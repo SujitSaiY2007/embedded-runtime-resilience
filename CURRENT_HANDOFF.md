@@ -2,69 +2,56 @@
 
 ## Last completed step
 
-Phase 0 research-space decomposition has been completed and recorded in `research/phase0_research_space_map.md`.
+Phase 0 research-space decomposition and the requested deep prior-art attack have been completed.
 
-Twelve opportunity classes were mapped and six were shortlisted for systematic prior-art investigation.
+The project topic is now frozen for development.
 
-## Current project status
+## Frozen development topic
 
-We have **not finalized the invention/topic**.
+> **Design and Implementation of a Lightweight Context-Aware Peripheral Recovery Policy for Resource-Constrained Event-Driven MCU Firmware**
 
-Research direction:
+## Research question
 
-> Missed Opportunities In Simpler Areas Of Embedded Systems
+Can a compact software-only recovery policy, using observed peripheral fault context and recovery history, select bounded recovery actions and contain the affected service while preserving unrelated event-driven work, with lower service interruption and acceptable MCU overhead than fixed retry/reset strategies?
 
-Current lead hypothesis:
+## Important status distinction
 
-> Lightweight Runtime Contract and Recovery Framework for Resource-Constrained Event-Driven Embedded Systems
+The topic is frozen as the development target. This is **not** a claim that the exact mechanism is novel or patentable.
 
-The lead remains provisional. Phase 0 found substantial prior work around runtime verification, watchdogs, resource contracts, and local recovery, so the lead must be narrowed or rejected if evidence shows insufficient differentiation.
+The deep prior-art attack established that generic peripheral recovery, selective peripheral restart, context-aware recovery, graceful degradation, and recovery state machines are already known areas. The surviving contribution hypothesis is narrower: a small deterministic MCU-resident policy that combines local fault context/history with bounded recovery-action selection and explicit preservation of unrelated event-driven service.
 
-## Shortlist
+## Important prior-art anchors
 
-1. OC-02 — Lightweight peripheral-failure recovery without full subsystem restart
-2. OC-01 — Context-aware runtime contracts with bounded local recovery
-3. OC-10 — Lightweight execution-time anomaly detection for MCU software
-4. OC-11 — Self-verifying event pipelines
-5. OC-06 — Localized software recovery / micro-restart for cooperative event-driven firmware
-6. OC-03 — Event-burst containment for event-driven MCU software
+- Phoenix: peripheral rollback/recovery on resource-constrained embedded systems.
+- Karma: asynchronous peripheral operation and recovery/state handling.
+- Recovering Device Drivers / Failure Resilience for Device Drivers: driver isolation and policy-driven recovery.
+- Context-aware embedded health management: context-dependent diagnosis/recovery.
+- Recent patents on selective peripheral restart, I/O fault recovery, and peripheral isolation.
 
-## Next action
+See `research/deep_prior_art_attack_topic_freeze.md` for the detailed attack record.
 
-Build systematic evidence matrices for the six shortlisted classes, beginning with OC-02, OC-01, and OC-10.
+## Next phase
 
-For each candidate investigate:
+**Design and Experimental Planning**
 
-- academic papers/proceedings;
-- patents/patent families;
-- standards/specifications;
-- commercial/vendor solutions;
-- open-source implementations;
-- closest mechanisms;
-- differentiating mechanism hypothesis;
-- experimental baseline and fault model;
-- novelty risk.
+### Immediate next actions
+
+1. Define the exact technical contribution and policy state variables.
+2. Select the MCU development board and a small peripheral testbed.
+3. Define reproducible fault-injection mechanisms.
+4. Specify baseline recovery policies.
+5. Design the proposed recovery policy.
+6. Define experimental workloads and primary/secondary metrics.
+7. Establish reproducibility and data-recording procedures.
+8. Review the exact mechanism once more for patent-sensitive disclosure before publishing implementation details.
 
 ## Do not do yet
 
-- Do not declare the topic novel.
-- Do not write a patent claim.
-- Do not publicly disclose detailed invention mechanics prematurely.
-- Do not begin a large implementation before the research gap is established.
-- Do not assume the current lead survives the prior-art stage.
-
-## Important continuity note
-
-The previous handoff described structured prior-art research as the next action. The present Phase 0 work inserted the necessary research-space decomposition step before candidate-specific prior-art analysis. The next chat should therefore continue with the evidence matrices rather than restart the mapping.
+- Do not claim patentability.
+- Do not claim "first" or "novel" without an exact claim-level search.
+- Do not implement a large framework before the policy and evaluation protocol are defined.
+- Do not use Phoenix/Karma/etc. as straw-man baselines; compare against their relevant concepts fairly.
 
 ## Continuation instruction
 
-When a new chat resumes this project, first read:
-
-1. `PROJECT_MANUAL.md`
-2. `PROJECT_STATE.md`
-3. `CURRENT_HANDOFF.md`
-4. `DECISION_LOG.md`
-5. latest research records
-
-Then continue from the first unchecked phase gate without restarting the project.
+Future chats should read `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, this file, `DECISION_LOG.md`, and `research/deep_prior_art_attack_topic_freeze.md` before substantive design work.
