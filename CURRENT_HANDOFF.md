@@ -2,55 +2,63 @@
 
 ## Last completed step
 
-Phase 0 research-space decomposition and the requested deep prior-art attack have been completed.
+Phase 0 research-space decomposition, deep prior-art attack, topic selection, and integration review of the zero-heap and event-quarantine additions have been completed.
 
-The project topic is now frozen for development.
+The development topic is now **frozen**.
 
 ## Frozen development topic
 
-> **Design and Implementation of a Lightweight Context-Aware Peripheral Recovery Policy for Resource-Constrained Event-Driven MCU Firmware**
+> **Design and Implementation of a Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**
+
+Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**
 
 ## Research question
 
-Can a compact software-only recovery policy, using observed peripheral fault context and recovery history, select bounded recovery actions and contain the affected service while preserving unrelated event-driven work, with lower service interruption and acceptable MCU overhead than fixed retry/reset strategies?
+Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-## Important status distinction
+## Integration decisions
 
-The topic is frozen as the development target. This is **not** a claim that the exact mechanism is novel or patentable.
+### Zero-heap
 
-The deep prior-art attack established that generic peripheral recovery, selective peripheral restart, context-aware recovery, graceful degradation, and recovery state machines are already known areas. The surviving contribution hypothesis is narrower: a small deterministic MCU-resident policy that combines local fault context/history with bounded recovery-action selection and explicit preservation of unrelated event-driven service.
+Accepted as a strict architectural constraint. No runtime dynamic allocation in the recovery manager/reference firmware. Static storage is used for recovery state, policy tables, and event queues.
 
-## Important prior-art anchors
+Zero-heap itself is not claimed as novel.
 
-- Phoenix: peripheral rollback/recovery on resource-constrained embedded systems.
-- Karma: asynchronous peripheral operation and recovery/state handling.
-- Recovering Device Drivers / Failure Resilience for Device Drivers: driver isolation and policy-driven recovery.
-- Context-aware embedded health management: context-dependent diagnosis/recovery.
-- Recent patents on selective peripheral restart, I/O fault recovery, and peripheral isolation.
+### MPU
 
-See `research/deep_prior_art_attack_topic_freeze.md` for the detailed attack record.
+Accepted as a target-platform containment mechanism. The project should use an MPU-enabled MCU where practical, but MPU usage itself is not claimed as novel. If MPU experimentation proves impractical on the selected board, the core zero-heap recovery policy remains the primary contribution and MPU becomes a secondary configuration rather than a project blocker.
 
-## Next phase
+### Event quarantine
 
-**Design and Experimental Planning**
+Accepted as an integrated mechanism. Formal terminology should be **event quarantine** rather than the informal phrase “queue poisoning prevention.” The mechanism will quarantine the fault-associated event/transaction context while preserving unrelated valid queued events subject to dependency and ordering rules.
 
-### Immediate next actions
+### Formal reasoning
 
-1. Define the exact technical contribution and policy state variables.
-2. Select the MCU development board and a small peripheral testbed.
-3. Define reproducible fault-injection mechanisms.
-4. Specify baseline recovery policies.
-5. Design the proposed recovery policy.
-6. Define experimental workloads and primary/secondary metrics.
-7. Establish reproducibility and data-recording procedures.
-8. Review the exact mechanism once more for patent-sensitive disclosure before publishing implementation details.
+Full formal verification of the firmware is out of scope. The project will instead define and, where tractable, prove policy/queue invariants such as bounded capacity, no execution of quarantined events before release, preservation of unaffected events, bounded recovery transitions, and ordering preservation for independent events.
+
+## Hardware clarification
+
+The project is software-dominant, but a genuine MCU research validation cannot be reduced to a laptop/PC if the final claims include physical MPU behavior, interrupt timing, peripheral-driver behavior, or real hardware fault modes.
+
+A laptop/PC can support development, simulation, emulation where available, fault-model testing, analysis, and data processing. A physical MCU development board is therefore a required validation resource for the strongest version of the project. No board is currently assumed to be available; board selection/acquisition is an immediate Phase 1 task.
+
+## Immediate Phase 1 actions
+
+1. Select an affordable MPU-enabled MCU development board.
+2. Identify 2–3 peripherals suitable for reproducible fault injection.
+3. Define event types, dependencies, and queue semantics.
+4. Define the recovery state machine and contextual inputs.
+5. Define queue/event invariants and formal properties.
+6. Define baseline policies: fixed retry and fixed retry+reset/reinitialize.
+7. Build a minimal firmware skeleton before expanding features.
+8. Define metrics, workloads, and reproducibility protocol.
 
 ## Do not do yet
 
 - Do not claim patentability.
-- Do not claim "first" or "novel" without an exact claim-level search.
-- Do not implement a large framework before the policy and evaluation protocol are defined.
-- Do not use Phoenix/Karma/etc. as straw-man baselines; compare against their relevant concepts fairly.
+- Do not claim that zero-heap, MPU isolation, event quarantine, or context-aware recovery is individually novel.
+- Do not publish detailed implementation mechanics before the IP strategy is reviewed.
+- Do not add unrelated features that turn the project into a generic embedded resilience framework.
 
 ## Continuation instruction
 
