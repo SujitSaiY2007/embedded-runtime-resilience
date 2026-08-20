@@ -2,13 +2,19 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`
-**Status:** Topic not yet finalized; research candidate under validation
+**Status:** Topic not yet finalized; research-space map completed; shortlisted candidates entering systematic prior-art investigation
 **Project mode:** Solo software-based embedded-systems project
 **Primary ambition:** Novel research-grade implementation with potential patent/publication value
 
 ## Current objective
 
 Identify and validate a genuinely underexplored software-only embedded-systems problem arising from a missed opportunity in a comparatively simple area of embedded-system design.
+
+## Current lead candidate
+
+**Lightweight Runtime Contract and Recovery Framework for Resource-Constrained Event-Driven Embedded Systems**
+
+Status: **lead hypothesis only**. It is not a confirmed gap, final topic, novelty claim, or patentability conclusion. Phase 0 mapping found substantial existing work in runtime verification, watchdogs, runtime resource assurance, and fine-grained recovery; the lead therefore requires narrowing and falsification.
 
 ## Non-negotiable principles
 
@@ -22,16 +28,16 @@ Identify and validate a genuinely underexplored software-only embedded-systems p
 
 ## Current phase
 
-**Phase 0 — Research and project-definition infrastructure**
+**Phase 0 — Topic Validation and Research-Space Decomposition**
 
 ### Phase gates
 
-- [ ] Repository continuity infrastructure established
-- [ ] Project requirements and constraints documented
-- [ ] Candidate problem space mapped
-- [ ] Academic prior art searched
-- [ ] Patent prior art searched
-- [ ] Existing commercial/open-source solutions assessed
+- [x] Repository continuity infrastructure established
+- [x] Project requirements and constraints documented
+- [x] Candidate problem space mapped
+- [ ] Academic prior art systematically searched
+- [ ] Patent prior art systematically searched
+- [ ] Existing commercial/open-source solutions systematically assessed
 - [ ] Explicit gap statement established
 - [ ] Candidate architecture selected
 - [ ] Novelty risk assessed
@@ -39,9 +45,43 @@ Identify and validate a genuinely underexplored software-only embedded-systems p
 - [ ] Experimental methodology defined
 - [ ] Topic formally frozen
 
-## Important constraint
+## Phase 0 research-space result
 
-The phrase “Missed Opportunities In Simpler Areas Of Embedded Systems” is the research direction, not itself a demonstrated research gap. The project must earn its final topic through evidence.
+Twelve opportunity classes were mapped in `research/phase0_research_space_map.md`.
+
+### Shortlist for next-stage investigation
+
+1. **OC-02 — Lightweight peripheral-failure recovery without full subsystem restart**
+2. **OC-01 — Context-aware runtime contracts with bounded local recovery**
+3. **OC-10 — Lightweight execution-time anomaly detection for MCU software**
+4. **OC-11 — Self-verifying event pipelines**
+5. **OC-06 — Localized software recovery / micro-restart for cooperative event-driven firmware**
+6. **OC-03 — Event-burst containment for event-driven MCU software**
+
+The ordering is preliminary and reflects problem relevance, MCU implementability, baseline measurability, and apparent research depth—not proven novelty.
+
+## Important Phase 0 finding
+
+The broad phrase “missed opportunities in simpler areas” is a useful research direction but is not itself a research gap. Likewise, “runtime contracts + recovery” is not automatically novel. Runtime verification, watchdog/recovery, resource contracts, micro-recovery, power-loss recovery, overload management, and adaptive scheduling all have substantial prior work.
+
+The emerging hypothesis is narrower: **small, explicit, event-driven resilience policies that connect fault detection to bounded local recovery or degradation under MCU resource constraints may contain useful underexplored intersections.** This remains a hypothesis requiring candidate-specific prior-art testing.
+
+## Next exact task
+
+Build an evidence matrix for the six shortlisted opportunity classes covering:
+
+1. academic papers/proceedings;
+2. patents/patent families;
+3. standards/specifications;
+4. commercial/vendor implementations;
+5. open-source implementations;
+6. closest competing mechanisms;
+7. candidate differentiating mechanism;
+8. experimental baseline;
+9. fault model;
+10. novelty-risk assessment.
+
+Start with **OC-02, OC-01, and OC-10**, but reject or reorder them if stronger evidence emerges.
 
 ## Continuity rule
 
