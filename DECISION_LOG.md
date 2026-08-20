@@ -20,6 +20,9 @@
 | D-016 | Accepted | Transition to Phase 1 — System Design and Experimental Preparation. | Topic is frozen; remaining work is to design the smallest defensible system and reproducible evaluation before implementation. |
 | D-017 | Accepted | Make MPU-capable MCU/board selection an immediate Phase 1 prerequisite. | Physical validation requires real MCU behavior; board choice affects architecture, peripherals, fault injection, and tooling. |
 | D-018 | Accepted | Treat event model, fault model, recovery state machine, formal invariants, baselines, and experimental protocol as design gates before large-scale implementation. | Prevents framework-first development and keeps the project experimentally falsifiable. |
+| D-019 | Accepted | Recommend STM32U575ZI on NUCLEO-U575ZI-Q as the primary Phase 1 physical platform, subject to acquisition verification. | It combines a native Cortex-M33 MPU, single-core execution, sufficient constrained resources, broad peripheral access, interrupt/timer capability, mature tooling, and low-power capability without introducing unnecessary multicore complexity. |
+| D-020 | Accepted | Keep Renesas EK-RA6M5 as the preferred fallback/alternative platform. | RA6M5 provides MPU, 512 KB SRAM, strong I2C/SPI/UART/CAN-FD/Ethernet access, on-board J-Link, and current-measurement points, but is more feature-rich than the minimum needed. |
+| D-021 | Rejected | Use NXP FRDM-MCXN947 as the primary platform. | The N94 platform is dual-core; multicore interactions would add experimental confounders without serving the core research question. |
 
 ## Frozen development topic
 
