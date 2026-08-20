@@ -23,6 +23,13 @@
 | D-019 | Accepted | Recommend STM32U575ZI on NUCLEO-U575ZI-Q as the primary Phase 1 physical platform, subject to acquisition verification. | It combines a native Cortex-M33 MPU, single-core execution, sufficient constrained resources, broad peripheral access, interrupt/timer capability, mature tooling, and low-power capability without introducing unnecessary multicore complexity. |
 | D-020 | Accepted | Keep Renesas EK-RA6M5 as the preferred fallback/alternative platform. | RA6M5 provides MPU, 512 KB SRAM, strong I2C/SPI/UART/CAN-FD/Ethernet access, on-board J-Link, and current-measurement points, but is more feature-rich than the minimum needed. |
 | D-021 | Rejected | Use NXP FRDM-MCXN947 as the primary platform. | The N94 platform is dual-core; multicore interactions would add experimental confounders without serving the core research question. |
+| D-022 | Accepted | Structure Phase 1 into explicit sub-phases 1A–1E, with 1E named Formal Specification & Experimental Design. | Separates completed architecture work from the remaining experimental-methodology gates and creates a clear Phase-1 closure criterion. |
+| D-023 | Accepted | Use dependency-aware event quarantine rather than unconditional queue filtering or peripheral-wide queue flushing. | Quarantine must preserve independent work without executing events whose dependencies or ordering constraints are invalid. |
+| D-024 | Accepted | Use a deterministic rule-table policy rather than an arbitrary weighted score as the initial recovery decision mechanism. | A rule table is explainable, bounded, reproducible, low-overhead, and formally tractable; added complexity requires experimental justification. |
+| D-025 | Accepted | Reduce the effective local recovery action set to RETRY, REINIT_OR_RESET, DEGRADE, and ESCALATE. | Reinitialize and peripheral reset should remain separate only when the selected peripheral implementation provides experimentally distinct semantics; avoiding artificial distinctions keeps the mechanism minimal. |
+| D-026 | Accepted | Use bounded local recovery termination with SUCCESS, DEGRADED, or ESCALATED terminal outcomes. | Prevents unbounded recovery loops and supports deterministic reasoning. |
+| D-027 | Accepted | Use policy ablation variants P0 fixed retry, P1 context without history, P2 context + short history, and P3 context + history + dependency-aware event quarantine where useful. | Separates the contribution of context, history, and quarantine instead of attributing all improvement to the full mechanism without evidence. |
+| D-028 | Accepted | Use a minimal starting hardware budget and defer optional instrumentation until experimentally justified. | Prevents unnecessary cost while preserving the core physical research capability. |
 
 ## Frozen development topic
 
@@ -61,3 +68,8 @@ Context-aware health management and recent selective peripheral-recovery patents
 **Status:** Rejected.
 
 Each is an established technology/concept. The research contribution must come from the specific integrated mechanism and its demonstrated technical trade-offs.
+
+### R-007 — Mark Phase 1 complete before 1E closure
+**Status:** Deferred.
+
+Phase 1 remains open until Formal Specification & Experimental Design sub-phase 1E is completed, including formal properties, baselines, experimental protocol, measurement/data schema, and final design review.
