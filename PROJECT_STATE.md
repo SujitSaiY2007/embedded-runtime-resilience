@@ -2,111 +2,125 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`
-**Status:** Development topic selected; novelty/gap validation remains evidence-driven and may still force narrowing or rejection of the mechanism.
+**Status:** Development topic frozen; implementation/design phase may proceed, while exact novelty remains evidence-dependent.
 **Project mode:** Solo software-dominant embedded-systems project
 **Primary ambition:** Research-grade implementation with publication potential and a possible patent pathway if supported by prior art and professional assessment.
 
-## Selected development topic
+## Frozen development topic
 
-**Design and Implementation of a Lightweight Context-Aware Peripheral Fault Recovery Mechanism for Resource-Constrained Event-Driven MCU Systems**
+**Design and Implementation of a Lightweight Context-Aware Peripheral Recovery Policy for Resource-Constrained Event-Driven MCU Firmware**
 
-This is the topic selected for development from the Phase 0 opportunity map. It is deliberately narrower than the earlier lead candidate.
+This topic was selected after the Phase 0 research-space map and a focused deep prior-art attack. The freeze means this is the topic to develop; it does **not** mean novelty or patentability has been legally or academically proven.
 
-### What the project will investigate
+## Research question
 
-The project will investigate whether a small MCU-resident recovery mechanism can detect common peripheral/service faults, classify the failure context, and select a bounded local recovery action—such as retry, reinitialization, peripheral reset, controlled degradation, or escalation—while minimizing collateral interruption to unrelated event-driven work.
+Can a compact software-only recovery policy, using observed peripheral fault context and recovery history, select bounded recovery actions and contain the affected service while preserving unrelated event-driven work, with lower service interruption and acceptable MCU overhead than fixed retry/reset strategies?
 
-The intended contribution is **not** a generic watchdog, generic retry loop, generic bus-recovery routine, or reproduction of Phoenix-style checkpoint/rollback.
+## Working contribution hypothesis
 
-The technical hypothesis is that a compact context-aware recovery policy, operating at the boundary between peripheral fault detection and event-driven service management, can reduce service interruption and unnecessary system-wide recovery compared with conventional fixed recovery sequences.
+A deliberately small, deterministic recovery policy for cooperative/event-driven MCU firmware can use local fault context and short recovery history to choose among bounded recovery actions while explicitly preserving unrelated event-driven service. The mechanism should be evaluated against fixed retry/reset baselines.
 
-This hypothesis is not yet a demonstrated research gap or novelty claim.
+Candidate recovery actions:
 
-## Evidence status
+1. retry;
+2. reinitialize;
+3. peripheral reset;
+4. controlled degradation/isolation;
+5. escalation to system-level recovery.
 
-### Established evidence
+Candidate context signals:
 
-- Embedded peripheral failures are a real problem and Phoenix demonstrated resource-constrained peripheral recovery using checkpointing and rollback. This makes generic peripheral recovery a crowded starting point.
-- Runtime verification and embedded runtime monitoring are mature research areas, including R2U2 and embedded Rust work. This weakens the earlier broad runtime-contract framing.
-- Existing patents also cover processor/watchdog recovery, fault containment, initialization recovery, and more recent peripheral-device recovery.
+- fault type;
+- timeout/error pattern;
+- recurrence/history;
+- peripheral/service criticality;
+- pending event workload;
+- previous recovery outcome.
 
-### Inference
+The exact policy formulation remains a design variable.
 
-A potentially useful remaining space is not “recover peripherals,” but the specific **policy and state-management problem of choosing a bounded recovery action from observed failure context while preserving unrelated event-driven service** on a small MCU.
+## Deep prior-art attack conclusion
 
-### Hypothesis
+The attack established that the following are **not** valid novelty claims by themselves:
 
-A deliberately small recovery policy can outperform a fixed retry/reset baseline on selected fault classes without imposing unacceptable CPU, RAM, Flash, latency, or implementation complexity.
+- peripheral fault recovery;
+- selective peripheral restart;
+- context-aware recovery;
+- recovery state machines;
+- retry/reinitialize/reset/degrade actions;
+- event-driven resilience;
+- graceful degradation.
 
-### Speculation
+Particularly important prior art includes Phoenix (peripheral rollback/recovery on resource-constrained embedded systems), Karma (asynchronous peripheral operation recovery/state handling), OS/device-driver recovery research, context-aware embedded health management, extensive graceful-degradation work, and recent patent activity around selective peripheral recovery and isolation.
 
-A sufficiently differentiated policy may eventually support a publication or patent pathway. No such conclusion is made at this stage.
+The surviving research hypothesis is narrower: a software-only, deterministic, MCU-scale policy that combines local fault context/history with bounded recovery selection and explicit preservation of unrelated event-driven service.
 
-## Course-guideline alignment
+This exact combination was not identified as an obvious one-to-one match during the focused search, but absence of an obvious match is **not proof of novelty**.
 
-The supplied Embedded Systems Course Project guideline requires a real-world engineering problem, literature/existing-solution review, a research/technical gap, an embedded solution, algorithmic/software contribution where appropriate, measurable experimental validation, comparison with a reference method, and a research/patent component. The selected topic is designed to satisfy that structure without relying on a trivial sensor application.
+## Course-guideline fit
 
-The guideline explicitly emphasizes quantitative validation and comparison rather than merely demonstrating that a prototype works. The project will therefore use measurable recovery, service, timing, and resource metrics.
+The supplied course guideline requires a real-world problem, literature and existing-solution review, a technical gap, embedded implementation, algorithm/software contribution, quantitative experimental validation, comparison with a reference method, and research/patent preparation. The selected topic supports all of these elements. The guideline also explicitly rejects projects that merely demonstrate functionality without measurable evaluation.
 
-## Planned evaluation concept
+## Planned baseline and evaluation
 
-Initial baseline candidates:
+Baseline A: fixed retry.
 
-1. fixed retry policy;
-2. fixed retry-then-reset policy;
-3. vendor/protocol-standard recovery where applicable.
+Baseline B: fixed retry + peripheral reset/reinitialize.
 
-Proposed-policy measurements:
+Where relevant, baseline C: vendor/protocol-standard recovery.
+
+Primary metrics:
 
 - fault detection latency;
-- time to service restoration;
+- recovery latency;
 - recovery success rate;
-- number of whole-system resets;
-- unrelated-service interruption;
-- lost/duplicated transactions;
+- unnecessary whole-system resets;
+- unrelated-service interruption time;
+- lost transactions/events;
+- duplicate transactions/events;
 - event-queue disruption;
 - CPU overhead;
 - RAM/Flash overhead;
 - energy impact where practical.
 
-Fault injection should be reproducible and include selected stuck/bus-error/timeout/peripheral-state fault scenarios appropriate to the chosen MCU and peripherals.
+Fault injection must be reproducible and cover selected timeout, stuck/bus-error, and peripheral-state fault scenarios appropriate to the selected MCU/peripheral set.
 
 ## Scope boundary
 
-The first implementation should remain small: one MCU family, a limited number of peripheral interfaces, a bounded set of fault classes, and a deterministic event-driven firmware architecture. Cross-platform generality is not a requirement for the initial paper-quality prototype.
+Initial implementation: one MCU family, limited peripheral interfaces, bounded fault classes, deterministic cooperative/event-driven firmware. No requirement for cross-platform generality in the first prototype.
 
-The exact MCU board, peripherals, fault-injection apparatus, recovery-state machine, and benchmark suite are **not frozen yet**.
+The exact MCU board, peripherals, fault-injection apparatus, recovery-state machine, and benchmark suite are the next design decisions.
 
 ## Phase status
 
-**Phase 0 — Topic Validation / Development Topic Selection**
-
-Completed:
+**Phase 0 — Topic Validation / Development Topic Selection: COMPLETE**
 
 - [x] Repository continuity infrastructure established
 - [x] Project requirements and constraints documented
-- [x] Research-space decomposed into 12 opportunity classes
+- [x] Research-space decomposed
 - [x] Candidate shortlist created
-- [x] Current literature/patent evidence used to eliminate the broad runtime-contract framing
-- [x] Development topic selected
+- [x] Deep academic prior-art attack performed
+- [x] Patent prior-art attack performed
+- [x] Commercial/vendor evidence considered
+- [x] Broad runtime-contract framing rejected as too broad
+- [x] Development topic frozen
 
-Still open:
+**Next phase — Design and Experimental Planning:**
 
-- [ ] Systematic academic prior-art matrix for the selected topic
-- [ ] Systematic patent-family search for the selected mechanism
-- [ ] Commercial/vendor/open-source comparison
-- [ ] Defensible explicit gap statement
-- [ ] Novelty-risk assessment
+- [ ] Formal contribution definition
 - [ ] Exact architecture
 - [ ] MCU/peripheral testbed selection
-- [ ] Fault model and injection method
+- [ ] Fault model and injection apparatus
+- [ ] Baseline implementation design
+- [ ] Recovery-policy design
 - [ ] Experimental protocol
-- [ ] Final title freeze
+- [ ] Reproducibility plan
+- [ ] Final patent-sensitive disclosure boundary
 
-## Important rule
+## Falsification rule
 
-The topic is now **selected for development**, because this is the primary project objective. However, the repository must not convert this selection into a false claim of novelty. If systematic prior-art work shows that the mechanism is already known, the topic must be narrowed, redesigned, merged with another opportunity, or rejected.
+If a later exact-mechanism search finds close prior art that materially discloses the same software-only architecture and policy, or if experiments show no meaningful advantage after accounting for overhead, the mechanism must be narrowed, redesigned, merged with another opportunity, or rejected.
 
-## Next exact task
+## Canonical research record
 
-Conduct a focused prior-art and patent investigation of the selected mechanism, specifically testing whether context-aware selection among retry/reinitialize/reset/degrade/escalate actions combined with preservation of unrelated event-driven service is already disclosed in closely related embedded systems.
+See `research/deep_prior_art_attack_topic_freeze.md` for the detailed prior-art attack and reasoning.
