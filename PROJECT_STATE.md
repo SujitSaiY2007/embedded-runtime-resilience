@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Development topic frozen; Phase 1E.1 active; Gates A, B, C, and D complete at the semantic/design-model level; Gate E is next.  
+**Status:** Development topic frozen; Phase 1E.1 complete through Gate E at the experimental-design/protocol level; Minimal Reference Implementation is next.  
 **Project mode:** Solo software-dominant embedded-systems project  
 **Primary ambition:** Research-grade implementation with publication potential and possible patent pathway if supported by evidence and professional assessment.
 
@@ -33,7 +33,7 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 
 ### Phase 1E.1 — Experimental Design / Formalization Foundation
 
-**Status: active. Gates A, B, C, and D are complete at the semantic/design-model level. Gate E is next.**
+**Status: Gate A, B, C, D, and E complete at their respective semantic/design/protocol levels.** Large-scale firmware implementation and physical validation remain deferred until the next implementation gate.
 
 ## Completed Gate A — Exact Event Model and Dependency Semantics
 
@@ -41,7 +41,7 @@ Final artifact: `research/phase1_gateA_event_model_final.md`
 
 Gate A established the final semantic contract for event identity, event types, service ownership, peripheral association, criticality, explicit dependency classes, bounded dependency representation, admission/execution ordering, lifecycle, evidence-bounded fault association, quarantine, capacity, full-queue behavior, and preservation correctness.
 
-Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report the chosen values explicitly.
+Provisional host-model capacity parameters were `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E has now frozen these as the reproducible protocol envelope, subject to empirical adequacy reporting and explicit amendment if capacity confounding is discovered.
 
 ## Completed Gate B — Fault Model + Fault Association
 
@@ -61,9 +61,7 @@ Key decisions include the five-class primary I2C taxonomy, four association leve
 
 Final artifact: `research/phase1_gateC_recovery_policy_final.md`
 
-Gate C is **ACCEPTED at the semantic/design level**. Large-scale implementation remains deferred.
-
-The frozen policy uses the minimum context of `fault_class`, `association_level`, bounded `attempt_count`, `criticality`, bounded `recovery_safety` preconditions, and `episode_state`. The logical actions are `RETRY`, `REINIT_OR_RESET`, `DEGRADE`, and `ESCALATE`, with at most two retries followed by one peripheral recovery action and one terminal action (`MAX_RECOVERY_ACTIONS=4`). Dependency-aware quarantine and conservative association are mandatory policy behavior.
+Gate C is **ACCEPTED at the semantic/design level**. The frozen policy uses the minimum context of `fault_class`, `association_level`, bounded `attempt_count`, `criticality`, bounded `recovery_safety` preconditions, and `episode_state`. The logical actions are `RETRY`, `REINIT_OR_RESET`, `DEGRADE`, and `ESCALATE`, with at most two retries followed by one peripheral recovery action and one terminal action (`MAX_RECOVERY_ACTIONS=4`). Dependency-aware quarantine and conservative association are mandatory policy behavior.
 
 ## Completed Gate D — Formal Properties + Proof/Check Strategy
 
@@ -71,27 +69,34 @@ Final artifact: `research/phase1_gateD_formal_properties_final.md`
 
 Gate D is **ACCEPTED at the semantic/design-model level**. It formalizes the six core invariants and supporting identity, release, dependency, transaction, termination, resource, and decision-table properties without claiming full formal verification of future firmware.
 
-A host-side abstract decision-table audit enumerated **33,792** bounded contexts and found exactly one outcome for every encoded context. This is evidence about the modeled decision function, not proof of firmware or hardware behavior.
+A host-side abstract audit enumerated **33,792** bounded policy contexts and found exactly one outcome for every encoded context. This is evidence about the modeled decision function, not proof of firmware or hardware behavior.
 
-The finite-model qualification, generation-wrap requirements, and possible explicit `EPMAX` bound for multiple simultaneous recovery episodes remain implementation concerns to resolve before implementation.
+The finite-model qualifications, generation-wrap requirements, and possible multiple-episode bound were carried into Gate E.
 
-## Next gate — Gate E
+## Completed Gate E — Baselines + Experimental Protocol
 
-### Baselines + Experimental Protocol
+Final artifact: `research/phase1_gateE_experimental_protocol_final.md`
 
-Gate E must freeze:
+Gate E is **ACCEPTED at the experimental-design/protocol level**.
 
-- baseline definitions and exact comparability;
-- workload matrix and event/dependency scenarios;
-- software fault schedule;
-- final experimental capacities where required;
-- metrics and correctness outcomes;
-- logging schema and trace identifiers;
-- repetitions/randomization or deterministic schedule policy;
-- statistical/reproducibility treatment;
-- acceptance criteria and reporting format.
+Frozen decisions include:
 
-Gate E must use Gates A–D as normative inputs and must not silently modify them. If a contradiction is discovered, it must be documented and explicitly amended.
+- five variants P0–P4;
+- P0/P1 as principal baselines, P2/P3 as mechanism ablations, P4 as the integrated proposal;
+- fourteen canonical workloads W01–W14 covering independent preservation, ordered/coupled dependencies, shared-peripheral non-causality, recovery paths, capacity boundaries, stale references, ambiguity, criticality, and mixed workloads;
+- deterministic software fault injection as the primary repeatable stimulus;
+- I2C as primary fault domain and SPI as secondary;
+- `QMAX=16`, `XMAX=4`, `DMAX=4` as the reproducible protocol envelope;
+- `EPMAX=1` for the normative reference prototype unless explicitly amended;
+- bounded episode-state history rather than unbounded history;
+- fixed run/event/episode/trace identifiers and structured logging;
+- deterministic canonical schedules, with predeclared repetitions/seeds for later performance campaigns;
+- fresh model state per host run and fixed reset/warm-up rules;
+- predeclared invalid-run handling;
+- correctness targets and latency/resource metrics;
+- explicit separation of host, MCU, and physical evidence.
+
+Gate E explicitly does **not** claim benchmark results, MCU measurements, energy measurements, physical fault validation, statistical significance, generalization, novelty, or patentability.
 
 ## What remains explicitly NOT claimed
 
@@ -107,21 +112,16 @@ Gate E must use Gates A–D as normative inputs and must not silently modify the
 - Gate B physical fault mechanisms remain unvalidated until hardware testing.
 - Gate C does not establish performance or recovery-success results.
 - Gate D does not establish firmware correctness beyond the defined model or prove arbitrary hardware behavior.
+- Gate E freezes a protocol; it does not constitute experimental evidence.
 
 The novelty hypothesis remains the **specific combined mechanism and measured technical trade-off**, not any individual ingredient.
 
 ## Implementation gate
 
-No large-scale firmware implementation begins until Gates A–E are sufficiently specified:
+The design/protocol foundation is now sufficiently specified to begin the **Minimal Reference Implementation — smallest testable reference prototype**. Implementation must remain deliberately small and must preserve Gates A–E as normative contracts.
 
-- **Gate A:** Event model + dependency semantics — COMPLETE
-- **Gate B:** Fault model + fault association — COMPLETE
-- **Gate C:** Recovery policy + bounded state machine — COMPLETE
-- **Gate D:** Formal properties + proof/check strategy — COMPLETE
-- **Gate E:** Baselines + experimental protocol — NEXT
-
-After Gate E, implement the **smallest testable reference prototype**, not a general resilience framework.
+The next implementation phase must first make the host/reference semantics executable and testable before attempting a full MCU application. It must concretely specify generation width/wrap behavior, fixed storage layout, scheduler rule, and any implementation-level details left intentionally open by the semantic gates, with explicit resource accounting.
 
 ## Continuity
 
-`CURRENT_HANDOFF.md` contains the exact Gate E continuation point. `NEXT_CHAT_PROMPT.md` contains the Gate E startup prompt. `DECISION_LOG.md` records Gate D decisions and rejected alternatives. Historical documents remain preserved.
+`CURRENT_HANDOFF.md` contains the exact post-Gate-E continuation point. `NEXT_CHAT_PROMPT.md` contains the Minimal Reference Implementation startup prompt. `DECISION_LOG.md` records Gate E decisions and rejected alternatives. Historical documents remain preserved.
