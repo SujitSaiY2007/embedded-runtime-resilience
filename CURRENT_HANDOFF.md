@@ -44,6 +44,18 @@ Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`
 
 Gate B is accepted at the semantic/design level.
 
+Educational companion:
+
+`research/phase1_gateB_learning_summary.md`
+
+The educational companion explains Gate B in simple terms without replacing the normative final artifact. Its central mental model is:
+
+`Gate A: what work exists and what depends on what?`
+
+`Gate B: what failed, what can we prove, and what work is defensibly associated with it?`
+
+`Gate C: given that context and recovery history, what bounded action should be taken?`
+
 Key frozen decisions:
 
 - The primary taxonomy is centered on observable I2C failure modes: NACK/non-acknowledge, timeout/no-progress, bus/protocol error, arbitration loss, and persistent no-progress/suspected peripheral-state failure.
@@ -56,9 +68,25 @@ Key frozen decisions:
 - Software injection is deterministic test stimulus, not equivalent to physical hardware failure.
 - Physical/protocol fault injection candidates remain unvalidated until hardware acquisition, electrical safety review, and repeatability testing.
 - The semantic fault record is fixed-size/static and retains only information needed for later policy decisions and metrics.
-- A fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a later post-terminal fault starts a new episode.
+- A fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal fault starts a new episode.
 
-No physical measurements or hardware validation are claimed.
+### Gate B practical interpretation
+
+Gate B is the project's **fault-understanding layer**. It does not perform recovery yet.
+
+Example:
+
+`I2C transaction E2 -> NACK`
+
+If evidence identifies E2 precisely, the record may use `EXACT_EVENT_TRANSACTION`. If only the service or peripheral is defensibly identified, the association remains broader. If evidence is insufficient, use `UNKNOWN_AMBIGUOUS` rather than inventing event-level causality.
+
+The rule is:
+
+`association precision <= evidence precision`
+
+An event being on the same peripheral is not enough to declare it fault-associated. An event that is not fault-associated can still need to be blocked if Gate A says it depends on invalid/quarantined state. Thus **fault association scope != dependency-blocking scope**.
+
+Software fault injection provides repeatable experimental stimuli; it does not prove a physical hardware failure mechanism. No physical measurements or hardware validation are claimed at this checkpoint.
 
 ## Platform checkpoint
 
@@ -115,7 +143,7 @@ Gate C must challenge the provisional recovery-policy design in `research/phase1
 
 ## GitHub continuity
 
-GitHub is the durable source of truth. Preserve historical material. Prefer additive updates and explicit supersession notes. At every gate boundary, checkpoint relevant research documentation plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md` before starting the next chat.
+GitHub is the durable source of truth. Preserve historical material. Prefer additive updates and explicit supersession notes. At every gate boundary, checkpoint relevant research documentation plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, `DECISION_LOG.md`, and `NEXT_CHAT_PROMPT.md` before starting the next chat.
 
 ## Chat boundary
 
