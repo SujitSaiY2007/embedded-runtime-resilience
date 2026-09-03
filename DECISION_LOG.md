@@ -46,6 +46,7 @@
 | D-042 | Accepted | Define an episode as continuing across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal failure starts a new episode. | Supports bounded recovery history without treating every repeated status observation as a separate incident. |
 | D-043 | Accepted | Do not make ARLO or multi-master physical injection a primary workload. | The minimal reference testbed is intended to remain simple/single-master; arbitration scenarios add complexity without directly strengthening the core hypothesis. |
 | D-044 | Accepted | Accept Gate B at the semantic/design level and advance to Gate C. | The fault taxonomy, evidence boundary, association model, episode semantics, and bounded record are sufficient to derive a deterministic recovery policy; physical validation remains deferred. |
+| D-045 | Accepted | Retain a separate Gate B learning summary as an educational companion to the normative fault-model artifact. | The project owner is learning embedded-systems concepts while building the research system; durable conceptual explanations improve continuity without altering the formal contract. |
 
 ## Frozen development topic
 
