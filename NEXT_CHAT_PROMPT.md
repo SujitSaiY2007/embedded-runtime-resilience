@@ -118,7 +118,7 @@ Critical Gate B rules:
 - fault association scope and dependency-blocking scope are distinct;
 - software fault injection is deterministic test stimulus, not physical hardware validation;
 - physical/protocol fault-injection candidates remain unvalidated until actual hardware, safety review, and repeatability testing;
-- a fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal fault starts a new episode;
+- a fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal failure starts a new episode;
 - the semantic fault record is fixed-size/static and bounded.
 
 The most important mental model is:
