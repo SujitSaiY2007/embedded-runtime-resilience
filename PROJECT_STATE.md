@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Development topic frozen; Phase 1E.1 active; Gate A complete; Gate B is next.  
+**Status:** Development topic frozen; Phase 1E.1 active; Gates A and B complete; Gate C is next.  
 **Project mode:** Solo software-dominant embedded-systems project  
 **Primary ambition:** Research-grade implementation with publication potential and possible patent pathway if supported by evidence and professional assessment.
 
@@ -31,7 +31,7 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 
 ### Phase 1E.1 — Experimental Design / Formalization Foundation
 
-**Status: active. Gate A is complete at the semantic-design level. Gate B is the next gate.**
+**Status: active. Gates A and B are complete at the semantic/design level. Gate C is next.**
 
 ## Completed Gate A — Exact Event Model and Dependency Semantics
 
@@ -45,6 +45,29 @@ Gate A established the final semantic contract for event identity, event types, 
 
 Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report the chosen values explicitly.
 
+## Completed Gate B — Fault Model + Fault Association
+
+Final artifact:
+
+`research/phase1_gateB_fault_model_final.md`
+
+Gate B freezes a small evidence-aware taxonomy centered on the primary I2C path, with a deliberately reduced secondary SPI taxonomy. The model distinguishes direct controller/service observations from inference and unknown physical cause.
+
+Key Gate B decisions:
+
+- I2C NACK/non-acknowledge, transfer timeout/no-progress, bus/protocol error, and arbitration loss are observable fault classes where the relevant controller/driver evidence exists.
+- Persistent no-progress is a history-derived condition, not proof of an internal peripheral state-machine lockup.
+- Recurrence and persistence are history/episode attributes, not independent instantaneous fault classes.
+- Service/driver-level failures without sufficient peripheral evidence are kept distinct from peripheral faults.
+- `EXACT_EVENT_TRANSACTION`, `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS` are operational association levels.
+- Peripheral equality alone never justifies event-level fault attribution.
+- Quarantine scope may be selective or broader only when dependency/shared-state safety justifies it; association scope and dependency-blocking scope are distinct.
+- Software injection is the primary deterministic testing mechanism; software faults are not represented as equivalent to physical hardware faults.
+- Physical/protocol injection methods remain candidates until actual hardware, fixture safety, and repeatability are demonstrated.
+- A fixed-size semantic fault record includes episode/observation identity, bounded timing, resource/fault context, conditional event/transaction identity, association confidence, evidence flags, recurrence/recovery context, and episode status.
+
+Gate B is accepted at the semantic/design level. No physical measurement or hardware validation is claimed.
+
 ## Existing design baselines retained
 
 The repository retains the Phase 1 design references for:
@@ -56,27 +79,23 @@ The repository retains the Phase 1 design references for:
 
 The primary platform direction is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition/validation remains a factual checkpoint rather than an assumption.
 
-## Next gate — Gate B
+## Next gate — Gate C
 
-### Fault Model + Fault Association
+### Recovery Policy + Bounded State Machine
 
-Gate B must freeze:
+Gate C must derive and freeze:
 
-- exact fault taxonomy for the selected experimental peripheral(s);
-- deterministic software fault-injection semantics;
-- safely reproducible hardware/protocol fault classes;
-- bounded fault-record representation;
-- fault-to-event/transaction association rules;
-- association-confidence handling;
-- fault-episode boundaries and recurrence semantics;
-- evidence needed to distinguish event fault, service fault, peripheral fault, and ambiguous fault;
-- quarantine-scope implications of each association level.
+- minimum fault-context variables that materially change recovery decisions;
+- minimum useful bounded recovery history;
+- finite recovery action set and technically distinct action semantics;
+- deterministic decision table/policy;
+- association-confidence-dependent recovery behavior;
+- exact retry/reinitialization/degradation/escalation rules;
+- bounded recovery transition budget;
+- interaction between recovery and event scheduling/quarantine;
+- degraded-mode semantics for the reference services.
 
-No large-scale firmware implementation begins during Gate B.
-
-A complete ready-to-paste next-chat prompt is stored in:
-
-`NEXT_CHAT_PROMPT.md`
+No large-scale firmware implementation begins during Gate C.
 
 ## Experimental direction
 
@@ -99,6 +118,7 @@ Primary metrics include detection latency, service-restoration latency, recovery
 - Formal invariants are not automatically novel.
 - Patentability is not established.
 - No physical measurement is claimed until actual MCU execution provides the evidence.
+- Gate B's candidate physical fault mechanisms are not yet hardware-validated.
 
 The novelty hypothesis remains the **specific combined mechanism and measured technical trade-off**, not any individual ingredient.
 
@@ -107,8 +127,8 @@ The novelty hypothesis remains the **specific combined mechanism and measured te
 No large-scale firmware implementation begins until Gates A–E are sufficiently specified:
 
 - **Gate A:** Event model + dependency semantics — COMPLETE
-- **Gate B:** Fault model + fault association — NEXT
-- **Gate C:** Recovery policy + bounded state machine
+- **Gate B:** Fault model + fault association — COMPLETE
+- **Gate C:** Recovery policy + bounded state machine — NEXT
 - **Gate D:** Formal properties + proof/check strategy
 - **Gate E:** Baselines + experimental protocol
 
@@ -116,4 +136,4 @@ After Gate E, implement the **smallest testable reference prototype**, not a gen
 
 ## Continuity
 
-`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the full Gate B startup prompt. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
+`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the earlier Gate B startup prompt and remains retained as historical continuity material; the next chat should reconstruct the current state from the updated repository documents and begin Gate C. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
