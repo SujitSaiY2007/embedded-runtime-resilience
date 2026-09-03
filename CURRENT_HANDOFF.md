@@ -6,7 +6,9 @@ Phase 0 topic validation and initial Phase 1 system-design preparation are compl
 
 **Gate A — Exact Event Model and Dependency Semantics is COMPLETE and checkpointed.**
 
-The current project state must be continued from the repository checkpoint below; do not restart topic ideation or earlier design work.
+The next chat must begin **Gate B — Fault Model + Fault Association**.
+
+A ready-to-use continuation prompt is preserved at `NEXT_CHAT_PROMPT.md`.
 
 ## Frozen development topic
 
@@ -67,7 +69,7 @@ Initial interface direction:
 - SPI — secondary interface
 - UART/USART — diagnostic/control path
 
-The retained MCU selection baseline is now present on `main` at `research/phase1_mcu_board_selection.md`. This is a design recommendation, not acquisition confirmation.
+The retained MCU selection baseline is present at `research/phase1_mcu_board_selection.md`. This is a design recommendation, not acquisition confirmation.
 
 ## Next exact task
 
@@ -75,7 +77,7 @@ The retained MCU selection baseline is now present on `main` at `research/phase1
 
 Do not begin large-scale firmware implementation.
 
-Start Gate B by reading the repository continuity files and the Gate A final artifact, then freeze:
+Start Gate B by reading the repository continuity files and `research/phase1_gateA_event_model_final.md`, then freeze:
 
 1. exact fault taxonomy for the selected experimental peripheral(s);
 2. deterministic software fault-injection semantics;
@@ -86,7 +88,7 @@ Start Gate B by reading the repository continuity files and the Gate A final art
 7. fault-episode boundaries and recurrence semantics;
 8. evidence needed to distinguish event, service, peripheral, and ambiguous faults.
 
-Gate B must remain consistent with all six core invariants and the Gate A event contract.
+The complete recommended next-chat prompt is in `NEXT_CHAT_PROMPT.md`.
 
 ## Subsequent gates
 
