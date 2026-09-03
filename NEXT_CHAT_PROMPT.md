@@ -1,4 +1,4 @@
-# Next Chat Prompt — Gate B
+# Next Chat Prompt — Gate C
 
 Copy/paste the following prompt into the next ChatGPT 5 chat.
 
@@ -10,7 +10,7 @@ You are continuing my embedded-systems research project from the canonical GitHu
 
 ## IMPORTANT: CONTINUATION, NOT RESTART
 
-Do **not** restart topic ideation, prior-art exploration, MCU selection, Phase 1 preparation, or Gate A.
+Do **not** restart topic ideation, prior-art exploration, MCU selection, Phase 1 preparation, Gate A, or Gate B.
 
 The project has already passed those stages.
 
@@ -20,21 +20,23 @@ Your first responsibility is to reconstruct the current state from GitHub and co
 
 Read these files from the `main` branch before doing substantive work:
 
-1. `PROJECT_STATE.md`
-2. `CURRENT_HANDOFF.md`
-3. `DECISION_LOG.md`
-4. `CHAT_CONTINUITY_PROTOCOL.md`
-5. `research/phase1_gateA_event_model_final.md`
-6. `research/phase1_event_model.md`
-7. `research/phase1_mcu_board_selection.md`
-8. `research/phase1_peripheral_testbed_fault_model.md`
-9. `research/phase1_recovery_policy_design.md`
+1. `PROJECT_MANUAL.md`
+2. `PROJECT_STATE.md`
+3. `CURRENT_HANDOFF.md`
+4. `DECISION_LOG.md`
+5. `CHAT_CONTINUITY_PROTOCOL.md`
+6. `research/phase1_gateA_event_model_final.md`
+7. `research/phase1_gateB_fault_model_final.md`
+8. `research/phase1_event_model.md`
+9. `research/phase1_mcu_board_selection.md`
+10. `research/phase1_peripheral_testbed_fault_model.md`
+11. `research/phase1_recovery_policy_design.md`
 
 Treat GitHub as the durable source of truth. Do not rely on missing conversation history when the repository can answer the question.
 
-## CURRENT PROJECT STATE
+## CURRENT CHECKPOINT
 
-### Frozen development topic
+The frozen topic is:
 
 **Design and Implementation of a Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**
 
@@ -42,84 +44,88 @@ Short working title:
 
 **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**
 
-### Core research question
+Core research question:
 
 Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-### Frozen architecture constraints
+### Completed gates
 
-- zero runtime heap allocation in the recovery manager/reference firmware;
-- bounded local fault context and short recovery history;
-- finite deterministic recovery actions with explicit terminal escalation;
-- dependency-aware event quarantine instead of global queue flushing;
-- MPU as a platform containment mechanism, not the invention itself;
-- lightweight event-driven reference architecture;
-- selected formal invariants/properties rather than a claim of full formal verification;
-- no unnecessary framework/generalization before the research mechanism is validated.
+- **Gate A — Exact Event Model and Dependency Semantics: COMPLETE**
+- **Gate B — Fault Model + Fault Association: COMPLETE**
 
-## SIX CORE INVARIANTS
-
-1. **Quarantine safety** — a quarantined event cannot execute until an explicitly permitted transition.
-2. **Fault association** — recovery uses the smallest defensible event/transaction scope; ambiguity is not silently converted into precision.
-3. **Service preservation** — unrelated valid work remains eligible only when dependency, ordering, shared-state, and recovery-safety conditions permit it.
-4. **Dependency safety** — dependent events cannot bypass an invalid/quarantined predecessor or shared state merely because they are not themselves fault-associated.
-5. **Recovery termination** — every fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
-6. **Bounded resource usage** — queue, quarantine storage, history, and recovery state remain within fixed limits with no runtime heap growth.
-
-These are the current formal correctness boundary. They are not a claim that the firmware is already formally verified.
-
-# GATE A STATUS: COMPLETE
-
-Gate A — Exact Event Model and Dependency Semantics — has already been critically reviewed and accepted.
-
-The final semantic contract is:
+Gate A final artifact:
 
 `research/phase1_gateA_event_model_final.md`
 
-Important frozen Gate A semantics:
+Gate B final artifact:
 
-- active event identity is `EventRef = {slot_id, generation}`;
-- event types are finite and bounded;
-- producer/service/consumer roles are explicitly distinguished;
-- peripheral association is separate from dependency;
-- criticality is finite and does not override safety/dependency constraints;
-- dependencies are explicitly classified as `INDEPENDENT`, `ORDERED`, or `COUPLED/TRANSACTIONAL`;
-- dependencies are represented explicitly and bounded, never inferred from peripheral equality;
+`research/phase1_gateB_fault_model_final.md`
+
+The original baseline documents remain retained.
+
+## FROZEN GATE A SEMANTICS
+
+- active event identity: `EventRef = {slot_id, generation}`;
+- transaction identity is separate and bounded;
+- dependencies are explicitly `INDEPENDENT`, `ORDERED`, or `COUPLED/TRANSACTIONAL`;
+- dependencies are not inferred from peripheral equality;
 - FIFO is admission order, not universal execution order;
 - dispatch uses an explicit eligibility predicate;
-- quarantine is retained non-executable state, not deletion or global queue flushing;
-- preservation means correct verified execution, not merely retaining an event in storage;
-- full-queue behavior is explicit and bounded;
-- `RELEASED` is a transition outcome rather than a persistent lifecycle state;
-- fault-association precision may not exceed the evidence available.
+- quarantine is retained non-executable state;
+- preservation means correct verified execution, not merely queue retention;
+- fault-association precision may not exceed evidence precision;
+- provisional host-model bounds remain `QMAX=16`, `XMAX=4`, `DMAX=4` pending Gate E validation.
 
-Provisional host-model bounds:
+## FROZEN GATE B SEMANTICS
 
-- `QMAX = 16`
-- `XMAX = 4`
-- `DMAX = 4`
+### Primary I2C observed fault classes
 
-These values are provisional and must be validated/revised at Gate E. Do not present them as experimentally optimal.
+- NACK/non-acknowledge;
+- transfer timeout/no-progress;
+- bus/protocol error;
+- arbitration/bus-ownership error;
+- persistent no-progress / suspected peripheral-state failure.
 
-The original `research/phase1_event_model.md` is historical baseline material and must remain retained.
+### Secondary SPI classes
 
-# PRIMARY PLATFORM DIRECTION
+- transfer timeout/no-progress;
+- transaction/protocol verification failure;
+- persistent communication failure;
+- ambiguous attribution.
 
-Current platform recommendation:
+### Attribution classes
+
+- `EXACT_EVENT_TRANSACTION`
+- `SERVICE_ONLY`
+- `PERIPHERAL_ONLY`
+- `UNKNOWN_AMBIGUOUS`
+
+### Critical evidence rules
+
+- recurrence and persistence are history/episode attributes, not independent instantaneous fault classes;
+- NACK, timeout, BERR, etc. are observations, not automatic physical root-cause proofs;
+- same-peripheral membership never justifies event-level causal attribution;
+- service/driver failure without sufficient peripheral evidence must remain distinct;
+- software fault injection is deterministic test stimulus, not physical hardware validation;
+- physical fault-injection candidates remain unvalidated until actual hardware, safety, and repeatability are demonstrated;
+- a fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal fault begins a new episode;
+- fault association scope and dependency-blocking scope are distinct.
+
+## PRIMARY PLATFORM DIRECTION
 
 **STM32U575ZI / NUCLEO-U575ZI-Q**
 
-Initial interface direction:
+Initial interfaces:
 
-- I2C — primary experimental peripheral;
+- I2C — primary experimental interface;
 - SPI — secondary interface;
 - UART/USART — diagnostic/control path.
 
-Physical acquisition is not to be assumed. No physical measurement may be claimed before actual hardware execution.
+Physical acquisition is not assumed. No physical measurement may be claimed without actual hardware execution.
 
-# YOUR TASK NOW: GATE B
+## YOUR TASK NOW: GATE C
 
-## Gate B — Fault Model + Fault Association
+### Gate C — Recovery Policy + Bounded State Machine
 
 This is the **only major gate to work on in this chat**.
 
@@ -127,198 +133,137 @@ Do not jump to firmware implementation.
 
 Do not begin large-scale C code.
 
-Do not redesign Gate A unless you find a genuine contradiction or missing semantic dependency. If you do find one, explicitly identify it, explain why it matters, and update the repository without deleting the historical Gate A artifact.
+Do not redesign Gate A or Gate B unless a genuine contradiction is found. If one is found, explicitly identify it, explain why it matters, preserve the original artifact, and document the amendment rather than silently rewriting history.
 
-## Gate B objectives
+## GATE C OBJECTIVES
 
-Freeze a rigorous, experimentally usable fault model covering:
+Using the completed Gate A and Gate B contracts, freeze:
 
-1. exact fault taxonomy for the selected experimental peripheral(s);
-2. deterministic software fault-injection semantics;
-3. safely reproducible hardware/protocol fault classes where appropriate;
-4. bounded fault-record representation;
-5. fault-to-event association rules;
-6. association-confidence levels and ambiguity handling;
-7. fault-episode boundaries;
-8. recurrence/repeated-fault semantics;
-9. distinction between event fault, service fault, peripheral fault, and ambiguous fault;
-10. evidence required before narrowing fault scope;
-11. relationship between fault evidence and quarantine scope;
-12. interaction with all six core invariants.
+1. the minimum fault-context variables that materially change recovery decisions;
+2. the minimum useful bounded recovery-history representation;
+3. the finite recovery action set and technically distinct action semantics;
+4. the deterministic recovery decision table/policy;
+5. recovery behavior for each association-confidence level;
+6. exact retry/reinitialization/degradation/escalation transitions;
+7. the bounded recovery transition budget;
+8. interaction between recovery and event scheduling/quarantine/dependency blocking;
+9. safe degraded-mode semantics for the reference services;
+10. the compact policy output record and its fixed-size storage semantics;
+11. policy ablation variants needed to test whether context/history actually contributes value.
 
-## CRITICAL RESEARCH STANDARD
+## CRITICAL GATE C STANDARD
 
-Treat every assumption as a hypothesis to test.
+Treat every policy variable and action as a hypothesis to test.
 
-Do not accept a fault model merely because it sounds plausible.
+For every proposed input variable ask:
 
-For each proposed fault class, distinguish:
+- Does it change a recovery decision?
+- Is it already derivable from another field?
+- Can it be observed reliably?
+- Does retaining it justify its RAM/Flash cost?
+- Would removing it change the experiment's ability to falsify the hypothesis?
 
-- what is physically observable;
-- what the MCU/software can reliably infer;
-- what is only an inference;
-- what cannot be distinguished from another fault class;
-- what evidence is required to justify event-level association.
+For every proposed recovery action ask:
 
-Do not manufacture precision that the instrumentation cannot support.
+- Is it technically distinct on the selected platform/peripheral?
+- What state does it change?
+- What events must remain blocked while it executes?
+- What evidence is required before release?
+- What is its worst-case bounded cost?
+- What happens if it fails?
 
-The rule from Gate A remains:
+Do not add scoring engines, machine learning, dynamic recovery objects, or general resilience features unless evidence demonstrates that the minimal deterministic policy is inadequate.
 
-`association precision <= evidence precision`
+## STARTING BASELINE TO CHALLENGE
 
-## Fault taxonomy requirement
+`research/phase1_recovery_policy_design.md` is an earlier proposed architecture, not a frozen policy.
 
-Build the smallest defensible taxonomy needed for the research question.
+Its current candidate inputs include:
 
-Prefer a taxonomy that supports reproducible comparison between:
+- `fault_class`
+- `fault_recurrence`
+- `attempt_count`
+- `last_action`
+- `last_outcome`
+- `service_criticality`
+- `event_dependency_status`
+- `pending_independent_work`
 
-1. fixed retry;
-2. fixed retry + peripheral reset/reinitialization;
-3. proposed context-aware recovery + dependency-aware event quarantine.
+Its current effective candidate action set is:
 
-Do not add exotic fault classes merely to make the system appear sophisticated.
+- `RETRY`
+- `REINIT_OR_RESET`
+- `DEGRADE`
+- `ESCALATE`
 
-The taxonomy should consider, as applicable to the chosen I2C/SPI testbed:
+The baseline suggests a small deterministic decision table and a provisional recovery transition bound such as `Rmax=3`, but none of these numerical/policy choices is frozen yet.
 
-- timeout/no-response;
-- NACK/error response;
-- bus/protocol fault;
-- peripheral state-machine lockup/stall;
-- repeated transient failure;
-- persistent failure;
-- ambiguous/insufficiently attributable failure;
-- software/service-level failure if it is required to distinguish it from a peripheral fault.
+Challenge them rather than copying them.
 
-Validate which of these are actually reproducible and observable before freezing them.
+## REQUIRED GATE C ARTIFACT
 
-## Fault injection
+Create:
 
-Define two separate categories where useful:
-
-### A. Software-injected deterministic faults
-
-Examples may include controlled timeout, synthetic NACK/error result, forced driver error, bounded simulated peripheral stall, or injected status condition.
-
-These are valuable for deterministic host/firmware testing but must not be represented as equivalent to physical hardware faults.
-
-### B. Physical/protocol fault injection
-
-Only include fault mechanisms that can be safely and repeatably created with the selected hardware/testbed.
-
-Do not propose unsafe electrical abuse.
-
-Do not claim a physical fault mechanism until its hardware feasibility and safety are established.
-
-## Fault record
-
-Design a fixed-size, zero-heap fault record sufficient to support later recovery policy decisions.
-
-Do not prematurely optimize the exact C packing.
-
-Define semantics first, including likely fields such as:
-
-- fault sequence/episode identity;
-- timestamp or bounded timing representation;
-- peripheral/resource identity;
-- observed fault class;
-- associated `EventRef` when justified;
-- transaction ID when justified;
-- service ID;
-- association confidence;
-- retry/history context;
-- recurrence count;
-- evidence flags;
-- terminal/episode status.
-
-Every field must justify why it is needed by a later decision or metric.
-
-## Fault association
-
-Explicitly define when association may be:
-
-- exact event/transaction;
-- service-level;
-- peripheral-level;
-- ambiguous/unknown.
-
-For each level, define what evidence is required.
-
-Do not infer event-level causality from peripheral equality alone.
-
-If a peripheral has multiple queued events, determine when the evidence is strong enough to associate the failure with one event and when the policy must conservatively quarantine a broader scope.
-
-## Fault episode
-
-Define when a fault episode begins and ends.
-
-Handle repeated observations of the same underlying fault without accidentally treating every status observation as a new independent episode.
-
-The episode definition must later support bounded recovery-history reasoning.
-
-## Required Gate B deliverable
-
-Create a final repository artifact, preferably:
-
-`research/phase1_gateB_fault_model_final.md`
+`research/phase1_gateC_recovery_policy_final.md`
 
 It must include:
 
 - scope and acceptance criteria;
-- exact fault taxonomy;
-- observable evidence for each fault class;
-- software injection semantics;
-- physical/protocol injection candidates and safety limits;
-- fixed-size fault-record semantic model;
-- association-confidence model;
-- fault episode/repetition semantics;
-- quarantine-scope implications;
+- policy inputs and evidence basis;
+- minimum bounded recovery history;
+- exact action semantics;
+- action safety/preconditions/postconditions;
+- association-confidence-dependent policy behavior;
+- deterministic decision table;
+- recovery state machine;
+- exact bounded transition/attempt semantics;
+- degraded-mode semantics;
+- interaction with Gate A quarantine/dependency rules;
+- policy output record;
+- policy ablation plan;
 - explicit rejected assumptions;
-- unresolved questions transferred to Gate C;
-- Gate B acceptance/rejection decision.
+- unresolved questions transferred to Gate D;
+- final Gate C acceptance/rejection decision.
 
-Do not delete the earlier `research/phase1_peripheral_testbed_fault_model.md`; preserve it as baseline/history and explicitly identify what was retained, refined, or rejected.
-
-## GitHub checkpoint requirement
-
-At the end of this chat:
-
-1. update `research/phase1_gateB_fault_model_final.md`;
-2. update `PROJECT_STATE.md`;
-3. update `CURRENT_HANDOFF.md`;
-4. update `DECISION_LOG.md`;
-5. preserve all useful historical documents;
-6. avoid unnecessary deletions or rewrites;
-7. ensure `main` contains the complete checkpoint;
-8. synchronize the active design branch with `main` if appropriate;
-9. verify branch state before declaring the checkpoint complete.
-
-Do not claim the checkpoint is complete until GitHub actually reflects it.
-
-## CHAT B STOPPING RULE
-
-**Stop after Gate B is fully checkpointed.**
-
-Do not continue into Gate C in this chat merely because Gate B finished early.
-
-The next chat should begin with:
-
-**Gate C — Recovery Policy + Bounded State Machine**
-
-The repository must contain the complete Gate B handoff so the next chat can reconstruct the project without depending on this conversation's history.
-
-## Research honesty requirements
-
-Throughout the project:
+## RESEARCH HONESTY
 
 - no fabricated benchmarks;
 - no fabricated physical measurements;
 - no fabricated board availability;
 - no unsupported novelty claims;
-- no claim that a host simulation equals hardware validation;
-- no claim that an established component is novel merely because it is combined with another component;
-- report negative or inconclusive results honestly;
+- no claim that host simulation equals hardware validation;
+- report negative/inconclusive design conclusions honestly;
 - keep the implementation minimal and directly tied to the research question.
 
-Proceed from the repository checkpoint and begin **Gate B — Fault Model + Fault Association**.
+## GITHUB CHECKPOINT REQUIREMENT
+
+At the end of this chat:
+
+1. update `research/phase1_gateC_recovery_policy_final.md`;
+2. update `PROJECT_STATE.md`;
+3. update `CURRENT_HANDOFF.md`;
+4. update `DECISION_LOG.md`;
+5. update this `NEXT_CHAT_PROMPT.md` for Gate D;
+6. preserve all historical documents;
+7. avoid unnecessary deletions or cosmetic rewrites;
+8. ensure `main` contains the complete checkpoint;
+9. synchronize the active design branch with `main` if appropriate;
+10. verify actual branch state before declaring completion.
+
+Do not claim the checkpoint is complete until GitHub actually reflects it.
+
+## CHAT C STOPPING RULE
+
+**Stop after Gate C is fully checkpointed.**
+
+Do not continue into Gate D merely because Gate C finishes early.
+
+The next chat after this one must begin:
+
+**Gate D — Formal Properties + Proof/Check Strategy**
+
+The repository must contain enough information for that next chat to reconstruct the project without depending on this conversation's history.
+
+Proceed from the repository checkpoint and begin **Gate C — Recovery Policy + Bounded State Machine**.
 
 ---
