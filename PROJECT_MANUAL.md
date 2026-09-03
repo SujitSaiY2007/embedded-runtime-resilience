@@ -10,6 +10,8 @@ The frozen development topic is:
 
 Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**.
 
+**Current status:** Phase 1E.1 — Experimental Design / Formalization Foundation. Gates A, B, C, and D are accepted at the semantic/design-model level. Gate E — Baselines + Experimental Protocol — is next. Large-scale firmware implementation and physical validation remain deferred.
+
 The intended outcome is not merely a functioning application. The target is a technically defensible research contribution that may support an academic publication and, if the evidence warrants it, a patent filing.
 
 ## 2. Research philosophy
@@ -48,7 +50,9 @@ Formal reasoning will focus on tractable queue/recovery invariants rather than c
 
 A laptop/PC is sufficient for development, simulation, host-side fault modelling, formal reasoning, and analysis. It is **not sufficient for the strongest final embedded validation claims**.
 
-The project therefore requires an actual MPU-capable MCU development board for final physical validation of MPU behavior, interrupt timing, peripheral behavior, resource footprint, and hardware-relevant faults. No physical board is currently assumed to be available; board selection/acquisition is a Phase 1 prerequisite.
+The current platform direction is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition remains a factual checkpoint; no physical measurements are claimed until actual hardware is acquired and executed.
+
+The project therefore requires an actual MPU-capable MCU development board for final physical validation of MPU behavior, interrupt timing, peripheral behavior, resource footprint, and hardware-relevant faults.
 
 ## 5. Research contribution discipline
 
@@ -73,7 +77,15 @@ Use controlled, traceable increments:
 
 For the current frozen topic:
 
-`topic freeze -> architecture -> MCU/testbed -> fault model -> policy -> invariants -> baselines -> prototype -> experiment -> evaluation`
+`topic freeze -> architecture -> MCU/testbed -> fault model -> policy -> invariants -> experimental protocol -> prototype -> experiment -> evaluation`
+
+Current design-gate progression:
+
+- **Gate A:** Event model + dependency semantics — COMPLETE
+- **Gate B:** Fault model + fault association — COMPLETE
+- **Gate C:** Recovery policy + bounded state machine — COMPLETE
+- **Gate D:** Formal properties + proof/check strategy — COMPLETE
+- **Gate E:** Baselines + experimental protocol — NEXT
 
 Avoid premature implementation. Code should follow a defined architecture and evaluation protocol.
 
@@ -114,15 +126,15 @@ Before substantive work, a future chat must read, in order:
 
 The topic is frozen, but development must still pass these gates:
 
-- exact mechanism defined;
-- hardware/testbed feasible;
-- credible fault model;
-- reproducible baseline;
-- measurable technical contribution;
-- reproducible evaluation;
-- no unsupported novelty claims;
-- publication-quality evidence;
-- patent-sensitive details handled deliberately.
+- exact mechanism defined — Gates A–D complete;
+- hardware/testbed feasible — platform direction selected; acquisition/physical validation pending;
+- credible fault model — Gate B complete at the semantic/design level;
+- reproducible baseline — Gate E pending;
+- measurable technical contribution — experimental evidence pending;
+- reproducible evaluation — Gate E and later experiments pending;
+- no unsupported novelty claims — required throughout;
+- publication-quality evidence — later-stage objective;
+- patent-sensitive details handled deliberately — required throughout.
 
 ## 10. Patent disclaimer
 
