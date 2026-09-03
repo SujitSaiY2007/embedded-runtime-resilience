@@ -186,7 +186,7 @@ For every proposed input variable ask:
 - Can it be observed reliably on the reference architecture?
 - What is its static RAM/Flash cost?
 - Does keeping it improve falsifiability or measurement?
-- What happens if the value is ambiguous or unavailable?
+- What happens if its value is ambiguous or unavailable?
 
 For every proposed recovery action ask:
 
