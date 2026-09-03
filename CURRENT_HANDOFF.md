@@ -4,11 +4,10 @@
 
 Phase 0 topic validation and initial Phase 1 system-design preparation are complete. The development topic is frozen. The project is in **Phase 1E.1 — Experimental Design / Formalization Foundation**.
 
-**Gate A — Exact Event Model and Dependency Semantics is COMPLETE and checkpointed.**
+**Gate A — Exact Event Model and Dependency Semantics is COMPLETE and checkpointed.**  
+**Gate B — Fault Model + Fault Association is COMPLETE and checkpointed.**
 
-The next chat must begin **Gate B — Fault Model + Fault Association**.
-
-A ready-to-use continuation prompt is preserved at `NEXT_CHAT_PROMPT.md`.
+The next chat must begin **Gate C — Recovery Policy + Bounded State Machine**.
 
 ## Frozen development topic
 
@@ -39,6 +38,28 @@ Gate A established the final semantic contract for event identity, event types, 
 
 Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report final values explicitly.
 
+## Gate B completed artifact
+
+`research/phase1_gateB_fault_model_final.md`
+
+Gate B is accepted at the semantic/design level.
+
+Key frozen decisions:
+
+- The primary taxonomy is centered on observable I2C failure modes: NACK/non-acknowledge, timeout/no-progress, bus/protocol error, arbitration loss, and persistent no-progress/suspected peripheral-state failure.
+- SPI has a deliberately reduced secondary taxonomy because SPI fault evidence is more implementation/device dependent and SPI has no universal NACK equivalent.
+- Recurrence and persistence are history/episode attributes rather than separate instantaneous fault classes.
+- Service/driver-level failure without sufficient peripheral evidence remains distinct from peripheral failure.
+- Association levels are `EXACT_EVENT_TRANSACTION`, `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS`.
+- Peripheral equality alone never justifies event-level fault attribution.
+- Fault association scope and dependency-blocking scope are distinct.
+- Software injection is deterministic test stimulus, not equivalent to physical hardware failure.
+- Physical/protocol fault injection candidates remain unvalidated until hardware acquisition, electrical safety review, and repeatability testing.
+- The semantic fault record is fixed-size/static and retains only information needed for later policy decisions and metrics.
+- A fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a later post-terminal fault starts a new episode.
+
+No physical measurements or hardware validation are claimed.
+
 ## Platform checkpoint
 
 Primary platform direction remains **STM32U575ZI / NUCLEO-U575ZI-Q**.
@@ -51,31 +72,32 @@ Initial interface direction:
 
 The retained MCU selection baseline is present at `research/phase1_mcu_board_selection.md`. This is a design recommendation, not acquisition confirmation.
 
-## Next exact task — Gate B
+## Next exact task — Gate C
 
-### Fault Model + Fault Association
+### Recovery Policy + Bounded State Machine
 
 Do not begin large-scale firmware implementation.
 
-Freeze:
+Use the completed Gate A and Gate B contracts to derive and freeze:
 
-1. exact fault taxonomy for the selected experimental peripheral(s);
-2. deterministic software fault-injection semantics;
-3. safely reproducible hardware/protocol fault classes;
-4. bounded fault-record representation;
-5. fault-to-event/transaction association rules;
-6. association-confidence handling;
-7. fault-episode boundaries and recurrence semantics;
-8. evidence needed to distinguish event, service, peripheral, and ambiguous faults;
-9. quarantine-scope implications of each association level.
+1. minimum fault-context variables that materially change recovery decisions;
+2. minimum useful bounded recovery-history representation;
+3. finite recovery action set, including whether reinitialization and peripheral reset are experimentally distinct on the final U575 path;
+4. deterministic recovery decision table;
+5. recovery behavior for each association-confidence level;
+6. exact retry/reinitialization/degradation/escalation transitions;
+7. bounded recovery transition budget;
+8. interaction between recovery and event scheduling/quarantine/dependency blocking;
+9. safe degraded-mode semantics for the reference services;
+10. policy output record and its fixed-size storage semantics;
+11. policy ablation variants needed to test whether context/history actually contributes value.
 
-The complete ready-to-paste prompt is stored in `NEXT_CHAT_PROMPT.md`.
+Gate C must challenge the provisional recovery-policy design in `research/phase1_recovery_policy_design.md` rather than copying it blindly.
 
 ## Subsequent gates
 
-- **Gate C:** minimum context/history variables, bounded action set, recovery policy and state machine.
 - **Gate D:** formal properties, transition-system reasoning, assertions/model-checking strategy where practical.
-- **Gate E:** baselines, workload matrix, fault schedule, metrics, repetitions, logging, and reproducibility protocol.
+- **Gate E:** baselines, workload matrix, fault schedule, metrics, logging, repetitions, and reproducibility protocol.
 - **Implementation:** only after A–E are sufficiently specified; build the smallest reference prototype.
 - **Physical validation:** after hardware/testbed acquisition and safe fault-injection setup.
 - **Evaluation:** matched baseline/proposed experiments.
@@ -87,6 +109,8 @@ The complete ready-to-paste prompt is stored in `NEXT_CHAT_PROMPT.md`.
 - Do not claim patentability.
 - Do not fabricate physical measurements, hardware availability, benchmarks, or experimental outcomes.
 - Host simulation is not equivalent to physical MCU validation.
+- Do not treat software fault injection as proof of a physical fault mechanism.
+- Do not turn an inferred physical cause into an observed fault class.
 - Do not add unrelated resilience features or build a general-purpose framework.
 
 ## GitHub continuity
@@ -95,11 +119,10 @@ GitHub is the durable source of truth. Preserve historical material. Prefer addi
 
 ## Chat boundary
 
-**Stop this chat after Gate A is checkpointed. The next chat is Gate B.**
+**Stop this chat after Gate B is checkpointed. The next chat is Gate C.**
 
 Recommended future boundaries:
 
-- Chat B: Gate B complete → checkpoint → new chat
 - Chat C: Gate C complete → checkpoint → new chat
 - Chat D: Gate D complete → checkpoint → new chat
 - Chat E: Gate E complete → checkpoint → new chat
