@@ -1,4 +1,4 @@
-# Next Chat Prompt — Gate D
+# Next Chat Prompt — Gate E
 
 Copy/paste the following prompt into the next ChatGPT 5 chat.
 
@@ -10,7 +10,7 @@ You are continuing my embedded-systems research project from the canonical GitHu
 
 ## 1. IMPORTANT: CONTINUATION, NOT RESTART
 
-This is a continuation of an existing research project. Do not restart topic ideation, prior-art exploration, MCU selection, Phase 1 preparation, Gate A, Gate B, or Gate C.
+This is a continuation of an existing research project. Do not restart topic ideation, prior-art exploration, MCU selection, Phase 1 preparation, Gate A, Gate B, Gate C, or Gate D.
 
 GitHub is the durable source of truth. Reconstruct the project from the repository before doing substantive work.
 
@@ -27,23 +27,26 @@ Read these files from `main` in this order:
 7. `research/phase1_gateB_fault_model_final.md`
 8. `research/phase1_gateB_learning_summary.md`
 9. `research/phase1_gateC_recovery_policy_final.md`
-10. `research/phase1_event_model.md`
-11. `research/phase1_mcu_board_selection.md`
-12. `research/phase1_peripheral_testbed_fault_model.md`
-13. `research/phase1_recovery_policy_design.md`
+10. `research/phase1_gateD_formal_properties_final.md`
+11. `research/phase1_event_model.md`
+12. `research/phase1_mcu_board_selection.md`
+13. `research/phase1_peripheral_testbed_fault_model.md`
+14. `research/phase1_recovery_policy_design.md`
 
 Then provide a concise continuity check covering:
 
 - frozen research topic;
 - frozen research question;
+- platform direction;
 - Gate A result;
 - Gate B result;
 - Gate C result;
-- why Gate C matters;
-- exact Gate D task;
+- Gate D result;
+- why Gates A–D matter together;
+- exact Gate E task;
 - explicit non-goals.
 
-Do not begin implementation.
+Do not begin firmware implementation.
 
 ## 3. FROZEN PROJECT
 
@@ -175,43 +178,155 @@ Conceptual fixed-size record:
 
 P0 fixed retry; P1 fixed retry + peripheral recovery; P2 context-only; P3 context + episode history; P4 integrated policy + dependency-aware event quarantine.
 
-## 7. ONLY MAJOR TASK NOW: GATE D
+## 7. COMPLETED GATE D
 
-### Gate D — Formal Properties + Proof/Check Strategy
+`research/phase1_gateD_formal_properties_final.md`
 
-Do not jump to firmware implementation or Gate E.
+Gate D is accepted at the semantic/design-model level.
 
-Use Gates A–C as normative contracts. Do not silently modify them. If a real contradiction is discovered, identify it precisely, preserve history, and record an explicit amendment decision.
+### Formalized properties
 
-Gate D must:
+Gate D formalized/check-specified:
 
-1. formalize the six core invariants;
-2. define precise predicates for quarantine safety, association conservatism, preservation/correct blocking, dependency safety, recovery termination, and bounded resource use;
-3. formalize `EventRef` generation validity;
-4. formalize release safety;
-5. formalize coupled-transaction containment;
-6. prove/check the four-action recovery bound;
-7. check completeness and consistency of the deterministic decision table across Gate B fault/association combinations;
-8. identify finite-state assumptions and state-space bounds suitable for host-side exhaustive checking;
-9. design assertions/property checks that can later be embedded in the reference prototype;
-10. distinguish properties that can be proven from those requiring experimental validation;
-11. define a practical proof/check strategy without claiming full formal verification of the firmware.
+1. quarantine safety;
+2. fault-association conservatism;
+3. service preservation versus correct blocking;
+4. dependency safety;
+5. recovery termination under the four-action bound;
+6. bounded resource usage;
+7. `EventRef` generation validity and stale-reference rejection;
+8. release safety and Gate A eligibility re-entry;
+9. coupled-transaction containment;
+10. deterministic decision-table totality and consistency.
 
-## 8. RESEARCH DISCIPLINE
+### Gate D model-level result
 
-For every property ask:
+A host-side abstract audit enumerated **33,792** encoded policy contexts and found exactly one outcome for every context. The audit covers 11 bounded fault classes, 4 association levels, 3 criticality classes, 4 active attempt-count values, 8 recovery-safety masks, and success/prohibition/containment status bits.
 
-- What is the exact state space?
-- What is assumed?
-- Is the property safety, liveness/termination, boundedness, or observational correctness?
-- Can it be exhaustively checked on a finite host model?
-- Can it be represented as a runtime assertion later?
-- What counterexample would falsify it?
-- Does it depend on hardware behavior not yet validated?
+This is model-level evidence about decision totality/determinism. It is not firmware verification, MCU validation, or physical fault validation.
 
-Avoid theorem inflation. A finite host model is evidence about the modeled semantics, not proof that arbitrary firmware/hardware behavior satisfies them.
+### Gate D qualifications
 
-## 9. RESEARCH HONESTY
+- `QMAX=16`, `XMAX=4`, `DMAX=4` remain provisional until Gate E workload validation.
+- Generation width/wrap behavior must be concretely specified before implementation; stale references must fail closed.
+- A single active recovery episode was used as a host-model proof decomposition. If implementation permits multiple simultaneous service/peripheral episodes outside retained event slots, a fixed `EPMAX` must be declared and resource-accounted before implementation.
+- Host-state checking is evidence about the modeled semantics, not proof of arbitrary MCU/hardware behavior.
+
+## 8. ONLY MAJOR TASK NOW: GATE E
+
+### Gate E — Baselines + Experimental Protocol
+
+Do not jump to firmware implementation, physical bring-up, or experimental execution before the Gate E protocol is frozen.
+
+Use Gates A–D as normative contracts. Do not silently modify them. If a real contradiction is discovered, identify it precisely, preserve history, and record an explicit amendment decision.
+
+Gate E must:
+
+1. freeze baseline definitions and exact comparability;
+2. freeze the workload matrix and event/dependency scenarios;
+3. freeze the deterministic software fault schedule and define how later physical-fault scenarios map to the semantic fault classes;
+4. validate or revise `QMAX`, `XMAX`, and `DMAX` using the workload rather than convenience;
+5. define any required finite recovery-context bound such as `EPMAX` if the implementation supports simultaneous episodes;
+6. freeze the final history-window/episode-record capacity used in experiments;
+7. freeze correctness metrics and performance/resource metrics;
+8. freeze logging schema, event/episode identifiers, and trace correlation;
+9. freeze repetitions, deterministic schedules/randomization rules, and reset/warm-up policy;
+10. freeze statistical/reproducibility treatment and handling of invalid runs;
+11. freeze acceptance criteria and reporting format;
+12. separate host-model measurements from MCU measurements and from physical fault-validation claims;
+13. define the minimum evidence required before making any performance, robustness, or generalization claim.
+
+### Baselines to reconcile carefully
+
+The project has two related descriptions of the comparison set that must be reconciled without losing history:
+
+- Gate C ablation: P0 fixed retry; P1 fixed retry + peripheral recovery; P2 context-only; P3 context + episode history; P4 integrated policy + dependency-aware event quarantine.
+- Earlier experimental direction: fixed retry; fixed retry + peripheral reset/reinitialization; proposed zero-heap context-aware recovery + dependency-aware event quarantine.
+
+Do not silently collapse or delete these definitions. Determine the smallest coherent experimental matrix that preserves the research question and makes comparisons fair. If a variant is redundant, document the rationale and retain the historical terminology.
+
+### Workload requirements
+
+At minimum, Gate E should define scenarios containing:
+
+- independent valid events;
+- ordered dependencies;
+- coupled/transactional events;
+- fault-associated event/transaction;
+- multiple queued events sharing a peripheral without implying causal association;
+- recovery success after retry;
+- retry failure followed by reinitialization/reset;
+- terminal degradation;
+- terminal escalation;
+- queue and quarantine capacity boundaries;
+- stale `EventRef` generation cases;
+- ambiguity/service-only/peripheral-only association cases where practical in the host model.
+
+### Required correctness outcomes
+
+At minimum define how to measure/count:
+
+- quarantine violations;
+- stale-reference mis-targeting;
+- incorrect event-level attribution;
+- preserved independent events;
+- correctly blocked dependent events;
+- incorrectly blocked/lost valid independent events;
+- lost events;
+- duplicated events;
+- invalid coupled-transaction execution;
+- recovery-action bound violations;
+- premature release;
+- terminal-state re-entry into recovery.
+
+### Required performance/resource outcomes
+
+Define reproducible measurement methods for:
+
+- fault-detection latency;
+- service-restoration latency;
+- recovery success/failure;
+- whole-system reset/escalation count;
+- queue occupancy/high-water mark;
+- quarantine occupancy/high-water mark;
+- CPU time/overhead;
+- RAM footprint;
+- Flash footprint;
+- energy only if a valid measurement method becomes available.
+
+Do not invent numerical acceptance thresholds before they are justified by the experiment/design objective.
+
+### Fault schedule
+
+Start with deterministic software injection because it is reproducible. The schedule should specify:
+
+- fault class;
+- injection point;
+- affected event/transaction;
+- association level;
+- workload position;
+- recovery configuration;
+- expected verification outcome;
+- run identifier/seed if applicable.
+
+Physical fault injection is a later validation layer, not a prerequisite for freezing the host experimental protocol.
+
+## 9. RESEARCH DISCIPLINE
+
+For every Gate E decision ask:
+
+- What exact hypothesis does this choice test?
+- Is the baseline genuinely comparable to the proposed mechanism?
+- Which variables are fixed and which are independent variables?
+- Could the workload accidentally reward aggressive blocking?
+- Are queue-capacity effects being mistaken for recovery benefit?
+- Are software-injected faults being overinterpreted as physical faults?
+- Can another researcher reproduce the schedule and logging?
+- Which claims will still require MCU hardware evidence?
+
+Avoid theorem inflation and experimenter degrees of freedom that can be changed after seeing results.
+
+## 10. RESEARCH HONESTY
 
 Never fabricate:
 
@@ -220,36 +335,35 @@ Never fabricate:
 - benchmark results;
 - energy measurements;
 - hardware fault-injection results;
+- statistical significance before data exist;
 - novelty;
 - patentability.
 
-Host-side exhaustive checking is not physical MCU validation. Software fault injection is not physical fault validation.
+Host-side results are not MCU measurements. Software fault injection is not physical fault validation.
 
-## 10. GATE D ARTIFACT AND CHECKPOINT
+## 11. GATE E ARTIFACT AND CHECKPOINT
 
-When Gate D is complete, create:
+When Gate E is complete, create:
 
-`research/phase1_gateD_formal_properties_final.md`
+`research/phase1_gateE_experimental_protocol_final.md`
 
 Then update:
 
 - `PROJECT_STATE.md`
 - `CURRENT_HANDOFF.md`
 - `DECISION_LOG.md`
-- `NEXT_CHAT_PROMPT.md` (replace it with the complete Gate E startup prompt)
+- `NEXT_CHAT_PROMPT.md` (replace it with the complete Minimal Reference Implementation startup prompt)
 
-Preserve all historical files. Avoid unnecessary deletions and cosmetic rewrites. Ensure `main` contains the complete Gate D checkpoint and synchronize the active design branch with `main` if appropriate. Verify actual branch state before declaring completion.
+Preserve all historical files. Avoid unnecessary deletions and cosmetic rewrites. Ensure `main` contains the complete Gate E checkpoint and synchronize the active design branch with `main` if appropriate. Verify actual branch state before declaring completion.
 
-## 11. CHAT D STOPPING RULE
+## 12. CHAT E STOPPING RULE
 
-Stop after Gate D is fully reasoned, checked at the design/model level, documented, accepted/rejected, checkpointed, and synchronized.
+Stop after Gate E is fully reasoned, checked at the design/protocol level, documented, accepted/rejected, checkpointed, and synchronized.
 
-Do not continue into Gate E.
+Do not continue into firmware implementation or physical testbed bring-up.
 
 The next chat begins:
 
-**Gate E — Baselines + Experimental Protocol**
-
-Proceed now with Gate D — Formal Properties + Proof/Check Strategy.
+**Minimal Reference Implementation — smallest testable reference prototype**
 
 ---
