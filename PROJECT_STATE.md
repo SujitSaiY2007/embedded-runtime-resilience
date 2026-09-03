@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Development topic frozen; Phase 1E.1 has officially started conceptually.  
+**Status:** Development topic frozen; Phase 1E.1 active; Gate A complete.  
 **Project mode:** Solo software-dominant embedded-systems project  
 **Primary ambition:** Research-grade implementation with publication potential and possible patent pathway if supported by evidence and professional assessment.
 
@@ -45,42 +45,41 @@ These invariants form the current formal correctness boundary. They are properti
 
 ### Phase 1E.1 — Experimental Design / Formalization Foundation
 
-**Status: officially started conceptually.**
+**Status: active. Gate A is complete at the semantic-design level.**
 
-The first concrete design result is the six-invariant correctness boundary above.
+### Completed Gate A — Exact Event Model and Dependency Semantics
 
-### Next immediate gate — Gate A
+The final semantic contract is recorded in:
 
-**Define the exact Event Model and dependency semantics.**
+`research/phase1_gateA_event_model_final.md`
 
-Gate A must settle, before implementation:
+Key accepted refinements include:
 
-- exact bounded event identity semantics;
-- event type set;
-- producer/consumer/service semantics;
-- peripheral association semantics;
-- criticality classes;
-- dependency classes and representation;
-- ordering semantics;
-- event state transitions;
-- fault-association states;
-- quarantine semantics;
-- bounded queue and quarantine capacity assumptions;
-- full-queue behavior;
-- preservation rule and correctness metric.
+- event identity is `EventRef = {slot_id, generation}` rather than an unqualified reusable event ID;
+- service ownership is primary, with consumer identity retained only when semantically distinct;
+- dependencies are explicit bounded relations, never inferred from peripheral equality;
+- dependency classes are INDEPENDENT, ORDERED, and COUPLED/TRANSACTIONAL;
+- FIFO is admission order, not universal execution order;
+- dispatch requires an explicit eligibility predicate;
+- quarantine is retained non-executable state, not deletion or queue flush;
+- preservation means correct verified execution, not mere queue retention;
+- full-queue behavior is explicit and bounded;
+- `RELEASED` is a transition outcome rather than a persistent terminal state.
 
-`research/phase1_event_model.md` is the current baseline reference. It is a semantic model, not yet a final C struct.
+Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report the chosen values explicitly.
+
+The original `research/phase1_event_model.md` remains retained as historical design-baseline material. It is not deleted.
 
 ## Existing design baselines retained
 
-The repository now retains the Phase 1 design references for:
+The repository retains the Phase 1 design references for:
 
 - MCU/board selection;
 - event model;
 - peripheral testbed/fault model;
 - recovery-policy design.
 
-The primary platform direction recorded in the current design material is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition/validation must still be treated as a factual checkpoint rather than assumed.
+The primary platform direction is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition/validation remains a factual checkpoint rather than an assumption.
 
 ## Experimental direction
 
@@ -106,12 +105,29 @@ Primary metrics include detection latency, service-restoration latency, recovery
 
 The novelty hypothesis remains the **specific combined mechanism and measured technical trade-off**, not any individual ingredient.
 
+## Next gate
+
+### Gate B — Fault Model + Fault Association
+
+Gate B must now freeze:
+
+- exact fault taxonomy for the selected experimental peripheral(s);
+- deterministic software fault-injection semantics;
+- hardware/protocol fault classes where safely reproducible;
+- fault record representation;
+- fault-to-event/transaction association rules;
+- association confidence handling;
+- fault episode boundaries and recurrence semantics;
+- evidence needed to distinguish event fault, service fault, peripheral fault, and ambiguous fault.
+
+No large-scale firmware implementation begins during Gate B.
+
 ## Implementation gate
 
 No large-scale firmware implementation begins until Gates A–E are sufficiently specified:
 
-- **Gate A:** Event model + dependency semantics
-- **Gate B:** Fault model + fault association
+- **Gate A:** Event model + dependency semantics — COMPLETE
+- **Gate B:** Fault model + fault association — NEXT
 - **Gate C:** Recovery policy + bounded state machine
 - **Gate D:** Formal properties + proof/check strategy
 - **Gate E:** Baselines + experimental protocol
