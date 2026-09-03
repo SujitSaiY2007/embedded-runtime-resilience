@@ -53,10 +53,14 @@ A new chat must first read the repository's continuity documents before performi
 ## Current checkpoint
 
 **Phase:** 1E.1 — Experimental Design / Formalization Foundation  
-**Completed:** six core invariants; Gate A — exact Event Model and dependency semantics; Gate B — Fault Model and Fault Association.  
-**Next:** Gate C — Recovery Policy + Bounded State Machine.  
+**Completed:** six core invariants; Gate A — exact Event Model and dependency semantics; Gate B — Fault Model and Fault Association; Gate C — Recovery Policy and Bounded State Machine.  
+**Next:** Gate D — Formal Properties + Proof/Check Strategy.  
 **Implementation status:** large-scale firmware implementation has not started and must remain deferred until the design gates are sufficiently complete.
+
+## Gate C checkpoint note
+
+`research/phase1_gateC_recovery_policy_final.md` is the authoritative Gate C artifact. Gate C freezes the minimum policy context, bounded episode representation, logical action set, association-aware behavior, exact four-action recovery budget, scheduling/quarantine/dependency interaction, degraded-mode abstraction, fixed-size policy output, and P0–P4 ablation plan. `research/phase1_recovery_policy_design.md` remains retained as the earlier non-frozen design baseline.
 
 ## Gate B checkpoint note
 
-`research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. `research/phase1_gateB_learning_summary.md` is an additive educational companion that explains the same gate in simpler terms and does not replace the normative artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material. The current `NEXT_CHAT_PROMPT.md` contains the Gate C continuation prompt.
+`research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. `research/phase1_gateB_learning_summary.md` is an additive educational companion that explains the same gate in simpler terms and does not replace the normative artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material.

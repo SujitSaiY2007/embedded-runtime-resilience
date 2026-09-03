@@ -47,6 +47,24 @@
 | D-043 | Accepted | Do not make ARLO or multi-master physical injection a primary workload. | The minimal reference testbed is intended to remain simple/single-master; arbitration scenarios add complexity without directly strengthening the core hypothesis. |
 | D-044 | Accepted | Accept Gate B at the semantic/design level and advance to Gate C. | The fault taxonomy, evidence boundary, association model, episode semantics, and bounded record are sufficient to derive a deterministic recovery policy; physical validation remains deferred. |
 | D-045 | Accepted | Retain a separate Gate B learning summary as an educational companion to the normative fault-model artifact. | The project owner is learning embedded-systems concepts while building the research system; durable conceptual explanations improve continuity without altering the formal contract. |
+| D-046 | Accepted | Freeze Gate C minimum policy context as `fault_class`, `association_level`, bounded `attempt_count`, `criticality`, bounded `recovery_safety` preconditions, and `episode_state`. | These variables can materially change recovery choice or safety; redundant history and scheduler-only state were removed. |
+| D-047 | Accepted | Represent recurrence through bounded episode progression rather than a separate policy variable. | Recurrence is a temporal property already represented by attempt/episode state; a duplicate field adds RAM without independent decision value. |
+| D-048 | Accepted | Remove `last_action` and `last_outcome` as independent policy inputs. | Explicit recovery state already determines the previous action/outcome needed for the next transition. |
+| D-049 | Accepted | Keep service criticality as a constrained policy context, but do not use it as a priority score. | Criticality changes degradability/escalation safety but cannot override dependency or correctness rules. |
+| D-050 | Accepted | Treat `pending_independent_work` as scheduler state, not recovery-policy state. | Recovery action selection should not depend on queue occupancy; Gate A eligibility already determines whether independent work may run. |
+| D-051 | Accepted | Treat dependency status as an action/scheduling precondition rather than duplicating the dependency graph inside the recovery policy. | Prevents two inconsistent dependency models and preserves Gate A as the authoritative scheduler contract. |
+| D-052 | Accepted | Freeze the logical recovery action set as `RETRY`, `REINIT_OR_RESET`, `DEGRADE`, and `ESCALATE`. | Four actions cover local retry, peripheral-local recovery, safe terminal degradation, and bounded terminal escalation without a general framework. |
+| D-053 | Accepted | Represent peripheral reinitialization and peripheral reset as one logical policy action while retaining method-level distinction for later controlled implementation experiments. | Their policy role is the same, but their hardware/software scopes can differ; treating them as permanently identical or permanently separate would both be unjustified before implementation evidence. |
+| D-054 | Accepted | Freeze at most two retry actions per fault episode before `REINIT_OR_RESET`. | Provides a deterministic transient-vs-repeated failure distinction while preventing retry loops. |
+| D-055 | Accepted | Replace the underspecified provisional `Rmax=3` with an exact four-action recovery budget: two retries, one peripheral recovery action, then one terminal action. | The new definition makes attempt counting and termination auditable and ensures every path reaches a terminal state. |
+| D-056 | Accepted | Count one recovery-action invocation plus its verification as one attempt; scheduler dispatches and repeated observations alone are not recovery attempts. | Prevents hidden or unrelated work from consuming the policy budget and makes experimental cost measurable. |
+| D-057 | Accepted | Require successful action verification plus Gate A eligibility before releasing a quarantined event. | A successful peripheral operation alone does not prove that the original event/transaction is valid to execute. |
+| D-058 | Accepted | Do not automatically retry coupled/transactional events unless the transaction contract explicitly establishes retry safety. | Member-level retry can violate transaction atomicity or shared-state consistency. |
+| D-059 | Accepted | For `UNKNOWN_AMBIGUOUS`, use conservative containment without inventing event-level attribution; escalate if safe local containment cannot be established. | Preserves the evidence-bound association rule while providing a bounded safety response. |
+| D-060 | Accepted | Use a common bounded degraded abstraction `ACTIVE -> DEGRADED -> TERMINAL` with service-specific safety contracts. | Avoids a general resilience framework while providing a uniform recovery-manager interface. |
+| D-061 | Accepted | Freeze a fixed-size `PolicyDecision` output containing action, target scope, quarantine/retry/release flags, bounded attempt index, terminal flag, and reason code. | Gives implementation and experiments a compact deterministic interface without dynamic objects or free-form logging. |
+| D-062 | Accepted | Freeze Gate C ablation variants P0–P4: fixed retry; fixed retry + peripheral recovery; context-only; context + episode history; integrated context/history + dependency-aware quarantine. | Allows the hypothesis to be falsified and separates the value of context/history/quarantine from baseline recovery. |
+| D-063 | Accepted | Accept Gate C at the semantic/design level and advance to Gate D. | The minimum context, bounded history, action set, deterministic policy, state machine, association behavior, scheduling interaction, and termination budget are sufficiently specified for formal-property analysis. |
 
 ## Frozen development topic
 
@@ -105,3 +123,28 @@ Peripheral identity is resource context, not evidence that one queued event caus
 **Status:** Rejected.
 
 Software injection provides deterministic experimental stimuli but cannot establish physical electrical behavior.
+
+### R-011 — Retain all eight earlier recovery-policy inputs as independent decision variables
+**Status:** Rejected in favor of D-046 through D-051.
+
+The Gate C challenge found redundancy and scheduler/policy boundary violations in `fault_recurrence`, `last_action`, `last_outcome`, `event_dependency_status`, and `pending_independent_work`.
+
+### R-012 — Treat `Rmax=3` as a sufficient recovery bound without exact attempt semantics
+**Status:** Rejected in favor of D-055 and D-056.
+
+A numerical bound without a precise definition of an attempt/transition does not establish termination or comparable recovery cost.
+
+### R-013 — Automatically retry every failed event, including coupled transactions
+**Status:** Rejected in favor of D-058.
+
+Retry safety depends on transaction semantics, not merely on fault class.
+
+### R-014 — Treat ambiguity as permission for peripheral-wide event attribution
+**Status:** Rejected in favor of D-059.
+
+Ambiguity can justify conservative blocking when safety requires it, but cannot justify invented causal precision.
+
+### R-015 — Make reinitialization and peripheral reset permanently separate policy actions before implementation evidence
+**Status:** Rejected in favor of D-053.
+
+They have potentially distinct mechanisms, but the policy-level role is one bounded peripheral-recovery action until controlled implementation experiments establish a reason to split them.
