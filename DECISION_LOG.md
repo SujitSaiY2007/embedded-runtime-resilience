@@ -34,6 +34,18 @@
 | D-030 | Accepted | Accept Gate A as complete and advance the project to Gate B — Fault Model + Fault Association. | The event/dependency semantic contract is internally consistent, bounded, and sufficient to constrain the next design gate. |
 | D-031 | Accepted | Store the complete Gate B continuation prompt in `NEXT_CHAT_PROMPT.md`. | Makes the next-chat startup reproducible and reduces dependence on conversation history. |
 | D-032 | Accepted | Make `main` the authoritative Gate A/Gate B handoff checkpoint and keep the design branch synchronized to it. | Prevents branch divergence at the chat boundary and preserves a single canonical continuation point. |
+| D-033 | Accepted | Freeze a minimal observable fault taxonomy centered on I2C NACK, timeout/no-progress, bus/protocol error, arbitration loss, and persistent no-progress, with a reduced secondary SPI taxonomy. | Supports matched recovery experiments without pretending to characterize every possible peripheral fault. |
+| D-034 | Accepted | Treat recurrence and persistence as history/episode attributes rather than instantaneous fault classes. | Repetition is a property over observations and recovery outcomes; separating it avoids an unnecessary combinatorial fault taxonomy. |
+| D-035 | Accepted | Replace direct claims of "peripheral state-machine lockup" with the observable class "persistent no-progress / suspected peripheral-state failure." | Available controller/service evidence normally cannot prove the internal failure location. |
+| D-036 | Accepted | Keep service/driver-level failure distinct from peripheral failure and retain an explicit ambiguous attribution outcome. | Prevents attribution bias and enforces evidence-bounded recovery scope. |
+| D-037 | Accepted | Operationalize four association levels: `EXACT_EVENT_TRANSACTION`, `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS`. | These levels match the Gate A identity model and prevent unsupported event-level causality. |
+| D-038 | Accepted | Peripheral equality alone never justifies event-level fault attribution. | Multiple queued events may share one peripheral while having different transactions/dependencies. |
+| D-039 | Accepted | Distinguish fault association scope from dependency-blocking scope. | A non-fault-associated event may still require blocking because it depends on quarantined/invalid state. |
+| D-040 | Accepted | Make software fault injection the primary deterministic fault-generation mechanism and treat physical/protocol injection methods as unvalidated candidates until hardware testing. | Host/firmware experiments need repeatability, while physical mechanisms require actual hardware evidence and safety validation. |
+| D-041 | Accepted | Define a fixed-size semantic fault record with episode identity, observation sequence, bounded timing, resource/fault context, conditional event/transaction identity, association confidence, evidence flags, recurrence/recovery context, and episode status. | Each field supports a later policy decision or experimental metric while preserving zero-heap constraints. |
+| D-042 | Accepted | Define an episode as continuing across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal failure starts a new episode. | Supports bounded recovery history without treating every repeated status observation as a separate incident. |
+| D-043 | Accepted | Do not make ARLO or multi-master physical injection a primary workload. | The minimal reference testbed is intended to remain simple/single-master; arbitration scenarios add complexity without directly strengthening the core hypothesis. |
+| D-044 | Accepted | Accept Gate B at the semantic/design level and advance to Gate C. | The fault taxonomy, evidence boundary, association model, episode semantics, and bounded record are sufficient to derive a deterministic recovery policy; physical validation remains deferred. |
 
 ## Frozen development topic
 
@@ -72,3 +84,23 @@ Context-aware health management and recent selective peripheral-recovery patents
 **Status:** Rejected.
 
 Each is an established technology/concept. The research contribution must come from the specific integrated mechanism and its demonstrated technical trade-offs.
+
+### R-007 — Treat repeated transient/persistent failure as separate top-level fault classes
+**Status:** Rejected in favor of D-034.
+
+These are temporal/history properties over a fault episode, not independent instantaneous observations.
+
+### R-008 — Treat a controller NACK, timeout, or BERR as proof of a specific physical root cause
+**Status:** Rejected.
+
+The controller observation identifies a protocol/error condition but does not, by itself, establish why it occurred. The STM32U575/U585 errata further demonstrates that at least some bus-error observations can be spurious.
+
+### R-009 — Treat same-peripheral membership as causal event association
+**Status:** Rejected in favor of D-038.
+
+Peripheral identity is resource context, not evidence that one queued event caused the observed failure.
+
+### R-010 — Treat software fault injection as physical fault validation
+**Status:** Rejected.
+
+Software injection provides deterministic experimental stimuli but cannot establish physical electrical behavior.
