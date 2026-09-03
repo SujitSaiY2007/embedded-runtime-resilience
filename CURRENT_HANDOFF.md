@@ -20,7 +20,7 @@ A ready-to-use continuation prompt is preserved at `NEXT_CHAT_PROMPT.md`.
 
 Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-## Six core invariants
+## Core invariants
 
 1. **Quarantine safety** — a quarantined event cannot execute until an explicitly permitted transition.
 2. **Fault association** — recovery uses the smallest defensible event/transaction scope; ambiguity is not silently converted into precision.
@@ -29,35 +29,15 @@ Can a compact deterministic software-only recovery policy for event-driven MCU f
 5. **Recovery termination** — each fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
 6. **Bounded resource usage** — queue, quarantine storage, history, and recovery state remain within fixed limits with no runtime heap growth.
 
-These define the formal correctness boundary; they do not constitute a claim of full firmware formal verification.
-
 ## Gate A completed artifact
-
-Primary final document:
 
 `research/phase1_gateA_event_model_final.md`
 
-The original `research/phase1_event_model.md` remains retained as historical design-baseline material and was not deleted.
+The original `research/phase1_event_model.md` remains retained as historical baseline material and was not deleted.
 
-Gate A froze/refined:
+Gate A established the final semantic contract for event identity, event types, service ownership, peripheral association, criticality, explicit dependency classes, bounded dependency representation, admission/execution ordering, lifecycle, evidence-bounded fault association, quarantine, capacity, full-queue behavior, and preservation correctness.
 
-- `EventRef = {slot_id, generation}` for bounded non-ambiguous active identity;
-- finite event types;
-- producer/service semantics and optional distinct consumer endpoint;
-- bounded peripheral association;
-- finite criticality classes;
-- explicit INDEPENDENT / ORDERED / COUPLED-TRANSACTIONAL dependency taxonomy;
-- bounded explicit dependency entries rather than peripheral-wide inference;
-- FIFO admission order separated from execution eligibility;
-- explicit event lifecycle and recovery transitions;
-- fault-association precision bounded by evidence;
-- quarantine as retained non-executable state;
-- bounded queue/quarantine capacity assumptions;
-- deterministic full-queue behavior;
-- preservation as correct verified execution rather than mere queue retention;
-- quarantine-violation correctness metric.
-
-Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`. Gate E must validate or revise them against the workload and report final values explicitly.
+Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report final values explicitly.
 
 ## Platform checkpoint
 
@@ -71,17 +51,17 @@ Initial interface direction:
 
 The retained MCU selection baseline is present at `research/phase1_mcu_board_selection.md`. This is a design recommendation, not acquisition confirmation.
 
-## Next exact task
+## Next exact task — Gate B
 
-### Gate B — Fault Model + Fault Association
+### Fault Model + Fault Association
 
 Do not begin large-scale firmware implementation.
 
-Start Gate B by reading the repository continuity files and `research/phase1_gateA_event_model_final.md`, then freeze:
+Freeze:
 
 1. exact fault taxonomy for the selected experimental peripheral(s);
 2. deterministic software fault-injection semantics;
-3. hardware/protocol fault classes where safely reproducible;
+3. safely reproducible hardware/protocol fault classes;
 4. bounded fault-record representation;
 5. fault-to-event/transaction association rules;
 6. association-confidence handling;
@@ -89,7 +69,7 @@ Start Gate B by reading the repository continuity files and `research/phase1_gat
 8. evidence needed to distinguish event, service, peripheral, and ambiguous faults;
 9. quarantine-scope implications of each association level.
 
-The complete ready-to-paste next-chat prompt is in `NEXT_CHAT_PROMPT.md`.
+The complete ready-to-paste prompt is stored in `NEXT_CHAT_PROMPT.md`.
 
 ## Subsequent gates
 
@@ -115,9 +95,9 @@ GitHub is the durable source of truth. Preserve historical material. Prefer addi
 
 ## Chat boundary
 
-**Stop this chat after Gate A is checkpointed.** The next chat is Gate B.
+**Stop this chat after Gate A is checkpointed. The next chat is Gate B.**
 
-Recommended future boundaries remain:
+Recommended future boundaries:
 
 - Chat B: Gate B complete → checkpoint → new chat
 - Chat C: Gate C complete → checkpoint → new chat
