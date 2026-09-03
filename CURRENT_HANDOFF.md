@@ -2,7 +2,9 @@
 
 ## Session status
 
-Phase 0 topic validation is complete. The research-space was decomposed, six candidates were shortlisted, the leading candidates were attacked with academic/patent/vendor evidence, and the development topic was frozen. The proposed zero-heap and event-quarantine additions were then evaluated and integrated without changing the project's core problem.
+Phase 0 topic validation and the initial Phase 1 system-design preparation are complete. The development topic is frozen. The project has now officially entered **Phase 1E.1 — Experimental Design / Formalization Foundation** conceptually.
+
+The current project state must be continued from the repository checkpoint below; do not restart topic ideation or earlier design work.
 
 ## Frozen development topic
 
@@ -10,168 +12,128 @@ Phase 0 topic validation is complete. The research-space was decomposed, six can
 
 **Short working title:** Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine
 
-This topic is frozen for development. Do not restart topic ideation unless new evidence makes the mechanism technically invalid or infeasible.
-
 ## Core research question
 
 Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-## Core architecture constraints
+## Frozen architecture constraints
 
-1. **Zero-heap:** no runtime dynamic allocation in the recovery manager/reference firmware; use static bounded memory.
-2. **Context/history:** policy may use fault type, error/timeout pattern, recurrence, previous recovery outcome, service criticality, and event workload.
-3. **Bounded actions:** retry, reinitialize, peripheral reset, controlled degradation/isolation, escalation.
-4. **Event quarantine:** isolate the fault-associated event/transaction rather than indiscriminately flushing unrelated valid queued events, subject to dependency/order semantics.
-5. **MPU:** target an MCU with usable MPU support where practical; use it for containment/isolation, not as a claimed invention.
-6. **Event-driven firmware:** cooperative/resource-constrained reference architecture; avoid making a heavyweight OS the dependency of the contribution.
-7. **Formal reasoning:** prove selected queue/recovery invariants where tractable; do not claim full formal verification of the firmware.
+1. Zero runtime heap allocation in the recovery manager/reference firmware.
+2. Bounded local fault context and short recovery history.
+3. Finite, deterministic recovery actions with explicit terminal escalation.
+4. Dependency-aware event quarantine rather than global queue flushing.
+5. MPU support used as a platform containment mechanism, not as the claimed invention.
+6. Lightweight event-driven reference architecture.
+7. Selected formal invariants/properties rather than a claim of full formal verification.
 
-## Important prior-art lessons
+## Six core invariants established for Phase 1E.1
 
-The project must not claim novelty for any individual ingredient. Generic peripheral recovery, selective restart, context-aware health management, graceful degradation, watchdog/recovery, event queues, zero-heap allocation discipline, MPU isolation, and formal invariants are established concepts.
+1. **Quarantine safety** — a quarantined event cannot execute until an explicitly permitted transition.
+2. **Fault association** — recovery uses the smallest defensible event/transaction scope; ambiguity is not silently converted into precision.
+3. **Service preservation** — unrelated valid work remains eligible only when dependency, ordering, shared-state, and recovery-safety conditions permit it.
+4. **Dependency safety** — dependent events cannot bypass an invalid/quarantined predecessor or shared state merely because they are not themselves fault-associated.
+5. **Recovery termination** — each fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
+6. **Bounded resource usage** — queue, quarantine storage, history, and recovery state remain within fixed limits with no runtime heap growth.
 
-The surviving contribution hypothesis is the **specific integrated mechanism and measured trade-off**: a compact deterministic zero-heap MCU policy using local fault context/history and event quarantine to reduce collateral interruption of unrelated event-driven service.
+These six invariants define the current formal correctness boundary. They are not a claim that the complete firmware is already formally verified.
 
-See `research/deep_prior_art_attack_topic_freeze.md` for the detailed prior-art attack.
+## Primary platform direction
 
-## Hardware reality
+Current design direction: **STM32U575ZI / NUCLEO-U575ZI-Q**.
 
-The project is software-dominant, but final physical embedded validation requires an actual MPU-capable MCU development board. A laptop/PC is sufficient for development, host simulation, fault modelling, formal reasoning, automated tests, and analysis; it cannot substitute for physical measurements of MCU MPU behavior, interrupt timing, peripheral behavior, and hardware-relevant faults.
+Initial interface direction:
 
-**Current hardware status:** no physical MCU board is assumed available.
+- I2C — primary experimental peripheral interface
+- SPI — secondary interface
+- UART/USART — initial diagnostic/control path
 
-Therefore, selecting an affordable suitable board is an immediate Phase 1 task. Do not invent hardware measurements before a board exists.
+The physical board and final peripheral module must be verified before physical measurements or hardware claims are made.
 
-## Immediate Phase 1 objective
+## Repository documentation checkpoint
 
-**Design the smallest defensible system that can test the frozen hypothesis.**
+The main branch now contains the retained Phase 1 design baselines:
 
-### Required work in order
+- `research/phase1_mcu_board_selection.md`
+- `research/phase1_event_model.md`
+- `research/phase1_peripheral_testbed_fault_model.md`
+- `research/phase1_recovery_policy_design.md`
 
-### 1. MCU/development-board selection
-
-Evaluate candidate MPU-capable MCUs/boards against:
-
-- MPU availability and software accessibility;
-- sufficient RAM/Flash;
-- timers/interrupts;
-- at least two suitable peripherals/interfaces;
-- accessible SDK/toolchain/debugger;
-- affordability/availability;
-- ability to reproduce faults safely;
-- documentation quality;
-- host-PC development compatibility.
-
-Do not choose a board merely because it is popular; justify the choice against project requirements.
-
-### 2. Peripheral testbed
-
-Select a small set of peripherals that allow reproducible fault scenarios. Prefer 2–3 interfaces/devices rather than an unnecessarily broad platform.
-
-Potential classes include I2C/SPI/UART/CAN, but exact selection must follow board availability and experimental controllability.
-
-### 3. Fault model
-
-Define explicit fault classes, for example:
-
-- transaction timeout;
-- peripheral non-response;
-- repeated communication failure;
-- stuck/bus error where safely reproducible;
-- invalid peripheral state;
-- event-triggered service failure.
-
-Distinguish injected faults from naturally occurring hardware faults.
-
-### 4. Event model
-
-Define:
-
-- event identity;
-- event type;
-- producer;
-- consumer/service;
-- dependency relation;
-- priority/criticality;
-- ordering requirements;
-- fault association;
-- quarantine state;
-- release/retry rules.
-
-### 5. Recovery-policy design
-
-Define the minimum state machine and policy variables before writing a large framework.
-
-Candidate states:
-
-`NORMAL -> FAULT_DETECTED -> CLASSIFY -> QUARANTINE -> RECOVER -> VERIFY -> RELEASE/DEGRADE/ESCALATE`
-
-This is only a starting abstraction; refine it from the requirements.
-
-### 6. Formal properties
-
-Define a small set of tractable invariants, such as:
-
-- quarantined events cannot execute until release;
-- unrelated valid events are preserved under an isolated single-event fault;
-- queue capacity remains bounded;
-- recovery transitions terminate within a declared bound;
-- required ordering among independent events is preserved.
-
-Determine whether lightweight state-machine reasoning, assertions, model checking, or another practical formal method is appropriate.
-
-### 7. Baselines
-
-At minimum:
-
-- fixed retry;
-- fixed retry + peripheral reset/reinitialization.
-
-Add a vendor/protocol-specific recovery baseline where technically appropriate.
-
-Do not misrepresent sophisticated prior systems such as Phoenix or Karma as simple baselines; use them for related-work comparison and conceptual positioning.
-
-### 8. Experimental protocol
-
-Define workloads, fault-injection schedule, repetitions, metrics, statistical treatment, logging format, and reproducibility requirements before interpreting results.
-
-Primary metrics:
-
-- detection latency;
-- recovery/service-restoration latency;
-- recovery success rate;
-- whole-system reset count;
-- unrelated-event preservation rate;
-- quarantine correctness;
-- lost/duplicated events;
-- queue occupancy;
-- CPU overhead;
-- RAM/Flash footprint;
-- energy where practical.
-
-## Do not do in the next chat
-
-- Do not restart topic selection.
-- Do not add unrelated resilience features.
-- Do not implement a large framework before the policy is specified.
-- Do not claim novelty/patentability from the topic title.
-- Do not claim physical measurements without physical hardware.
-- Do not treat simulation as equivalent to MCU validation.
-- Do not publish potentially patent-sensitive implementation details unnecessarily.
-
-## Required continuity behavior
-
-The next chat must first read, in order:
-
-1. `PROJECT_MANUAL.md`
-2. `PROJECT_STATE.md`
-3. `CURRENT_HANDOFF.md`
-4. `DECISION_LOG.md`
-5. `research/deep_prior_art_attack_topic_freeze.md`
-6. relevant Phase 0 research files
-
-Then provide a concise continuity check before substantive design work.
+These were restored onto `main` from the earlier design branch without deleting the newer main-branch continuity documents.
 
 ## Exact next task
 
-**Begin Phase 1 — System Design and Experimental Preparation, starting with a justified selection of an MPU-capable MCU development board and a minimal peripheral testbed, followed by the event model, fault model, recovery state machine, formal invariants, baselines, and experimental protocol.**
+### Gate A — Exact Event Model and Dependency Semantics
+
+Do not jump to firmware implementation.
+
+First derive and freeze the semantic contract for:
+
+1. bounded event identity;
+2. event types;
+3. producer/consumer/service roles;
+4. peripheral association;
+5. criticality;
+6. independent vs ordered vs coupled/transactional dependency classes;
+7. dependency representation and worst-case storage;
+8. queue ordering vs execution-order constraints;
+9. event lifecycle/state transitions;
+10. fault-association state;
+11. quarantine semantics;
+12. bounded queue/quarantine capacity;
+13. full-queue behavior;
+14. event-preservation correctness metric.
+
+Use `research/phase1_event_model.md` as the starting baseline, but **validate every semantic assumption before declaring Gate A complete**. Do not silently treat the existing document as final merely because it exists.
+
+## Subsequent gates
+
+After Gate A:
+
+- **Gate B:** exact fault taxonomy, injection semantics, and fault-to-event association.
+- **Gate C:** minimum context/history variables, bounded action set, recovery policy and state machine.
+- **Gate D:** formal properties, transition-system reasoning, assertions/model-checking strategy where practical.
+- **Gate E:** baseline definitions, workload matrix, fault schedule, metrics, repetitions, logging, and reproducibility protocol.
+- **Implementation:** only after A–E are sufficiently specified; build the smallest reference prototype.
+- **Physical validation:** after hardware/testbed acquisition and safe fault-injection setup.
+- **Evaluation:** execute baselines and proposed mechanism under matched workloads/fault schedules.
+- **Research synthesis:** analyze trade-offs, limitations, novelty evidence, publication/patent pathway.
+
+## Experimental baseline direction
+
+At minimum compare:
+
+1. fixed retry;
+2. fixed retry + peripheral reset/reinitialization;
+3. proposed zero-heap context-aware recovery + dependency-aware event quarantine.
+
+Use the same workload/fault schedule and report failures honestly. If the proposed mechanism does not outperform the baselines on a meaningful metric, record that result rather than forcing a positive conclusion.
+
+## Important non-claims
+
+- Do not claim novelty for zero-heap, MPU, peripheral recovery, event queues, event quarantine, context-aware recovery, or formal invariants individually.
+- Do not claim patentability.
+- Do not claim physical MCU measurements before actual execution on the hardware.
+- Do not present host simulation as equivalent to physical validation.
+- Do not add unrelated resilience features.
+- Do not create a large framework before the research mechanism is specified.
+
+## Chat continuity protocol
+
+The repository is the durable source of truth. At the end of each substantial chat, update `CURRENT_HANDOFF.md`, `PROJECT_STATE.md`, and `DECISION_LOG.md` as needed, and commit the checkpoint before starting a new chat.
+
+Use a new chat at **phase/gate boundaries**, not arbitrarily. Never wait until a long chat becomes impossible to reconstruct.
+
+Recommended checkpoint boundaries:
+
+- Chat A: Gate A complete → checkpoint → new chat
+- Chat B: Gate B complete → checkpoint → new chat
+- Chat C: Gate C complete → checkpoint → new chat
+- Chat D: Gate D complete → checkpoint → new chat
+- Chat E: Gate E complete → checkpoint → new chat
+- Chat F: minimal prototype architecture/code complete → checkpoint → new chat
+- Chat G: first physical testbed bring-up complete → checkpoint → new chat
+- Chat H: baseline experiments complete → checkpoint → new chat
+- Chat I: proposed-policy experiments complete → checkpoint → new chat
+- Chat J: evaluation/analysis complete → checkpoint → final synthesis chat
+
+If a chat becomes very long before the next listed boundary, stop at the nearest coherent sub-boundary, update the repository checkpoint, and start a new chat. The new chat must read the repository handoff before doing substantive work.
