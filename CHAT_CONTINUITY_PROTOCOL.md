@@ -46,12 +46,16 @@ A new chat must first read the repository's continuity documents before performi
 3. Read `CURRENT_HANDOFF.md`.
 4. Read `DECISION_LOG.md`.
 5. Read the relevant `research/` design files for the active gate.
-6. State a concise continuity check: current phase, completed gate, next gate, and explicit non-goals.
+6. State a concise continuity check: current phase, completed gates, next gate, and explicit non-goals.
 7. Continue from the checkpoint; do not restart earlier decisions without evidence requiring reconsideration.
 
 ## Current checkpoint
 
 **Phase:** 1E.1 — Experimental Design / Formalization Foundation  
-**Completed:** six core invariants established.  
-**Next:** Gate A — exact Event Model and dependency semantics.  
+**Completed:** six core invariants; Gate A — exact Event Model and dependency semantics; Gate B — Fault Model and Fault Association.  
+**Next:** Gate C — Recovery Policy + Bounded State Machine.  
 **Implementation status:** large-scale firmware implementation has not started and must remain deferred until the design gates are sufficiently complete.
+
+## Gate B checkpoint note
+
+`research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material. The current `NEXT_CHAT_PROMPT.md` contains the Gate C continuation prompt.
