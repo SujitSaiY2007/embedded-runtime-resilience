@@ -8,9 +8,9 @@
 
 **Document Purpose:** Shared technical reference for the project team. This document explains what the project is, why it exists, what has been decided, what is currently being built, what is novel *as a research hypothesis*, and what remains to be completed.
 
-**Status:** Phase 1 — Preparation / System Design and Experimental Planning. Phase 1E — Formal Specification & Experimental Design is active.
+**Status:** Phase 1 — Main Engineering / Research Phase is active. Phase 1E.1 — Formal Properties / Invariants is complete; Gate E — Baselines + Experimental Protocol is next.
 
-**Last Updated:** 2026-08-24
+**Last Updated:** 2026-09-03
 
 ---
 
@@ -501,11 +501,13 @@ The reference implementation is intended to remain lightweight, event-driven, st
 
 ---
 
-## 16. Formal Properties / Invariants Under Development
+## 16. Formal Properties / Invariants
 
-Phase 1E.1 is currently focused on deriving the smallest defensible formal specification from the actual architecture.
+**Phase 1E.1 — Formal Properties / Invariants: COMPLETE.**
 
-Candidate properties include:
+The formal specification has been derived from the actual event/recovery architecture and the candidate properties have been challenged and reduced to the smallest defensible set needed for subsequent checking and experimentation.
+
+The completed specification establishes the following core areas:
 
 ### P1 — Quarantine Safety
 
@@ -521,19 +523,25 @@ QuarantineViolation = 0
 
 For an isolated fault associated with event `Ei`, an independent valid event `Ej` must not be removed solely because of `Ei`.
 
-This is subject to dependency, ordering, shared-state validity, and recovery-action safety.
+This remains subject to dependency, ordering, shared-state validity, and recovery-action safety.
 
-### P3 — Queue Boundedness
+### P3 — Queue / Storage Boundedness
 
 ```text
 0 <= |Q| <= Qmax
 ```
 
-Quarantine storage must also remain bounded.
+Quarantine storage, recovery history, and recovery records must also remain statically bounded.
 
 ### P4 — Recovery Termination
 
-Every fault episode must reach `SUCCESS`, `DEGRADED`, or `ESCALATED` within a finite declared transition bound.
+Every fault episode must reach `SUCCESS`, `DEGRADED`, or `ESCALATED` within the declared finite transition bound.
+
+The current recovery sequence is bounded to the four-action policy:
+
+```text
+RETRY -> RETRY -> REINIT_OR_RESET -> DEGRADE / ESCALATE
+```
 
 ### P5 — Ordering Preservation
 
@@ -549,7 +557,7 @@ unless explicitly defined quarantine/reclassification semantics legally alter th
 
 The recovery manager must not assign a fault to an unrelated event without satisfying the defined association rule.
 
-Association levels under consideration:
+Association levels are:
 
 1. Exact event/transaction
 2. Service
@@ -560,11 +568,22 @@ Ambiguous association must trigger conservative behavior.
 
 ### P7 — Bounded Recovery Storage
 
-Recovery history, recovery records, and quarantine storage must remain statically bounded.
+Recovery history, recovery records, and quarantine storage must remain statically bounded. The relationship between queue capacity, quarantine capacity, history capacity, and recovery-record capacity must be explicitly defined before implementation.
 
-The relationship between queue capacity, quarantine capacity, history capacity, and recovery-record capacity must be explicitly defined.
+### Additional Gate-D decisions
 
-The project will use the lightest formal method that provides credible evidence. Full formal verification of the firmware is not a project requirement.
+The Gate-D work also made two implementation-boundary issues explicit rather than leaving them implicit:
+
+1. `EventRef = {slot_id, generation}` requires a concrete generation-width and wrap/reuse policy before implementation.
+2. If simultaneous recovery episodes can exceed retained event slots, a fixed recovery-context bound such as `EPMAX` must be declared explicitly.
+
+The formal work is a **model-level proof/checking boundary**, not a claim of full firmware verification or physical validation.
+
+### Gate-D model-check result
+
+The bounded abstract decision-table audit covered **33,792 modeled policy contexts**, with every encoded context producing exactly one deterministic outcome.
+
+This supports totality/determinism of the modeled policy function. It does **not** constitute firmware verification or hardware validation.
 
 ---
 
@@ -633,48 +652,77 @@ The central outcome is not simply whether recovery succeeds. The experiment must
 
 ---
 
-## 19. Current Project State — 2026-08-24
+## 19. Current Project State — 2026-09-03
 
-### Phase
+### Overall Project Structure
 
-**Phase 1 — Preparation / System Design and Experimental Planning**
+The project has two broad phases:
+
+**Phase 0 — Research & Topic Selection**
+
+- Research-space exploration
+- Prior-art investigation
+- Candidate comparison
+- Topic selection and freeze
+
+**Phase 1 — Main Engineering / Research Phase**
+
+- System design
+- Formal specification
+- Baseline and experimental design
+- Reference implementation
+- Physical testbed
+- Baseline experiments
+- Proposed-policy experiments
+- Analysis
+- Final synthesis
+
+Phase 1 is the main work phase. The project is currently still inside Phase 1; firmware implementation and physical validation have not yet begun.
 
 ### Current Sub-Phase
 
-**Phase 1E — Formal Specification & Experimental Design**
+**Phase 1E.1 — Formal Properties / Invariants: COMPLETE**
 
-### Status
+### Completed Gates
 
-**ACTIVE — Phase 1 is not yet complete.**
+- **Gate A — Event Model:** COMPLETE
+- **Gate B — Fault Model + Association:** COMPLETE
+- **Gate C — Recovery Policy:** COMPLETE
+- **Gate D — Formal Properties + Proof/Check Strategy:** COMPLETE
 
-### Completed
+### Gate-D Evidence
 
-- Research-space decomposition
-- Candidate comparison
-- Deep prior-art attack
-- Topic selection and freeze
-- Zero-heap architectural constraint
-- Event-quarantine integration
-- MPU role definition
-- MCU/board selection
-- Peripheral testbed direction
-- Formal event model
-- Recovery policy design
+- Formal property set established.
+- Quarantine safety, preservation, boundedness, termination, ordering, fault association, and recovery-storage properties specified.
+- `EventRef` generation/reuse boundary identified for implementation.
+- Bounded decision-table audit completed over 33,792 modeled contexts with exactly one outcome per context.
 
-### Current immediate task
+### Current Immediate Task
 
-**Phase 1E.1 — Formal Properties / Invariants**
+**Gate E — Baselines + Experimental Protocol**
 
-The immediate goal is to derive, challenge, simplify, and formally specify the smallest useful set of invariants from the actual event/recovery architecture.
+The next work is to finalize fair baselines, experimental scenarios, fault-injection schedules, workload composition, measurement points, repetitions, reproducibility controls, and data-recording rules.
 
-### Remaining Phase 1 work
+### Remaining Phase 1 Work
 
-1. Complete 1E.1 formal properties/invariants
-2. Complete 1E.2 baseline definitions
-3. Complete 1E.3 experimental protocol
-4. Complete 1E.4 measurement/data schema
-5. Complete 1E.5 Phase-1 design review and closure
-6. Only after these gates pass, begin firmware implementation
+1. Gate E — Baselines + Experimental Protocol
+2. Measurement/data schema and experiment reproducibility closure
+3. Phase-1 design/feasibility review and closure
+4. Reference implementation
+5. Host simulation/testing
+6. Physical MCU testbed bring-up
+7. Baseline experiments
+8. Proposed-policy experiments
+9. Analysis and interpretation
+10. Final synthesis
+
+### Implementation Status
+
+**Firmware implementation has NOT started.**
+
+**Physical MCU validation has NOT started.**
+
+The project remains deliberately gated: experimental design and feasibility must be sufficiently closed before large-scale implementation begins.
 
 ---
 
@@ -744,8 +792,8 @@ Conceptually:
                   |           |           |
                   v           v           v
                RETRY      REINIT/RESET  DEGRADE
-                  \           |           /
-                   \          |          /
+                  \\           |           /
+                   \\          |          /
                     +---------+---------+
                               |
                               v
@@ -885,6 +933,6 @@ The GitHub repository remains the canonical continuity mechanism for the project
 
 ## 27. Current Starting Point for the Next Work Session
 
-> **Phase 1E.1 — Formal Properties / Invariants**
+> **Gate E — Baselines + Experimental Protocol**
 >
-> Recover the repository state, derive the formal properties from the actual event and recovery architecture, challenge every candidate invariant, remove redundant or untestable properties, add only genuinely necessary properties, choose the lightest defensible formal-reasoning method, and record the resulting specification before moving to baselines, experimental protocol, measurement schema, and Phase-1 closure.
+> Recover the repository state, confirm Gates A–D and the Gate-D formal specification, then define and challenge the experimental baselines, workload composition, fault-injection schedule, measurement points, repetitions, reproducibility controls, and data schema. Ensure baseline fairness and clear separation between host/simulation evidence and physical MCU evidence. Do not begin large-scale firmware implementation until the Phase-1 experimental-design and feasibility gates are closed.
