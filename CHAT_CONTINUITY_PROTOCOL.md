@@ -46,8 +46,9 @@ A new chat must first read the repository's continuity documents before performi
 3. Read `CURRENT_HANDOFF.md`.
 4. Read `DECISION_LOG.md`.
 5. Read the relevant `research/` design files for the active gate.
-6. State a concise continuity check: current phase, completed gates, next gate, and explicit non-goals.
-7. Continue from the checkpoint; do not restart earlier decisions without evidence requiring reconsideration.
+6. If available, read the corresponding educational companion for conceptual continuity; for Gate B this is `research/phase1_gateB_learning_summary.md`.
+7. State a concise continuity check: current phase, completed gates, next gate, and explicit non-goals.
+8. Continue from the checkpoint; do not restart earlier decisions without evidence requiring reconsideration.
 
 ## Current checkpoint
 
@@ -58,4 +59,4 @@ A new chat must first read the repository's continuity documents before performi
 
 ## Gate B checkpoint note
 
-`research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material. The current `NEXT_CHAT_PROMPT.md` contains the Gate C continuation prompt.
+`research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. `research/phase1_gateB_learning_summary.md` is an additive educational companion that explains the same gate in simpler terms and does not replace the normative artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material. The current `NEXT_CHAT_PROMPT.md` contains the Gate C continuation prompt.
