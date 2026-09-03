@@ -2,7 +2,9 @@
 
 ## Session status
 
-Phase 0 topic validation and the initial Phase 1 system-design preparation are complete. The development topic is frozen. The project has now officially entered **Phase 1E.1 — Experimental Design / Formalization Foundation** conceptually.
+Phase 0 topic validation and initial Phase 1 system-design preparation are complete. The development topic is frozen. The project is in **Phase 1E.1 — Experimental Design / Formalization Foundation**.
+
+**Gate A — Exact Event Model and Dependency Semantics is COMPLETE and checkpointed.**
 
 The current project state must be continued from the repository checkpoint below; do not restart topic ideation or earlier design work.
 
@@ -16,17 +18,7 @@ The current project state must be continued from the repository checkpoint below
 
 Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-## Frozen architecture constraints
-
-1. Zero runtime heap allocation in the recovery manager/reference firmware.
-2. Bounded local fault context and short recovery history.
-3. Finite, deterministic recovery actions with explicit terminal escalation.
-4. Dependency-aware event quarantine rather than global queue flushing.
-5. MPU support used as a platform containment mechanism, not as the claimed invention.
-6. Lightweight event-driven reference architecture.
-7. Selected formal invariants/properties rather than a claim of full formal verification.
-
-## Six core invariants established for Phase 1E.1
+## Six core invariants
 
 1. **Quarantine safety** — a quarantined event cannot execute until an explicitly permitted transition.
 2. **Fault association** — recovery uses the smallest defensible event/transaction scope; ambiguity is not silently converted into precision.
@@ -35,105 +27,103 @@ Can a compact deterministic software-only recovery policy for event-driven MCU f
 5. **Recovery termination** — each fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
 6. **Bounded resource usage** — queue, quarantine storage, history, and recovery state remain within fixed limits with no runtime heap growth.
 
-These six invariants define the current formal correctness boundary. They are not a claim that the complete firmware is already formally verified.
+These define the formal correctness boundary; they do not constitute a claim of full firmware formal verification.
 
-## Primary platform direction
+## Gate A completed artifact
 
-Current design direction: **STM32U575ZI / NUCLEO-U575ZI-Q**.
+Primary final document:
+
+`research/phase1_gateA_event_model_final.md`
+
+The original `research/phase1_event_model.md` remains retained as historical design-baseline material and was not deleted.
+
+Gate A froze/refined:
+
+- `EventRef = {slot_id, generation}` for bounded non-ambiguous active identity;
+- finite event types;
+- producer/service semantics and optional distinct consumer endpoint;
+- bounded peripheral association;
+- finite criticality classes;
+- explicit INDEPENDENT / ORDERED / COUPLED-TRANSACTIONAL dependency taxonomy;
+- bounded explicit dependency entries rather than peripheral-wide inference;
+- FIFO admission order separated from execution eligibility;
+- explicit event lifecycle and recovery transitions;
+- fault-association precision bounded by evidence;
+- quarantine as retained non-executable state;
+- bounded queue/quarantine capacity assumptions;
+- deterministic full-queue behavior;
+- preservation as correct verified execution rather than mere queue retention;
+- quarantine-violation correctness metric.
+
+Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`. Gate E must validate or revise them against the workload and report final values explicitly.
+
+## Platform checkpoint
+
+Primary platform direction remains **STM32U575ZI / NUCLEO-U575ZI-Q**.
 
 Initial interface direction:
 
-- I2C — primary experimental peripheral interface
+- I2C — primary experimental interface
 - SPI — secondary interface
-- UART/USART — initial diagnostic/control path
+- UART/USART — diagnostic/control path
 
-The physical board and final peripheral module must be verified before physical measurements or hardware claims are made.
+The retained MCU selection baseline is now present on `main` at `research/phase1_mcu_board_selection.md`. This is a design recommendation, not acquisition confirmation.
 
-## Repository documentation checkpoint
+## Next exact task
 
-The main branch now contains the retained Phase 1 design baselines:
+### Gate B — Fault Model + Fault Association
 
-- `research/phase1_mcu_board_selection.md`
-- `research/phase1_event_model.md`
-- `research/phase1_peripheral_testbed_fault_model.md`
-- `research/phase1_recovery_policy_design.md`
+Do not begin large-scale firmware implementation.
 
-These were restored onto `main` from the earlier design branch without deleting the newer main-branch continuity documents.
+Start Gate B by reading the repository continuity files and the Gate A final artifact, then freeze:
 
-## Exact next task
+1. exact fault taxonomy for the selected experimental peripheral(s);
+2. deterministic software fault-injection semantics;
+3. hardware/protocol fault classes where safely reproducible;
+4. bounded fault-record representation;
+5. fault-to-event/transaction association rules;
+6. association-confidence handling;
+7. fault-episode boundaries and recurrence semantics;
+8. evidence needed to distinguish event, service, peripheral, and ambiguous faults.
 
-### Gate A — Exact Event Model and Dependency Semantics
-
-Do not jump to firmware implementation.
-
-First derive and freeze the semantic contract for:
-
-1. bounded event identity;
-2. event types;
-3. producer/consumer/service roles;
-4. peripheral association;
-5. criticality;
-6. independent vs ordered vs coupled/transactional dependency classes;
-7. dependency representation and worst-case storage;
-8. queue ordering vs execution-order constraints;
-9. event lifecycle/state transitions;
-10. fault-association state;
-11. quarantine semantics;
-12. bounded queue/quarantine capacity;
-13. full-queue behavior;
-14. event-preservation correctness metric.
-
-Use `research/phase1_event_model.md` as the starting baseline, but **validate every semantic assumption before declaring Gate A complete**. Do not silently treat the existing document as final merely because it exists.
+Gate B must remain consistent with all six core invariants and the Gate A event contract.
 
 ## Subsequent gates
 
-After Gate A:
-
-- **Gate B:** exact fault taxonomy, injection semantics, and fault-to-event association.
 - **Gate C:** minimum context/history variables, bounded action set, recovery policy and state machine.
 - **Gate D:** formal properties, transition-system reasoning, assertions/model-checking strategy where practical.
-- **Gate E:** baseline definitions, workload matrix, fault schedule, metrics, repetitions, logging, and reproducibility protocol.
+- **Gate E:** baselines, workload matrix, fault schedule, metrics, repetitions, logging, and reproducibility protocol.
 - **Implementation:** only after A–E are sufficiently specified; build the smallest reference prototype.
 - **Physical validation:** after hardware/testbed acquisition and safe fault-injection setup.
-- **Evaluation:** execute baselines and proposed mechanism under matched workloads/fault schedules.
-- **Research synthesis:** analyze trade-offs, limitations, novelty evidence, publication/patent pathway.
+- **Evaluation:** matched baseline/proposed experiments.
+- **Research synthesis:** analysis, limitations, novelty evidence, publication/patent pathway.
 
-## Experimental baseline direction
-
-At minimum compare:
-
-1. fixed retry;
-2. fixed retry + peripheral reset/reinitialization;
-3. proposed zero-heap context-aware recovery + dependency-aware event quarantine.
-
-Use the same workload/fault schedule and report failures honestly. If the proposed mechanism does not outperform the baselines on a meaningful metric, record that result rather than forcing a positive conclusion.
-
-## Important non-claims
+## Research honesty / non-claims
 
 - Do not claim novelty for zero-heap, MPU, peripheral recovery, event queues, event quarantine, context-aware recovery, or formal invariants individually.
 - Do not claim patentability.
-- Do not claim physical MCU measurements before actual execution on the hardware.
-- Do not present host simulation as equivalent to physical validation.
-- Do not add unrelated resilience features.
-- Do not create a large framework before the research mechanism is specified.
+- Do not fabricate physical measurements, hardware availability, benchmarks, or experimental outcomes.
+- Host simulation is not equivalent to physical MCU validation.
+- Do not add unrelated resilience features or build a general-purpose framework.
 
-## Chat continuity protocol
+## GitHub continuity
 
-The repository is the durable source of truth. At the end of each substantial chat, update `CURRENT_HANDOFF.md`, `PROJECT_STATE.md`, and `DECISION_LOG.md` as needed, and commit the checkpoint before starting a new chat.
+GitHub is the durable source of truth. Preserve historical material. Prefer additive updates and explicit supersession notes. At every gate boundary, checkpoint relevant research documentation plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md` before starting the next chat.
 
-Use a new chat at **phase/gate boundaries**, not arbitrarily. Never wait until a long chat becomes impossible to reconstruct.
+## Chat boundary
 
-Recommended checkpoint boundaries:
+**Stop this chat after Gate A is checkpointed.** The next chat is Gate B.
 
-- Chat A: Gate A complete → checkpoint → new chat
+Recommended future boundaries remain:
+
 - Chat B: Gate B complete → checkpoint → new chat
 - Chat C: Gate C complete → checkpoint → new chat
 - Chat D: Gate D complete → checkpoint → new chat
 - Chat E: Gate E complete → checkpoint → new chat
-- Chat F: minimal prototype architecture/code complete → checkpoint → new chat
-- Chat G: first physical testbed bring-up complete → checkpoint → new chat
+- Chat F: minimal reference implementation complete → checkpoint → new chat
+- Chat G: physical testbed bring-up complete → checkpoint → new chat
 - Chat H: baseline experiments complete → checkpoint → new chat
 - Chat I: proposed-policy experiments complete → checkpoint → new chat
 - Chat J: evaluation/analysis complete → checkpoint → final synthesis chat
 
-If a chat becomes very long before the next listed boundary, stop at the nearest coherent sub-boundary, update the repository checkpoint, and start a new chat. The new chat must read the repository handoff before doing substantive work.
+If a chat becomes unusually long before a gate boundary, stop at the nearest coherent sub-boundary after checkpointing the repository.
