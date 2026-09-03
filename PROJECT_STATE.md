@@ -81,7 +81,7 @@ An observed NACK, timeout, or bus/protocol error is not automatically treated as
 - Peripheral equality alone never justifies event-level fault attribution.
 - Quarantine scope may be selective or broader only when dependency/shared-state safety justifies it; association scope and dependency-blocking scope are distinct.
 - Software injection is the primary deterministic testing mechanism; software faults are not represented as equivalent to physical hardware faults.
-- Physical/protocol injection methods remain candidates until actual hardware, fixture safety, and repeatability are demonstrated.
+- Physical/protocol injection methods remain candidates until actual hardware, fixture safety, and repeatability testing are demonstrated.
 - A fixed-size semantic fault record includes episode/observation identity, bounded timing, resource/fault context, conditional event/transaction identity, association confidence, evidence flags, recurrence/recovery context, and episode status.
 
 Gate B is accepted at the semantic/design level. No physical measurement or hardware validation is claimed.
