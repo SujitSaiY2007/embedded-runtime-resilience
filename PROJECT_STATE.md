@@ -51,9 +51,27 @@ Final artifact:
 
 `research/phase1_gateB_fault_model_final.md`
 
+Educational companion:
+
+`research/phase1_gateB_learning_summary.md`
+
 Gate B freezes a small evidence-aware taxonomy centered on the primary I2C path, with a deliberately reduced secondary SPI taxonomy. The model distinguishes direct controller/service observations from inference and unknown physical cause.
 
-Key Gate B decisions:
+### Gate B in simple terms
+
+Gate A defines how work and dependencies behave. Gate B defines how the system describes a failure before recovery decisions are made. The conceptual chain is:
+
+`EVENT MODEL -> FAULT UNDERSTANDING -> RECOVERY POLICY`
+
+Gate B therefore turns “something went wrong” into a bounded fault context describing what was observed, where it can defensibly be associated, how certain that association is, whether the observation belongs to an ongoing episode, and what scope may need to be isolated or blocked.
+
+The governing evidence rule is:
+
+`association precision <= evidence precision`
+
+An observed NACK, timeout, or bus/protocol error is not automatically treated as proof of a particular physical root cause. Likewise, same-peripheral membership does not by itself establish event-level causality. Fault association scope and dependency-blocking scope remain separate.
+
+### Key Gate B decisions
 
 - I2C NACK/non-acknowledge, transfer timeout/no-progress, bus/protocol error, and arbitration loss are observable fault classes where the relevant controller/driver evidence exists.
 - Persistent no-progress is a history-derived condition, not proof of an internal peripheral state-machine lockup.
@@ -136,4 +154,4 @@ After Gate E, implement the **smallest testable reference prototype**, not a gen
 
 ## Continuity
 
-`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the earlier Gate B startup prompt and remains retained as historical continuity material; the next chat should reconstruct the current state from the updated repository documents and begin Gate C. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
+`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the Gate C startup prompt and remains the durable startup instruction. The Gate B educational companion is retained separately so future chats can understand the concepts without replacing the normative Gate B artifact. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
