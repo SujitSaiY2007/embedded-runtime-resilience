@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Development topic frozen; Phase 1E.1 active; Gates A, B, and C complete at the semantic/design level; Gate D is next.  
+**Status:** Development topic frozen; Phase 1E.1 active; Gates A, B, C, and D complete at the semantic/design-model level; Gate E is next.  
 **Project mode:** Solo software-dominant embedded-systems project  
 **Primary ambition:** Research-grade implementation with publication potential and possible patent pathway if supported by evidence and professional assessment.
 
@@ -23,7 +23,7 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 1. **Quarantine safety:** a quarantined event must not execute until an explicitly permitted transition releases/reclassifies it.
 2. **Fault association:** recovery acts on the smallest defensible event/transaction scope supported by available context; ambiguity is not silently treated as precision.
 3. **Service preservation:** a fault-associated event may be isolated without removing unrelated valid work when dependency, ordering, shared-state, and recovery-safety conditions permit it.
-4. **Dependency safety:** an event that depends on an invalid or quarantined predecessor/shared state must not bypass that dependency merely because it is not itself fault-associated.
+4. **Dependency safety:** an event that depends on an invalid or quarantined predecessor/shared state must not bypass that dependency merely because it is not fault-associated.
 5. **Recovery termination:** every fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
 6. **Bounded resource usage:** queue, quarantine storage, recovery state, and history remain within fixed statically allocated limits; no runtime heap growth is permitted.
 
@@ -31,7 +31,7 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 
 ### Phase 1E.1 — Experimental Design / Formalization Foundation
 
-**Status: active. Gates A, B, and C are complete at the semantic/design level. Gate D is next.**
+**Status: active. Gates A, B, C, and D are complete at the semantic/design-model level. Gate E is next.**
 
 ## Completed Gate A — Exact Event Model and Dependency Semantics
 
@@ -147,42 +147,66 @@ Gate C freezes four conceptual comparisons:
 
 The design is explicitly falsifiable: additional context/history is not assumed to be beneficial merely because it is more sophisticated.
 
+## Completed Gate D — Formal Properties + Proof/Check Strategy
+
+Final artifact: `research/phase1_gateD_formal_properties_final.md`
+
+Gate D is **ACCEPTED at the semantic/design-model level**. It formalizes the six core invariants and the supporting identity, release, dependency, transaction, termination, resource, and decision-table properties without claiming full formal verification of future firmware.
+
+### Gate D result
+
+Gate D establishes explicit predicates and checking obligations for:
+
+- quarantine safety;
+- fault-association conservatism;
+- service preservation versus correct blocking;
+- dependency safety;
+- recovery termination;
+- bounded resource use;
+- `EventRef = {slot_id, generation}` validity and stale-reference rejection;
+- release safety and Gate A eligibility re-entry;
+- coupled-transaction containment;
+- deterministic decision-table totality and consistency.
+
+The four-action ladder has a direct finite-rank termination argument. A host-side abstract decision-table audit enumerated **33,792** bounded contexts and found exactly one outcome for every encoded context. This is evidence about the modeled decision function, not proof of firmware or hardware behavior.
+
+### Gate D finite-model qualification
+
+The initial bounded envelope remains `QMAX=16`, `XMAX=4`, `DMAX=4`. Gate D uses a layered host-model strategy rather than attempting to enumerate the entire concrete MCU state at once.
+
+For `EventRef`, the checker must model generation changes and stale references explicitly; generation wrap is safe only when no outstanding reference can still identify the older generation. The concrete generation width and wrap policy remain implementation concerns.
+
+A single active recovery episode is used as a proof decomposition for the policy-state model. If implementation permits multiple simultaneous service/peripheral recovery episodes not represented by retained event slots, an explicit finite `EPMAX` must be declared and resource-accounted before implementation.
+
+### Properties that are model-level vs experimental
+
+Model-level properties include quarantine safety, association conservatism, dependency safety, coupled containment, decision determinism/totality, and the four-action termination bound, subject to implementation conformance.
+
+Experimental properties include CPU/RAM/Flash overhead, recovery latency, recovery success rate, physical fault validity, MPU behavior, and energy impact. No physical result is claimed at Gate D.
+
 ## Existing design baselines retained
 
 The repository retains the Phase 1 design references for MCU/board selection, event model, peripheral testbed/fault model, and the earlier recovery-policy proposal. The earlier recovery proposal remains historical and is not silently rewritten.
 
 The primary platform direction is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition/validation remains a factual checkpoint rather than an assumption.
 
-## Next gate — Gate D
+## Next gate — Gate E
 
-### Formal Properties + Proof/Check Strategy
+### Baselines + Experimental Protocol
 
-Gate D must formalize and practically check the properties implied by Gates A–C, especially:
+Gate E must freeze:
 
-- quarantine safety;
-- fault-association conservatism;
-- service preservation/correct blocking;
-- dependency safety;
-- recovery termination under the four-action bound;
-- bounded resource usage;
-- valid `EventRef` generation handling;
-- safe release criteria;
-- coupled-transaction containment;
-- completeness of the deterministic decision table.
+- baseline definitions and exact comparability;
+- workload matrix and event/dependency scenarios;
+- software fault schedule;
+- final experimental capacities where required;
+- metrics and correctness outcomes;
+- logging schema and trace identifiers;
+- repetitions/randomization or deterministic schedule policy;
+- statistical/reproducibility treatment;
+- acceptance criteria and reporting format.
 
-Gate D should identify which properties can be checked by exhaustive host-state exploration, assertions, model checking, invariant reasoning, or deterministic trace tests. It must not claim full formal verification of the firmware.
-
-## Experimental direction
-
-Compare, using matched workload and fault schedules:
-
-1. fixed retry;
-2. fixed retry + peripheral reset/reinitialization;
-3. proposed zero-heap context-aware recovery + dependency-aware event quarantine.
-
-Primary metrics include detection latency, service-restoration latency, recovery success, whole-system resets, unrelated-event preservation, quarantine violations, lost/duplicated events, queue occupancy, CPU overhead, RAM/Flash footprint, and energy where practical.
-
-Gate E will freeze the workload matrix, capacities, repetitions, logging, and statistical/reproducibility protocol.
+Gate E must use Gates A–D as normative inputs and must not silently modify them. If a contradiction is discovered, it must be documented and explicitly amended.
 
 ## What remains explicitly NOT claimed
 
@@ -197,6 +221,7 @@ Gate E will freeze the workload matrix, capacities, repetitions, logging, and st
 - No physical measurement is claimed until actual MCU execution provides the evidence.
 - Gate B physical fault mechanisms remain unvalidated until hardware testing.
 - Gate C does not establish performance or recovery-success results.
+- Gate D does not establish firmware correctness beyond the defined model or prove arbitrary hardware behavior.
 
 The novelty hypothesis remains the **specific combined mechanism and measured technical trade-off**, not any individual ingredient.
 
@@ -207,11 +232,11 @@ No large-scale firmware implementation begins until Gates A–E are sufficiently
 - **Gate A:** Event model + dependency semantics — COMPLETE
 - **Gate B:** Fault model + fault association — COMPLETE
 - **Gate C:** Recovery policy + bounded state machine — COMPLETE
-- **Gate D:** Formal properties + proof/check strategy — NEXT
-- **Gate E:** Baselines + experimental protocol
+- **Gate D:** Formal properties + proof/check strategy — COMPLETE
+- **Gate E:** Baselines + experimental protocol — NEXT
 
 After Gate E, implement the **smallest testable reference prototype**, not a general resilience framework.
 
 ## Continuity
 
-`CURRENT_HANDOFF.md` contains the exact Gate D continuation point. `NEXT_CHAT_PROMPT.md` contains the Gate D startup prompt. `DECISION_LOG.md` records Gate C decisions and rejected alternatives. Historical documents remain preserved.
+`CURRENT_HANDOFF.md` contains the exact Gate E continuation point. `NEXT_CHAT_PROMPT.md` contains the Gate E startup prompt. `DECISION_LOG.md` records Gate D decisions and rejected alternatives. Historical documents remain preserved.
