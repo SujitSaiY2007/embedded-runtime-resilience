@@ -35,9 +35,7 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 
 ## Completed Gate A — Exact Event Model and Dependency Semantics
 
-Final artifact:
-
-`research/phase1_gateA_event_model_final.md`
+Final artifact: `research/phase1_gateA_event_model_final.md`
 
 The original `research/phase1_event_model.md` remains retained as historical design-baseline material and is not deleted.
 
@@ -47,29 +45,25 @@ Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`
 
 ## Completed Gate B — Fault Model + Fault Association
 
-Final artifact:
+Final artifact: `research/phase1_gateB_fault_model_final.md`
 
-`research/phase1_gateB_fault_model_final.md`
+Educational companion: `research/phase1_gateB_learning_summary.md`
 
-Educational companion:
-
-`research/phase1_gateB_learning_summary.md`
-
-Gate B freezes a small evidence-aware taxonomy centered on the primary I2C path, with a deliberately reduced secondary SPI taxonomy. The model distinguishes direct controller/service observations from inference and unknown physical cause.
+Gate B freezes a small evidence-aware taxonomy centered on the primary I2C path, with a deliberately reduced secondary SPI taxonomy. It separates observed controller/service evidence from inference and unknown physical cause.
 
 ### Gate B in simple terms
 
-Gate A defines how work and dependencies behave. Gate B defines how the system describes a failure before recovery decisions are made. The conceptual chain is:
+Gate A defines how work and dependencies behave. Gate B defines how the system describes a failure before recovery decisions are made.
 
 `EVENT MODEL -> FAULT UNDERSTANDING -> RECOVERY POLICY`
 
-Gate B therefore turns “something went wrong” into a bounded fault context describing what was observed, where it can defensibly be associated, how certain that association is, whether the observation belongs to an ongoing episode, and what scope may need to be isolated or blocked.
+Gate B turns “something went wrong” into a bounded fault context describing what was observed, where it can defensibly be associated, how certain that association is, whether the observation belongs to an ongoing episode, and what scope may need to be isolated or blocked.
 
 The governing evidence rule is:
 
 `association precision <= evidence precision`
 
-An observed NACK, timeout, or bus/protocol error is not automatically treated as proof of a particular physical root cause. Likewise, same-peripheral membership does not by itself establish event-level causality. Fault association scope and dependency-blocking scope remain separate.
+An observed NACK, timeout, or bus/protocol error is not automatically treated as proof of a particular physical root cause. Same-peripheral membership does not by itself establish event-level causality. Fault association scope and dependency-blocking scope remain separate.
 
 ### Key Gate B decisions
 
@@ -82,18 +76,14 @@ An observed NACK, timeout, or bus/protocol error is not automatically treated as
 - Quarantine scope may be selective or broader only when dependency/shared-state safety justifies it; association scope and dependency-blocking scope are distinct.
 - Software injection is the primary deterministic testing mechanism; software faults are not represented as equivalent to physical hardware faults.
 - Physical/protocol injection methods remain candidates until actual hardware, fixture safety, and repeatability testing are demonstrated.
-- A fixed-size semantic fault record includes episode/observation identity, bounded timing, resource/fault context, conditional event/transaction identity, association confidence, evidence flags, recurrence/recovery context, and episode status.
+- The semantic fault record is fixed-size/static and retains only information needed for later policy decisions and metrics.
+- A fault episode continues across qualifying repeated observations until verified success, degraded terminal handling, or escalation; a post-terminal fault starts a new episode.
 
 Gate B is accepted at the semantic/design level. No physical measurement or hardware validation is claimed.
 
 ## Existing design baselines retained
 
-The repository retains the Phase 1 design references for:
-
-- MCU/board selection;
-- event model;
-- peripheral testbed/fault model;
-- recovery-policy design.
+The repository retains the Phase 1 design references for MCU/board selection, event model, peripheral testbed/fault model, and recovery-policy design.
 
 The primary platform direction is **STM32U575ZI / NUCLEO-U575ZI-Q**, with I2C as the primary interface, SPI as a secondary interface, and UART/USART as the initial diagnostic/control path. Physical acquisition/validation remains a factual checkpoint rather than an assumption.
 
@@ -154,4 +144,4 @@ After Gate E, implement the **smallest testable reference prototype**, not a gen
 
 ## Continuity
 
-`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the Gate C startup prompt and remains the durable startup instruction. The Gate B educational companion is retained separately so future chats can understand the concepts without replacing the normative Gate B artifact. `CHAT_CONTINUITY_PROTOCOL.md` also records the educational companion as optional conceptual continuity material. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
+`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the Gate C startup prompt and remains the durable startup instruction. The Gate B educational companion is retained separately so future chats can understand the concepts without replacing the normative Gate B artifact. `CHAT_CONTINUITY_PROTOCOL.md` records the educational companion as optional conceptual continuity material. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
