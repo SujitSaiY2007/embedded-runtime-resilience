@@ -86,9 +86,10 @@ Start Gate B by reading the repository continuity files and `research/phase1_gat
 5. fault-to-event/transaction association rules;
 6. association-confidence handling;
 7. fault-episode boundaries and recurrence semantics;
-8. evidence needed to distinguish event, service, peripheral, and ambiguous faults.
+8. evidence needed to distinguish event, service, peripheral, and ambiguous faults;
+9. quarantine-scope implications of each association level.
 
-The complete recommended next-chat prompt is in `NEXT_CHAT_PROMPT.md`.
+The complete ready-to-paste next-chat prompt is in `NEXT_CHAT_PROMPT.md`.
 
 ## Subsequent gates
 
