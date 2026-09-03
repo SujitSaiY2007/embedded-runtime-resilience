@@ -14,23 +14,11 @@
 
 **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**
 
-This is the frozen development topic. The wording is intentionally specific: zero-heap is an architectural constraint, MPU support is a target platform capability rather than a universal MCU requirement, and event quarantine is the mechanism for preventing a fault-triggering event from poisoning otherwise valid queued work.
-
 ## Core research question
 
 Can a compact, deterministic, software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
 
-## Frozen architecture constraints
-
-1. **Zero-heap:** recovery-manager/reference-firmware state uses statically allocated, bounded memory.
-2. **Context/history:** policy uses only bounded, experimentally justified fault/event context and short recovery history.
-3. **Bounded actions:** finite recovery-action set with explicit terminal escalation.
-4. **Event quarantine:** isolate the smallest defensible fault-associated event/transaction scope rather than flushing unrelated valid work.
-5. **MPU:** target an MPU-capable MCU where practical; MPU is a containment mechanism, not the invention itself.
-6. **Event-driven firmware:** keep the reference architecture lightweight and avoid unnecessary heavyweight RTOS dependence.
-7. **Formal reasoning:** establish selected queue/recovery invariants; do not claim full formal verification of the firmware.
-
-## Six core invariants established at the start of Phase 1E.1
+## Six core invariants
 
 1. **Quarantine safety:** a quarantined event must not execute until an explicitly permitted transition releases/reclassifies it.
 2. **Fault association:** recovery acts on the smallest defensible event/transaction scope supported by available context; ambiguity is not silently treated as precision.
@@ -38,8 +26,6 @@ Can a compact, deterministic, software-only recovery policy for event-driven MCU
 4. **Dependency safety:** an event that depends on an invalid or quarantined predecessor/shared state must not bypass that dependency merely because it is not itself fault-associated.
 5. **Recovery termination:** every fault episode reaches success, degraded, or escalated terminal handling within a declared bounded transition budget.
 6. **Bounded resource usage:** queue, quarantine storage, recovery state, and history remain within fixed statically allocated limits; no runtime heap growth is permitted.
-
-These invariants form the current formal correctness boundary. They are properties to be specified, reasoned about, and later experimentally tested—not claims that the complete firmware is formally verified.
 
 ## Current phase
 
@@ -53,26 +39,11 @@ Final artifact:
 
 `research/phase1_gateA_event_model_final.md`
 
-Important accepted semantics:
+The original `research/phase1_event_model.md` remains retained as historical design-baseline material and is not deleted.
 
-- `EventRef = {slot_id, generation}`;
-- finite event types;
-- explicit producer/service/consumer semantics;
-- separate peripheral association and dependency semantics;
-- finite criticality classes;
-- `INDEPENDENT`, `ORDERED`, and `COUPLED/TRANSACTIONAL` dependencies;
-- bounded explicit dependency representation;
-- FIFO admission order separated from execution eligibility;
-- explicit event lifecycle;
-- evidence-bounded fault association;
-- retained non-executable quarantine;
-- bounded queue/quarantine assumptions;
-- explicit full-queue behavior;
-- preservation defined as correct verified execution.
+Gate A established the final semantic contract for event identity, event types, service ownership, peripheral association, criticality, explicit dependency classes, bounded dependency representation, admission/execution ordering, lifecycle, evidence-bounded fault association, quarantine, capacity, full-queue behavior, and preservation correctness.
 
 Provisional host-model capacity parameters are `QMAX=16`, `XMAX=4`, and `DMAX=4`; Gate E must validate or revise them against the workload and report the chosen values explicitly.
-
-The original `research/phase1_event_model.md` remains retained as historical design-baseline material. It is not deleted.
 
 ## Existing design baselines retained
 
@@ -142,3 +113,7 @@ No large-scale firmware implementation begins until Gates A–E are sufficiently
 - **Gate E:** Baselines + experimental protocol
 
 After Gate E, implement the **smallest testable reference prototype**, not a general resilience framework.
+
+## Continuity
+
+`CURRENT_HANDOFF.md` contains the current handoff and stopping boundary. `NEXT_CHAT_PROMPT.md` contains the full Gate B startup prompt. At each gate boundary, update the relevant final artifact plus `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `DECISION_LOG.md`, preserve historical material, and synchronize the active branch with `main` before starting a new chat.
