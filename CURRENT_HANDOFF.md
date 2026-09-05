@@ -2,101 +2,80 @@
 
 ## Session status
 
-Phase 0 topic validation and Phase 1 system-design preparation are complete. The development topic is frozen. Phase 1E.1 — Experimental Design / Formalization Foundation — is now complete through Gate E.
+Gates A-E remain closed and normative. The **Minimal Reference Implementation — smallest testable host/reference checkpoint** is now complete and tested.
 
-**Gate A — Exact Event Model and Dependency Semantics: COMPLETE.**  
-**Gate B — Fault Model + Fault Association: COMPLETE.**  
-**Gate C — Recovery Policy + Bounded State Machine: COMPLETE.**  
-**Gate D — Formal Properties + Proof/Check Strategy: COMPLETE at the semantic/design-model level.**  
-**Gate E — Baselines + Experimental Protocol: COMPLETE at the experimental-design/protocol level.**
-
-The next chat must begin **Minimal Reference Implementation — smallest testable reference prototype**.
-
-## Frozen development topic
+## Frozen topic
 
 > **Design and Implementation of a Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**
 
-**Short working title:** Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine
+Short title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**
 
-## Core research question
+## Frozen platform direction
 
-Can a compact deterministic software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
+**STM32U575ZI / NUCLEO-U575ZI-Q**, I2C primary, SPI secondary, UART/USART diagnostic/control. Hardware acquisition is not assumed.
 
-## Gates A–D remain normative
+## Continuity check
 
-Gate A freezes `EventRef = {slot_id, generation}`, separate transaction identity, explicit `INDEPENDENT`/`ORDERED`/`COUPLED/TRANSACTIONAL` dependencies, FIFO admission versus eligibility-driven execution, retained non-executable quarantine, and preservation as verified execution.
+- **Gate A:** exact event/dependency semantics are frozen, including `EventRef={slot_id,generation}`, explicit dependency classes, FIFO admission versus eligibility-driven execution, and retained quarantine.
+- **Gate B:** observable fault taxonomy and evidence-bounded association are frozen; `association precision <= evidence precision`.
+- **Gate C:** deterministic bounded recovery policy is frozen with RETRY, REINIT_OR_RESET, DEGRADE, ESCALATE and four recovery-action transitions.
+- **Gate D:** formal safety/termination/boundedness/identity/release/transaction properties are specified; the 33,792-context audit remains model-level evidence.
+- **Gate E:** P0-P4, W01-W14, deterministic injection, fixed capacities, trace schema, metrics, and evidence boundaries are frozen.
 
-Gate B freezes the primary I2C fault observations: NACK, timeout/no-progress, bus/protocol error, arbitration loss, and persistent no-progress/suspected peripheral-state failure. Association levels are `EXACT_EVENT_TRANSACTION`, `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS`, under `association precision <= evidence precision`.
+These gates are one chain: event semantics constrain fault association; fault context constrains policy; policy/recovery interacts with scheduler/quarantine semantics; formal properties define correctness; the experimental protocol makes those properties comparable and reproducible.
 
-Gate C freezes minimum policy context (`fault_class`, `association_level`, bounded `attempt_count`, `criticality`, `recovery_safety`, `episode_state`), actions `RETRY`, `REINIT_OR_RESET`, `DEGRADE`, `ESCALATE`, and the exact four-action bound `T1=RETRY #1 -> T2=RETRY #2 -> T3=REINIT_OR_RESET -> T4=terminal`.
+## What was implemented
 
-Gate D formalizes quarantine, association, preservation/blocking, dependency, termination, bounded resource, EventRef, release, transaction, and deterministic decision-table properties. Its host audit covered 33,792 bounded contexts with one deterministic outcome per encoded context; this remains model-level evidence only.
+Directory: `reference/`
 
-## Gate E checkpoint
+- ISO C11 host reference.
+- CMake build.
+- Fixed `EventSlot[20]` storage (`QMAX=16`, `XMAX=4`).
+- Queue stores slot IDs; quarantine retains the same event slot and does not duplicate records.
+- Four fixed dependency entries per event (`DMAX=4`).
+- One fixed recovery episode (`EPMAX=1`).
+- 8-bit EventRef generation; generation wrap fails closed instead of recycling.
+- Deterministic first-eligible scheduler scan.
+- Fixed-size `PolicyDecision` and P0-P4 policy variants.
+- Deterministic software fault injection keyed by EventRef/action index.
+- W01-W14 executable correctness scenarios.
+- Gate-D-oriented policy/property assertions.
+- Stable trace identifiers and deterministic CSV trace serialization.
+- Static resource accounting and allocator audit.
 
-Final artifact: `research/phase1_gateE_experimental_protocol_final.md`
+## Verification result
 
-Gate E freezes the experimental bridge from the semantic model to implementation/evaluation.
+Host C11/CMake build passed. `ctest` passed the W01-W14 suite plus recovery-bound, policy-property, trace-metadata, and static-accounting checks.
 
-### Comparison variants
+Host layout observed in this build:
 
-- **P0:** fixed retry baseline.
-- **P1:** fixed retry + bounded peripheral recovery.
-- **P2:** context-only ablation.
-- **P3:** context + episode-history ablation.
-- **P4:** integrated context + history + dependency-aware event quarantine.
+- Runtime: 8164 bytes
+- EventSlot: 84 bytes
+- TraceRecord: 24 bytes
+- fixed trace pool: 6144 bytes
 
-P0/P1 are the principal baselines; P2/P3 isolate mechanism contributions; P4 is the proposed integrated mechanism. Historical baseline terminology is retained rather than silently collapsed.
+Allocator source/symbol audit found no runtime allocator path in the reference implementation/test executable.
 
-### Canonical workloads
+## Important implementation qualification
 
-W01 independent queue preservation; W02 ordered dependency blocking; W03 coupled transaction containment; W04 shared-peripheral non-causality; W05 retry-success; W06 retry-failure then reinit/reset success; W07 terminal degradation; W08 terminal escalation; W09 queue-capacity boundary; W10 quarantine-capacity boundary; W11 stale EventRef generation; W12 association ambiguity; W13 criticality/degradability; W14 mixed ordered/coupled/independent integrated workload.
+The minimal prototype intentionally implements exact event/transaction recovery as the executable recovery target. For `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS`, it does not invent an event target; where broader recovery is not implemented safely, it fails closed to terminal escalation. This is an implementation boundary, not a change to Gate B/C semantics.
 
-### Frozen protocol envelope
+`EPMAX=1` is explicit. W10 tests the bounded second-episode outcome rather than hiding additional recovery storage.
 
-`QMAX=16`, `XMAX=4`, `DMAX=4`, and `EPMAX=1` for the normative reference prototype unless an explicit amendment is made. These are reproducible protocol parameters, not universal optimality claims. Capacity-confounded runs must be flagged rather than interpreted as recovery benefit.
+## Exact next task
 
-Generation width/wrap remains an implementation detail that must be concretely fixed before implementation and must fail closed for stale references.
+The next chat should **not** redesign Gates A-E. It should review the committed host reference implementation against the frozen contracts, close any concrete semantic/test contradictions, then prepare the next smallest checkpoint for reproducible host experiment execution if the reference remains consistent.
 
-### Fault and outcome schedule
+The next likely boundary is: **host reference experiment harness + frozen trace corpus + matched P0-P4 execution**, still without claiming MCU or physical evidence.
 
-Deterministic software injection is the primary repeatable stimulus. Core I2C classes are F-I2C-01 NACK, F-I2C-02 timeout/no-progress, F-I2C-03 bus/protocol error, F-I2C-04 arbitration loss as secondary/conditional, and F-I2C-05 persistent no-progress. Recovery schedules cover first-retry success, second-retry success, reinit/reset success after two failed retries, terminal degradation, and terminal escalation.
+## Non-goals
 
-### Metrics
+Do not yet:
 
-Correctness includes quarantine violations, stale-reference mis-targeting, incorrect attribution, preserved independent events, correctly blocked dependent events, incorrect blocking/loss, lost/duplicated events, invalid coupled execution, recovery-bound violations, premature release, and terminal re-entry. Performance/resource metrics include detection/restoration latency, recovery success/failure, reset/escalation count, queue/quarantine occupancy, CPU, RAM, and Flash. Energy is optional only after valid instrumentation exists.
-
-### Evidence boundary
-
-Host results support model/software-fault behavior only. MCU results are required for actual implementation timing/resource claims. Physical-fault claims require hardware and validated physical/protocol injection. Generalization requires additional workloads/interfaces/fault conditions. Novelty/patentability require separate evidence and assessment.
-
-## Exact next task — Minimal Reference Implementation
-
-Do **not** redesign Gates A–E without identifying a genuine contradiction. Do not start by building a general resilience framework.
-
-The next chat must:
-
-1. reconstruct the repository from `main` and read the continuity documents;
-2. define the smallest executable host/reference prototype implementing the frozen semantic contracts;
-3. concretely choose and document the fixed storage layout, generation width/wrap behavior, scheduler selection rule, event/quarantine representation, episode record, and policy-decision interface;
-4. implement deterministic software fault injection and the canonical workload traces needed for the Gate E correctness suite;
-5. add host-side assertions/property tests for the Gate D obligations;
-6. preserve zero-heap behavior and produce explicit static resource accounting;
-7. keep MCU-specific code and physical bring-up separate from the host reference until the reference behavior is stable;
-8. avoid premature optimization or framework expansion;
-9. update state/handoff/decision documents only with consequential implementation decisions;
-10. stop at the smallest testable reference checkpoint before broad MCU integration unless the next chat explicitly establishes a new stopping boundary.
-
-The first implementation objective is **testability and traceability**, not feature breadth.
-
-## Research honesty
-
-Do not fabricate hardware availability, MCU measurements, benchmarks, energy measurements, physical fault injection, statistical significance, novelty, or patentability. Host simulation/software injection is not physical validation.
-
-## Chat boundary
-
-**Gate E is closed. This handoff stops before firmware implementation.**
-
-The next chat begins:
-
-**Minimal Reference Implementation — smallest testable reference prototype**
+- integrate full STM32U575 firmware;
+- claim MCU RAM/Flash/timing;
+- perform physical fault injection;
+- add RTOS/framework layers;
+- add unrelated peripherals;
+- optimize before correctness;
+- claim novelty, patentability, robustness, generalization, or statistical significance.
