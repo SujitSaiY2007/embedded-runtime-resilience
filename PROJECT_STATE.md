@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Gates A-E complete at their respective semantic/design/protocol levels; Minimal Reference Implementation checkpoint complete at host level.  
+**Status:** Gates A-E complete at their respective semantic/design/protocol levels; Minimal Reference Implementation complete at host level; first explicit host-experiment harness checkpoint implemented on an experiment branch, pending local execution/corpus generation.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
 ## Frozen development topic
@@ -46,9 +46,9 @@ Implemented under `reference/` as a deliberately small ISO C11 host reference wi
 - Fault injection is deterministic and keyed by `EventRef` plus recovery action index.
 - Trace records contain run/trace/episode identity, EventRef, transaction ID, observation sequence, action index, lifecycle state, action, outcome, and correctness; CSV serialization uses fixed local buffers and `write()`.
 
-### Host verification performed
+### Host verification already established on main
 
-Local C11/CMake build completed successfully. `ctest` passed the W01-W14 correctness suite, bounded recovery test, policy-property checks, trace-metadata checks, and static-accounting checks.
+Local C11/CMake build and `ctest` previously passed the W01-W14 correctness suite, bounded recovery test, policy-property checks, trace-metadata checks, and static-accounting checks.
 
 Current host C-layout accounting:
 
@@ -57,18 +57,49 @@ Current host C-layout accounting:
 - `sizeof(TraceRecord) = 24` bytes
 - fixed trace pool = `6144` bytes
 
-A source/symbol allocator audit found no `malloc/calloc/realloc/free` references in the reference implementation and no unresolved allocator symbols in the test executable.
+A source/symbol allocator audit previously found no `malloc/calloc/realloc/free` references in the reference implementation and no unresolved allocator symbols in the test executable.
 
 These are host/reference observations only. They are **not** STM32U575 RAM/Flash/timing measurements.
 
-## Current boundary
+## Reference audit conclusion this session
 
-The smallest testable host/reference checkpoint is complete. Do not automatically proceed to full MCU integration or physical fault injection in the same phase merely because host tests pass.
+The committed reference remains consistent with the frozen core storage/identity/quarantine semantics at its explicitly declared prototype boundary. No genuine Gate A-E contradiction was used to change the semantics.
+
+A concrete implementation limitation remains explicitly documented: executable recovery is exact-event/transaction targeted. `SERVICE_ONLY`, `PERIPHERAL_ONLY`, and `UNKNOWN_AMBIGUOUS` never fabricate event-level precision; unsupported broader recovery fails closed.
+
+The committed runtime trace format is also narrower than the full Gate E conceptual trace decomposition, so the new harness treats runtime CSV as the raw low-level trace and preserves run/workload/schedule/variant information in the experiment summary rather than silently claiming the existing `TraceRecord` is a complete RunHeader/EventTrace/FaultTrace/RecoveryTrace/OutcomeTrace implementation.
+
+## Host experiment harness checkpoint
+
+Branch: `experiment/host-p0-p4-harness`
+
+Added under `reference/experiments/`:
+
+- `workloads.txt` — explicit W01-W14 workload records;
+- `fault_schedules.txt` — explicit deterministic fault/recovery schedules;
+- `harness.c` — small input-driven matched P0-P4 runner reusing the reference runtime;
+- `run_host_experiment.sh` — reproducible build/run entry point;
+- `RESULTS_SCHEMA.md` — summary schema and evidence boundary;
+- replay/matched-input/input-consistency test material.
+
+The harness is designed to emit one matched row per `(workload, schedule, variant)` execution, preserve raw traces, and mark capacity/trace-completeness issues explicitly.
+
+## Current verification boundary
+
+The new harness code is **not yet claimed as executed successfully**. The available GitHub connector did not expose a runnable CI workflow for this repository, so no trustworthy build/CTest/harness result was available from the connected environment.
+
+Therefore:
+
+- no new trace corpus is claimed yet;
+- no new P0-P4 correctness/performance result is claimed yet;
+- no statistical/performance inference is made.
 
 ## Explicit non-claims
 
-No MCU performance/resource measurement, physical fault validation, energy measurement, statistical significance, generalization, novelty, or patentability claim is established by the host prototype.
+No MCU performance/resource measurement, physical fault validation, energy measurement, statistical significance, generalization, novelty, or patentability claim is established by the current host work.
 
-## Continuation
+## Exact continuation
 
-`CURRENT_HANDOFF.md` contains the exact next continuation point. `research/phase1_reference_implementation_design.md` records implementation decisions. `reference/tests/canonical_workloads.md` maps W01-W14 to executable tests. Historical Gate A-E artifacts remain normative and preserved.
+Run the new experiment branch in a real local checkout/build environment. First compile and execute the existing tests plus `host_experiment` and replay/input-consistency checks. Then inspect the generated matched corpus for correctness against the frozen Gate E metrics and commit only the resulting raw inputs/traces/summaries that are actually reproduced.
+
+Do not redesign Gates A-E merely to accommodate harness implementation convenience.
