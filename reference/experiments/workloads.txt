@@ -1,0 +1,16 @@
+# Explicit canonical host workload inputs.
+# Format: workload_id|scenario|event_count|fault_event_index|fault_class|association|retry_safe|reinit_safe|degrade_safe|criticality|schedule_id
+W01|independent_preservation|4|1|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S01
+W02|ordered_blocking|3|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S02
+W03|coupled_containment|2|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S03
+W04|shared_peripheral_noncausality|3|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S04
+W05|retry_success|1|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S05
+W06|retry_retry_reinit|1|0|FAULT_I2C_TIMEOUT|ASSOC_EXACT|1|1|1|NORMAL|S06
+W07|degrade|1|0|FAULT_I2C_PERSISTENT|ASSOC_EXACT|0|0|1|DEFERABLE|S07
+W08|escalate|1|0|FAULT_I2C_PERSISTENT|ASSOC_UNKNOWN|0|0|0|CRITICAL|S08
+W09|queue_boundary|16|15|FAULT_NONE|ASSOC_EXACT|1|1|1|NORMAL|S09
+W10|quarantine_boundary|4|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S10
+W11|stale_generation|16|0|FAULT_NONE|ASSOC_EXACT|1|1|1|NORMAL|S11
+W12|association_ambiguity|1|0|FAULT_AMBIGUOUS|ASSOC_PERIPHERAL_ONLY|1|1|1|NORMAL|S12
+W13|criticality_degradability|1|0|FAULT_I2C_PERSISTENT|ASSOC_EXACT|0|0|0|CRITICAL|S13
+W14|mixed|4|0|FAULT_I2C_NACK|ASSOC_EXACT|1|1|1|NORMAL|S14
