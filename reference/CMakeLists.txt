@@ -15,3 +15,9 @@ add_test(NAME reference_tests COMMAND reference_tests)
 add_executable(host_experiment experiments/host_experiment.c)
 target_link_libraries(host_experiment PRIVATE ref_runtime)
 target_compile_options(host_experiment PRIVATE -Wall -Wextra -Werror -pedantic)
+
+find_package(Python3 COMPONENTS Interpreter QUIET)
+if(Python3_Interpreter_FOUND)
+  add_test(NAME host_experiment_replay
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/experiments/run_host_experiment.py --check)
+endif()
