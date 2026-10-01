@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Gates A-E complete at their respective semantic/design/protocol levels; Minimal Reference Implementation checkpoint complete at host level.  
+**Status:** Gates A-E complete; Minimal Reference Implementation, K.1, K.2, and K.3 complete; integrated software demonstrator/methodology-lock phase active before MCU validation.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
 ## Frozen development topic
@@ -179,3 +179,34 @@ K.2 validates reproducible host corpus generation and the declared trace/outcome
 **K.2 — COMPLETE.**
 
 The next checkpoint is **K.3 — Final synthesis and evidence-bounded project packaging**. Gates A-E remain frozen and normative; no MCU integration or physical validation has been started.
+
+
+## Integrated Software Phase — 2026-10-01
+
+**Objective:** construct a complete software-only demonstrator, re-verify and lock the research methodology, and produce a professor-facing conclusion that the mechanism is ready for target-MCU validation.
+
+**Professor review is not a separate project stage.** It is the intended use of this integrated checkpoint.
+
+### Locked software chain
+
+`Gates A-E -> reference implementation -> K.1 host verification -> K.2 corpus validation -> K.3 synthesis -> software demonstrator -> methodology lock -> hardware-validation handoff`
+
+### Current demonstrator
+
+`demo/index.html` is the presentation layer. It exposes policy variants, fault scenarios, bounded recovery failures, association precision, and the expected decision/recovery path. The C reference under `reference/` remains the authoritative implementation; the UI is not a replacement specification.
+
+### Re-verification status
+
+The existing host evidence remains the verified basis: Windows/MSVC build, CTest 2/2, 70 matched W01-W14 × P0-P4 runs, deterministic replay, matched-input equivalence, raw-input preservation, explicit capacity-confound handling, and explicit ablation-contract handling.
+
+### Locked limitations
+
+- P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across variants.
+- W09/W10 are capacity-confounded.
+- Host evidence is not MCU/physical evidence.
+- Host C-layout values are not STM32U575 resource measurements.
+- Novelty and patentability remain hypotheses/assessment targets, not established conclusions.
+
+### Software-phase conclusion
+
+The software mechanism is now sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify proceeding to STM32U575 validation. The next empirical phase is hardware validation, not another redesign of Gates A-E.
