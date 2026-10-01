@@ -53,7 +53,7 @@ The generated `reference/experiments/out/` and `out.replay/` directories were us
 - W09/W10 remain capacity-confounded.
 - Host evidence must not be presented as MCU/physical evidence.
 
-## Chat K.2 — Next Checkpoint
+## Chat K.2 — Completed 2026-10-01
 
 **Status:** Planned / next chat, not yet completed.
 
@@ -87,3 +87,26 @@ Validate the actual regenerated host corpus at the trace/outcome level against G
 ### Stop condition
 
 Stop after the smallest reproducible corpus-validation checkpoint and update the repository continuity records with the actual findings.
+
+
+### K.2 execution findings
+
+The regenerated corpus was inspected after successful K.1 harness execution.
+
+- 70 matched runs were present: W01-W14 × P0-P4.
+- `corpus_manifest.csv` reported PASS for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- The manifest explicitly identified host-only evidence and zero MCU/physical evidence.
+- Representative `runs.csv`/`trace.csv` slices across W05-W08 and W11-W14 were coherent in the inspected recovery, action/outcome, correctness, and metadata fields.
+- No concrete corpus-generation, serialization, or runtime defect was found.
+
+### K.2 interpretation
+
+The corpus checkpoint is complete, but P0-P3 are not clean quarantine ablations because the current implementation applies exact-event quarantine across all variants. W09/W10 remain capacity-confounded. Host/reference evidence remains distinct from MCU and physical validation.
+
+### K.2 stop condition
+
+**K.2 COMPLETE.** No Gates A-E were changed and no MCU integration was started.
+
+## K.3 — Starting boundary
+
+Final synthesis and evidence-bounded project packaging. Consolidate the demonstrated host/reference evidence, known limitations, and remaining validation gaps without introducing unsupported hardware, performance, novelty, or patentability claims.
