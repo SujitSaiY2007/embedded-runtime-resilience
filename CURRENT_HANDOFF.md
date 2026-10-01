@@ -565,3 +565,10 @@ Antigravity remains the designated repository execution agent for K.10. It must 
 
 ### Stop condition
 Do not proceed to final synthesis or hardware-validation handoff merely because K.10 experiments run. Those conclusions require the K.10 evidence.
+
+
+## Post-K.10 checkpoint — K.11
+
+The downstream stage is explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the P4 Advantage & Novelty Investigation.
+
+K.11 will synthesize K.10 evidence, state the evidence-bounded software conclusion, package final evidence, and define target-MCU validation requirements and success criteria. Do not start K.11 before K.10 is complete. The historical K.10 handoff wording is superseded.
