@@ -10,7 +10,7 @@ The frozen development topic is:
 
 Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**.
 
-**Current status:** **K.3 COMPLETE — final host/reference synthesis checkpoint.** Gates A-E are frozen and normative; the minimal reference implementation plus K.1/K.2 host evidence checkpoints are complete. MCU integration and physical validation remain unperformed.
+**Current status:** **Integrated software proof-of-concept + methodology-lock phase.** Gates A-E are frozen and normative; the minimal reference implementation, K.1/K.2 host evidence checkpoints, and K.3 synthesis are complete. The current objective is a professor-facing demonstrator, complete software re-verification, methodology lock, and a bounded conclusion before MCU validation.
 
 The intended outcome is not merely a functioning application. The target is a technically defensible research contribution that may support an academic publication and, if the evidence warrants it, a patent filing.
 
@@ -129,9 +129,9 @@ The topic is frozen, but development must still pass these gates:
 - exact mechanism defined — Gates A–D complete;
 - hardware/testbed feasible — platform direction selected; acquisition/physical validation pending;
 - credible fault model — Gate B complete at the semantic/design level;
-- reproducible baseline — Gate E pending;
-- measurable technical contribution — experimental evidence pending;
-- reproducible evaluation — Gate E and later experiments pending;
+- reproducible baseline — Gate E frozen; host verification complete;
+- measurable technical contribution — hardware/empirical evidence still pending;
+- reproducible evaluation — host layer complete; target-MCU evaluation pending;
 - no unsupported novelty claims — required throughout;
 - publication-quality evidence — later-stage objective;
 - patent-sensitive details handled deliberately — required throughout.
@@ -149,3 +149,18 @@ The host/reference experiment checkpoint has now been executed and verified.
 **Current limitations:** W09/W10 are capacity-confounded; P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across all variants. Neither limitation is hidden or silently redefined.
 
 **Chat K.2 boundary:** regenerate and inspect the actual host corpus and validate trace/outcome semantics against Gate E. Do not infer policy-level evidence from harness-level PASS alone. Do not start MCU integration or physical validation during this checkpoint.
+
+
+## 11. Software Proof-of-Concept and Methodology Lock
+
+The professor-facing verification activity is part of the integrated software phase, not a separate gate. The objective is to demonstrate the complete mechanism in software, re-verify the methodology, lock the evidence boundaries, and present a defensible conclusion for proceeding to target-MCU validation.
+
+Authoritative checkpoint: `research/phase1_software_demonstrator_methodology_lock.md`.
+
+The demonstrator must make visible: fault observation, evidence-bounded association, event quarantine, bounded context/history-aware recovery, verification/release or terminal handling, and traceable explanation. It must not introduce a second competing research specification.
+
+## 12. Novelty discipline at the software checkpoint
+
+The project may showcase its **integrated novelty hypothesis** and explain why the combination is worth hardware testing. It must not state that novelty or patentability has already been proven. Individual ingredients remain established concepts. Final novelty assessment depends on the complete prior-art record and the eventual demonstrated implementation/claims.
+
+The software-phase conclusion is that the mechanism is sufficiently specified, implemented, reproducible, and evidence-bounded to justify target-MCU validation. It is not a claim of hardware performance or final patentability.
