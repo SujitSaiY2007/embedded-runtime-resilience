@@ -113,3 +113,9 @@ The project should not currently be described as hardware-validated, statistical
 No further work is implied by this checkpoint. If the project is resumed, the next work should be selected explicitly from the deferred validation list rather than inferred as an automatic continuation.
 
 Historical Gates A-E, K.1, and K.2 artifacts remain preserved.
+
+## 9. 2026-10-01 Software-Phase Supersession
+
+K.3 remains a completed historical checkpoint. The active continuation is now the integrated software demonstrator and methodology-lock phase recorded in `research/phase1_software_demonstrator_methodology_lock.md`. Professor verification is part of that integrated phase, not a separate stage.
+
+The software-phase conclusion is bounded: the mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation. Hardware performance, statistical superiority, final novelty, and patentability remain unvalidated.
