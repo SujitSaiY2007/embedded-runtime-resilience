@@ -158,3 +158,20 @@ The UI is presentation/control only. The virtual system models the environment. 
 
 ### Chat scope contract
 Every Part-II chat has a predefined scope in research/PART_II_CHAT_PLAN.md. A chat must read continuity files, perform only its assigned checkpoint, record completed and incomplete work, update continuity, and stop at its boundary.
+
+
+
+
+---
+
+## Active roadmap update — 2026-10-01
+
+K.9 is historically closed. A new controlled checkpoint, **K.9.2 — P4 Advantage & Novelty Investigation Design Lock**, now precedes K.10.
+
+This is intentional: the existing K.8/K.9 evidence does not establish universal P4 superiority or novelty. K.9.2 defines the complete metric, scenario-combination, attribution, falsification and prior-art search space before decisive investigation.
+
+**K.9.2:** design/measurement/search lock only.  
+**K.10:** execute the P4 advantage and novelty investigation.  
+**Later checkpoint:** final synthesis and hardware-validation handoff only after K.10 evidence exists.
+
+Antigravity is the repository execution agent; ChatGPT controls/audits checkpoint scope. Historical K.1-K.9 records are preserved.
