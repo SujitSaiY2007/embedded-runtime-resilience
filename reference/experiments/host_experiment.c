@@ -110,6 +110,16 @@ static int run_one(FILE *runs, FILE *trace, int workload_id, PolicyVariant varia
                 target,(uint16_t)s->transaction_id,(Criticality)s->criticality,
                 s->retry_safe!=0,s->reinit_safe!=0,s->degrade_safe!=0);
             if(out==OUTCOME_EPISODE_FULL && workload_id!=10) harness_ok=0;
+        } else if(strcmp(o->op,"REUSE_CHECK")==0) {
+            if(!have_ref[o->a]) { harness_ok=0; continue; }
+            EventRef old=refs[o->a], fresh;
+            EventSlot e={0};
+            e.type=EVT_PERIPHERAL_READ; e.producer_id=1u; e.service_id=(uint8_t)o->b; e.consumer_id=(uint8_t)o->b;
+            e.peripheral=periph(o->c); e.criticality=crit(o->d); e.transaction_id=(uint16_t)o->e;
+            e.degradable=e.criticality!=CRITICAL; e.shared_state_valid=true;
+            if(runtime_admit(&rt,&e,&fresh)!=OUTCOME_SUCCESS ||
+               fresh.slot_id!=old.slot_id || fresh.generation==old.generation ||
+               event_ref_valid(&rt,old) || !event_ref_valid(&rt,fresh)) harness_ok=0;
         } else if(strcmp(o->op,"DRAIN")==0) {
             for(unsigned guard=0;guard<64u;guard++) {
                 EventRef selected;
