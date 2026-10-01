@@ -64,3 +64,11 @@ Exit: Part II is complete as a software proof-of-concept and methodology-lock ph
 
 ## Scope escalation rule
 If a later dependency is discovered: document it, do not implement it, add it to the next handoff, and stop at the current boundary.
+
+## K.5 completion update — 2026-10-01
+
+K.5 is COMPLETE at the technical-design/contract level. The virtual system, peripheral contracts, deterministic fault injection, C-runtime adapter boundary, runtime I/O, UI authority boundary, ownership rules and S01-S14 deterministic scenarios are documented.
+
+K.6 is now the active implementation checkpoint. It may implement only the K.5 contracts around the existing C reference runtime.
+
+K.6 must not modify the recovery policy, add a second recovery engine, or silently add a peripheral-action callback to the C runtime. The current runtime API remains the integration boundary unless a separate design decision explicitly authorizes a change.
