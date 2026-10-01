@@ -160,3 +160,65 @@ Required K.5 outputs:
 8. NEXT_CHAT_PROMPT.md for K.6.
 
 Exit only when K.6 has an unambiguous implementation starting point.
+
+
+---
+# Active Next-Chat Prompt — K.6
+
+Continue the canonical project in:
+
+SujitSaiY2007/embedded-runtime-resilience
+
+Start from the latest exp state after K.5 has been merged back to exp. Do not repeat K.5 design work and do not execute K.7 or later work.
+
+## Read first
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. NEXT_CHAT_PROMPT.md
+7. research/PART_II_CHAT_PLAN.md
+8. research/part_ii_conceptual_architecture.md
+9. research/part_ii_virtual_system_technical_design.md
+10. research/part_ii_interface_contracts_k5.md
+11. research/part_ii_deterministic_scenarios_k5.md
+12. research/chat_records/chat_k5_record.md
+13. reference/include/ref_runtime.h
+14. reference/src/ref_runtime.c
+15. reference/tests/test_reference.c
+
+## K.6 objective
+Implement the bounded virtual embedded system and connect it to the SAME existing C reference runtime using the K.5 contracts.
+
+## Allowed
+- virtual scheduler/environment implementation;
+- bounded workload/scenario representation;
+- virtual I2C/SPI/UART environmental models;
+- immutable deterministic fault schedules;
+- runtime adapter using existing ref_runtime.h API;
+- EventRef/dependency mapping;
+- deterministic trace correlation;
+- focused K.6 tests and replay checks.
+
+## Explicitly prohibited
+- recovery-policy redesign;
+- new recovery algorithm;
+- new policy variant;
+- UI implementation/polish;
+- baseline comparison experiment;
+- hardware/STM32U575 integration;
+- physical fault injection;
+- Gates A-E changes;
+- K.7-K.10 execution.
+
+## Critical implementation constraint
+The current runtime has no peripheral-action callback. Do NOT silently modify runtime_apply_policy(), policy_decide(), or the recovery mechanism to create one. If K.6 needs environmental action visualization, mirror the predeclared deterministic outcome schedule while keeping the C runtime authoritative for policy transition and verification. If a true callback boundary is judged necessary, document the issue and stop rather than redesigning the runtime.
+
+## Runtime authority
+The C runtime remains authoritative for EventRef identity, dependency eligibility, quarantine, recovery action selection, attempt progression, verification/release, terminal outcome, and trace facts.
+
+## Required K.6 exit
+A controlled deterministic scenario must travel through the virtual environment, the existing C runtime, and back to an inspectable correlated trace without introducing a second recovery policy.
+
+At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new decisions arise, research/chat_records/chat_k6_record.md, and NEXT_CHAT_PROMPT.md. Preserve K.5 history.
