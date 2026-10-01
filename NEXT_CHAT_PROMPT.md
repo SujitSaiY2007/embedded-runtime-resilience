@@ -721,3 +721,46 @@ Use Antigravity as the repository execution agent. It must inspect the latest `e
 K.11 is complete when the final software-phase conclusion is evidence-bounded, the professor-facing package is coherent, the target-MCU validation plan is reproducible, all continuity files are updated, and the exact next hardware-validation/refinement starting point is recorded.
 
 STOP after K.11. Do not begin hardware implementation in K.11 unless explicitly re-scoped.
+
+---
+
+## ACTIVE K.10 CONTINUATION — EXECUTION REQUIRED (2026-10-01)
+
+K.10 is **NOT COMPLETE** and must not be treated as a final-synthesis stage.
+
+Start from the current live `exp` HEAD. The previous audit reconciled the earlier expected `e28af7...` state to the actual live `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`; the intervening five commits are continuity-only.
+
+### Read first
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. research/PART_II_CHAT_PLAN.md
+7. research/phase2_k9_methodology_lock.md
+8. research/phase2_k8_matched_baseline_validation.md
+9. research/phase2_k9_2_p4_advantage_novelty_design.md
+10. research/chat_records/chat_k9_record.md
+11. research/chat_records/chat_k9_2_record.md
+12. research/novelty_investigation.md
+13. reference/include/ref_runtime.h
+14. reference/src/ref_runtime.c
+
+### Mission
+Execute **K.10 — P4 Advantage & Novelty Investigation** only.
+
+### Mandatory
+Use Antigravity as the repository execution agent. First report branch, starting commit, working-tree state and protected runtime integrity. Then execute all locked matched P0-P4 case families and controls with approved non-invasive instrumentation only, produce metric-level evidence, analyze interactions/trade-offs, and complete the adversarial prior-art investigation.
+
+### Do not
+- redesign P4;
+- modify Gates A-E;
+- modify `ref_runtime.c/.h`;
+- add a new policy/engine/scheduler;
+- claim universal superiority;
+- claim novelty/patentability;
+- perform hardware validation;
+- start K.11.
+
+### Exit
+K.10 is complete only after the actual matched cases, controls, metrics, interactions, trade-offs, prior-art investigation, falsification assessment and continuity updates are all present, committed and pushed. Then STOP. Do not activate K.11 prematurely.
