@@ -101,3 +101,32 @@ The harness is host/reference evidence only. Generated corpus outputs must be pr
 **Trace corpus:** raw declarative inputs are committed; generated `runs.csv`/`trace.csv` are reproducibly generated artifacts and are not represented as already executed here.
 
 **MCU/physical evidence:** none.
+
+## 2026-10-01 Chat K.1 verified host-experiment checkpoint
+
+Chat K.1 supersedes the earlier “execution verification pending” qualification.
+
+### Verified in the user-controlled Windows/MSVC host environment
+
+- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
+- Commit: `949bd4c`
+- Build outputs included `reference_tests.exe` and `host_experiment.exe`.
+- CTest: **2/2 tests passed**.
+- Host experiment check: **PASS** for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Matched execution: **70 runs = W01-W14 × P0-P4**.
+- W09/W10: `capacity_confounded=1`.
+- P0-P3: `ablation_contract_valid=0` because the current reference applies exact-event quarantine across all variants.
+- P4: `ablation_contract_valid=1`.
+- No remaining compile/runtime/test failure was reported at this checkpoint.
+
+### Evidence boundary
+
+This is **host/reference evidence only**. It does not establish STM32U575 timing, RAM, Flash, energy, electrical fault behavior, or physical recovery.
+
+The generated `reference/experiments/out/` and `out.replay/` artifacts were inspected during verification but cleaned before commit. The committed reproducibility source is the declarative input corpus plus harness; Chat K.2 must validate the regenerated corpus contents rather than assuming the harness pass alone proves every Gate-E trace claim.
+
+### Chat K.2 exact starting task
+
+Regenerate and inspect the 70-run corpus from the clean branch. Check trace identifiers/lifecycle/action/outcome fields against Gate E, W01-W14 matched P0-P4 identity, capacity/ablation metadata, preservation/quarantine/recovery-bound evidence, and whether any result is only a harness property rather than a policy property.
+
+Do not modify Gates A-E or start MCU integration during this checkpoint.
