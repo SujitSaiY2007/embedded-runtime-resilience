@@ -248,3 +248,51 @@ Required end state: prior-art landscape refreshed, novelty hypothesis narrowed, 
 
 ### Evidence boundary
 No Part-II software result may be represented as STM32U575 timing/resource measurement, physical electrical fault evidence, physical MPU behavior, final patentability, or established novelty.
+
+
+## Active K.4 Scope Update — 2026-10-01
+
+All preceding state and historical checkpoint material is preserved.
+
+Part I (K.1-K.3) is COMPLETE. Part II begins at K.4.
+
+### Current checkpoint
+K.4 — Novelty Re-Research + Conceptual Architecture Lock.
+
+### Branch state
+- exp = 1f3a471d2987b066ee995f4bf563fcdcbcd74d97
+- main = e413a5986df9a486622bb4b34ef13ebc1e63ae80
+- main is one merge commit ahead because of the older integrated-software-phase package.
+
+K.4 work follows exp only.
+
+### Novelty result
+The broad framing is not defensible after adversarial re-research. The following are established or strongly overlapping: peripheral recovery/isolation; recovery history; event failure queues/quarantine; dependency-aware containment; selective rollback/preservation; constrained runtime fault disambiguation/trace monitoring; and zero-dynamic-allocation embedded execution.
+
+Remaining hypothesis:
+
+> There may be a technically meaningful distinction in implementing evidence-limited fault-to-event association together with retained event quarantine, dependency/order-aware preservation, and bounded history-conditioned recovery as one statically bounded mechanism for constrained event-driven MCU firmware.
+
+Status: UNRESOLVED.
+
+Detailed record: research/novelty_investigation.md
+
+### Architecture lock
+UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI.
+
+Authority:
+- UI = presentation/scenario control.
+- Virtual system = deterministic environment/workload/peripheral/fault model.
+- C runtime = sole recovery-policy authority.
+- Recovery Decision = observable C-runtime result, not a second component.
+- Trace/Evidence = runtime-produced evidence.
+
+Detailed record: research/part_ii_conceptual_architecture.md
+
+### Documentation inconsistency
+Historical K.4 integrated-software records remain in the repository and are preserved. They are superseded for active scope by research/PART_II_CHAT_PLAN.md and the Part-II scope override.
+
+### Exact next checkpoint
+K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+K.5 must not implement the simulator/UI and must not redesign the recovery policy.

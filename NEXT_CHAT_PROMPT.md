@@ -109,3 +109,54 @@ Use the current Part-II plan in research/PART_II_CHAT_PLAN.md as the scope autho
 Branch rule: exp is the active reference branch; main is the integrated mirror synchronized through PR/merge.
 
 At K.4 completion, the next checkpoint is K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+
+---
+# Active Next-Chat Override — K.5
+
+The earlier K.4 prompt above is preserved as historical project planning.
+
+The next chat must execute **K.5 — Virtual Embedded System Technical Design + Interface Contracts** only.
+
+Read first:
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. NEXT_CHAT_PROMPT.md
+7. research/PART_II_CHAT_PLAN.md
+8. research/novelty_investigation.md
+9. research/part_ii_conceptual_architecture.md
+10. research/chat_records/chat_k4_record.md
+
+K.5 allowed:
+- virtual scheduler/environment design;
+- virtual I2C/SPI/UART contracts;
+- deterministic fault-injection API;
+- simulator-to-C-runtime adapter contract;
+- runtime input/output schemas;
+- UI-facing state/trace schema;
+- baseline interface boundary;
+- deterministic scenario contracts;
+- ownership/identity/resource boundaries.
+
+K.5 prohibited:
+- simulator implementation;
+- UI implementation;
+- recovery-policy redesign;
+- Gates A-E changes;
+- hardware integration;
+- K.6/K.7/K.8/K.9/K.10 execution.
+
+Required K.5 outputs:
+1. virtual-system technical design;
+2. interface/contract document;
+3. deterministic scenario definitions;
+4. research/chat_records/chat_k5_record.md;
+5. PROJECT_STATE.md;
+6. CURRENT_HANDOFF.md;
+7. DECISION_LOG.md when needed;
+8. NEXT_CHAT_PROMPT.md for K.6.
+
+Exit only when K.6 has an unambiguous implementation starting point.

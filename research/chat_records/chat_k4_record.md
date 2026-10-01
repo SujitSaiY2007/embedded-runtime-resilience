@@ -78,3 +78,48 @@ Out of scope:
 ### Required next checkpoint
 
 K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+
+---
+## K.4 Active Scope Execution Record — 2026-10-01
+
+The earlier sections are retained as historical context. The active K.4 scope was narrowed by the Part-II scope override to novelty re-research + conceptual architecture lock.
+
+### Adversarial prior-art findings
+
+The search found strong prior art for:
+- peripheral recovery/isolation/reinitialization/escalation — Phoenix; US8510592B1;
+- recovery history affecting later action — US10921871B2;
+- failed-event association, retry and message quarantine — US10331522/US10929373;
+- failed-event queue and replay/corrective action — US20180365126;
+- retaining queued work during recoverable errors — US12688084;
+- dependency-aware fault containment — Ahn et al. service-robot framework;
+- selective rollback/preservation — distributed/dataflow recovery literature;
+- resource-constrained runtime fault disambiguation and trace/verdict monitoring — R2U2 and related runtime-verification work;
+- zero-dynamic-allocation embedded execution — established open-source embedded state-machine practice.
+
+### Narrowed hypothesis
+
+The broad claim is rejected as insufficiently differentiated.
+
+Remaining hypothesis:
+
+> There may be a technically meaningful distinction in implementing evidence-limited fault-to-event association together with retained event quarantine, dependency/order-aware preservation, and bounded history-conditioned recovery as one statically bounded mechanism for constrained event-driven MCU firmware.
+
+Status: UNRESOLVED.
+
+### Conceptual architecture
+
+Locked:
+
+UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI
+
+The C runtime is the only recovery-policy authority. Recovery Decision is a presentation stage, not a second algorithm. The virtual system models environment/stimulus; it does not decide recovery. The trace records runtime-produced evidence; it does not infer policy.
+
+### Documentation integrity
+
+The older integrated-software K.4 record is intentionally retained. It is not the active scope. Current scope is controlled by research/PART_II_CHAT_PLAN.md and the Part-II scope override.
+
+### Next checkpoint
+
+K.5 — Virtual Embedded System Technical Design + Interface Contracts.

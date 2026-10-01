@@ -190,3 +190,40 @@ They have potentially distinct mechanisms, but the policy-level role is one boun
 | D-092 | Accepted | Do not claim novelty from individual ingredients; conduct a fresh element-by-element prior-art investigation of the integrated mechanism. | Current prior art covers peripheral recovery, checkpointing, selective recovery, fault containment and policy-driven recovery. The remaining question concerns the specific combination and constraints. |
 | D-093 | Accepted | Preserve the C reference runtime as the sole authoritative recovery-policy implementation for the virtual demonstrator. | Prevents the UI/simulator from becoming a second competing specification. |
 | D-094 | Accepted | Freeze the Part-II demonstrator architecture as UI -> Virtual Embedded System -> C Reference Runtime -> Recovery Decision -> Trace -> UI before implementation. | Keeps presentation, environment modelling, policy execution and evidence traceability distinct. |
+
+
+## D-095 — K.4 narrow the novelty hypothesis after adversarial re-research
+**Status:** Accepted
+
+The broad novelty framing is not defensible because prior art separately and in meaningful combinations covers peripheral recovery/isolation, recovery history, failed-event quarantine, dependency-aware containment, selective rollback/preservation, constrained runtime fault disambiguation, and zero-dynamic-allocation execution.
+
+**Decision:** retain only the narrower unresolved hypothesis concerning the combination of evidence-limited fault-to-event association, retained event quarantine, dependency/order-aware preservation, bounded history-conditioned recovery, and static bounded implementation in constrained event-driven MCU firmware.
+
+**Reason:** avoids claiming novelty merely because no identical publication was found.
+
+## D-096 — Lock Part-II conceptual authority boundaries before K.5
+**Status:** Accepted
+
+Freeze the conceptual chain as:
+
+UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI
+
+The C reference runtime is the sole recovery-policy authority. UI and virtual-system layers may present/request/model behavior but may not implement alternative recovery semantics. The trace layer records runtime-produced evidence and does not infer policy.
+
+**Reason:** prevents architecture drift and a second competing recovery specification during K.5-K.7.
+
+## D-097 — Preserve historical K.4 integrated-software records as superseded history
+**Status:** Accepted
+
+Retain the older integrated-software-phase K.4 record and methodology-lock document. Mark current continuity state as governed by the Part-II K.4 scope override rather than deleting or rewriting historical records.
+
+**Reason:** preserves provenance and explains the project-scope reclassification without allowing stale material to control active work.
+
+## D-098 — Treat main-ahead state as historical, not as active exp state
+**Status:** Accepted
+
+At K.4 entry, exp was 1f3a471d2987b066ee995f4bf563fcdcbcd74d97 while main was e413a5986df9a486622bb4b34ef13ebc1e63ae80, one merge commit ahead. The main-only merge contains the earlier integrated-software-phase package.
+
+**Decision:** continue K.4 from exp, as required by the active-branch rule. Do not silently reset or force-update either branch.
+
+**Reason:** the project protocol defines exp as the active research/reference branch; the main-only merge is preserved until the completed K.4 package is explicitly synchronized through the required PR path.

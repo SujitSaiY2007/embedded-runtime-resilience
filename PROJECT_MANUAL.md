@@ -10,7 +10,7 @@ The frozen development topic is:
 
 Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**.
 
-**Current status:** **Integrated software proof-of-concept + methodology-lock phase.** Gates A-E are frozen and normative; the minimal reference implementation, K.1/K.2 host evidence checkpoints, and K.3 synthesis are complete. The current objective is a professor-facing demonstrator, complete software re-verification, methodology lock, and a bounded conclusion before MCU validation.
+**Current status:** **Part II K.4 — Novelty Re-Research + Conceptual Architecture Lock.** Part I (K.1-K.3) is complete. Gates A-E remain frozen and normative. The current objective is adversarial prior-art investigation and conceptual architecture lock before any K.5 implementation.
 
 The intended outcome is not merely a functioning application. The target is a technically defensible research contribution that may support an academic publication and, if the evidence warrants it, a patent filing.
 

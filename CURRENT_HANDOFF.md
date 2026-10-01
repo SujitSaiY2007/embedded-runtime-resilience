@@ -248,3 +248,47 @@ K.4 must establish the current prior-art landscape and lock the conceptual softw
 
 ### No-forward-scope rule
 K.4 must not implement the virtual circuit/UI or alter the recovery mechanism. K.5 follows only after K.4 closes.
+
+
+## Active K.4 Scope Update — 2026-10-01
+
+The preceding handoff sections are preserved as historical continuity. They described the earlier integrated-software interpretation of K.4 and are superseded for active scope by research/PART_II_CHAT_PLAN.md and this section.
+
+### Current Part
+Part II.
+
+### Current checkpoint
+K.4 — Novelty Re-Research + Conceptual Architecture Lock.
+
+### Last completed checkpoint
+K.3 — Final host/reference synthesis.
+
+### Active exp reference
+1f3a471d2987b066ee995f4bf563fcdcbcd74d97.
+
+### main relationship
+main is e413a5986df9a486622bb4b34ef13ebc1e63ae80, one merge commit ahead of exp. That merge contains the older integrated-software-phase package. It is preserved and is not treated as a newer exp research state.
+
+### K.4 result
+Adversarial prior-art research materially weakens the broad novelty framing. Prior art covers peripheral recovery/isolation, recovery history, failed-event quarantine, dependency-aware containment, selective rollback/preservation, constrained runtime fault disambiguation, and zero-dynamic-allocation execution.
+
+The remaining hypothesis is:
+
+> There may be a technically meaningful distinction in implementing evidence-limited fault-to-event association together with retained event quarantine, dependency/order-aware preservation, and bounded history-conditioned recovery as one statically bounded mechanism for constrained event-driven MCU firmware.
+
+Status: UNRESOLVED. No novelty or patentability conclusion is made.
+
+### Architecture lock
+UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI.
+
+The C reference runtime is the sole recovery-policy authority. UI and virtual-system layers cannot choose recovery actions. Trace records runtime-produced evidence and does not infer policy.
+
+Authoritative architecture:
+research/part_ii_conceptual_architecture.md
+
+### Exact K.5 starting point
+K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+K.5 defines, but does not implement, the virtual scheduler/environment, I2C/SPI/UART models, deterministic fault injection, C-runtime adapter, UI-facing state/trace schema, and baseline interface boundary.
+
+Do not execute K.5 or later work in K.4 history sections above; this section is the active handoff.
