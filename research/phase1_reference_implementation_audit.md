@@ -56,3 +56,17 @@ No Gate A-E contract is amended.
 ## Non-goals
 
 This audit does not add MCU integration, physical fault injection, RTOS/framework layers, statistical claims, MCU timing/RAM/Flash claims, or novelty/patentability claims.
+
+## Chat K.1 verification record
+
+The host experiment harness was subsequently executed in the user-controlled Windows/MSVC environment.
+
+- Build outputs: `reference_tests.exe`, `host_experiment.exe`.
+- CTest: **2/2 passed**.
+- Host check: deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging all **PASS**.
+- Matched runs: **70** (W01-W14 × P0-P4).
+- W09/W10 were explicitly capacity-confounded.
+- P0-P3 remained `ablation_contract_valid=0`; P4 remained valid.
+- No remaining compile/runtime/test failure was reported.
+
+This verifies execution of the harness. It does not yet constitute corpus-level validation of every Gate-E trace claim; that is the Chat K.2 task.
