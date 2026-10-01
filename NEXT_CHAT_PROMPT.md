@@ -225,30 +225,25 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 
 
 ---
-# Active Next-Chat Prompt — K.7: Professor-Facing UI Implementation
+# Active Next-Chat Prompt — K.7 Merge & Transition to K.8 (Matched Baseline Software Validation)
 
 Continue the canonical project in:
 
 SujitSaiY2007/embedded-runtime-resilience
 
-Start from the latest canonical `exp` branch (merge commit `b161589`).
+Start from the verified K.7 implementation branch:
 
-Do not repeat K.5/K.6 work and do not execute K.8 or later work.
+feature/k7-professor-ui-2026-10-01
+
+Base exp commit: 0df1cd7
+
+Do not repeat K.6/K.7 implementation work and do not execute K.9 or later work.
 
 ## Objective
 
-Implement the professor-facing UI (K.7) as the front-end for the software-only demonstrator, connecting the UI to the K.6 bounded virtual embedded system and the authoritative C reference runtime.
-
-The full software mechanism must be observable without source-code inspection:
-topology/status
--> queue view
--> fault controls
--> recovery action
--> verification/release/degrade/escalation
--> trace/explanation
--> metrics
--> scenarios
--> simulator integration.
+1. Review and merge the verified K.7 Professor-Facing UI into `exp` via PR.
+2. Advance to K.8: Matched Baseline vs Proposed Software Validation.
+3. In K.8, execute the matched comparative evaluations under frozen Gates A-E and canonical workloads/fault schedules (W01-W14).
 
 ## Read first
 
@@ -259,24 +254,16 @@ topology/status
 5. CHAT_CONTINUITY_PROTOCOL.md
 6. NEXT_CHAT_PROMPT.md
 7. research/PART_II_CHAT_PLAN.md
-8. research/part_ii_conceptual_architecture.md
-9. research/part_ii_virtual_system_technical_design.md
-10. research/part_ii_interface_contracts_k5.md
-11. research/part_ii_deterministic_scenarios_k5.md
-12. research/chat_records/chat_k5_record.md
-13. research/chat_records/chat_k6_record.md
-14. reference/include/ref_runtime.h
-15. reference/src/ref_runtime.c
-16. reference/virtual/include/virtual_system.h
-17. reference/virtual/src/virtual_system.c
-18. reference/virtual/tests/test_virtual_system.c
+8. research/chat_records/chat_k7_record.md
+9. demo/README.md
+10. reference/include/ref_runtime.h
+11. reference/src/ref_runtime.c
 
 ## Critical constraints
 
 - The C reference runtime remains the sole recovery-policy authority.
-- The UI is a read-only projection and interactive stimulus injector; it MUST NOT contain a second recovery policy or alternative decision logic.
 - Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
-- Do NOT perform K.8 baseline comparison experiments.
-- Do NOT perform hardware integration or physical fault injection.
+- Do NOT perform physical hardware integration or physical fault injection.
 - Gates A-E remain frozen and normative.
+
 

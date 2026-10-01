@@ -1,2 +1,1130 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zero-Heap Recovery — Software Demonstrator</title><style>body{font-family:system-ui;margin:0;background:#0b1020;color:#eef2ff}header{padding:24px;background:#11182c;border-bottom:1px solid #293451}main{max-width:1100px;margin:auto;padding:22px;display:grid;gap:14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:#121a30;border:1px solid #293451;border-radius:12px;padding:15px}label{display:block;color:#aab5d0;font-size:12px;margin-bottom:5px}select,button{width:100%;padding:10px;border-radius:8px;border:1px solid #394766;background:#18223b;color:#eef2ff}button{font-weight:700;cursor:pointer}.pipeline{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.node{text-align:center;padding:12px 4px;background:#17213a;border:1px solid #354361;border-radius:9px;font-size:12px}.metric{font-size:22px;font-weight:800}.small{font-size:12px;color:#9eabc8}pre{white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace}@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr}}</style></head><body><header><h1>Zero-Heap Context-Aware Recovery with Event Quarantine</h1><div class="small">Software-only professor-facing proof-of-concept demonstrator. The authoritative implementation remains the ISO C11 reference runtime in reference/.</div></header><main><section class="grid"><div class="card"><label>Policy variant</label><select id="v"><option value="0">P0 — Fixed Retry</option><option value="1">P1 — Fixed Retry + Recovery</option><option value="2">P2 — Context Only</option><option value="3">P3 — Context + History</option><option value="4" selected>P4 — Integrated Mechanism</option></select></div><div class="card"><label>Fault</label><select id="f"><option>I2C Timeout</option><option>I2C NACK</option><option>I2C Bus Error</option><option>I2C Persistent Fault</option></select></div><div class="card"><label>Recovery failures before success</label><select id="n"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option></select></div><div class="card"><label>Association evidence</label><select id="a"><option>Exact event</option><option>Service only</option><option>Peripheral only</option><option>Unknown / ambiguous</option></select></div></section><section class="card"><button onclick="run()">INJECT FAULT → RUN SOFTWARE POLICY</button></section><section class="pipeline"><div class="node">FAULT<br>OBSERVED</div><div>→</div><div class="node">CONTEXT<br>+ HISTORY</div><div>→</div><div class="node">EVENT<br>QUARANTINE</div><div>→</div><div class="node">BOUNDED<br>RECOVERY</div></section><section class="grid"><div class="card"><div class="small">Policy</div><div class="metric" id="policy">P4</div></div><div class="card"><div class="small">Decision path</div><div class="metric" id="actions">—</div></div><div class="card"><div class="small">Episode</div><div class="metric" id="episode">—</div></div><div class="card"><div class="small">Unrelated event</div><div class="metric" id="unrelated">—</div></div></section><section class="card"><h3>Demonstration trace</h3><pre id="out">Select a scenario and run it.</pre></section><section class="card"><div class="small"><b>Evidence boundary:</b> this UI is a software demonstrator of the frozen mechanism. It does not establish STM32U575 RAM/Flash/timing, MPU behavior, electrical fault behavior, physical recovery, statistical significance, or novelty/patentability by itself.</div></section></main><script>const names=['P0','P1','P2','P3','P4'];const actions=(v,n,a)=>{if(a!=='Exact event')return ['ESCALATE'];if(v===4){if(n===0)return ['RETRY'];if(n===1)return ['RETRY','REINIT_OR_RESET'];if(n===2)return ['RETRY','RETRY','REINIT_OR_RESET'];return ['RETRY','RETRY','REINIT_OR_RESET','DEGRADE']}if(v===3){if(n===0)return ['RETRY'];if(n===1)return ['RETRY','RETRY'];return ['RETRY','RETRY','REINIT_OR_RESET']}if(v===2){if(n===0)return ['RETRY'];return ['RETRY','RETRY','REINIT_OR_RESET']}if(v===1){if(n===0)return ['RETRY'];if(n===1)return ['RETRY','REINIT_OR_RESET'];return ['RETRY','REINIT_OR_RESET','DEGRADE']}return n===0?['RETRY']:['RETRY','RETRY','ESCALATE']};function run(){const v=+document.getElementById('v').value,n=+document.getElementById('n').value,a=document.getElementById('a').value,f=document.getElementById('f').value;const path=actions(v,n,a),closed=a!=='Exact event'||path[path.length-1]==='DEGRADE'||path[path.length-1]==='ESCALATE'||n<3;document.getElementById('policy').textContent=names[v];document.getElementById('actions').textContent=path.join(' → ');document.getElementById('episode').textContent=closed?'CLOSED':'ACTIVE';document.getElementById('unrelated').textContent=a==='Exact event'?'PRESERVED':'NOT TARGETABLE';document.getElementById('out').textContent=['Fault: '+f,'Association evidence: '+a,'Step 1: observe fault and retain EventRef','Step 2: quarantine the fault-associated event','Step 3: select bounded recovery using policy context/history','Step 4: verify before release; otherwise degrade/escalate','Decision path: '+path.join(' → '),'Unrelated valid work: '+(a==='Exact event'?'remains eligible when dependency rules permit it':'not released by invented attribution'),'This visualization is intentionally bounded by the committed Gate A–E contracts.'].join('\n')}run();</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zero-Heap Context-Aware Recovery — Professor-Facing Demonstrator (K.7)</title>
+  <meta name="description" content="Professor-facing proof-of-concept demonstrator for zero-heap context-aware peripheral recovery with event quarantine, connected to the canonical C reference runtime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(51, 65, 85, 0.6);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --cyan: #06b6d4;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
+      color: var(--text);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    header {
+      background: rgba(11, 17, 32, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 18px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .badge-primary { background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.4); color: #c7d2fe; }
+    .badge-success { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #a7f3d0; }
+    .badge-warning { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: #fde68a; }
+    .badge-danger { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #fecaca; }
+    .badge-cyan { background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.4); color: #a5f3fc; }
+
+    main {
+      flex: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Architecture Flow Banner */
+    .arch-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .pipeline-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 0;
+    }
+
+    .pipe-node {
+      flex: 1;
+      min-width: 130px;
+      padding: 10px 8px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(71, 85, 105, 0.4);
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .pipe-node.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--accent);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .pipe-node .pipe-step {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .pipe-node .pipe-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 3px;
+    }
+
+    .pipe-arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+      user-select: none;
+    }
+
+    /* Controls Panel */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 2.5fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .controls-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    select, button, input {
+      font-family: var(--font-main);
+      font-size: 13px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(30, 41, 59, 0.7);
+      color: var(--text);
+      padding: 9px 12px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    select:focus, button:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    button:hover:not(:disabled) {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: #64748b;
+    }
+
+    button.btn-primary {
+      background: #4f46e5;
+      border-color: #6366f1;
+      color: #ffffff;
+    }
+
+    button.btn-primary:hover:not(:disabled) {
+      background: #4338ca;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    button.btn-success {
+      background: #059669;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    button.btn-success:hover:not(:disabled) {
+      background: #047857;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .step-slider-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 4px;
+      padding: 0;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* Live State Grid */
+    .state-dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1200px) {
+      .state-dashboard { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .state-dashboard { grid-template-columns: 1fr; }
+    }
+
+    .stat-box {
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(51, 65, 85, 0.4);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      text-align: left;
+    }
+
+    thead {
+      background: rgba(30, 41, 59, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      padding: 10px 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+      color: #e2e8f0;
+    }
+
+    tbody tr:hover {
+      background: rgba(51, 65, 85, 0.2);
+    }
+
+    tbody tr.highlighted {
+      background: rgba(99, 102, 241, 0.25) !important;
+      border-left: 3px solid var(--accent);
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .status-queued { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+    .status-completed { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    .status-quarantined { background: rgba(245, 158, 11, 0.2); color: #fde68a; }
+    .status-escalated { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+
+    /* Trace Section */
+    .trace-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .trace-section { grid-template-columns: 1fr; }
+    }
+
+    .authority-note {
+      font-size: 12px;
+      color: #94a3b8;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    footer {
+      padding: 16px 28px;
+      background: rgba(11, 17, 32, 0.9);
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1>
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;"></span>
+        Zero-Heap Context-Aware Peripheral Recovery Demonstrator
+      </h1>
+      <div class="subtitle" id="scenario-desc-header">
+        Canonical Reference Runtime Front-End (K.7) — Authoritative ISO C11 Policy & Virtual System
+      </div>
+    </div>
+    <div class="header-badges">
+      <span class="badge badge-primary" id="mode-badge">STANDALONE OFFLINE</span>
+      <span class="badge badge-success">C RUNTIME AUTHORITATIVE</span>
+      <span class="badge badge-cyan">ZERO-HEAP VERIFIED</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Architecture Chain Banner -->
+    <section class="arch-banner">
+      <div class="pipeline-grid">
+        <div class="pipe-node active" id="pipe-env">
+          <div class="pipe-step">Step 1</div>
+          <div class="pipe-label">Virtual Environment</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-admit">
+          <div class="pipe-step">Step 2</div>
+          <div class="pipe-label">Event Admission (C)</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-fault">
+          <div class="pipe-step">Step 3</div>
+          <div class="pipe-label">Fault Observation</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-policy">
+          <div class="pipe-step">Step 4</div>
+          <div class="pipe-label">policy_decide()</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-apply">
+          <div class="pipe-step">Step 5</div>
+          <div class="pipe-label">runtime_apply_policy()</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-release">
+          <div class="pipe-step">Step 6</div>
+          <div class="pipe-label">Verify & Release</div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node" id="pipe-trace">
+          <div class="pipe-step">Step 7</div>
+          <div class="pipe-label">Correlated Trace</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <section class="controls-grid">
+      <!-- Scenario Selection -->
+      <div class="card">
+        <div class="card-title">
+          <span>1. Scenario Selection</span>
+          <span class="badge badge-primary" id="scenario-id-badge">S01</span>
+        </div>
+        <select id="scenario-select" aria-label="Select Scenario">
+          <option value="S01">S01 — Independent Preservation Under Transient Fault</option>
+          <option value="S02">S02 — Ordered Dependency Blocking</option>
+          <option value="S05">S05 — Retry Success & Trace Correlation</option>
+          <option value="S06">S06 — Bounded Progression to Subsystem Restart</option>
+          <option value="S08">S08 — Ambiguous Association Isolation (Zero Synthetic EventRef)</option>
+          <option value="S14">S14 — Mixed Dependencies & Deterministic Replay</option>
+        </select>
+        <div id="scenario-summary-text" style="font-size:12px; color:var(--text-muted); line-height:1.4;">
+          Loading scenario details...
+        </div>
+      </div>
+
+      <!-- Policy Variant -->
+      <div class="card">
+        <div class="card-title">
+          <span>2. Policy Variant</span>
+          <span class="badge badge-cyan" id="variant-badge">P4</span>
+        </div>
+        <select id="variant-select" aria-label="Select Policy Variant">
+          <option value="4" selected>P4 — Integrated (Context + History + Quarantine)</option>
+          <option value="3">P3 — Context + History</option>
+          <option value="2">P2 — Context Only</option>
+          <option value="1">P1 — Fixed Retry + Recovery</option>
+          <option value="0">P0 — Fixed Retry Baseline</option>
+        </select>
+        <div style="font-size:11px; color:var(--text-muted);">
+          Governs <code style="font-family:var(--font-mono); color:#a5b4fc;">policy_decide()</code> decision rules in the unchanged C runtime.
+        </div>
+      </div>
+
+      <!-- Execution Controls -->
+      <div class="card">
+        <div class="card-title">
+          <span>3. Deterministic Stepper</span>
+          <span id="step-counter" style="font-family:var(--font-mono); font-size:12px; color:#a5b4fc;">Step 0 / 7</span>
+        </div>
+        <div class="btn-row">
+          <button id="btn-reset" class="btn-primary" title="Reset scenario to step 0">⟲ Reset</button>
+          <button id="btn-prev" title="Step backward">◀ Step Back</button>
+          <button id="btn-next" class="btn-primary" title="Step forward">Step Next ▶</button>
+          <button id="btn-play" title="Auto-advance steps">▶ Play</button>
+          <button id="btn-run" class="btn-success" title="Run to completion">Run All ⏭</button>
+        </div>
+        <div class="step-slider-container">
+          <div class="slider-labels">
+            <span>START</span>
+            <span id="slider-curr-label">STEP 0</span>
+            <span>COMPLETE</span>
+          </div>
+          <input type="range" id="step-slider" min="0" max="7" value="0" aria-label="Step Progress Slider">
+        </div>
+      </div>
+    </section>
+
+    <!-- State Dashboard Summary -->
+    <section class="state-dashboard">
+      <div class="stat-box">
+        <div class="stat-label">Active Fault Episode</div>
+        <div class="stat-value" id="stat-episode">IDLE</div>
+        <div style="font-size:11px; color:var(--text-muted);" id="stat-episode-sub">No active fault episode</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Policy Decision (C Runtime)</div>
+        <div class="stat-value" id="stat-decision">ACT_NONE</div>
+        <div style="font-size:11px; color:var(--text-muted);" id="stat-decision-sub">Decided by policy_decide()</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Quarantine & Isolation</div>
+        <div class="stat-value" id="stat-quarantine">0 IN QUARANTINE</div>
+        <div style="font-size:11px; color:var(--text-muted);" id="stat-quarantine-sub">Preserving independent tasks</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Replay Digest & Outcome</div>
+        <div class="stat-value" id="stat-digest">0x00000000</div>
+        <div style="font-size:11px; color:var(--text-muted);" id="stat-outcome">IN PROGRESS</div>
+      </div>
+    </section>
+
+    <!-- Mid Section: Event Slots & Peripherals -->
+    <section style="display:grid; grid-template-columns: 2fr 1fr; gap:16px;">
+      <!-- Active Event Slots Table -->
+      <div class="card">
+        <div class="card-title">
+          <span>Active Event Slots & Gate A Dispatchability</span>
+          <span style="font-size:11px; font-weight:normal; color:var(--text-muted);">QMAX=16, XMAX=4 (Zero-Heap)</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Slot</th>
+                <th>Gen</th>
+                <th>EventRef</th>
+                <th>TxID</th>
+                <th>State</th>
+                <th>Periph</th>
+                <th>Crit</th>
+                <th>Quarantined</th>
+                <th>Gate A Eligible</th>
+              </tr>
+            </thead>
+            <tbody id="slots-table-body">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No events admitted yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Virtual Peripherals Status -->
+      <div class="card">
+        <div class="card-title">
+          <span>Virtual Peripherals</span>
+          <span class="badge badge-cyan">I2C / SPI / UART</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Peripheral</th>
+                <th>Status</th>
+                <th>Fault Class</th>
+                <th>Op Seq</th>
+              </tr>
+            </thead>
+            <tbody id="periph-table-body">
+              <tr><td>I2C0</td><td>READY</td><td>NONE</td><td>0</td></tr>
+              <tr><td>SPI0</td><td>READY</td><td>NONE</td><td>0</td></tr>
+              <tr><td>UART0</td><td>READY</td><td>NONE</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="authority-note">
+          <b>Non-authoritative mirror:</b> Peripheral models reflect environmental observations only; the C reference runtime alone decides recovery actions.
+        </div>
+      </div>
+    </section>
+
+    <!-- Lower Section: Trace Correlation Dual-View -->
+    <section class="trace-section">
+      <!-- Wrapper Trace (Virtual System) -->
+      <div class="card">
+        <div class="card-title">
+          <span>Wrapper / Environment Trace</span>
+          <span style="font-size:11px; color:var(--text-muted);" id="wrapper-trace-count">0 records</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Wrap#</th>
+                <th>Step</th>
+                <th>Key</th>
+                <th>EventRef</th>
+                <th>Periph</th>
+                <th>TxID</th>
+                <th>Action</th>
+                <th>Outcome</th>
+                <th>Runtime Span</th>
+              </tr>
+            </thead>
+            <tbody id="wrapper-trace-body">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No wrapper records</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted);">
+          Hover or click on any wrapper record to highlight the authoritative C runtime trace records it initiated.
+        </div>
+      </div>
+
+      <!-- Authoritative C Runtime Trace -->
+      <div class="card">
+        <div class="card-title">
+          <span>Authoritative C Runtime Trace (TraceRecord)</span>
+          <span style="font-size:11px; color:var(--text-muted);" id="runtime-trace-count">0 records</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Seq</th>
+                <th>EpID</th>
+                <th>EventRef</th>
+                <th>TxID</th>
+                <th>Obs</th>
+                <th>ActIdx</th>
+                <th>State</th>
+                <th>Action</th>
+                <th>Outcome</th>
+              </tr>
+            </thead>
+            <tbody id="runtime-trace-body">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No runtime trace records</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="authority-note">
+          <b>Ground Truth:</b> These records are generated directly by <code style="font-family:var(--font-mono); color:#a5b4fc;">ref_runtime.c</code>. The UI does not fabricate, alter, or infer any runtime record.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>
+      <b>Embedded Runtime Resilience</b> — Research Checkpoint K.7 (Professor Demonstrator)
+    </div>
+    <div style="font-family:var(--font-mono); font-size:11px;">
+      Architecture: UI → Virtual System (K.6) → C Reference Runtime (ref_runtime.c)
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================================
+     * K.7 Professor-Facing Demonstrator Logic
+     * Preserves strict runtime authority: all data originates from C binary.
+     * ========================================================================= */
+
+    let scenariosData = null;
+    let currentScenarioId = 'S01';
+    let currentStep = 0;
+    let maxSteps = 7;
+    let currentVariant = 4;
+    let playInterval = null;
+    let isLiveBackend = false;
+
+    // DOM Elements
+    const scenarioSelect = document.getElementById('scenario-select');
+    const variantSelect = document.getElementById('variant-select');
+    const scenarioIdBadge = document.getElementById('scenario-id-badge');
+    const scenarioDescHeader = document.getElementById('scenario-desc-header');
+    const scenarioSummaryText = document.getElementById('scenario-summary-text');
+    const stepCounter = document.getElementById('step-counter');
+    const stepSlider = document.getElementById('step-slider');
+    const sliderCurrLabel = document.getElementById('slider-curr-label');
+    const modeBadge = document.getElementById('mode-badge');
+
+    const btnReset = document.getElementById('btn-reset');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnPlay = document.getElementById('btn-play');
+    const btnRun = document.getElementById('btn-run');
+
+    const statEpisode = document.getElementById('stat-episode');
+    const statEpisodeSub = document.getElementById('stat-episode-sub');
+    const statDecision = document.getElementById('stat-decision');
+    const statDecisionSub = document.getElementById('stat-decision-sub');
+    const statQuarantine = document.getElementById('stat-quarantine');
+    const statQuarantineSub = document.getElementById('stat-quarantine-sub');
+    const statDigest = document.getElementById('stat-digest');
+    const statOutcome = document.getElementById('stat-outcome');
+
+    const slotsTableBody = document.getElementById('slots-table-body');
+    const periphTableBody = document.getElementById('periph-table-body');
+    const wrapperTraceBody = document.getElementById('wrapper-trace-body');
+    const runtimeTraceBody = document.getElementById('runtime-trace-body');
+    const wrapperTraceCount = document.getElementById('wrapper-trace-count');
+    const runtimeTraceCount = document.getElementById('runtime-trace-count');
+
+    // Pipeline Nodes
+    const pipeNodes = {
+      env: document.getElementById('pipe-env'),
+      admit: document.getElementById('pipe-admit'),
+      fault: document.getElementById('pipe-fault'),
+      policy: document.getElementById('pipe-policy'),
+      apply: document.getElementById('pipe-apply'),
+      release: document.getElementById('pipe-release'),
+      trace: document.getElementById('pipe-trace')
+    };
+
+    async function init() {
+      // 1. Check if backend API is reachable
+      try {
+        const res = await fetch('/api/status', { cache: 'no-store' });
+        if (res.ok) {
+          const status = await res.json();
+          if (status.c_binary_found) {
+            isLiveBackend = true;
+            modeBadge.textContent = 'LIVE C BINARY';
+            modeBadge.className = 'badge badge-success';
+          }
+        }
+      } catch (e) {
+        isLiveBackend = false;
+      }
+
+      // 2. Load pre-exported scenarios_data.json as default/fallback data
+      try {
+        const res = await fetch('scenarios_data.json', { cache: 'no-store' });
+        if (res.ok) {
+          scenariosData = await res.json();
+        }
+      } catch (e) {
+        console.warn('Could not load static scenarios_data.json:', e);
+      }
+
+      // 3. Attach listeners
+      scenarioSelect.addEventListener('change', onScenarioChange);
+      variantSelect.addEventListener('change', onVariantChange);
+      btnReset.addEventListener('click', () => setStep(0));
+      btnPrev.addEventListener('click', () => setStep(currentStep - 1));
+      btnNext.addEventListener('click', () => setStep(currentStep + 1));
+      btnRun.addEventListener('click', () => setStep(maxSteps));
+      btnPlay.addEventListener('click', togglePlay);
+      stepSlider.addEventListener('input', (e) => setStep(parseInt(e.target.value, 10)));
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') setStep(currentStep + 1);
+        if (e.key === 'ArrowLeft') setStep(currentStep - 1);
+        if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+      });
+
+      // Load initial scenario
+      loadScenario(currentScenarioId);
+    }
+
+    function onScenarioChange() {
+      stopPlay();
+      currentScenarioId = scenarioSelect.value;
+      loadScenario(currentScenarioId);
+    }
+
+    function onVariantChange() {
+      currentVariant = parseInt(variantSelect.value, 10);
+      document.getElementById('variant-badge').textContent = 'P' + currentVariant;
+      // Refresh current step with new variant
+      renderStep(currentStep);
+    }
+
+    function loadScenario(scId) {
+      currentScenarioId = scId;
+      scenarioIdBadge.textContent = scId;
+
+      if (scenariosData && scenariosData.scenarios && scenariosData.scenarios[scId]) {
+        const sc = scenariosData.scenarios[scId];
+        scenarioDescHeader.textContent = sc.name + ' — ' + sc.description;
+        scenarioSummaryText.textContent = sc.description;
+        maxSteps = sc.step_count;
+        stepSlider.max = maxSteps;
+      }
+
+      currentStep = 0;
+      setStep(0);
+    }
+
+    async function setStep(step) {
+      if (step < 0) step = 0;
+      if (step > maxSteps) step = maxSteps;
+      currentStep = step;
+
+      stepSlider.value = step;
+      stepCounter.textContent = `Step ${step} / ${maxSteps}`;
+      sliderCurrLabel.textContent = `STEP ${step}`;
+
+      btnPrev.disabled = (step === 0);
+      btnNext.disabled = (step === maxSteps);
+
+      await renderStep(step);
+    }
+
+    async function renderStep(step) {
+      let state = null;
+
+      // Prefer live backend if available and custom variant is selected
+      if (isLiveBackend) {
+        try {
+          const res = await fetch(`/api/step?scenario=${currentScenarioId}&step=${step}&variant=${currentVariant}`);
+          if (res.ok) {
+            state = await res.json();
+          }
+        } catch (e) {
+          console.warn('Backend fetch failed, falling back to static data:', e);
+        }
+      }
+
+      // Fallback to offline timeline data
+      if (!state && scenariosData && scenariosData.scenarios[currentScenarioId]) {
+        const timeline = scenariosData.scenarios[currentScenarioId].timeline;
+        if (timeline && timeline[step]) {
+          state = timeline[step];
+        }
+      }
+
+      if (!state) return;
+
+      // Update UI with authoritative state
+      updatePipeline(state);
+      updateDashboard(state);
+      updateSlotsTable(state);
+      updatePeriphTable(state);
+      updateTraces(state);
+    }
+
+    function updatePipeline(state) {
+      // Clear active on all nodes
+      Object.values(pipeNodes).forEach(n => n.classList.remove('active'));
+
+      if (state.step_index === 0) {
+        pipeNodes.env.classList.add('active');
+        return;
+      }
+
+      const stepKind = state.last_executed_step ? state.last_executed_step.kind : '';
+      if (stepKind === 'VSTEP_ADMIT') {
+        pipeNodes.admit.classList.add('active');
+      } else if (stepKind === 'VSTEP_START_FAULT') {
+        pipeNodes.fault.classList.add('active');
+      } else if (stepKind === 'VSTEP_APPLY_FAULT') {
+        pipeNodes.policy.classList.add('active');
+        pipeNodes.apply.classList.add('active');
+      } else if (stepKind === 'VSTEP_DRAIN') {
+        pipeNodes.release.classList.add('active');
+        pipeNodes.trace.classList.add('active');
+      } else {
+        pipeNodes.trace.classList.add('active');
+      }
+    }
+
+    function updateDashboard(state) {
+      // Episode
+      if (state.episode && state.episode.in_use) {
+        statEpisode.innerHTML = `<span style="color:#f59e0b;">EPISODE #${state.episode.episode_id}</span>`;
+        statEpisodeSub.textContent = `Attempt ${state.episode.attempt_count} / 4 | Target: ${state.episode.target_slot}:${state.episode.target_gen}`;
+      } else {
+        statEpisode.textContent = 'IDLE';
+        statEpisodeSub.textContent = 'No active fault episode';
+      }
+
+      // Decision
+      if (state.episode && state.episode.in_use && state.episode.policy_action !== 'ACT_NONE') {
+        let col = '#a5b4fc';
+        if (state.episode.policy_action === 'ACT_RETRY') col = '#38bdf8';
+        if (state.episode.policy_action === 'ACT_REINIT_OR_RESET') col = '#f59e0b';
+        if (state.episode.policy_action === 'ACT_ESCALATE') col = '#ef4444';
+        statDecision.innerHTML = `<span style="color:${col};">${state.episode.policy_action}</span>`;
+        statDecisionSub.textContent = `Quarantine: ${state.episode.quarantine_required ? 'YES' : 'NO'} | Terminal: ${state.episode.terminal ? 'YES' : 'NO'}`;
+      } else {
+        statDecision.textContent = 'ACT_NONE';
+        statDecisionSub.textContent = 'Awaiting policy decision';
+      }
+
+      // Quarantine
+      const quarantined = state.active_slots.filter(s => s.quarantined);
+      if (quarantined.length > 0) {
+        statQuarantine.innerHTML = `<span style="color:#f59e0b;">${quarantined.length} QUARANTINED</span>`;
+        statQuarantineSub.textContent = `Target slot ${quarantined.map(s => s.slot_id).join(', ')} isolated`;
+      } else {
+        statQuarantine.textContent = '0 IN QUARANTINE';
+        statQuarantineSub.textContent = 'All admitted tasks executable';
+      }
+
+      // Digest & Outcome
+      statDigest.textContent = state.digest;
+      if (state.is_complete) {
+        let badgeClass = state.outcome_str === 'OUTCOME_SUCCESS' ? 'badge-success' : 'badge-danger';
+        statOutcome.innerHTML = `<span class="badge ${badgeClass}">${state.outcome_str}</span>`;
+      } else {
+        statOutcome.innerHTML = `<span class="badge badge-primary">STEP ${state.step_index} / ${state.step_count}</span>`;
+      }
+    }
+
+    function updateSlotsTable(state) {
+      if (!state.active_slots || state.active_slots.length === 0) {
+        slotsTableBody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No events admitted yet</td></tr>';
+        return;
+      }
+
+      let html = '';
+      state.active_slots.forEach(s => {
+        let stateBadgeClass = 'status-queued';
+        if (s.state === 'ST_COMPLETED') stateBadgeClass = 'status-completed';
+        else if (s.quarantined) stateBadgeClass = 'status-quarantined';
+        else if (s.state === 'ST_TERMINAL_ESCALATE' || s.state === 'ST_DISCARDED') stateBadgeClass = 'status-escalated';
+
+        html += `
+          <tr>
+            <td><b>${s.slot_id}</b></td>
+            <td>${s.generation}</td>
+            <td><code>${s.ref_str}</code></td>
+            <td>${s.tx_id}</td>
+            <td><span class="status-pill ${stateBadgeClass}">${s.state}</span></td>
+            <td>${s.peripheral}</td>
+            <td>${s.criticality}</td>
+            <td>${s.quarantined ? '<span style="color:#f59e0b;font-weight:700;">YES</span>' : '<span style="color:#94a3b8;">NO</span>'}</td>
+            <td>${s.eligible ? '<span style="color:#10b981;font-weight:700;">ELIGIBLE</span>' : '<span style="color:#ef4444;font-weight:700;">BLOCKED</span>'}</td>
+          </tr>
+        `;
+      });
+      slotsTableBody.innerHTML = html;
+    }
+
+    function updatePeriphTable(state) {
+      if (!state.peripherals || state.peripherals.length === 0) return;
+      let html = '';
+      state.peripherals.forEach(p => {
+        let statCol = '#94a3b8';
+        if (p.status === 'SUCCESS') statCol = '#10b981';
+        if (p.status === 'TIMEOUT' || p.status === 'NACK') statCol = '#f59e0b';
+        if (p.status === 'PERSISTENT_FAILURE') statCol = '#ef4444';
+
+        html += `
+          <tr>
+            <td><b>${p.name}</b></td>
+            <td><span style="color:${statCol}; font-weight:700;">${p.status}</span></td>
+            <td>${p.fault_class !== 'NONE' ? '<span style="color:#ef4444;">' + p.fault_class + '</span>' : 'NONE'}</td>
+            <td>${p.op_seq}</td>
+          </tr>
+        `;
+      });
+      periphTableBody.innerHTML = html;
+    }
+
+    function updateTraces(state) {
+      // Wrapper Trace
+      wrapperTraceCount.textContent = `${state.wrapper_trace ? state.wrapper_trace.length : 0} records`;
+      if (!state.wrapper_trace || state.wrapper_trace.length === 0) {
+        wrapperTraceBody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No wrapper records</td></tr>';
+      } else {
+        let wHtml = '';
+        state.wrapper_trace.forEach((w, idx) => {
+          wHtml += `
+            <tr id="wrap-row-${idx}" 
+                onmouseenter="highlightRuntimeTrace(${w.rt_first}, ${w.rt_last})"
+                onmouseleave="clearTraceHighlights()"
+                style="cursor:pointer;">
+              <td>#${w.wrap_seq}</td>
+              <td>${w.step_seq}</td>
+              <td>K${w.key}</td>
+              <td><code>${w.slot_id}:${w.generation}</code></td>
+              <td>${w.peripheral}</td>
+              <td>${w.tx_id}</td>
+              <td>${w.action}</td>
+              <td>${w.outcome}</td>
+              <td><span class="badge badge-cyan" style="font-size:10px;">RT ${w.rt_first}..${w.rt_last}</span></td>
+            </tr>
+          `;
+        });
+        wrapperTraceBody.innerHTML = wHtml;
+      }
+
+      // Runtime Trace
+      runtimeTraceCount.textContent = `${state.runtime_trace ? state.runtime_trace.length : 0} records`;
+      if (!state.runtime_trace || state.runtime_trace.length === 0) {
+        runtimeTraceBody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No runtime trace records</td></tr>';
+      } else {
+        let rHtml = '';
+        state.runtime_trace.forEach(r => {
+          rHtml += `
+            <tr id="rt-row-${r.seq}">
+              <td><b>#${r.seq}</b></td>
+              <td>${r.episode_id}</td>
+              <td><code>${r.slot_id}:${r.generation}</code></td>
+              <td>${r.tx_id}</td>
+              <td>${r.obs_seq}</td>
+              <td>${r.action_index}</td>
+              <td>${r.state}</td>
+              <td>${r.action}</td>
+              <td>${r.outcome}</td>
+            </tr>
+          `;
+        });
+        runtimeTraceBody.innerHTML = rHtml;
+      }
+    }
+
+    // Highlight runtime trace rows when hovering over wrapper trace row
+    window.highlightRuntimeTrace = function(first, last) {
+      if (first === 0 && last === 0) return;
+      for (let s = first; s <= last; ++s) {
+        const row = document.getElementById(`rt-row-${s}`);
+        if (row) row.classList.add('highlighted');
+      }
+    };
+
+    window.clearTraceHighlights = function() {
+      document.querySelectorAll('#runtime-trace-body tr.highlighted').forEach(r => {
+        r.classList.remove('highlighted');
+      });
+    };
+
+    function togglePlay() {
+      if (playInterval) {
+        stopPlay();
+      } else {
+        startPlay();
+      }
+    }
+
+    function startPlay() {
+      btnPlay.textContent = '⏸ Pause';
+      btnPlay.classList.add('btn-primary');
+      if (currentStep >= maxSteps) setStep(0);
+      playInterval = setInterval(() => {
+        if (currentStep < maxSteps) {
+          setStep(currentStep + 1);
+        } else {
+          stopPlay();
+        }
+      }, 1000);
+    }
+
+    function stopPlay() {
+      if (playInterval) {
+        clearInterval(playInterval);
+        playInterval = null;
+      }
+      btnPlay.textContent = '▶ Play';
+      btnPlay.classList.remove('btn-primary');
+    }
+
+    // Initialize application
+    init();
+  </script>
+</body>
+</html>

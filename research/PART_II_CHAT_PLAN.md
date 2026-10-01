@@ -93,7 +93,23 @@ Status:
 - K.4: completed
 - K.5: completed
 - K.6: VERIFIED AND MERGED
-- K.7: NOT STARTED
+- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.8: NOT STARTED
 
-K.7 is now the active checkpoint: Professor-Facing UI Implementation.
+## K.7 completion update — 2026-10-01
+
+K.7 Professor-Facing UI is COMPLETE and IMPLEMENTATION VERIFIED on `feature/k7-professor-ui-2026-10-01`.
+
+Implemented surface:
+- `demo/index.html`: Web front-end demonstrator with scenario selection, execution controls, pipeline indicator, live event slot inspector, peripheral mirror, and interactive trace correlation.
+- `demo/server.py`: Lightweight Python local server proxying requests to the compiled C binary.
+- `demo/scenarios_data.json`: Offline authoritative dataset allowing instant in-browser demonstration without external tooling.
+- `reference/virtual/src/virtual_demo_cli.c`: CLI tool for JSON state serialization, step execution, and verification.
+- `reference/virtual/include/virtual_scenarios.h` & `src/virtual_scenarios.c`: Canonical scenario registry for S01, S02, S05, S06, S08, S14.
+- `demo/test_ui_contracts.py`: Comprehensive test suite verifying contract integrity, policy authority, trace correlation, and determinism.
+- CTest suite passing 5/5 targets (100%).
+
+K.7 preserves single-policy authority in `ref_runtime.c`. No recovery logic or peripheral callback was added to the UI.
+Next checkpoint after PR merge: K.8 (Matched Baseline vs Proposed Software Validation).
+
 
