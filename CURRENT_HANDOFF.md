@@ -487,3 +487,52 @@ K.10 has NOT been started.
 
 
 
+
+
+
+
+---
+
+# ACTIVE HANDOFF — K.9.2 (2026-10-01)
+
+## Canonical starting state
+- K.9 remains historically CLOSED.
+- Canonical `exp` closure is `72edc4f86986c868b2e7102c192441d069c6dba7`.
+- The K.9.2 design artifact is `research/phase2_k9_2_p4_advantage_novelty_design.md`.
+- Historical K.9/K.8 records are preserved and must not be rewritten or deleted.
+
+## Why K.9.2 exists
+The project must not jump from methodology lock to final conclusion. K.9.2 locks the complete search space for meaningful P4 advantage and the combination-level novelty investigation.
+
+## K.9.2 only
+The next ChatGPT chat must execute **K.9.2 — P4 Advantage & Novelty Investigation Design Lock** and nothing beyond it.
+
+It must:
+1. read the current continuity state and K.9.2 design;
+2. audit existing measurements/instrumentation against the candidate metric matrix;
+3. map current W01-W14 and S01/S02/S05/S06/S08/S14 coverage against fault/history/workload/resource/association dimensions;
+4. identify missing but valid differentiating combinations, especially compound conditions;
+5. define exact metric semantics and attribution rules;
+6. identify which measurements are impossible to make faithfully in the current software model;
+7. define the deeper prior-art search matrix;
+8. define falsification/negative-result criteria;
+9. create/update `research/chat_records/chat_k9_2_record.md`;
+10. update continuity files and the next-chat prompt for K.10;
+11. commit and report exact branch, commit, tests, and clean/dirty status.
+
+## K.9.2 hard boundary
+Do NOT:
+- modify Gates A-E;
+- modify `ref_runtime.c` or `ref_runtime.h`;
+- redesign P4;
+- add a new policy variant;
+- run the decisive K.10 experiment matrix;
+- claim P4 superiority;
+- claim novelty/patentability;
+- perform hardware work.
+
+## K.10 after K.9.2
+K.10 is the **P4 Advantage & Novelty Investigation**, not the final conclusion. It will execute the locked experiment and prior-art plan and produce metric-level evidence. Final synthesis/hardware handoff comes later.
+
+## Antigravity
+Antigravity is the execution agent. ChatGPT defines and audits the scope. The K.9.2 prompt must explicitly tell Antigravity to inspect first, preserve history, avoid inventing metrics or P4 behavior, and stop at the K.9.2 boundary.
