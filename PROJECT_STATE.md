@@ -482,3 +482,28 @@ K.9.2 also defines the deeper prior-art search: individual elements, pairwise/hi
 K.9.2 is design/measurement/search planning only. K.10 will execute the locked P4 advantage and novelty investigation. Neither stage is permitted to assume that P4 will prove superior or novel.
 
 Antigravity remains the repository execution agent; ChatGPT remains the research-control/audit layer. Historical K.1-K.9 records must remain intact.
+
+
+## 2026-10-01 — K.9.2 COMPLETE
+
+K.9.2 — P4 Advantage & Novelty Investigation Design Lock is complete as a repository-audited design checkpoint.
+
+### Verified state
+- `exp` starting HEAD audited: `50951ed32fd7ba7ee27ffdb4d9cb9658e4322062`.
+- K.9 closure remains historical at `d1e0dcba836320526686806980572ef3a5a6a5cb`.
+- `reference/src/ref_runtime.c` unchanged from K.9.
+- `reference/include/ref_runtime.h` unchanged from K.9.
+- Gates A-E remain frozen.
+- `policy_decide()` remains the policy authority.
+- `runtime_apply_policy()` remains the transition authority.
+- No new policy, recovery engine, scheduler, or EventRef mechanism was introduced.
+
+### K.9.2 result
+The repository now contains an auditable 21-dimension advantage matrix, scenario-combination coverage/gaps, compound-case priorities, no-difference controls, attribution locks, measurement admissibility rules, novelty-search decomposition, and falsification criteria.
+
+K.9.2 does **not** establish P4 superiority, statistical superiority, hardware superiority, novelty, patentability or universal generalization.
+
+### Active checkpoint
+**K.10 — P4 Advantage & Novelty Investigation**
+
+K.10 is responsible for executing the locked experiment/search design. Final software conclusion and hardware-validation handoff remain downstream of K.10 evidence.

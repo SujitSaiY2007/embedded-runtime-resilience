@@ -536,3 +536,32 @@ K.10 is the **P4 Advantage & Novelty Investigation**, not the final conclusion. 
 
 ## Antigravity
 Antigravity is the execution agent. ChatGPT defines and audits the scope. The K.9.2 prompt must explicitly tell Antigravity to inspect first, preserve history, avoid inventing metrics or P4 behavior, and stop at the K.9.2 boundary.
+
+
+## K.9.2 completion handoff — 2026-10-01
+
+K.9.2 is COMPLETE. Historical K.9 remains unchanged.
+
+### Exact K.10 starting point
+- Repository: `SujitSaiY2007/embedded-runtime-resilience`
+- Branch: `exp`
+- K.9.2 completion commit: **to be reported after this checkpoint commit is created**
+- Starting state for K.10: the commit produced by this K.9.2 checkpoint.
+- Gates A-E: frozen.
+- `ref_runtime.c/.h`: unchanged.
+- K.10 must read the K.9.2 design/audit and all continuity files before any experiment.
+
+### K.10 scope
+Execute only the locked P4 Advantage & Novelty Investigation:
+- implement approved non-invasive measurements only;
+- run differentiating cases, negative controls, no-difference controls and baseline-advantage cases;
+- preserve all attribution locks;
+- perform the deeper adversarial prior-art search;
+- report metric-level evidence and trade-offs;
+- do not convert absence of a reference into a novelty claim.
+
+### Antigravity execution role
+Antigravity remains the designated repository execution agent for K.10. It must inspect the exact K.9.2 starting commit, working-tree state and continuity files before modifications, and return exact branch/commit/tests/status. It must not invent P4 behavior or measurements. If a quantity cannot be measured faithfully, record it as unavailable and use only a defensible software-level alternative.
+
+### Stop condition
+Do not proceed to final synthesis or hardware-validation handoff merely because K.10 experiments run. Those conclusions require the K.10 evidence.

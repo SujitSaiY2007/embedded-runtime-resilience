@@ -399,3 +399,21 @@ K.10 is thereby redefined as execution of the locked P4 Advantage & Novelty Inve
 **Reason:** the K.8/K.9 evidence establishes reproducibility and bounded comparative observations but does not establish universal P4 superiority or novelty. A defensible research process must test meaningful alternatives including latency, transition cost, work preservation, resource cost, decision quality, compound conditions and trade-offs, while separately investigating prior art.
 
 Historical K.1-K.9 records remain immutable; this is a forward-looking scope decision.
+
+
+## D-113 — K.9.2 P4 Advantage & Novelty Investigation Design Lock completed
+**Status:** Accepted
+
+K.9.2 is complete as a design/audit checkpoint. The repository now locks:
+1. a 21-dimension metric/advantage matrix;
+2. admissible, instrumentable and inadmissible measurement classes;
+3. W01-W14 and S01/S02/S05/S06/S08/S14 coverage and identified gaps;
+4. compound-fault, history, load, queue-position, contention and alternating-fault case families for K.10;
+5. negative/no-difference controls and baseline-advantage cases;
+6. attribution locks for shared quarantine, S06/P2, capacity-confounded W09/W10 and host-only evidence;
+7. the novelty search decomposition across individual, pairwise, higher-order and whole-combination disclosures;
+8. falsification criteria for both performance advantage and integrated novelty.
+
+No K.10 experiment or final prior-art conclusion is included in K.9.2.
+
+**Reason:** K.9/K.8 evidence established reproducibility and bounded comparative observations but did not establish superiority or novelty. The project therefore requires a non-predetermined investigation before final synthesis.

@@ -473,3 +473,187 @@ Then commit/push the K.9.2 work and report:
 - exact K.10 starting point.
 
 STOP. Do not begin K.10 in this chat.
+
+
+# ACTIVE NEXT-CHAT PROMPT — K.10: P4 Advantage & Novelty Investigation
+
+Continue the canonical project in:
+
+`SujitSaiY2007/embedded-runtime-resilience`
+
+Start from the exact post-K.9.2 `exp` commit reported by the previous chat. Do not restart K.1-K.9. Do not execute any later final-synthesis/hardware-handoff checkpoint.
+
+## Mission
+
+Execute **K.10 — P4 Advantage & Novelty Investigation** only.
+
+K.9.2 established a non-predetermined design. K.10 must now test it. A positive P4 result is not assumed.
+
+## Read first
+
+1. `PROJECT_MANUAL.md`
+2. `PROJECT_STATE.md`
+3. `CURRENT_HANDOFF.md`
+4. `DECISION_LOG.md`
+5. `CHAT_CONTINUITY_PROTOCOL.md`
+6. `research/PART_II_CHAT_PLAN.md`
+7. `research/phase2_k9_methodology_lock.md`
+8. `research/phase2_k8_matched_baseline_validation.md`
+9. `research/phase2_k9_2_p4_advantage_novelty_design.md`
+10. `research/chat_records/chat_k9_record.md`
+11. `research/chat_records/chat_k9_2_record.md`
+12. `research/novelty_investigation.md`
+13. `reference/include/ref_runtime.h`
+14. `reference/src/ref_runtime.c`
+15. relevant host/virtual experiment and scenario sources
+
+## Antigravity execution requirement
+
+Use **Antigravity as the repository execution agent**.
+
+Before any modification Antigravity must:
+- verify latest `exp` HEAD and working-tree state;
+- report the exact starting commit;
+- read the K.9.2 lock and continuity files;
+- verify `ref_runtime.c/.h` integrity;
+- identify the minimum instrumentation required.
+
+Antigravity must not invent P4 behavior, alter shared semantics merely to improve a metric, or create a second recovery policy.
+
+## A. Execute the approved measurement plan
+
+Use the K.9.2 classifications.
+
+### Execute directly where already supported
+- terminal outcomes;
+- recovery attempts/actions;
+- authoritative trace transitions;
+- stale/association outcomes;
+- deterministic replay;
+- host/reference static accounting;
+- virtual step counts where explicitly labelled as model metrics.
+
+### Add only non-invasive instrumentation where required
+Potential additions:
+- explicit logical transition counters;
+- logical stage-distance counters;
+- work-disposition accounting;
+- policy-decision operation counters;
+- scenario oracle labels.
+
+Do not convert any of these into MCU timing, RTOS context-switch, RAM/Flash, energy or electrical claims.
+
+### Do not implement
+- hardware timing;
+- physical fault models;
+- RTOS context-switch counters not represented by the model;
+- MCU resource claims;
+- a redesigned P4 policy;
+- a new baseline mechanism.
+
+## B. Run the locked matched scenario families
+
+At minimum include:
+1. persistent fault + repeated history + dependent queued work;
+2. persistent fault + high queue load;
+3. intermittent same-resource fault + prior recovery;
+4. prior recovery failure + new fault;
+5. prior escalation + new fault;
+6. ambiguous association + high workload;
+7. fault during recovery + dependency chain;
+8. mixed critical/deferable work + persistent fault;
+9. repeated fault + recovery/resource contention;
+10. fault after successful reinitialization;
+11. alternating fault classes;
+12. early/middle/late queue-position controls;
+13. low-load/high-load matched controls;
+14. explicit no-difference controls;
+15. baseline-advantage/cost controls.
+
+Preserve W09/W10 `capacity_confounded=1`.
+
+## C. Attribution rules
+
+Do not claim a P4 advantage from:
+- shared exact-event quarantine;
+- S06 persistent-fault recovery alone;
+- capacity-confounded W09/W10;
+- deterministic behavior shared by all policies;
+- any metric unsupported by the software model.
+
+P2 S06 must retain digest `0xCDAB2617`.
+
+Classify every result only as:
+- P4 advantage;
+- P4 neutral;
+- P4 trade-off/cost;
+- baseline advantage;
+- inconclusive.
+
+Do not create an overall score, ranking, tier or composite winner.
+
+## D. Compound interaction analysis
+
+Prioritize interactions among:
+- history × fault persistence;
+- history × queue pressure;
+- association ambiguity × workload;
+- fault during recovery × dependency;
+- recovery failure × subsequent fault;
+- criticality × persistent fault;
+- resource contention × repeated fault.
+
+Use matched controls to determine whether the interaction actually changes policy behavior.
+
+## E. Novelty/prior-art investigation
+
+Perform the deeper adversarial search across:
+- academic literature;
+- patents/patent families;
+- standards/technical systems;
+- embedded/RTOS/bare-metal implementations;
+- peripheral/driver recovery;
+- event/message/transaction quarantine;
+- safety-critical fault management.
+
+Search:
+1. individual elements;
+2. pairwise combinations;
+3. three-or-more-element combinations;
+4. whole-combination disclosures.
+
+For each relevant reference record:
+- what elements it discloses;
+- what it does not disclose;
+- technical environment;
+- overlap;
+- whether it weakens/falsifies the integrated hypothesis.
+
+Do not treat “no identical reference found” as proof of novelty. Keep novelty separate from inventive step/non-obviousness and legal patentability.
+
+## F. Required outputs
+
+Update/create:
+- `research/phase2_k10_p4_advantage_novelty_results.md`;
+- `research/chat_records/chat_k10_record.md`;
+- `research/PART_II_CHAT_PLAN.md`;
+- `PROJECT_STATE.md`;
+- `CURRENT_HANDOFF.md`;
+- `DECISION_LOG.md` if required;
+- `NEXT_CHAT_PROMPT.md` for the downstream final synthesis/hardware-validation checkpoint.
+
+Preserve K.1-K.9.2 historical records exactly.
+
+## Hard stop
+
+Do not:
+- claim universal P4 superiority;
+- claim novelty/patentability as established;
+- perform hardware experiments;
+- modify Gates A-E;
+- modify `ref_runtime.c/.h` unless a separately approved defect is proven and the checkpoint is explicitly re-scoped;
+- begin final software packaging/hardware handoff.
+
+K.10 is complete only when the repository contains auditable metric-level results, compound-interaction analysis, adversarial prior-art evidence, explicit limitations, and falsification outcomes.
+
+Then report exact branch, commit, tests/checks, runtime integrity, working-tree status and the exact downstream starting point. STOP.

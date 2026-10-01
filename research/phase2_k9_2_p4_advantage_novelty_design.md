@@ -243,3 +243,106 @@ K.10 must execute the locked **P4 Advantage & Novelty Investigation**:
 - produce an evidence-bounded result for both performance advantage and technical differentiation.
 
 A later checkpoint must perform final synthesis/hardware handoff only after K.10 evidence is complete. No K.10 result may be predetermined.
+
+
+## 13. K.9.2 execution audit — 2026-10-01
+
+### Starting-state verification
+
+- Repository: `SujitSaiY2007/embedded-runtime-resilience`
+- Branch: `exp`
+- Verified starting HEAD: `50951ed32fd7ba7ee27ffdb4d9cb9658e4322062`
+- Previous K.9 closure remains in history at `d1e0dcba836320526686806980572ef3a5a6a5cb`.
+- The current `exp` branch is eight commits ahead of that K.9 closure; the intervening commits are continuity/design updates, not a reopening of K.9.
+- `reference/src/ref_runtime.c` blob is unchanged from K.9: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`.
+- `reference/include/ref_runtime.h` blob is unchanged from K.9: `fbb7bb07bdb712fbadcde3d83bca19f82b5c8198`.
+- Gates A-E remain frozen. `policy_decide()` remains the decision authority and `runtime_apply_policy()` remains the transition authority.
+- No decisive K.10 experiment or final prior-art search is executed by K.9.2.
+
+### Measurement availability audit
+
+| # | Dimension | Current status | K.10 treatment |
+|---|---|---|---|
+| 1 | Outcome resilience | **Measurable now** from terminal outcome, stale-ref, active/unclosed and degradation fields | Use matched scenarios; include failure/no-difference controls |
+| 2 | Recovery efficiency | **Measurable now/partial**: attempt counts and actions exist; redundant-work semantics are not fully explicit | Add targeted repeated/failed-recovery cases; derive only from trace facts |
+| 3 | Recovery latency | **Not real-time measurable**; step/trace order exists but no physical clock | If useful, add logical stage-distance counters only; never call them MCU latency |
+| 4 | State-transition cost | **Partly measurable** from ordered trace lifecycle/action/outcome records | Define transition counting over authoritative trace states/actions |
+| 5 | Scheduler/context-switch cost | **Not faithfully measurable**; virtual scheduler is not an RTOS and trace records do not encode real context switches | Do not report context-switch counts; optionally report virtual step count as a separate model metric |
+| 6 | Work preservation | **Partial**: S01/S02 and trace evidence show preservation/blocking; systematic loss/re-execution accounting is incomplete | Add explicit work disposition accounting only if it can be derived without changing policy semantics |
+| 7 | Fault containment | **Partial/measurable for existing cases**: exact association, stale refs, ambiguous association and dependency blocking are observable | Expand contamination/isolation cases |
+| 8 | Retry efficiency | **Measurable now/partial** through attempt/action traces | Add cases for redundant retries, retry-before-escalation and prior-failure history |
+| 9 | Escalation quality | **Partial**: terminal outcome and decision action are available; premature/delayed requires an explicit scenario oracle | Define predeclared expected-decision labels before execution |
+| 10 | Resource cost | **Partial**: static layout and trace/storage quantities exist; CPU cycles are not measured | Use host operation/step counters only if explicitly defined; no MCU-cycle inference |
+| 11 | Memory/static overhead | **Measurable as host/reference accounting**; not MCU RAM/Flash | Compare source-level/static object accounting; label as host/reference only |
+| 12 | Policy decision cost | **Not currently explicit** as bounded operation count | Add non-semantic decision-step instrumentation only if it does not alter policy behavior |
+| 13 | Resilience overhead | **Derivable** once benefit/cost metrics are defined | Report cost per successful recovery/contained fault without a composite score |
+| 14 | Decision accuracy | **Not directly established** because current scenarios lack a complete independent decision oracle | Define oracle-labeled cases before K.10; classify necessary/unnecessary actions |
+| 15 | Fault-class adaptability | **Partial**: current corpus covers several fault classes but not a systematic intermittent/alternating/recurring matrix | Add targeted fault-class sequences |
+| 16 | Workload/scheduling effects | **Partial**: queue, dependency, criticality and capacity cases exist; systematic load/position coverage is incomplete | Add matched low/high-load and early/middle/late-position controls |
+| 17 | Compound-fault interactions | **High-priority gap**: S14 is integrated but does not exhaust history/load/contention interactions | Add compound cases before interpreting any interaction advantage |
+| 18 | Graceful degradation | **Measurable now/partial** via W07/degrade outcomes | Add critical-vs-deferable and persistent-vs-transient controls |
+| 19 | Worst-case behavior | **Partly measurable** for attempts, transitions and trace size; latency/physical cost unavailable | Compute software-model maxima only |
+| 20 | Determinism/predictability | **Strongly measurable now** through replay/digest equality and bounded state | Treat as validation property, not assumed P4 advantage |
+| 21 | Complexity vs benefit | **Partial**: static accounting and existing behavior provide inputs, but benefit must be established first | K.10 must report explicit trade-offs rather than a composite winner |
+
+### Current scenario coverage
+
+The committed host workload corpus W01-W14 already spans independent preservation, ordered/coupled dependency behavior, retry/recovery, persistent recovery, degradation, ambiguous association, queue/episode capacity boundaries, stale EventRef reuse, association precision, criticality and mixed dependencies. The virtual demonstrator currently exposes S01, S02, S05, S06, S08 and S14.
+
+The following dimensions are therefore **represented but not exhaustively crossed**: fault recurrence/intermittency, previous recovery failure followed by a new fault, previous escalation followed by a new fault, systematic queue-position effects, systematic low/high load, recovery-resource contention, alternating fault classes, fault during recovery, and multi-fault dependency interactions.
+
+### Required K.10 case families
+
+K.10 must construct matched P0-P4 cases for:
+
+1. persistent fault + repeated history + dependent queued work;
+2. persistent fault + high queue load;
+3. intermittent same-resource fault + prior recovery;
+4. prior recovery failure + new fault;
+5. prior escalation + new fault;
+6. ambiguous association + high workload;
+7. fault during recovery + dependency chain;
+8. mixed critical/deferable workload + persistent fault;
+9. repeated fault + resource/recovery contention;
+10. fault after previous successful reinitialization;
+11. alternating fault classes on the same resource;
+12. early/middle/late fault position under otherwise matched inputs;
+13. low-load versus high-load matched controls;
+14. explicit no-difference controls where P4's additional context/history should not alter the outcome;
+15. cases where a simpler baseline may legitimately incur lower trace/decision cost or fewer recovery actions.
+
+No family is evidence of advantage until executed with the locked attribution rules.
+
+### Attribution locks reaffirmed
+
+- Exact-event quarantine is shared across P0-P4 in the current implementation; it is not a unique P4 benefit.
+- S06 recovery is shared by P1/P2/P3/P4; P2's authoritative digest remains `0xCDAB2617`.
+- W09/W10 remain `capacity_confounded=1` and cannot support policy-intelligence claims.
+- Host/reference memory and operation counts are not STM32U575 measurements.
+- Determinism is a validation property unless a controlled comparison demonstrates a policy-specific difference.
+- No overall score, ranking, tier, or composite winner will be used.
+
+### K.10 prior-art search lock
+
+Search separately for:
+
+- each individual mechanism;
+- every pairwise combination among association, history, recovery ladder, quarantine, dependency preservation, verification/release, and static bounded execution;
+- three-or-more-element combinations;
+- whole-combination disclosures in constrained embedded/MCU firmware.
+
+Search source families across:
+
+1. peer-reviewed academic literature and conference proceedings;
+2. patents and patent families;
+3. standards and technical architecture documents;
+4. bare-metal/RTOS/MCU implementations;
+5. peripheral-driver recovery;
+6. event/message/transaction queue quarantine or retention;
+7. safety-critical fault-management and selective recovery systems.
+
+The falsification target is not merely an identical title or diagram. A materially equivalent technical combination, or a set of closely linked references showing routine combination in the same field and purpose, weakens the integrated hypothesis and must be recorded.
+
+### K.9.2 completion state
+
+K.9.2 is a completed **design/audit checkpoint**. It does not contain decisive K.10 results. The next checkpoint is K.10 — P4 Advantage & Novelty Investigation.

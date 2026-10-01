@@ -201,3 +201,35 @@ A later checkpoint, after K.10 evidence is complete, will perform final synthesi
 
 ### Antigravity execution rule
 ChatGPT is the research-control/audit layer. Antigravity is the repository execution agent. Each chat must give Antigravity an exact bounded scope, require repository inspection from latest `exp`, preserve historical records, and return exact branch/commit/test/working-tree status. Antigravity must not invent new P4 behavior or a new policy merely to manufacture a measurable advantage.
+
+
+## K.9.2 completion update — 2026-10-01
+
+K.9.2 — P4 Advantage & Novelty Investigation Design Lock is COMPLETE as a design/audit checkpoint.
+
+Completed:
+- audited the current `exp` starting state;
+- preserved Gates A-E and the C reference runtime;
+- locked the 21-dimensional P4 advantage matrix;
+- separated currently measurable, partially measurable, instrumentable and inadmissible metrics;
+- mapped current W01-W14 and S01/S02/S05/S06/S08/S14 coverage;
+- identified the missing compound/history/load/contention case families for K.10;
+- reaffirmed quarantine, S06/P2, capacity-confound and host-only attribution locks;
+- locked negative/no-difference controls and baseline-advantage cases;
+- locked the element/pairwise/higher-order/whole-combination prior-art search structure;
+- locked falsification criteria.
+
+No decisive K.10 experiment, final prior-art investigation, hardware experiment, or superiority/novelty conclusion was performed.
+
+### K.10 — P4 Advantage & Novelty Investigation
+
+K.10 is now the active checkpoint. It executes the K.9.2 design rather than assuming a positive result.
+
+K.10 must:
+1. add only approved non-invasive measurement instrumentation;
+2. execute the matched advantage/interaction cases and controls;
+3. analyze metric-level benefits, neutral outcomes, costs/trade-offs and baseline-advantage cases;
+4. perform the deeper adversarial prior-art search;
+5. record evidence that strengthens, narrows or falsifies the advantage and integrated-novelty hypotheses.
+
+A later checkpoint will perform final synthesis/hardware-validation handoff only after K.10 evidence exists.
