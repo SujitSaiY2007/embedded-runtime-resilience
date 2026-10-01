@@ -126,6 +126,21 @@ Implemented surface:
 
 Next checkpoint: K.9 (Full Software Re-Verification + Methodology Lock).
 
+## K.9 completion update — 2026-10-01
+
+K.9 Full Software Re-Verification + Methodology Lock is IMPLEMENTATION VERIFIED on `feature/k9-methodology-lock-2026-10-01`.
+
+Implemented surface:
+- `research/phase2_k9_methodology_lock.md`: Formal methodology lock freezing experimental dimensions A through O, locking limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims), and clarifying scenario scope (S01–S14 vs 6-scenario demonstrator subset).
+- `research/chat_records/chat_k9_record.md`: Canonical chat record for K.9.
+- `DECISION_LOG.md`: Added architectural decision `D-110`.
+- Complete CTest suite passing 7/7 (100%).
+- Full 100-run baseline reproduction verified.
+- Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% unchanged.
+
+Next checkpoint: K.9 Merge into `exp` and transition to K.10 (Final Software Packaging & Research Conclusion).
+
+
 
 
 
