@@ -4,7 +4,7 @@ This directory contains the smallest executable host/reference prototype for the
 
 ## Current status
 
-**K.3 COMPLETE — host/reference final-synthesis checkpoint.** Gates A-E remain frozen. K.1/K.2 host verification and corpus validation are complete.
+**Host/reference foundation complete.** Gates A-E, K.1, K.2, and K.3 are complete; the active software phase adds a professor-facing demonstrator without changing this reference.
 
 ## Build and test
 
@@ -37,3 +37,10 @@ The runtime keeps a fixed trace pool and provides `trace_write_csv()` for determ
 ## Zero-heap audit
 
 There are no allocator calls in `include/`, `src/`, or `tests/`. The reference runtime uses fixed arrays and bounded records. Host-library behavior is not presented as MCU heap evidence.
+
+
+## Software demonstrator relationship
+
+`demo/index.html` is the presentation layer for the software proof of concept. This C reference remains the authoritative executable software model; the UI must not be treated as a replacement specification.
+
+The current software-phase methodology lock is recorded in `research/phase1_software_demonstrator_methodology_lock.md`.
