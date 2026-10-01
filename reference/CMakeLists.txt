@@ -11,3 +11,7 @@ target_link_libraries(reference_tests PRIVATE ref_runtime)
 target_compile_options(reference_tests PRIVATE -Wall -Wextra -Werror -pedantic)
 enable_testing()
 add_test(NAME reference_tests COMMAND reference_tests)
+
+add_executable(host_experiment experiments/host_experiment.c)
+target_link_libraries(host_experiment PRIVATE ref_runtime)
+target_compile_options(host_experiment PRIVATE -Wall -Wextra -Werror -pedantic)
