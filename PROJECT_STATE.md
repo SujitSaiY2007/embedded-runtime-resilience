@@ -404,9 +404,37 @@ Correlated Inspectable Trace
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: NOT STARTED
+- K.8: IMPLEMENTATION VERIFIED — READY FOR MERGE
 - K.9: NOT STARTED
 - K.10: NOT STARTED
+
+
+## 2026-10-01 — Chat K.8 complete: matched baseline validation verified
+
+K.8 implementation and verification are complete on focused branch `feature/k8-baseline-validation-2026-10-01`.
+
+### Evaluated surface
+1. **Host Experiment Corpus (70 runs):** 14 declarative workloads (W01–W14) evaluated across 5 policy variants (P0–P4).
+2. **Virtual Demonstrator Matrix (30 runs):** 6 canonical scenarios (S01, S02, S05, S06, S08, S14) evaluated across P0–P4.
+3. **Total evaluated runs:** 100 deterministic executions.
+
+### Key findings
+- **Persistent Faults (W06, S06):** Baseline P0 blindly retries twice and escalates to terminal failure (`OUTCOME_TERMINAL_ESCALATE`), while P1, P2, P3, and P4 progress to `ACT_REINIT_OR_RESET` on attempt 3, reinitialize the peripheral, and achieve recovery (`OUTCOME_SUCCESS`).
+- **Ambiguous Association (W12, S08):** Baseline P0 blindly retries unmapped targets yielding `OUTCOME_STALE_REF` and leaves episodes unclosed; P4 enforces exact association (`ctx->association == ASSOC_EXACT`), immediately failing closed safely to `OUTCOME_TERMINAL_ESCALATE` with episode closed and zero synthetic EventRefs.
+- **Graceful Degradation (W07):** P0 blindly escalates deferable work; P1–P4 cleanly transition deferable work to `TERMINAL_DEGRADE`.
+- **Work Preservation & Blocking (W01/S01, W02/S02):** Unassociated work continues execution; dependent work remains blocked in `ST_QUEUED` during quarantine across all variants.
+
+### Test suite status
+- CTest suite: 7/7 passed (100%):
+  1. `reference_tests` (Passed)
+  2. `host_experiment_replay` (Passed)
+  3. `virtual_system_tests` (Passed)
+  4. `virtual_demo_test` (Passed)
+  5. `virtual_baseline_tests` (Passed)
+  6. `virtual_ui_contracts_test` (Passed)
+  7. `matched_baseline_validation_test` (Passed)
+- Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` remain completely unchanged.
+
 
 
 
