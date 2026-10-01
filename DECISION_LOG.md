@@ -330,6 +330,20 @@ The K.8 matched baseline validation was executed across 100 deterministic runs:
 
 **Reason:** establishes controlled, reproducible comparative software evidence sufficient to evaluate the software resilience hypothesis prior to K.9 methodology lock.
 
+## D-109 — K.8 Matched Baseline Validation Merge into exp
+
+**Status:** Accepted
+
+The K.8 matched baseline validation was audited, verified, and merged into `exp` via PR #9 at merge commit `5590bf1`. Post-merge verification confirmed:
+1. Complete CTest suite passing 7/7 (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_baseline_tests`, `virtual_ui_contracts_test`, `matched_baseline_validation_test`.
+2. Deterministic execution of 100 runs (70 host runs + 30 demonstrator runs) verified identical to pre-merge evidence.
+3. Stable scenario digests preserved across all runs (S01: `0xB72131CB`, S02: `0xE8691374`, S05: `0xBDC168BD`, S06: P0 `0xFD5C2BA8` / P1-P4 `0xA123BB47`, S08: P0 `0x489DED5F` / P1-P4 `0x5A52628A`, S14: `0x9185616C`).
+4. Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` untouched; `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition; zero synthetic EventRefs.
+5. Known qualifications retained: W09/W10 `capacity_confounded=1` and P0–P3 `ablation_contract_valid=0`.
+
+**Reason:** locks the comparative baseline validation onto `exp` and formally closes K.8, clearing the path to K.9 full software re-verification and methodology lock.
+
+
 
 
 

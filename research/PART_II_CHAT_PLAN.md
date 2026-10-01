@@ -113,9 +113,9 @@ Implemented surface:
 
 K.7 preserves single-policy authority in `ref_runtime.c`. No recovery logic or peripheral callback was added to the UI.
 
-## K.8 completion update — 2026-10-01
+## K.8 completion and merge update — 2026-10-01
 
-K.8 Matched Baseline vs Proposed Software Validation is IMPLEMENTATION VERIFIED on `feature/k8-baseline-validation-2026-10-01`.
+K.8 Matched Baseline vs Proposed Software Validation is VERIFIED AND MERGED into `exp` (PR #9, merge commit `5590bf1`).
 
 Implemented surface:
 - `reference/experiments/evaluate_baselines.py`: Comprehensive comparative evaluation harness for 70 host runs (W01–W14 × P0–P4) and 30 virtual demonstrator runs (S01–S14 × P0–P4) = 100 total runs.
@@ -124,7 +124,8 @@ Implemented surface:
 - CTest suite expanded to 7 targets (100% passing).
 - Authority preserved: `ref_runtime.c` and `ref_runtime.h` unchanged.
 
-Next checkpoint after PR merge: K.9 (Full Software Re-Verification + Methodology Lock).
+Next checkpoint: K.9 (Full Software Re-Verification + Methodology Lock).
+
 
 
 

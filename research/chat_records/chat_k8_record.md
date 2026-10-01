@@ -93,9 +93,21 @@ Under frozen Gates A-E, evaluate the comparative performance of baseline policie
 ### Determinism
 - 100% reproducible digests verified across repeated runs for all workloads and scenarios across P0–P4.
 
+## Pull Request and Merge into exp
+
+- PR: #9 (`K.8: matched baseline validation`)
+- Source branch: `feature/k8-baseline-validation-2026-10-01` (`319068c`)
+- Target branch: `exp` (`d808436`)
+- Merge type: Non-fast-forward (`--no-ff`)
+- Merge commit: `5590bf1`
+- Post-merge verification on `exp`:
+  - CTest suite: 7/7 passed (100%)
+  - Baseline validation test suite (`evaluate_baselines.py --check`): 100 runs evaluated, all assertions passed.
+  - Working tree clean.
+
 ## K.8 exit status
 
-**`K.8 IMPLEMENTATION VERIFIED — READY FOR MERGE`**
+**`K.8 CLOSED — MERGED INTO EXP`**
 
 Canonical checkpoint status:
 - K.1–K.3: completed
@@ -103,10 +115,11 @@ Canonical checkpoint status:
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.8: VERIFIED AND MERGED INTO EXP
 - K.9: NOT STARTED
 - K.10: NOT STARTED
 
 ## Scope discipline
 
 No recovery-policy redesign, new algorithm, hardware integration, physical fault injection, Gates A-E change, or K.9–K.10 work was performed.
+

@@ -404,14 +404,14 @@ Correlated Inspectable Trace
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: IMPLEMENTATION VERIFIED — READY FOR MERGE
+- K.8: VERIFIED AND MERGED INTO EXP
 - K.9: NOT STARTED
 - K.10: NOT STARTED
 
 
-## 2026-10-01 — Chat K.8 complete: matched baseline validation verified
+## 2026-10-01 — Chat K.8 complete: matched baseline validation verified and merged
 
-K.8 implementation and verification are complete on focused branch `feature/k8-baseline-validation-2026-10-01`.
+K.8 implementation and verification are complete, audited, and merged into `exp` via PR #9 at merge commit `5590bf1`.
 
 ### Evaluated surface
 1. **Host Experiment Corpus (70 runs):** 14 declarative workloads (W01–W14) evaluated across 5 policy variants (P0–P4).
@@ -434,6 +434,8 @@ K.8 implementation and verification are complete on focused branch `feature/k8-b
   6. `virtual_ui_contracts_test` (Passed)
   7. `matched_baseline_validation_test` (Passed)
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` remain completely unchanged.
+- Post-merge verification on `exp`: 7/7 CTest passed; `evaluate_baselines.py --check` passed (100 runs); working tree clean.
+
 
 
 

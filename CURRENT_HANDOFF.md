@@ -384,19 +384,19 @@ Surface in `reference/virtual/`:
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.8: VERIFIED AND MERGED INTO EXP
 - K.9: NOT STARTED
 - K.10: NOT STARTED
 
 
-## 2026-10-01 — Chat K.8 complete: matched baseline validation verified
+## 2026-10-01 — Chat K.8 complete: matched baseline validation verified and merged into exp
 
 ### Continuity
 
 - Part II remains active.
 - K.1–K.3 are complete.
 - K.4, K.5, K.6, and K.7 are complete and merged into `exp`.
-- K.8 is IMPLEMENTATION VERIFIED on `feature/k8-baseline-validation-2026-10-01`.
+- K.8 is VERIFIED AND MERGED into `exp` via PR #9 at merge commit `5590bf1`.
 - Gates A-E remain frozen and normative.
 - The C reference runtime remains the sole recovery-policy authority.
 
@@ -404,6 +404,8 @@ Surface in `reference/virtual/`:
 
 Branch: `feature/k8-baseline-validation-2026-10-01`
 Base exp commit: `d808436`
+Merge commit: `5590bf1`
+PR: #9 (`K.8: matched baseline validation`) — Merged and closed.
 
 Files created/updated:
 - `reference/experiments/evaluate_baselines.py`: Comprehensive comparative evaluation harness for 70 host runs (W01–W14 × P0–P4) and 30 virtual demonstrator runs (S01–S14 × P0–P4) = 100 total deterministic runs.
@@ -428,14 +430,16 @@ Files created/updated:
   - Deferable work (W07): P0 escalates; P1–P4 cleanly degrade to `TERMINAL_DEGRADE`.
   - Independent work preservation (W01/S01): All variants preserve unassociated work under exact quarantine.
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
+- Post-merge verification on `exp`: 7/7 CTest passed; `evaluate_baselines.py --check` passed (100 runs); working tree clean.
 
-### Exact next task: K.8 Merge & Transition to K.9
+### Exact next task: K.9 (Full Software Re-Verification + Methodology Lock)
 
-1. Create PR from `feature/k8-baseline-validation-2026-10-01` into `exp`.
-2. Merge PR into `exp` preserving commit history.
-3. Advance to K.9: Full Software Re-Verification + Methodology Lock.
+1. Re-verify full software chain (reference runtime C unit tests, host experiment corpus replay, virtual system tests, demo CLI & UI contract tests, matched baseline validation suite).
+2. Verify cross-layer determinism and digest stability.
+3. Lock software methodology, evidence boundaries, and formal claims boundary prior to final packaging (K.10).
 
 No K.9 work has been performed in this chat.
+
 
 
 
