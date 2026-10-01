@@ -199,3 +199,14 @@ The project may pursue a novelty hypothesis, but novelty is not assumed. Prior a
 Current search evidence already shows established prior art for peripheral recovery, checkpoint-based recovery, selective recovery, fault containment and policy-driven recovery. Therefore the novelty question is the narrower integrated mechanism: evidence-bounded fault association plus bounded context/history recovery plus event-level quarantine/dependency preservation under a deterministic zero-heap event-driven MCU model.
 
 No chat may convert this hypothesis into established novelty or patentability without documented technical prior-art analysis and, for patentability, professional legal assessment.
+
+
+## 2026-10-01 Operational Checkpoint — K.5
+
+Part I K.1-K.3 is COMPLETE. Part II K.4 is COMPLETE and K.5 is COMPLETE at technical-design/contract level.
+
+K.5 defined the virtual embedded-system boundary around the actual existing ISO C11 reference runtime, including deterministic scheduler/environment semantics, I2C/SPI/UART contracts, deterministic fault injection, runtime adapter inputs/outputs, ownership/lifetime, trace/evidence correlation and deterministic scenarios.
+
+The current C runtime remains the sole recovery-policy authority. K.5 identified but did not modify the runtime limitation that there is no peripheral-action callback. Future implementation must not silently add one or otherwise redesign recovery semantics.
+
+Current active checkpoint: K.6 — Virtual Embedded System Implementation around the existing C runtime.
