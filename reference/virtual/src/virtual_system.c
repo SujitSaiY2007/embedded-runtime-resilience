@@ -14,10 +14,15 @@ static int event_index(const VirtualSystem *vs, ScenarioEventKey key) {
 static const VirtualFaultSchedule *find_schedule(const VirtualSystem *vs,
                                                   uint16_t schedule_id,
                                                   uint8_t action_index) {
+    const VirtualFaultSchedule *first_match = NULL;
     for (uint8_t i = 0u; i < vs->scenario->fault_schedule_count; ++i) {
         const VirtualFaultSchedule *s = &vs->scenario->fault_schedules[i];
-        if (s->schedule_id == schedule_id && s->action_index == action_index) return s;
+        if (s->schedule_id == schedule_id) {
+            if (first_match == NULL) first_match = s;
+            if (s->action_index == action_index) return s;
+        }
     }
+    if (action_index == 0u) return first_match;
     return NULL;
 }
 
@@ -65,7 +70,7 @@ static void append_wrapper_trace(VirtualSystem *vs, uint16_t step_sequence,
                                  PeripheralId peripheral, uint16_t tx,
                                  RecoveryAction action, OutcomeCode outcome,
                                  VirtualPeripheralStatus status,
-                                 FaultClass fault, uint16_t runtime_first) {
+                                 FaultClass fault, uint32_t runtime_first) {
     if (vs->trace_count >= VIRTUAL_MAX_ENV_TRACE) {
         vs->adapter_error = true;
         return;
