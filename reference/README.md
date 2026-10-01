@@ -2,6 +2,10 @@
 
 This directory contains the smallest executable host/reference prototype for the frozen Gates A-E contracts.
 
+## Current status
+
+**K.3 COMPLETE — host/reference final-synthesis checkpoint.** Gates A-E remain frozen. K.1/K.2 host verification and corpus validation are complete.
+
 ## Build and test
 
 ```text
