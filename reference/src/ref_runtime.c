@@ -2,7 +2,14 @@
 #include <assert.h>
 #include <limits.h>
 #include <string.h>
+
+#ifdef _WIN32
+#include <io.h>
+typedef int ssize_t;
+#define write _write
+#else
 #include <unistd.h>
+#endif
 
 static EventRef ref_of(const EventSlot *e) { EventRef r={e->slot_id,e->generation}; return r; }
 EventRef event_ref_invalid(void) { EventRef r={INVALID_SLOT,0u}; return r; }
@@ -130,7 +137,7 @@ OutcomeCode runtime_verify_and_release(Runtime*rt,bool verification_ok){
 
 static size_t append_u32(char*buf,size_t pos,size_t cap,uint32_t value){char tmp[10];size_t n=0u;do{tmp[n++]=(char)('0'+(value%10u));value/=10u;}while(value!=0u);while(n!=0u&&pos<cap)buf[pos++]=tmp[--n];return pos;}
 size_t trace_write_csv(const Runtime*rt,int fd){
-    static const char header[]="run_id,workload_id,fault_schedule_id,trace_seq,fault_episode_id,slot_id,generation,transaction_id,observation_seq,action_index,state,action,outcome,correctness\n";size_t written=0u;ssize_t n=write(fd,header,sizeof(header)-1u);if(n<0)return 0u;written+=(size_t)n;
-    for(uint16_t i=0u;i<rt->trace_count;++i){const TraceRecord*t=&rt->trace[i];char line[192];size_t p=0u;p=append_u32(line,p,sizeof(line),t->run_id);line[p++]=',';p=append_u32(line,p,sizeof(line),rt->workload_id);line[p++]=',';p=append_u32(line,p,sizeof(line),rt->fault_schedule_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->trace_seq);line[p++]=',';p=append_u32(line,p,sizeof(line),t->fault_episode_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->event_ref.slot_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->event_ref.generation);line[p++]=',';p=append_u32(line,p,sizeof(line),t->transaction_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->observation_seq);line[p++]=',';p=append_u32(line,p,sizeof(line),t->action_index);line[p++]=',';p=append_u32(line,p,sizeof(line),t->state);line[p++]=',';p=append_u32(line,p,sizeof(line),t->action);line[p++]=',';p=append_u32(line,p,sizeof(line),t->outcome);line[p++]=',';p=append_u32(line,p,sizeof(line),t->correctness);line[p++]='\n';n=write(fd,line,p);if(n<0)break;written+=(size_t)n;}return written;
+    static const char header[]="run_id,workload_id,fault_schedule_id,trace_seq,fault_episode_id,slot_id,generation,transaction_id,observation_seq,action_index,state,action,outcome,correctness\n";size_t written=0u;ssize_t n=write(fd,header,(unsigned int)(sizeof(header)-1));if(n<0)return 0u;written+=(size_t)n;
+    for(uint16_t i=0u;i<rt->trace_count;++i){const TraceRecord*t=&rt->trace[i];char line[192];size_t p=0u;p=append_u32(line,p,sizeof(line),t->run_id);line[p++]=',';p=append_u32(line,p,sizeof(line),rt->workload_id);line[p++]=',';p=append_u32(line,p,sizeof(line),rt->fault_schedule_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->trace_seq);line[p++]=',';p=append_u32(line,p,sizeof(line),t->fault_episode_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->event_ref.slot_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->event_ref.generation);line[p++]=',';p=append_u32(line,p,sizeof(line),t->transaction_id);line[p++]=',';p=append_u32(line,p,sizeof(line),t->observation_seq);line[p++]=',';p=append_u32(line,p,sizeof(line),t->action_index);line[p++]=',';p=append_u32(line,p,sizeof(line),t->state);line[p++]=',';p=append_u32(line,p,sizeof(line),t->action);line[p++]=',';p=append_u32(line,p,sizeof(line),t->outcome);line[p++]=',';p=append_u32(line,p,sizeof(line),t->correctness);line[p++]='\n';n=write(fd,line,(unsigned int)p);if(n<0)break;written+=(size_t)n;}return written;
 }
 size_t runtime_slot_bytes(void){return sizeof(EventSlot);}size_t runtime_trace_bytes(void){return sizeof(TraceRecord)*TRACE_EVENT_CAP;}size_t runtime_static_bytes(void){return sizeof(Runtime);}

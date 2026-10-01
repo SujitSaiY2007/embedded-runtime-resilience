@@ -1,112 +1,98 @@
-# Next Chat Prompt — Host Reference Experiment Harness
+# Next Chat Prompt — K.4: Integrated Software Proof of Concept and Methodology Lock
 
-Copy/paste the following prompt into the next ChatGPT chat.
+Continue the canonical project in:
 
----
+SujitSaiY2007/embedded-runtime-resilience
 
-You are continuing my embedded-systems research project from the canonical GitHub repository:
+Do not restart Gates A-E or repeat K.1/K.2/K.3 work.
 
-`SujitSaiY2007/embedded-runtime-resilience`
+## Read first
 
-This is a continuation, not a restart. GitHub `main` is the durable source of truth.
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. research/phase1_software_demonstrator_methodology_lock.md
+7. research/phase1_final_evidence_synthesis.md
+8. research/phase1_reference_implementation_audit.md
+9. research/phase1_host_corpus_validation.md
+10. research/phase1_gateA_event_model_final.md
+11. research/phase1_gateB_fault_model_final.md
+12. research/phase1_gateC_recovery_policy_final.md
+13. research/phase1_gateD_formal_properties_final.md
+14. research/phase1_gateE_experimental_protocol_final.md
+15. reference/README.md
+16. reference/experiments/README.md
+17. demo/README.md
 
-## Mandatory startup reading
+## Current objective
 
-Read, in order:
+Build and finalize the complete software-only proof of concept that will be shown to the professor.
 
-1. `PROJECT_MANUAL.md`
-2. `PROJECT_STATE.md`
-3. `CURRENT_HANDOFF.md`
-4. `DECISION_LOG.md`
-5. `CHAT_CONTINUITY_PROTOCOL.md`
-6. `research/phase1_gateA_event_model_final.md`
-7. `research/phase1_gateB_fault_model_final.md`
-8. `research/phase1_gateB_learning_summary.md`
-9. `research/phase1_gateC_recovery_policy_final.md`
-10. `research/phase1_gateD_formal_properties_final.md`
-11. `research/phase1_gateE_experimental_protocol_final.md`
-12. `research/phase1_reference_implementation_design.md`
-13. `reference/README.md`
-14. `reference/docs/minimal_reference_implementation.md`
-15. `reference/tests/canonical_workloads.md`
-16. relevant files under `reference/include`, `reference/src`, and `reference/tests`
+Professor verification is NOT a separate project stage. It is the intended use of this integrated software checkpoint.
 
-Then provide a concise continuity check: frozen topic/question/platform; Gate A-E results; host reference implementation status; test result; exact next task; explicit non-goals.
+The desired chain is:
 
-## Frozen research
+Gates A-E
+-> reference implementation
+-> host verification
+-> corpus validation
+-> software demonstrator
+-> re-verification
+-> methodology lock
+-> final software-phase conclusion
+-> target-MCU validation
 
-Topic:
+## What the demonstrator must show
 
-**Design and Implementation of a Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**
+Make the mechanism understandable end-to-end:
 
-Research question:
+fault observation
+-> evidence-bounded association
+-> event quarantine
+-> context/history-aware bounded recovery
+-> verification
+-> release/degrade/escalate
+-> trace/explanation
 
-Can a compact deterministic software-only recovery policy use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
+Keep the C reference implementation authoritative. Do not silently create a competing specification in the UI.
 
-Platform direction: **STM32U575ZI / NUCLEO-U575ZI-Q**; I2C primary, SPI secondary, UART/USART diagnostic/control. Hardware availability is not assumed.
+## Re-verification requirements
 
-## Frozen Gates A-E
+Re-run or confirm:
 
-Do not redesign them without identifying a concrete contradiction.
+- clean CMake build;
+- CTest;
+- host experiment --check;
+- deterministic replay;
+- matched-input equivalence;
+- raw-input preservation;
+- capacity-confound flagging;
+- ablation-contract flagging;
+- representative trace/outcome inspection;
+- software demonstrator scenario coherence.
 
-- Gate A: `EventRef={slot_id,generation}`; explicit INDEPENDENT/ORDERED/COUPLED dependencies; FIFO admission versus eligibility; retained quarantine.
-- Gate B: observable I2C fault taxonomy and four evidence-bounded association levels under `association precision <= evidence precision`.
-- Gate C: RETRY, REINIT_OR_RESET, DEGRADE, ESCALATE with `T1 RETRY #1 -> T2 RETRY #2 -> T3 REINIT_OR_RESET -> T4 terminal`, maximum four recovery-action transitions.
-- Gate D: quarantine, association, preservation/blocking, dependency, termination, resource, identity, release, coupled-transaction, and decision-table properties.
-- Gate E: P0-P4, W01-W14, deterministic fault schedules, `QMAX=16`, `XMAX=4`, `DMAX=4`, `EPMAX=1`, trace schema, metrics, and evidence boundaries.
+## Locked limitations
 
-## Current implementation checkpoint
+1. P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across variants.
+2. W09/W10 are capacity-confounded.
+3. Host/reference evidence is not MCU/physical evidence.
+4. Host C-layout values are not STM32U575 RAM/Flash measurements.
+5. Novelty and patentability are not established merely by the software checkpoint.
 
-`reference/` contains the smallest host/reference prototype.
+Do not hide or redefine these limitations to make the project appear stronger.
 
-Implementation decisions are already fixed:
+## Required conclusion
 
-- ISO C11 + CMake.
-- 20 fixed event slots (`QMAX+XMAX`).
-- queue stores slot IDs; quarantined events remain in the same slot pool and are removed from the normal queue, avoiding duplicate storage.
-- four dependency entries per event.
-- one active recovery episode.
-- 8-bit per-slot generation starting at 1; generation wrap fails closed.
-- deterministic first-eligible queue scan.
-- fixed-size policy decision and P0-P4 variant selector.
-- deterministic software fault injection keyed by EventRef and action index.
-- stable trace IDs and fixed-buffer CSV serialization.
-- no runtime allocator calls in the reference implementation.
+End this checkpoint with a clear software-phase conclusion:
 
-Host verification already passed: W01-W14, recovery-bound, policy-property, trace-metadata, and static-accounting tests.
+The mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation.
 
-Current host layout evidence: Runtime 8164 bytes; EventSlot 84 bytes; TraceRecord 24 bytes; fixed trace pool 6144 bytes. These are host C-layout measurements only.
+Do NOT say that hardware performance, statistical superiority, final novelty, or patentability has already been proven.
 
-## ONLY TASK NOW
+## Repository requirement
 
-Review the actual committed reference implementation against Gates A-E, then build the **smallest reproducible host experiment harness and trace corpus** for matched P0-P4 execution.
+Update all necessary current-state documentation, preserve historical records, identify genuinely redundant files before deletion, and ensure main can represent the most defensible integrated state.
 
-The harness should:
-
-1. consume explicit workload/fault-schedule records rather than hidden test behavior;
-2. run matched variants P0-P4 on identical workload/fault inputs where applicable;
-3. emit the frozen Gate E trace identifiers and outcome/correctness fields;
-4. preserve raw input schedules and generated traces;
-5. calculate only the frozen host/reference correctness and host-performance metrics that can be measured honestly;
-6. flag capacity-confounded runs explicitly;
-7. keep host evidence separate from future MCU/physical evidence;
-8. add tests for deterministic replay and matched-input equivalence;
-9. avoid adding framework abstractions or premature MCU integration.
-
-Before changing semantics, stop and document any genuine contradiction with Gates A-E. Do not silently patch the contracts.
-
-## Explicit non-goals
-
-Do not yet:
-
-- perform STM32U575 firmware integration;
-- claim MCU timing/RAM/Flash;
-- perform physical fault injection;
-- add an RTOS;
-- add unrelated peripherals;
-- add machine learning or a weighted recovery score;
-- claim statistical significance, generalization, novelty, or patentability.
-
-Stop at the smallest reproducible host-experiment checkpoint and update `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and implementation decision records from the actual repository state.
-
----
+When complete, verify the branch and merge/push the software-phase package to main if the user has authorized that action.

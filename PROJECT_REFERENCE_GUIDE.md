@@ -8,9 +8,9 @@
 
 **Document Purpose:** Shared technical reference for the project team. This document explains what the project is, why it exists, what has been decided, what is currently being built, what is novel *as a research hypothesis*, and what remains to be completed.
 
-**Status:** Phase 1 — Main Engineering / Research Phase is active. Phase 1E.1 — Formal Properties / Invariants is complete; Gate E — Baselines + Experimental Protocol is next.
+**Status:** Integrated software proof-of-concept and methodology-lock phase. Gates A-E, host reference, K.1, K.2, and K.3 are complete; target-MCU validation remains pending.
 
-**Last Updated:** 2026-09-03
+**Last Updated:** 2026-10-01
 
 ---
 
@@ -936,3 +936,34 @@ The GitHub repository remains the canonical continuity mechanism for the project
 > **Gate E — Baselines + Experimental Protocol**
 >
 > Recover the repository state, confirm Gates A–D and the Gate-D formal specification, then define and challenge the experimental baselines, workload composition, fault-injection schedule, measurement points, repetitions, reproducibility controls, and data schema. Ensure baseline fairness and clear separation between host/simulation evidence and physical MCU evidence. Do not begin large-scale firmware implementation until the Phase-1 experimental-design and feasibility gates are closed.
+
+## Chat K.1/K.2 Continuity Checkpoint
+
+**Last updated:** 2026-10-01
+
+The project has moved beyond the earlier Gate-E “next” wording. Gates A-E are frozen, the minimal host reference is implemented, and Chat K.1 verified the reproducible P0-P4 host harness.
+
+### Chat K.1 — completed
+
+- Audited reference implementation against Gates A-E.
+- Recorded the P0-P3 quarantine-ablation gap without changing semantics.
+- Verified Windows/MSVC build.
+- Verified CTest 2/2.
+- Verified deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Verified 70 matched workload/variant runs during the host check.
+- Checkpoint commit: `949bd4c`.
+
+### Chat K.2 — next
+
+Validate the actual regenerated `runs.csv`, `trace.csv`, and `corpus_manifest.csv` against Gate E. This is a corpus-evidence review, not another implementation/setup pass.
+
+Host evidence remains distinct from future STM32U575/physical evidence.
+
+
+## 2026-10-01 Current-State Supersession
+
+Sections written before the Gates A-E/K.1/K.2/K.3 checkpoints contain historical planning language (for example, Gate E as the next task). They are retained as project history and are superseded for current status by `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, and `research/phase1_software_demonstrator_methodology_lock.md`.
+
+The current integrated objective is software proof of concept + re-verification + methodology lock + final software-phase conclusion. Professor verification is part of this objective, not a separate stage.
+
+The current defensible conclusion is that the mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation. This does not establish hardware performance, final novelty, or patentability.

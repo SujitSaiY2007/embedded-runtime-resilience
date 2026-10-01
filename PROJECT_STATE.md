@@ -2,7 +2,7 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Gates A-E complete at their respective semantic/design/protocol levels; Minimal Reference Implementation checkpoint complete at host level.  
+**Status:** Gates A-E complete; Minimal Reference Implementation, K.1, K.2, and K.3 complete; integrated software demonstrator/methodology-lock phase active before MCU validation.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
 ## Frozen development topic
@@ -72,3 +72,141 @@ No MCU performance/resource measurement, physical fault validation, energy measu
 ## Continuation
 
 `CURRENT_HANDOFF.md` contains the exact next continuation point. `research/phase1_reference_implementation_design.md` records implementation decisions. `reference/tests/canonical_workloads.md` maps W01-W14 to executable tests. Historical Gate A-E artifacts remain normative and preserved.
+
+## 2026-10-01 host experiment checkpoint
+
+The committed reference implementation was audited against Gates A-E before experiment work. Gates A-E remain unchanged.
+
+A concrete implementation gap was recorded in `research/phase1_reference_implementation_audit.md`: `runtime_start_fault()` applies exact-event quarantine for every policy variant, while frozen Gate C/E reserve selective dependency-aware event quarantine as the P4 integrated mechanism. No runtime semantics were silently changed.
+
+A smallest declarative experiment layer has been added under `reference/experiments/`:
+
+- explicit workload operation corpus;
+- explicit deterministic fault schedules;
+- matched P0-P4 C harness;
+- fixed CSV run/trace outputs;
+- deterministic replay driver;
+- matched-input/replay checks;
+- explicit capacity-confounding flags;
+- explicit P0-P3 ablation-validity flags.
+
+The harness is host/reference evidence only. Generated corpus outputs must be produced by the committed build/run command before being treated as executed evidence. This environment could not execute the repository's committed binary directly, so no successful build/test result is claimed from this chat.
+
+### Current implementation boundary
+
+**Reference semantics:** unchanged.
+
+**Experiment harness:** committed but execution verification is pending a host build/run.
+
+**Trace corpus:** raw declarative inputs are committed; generated `runs.csv`/`trace.csv` are reproducibly generated artifacts and are not represented as already executed here.
+
+**MCU/physical evidence:** none.
+
+## 2026-10-01 Chat K.1 verified host-experiment checkpoint
+
+Chat K.1 supersedes the earlier “execution verification pending” qualification.
+
+### Verified in the user-controlled Windows/MSVC host environment
+
+- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
+- Commit: `949bd4c`
+- Build outputs included `reference_tests.exe` and `host_experiment.exe`.
+- CTest: **2/2 tests passed**.
+- Host experiment check: **PASS** for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Matched execution: **70 runs = W01-W14 × P0-P4**.
+- W09/W10: `capacity_confounded=1`.
+- P0-P3: `ablation_contract_valid=0` because the current reference applies exact-event quarantine across all variants.
+- P4: `ablation_contract_valid=1`.
+- No remaining compile/runtime/test failure was reported at this checkpoint.
+
+### Evidence boundary
+
+This is **host/reference evidence only**. It does not establish STM32U575 timing, RAM, Flash, energy, electrical fault behavior, or physical recovery.
+
+The generated `reference/experiments/out/` and `out.replay/` artifacts were inspected during verification but cleaned before commit. The committed reproducibility source is the declarative input corpus plus harness; Chat K.2 must validate the regenerated corpus contents rather than assuming the harness pass alone proves every Gate-E trace claim.
+
+### Chat K.2 exact starting task
+
+Regenerate and inspect the 70-run corpus from the clean branch. Check trace identifiers/lifecycle/action/outcome fields against Gate E, W01-W14 matched P0-P4 identity, capacity/ablation metadata, preservation/quarantine/recovery-bound evidence, and whether any result is only a harness property rather than a policy property.
+
+Do not modify Gates A-E or start MCU integration during this checkpoint.
+
+
+## 2026-10-01 Chat K.3 completed — final evidence-bounded synthesis
+
+K.3 completed the final host/reference evidence synthesis and repository packaging.
+
+- Gates A-E remain frozen and normative.
+- K.1 and K.2 remain complete and their evidence is preserved.
+- The current evidence boundary is host/reference + deterministic software injection only.
+- P0-P3 remain `ablation_contract_valid=0` because exact-event quarantine is currently applied across all variants; P4 remains valid under the current implementation boundary.
+- W09/W10 remain `capacity_confounded=1`.
+- No MCU or physical-fault evidence is present.
+- No statistical significance, generalization, novelty, or patentability claim is established.
+
+See `research/phase1_final_evidence_synthesis.md` for the evidence matrix, interpretation boundaries, reproducibility entry point, and deferred-validation list.
+
+**Current checkpoint: K.3 COMPLETE.** Any future work must explicitly select a deferred validation objective rather than being inferred from host completion.
+
+
+## Historical K.2 record (preserved)
+
+## 2026-10-01 Chat K.2 completed — host corpus validation
+
+Chat K.2 regenerated and inspected the actual host corpus produced by the committed P0-P4 harness.
+
+### Observed corpus evidence
+
+- Corpus cardinality: **70 runs = W01-W14 × P0-P4**.
+- `corpus_manifest.csv` reported:
+  - `raw_input_preserved=PASS`
+  - `matched_input_equivalence=PASS`
+  - `capacity_confounds_explicit=PASS`
+  - `ablation_contract_flagging=PASS`
+  - `deterministic_replay=PASS`
+  - `host_evidence_only=1`
+  - `mcu_evidence=0`
+  - `physical_fault_evidence=0`
+- Representative `runs.csv` and `trace.csv` slices were inspected across W05-W08 and W11-W14, including recovery attempts, action/outcome fields, correctness, capacity metadata, and ablation metadata.
+- No concrete corpus-generation, serialization, or runtime defect was found during K.2 validation.
+
+### Interpretation boundary
+
+K.2 validates reproducible host corpus generation and the declared trace/outcome metadata. It does not turn host/reference evidence into MCU or physical evidence, and it does not make P0-P3 clean quarantine ablations. The implementation limitation remains: `runtime_start_fault()` applies exact-event quarantine across all variants, so P0-P3 remain `ablation_contract_valid=0`.
+
+### Current checkpoint
+
+**K.2 — COMPLETE.**
+
+The next checkpoint is **K.3 — Final synthesis and evidence-bounded project packaging**. Gates A-E remain frozen and normative; no MCU integration or physical validation has been started.
+
+
+## Integrated Software Phase — 2026-10-01
+
+**Objective:** construct a complete software-only demonstrator, re-verify and lock the research methodology, and produce a professor-facing conclusion that the mechanism is ready for target-MCU validation.
+
+**Professor review is not a separate project stage.** It is the intended use of this integrated checkpoint.
+
+### Locked software chain
+
+`Gates A-E -> reference implementation -> K.1 host verification -> K.2 corpus validation -> K.3 synthesis -> software demonstrator -> methodology lock -> hardware-validation handoff`
+
+### Current demonstrator
+
+`demo/index.html` is the presentation layer. It exposes policy variants, fault scenarios, bounded recovery failures, association precision, and the expected decision/recovery path. The C reference under `reference/` remains the authoritative implementation; the UI is not a replacement specification.
+
+### Re-verification status
+
+The existing host evidence remains the verified basis: Windows/MSVC build, CTest 2/2, 70 matched W01-W14 × P0-P4 runs, deterministic replay, matched-input equivalence, raw-input preservation, explicit capacity-confound handling, and explicit ablation-contract handling.
+
+### Locked limitations
+
+- P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across variants.
+- W09/W10 are capacity-confounded.
+- Host evidence is not MCU/physical evidence.
+- Host C-layout values are not STM32U575 resource measurements.
+- Novelty and patentability remain hypotheses/assessment targets, not established conclusions.
+
+### Software-phase conclusion
+
+The software mechanism is now sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify proceeding to STM32U575 validation. The next empirical phase is hardware validation, not another redesign of Gates A-E.

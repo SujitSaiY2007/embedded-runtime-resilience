@@ -160,3 +160,23 @@ Ambiguity can justify conservative blocking when safety requires it, but cannot 
 **Status:** Rejected in favor of D-053.
 
 They have potentially distinct mechanisms, but the policy-level role is one bounded peripheral-recovery action until controlled implementation experiments establish a reason to split them.
+
+| D-076 | Accepted | Audit the committed reference before experiment work and explicitly record the P0-P3 quarantine ablation gap rather than silently changing runtime semantics. | The frozen Gate C/E variant definitions reserve selective dependency-aware event quarantine for P4, while `runtime_start_fault()` currently applies exact-event quarantine for every variant. The gap must remain visible until baseline semantics are separately specified. |
+| D-077 | Accepted | Use a declarative host experiment input corpus plus deterministic replay harness for the first P0-P4 matched-input checkpoint. | A line-oriented workload operation stream and deterministic fault schedules make inputs inspectable, preserve matched execution conditions, and avoid hidden behavior in the correctness harness. |
+
+| D-078 | Accepted | Treat Chat K.1 as the verified host-experiment checkpoint: the committed harness builds under Windows/MSVC, CTest passes 2/2, and the host check passes for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging. | These results establish reproducible host execution of the harness, not MCU/physical evidence. |
+
+| D-079 | Accepted | Treat the generated 70-run corpus as an inspectable evidence artifact that must be validated at the trace/outcome level before interpreting Gate-E policy results. | Harness-level PASS does not by itself establish that every emitted trace field or outcome demonstrates the intended Gate-E property. |
+
+| D-080 | Accepted | Keep generated `out/` and `out.replay/` directories out of the committed source checkpoint; preserve the declarative inputs, harness, and checkpoint record instead. | The generated corpus is reproducible from committed inputs and code, while avoiding accidental commitment of transient host outputs before corpus-level validation. |
+
+
+| D-081 | Accepted | Treat Chat K.2 as a completed host-corpus validation checkpoint: the regenerated corpus contains 70 matched W01-W14 × P0-P4 runs, the manifest reports the declared reproducibility/metadata checks as PASS, and no concrete corpus-generation or runtime defect was found in the inspected evidence. | This validates reproducibility and inspectability of the host evidence without claiming MCU/physical validation or experimental superiority. |
+| D-082 | Accepted | Preserve the P0-P3 quarantine-ablation qualification and W09/W10 capacity-confound qualification in all later interpretation. | The current implementation applies exact-event quarantine across P0-P4, so P0-P3 are not clean quarantine ablations; W09/W10 exercise capacity-confounded conditions by protocol. |
+| D-083 | Accepted | Keep generated `reference/experiments/out/` and `out.replay/` as transient verification artifacts rather than mandatory source-checkpoint files. | The committed declarative inputs and harness reproduce the corpus, while transient host outputs should not be mistaken for durable source artifacts. |
+| D-084 | Accepted | Advance from Chat K.2 to Chat K.3 final synthesis without reopening Gates A-E. | K.2 found no concrete corpus defect requiring a semantic redesign; the remaining work is evidence-bounded synthesis, limitation reporting, and project packaging. |
+
+| D-085 | Accepted | Treat Chat K.3 as the final host/reference synthesis checkpoint for the current stage and preserve an explicit evidence boundary: host reproducibility/correctness evidence is not MCU/physical evidence. | K.1/K.2 provide reproducible host evidence but leave MCU, physical, statistical, external-validity, and clean-ablation questions unresolved; the repository should stop at a coherent evidence-bounded checkpoint rather than imply completion of those validations. |
+
+
+| D-086 | Accepted | Treat the software demonstrator, host re-verification, methodology lock, professor-facing demonstration, and software-phase conclusion as one integrated checkpoint. | This is the immediate software objective before target-MCU validation; professor verification is its intended use, not a separate gate. |
