@@ -1,12 +1,12 @@
 # Embedded Runtime Resilience
 
-> **Research project — Gates A-E frozen; Chat K.2 host-corpus checkpoint complete; Chat K.3 final synthesis next**
+> **Research project — Gates A-E frozen; host validation complete; software demonstrator + methodology lock active**
 
 A solo software-dominant embedded-systems research project investigating a **Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**.
 
 ## Current status
 
-The project is in **Phase 1 — System Design and Experimental Preparation**, specifically **Phase 1E.1 — Experimental Design / Formalization Foundation**.
+The project has completed the frozen design, host/reference implementation, K.1/K.2 host verification, and K.3 evidence synthesis checkpoints. It is now in the **integrated software proof-of-concept and methodology-lock phase**: build the professor-facing demonstrator, re-verify the complete software chain, lock the methodology, and prepare the hardware-validation handoff.
 
 ### Completed
 
@@ -18,13 +18,15 @@ The project is in **Phase 1 — System Design and Experimental Preparation**, sp
 - **Minimal Reference Implementation** — host checkpoint complete
 - **Chat K.1 — matched P0-P4 host experiment harness** — execution verified
 
-### Next
+### Current integrated objective
 
-- **Chat K.3 — Final synthesis and evidence-bounded project packaging**
+- **Software demonstrator** — professor-facing proof of concept
+- **Re-verification** — re-run/confirm the complete host/reference methodology
+- **Methodology lock** — freeze the research chain and its evidence boundaries
+- **Novelty showcase** — present the integrated mechanism as a research hypothesis supported by prior-art positioning, not as an already-proven patentability result
+- **Conclusion** — establish the software phase as ready for target-MCU validation
 
-K.2 has completed the host-corpus validation checkpoint. The next task is final synthesis: consolidate demonstrated evidence, limitations, remaining validation gaps, and the final project package without converting host/reference evidence into MCU or physical claims.
-
-**Large-scale firmware implementation has not started. Physical MCU validation has not started.** These remain downstream of the design and experimental gates.
+**Hardware validation has not started.** The software phase is being completed deliberately before moving to the STM32U575 target.
 
 ## Research question
 
@@ -119,3 +121,10 @@ Chat K.2 completed the corpus-level validation of the regenerated host evidence.
 The generated `out/` and `out.replay/` directories remain transient verification artifacts. The committed source of reproducibility is the declarative corpus, harness, and checkpoint documentation.
 
 **K.2 is complete. K.3 is the next checkpoint.**
+
+
+## 2026-10-01 — Integrated software-phase objective
+
+The current target is a complete software-only proof of concept for professor review. The UI demonstrates the end-to-end mechanism while the ISO C11 reference and host corpus remain the authoritative software evidence. See `research/phase1_software_demonstrator_methodology_lock.md`.
+
+The software conclusion is intentionally bounded: the project has a specified, implemented, reproducible host mechanism suitable for hardware validation, but MCU performance, physical recovery, statistical evidence, and final novelty/patentability remain unverified.
