@@ -292,3 +292,46 @@ K.5 — Virtual Embedded System Technical Design + Interface Contracts.
 K.5 defines, but does not implement, the virtual scheduler/environment, I2C/SPI/UART models, deterministic fault injection, C-runtime adapter, UI-facing state/trace schema, and baseline interface boundary.
 
 Do not execute K.5 or later work in K.4 history sections above; this section is the active handoff.
+
+
+## 2026-10-01 — Chat K.5 completed
+
+### Current Part
+Part II.
+
+### Completed checkpoints
+K.1-K.3 complete; K.4 complete; K.5 complete at design/contract level.
+
+### K.5 result
+The virtual embedded-system architecture and interfaces are now implementation-ready and are explicitly based on the actual ref_runtime.h/ref_runtime.c API. The C runtime remains the only recovery-policy authority.
+
+Completed K.5 design boundaries:
+- deterministic virtual scheduler/environment;
+- EventSlot admission and runtime-generated EventRef identity;
+- explicit dependency/order/transaction representation;
+- I2C/SPI/UART environmental models;
+- deterministic fault injection;
+- simulator-to-C-runtime adapter;
+- runtime input/output schemas;
+- trace/evidence correlation;
+- UI control/read-only evidence boundary;
+- ownership/lifetime/static-capacity rules;
+- S01-S14 deterministic scenario contracts.
+
+### Critical K.6 constraint
+The current runtime has no peripheral-action callback. K.6 must not silently modify runtime_apply_policy(), policy_decide(), or other recovery semantics to create one. The virtual peripheral may mirror deterministic action outcomes for environmental visualization, but runtime transition/verification remains authoritative. Any callback-based redesign requires a separate decision and is outside K.6 unless explicitly authorized.
+
+### Exact K.6 starting sequence
+1. implement bounded scenario/workload structures;
+2. implement virtual I2C/SPI/UART state models;
+3. implement immutable deterministic fault schedules;
+4. implement adapter against existing ref_runtime.h;
+5. implement event admission/dependencies;
+6. implement deterministic scheduler loop around scheduler_select();
+7. bridge fault observations to runtime_start_fault();
+8. use existing policy/recovery/verification APIs without policy changes;
+9. correlate authoritative runtime trace with environment records;
+10. add focused deterministic/replay tests.
+
+### K.6 non-goals
+No UI implementation/polish, no recovery-policy redesign, no new policy variant, no hardware integration, no physical fault injection, no final baseline comparison, and no K.7-K.10 work.

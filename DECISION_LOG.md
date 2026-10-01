@@ -227,3 +227,39 @@ At K.4 entry, exp was 1f3a471d2987b066ee995f4bf563fcdcbcd74d97 while main was e4
 **Decision:** continue K.4 from exp, as required by the active-branch rule. Do not silently reset or force-update either branch.
 
 **Reason:** the project protocol defines exp as the active research/reference branch; the main-only merge is preserved until the completed K.4 package is explicitly synchronized through the required PR path.
+
+
+## D-099 — K.5 runtime API is the virtual-system integration boundary
+**Status:** Accepted
+
+K.6 will implement the virtual environment around the existing ref_runtime.h/ref_runtime.c API. The C runtime remains the sole recovery-policy authority.
+
+**Reason:** prevents simulator/UI policy duplication and keeps the demonstrator tied to the actual reference implementation.
+
+## D-100 — Virtual peripheral models remain environmental, not policy authorities
+**Status:** Accepted
+
+I2C/SPI/UART models may represent state, operation results and deterministic faults, but they do not select recovery actions, retry counts, quarantine targets or terminal outcomes.
+
+**Reason:** preserves the locked K.4 architecture and single-policy-authority rule.
+
+## D-101 — Do not add a peripheral-action callback during K.5/K.6
+**Status:** Accepted for current checkpoint boundary
+
+The current runtime has no callback for executing a virtual peripheral recovery action. K.5 therefore defines deterministic environmental action mirroring while keeping runtime_apply_policy()/runtime_verify_and_release() authoritative. Adding a callback would be a runtime/API design change and is outside K.5.
+
+**Reason:** avoid silently redesigning the recovery mechanism merely to make the simulator more tightly coupled.
+
+## D-102 — Scenario EventRef mappings are observational only
+**Status:** Accepted
+
+Scenario keys may map to EventRefs returned by runtime_admit(), but the virtual environment cannot allocate or fabricate EventRefs.
+
+**Reason:** preserves generation safety and runtime ownership of identity.
+
+## D-103 — K.5 deterministic scenarios are declarative
+**Status:** Accepted
+
+S01-S14 define workloads, dependencies, fault stimuli and evidence targets. They do not contain hidden recovery logic or hard-coded simulator recovery decisions.
+
+**Reason:** ensures K.6 scenarios exercise the existing mechanism rather than becoming a second specification.
