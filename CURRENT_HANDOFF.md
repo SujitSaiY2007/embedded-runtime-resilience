@@ -2,7 +2,7 @@
 
 ## Session status
 
-Gates A-E remain closed and normative. The **Minimal Reference Implementation — smallest testable host/reference checkpoint** is now complete and tested.
+Gates A-E remain closed and normative. The Minimal Reference Implementation, K.1 host verification, K.2 corpus validation, and K.3 synthesis are complete. The active objective is the integrated software demonstrator + methodology lock before MCU validation.
 
 ## Frozen topic
 
@@ -62,11 +62,13 @@ The minimal prototype intentionally implements exact event/transaction recovery 
 
 `EPMAX=1` is explicit. W10 tests the bounded second-episode outcome rather than hiding additional recovery storage.
 
-## Exact next task
+## Current exact task
 
-The next chat should **not** redesign Gates A-E. It should review the committed host reference implementation against the frozen contracts, close any concrete semantic/test contradictions, then prepare the next smallest checkpoint for reproducible host experiment execution if the reference remains consistent.
+Complete the software-only proof-of-concept and methodology lock. The professor review is part of this integrated phase, not a separate stage.
 
-The next likely boundary is: **host reference experiment harness + frozen trace corpus + matched P0-P4 execution**, still without claiming MCU or physical evidence.
+The demonstrator should expose the full mechanism: fault observation -> evidence-bounded association -> event quarantine -> bounded context/history-aware recovery -> verification -> release/degrade/escalate -> trace explanation.
+
+After the demonstrator is complete, re-run/confirm the host verification path, lock the methodology and evidence boundaries, and record the final software-phase conclusion. Do not reopen Gates A-E unless new evidence directly contradicts them.
 
 ## Non-goals
 
@@ -185,3 +187,34 @@ Generated `reference/experiments/out/` and `out.replay/` remain transient verifi
 Prepare the **final evidence-bounded synthesis** from the current repository state. Consolidate the frozen design, host/reference implementation, K.1/K.2 evidence, known semantic/ablation limitations, and explicit MCU/physical evidence gaps. Review the repository for consistency and produce the final project-facing documentation/package without silently changing Gates A-E or manufacturing unsupported performance, novelty, or patentability claims.
 
 Do not begin MCU integration merely because the host corpus is complete.
+
+
+## Integrated Software Phase — 2026-10-01
+
+### Completed in this checkpoint
+
+- Added `demo/index.html` as the professor-facing software demonstrator UI.
+- Added `demo/README.md` with the UI's authority/evidence boundary.
+- Added `research/phase1_software_demonstrator_methodology_lock.md` as the methodology-lock and conclusion record.
+- Updated continuity state to treat professor verification as the intended use of this integrated software checkpoint, not as a separate gate.
+
+### Remaining immediate work
+
+1. Re-verify the repository from a clean checkout/build environment available to the user.
+2. Run the demonstrator scenarios against the documented software evidence.
+3. Review all current documents for stale pre-K.3 continuation language.
+4. Decide whether any historical file is truly redundant; do not delete historical research merely for brevity.
+5. Merge the completed software-phase package to `main` once re-verification passes.
+
+### Methodology lock
+
+The authoritative lock is `research/phase1_software_demonstrator_methodology_lock.md`.
+
+The locked conclusion is: the project now has a specified, implemented, reproducible, demonstrable, evidence-bounded software mechanism suitable for target-MCU validation. This does not establish hardware performance, final novelty, or patentability.
+
+### Important limitations remain
+
+- P0-P3 are not clean quarantine ablations.
+- W09/W10 are capacity-confounded.
+- Host evidence is not MCU/physical evidence.
+- No novelty/patentability conclusion is inferred from the software checkpoint.
