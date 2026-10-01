@@ -31,7 +31,9 @@ Never delete historical material merely to shorten the repository. Prefer additi
 | H | Baseline experiments | Baseline measurements are complete and raw artifacts/checksums/logging are preserved |
 | I | Proposed-policy experiments | Proposed mechanism measurements and correctness observations are complete |
 | J | Analysis | Statistical/technical analysis, limitations, and interpretation are checkpointed |
-| K | Final synthesis | Report, paper/patent assessment, demonstrations, and final repository organization |
+| K.1 | Host experiment verification | Harness builds/runs reproducibly, matched P0-P4 execution is verified, and checkpoint is committed |
+| K.2 | Host corpus validation | Generated traces/outcomes are inspected against Gate-E evidence requirements and remaining host-only limitations are recorded |
+| K.3 | Final synthesis | Report, paper/patent assessment, demonstrations, and final repository organization |
 
 ## Early-stop rule
 
@@ -64,3 +66,26 @@ A new chat must first read the repository's continuity documents before performi
 ## Gate B checkpoint note
 
 `research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. `research/phase1_gateB_learning_summary.md` is an additive educational companion that explains the same gate in simpler terms and does not replace the normative artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material.
+
+## Chat K.1/K.2 checkpoint
+
+**Chat K.1 — completed 2026-10-01**
+
+- Audited the reference implementation against Gates A-E.
+- Recorded the concrete P0-P3 quarantine-ablation gap.
+- Built the smallest declarative matched P0-P4 host experiment harness.
+- Verified Windows/MSVC execution.
+- CTest: 2/2 passed.
+- Host harness checks: all PASS.
+- 70 matched runs generated during verification.
+- Commit: `949bd4c`.
+
+**Chat K.2 — next**
+
+- Regenerate and inspect the 70-run corpus.
+- Validate actual trace identifiers, lifecycle states, actions, outcomes, correctness fields, and metadata against Gate E.
+- Separate harness-level guarantees from policy-level evidence.
+- Preserve host/reference evidence boundaries.
+- Do not repeat the build/debug work unless corpus validation exposes a concrete defect.
+
+The earlier K.1 “execution pending” text in this document is historical and is superseded by this checkpoint.
