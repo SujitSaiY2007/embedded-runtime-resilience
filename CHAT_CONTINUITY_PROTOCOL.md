@@ -108,3 +108,25 @@ The professor-facing activity is not a separate gate. It is the intended use of 
 Authoritative record: `research/phase1_software_demonstrator_methodology_lock.md`.
 
 Current limitations remain unchanged: P0-P3 are not clean quarantine ablations; W09/W10 are capacity-confounded; host evidence is not MCU/physical evidence; novelty/patentability are not established.
+
+
+---
+
+# Part-II Two-Branch / Multi-Chat Continuity Protocol
+
+## Project partition
+- Part I: K.1-K.3 — COMPLETE.
+- Part II: K.4 onward — ACTIVE.
+- K.3 is the explicit boundary between the two parts.
+
+## Reference branch rule
+exp is always the active reference branch. Every continuation recovers state from exp. Child branches must record their base exp commit. Completed checkpoint work returns to exp before becoming current project state.
+
+## Main synchronization rule
+main must be aware of every completed checkpoint declared integrated. The authoritative chain is exp checkpoint -> PR -> main. The PR records checkpoint, source exp commit, change summary, validation and limitations.
+
+## Chat entry contract
+Every new chat begins with a Continuity Check containing Part, checkpoint, exp reference, last completed checkpoint, allowed scope, explicit out-of-scope work and required end state.
+
+## Chat exit contract
+Every chat finishes with completed work, tests/evidence, unresolved issues, files changed, exact next checkpoint, exact branch state, whether exp was updated and whether main was synchronized. The next chat must not rely on conversation memory.
