@@ -512,3 +512,14 @@ K.10 is responsible for executing the locked experiment/search design. Final sof
 - K.9.2 completion commit: `04308f0fc797892da51e2265edfc57b810d0acd9`.
 - This commit is the canonical K.10 starting point on `exp`.
 - K.10 must not assume P4 superiority or novelty; both are empirical/research questions to be tested.
+
+
+## 2026-10-01 — Post-K.10 checkpoint numbering normalized
+
+The downstream stage after K.10 is now explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**.
+
+- **K.10:** P4 Advantage & Novelty Investigation — final major investigative stage; outcome is evidence-driven.
+- **K.11:** Final Software Synthesis + Hardware-Validation Handoff — synthesize K.10 evidence, state the bounded software conclusion, package final evidence, and define target-MCU validation requirements and success criteria.
+- **After K.11:** hardware validation and evidence-driven refinement, if authorized.
+
+The old “K.10 Final Software Conclusion + Hardware-Validation Handoff” wording is historical/superseded and must not be treated as the active checkpoint definition.
