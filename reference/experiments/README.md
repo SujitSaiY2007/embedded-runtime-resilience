@@ -46,3 +46,19 @@ The harness records `capacity_confounded` for W09/W10 and `ablation_contract_val
 ## Evidence boundary
 
 All outputs are host/reference/software-injection evidence. They do not measure STM32U575 timing, RAM, Flash, energy, electrical fault behavior, or physical recovery.
+
+## Verification checkpoint — 2026-10-01
+
+Chat K.1 execution verification completed in the user-controlled Windows/MSVC environment.
+
+- Build succeeded.
+- CTest: **2/2 passed**.
+- `py run_host_experiment.py --check`: all five checks **PASS**.
+- Corpus cardinality during verification: **70 runs**.
+- W09/W10: `capacity_confounded=1`.
+- P0-P3: `ablation_contract_valid=0`.
+- P4: `ablation_contract_valid=1`.
+
+The generated `out/` and `out.replay/` directories were inspected during verification and then removed before the clean source checkpoint. Therefore the repository currently commits the reproducibility inputs/harness, not the transient generated CSV outputs.
+
+**Chat K.2 must validate the regenerated CSV corpus itself before any policy-level interpretation is made.**
