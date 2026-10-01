@@ -1,10 +1,124 @@
-# Next Chat Prompt — K.5: Virtual Embedded System Technical Design + Interface Contracts
+# Next Chat Prompt — K.4: Integrated Software Proof of Concept and Methodology Lock
 
-Continue SujitSaiY2007/embedded-runtime-resilience from completed K.4.
+Continue the canonical project in:
 
-## Mandatory startup
+SujitSaiY2007/embedded-runtime-resilience
 
-Read, in order:
+Do not restart Gates A-E or repeat K.1/K.2/K.3 work.
+
+## Read first
+
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. research/phase1_software_demonstrator_methodology_lock.md
+7. research/phase1_final_evidence_synthesis.md
+8. research/phase1_reference_implementation_audit.md
+9. research/phase1_host_corpus_validation.md
+10. research/phase1_gateA_event_model_final.md
+11. research/phase1_gateB_fault_model_final.md
+12. research/phase1_gateC_recovery_policy_final.md
+13. research/phase1_gateD_formal_properties_final.md
+14. research/phase1_gateE_experimental_protocol_final.md
+15. reference/README.md
+16. reference/experiments/README.md
+17. demo/README.md
+
+## Current objective
+
+Build and finalize the complete software-only proof of concept that will be shown to the professor.
+
+Professor verification is NOT a separate project stage. It is the intended use of this integrated software checkpoint.
+
+The desired chain is:
+
+Gates A-E
+-> reference implementation
+-> host verification
+-> corpus validation
+-> software demonstrator
+-> re-verification
+-> methodology lock
+-> final software-phase conclusion
+-> target-MCU validation
+
+## What the demonstrator must show
+
+Make the mechanism understandable end-to-end:
+
+fault observation
+-> evidence-bounded association
+-> event quarantine
+-> context/history-aware bounded recovery
+-> verification
+-> release/degrade/escalate
+-> trace/explanation
+
+Keep the C reference implementation authoritative. Do not silently create a competing specification in the UI.
+
+## Re-verification requirements
+
+Re-run or confirm:
+
+- clean CMake build;
+- CTest;
+- host experiment --check;
+- deterministic replay;
+- matched-input equivalence;
+- raw-input preservation;
+- capacity-confound flagging;
+- ablation-contract flagging;
+- representative trace/outcome inspection;
+- software demonstrator scenario coherence.
+
+## Locked limitations
+
+1. P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across variants.
+2. W09/W10 are capacity-confounded.
+3. Host/reference evidence is not MCU/physical evidence.
+4. Host C-layout values are not STM32U575 RAM/Flash measurements.
+5. Novelty and patentability are not established merely by the software checkpoint.
+
+Do not hide or redefine these limitations to make the project appear stronger.
+
+## Required conclusion
+
+End this checkpoint with a clear software-phase conclusion:
+
+The mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation.
+
+Do NOT say that hardware performance, statistical superiority, final novelty, or patentability has already been proven.
+
+## Repository requirement
+
+Update all necessary current-state documentation, preserve historical records, identify genuinely redundant files before deletion, and ensure main can represent the most defensible integrated state.
+
+When complete, verify the branch and merge/push the software-phase package to main if the user has authorized that action.
+
+---
+# Part-II K.4 Active Scope Override
+
+Part I (K.1-K.3) is COMPLETE. Part II begins at K.4.
+
+The active K.4 scope is **Novelty Re-Research + Conceptual Architecture Lock**. Do not implement the virtual system or UI in K.4. Do not alter Gates A-E or the recovery policy.
+
+Use the current Part-II plan in research/PART_II_CHAT_PLAN.md as the scope authority.
+
+Branch rule: exp is the active reference branch; main is the integrated mirror synchronized through PR/merge.
+
+At K.4 completion, the next checkpoint is K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+
+---
+# Active Next-Chat Override — K.5
+
+The earlier K.4 prompt above is preserved as historical project planning.
+
+The next chat must execute **K.5 — Virtual Embedded System Technical Design + Interface Contracts** only.
+
+Read first:
 1. PROJECT_MANUAL.md
 2. PROJECT_STATE.md
 3. CURRENT_HANDOFF.md
@@ -15,80 +129,34 @@ Read, in order:
 8. research/novelty_investigation.md
 9. research/part_ii_conceptual_architecture.md
 10. research/chat_records/chat_k4_record.md
-11. relevant Gate A-E/reference design records
 
-Then report a Continuity Check before substantive work.
+K.5 allowed:
+- virtual scheduler/environment design;
+- virtual I2C/SPI/UART contracts;
+- deterministic fault-injection API;
+- simulator-to-C-runtime adapter contract;
+- runtime input/output schemas;
+- UI-facing state/trace schema;
+- baseline interface boundary;
+- deterministic scenario contracts;
+- ownership/identity/resource boundaries.
 
-## Partition
+K.5 prohibited:
+- simulator implementation;
+- UI implementation;
+- recovery-policy redesign;
+- Gates A-E changes;
+- hardware integration;
+- K.6/K.7/K.8/K.9/K.10 execution.
 
-- Part I — K.1-K.3: COMPLETE.
-- Part II — K.4 onward: ACTIVE.
-- K.4: COMPLETE.
-- Current checkpoint: K.5 — Virtual Embedded System Technical Design + Interface Contracts.
-
-## K.4 facts that K.5 must preserve
-
-The broad novelty framing was rejected as insufficiently differentiated.
-
-Remaining hypothesis:
-
-> There may be a technically meaningful distinction in implementing evidence-limited fault-to-event association together with retained event quarantine, dependency/order-aware preservation, and bounded history-conditioned recovery as one statically bounded mechanism for constrained event-driven MCU firmware.
-
-This is unresolved. Do not call it novel or patentable.
-
-Locked architecture:
-
-UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI
-
-The C reference runtime is the only recovery-policy authority.
-
-## K.5 ALLOWED
-
-1. Define implementable contracts for the virtual embedded system.
-2. Define the virtual scheduler/environment model.
-3. Define virtual I2C/SPI/UART boundaries.
-4. Define deterministic fault-injection API and stimulus representation.
-5. Define simulator-to-C-runtime adapter contract.
-6. Define runtime input/output schemas needed for integration.
-7. Define UI-facing state/trace schema.
-8. Define baseline interface boundary for later K.8 comparison.
-9. Define deterministic scenario contracts and terminal cases.
-10. Define data ownership, identity and resource boundaries.
-11. Identify implementation dependencies that must be deferred.
-
-## K.5 MUST NOT
-
-Do NOT:
-- implement the virtual embedded system;
-- implement the virtual circuit;
-- implement the UI;
-- modify Gates A-E;
-- modify the recovery policy;
-- create a second recovery algorithm;
-- perform K.6 implementation;
-- perform K.7 UI implementation;
-- perform K.8 baseline experiments;
-- perform K.9 methodology lock;
-- perform K.10 final conclusion;
-- integrate STM32U575 hardware;
-- perform physical validation.
-
-If a later-stage dependency is discovered, document it and hand it forward; do not execute it.
-
-## Required K.5 outputs
-
-Create/update:
-1. technical design document for the virtual embedded system;
+Required K.5 outputs:
+1. virtual-system technical design;
 2. interface/contract document;
 3. deterministic scenario definitions;
 4. research/chat_records/chat_k5_record.md;
 5. PROJECT_STATE.md;
 6. CURRENT_HANDOFF.md;
-7. DECISION_LOG.md if consequential decisions are made;
+7. DECISION_LOG.md when needed;
 8. NEXT_CHAT_PROMPT.md for K.6.
 
-## Exit condition
-
-K.5 is complete only when interfaces are explicit enough for K.6 implementation, data ownership is unambiguous, runtime authority is preserved, deterministic fault injection is specified, trace/state boundaries are explicit, baseline integration boundary is explicit, and K.6 has an unambiguous starting point.
-
-Do not begin K.6.
+Exit only when K.6 has an unambiguous implementation starting point.
