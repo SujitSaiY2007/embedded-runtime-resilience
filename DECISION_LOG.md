@@ -435,3 +435,14 @@ K.10 is strictly the P4 Advantage & Novelty Investigation. It must execute the l
 The downstream checkpoint after K.10 is explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the P4 Advantage & Novelty Investigation and is not itself the final conclusion.
 
 K.11 will synthesize K.10 evidence, produce the evidence-bounded software-phase conclusion, package the final evidence, and define target-MCU hardware-validation requirements and success criteria. It must not redesign P4 or force a preferred outcome.
+
+---
+
+## D-116 — K.10 execution blocker in current environment
+**Status:** Accepted
+
+K.10 is not complete. The live repository was audited and the protected runtime remains unchanged, but the designated Antigravity execution agent is not available in the current ChatGPT tool environment and no repository-local/CI execution path is exposed. Therefore the decisive K.10 experiment matrix was not executed and no K.10 performance conclusion may be asserted.
+
+Fresh prior-art research may be recorded as research-control evidence, but it cannot substitute for the required experiments. K.11 remains inactive until K.10's actual exit conditions are satisfied.
+
+**Reason:** preserves research integrity and prevents fabricated execution, metrics, or superiority/novelty claims.
