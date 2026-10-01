@@ -163,3 +163,9 @@ They have potentially distinct mechanisms, but the policy-level role is one boun
 
 | D-076 | Accepted | Audit the committed reference before experiment work and explicitly record the P0-P3 quarantine ablation gap rather than silently changing runtime semantics. | The frozen Gate C/E variant definitions reserve selective dependency-aware event quarantine for P4, while `runtime_start_fault()` currently applies exact-event quarantine for every variant. The gap must remain visible until baseline semantics are separately specified. |
 | D-077 | Accepted | Use a declarative host experiment input corpus plus deterministic replay harness for the first P0-P4 matched-input checkpoint. | A line-oriented workload operation stream and deterministic fault schedules make inputs inspectable, preserve matched execution conditions, and avoid hidden behavior in the correctness harness. |
+
+| D-078 | Accepted | Treat Chat K.1 as the verified host-experiment checkpoint: the committed harness builds under Windows/MSVC, CTest passes 2/2, and the host check passes for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging. | These results establish reproducible host execution of the harness, not MCU/physical evidence. |
+
+| D-079 | Accepted | Treat the generated 70-run corpus as an inspectable evidence artifact that must be validated at the trace/outcome level before interpreting Gate-E policy results. | Harness-level PASS does not by itself establish that every emitted trace field or outcome demonstrates the intended Gate-E property. |
+
+| D-080 | Accepted | Keep generated `out/` and `out.replay/` directories out of the committed source checkpoint; preserve the declarative inputs, harness, and checkpoint record instead. | The generated corpus is reproducible from committed inputs and code, while avoiding accidental commitment of transient host outputs before corpus-level validation. |
