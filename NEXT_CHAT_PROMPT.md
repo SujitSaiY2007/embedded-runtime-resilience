@@ -227,25 +227,23 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 ---
 ---
 ---
-# Active Next-Chat Prompt — K.9 Merge & Transition to K.10 (Final Software Packaging & Research Conclusion)
+# Active Next-Chat Prompt — K.10: Final Software Packaging & Research Conclusion
 
 Continue the canonical project in:
 
 `SujitSaiY2007/embedded-runtime-resilience`
 
-Start from the verified K.9 implementation branch:
+Start from the canonical merged and closed K.9 `exp` checkpoint:
 
-`feature/k9-methodology-lock-2026-10-01`
+`exp @ d1e0dcb`
 
-Base exp commit: `9ebd84c`
-
-Do not repeat K.6–K.9 implementation work and do not execute K.10 packaging or physical hardware deployment in this chat.
+Do not restart Gates A–E, repeat K.1–K.9 work, or alter the C reference runtime.
 
 ## Objective
 
-1. Review, audit, and merge the verified K.9 Methodology Lock and Software Re-Verification into `exp` via PR.
-2. Advance to K.10: Final Software Packaging & Research Conclusion.
-3. In K.10, prepare the final software-phase release, freeze documentation, package the research findings under the locked evidence boundaries, and conclude the software phase prior to target-MCU validation.
+Execute **K.10 — Final Software Packaging & Research Conclusion**.
+
+Package the complete software proof of concept, freeze canonical software-phase documentation, synthesize the research findings under the locked evidence boundaries, and establish the exact handoff to target-MCU validation.
 
 ## Read first
 
@@ -257,17 +255,33 @@ Do not repeat K.6–K.9 implementation work and do not execute K.10 packaging or
 6. `NEXT_CHAT_PROMPT.md`
 7. `research/PART_II_CHAT_PLAN.md`
 8. `research/phase2_k9_methodology_lock.md`
-9. `research/chat_records/chat_k9_record.md`
-10. `reference/include/ref_runtime.h`
-11. `reference/src/ref_runtime.c`
+9. `research/phase2_k8_matched_baseline_validation.md`
+10. `research/chat_records/chat_k9_record.md`
+11. `reference/include/ref_runtime.h`
+12. `reference/src/ref_runtime.c`
 
-## Critical constraints
+## Allowed in K.10
 
-- The C reference runtime remains the sole recovery-policy authority.
-- Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
-- Do NOT perform physical hardware integration or physical fault injection.
-- Gates A–E remain frozen and normative.
-- Enforce the locked limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims).
+- Final software-phase release packaging and documentation freeze;
+- Synthesis of software evidence across 100 deterministic runs (W01–W14, S01–S14, P0–P4);
+- Bounded novelty and differentiation statement based strictly on software findings;
+- Definition of target-MCU hardware-validation requirements, testbed specification, and success criteria;
+- Final Part II continuity and repository closure.
+
+## Explicitly Prohibited in K.10
+
+- Physical MCU hardware experiments, acquisition assumptions, or physical fault injection;
+- Altering Gates A–E or modifying `ref_runtime.c` / `ref_runtime.h`;
+- Introducing new recovery policies or a second scheduler;
+- Claiming universal superiority of P4;
+- Claiming novelty or patentability beyond bounded software differentiation;
+- Removing or redefining locked qualifications (`capacity_confounded=1`, `ablation_contract_valid=0`, S06 multi-policy recovery, software-only scope).
+
+## Required K.10 Conclusion
+
+Conclude with a clear, evidence-based software-phase conclusion:
+"The mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation."
+
 
 
 

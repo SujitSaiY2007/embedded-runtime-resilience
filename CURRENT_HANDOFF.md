@@ -385,7 +385,7 @@ Surface in `reference/virtual/`:
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
-- K.9: IMPLEMENTATION VERIFIED — READY FOR CLOSURE
+- K.9: CLOSED — MERGED INTO EXP
 - K.10: NOT STARTED
 
 
@@ -434,14 +434,14 @@ Files created/updated:
 
 
 
-## 2026-10-01 — Chat K.9 complete: full software re-verification and methodology lock verified
+## 2026-10-01 — Chat K.9 complete: full software re-verification, evidence reconciliation, and methodology lock closed
 
 ### Continuity
 
 - Part II remains active.
 - K.1–K.3 are complete.
 - K.4–K.8 are complete and merged into `exp`.
-- K.9 is IMPLEMENTATION VERIFIED on `feature/k9-methodology-lock-2026-10-01`.
+- K.9 is CLOSED and MERGED into `exp` via PR #10 at merge commit `d1e0dcb`.
 - Gates A–E remain frozen and normative.
 - The C reference runtime remains the sole recovery-policy authority.
 
@@ -449,14 +449,19 @@ Files created/updated:
 
 Branch: `feature/k9-methodology-lock-2026-10-01`
 Base exp commit: `9ebd84c`
+Implementation commit: `33fe87c`
+Reconciliation commit: `2e0e5a0`
+Merge commit: `d1e0dcb`
+PR: #10 (`K.9: methodology lock and re-verification`) — Merged and closed.
 
 Files created/updated:
 - `research/phase2_k9_methodology_lock.md`: Comprehensive formal methodology lock freezing Items A through O, locking limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims), and clarifying scenario scope (S01–S14 vs 6-scenario demonstrator subset).
 - `research/chat_records/chat_k9_record.md`: Canonical chat record for K.9.
-- `DECISION_LOG.md`: Added architectural decision `D-110` formally recording the methodology lock.
+- `DECISION_LOG.md`: Added architectural decisions `D-110` (methodology lock) and `D-111` (merge and closure).
 
-### Verification evidence
+### Evidence reconciliation and verification evidence
 
+- S06/P2 Reconciliation: Authoritative digest is `0xCDAB2617` (established by K.8 report, direct C execution, and 10/10 deterministic replay). Prose grouping error corrected.
 - CTest: 7/7 passed (100%):
   1. `reference_tests` (Passed)
   2. `host_experiment_replay` (Passed)
@@ -465,16 +470,17 @@ Files created/updated:
   5. `virtual_baseline_tests` (Passed)
   6. `virtual_ui_contracts_test` (Passed)
   7. `matched_baseline_validation_test` (Passed)
-- Deterministic 100-run reproduction: 70 host runs + 30 demonstrator runs, 100% bit-for-bit identical digests.
+- Deterministic 100-run reproduction: 70 host runs + 30 demonstrator runs, 100% bit-for-bit identical digests with zero divergence.
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
 
-### Exact next task: K.9 Audit, Merge & Transition to K.10
+### Exact next task: K.10 Final Software Packaging & Research Conclusion
 
-1. Audit and merge PR for `feature/k9-methodology-lock-2026-10-01` into `exp`.
-2. Formally close K.9 on `exp`.
-3. Transition to K.10: Final Software Packaging & Research Conclusion.
+1. Prepare final software-phase release and freeze documentation under the locked methodology boundaries.
+2. Package research findings under locked evidence boundaries (no hardware claims, no superiority claims, no patent claims).
+3. Conclude software phase prior to target-MCU validation.
 
-No K.10 work has been performed in this chat.
+K.10 has NOT been started.
+
 
 
 

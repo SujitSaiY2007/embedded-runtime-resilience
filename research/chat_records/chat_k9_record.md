@@ -49,6 +49,11 @@ Rigorously re-verify the complete software experimental chain produced through K
 - No second recovery policy or second scheduler was invented.
 - Zero synthetic EventRefs fabricated.
 
+## Evidence Reconciliation
+
+- **S06/P2 Reconciliation:** Authoritative digest is `0xCDAB2617` (established by K.8 report, direct C execution, and 10/10 deterministic replay). Prose grouping error corrected in commit `2e0e5a0`.
+- All 100 runs in K.8 baseline reproduction verified bit-for-bit identical with zero divergence.
+
 ## Verification Status
 
 ### CTest Suite (7/7 Passed, 100%)
@@ -63,9 +68,14 @@ Rigorously re-verify the complete software experimental chain produced through K
 ### Determinism
 - 100% reproducible digests verified across repeated runs for all workloads and scenarios across P0–P4.
 
+## Git Commits
+- K.9 implementation: `33fe87c`
+- S06/P2 reconciliation: `2e0e5a0`
+- Merge into `exp`: `d1e0dcb` (PR #10)
+
 ## K.9 Exit Status
 
-**`K.9 IMPLEMENTATION VERIFIED — READY FOR CLOSURE`**
+**`K.9 CLOSED — CANONICAL EXP UPDATED — READY FOR K.10`**
 
 Canonical checkpoint status:
 - K.1–K.3: completed
@@ -74,9 +84,10 @@ Canonical checkpoint status:
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
-- K.9: IMPLEMENTATION VERIFIED — READY FOR CLOSURE
+- K.9: CLOSED — MERGED INTO EXP
 - K.10: NOT STARTED
 
 ## Scope Discipline
 
 No recovery-policy redesign, new algorithm, hardware integration, physical fault injection, Gates A-E change, or K.10 work was performed.
+

@@ -364,6 +364,21 @@ The experimental methodology, evaluation protocol, attribution boundaries, and i
 
 **Reason:** ensures all empirical research claims are strictly bounded, defensible, reproducible, and methodologically controlled prior to K.10 final packaging.
 
+## D-111 — K.9 Software Re-Verification, Methodology Lock, and Evidence Reconciliation Merge into exp
+
+**Status:** Accepted
+
+The K.9 software re-verification, evidence reconciliation, and formal methodology lock were audited, verified, and merged into `exp` via PR #10 at merge commit `d1e0dcb`. Post-merge verification confirmed:
+1. Complete CTest suite passing 7/7 (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_baseline_tests`, `virtual_ui_contracts_test`, `matched_baseline_validation_test`.
+2. Deterministic execution of 100 runs (70 host runs + 30 demonstrator runs) verified identical with zero divergence.
+3. S06/P2 authoritative digest reconciled to `0xCDAB2617` (while P1/P3/P4 is `0xA123BB47` and P0 is `0xFD5C2BA8`), correcting an earlier prose grouping note without altering historical K.8 evidence.
+4. Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` 100% untouched; `policy_decide()` remains sole decider; `runtime_apply_policy()` remains sole authoritative transition; zero synthetic EventRefs.
+5. All methodology limitations, attribution boundaries, and prohibited claims locked in `research/phase2_k9_methodology_lock.md`.
+6. Canonical project state updated to `K.9: CLOSED`. K.10 has NOT started.
+
+**Reason:** locks the re-verified methodology and reconciled empirical evidence onto canonical `exp` and formally closes K.9, clearing the path to K.10 final software packaging and research conclusion.
+
+
 
 
 

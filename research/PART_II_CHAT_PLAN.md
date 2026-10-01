@@ -94,8 +94,8 @@ Status:
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: IMPLEMENTATION VERIFIED (READY FOR MERGE)
-- K.9: NOT STARTED
+- K.8: VERIFIED AND MERGED INTO EXP
+- K.9: CLOSED AND MERGED INTO EXP
 - K.10: NOT STARTED
 
 ## K.7 completion and merge update — 2026-10-01
@@ -126,19 +126,21 @@ Implemented surface:
 
 Next checkpoint: K.9 (Full Software Re-Verification + Methodology Lock).
 
-## K.9 completion update — 2026-10-01
+## K.9 completion and merge update — 2026-10-01
 
-K.9 Full Software Re-Verification + Methodology Lock is IMPLEMENTATION VERIFIED on `feature/k9-methodology-lock-2026-10-01`.
+K.9 Full Software Re-Verification + Methodology Lock is CLOSED AND MERGED into `exp` (PR #10, merge commit `d1e0dcb`).
 
 Implemented surface:
 - `research/phase2_k9_methodology_lock.md`: Formal methodology lock freezing experimental dimensions A through O, locking limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims), and clarifying scenario scope (S01–S14 vs 6-scenario demonstrator subset).
 - `research/chat_records/chat_k9_record.md`: Canonical chat record for K.9.
-- `DECISION_LOG.md`: Added architectural decision `D-110`.
+- `DECISION_LOG.md`: Added architectural decisions `D-110` and `D-111`.
+- S06/P2 Reconciliation: Authoritative digest `0xCDAB2617` confirmed across 100-run baseline validation and 10/10 independent replay runs.
 - Complete CTest suite passing 7/7 (100%).
-- Full 100-run baseline reproduction verified.
+- Full 100-run baseline reproduction verified with zero divergence.
 - Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% unchanged.
 
-Next checkpoint: K.9 Merge into `exp` and transition to K.10 (Final Software Packaging & Research Conclusion).
+Next checkpoint: K.10 (Final Software Packaging & Research Conclusion).
+
 
 
 

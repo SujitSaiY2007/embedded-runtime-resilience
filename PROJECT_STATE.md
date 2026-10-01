@@ -405,7 +405,7 @@ Correlated Inspectable Trace
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
-- K.9: IMPLEMENTATION VERIFIED — READY FOR CLOSURE
+- K.9: CLOSED — MERGED INTO EXP
 - K.10: NOT STARTED
 
 
@@ -437,22 +437,28 @@ K.8 implementation and verification are complete, audited, and merged into `exp`
 - Post-merge verification on `exp`: 7/7 CTest passed; `evaluate_baselines.py --check` passed (100 runs); working tree clean.
 
 
-## 2026-10-01 — Chat K.9 complete: full software re-verification and methodology lock verified
+## 2026-10-01 — Chat K.9 complete: full software re-verification, evidence reconciliation, and methodology lock closed
 
-K.9 implementation and verification are complete on focused branch `feature/k9-methodology-lock-2026-10-01`.
+K.9 implementation, evidence reconciliation, and verification are complete, audited, and merged into `exp` via PR #10 at merge commit `d1e0dcb`.
+
+### Commits
+- K.9 implementation: `33fe87c`
+- S06/P2 evidence reconciliation: `2e0e5a0`
+- Merge into `exp`: `d1e0dcb`
 
 ### Locked methodology surface
 1. **Formal Methodology Lock Document (`research/phase2_k9_methodology_lock.md`):** Freezes experimental definitions across 15 dimensions (Items A–O: policy, workloads, scenarios, input conditions, fault taxonomy, recovery conditions, association rules, quarantine semantics, attempt counters, terminal outcomes, trace metrics, replay determinism, confound handling, reproducibility, programmatic reporting).
 2. **Attribution Boundaries & Limitations Formally Locked:**
    - *Quarantine Mechanism:* Exact-event quarantine is shared across P0–P4 in `ref_runtime.c`. No unique P4 quarantine work-preservation advantage may be claimed (`ablation_contract_valid=0` on P0–P3).
-   - *Persistent Fault Recovery:* P1, P2, P3, and P4 all recover on S06 (`OUTCOME_SUCCESS`; digests: P1/P3/P4 `0xA123BB47` via peripheral reinitialization, P2 `0xCDAB2617` via history-blind retry). P4 is not uniquely superior on persistent faults.
+   - *Persistent Fault Recovery:* P1, P2, P3, and P4 all recover on S06 (`OUTCOME_SUCCESS`; digests: P1/P3/P4 `0xA123BB47` via peripheral reinitialization, P2 `0xCDAB2617` via history-blind retry, P0 `0xFD5C2BA8` via blind escalation). P4 is not uniquely superior on persistent faults.
    - *Capacity Confounding:* W09 and W10 outcomes reflect table capacity limits (`QMAX`, `EPMAX`) and remain explicitly flagged as `capacity_confounded=1`.
    - *Software-Only Boundary:* No physical MCU timing, RAM/Flash, electrical noise, or STM32U575 hardware resilience claims are established.
-
    - *Prohibited Claims:* Universal superiority, statistical generalization, novelty, and patentability claims are strictly prohibited.
 3. **Scenario Scope Clarification:** Clarified mapping between full conceptual set (S01–S14) and the 6 canonical virtual demonstrator scenarios (S01, S02, S05, S06, S08, S14).
-4. **Architectural Decision D-110:** Added to `DECISION_LOG.md`.
-5. **Re-Verification Evidence:** Complete CTest suite passing 7/7 (100%); 100-run baseline reproduction passing; runtime integrity verified (`ref_runtime.c`, `ref_runtime.h` untouched).
+4. **Architectural Decisions:** Added `D-110` (methodology lock) and `D-111` (merge and closure) to `DECISION_LOG.md`.
+5. **Re-Verification Evidence:** Complete CTest suite passing 7/7 (100%); 100-run baseline reproduction passing with zero divergence; runtime integrity verified (`ref_runtime.c`, `ref_runtime.h` 100% untouched).
+6. **K.10 Boundary:** K.10 has NOT started.
+
 
 
 
