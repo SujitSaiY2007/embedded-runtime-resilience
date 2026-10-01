@@ -657,3 +657,17 @@ Do not:
 K.10 is complete only when the repository contains auditable metric-level results, compound-interaction analysis, adversarial prior-art evidence, explicit limitations, and falsification outcomes.
 
 Then report exact branch, commit, tests/checks, runtime integrity, working-tree status and the exact downstream starting point. STOP.
+
+
+---
+
+# ACTIVE CONTINUITY NOTICE — K.10 STARTING POINT (2026-10-01)
+
+The **active K.10 prompt is the final section above this notice** and supersedes all earlier/historical K.4–K.10 prompts retained in this file for continuity. Do not follow the obsolete earlier “K.10 Final Software Packaging & Research Conclusion” prompt.
+
+Canonical K.9.2 completion commit on `exp`:
+`04308f0fc797892da51e2265edfc57b810d0acd9`
+
+K.10 scope: **P4 Advantage & Novelty Investigation only**. Execute the locked measurement/experiment matrix and adversarial prior-art investigation. Do not predetermine superiority or novelty. Do not perform final synthesis or hardware validation in K.10.
+
+Antigravity is the repository execution agent. It must verify the live `exp` HEAD equals the expected K.9.2 starting point (or explicitly reconcile any legitimate intervening commit), inspect the working tree and protected runtime integrity, read the K.9.2 design/continuity files first, and return exact branch/commit/test/status information.
