@@ -210,3 +210,41 @@ The existing host evidence remains the verified basis: Windows/MSVC build, CTest
 ### Software-phase conclusion
 
 The software mechanism is now sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify proceeding to STM32U575 validation. The next empirical phase is hardware validation, not another redesign of Gates A-E.
+
+---
+
+## 2026-10-01 — Explicit Part Boundary
+
+### Part I — K-Series Host/Reference Foundation — COMPLETE
+K.1, K.2 and K.3 are COMPLETE. K.3 closes Part I as the final host/reference evidence-bounded synthesis checkpoint.
+
+### Part II — Software Demonstrator, Novelty Investigation, and Methodology Lock — ACTIVE
+K.4 onward is Part II.
+
+Part II will construct and validate a software-only virtual embedded-system demonstrator around the existing C reference runtime. The UI is the face of the system; the virtual system is the controlled environment; the C reference runtime is the authoritative policy implementation; the trace is the evidence path.
+
+### Part-II objective
+Produce a coherent software proof of concept showing fault occurrence, evidence-bounded association, event quarantine, bounded context/history-aware recovery, verification and release/degrade/escalation, conditional preservation of unrelated valid work, traceable explanation and controlled baseline comparison.
+
+### Part-II chat sequence
+| Chat | Scope | Must not do |
+|---|---|---|
+| K.4 | Novelty re-research + conceptual demonstrator architecture lock | No implementation |
+| K.5 | Virtual embedded-system technical design + interface contracts | No full UI or baseline experiment |
+| K.6 | Virtual embedded-system implementation around the C reference runtime | No final UI polish or claims |
+| K.7 | Professor-facing UI implementation | No recovery-policy redesign |
+| K.8 | Matched baseline vs proposed software validation | No hardware claims or new mechanism |
+| K.9 | Full software-chain re-verification + methodology lock | No hardware integration |
+| K.10 | Final software conclusion + evidence package + hardware-validation handoff | No unsupported novelty/patentability conclusion |
+
+A chat may report later-stage blockers but must not execute later-stage work unless explicitly re-authorized.
+
+### Part-II branch rule
+exp is the active reference branch. Work pattern: exp -> focused child branch -> checkpoint completion -> merge to exp -> PR/merge exp -> main.
+
+### Current checkpoint
+K.4 — Novelty Re-Research and Conceptual Architecture Lock.
+Required end state: prior-art landscape refreshed, novelty hypothesis narrowed, conceptual demonstrator architecture locked, K.4 continuity record complete, next checkpoint K.5 precisely defined.
+
+### Evidence boundary
+No Part-II software result may be represented as STM32U575 timing/resource measurement, physical electrical fault evidence, physical MPU behavior, final patentability, or established novelty.
