@@ -147,3 +147,35 @@ K.3 completed the final host/reference evidence synthesis and repository packagi
 See `research/phase1_final_evidence_synthesis.md` for the evidence matrix, interpretation boundaries, reproducibility entry point, and deferred-validation list.
 
 **Current checkpoint: K.3 COMPLETE.** Any future work must explicitly select a deferred validation objective rather than being inferred from host completion.
+
+
+## Historical K.2 record (preserved)
+
+## 2026-10-01 Chat K.2 completed — host corpus validation
+
+Chat K.2 regenerated and inspected the actual host corpus produced by the committed P0-P4 harness.
+
+### Observed corpus evidence
+
+- Corpus cardinality: **70 runs = W01-W14 × P0-P4**.
+- `corpus_manifest.csv` reported:
+  - `raw_input_preserved=PASS`
+  - `matched_input_equivalence=PASS`
+  - `capacity_confounds_explicit=PASS`
+  - `ablation_contract_flagging=PASS`
+  - `deterministic_replay=PASS`
+  - `host_evidence_only=1`
+  - `mcu_evidence=0`
+  - `physical_fault_evidence=0`
+- Representative `runs.csv` and `trace.csv` slices were inspected across W05-W08 and W11-W14, including recovery attempts, action/outcome fields, correctness, capacity metadata, and ablation metadata.
+- No concrete corpus-generation, serialization, or runtime defect was found during K.2 validation.
+
+### Interpretation boundary
+
+K.2 validates reproducible host corpus generation and the declared trace/outcome metadata. It does not turn host/reference evidence into MCU or physical evidence, and it does not make P0-P3 clean quarantine ablations. The implementation limitation remains: `runtime_start_fault()` applies exact-event quarantine across all variants, so P0-P3 remain `ablation_contract_valid=0`.
+
+### Current checkpoint
+
+**K.2 — COMPLETE.**
+
+The next checkpoint is **K.3 — Final synthesis and evidence-bounded project packaging**. Gates A-E remain frozen and normative; no MCU integration or physical validation has been started.
