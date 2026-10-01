@@ -545,8 +545,8 @@ K.9.2 is COMPLETE. Historical K.9 remains unchanged.
 ### Exact K.10 starting point
 - Repository: `SujitSaiY2007/embedded-runtime-resilience`
 - Branch: `exp`
-- K.9.2 completion commit: **to be reported after this checkpoint commit is created**
-- Starting state for K.10: the commit produced by this K.9.2 checkpoint.
+- K.9.2 completion commit: **`04308f0fc797892da51e2265edfc57b810d0acd9`**
+- Starting state for K.10: exactly this commit (verify the live `exp` HEAD before modifications).
 - Gates A-E: frozen.
 - `ref_runtime.c/.h`: unchanged.
 - K.10 must read the K.9.2 design/audit and all continuity files before any experiment.
