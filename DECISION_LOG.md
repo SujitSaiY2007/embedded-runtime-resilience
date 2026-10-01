@@ -385,3 +385,17 @@ The K.9 software re-verification, evidence reconciliation, and formal methodolog
 
 
 
+
+
+
+
+## D-112 — Insert K.9.2 Advantage & Novelty Investigation Design Lock before K.10
+**Status:** Accepted
+
+Do not move directly from K.9 methodology lock to a final software conclusion. Insert K.9.2 as a design/control checkpoint that systematically enumerates measurable P4 advantage dimensions, scenario combinations, trade-offs, negative controls, attribution rules, falsification criteria, and combination-level novelty search requirements.
+
+K.10 is thereby redefined as execution of the locked P4 Advantage & Novelty Investigation, not a predetermined proof of superiority or novelty. Final synthesis/hardware-validation handoff occurs only after K.10 evidence is complete.
+
+**Reason:** the K.8/K.9 evidence establishes reproducibility and bounded comparative observations but does not establish universal P4 superiority or novelty. A defensible research process must test meaningful alternatives including latency, transition cost, work preservation, resource cost, decision quality, compound conditions and trade-offs, while separately investigating prior art.
+
+Historical K.1-K.9 records remain immutable; this is a forward-looking scope decision.
