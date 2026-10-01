@@ -1,6 +1,6 @@
 # Embedded Runtime Resilience
 
-> **Research project — Gates A-E frozen; Chat K.1 host-experiment checkpoint verified; Chat K.2 corpus validation next**
+> **Research project — Gates A-E frozen; Chat K.2 host-corpus checkpoint complete; Chat K.3 final synthesis next**
 
 A solo software-dominant embedded-systems research project investigating a **Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**.
 
@@ -20,9 +20,9 @@ The project is in **Phase 1 — System Design and Experimental Preparation**, sp
 
 ### Next
 
-- **Chat K.2 — Corpus-level validation of the generated Gate-E host evidence**
+- **Chat K.3 — Final synthesis and evidence-bounded project packaging**
 
-The next task is to inspect the actual matched P0-P4 run/trace corpus and verify that the generated outcomes and trace records satisfy the frozen Gate-E evidence requirements. This does not reopen Gates A-E.
+K.2 has completed the host-corpus validation checkpoint. The next task is final synthesis: consolidate demonstrated evidence, limitations, remaining validation gaps, and the final project package without converting host/reference evidence into MCU or physical claims.
 
 **Large-scale firmware implementation has not started. Physical MCU validation has not started.** These remain downstream of the design and experimental gates.
 
@@ -102,3 +102,20 @@ The generated `out/` and `out.replay/` directories were inspected during verific
 ### Chat K.2 starting boundary
 
 Do not rebuild or redesign the harness unless corpus inspection exposes a concrete defect. Start by regenerating/inspecting the corpus, validating trace/outcome semantics against Gate E, and recording any remaining evidence limitations.
+
+## 2026-10-01 — Chat K.2 corpus-validation checkpoint
+
+Chat K.2 completed the corpus-level validation of the regenerated host evidence.
+
+- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
+- Regenerated corpus: **70 runs = W01-W14 × P0-P4**.
+- `corpus_manifest.csv` reports PASS for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Manifest evidence boundary reports host evidence only: `host_evidence_only=1`, `mcu_evidence=0`, `physical_fault_evidence=0`.
+- Representative trace/run slices were inspected across recovery-heavy and later workloads; no concrete corpus-generation, serialization, or runtime defect was found.
+- W09/W10 remain explicitly capacity-confounded.
+- P0-P3 remain `ablation_contract_valid=0`; P4 remains valid under the current implementation boundary.
+- The existing exact-event-quarantine implementation gap remains documented and unchanged.
+
+The generated `out/` and `out.replay/` directories remain transient verification artifacts. The committed source of reproducibility is the declarative corpus, harness, and checkpoint documentation.
+
+**K.2 is complete. K.3 is the next checkpoint.**
