@@ -139,3 +139,13 @@ The topic is frozen, but development must still pass these gates:
 ## 10. Patent disclaimer
 
 A project being described as “potentially patentable” is not a legal conclusion. Patentability depends on jurisdiction, claim construction, prior art, disclosure timing, inventorship, and professional legal assessment.
+
+## 2026-10-01 Operational Continuity Checkpoint — Chat K.1/K.2
+
+The host/reference experiment checkpoint has now been executed and verified.
+
+**Chat K.1 result:** the matched P0-P4 host harness builds under Windows/MSVC; CTest passes 2/2; the host experiment check passes all deterministic-replay, matched-input, raw-input, capacity-confound, and ablation-contract checks; 14 workloads × 5 variants produce 70 matched runs during verification.
+
+**Current limitations:** W09/W10 are capacity-confounded; P0-P3 are not clean quarantine ablations because exact-event quarantine is currently shared across all variants. Neither limitation is hidden or silently redefined.
+
+**Chat K.2 boundary:** regenerate and inspect the actual host corpus and validate trace/outcome semantics against Gate E. Do not infer policy-level evidence from harness-level PASS alone. Do not start MCU integration or physical validation during this checkpoint.
