@@ -164,3 +164,38 @@ The demonstrator must make visible: fault observation, evidence-bounded associat
 The project may showcase its **integrated novelty hypothesis** and explain why the combination is worth hardware testing. It must not state that novelty or patentability has already been proven. Individual ingredients remain established concepts. Final novelty assessment depends on the complete prior-art record and the eventual demonstrated implementation/claims.
 
 The software-phase conclusion is that the mechanism is sufficiently specified, implemented, reproducible, and evidence-bounded to justify target-MCU validation. It is not a claim of hardware performance or final patentability.
+
+## 13. Two-Part Project Structure
+
+### Part I — K-Series Host/Reference Foundation — COMPLETE
+Part I consists of K.1, K.2 and K.3. K.3 closes Part I as the final host/reference evidence-bounded synthesis checkpoint.
+
+### Part II — Software Demonstrator + Novelty Investigation + Methodology Lock — ACTIVE
+Part II begins at K.4. It combines novelty re-investigation, virtual embedded-system construction, UI demonstrator, matched software comparison, complete software re-verification, methodology lock and professor-facing proof of concept.
+
+Professor review is the intended use of this integrated Part-II work, not a separate gate.
+
+The authoritative architecture is:
+UI -> Virtual Embedded System -> C Reference Runtime -> Recovery Decision -> Trace -> UI
+
+## 14. Strict Multi-Chat Scope
+The active checkpoint plan is maintained in research/PART_II_CHAT_PLAN.md. Every chat has a fixed objective, allowed work, explicit out-of-scope work, required outputs and an exact next-chat handoff. A chat may not execute a later checkpoint simply because it becomes convenient.
+
+## 15. Branch Governance — exp Reference, main Integrated Mirror
+exp is the canonical active research/reference branch for Part II. All experimental and implementation progress must be based on the latest exp state.
+
+main is the canonical integrated/stable branch. It must track completed exp checkpoints through explicit pull requests/merges. No direct Part-II development is performed on main.
+
+Every PR from exp to main must identify the source exp commit, checkpoint/chat identifier, files changed, validation, known limitations and whether the merge closes a Part-II checkpoint.
+
+## 16. Continuity Requirement Per Chat
+At the beginning of every chat read PROJECT_MANUAL.md, PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md, research/PART_II_CHAT_PLAN.md and the latest relevant Part-II chat record. Then state a Continuity Check containing current Part, checkpoint, exp reference, completed prior checkpoints, exact scope and explicit out-of-scope work.
+
+At the end of every chat update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md when needed, the chat record and next-chat prompt. Verify branch relationship and whether main has been synchronized.
+
+## 17. Novelty Investigation Protocol
+The project may pursue a novelty hypothesis, but novelty is not assumed. Prior art must be checked across papers, patents, standards, commercial implementations and open-source implementations.
+
+Current search evidence already shows established prior art for peripheral recovery, checkpoint-based recovery, selective recovery, fault containment and policy-driven recovery. Therefore the novelty question is the narrower integrated mechanism: evidence-bounded fault association plus bounded context/history recovery plus event-level quarantine/dependency preservation under a deterministic zero-heap event-driven MCU model.
+
+No chat may convert this hypothesis into established novelty or patentability without documented technical prior-art analysis and, for patentability, professional legal assessment.
