@@ -523,3 +523,30 @@ The downstream stage after K.10 is now explicitly numbered **K.11 — Final Soft
 - **After K.11:** hardware validation and evidence-driven refinement, if authorized.
 
 The old “K.10 Final Software Conclusion + Hardware-Validation Handoff” wording is historical/superseded and must not be treated as the active checkpoint definition.
+
+---
+
+## 2026-10-01 — K.10 execution attempt: open/incomplete
+
+K.10 remains **ACTIVE / NOT COMPLETE**.
+
+### Verified live state
+- live branch: `exp`
+- live pre-K.10 HEAD: `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`
+- earlier declared continuity HEAD: `e28af7a539eec790aa7b9fc7a3bdc819f1992403`
+- the five commits after `e28af7...` modify continuity/control documents only; protected runtime source is unchanged
+- `reference/src/ref_runtime.c` blob: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`
+- `reference/include/ref_runtime.h` blob: `fbb7bb07bdb712fbadcde3d83bca19f82b5c8198`
+
+### K.10 work in this environment
+- K.9.2 design and methodology audited.
+- No runtime redesign or instrumentation changes made.
+- Fresh adversarial prior-art research completed.
+- Decisive K.10 experiment execution was **not completed** because Antigravity is unavailable in this environment and no local/CI execution path is exposed.
+
+### Evidence status
+- performance/advantage outcome: **UNTESTED**
+- integrated novelty hypothesis: **narrowed and weakened at component/pairwise level; unresolved at whole-combination level**
+- no superiority, universal advantage, novelty, patentability, hardware or statistical conclusion is established
+
+K.11 remains inactive. The next required action is actual K.10 execution through the designated Antigravity repository execution agent.
