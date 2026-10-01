@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "ref_runtime.h"
 #include <stdio.h>
 #include <stdlib.h>

@@ -37,16 +37,27 @@ def main() -> int:
     workloads = root / "workloads.csv"
     schedules = root / "fault_schedules.csv"
     exe = args.exe if args.exe.is_absolute() else (root.parent / args.exe)
+    if not exe.exists():
+        for candidate in (
+            exe.with_suffix(".exe"),
+            exe.parent / "Debug" / f"{exe.name}.exe",
+            exe.parent / "Release" / f"{exe.name}.exe",
+            exe.parent / "Debug" / exe.name,
+            exe.parent / "Release" / exe.name,
+        ):
+            if candidate.exists():
+                exe = candidate
+                break
 
     out = args.out if args.out.is_absolute() else (root.parent / args.out)
     replay = out.with_name(out.name + ".replay")
     for p in (out, replay):
         if p.exists():
-            shutil.rmtree(p)
-        p.mkdir(parents=True)
+            shutil.rmtree(p, ignore_errors=True)
+        p.mkdir(parents=True, exist_ok=True)
 
     for dest in (out / "raw", replay / "raw"):
-        dest.mkdir()
+        dest.mkdir(parents=True, exist_ok=True)
         shutil.copy2(workloads, dest / "workloads.csv")
         shutil.copy2(schedules, dest / "fault_schedules.csv")
 
