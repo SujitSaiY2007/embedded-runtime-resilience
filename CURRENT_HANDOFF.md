@@ -386,7 +386,8 @@ Surface in `reference/virtual/`:
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
 - K.9: CLOSED — MERGED INTO EXP
-- K.10: NOT STARTED
+- K.10: COMPLETE
+- K.11: NOT STARTED
 
 
 ## 2026-10-01 — Chat K.8 complete: matched baseline validation verified and merged into exp
@@ -473,13 +474,46 @@ Files created/updated:
 - Deterministic 100-run reproduction: 70 host runs + 30 demonstrator runs, 100% bit-for-bit identical digests with zero divergence.
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
 
-### Exact next task: K.10 Final Software Packaging & Research Conclusion
 
-1. Prepare final software-phase release and freeze documentation under the locked methodology boundaries.
-2. Package research findings under locked evidence boundaries (no hardware claims, no superiority claims, no patent claims).
-3. Conclude software phase prior to target-MCU validation.
 
-K.10 has NOT been started.
+## 2026-10-01 — Chat K.10 complete: P4 advantage & novelty investigation verified
+
+### Continuity
+
+- Part II remains active.
+- K.1–K.3 are complete.
+- K.4–K.9 are complete and merged into `exp`.
+- K.10 is COMPLETE on `exp`.
+- Gates A–E remain frozen and normative.
+- The C reference runtime remains the sole recovery-policy authority.
+
+### Implemented K.10 surface
+
+Files created/updated:
+- `research/phase2_k9_2_p4_advantage_novelty_design.md`: Authoritative design specification for the 16-case-family matched matrix, hypotheses (H1–H5), metrics, and attribution rules.
+- `reference/experiments/k10_experiment.c`: C11 runner executing 16 case families across P0–P4 with 5 repetitions (400 runs) and logging raw outputs.
+- `reference/experiments/evaluate_k10_advantage.py`: Python harness analyzing runs, checking determinism, evaluating interactions, and generating results artifact.
+- `research/phase2_k10_p4_advantage_novelty_results.md`: Complete results report with 16-case matrix, attribution analysis, trade-offs, interactions, controls, prior art, and classifications.
+- `research/chat_records/chat_k10_record.md`: Canonical chat record for K.10.
+- `DECISION_LOG.md`: Added architectural decision `D-117`.
+
+### Verification evidence
+
+- CTest: 8/8 passed (100%):
+  1. `reference_tests` (Passed)
+  2. `host_experiment_replay` (Passed)
+  3. `k10_advantage_evaluation` (Passed)
+  4. `virtual_system_tests` (Passed)
+  5. `virtual_demo_test` (Passed)
+  6. `virtual_baseline_tests` (Passed)
+  7. `virtual_ui_contracts_test` (Passed)
+  8. `matched_baseline_validation_test` (Passed)
+- Deterministic 400-run execution: 16 case families $\times$ 5 variants $\times$ 5 repetitions = 100% bit-for-bit identical.
+- Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
+
+### Exact next task: K.11 Target-MCU Handoff & Final Part II Synthesis
+K.11 has NOT been started.
+
 
 
 

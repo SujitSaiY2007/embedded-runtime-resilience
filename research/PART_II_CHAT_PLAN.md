@@ -105,7 +105,8 @@ Status:
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
 - K.9: CLOSED AND MERGED INTO EXP
-- K.10: NOT STARTED
+- K.10: COMPLETE
+- K.11: NOT STARTED
 
 ## K.7 completion and merge update — 2026-10-01
 
@@ -148,7 +149,26 @@ Implemented surface:
 - Full 100-run baseline reproduction verified with zero divergence.
 - Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% unchanged.
 
-Next checkpoint: K.10 (Final Software Packaging & Research Conclusion).
+Next checkpoint: K.10 (P4 Advantage & Novelty Investigation).
+
+## K.10 completion update — 2026-10-01
+
+K.10 P4 Advantage & Novelty Investigation is COMPLETE on `exp`.
+
+Implemented surface:
+- `research/phase2_k9_2_p4_advantage_novelty_design.md`: Authoritative design specification for 16-case-family matched matrix, hypotheses (H1–H5), metrics, and attribution rules.
+- `reference/experiments/k10_experiment.c`: C11 runner executing 16 case families across P0–P4 with 5 repetitions (400 runs) logging raw CSV data.
+- `reference/experiments/evaluate_k10_advantage.py`: Evaluation harness and report generator.
+- `research/phase2_k10_p4_advantage_novelty_results.md`: Complete results report documenting 16-case matrix, attribution analysis, trade-offs, interactions, controls, prior art, and classifications.
+- `research/chat_records/chat_k10_record.md`: Canonical chat record for K.10.
+- `DECISION_LOG.md`: Added architectural decision `D-117`.
+- Complete CTest suite expanded to 8 targets (8/8 passed, 100%).
+- 400 matched executions verified with 100% determinism.
+- Classifications: Performance: `Demonstrated bounded advantage`; Prior Art: `Potentially distinguishable combination — further legal/technical review required`.
+- Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
+
+Next checkpoint: K.11 (Target-MCU Handoff & Final Part II Synthesis).
+
 
 
 

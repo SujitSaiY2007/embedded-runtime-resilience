@@ -26,6 +26,10 @@ add_executable(host_experiment experiments/host_experiment.c)
 target_link_libraries(host_experiment PRIVATE ref_runtime)
 target_compile_options(host_experiment PRIVATE ${REF_WARNING_FLAGS})
 
+add_executable(k10_experiment experiments/k10_experiment.c)
+target_link_libraries(k10_experiment PRIVATE ref_runtime)
+target_compile_options(k10_experiment PRIVATE ${REF_WARNING_FLAGS})
+
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
   add_test(
@@ -34,6 +38,13 @@ if(Python3_Interpreter_FOUND)
             ${CMAKE_CURRENT_SOURCE_DIR}/experiments/run_host_experiment.py
             --check
   )
+  add_test(
+    NAME k10_advantage_evaluation
+    COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/experiments/evaluate_k10_advantage.py
+            --check
+  )
 endif()
 
 add_subdirectory(virtual)
+

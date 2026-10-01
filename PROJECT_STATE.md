@@ -406,7 +406,8 @@ Correlated Inspectable Trace
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
 - K.9: CLOSED — MERGED INTO EXP
-- K.10: NOT STARTED
+- K.10: COMPLETE
+- K.11: NOT STARTED
 
 
 ## 2026-10-01 — Chat K.8 complete: matched baseline validation verified and merged
@@ -457,7 +458,36 @@ K.9 implementation, evidence reconciliation, and verification are complete, audi
 3. **Scenario Scope Clarification:** Clarified mapping between full conceptual set (S01–S14) and the 6 canonical virtual demonstrator scenarios (S01, S02, S05, S06, S08, S14).
 4. **Architectural Decisions:** Added `D-110` (methodology lock) and `D-111` (merge and closure) to `DECISION_LOG.md`.
 5. **Re-Verification Evidence:** Complete CTest suite passing 7/7 (100%); 100-run baseline reproduction passing with zero divergence; runtime integrity verified (`ref_runtime.c`, `ref_runtime.h` 100% untouched).
-6. **K.10 Boundary:** K.10 has NOT started.
+
+
+## 2026-10-01 — Chat K.10 complete: P4 advantage & novelty investigation verified
+
+K.10 controlled experiments and adversarial prior-art analysis are complete on `exp`.
+
+### Evaluated surface
+1. **Case Families:** 16 Case Families (CF01–CF16) covering persistent faults, queue pressure, dependencies, association ambiguity, recovery failure, subsequent fault handling, criticality, load controls, negative controls, and baseline-cost controls.
+2. **Total Executions:** 16 families $\times$ 5 variants (P0–P4) $\times$ 5 repetitions = **400 matched executions**.
+3. **Determinism:** 100% bit-for-bit identical results across all 5 repetitions.
+4. **Harness:** Added `reference/experiments/k10_experiment.c` and `reference/experiments/evaluate_k10_advantage.py`. CTest expanded from 7 to 8 tests (8/8 passed, 100%).
+
+### Key findings & attribution
+1. **Genuine P4 Advantages:**
+   - *Association Ambiguity (CF04, CF07):* P4 strictly enforces `association == ASSOC_EXACT`, safely failing closed to `TERMINAL_ESCALATE` and cleanly closing the episode. Baselines P0–P3 attempt retry on invalid targets (`OUTCOME_STALE_REF`) and leave episodes unclosed (`ACTIVE`), causing subsequent faults to fail with `OUTCOME_EPISODE_FULL`.
+   - *Bounded Ladder Termination (CF05):* Under repeated recovery faults, P4 enforces the exact Gate C ladder ($T_1 \to T_2 \to T_3 \to T_4$) and terminates cleanly at attempt 3, avoiding unbounded reinit loops in P2/P3.
+2. **Shared Mechanisms (No P4 Superiority):**
+   - *Work Preservation (CF02, CF14):* Background work preservation under quarantine is identical across P0–P4 due to shared quarantine in `ref_runtime.c`.
+   - *Persistent Fault Recovery (CF01, CF10):* P1, P2, P3, and P4 all recover via peripheral reinitialization (`ACT_REINIT_OR_RESET`).
+3. **Measured Trade-Offs (Baseline Advantages):**
+   - *Known Persistent Fault Cost (CF16):* P2 (Context Only) immediately reinitializes on attempt 0 (1 attempt); P4 retries twice first, taking 3 attempts.
+   - *Decision Overhead:* P0 evaluates 1 branch; P4 evaluates up to 6 conditional checks.
+4. **Negative Controls:** 6 out of 16 case families (CF02, CF09, CF11, CF12, CF13, CF15) demonstrated zero difference between P4 and baselines.
+
+### Final classifications
+- **Experimental Performance:** **Demonstrated bounded advantage**
+- **Integrated Prior Art:** **Potentially distinguishable combination — further legal/technical review required**
+- **Runtime Integrity:** `ref_runtime.c` and `ref_runtime.h` 100% untouched.
+- **K.11 Boundary:** K.11 has NOT started.
+
 
 
 

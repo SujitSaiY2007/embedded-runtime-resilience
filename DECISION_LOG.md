@@ -378,17 +378,6 @@ The K.9 software re-verification, evidence reconciliation, and formal methodolog
 
 **Reason:** locks the re-verified methodology and reconciled empirical evidence onto canonical `exp` and formally closes K.9, clearing the path to K.10 final software packaging and research conclusion.
 
-
-
-
-
-
-
-
-
-
-
-
 ## D-112 — Insert K.9.2 Advantage & Novelty Investigation Design Lock before K.10
 **Status:** Accepted
 
@@ -446,3 +435,28 @@ K.10 is not complete. The live repository was audited and the protected runtime 
 Fresh prior-art research may be recorded as research-control evidence, but it cannot substitute for the required experiments. K.11 remains inactive until K.10's actual exit conditions are satisfied.
 
 **Reason:** preserves research integrity and prevents fabricated execution, metrics, or superiority/novelty claims.
+
+---
+
+## D-117 — K.10 P4 Advantage & Novelty Investigation Results Completed
+**Status:** Accepted
+
+The K.10 controlled empirical evaluation and adversarial prior-art analysis were executed by the designated Antigravity repository execution agent across 400 matched runs (16 Case Families CF01–CF16 $\times$ 5 Policy Variants P0–P4 $\times$ 5 repetitions) with 100% determinism.
+1. **Genuine P4 Advantages Confirmed:**
+   - *Association Ambiguity (CF04, CF07):* P4 strictly enforces `association == ASSOC_EXACT`, safely failing closed to `TERMINAL_ESCALATE` and cleanly closing the episode. Baselines P0–P3 attempt retry on invalid targets (`OUTCOME_STALE_REF`) and leave episodes unclosed (`ACTIVE`), causing subsequent faults to fail with `OUTCOME_EPISODE_FULL`.
+   - *Bounded Ladder Termination (CF05):* Under repeated recovery faults, P4 enforces the exact Gate C ladder ($T_1 \to T_2 \to T_3 \to T_4$) and terminates cleanly at attempt 3, avoiding unbounded reinit loops in P2/P3.
+2. **Shared Mechanisms Codified:**
+   - Work preservation under quarantine is identical across P0–P4 due to shared exact-event quarantine in `ref_runtime.c` (CF02, CF14).
+   - Recovery from persistent faults is shared across P1–P4 via peripheral reinitialization (CF01, CF10).
+3. **Trade-Offs and Baseline Advantages Measured:**
+   - In CF16, P2 (Context Only) immediately reinitializes on attempt 0 (1 attempt) for known persistent faults, whereas P4 retries twice first, taking 3 attempts. P2 is cheaper/faster under known persistent faults.
+   - P0 has lower decision complexity (1 branch vs up to 6 in P4).
+4. **Adversarial Prior-Art Assessment:**
+   - All individual mechanisms are established in prior art (PA-01 through PA-10).
+   - The whole combination is potentially distinguishable, but vulnerable to obviousness challenge.
+5. **Classifications Established:**
+   - Performance: `Demonstrated bounded advantage`
+   - Prior Art: `Potentially distinguishable combination — further legal/technical review required`
+6. **Runtime Integrity:** `ref_runtime.c` and `ref_runtime.h` 100% untouched.
+
+**Reason:** provides controlled empirical evidence isolating genuine P4 advantages from shared infrastructure and establishing baseline trade-offs prior to K.11 target-MCU handoff.

@@ -227,23 +227,21 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 ---
 ---
 ---
-# Active Next-Chat Prompt — K.10: Final Software Packaging & Research Conclusion
+# Active Next-Chat Prompt — K.11: Target-MCU Handoff & Final Part II Synthesis
 
 Continue the canonical project in:
 
 `SujitSaiY2007/embedded-runtime-resilience`
 
-Start from the canonical merged and closed K.9 `exp` checkpoint:
+Start from the canonical `exp` state with K.10 complete.
 
-`exp @ d1e0dcb`
-
-Do not restart Gates A–E, repeat K.1–K.9 work, or alter the C reference runtime.
+Do not restart Gates A–E, repeat K.1–K.10 work, or alter the C reference runtime.
 
 ## Objective
 
-Execute **K.10 — Final Software Packaging & Research Conclusion**.
+Execute **K.11 — Target-MCU Handoff & Final Part II Synthesis**.
 
-Package the complete software proof of concept, freeze canonical software-phase documentation, synthesize the research findings under the locked evidence boundaries, and establish the exact handoff to target-MCU validation.
+Synthesize the complete Part II software evidence, package the software demonstrator, establish the formal target-MCU validation plan for STM32U575, and prepare the repository for Part III physical hardware validation.
 
 ## Read first
 
@@ -255,32 +253,27 @@ Package the complete software proof of concept, freeze canonical software-phase 
 6. `NEXT_CHAT_PROMPT.md`
 7. `research/PART_II_CHAT_PLAN.md`
 8. `research/phase2_k9_methodology_lock.md`
-9. `research/phase2_k8_matched_baseline_validation.md`
-10. `research/chat_records/chat_k9_record.md`
-11. `reference/include/ref_runtime.h`
-12. `reference/src/ref_runtime.c`
+9. `research/phase2_k9_2_p4_advantage_novelty_design.md`
+10. `research/phase2_k10_p4_advantage_novelty_results.md`
+11. `research/chat_records/chat_k10_record.md`
+12. `reference/include/ref_runtime.h`
+13. `reference/src/ref_runtime.c`
 
-## Allowed in K.10
+## Allowed in K.11
 
-- Final software-phase release packaging and documentation freeze;
-- Synthesis of software evidence across 100 deterministic runs (W01–W14, S01–S14, P0–P4);
-- Bounded novelty and differentiation statement based strictly on software findings;
-- Definition of target-MCU hardware-validation requirements, testbed specification, and success criteria;
-- Final Part II continuity and repository closure.
+- Final Part II synthesis and documentation freeze;
+- STM32U575 hardware testbed specification and physical instrumentation plan;
+- Target-MCU validation success criteria and test schedule;
+- Final software release packaging and transition to Part III.
 
-## Explicitly Prohibited in K.10
+## Explicitly Prohibited in K.11
 
-- Physical MCU hardware experiments, acquisition assumptions, or physical fault injection;
-- Altering Gates A–E or modifying `ref_runtime.c` / `ref_runtime.h`;
-- Introducing new recovery policies or a second scheduler;
+- Physical hardware execution without explicit authorization;
+- Modifying `ref_runtime.c` or `ref_runtime.h`;
+- Changing Gates A–E;
 - Claiming universal superiority of P4;
-- Claiming novelty or patentability beyond bounded software differentiation;
-- Removing or redefining locked qualifications (`capacity_confounded=1`, `ablation_contract_valid=0`, S06 multi-policy recovery, software-only scope).
+- Claiming novelty beyond the bounded software differentiation established in K.10.
 
-## Required K.10 Conclusion
-
-Conclude with a clear, evidence-based software-phase conclusion:
-"The mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation."
 
 
 
@@ -724,11 +717,9 @@ STOP after K.11. Do not begin hardware implementation in K.11 unless explicitly 
 
 ---
 
-## ACTIVE K.10 CONTINUATION — EXECUTION REQUIRED (2026-10-01)
+## ACTIVE NEXT PROMPT — K.11: Final Software Synthesis & Target-MCU Handoff (2026-10-01)
 
-K.10 is **NOT COMPLETE** and must not be treated as a final-synthesis stage.
-
-Start from the current live `exp` HEAD. The previous audit reconciled the earlier expected `e28af7...` state to the actual live `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`; the intervening five commits are continuity-only.
+Start from the canonical `exp` branch after K.10 completion.
 
 ### Read first
 1. PROJECT_MANUAL.md
@@ -738,29 +729,20 @@ Start from the current live `exp` HEAD. The previous audit reconciled the earlie
 5. CHAT_CONTINUITY_PROTOCOL.md
 6. research/PART_II_CHAT_PLAN.md
 7. research/phase2_k9_methodology_lock.md
-8. research/phase2_k8_matched_baseline_validation.md
-9. research/phase2_k9_2_p4_advantage_novelty_design.md
-10. research/chat_records/chat_k9_record.md
-11. research/chat_records/chat_k9_2_record.md
-12. research/novelty_investigation.md
-13. reference/include/ref_runtime.h
-14. reference/src/ref_runtime.c
+8. research/phase2_k9_2_p4_advantage_novelty_design.md
+9. research/phase2_k10_p4_advantage_novelty_results.md
+10. research/chat_records/chat_k10_record.md
+11. reference/include/ref_runtime.h
+12. reference/src/ref_runtime.c
 
 ### Mission
-Execute **K.10 — P4 Advantage & Novelty Investigation** only.
+Execute **K.11: Final Software Synthesis & Target-MCU Handoff**.
+- Synthesize all Part II empirical evidence (K.1–K.10) into a coherent, evidence-bounded conclusion.
+- Formulate target-MCU hardware-validation requirements, testbed specification, instrumentation, scenarios, controls, and success criteria for STM32U575.
+- Package the professor-facing demonstrator artifacts and final software-phase deliverables.
+- Maintain strict boundaries: no unverified hardware claims, no patentability claims.
 
-### Mandatory
-Use Antigravity as the repository execution agent. First report branch, starting commit, working-tree state and protected runtime integrity. Then execute all locked matched P0-P4 case families and controls with approved non-invasive instrumentation only, produce metric-level evidence, analyze interactions/trade-offs, and complete the adversarial prior-art investigation.
-
-### Do not
-- redesign P4;
-- modify Gates A-E;
-- modify `ref_runtime.c/.h`;
-- add a new policy/engine/scheduler;
-- claim universal superiority;
-- claim novelty/patentability;
-- perform hardware validation;
-- start K.11.
-
-### Exit
-K.10 is complete only after the actual matched cases, controls, metrics, interactions, trade-offs, prior-art investigation, falsification assessment and continuity updates are all present, committed and pushed. Then STOP. Do not activate K.11 prematurely.
+### Mandatory Rules
+- Do NOT alter Gates A–E.
+- Do NOT modify `reference/src/ref_runtime.c` or `reference/include/ref_runtime.h`.
+- Do NOT claim physical MCU cycle/RAM/energy numbers.
