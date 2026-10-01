@@ -72,3 +72,32 @@ No MCU performance/resource measurement, physical fault validation, energy measu
 ## Continuation
 
 `CURRENT_HANDOFF.md` contains the exact next continuation point. `research/phase1_reference_implementation_design.md` records implementation decisions. `reference/tests/canonical_workloads.md` maps W01-W14 to executable tests. Historical Gate A-E artifacts remain normative and preserved.
+
+## 2026-10-01 host experiment checkpoint
+
+The committed reference implementation was audited against Gates A-E before experiment work. Gates A-E remain unchanged.
+
+A concrete implementation gap was recorded in `research/phase1_reference_implementation_audit.md`: `runtime_start_fault()` applies exact-event quarantine for every policy variant, while frozen Gate C/E reserve selective dependency-aware event quarantine as the P4 integrated mechanism. No runtime semantics were silently changed.
+
+A smallest declarative experiment layer has been added under `reference/experiments/`:
+
+- explicit workload operation corpus;
+- explicit deterministic fault schedules;
+- matched P0-P4 C harness;
+- fixed CSV run/trace outputs;
+- deterministic replay driver;
+- matched-input/replay checks;
+- explicit capacity-confounding flags;
+- explicit P0-P3 ablation-validity flags.
+
+The harness is host/reference evidence only. Generated corpus outputs must be produced by the committed build/run command before being treated as executed evidence. This environment could not execute the repository's committed binary directly, so no successful build/test result is claimed from this chat.
+
+### Current implementation boundary
+
+**Reference semantics:** unchanged.
+
+**Experiment harness:** committed but execution verification is pending a host build/run.
+
+**Trace corpus:** raw declarative inputs are committed; generated `runs.csv`/`trace.csv` are reproducibly generated artifacts and are not represented as already executed here.
+
+**MCU/physical evidence:** none.
