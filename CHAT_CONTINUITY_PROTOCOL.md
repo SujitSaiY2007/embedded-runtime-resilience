@@ -130,3 +130,12 @@ Every new chat begins with a Continuity Check containing Part, checkpoint, exp r
 
 ## Chat exit contract
 Every chat finishes with completed work, tests/evidence, unresolved issues, files changed, exact next checkpoint, exact branch state, whether exp was updated and whether main was synchronized. The next chat must not rely on conversation memory.
+
+
+## 2026-10-01 — Part-II K.5 checkpoint
+
+K.4 is complete and K.5 is complete at design/contract level. The current next checkpoint is K.6 — Virtual Embedded System Implementation.
+
+K.5 established the implementation boundary around the existing C runtime and preserved Gates A-E. The next chat must read the K.5 technical design, interface contracts, deterministic scenarios and K.5 record before coding.
+
+K.6 must not redesign the recovery policy or create a second policy authority. The current runtime has no peripheral-action callback; this is a documented adapter limitation and must not be silently solved by changing runtime semantics.
