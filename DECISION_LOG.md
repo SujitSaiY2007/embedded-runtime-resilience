@@ -160,3 +160,6 @@ Ambiguity can justify conservative blocking when safety requires it, but cannot 
 **Status:** Rejected in favor of D-053.
 
 They have potentially distinct mechanisms, but the policy-level role is one bounded peripheral-recovery action until controlled implementation experiments establish a reason to split them.
+
+| D-076 | Accepted | Audit the committed reference before experiment work and explicitly record the P0-P3 quarantine ablation gap rather than silently changing runtime semantics. | The frozen Gate C/E variant definitions reserve selective dependency-aware event quarantine for P4, while `runtime_start_fault()` currently applies exact-event quarantine for every variant. The gap must remain visible until baseline semantics are separately specified. |
+| D-077 | Accepted | Use a declarative host experiment input corpus plus deterministic replay harness for the first P0-P4 matched-input checkpoint. | A line-oriented workload operation stream and deterministic fault schedules make inputs inspectable, preserve matched execution conditions, and avoid hidden behavior in the correctness harness. |
