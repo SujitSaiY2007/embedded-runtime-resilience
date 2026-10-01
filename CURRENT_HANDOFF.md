@@ -218,3 +218,33 @@ The locked conclusion is: the project now has a specified, implemented, reproduc
 - W09/W10 are capacity-confounded.
 - Host evidence is not MCU/physical evidence.
 - No novelty/patentability conclusion is inferred from the software checkpoint.
+
+
+---
+
+## 2026-10-01 — Part-II boundary established after K.3
+
+### Part-I closure
+Part I = K.1 -> K.2 -> K.3 — COMPLETE.
+K.3 is the final host/reference synthesis checkpoint of Part I. It remains evidence-bounded and does not claim MCU/physical validation, statistical superiority, final novelty or patentability.
+
+### Part-II opening
+Part II begins at K.4.
+Part II is the integrated novelty re-investigation, virtual embedded-system/virtual-circuit construction, software demonstrator/UI, matched software comparison, full software re-verification, methodology lock, professor-facing proof of concept and hardware-validation handoff.
+
+Professor review is the intended use of this integrated Part-II phase, not a separate stage.
+
+### Branch state
+- exp = active reference branch.
+- main = stable integrated mirror.
+- Part-II work starts from the latest exp state.
+- Completed checkpoints return to exp, then synchronize to main by PR/merge.
+- Direct Part-II development on main is prohibited by project protocol.
+
+### Immediate next checkpoint
+K.4 — Novelty Re-Research and Part-II Architecture Lock.
+
+K.4 must establish the current prior-art landscape and lock the conceptual software demonstrator architecture before implementation begins.
+
+### No-forward-scope rule
+K.4 must not implement the virtual circuit/UI or alter the recovery mechanism. K.5 follows only after K.4 closes.
