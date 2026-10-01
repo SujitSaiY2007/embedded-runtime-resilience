@@ -337,7 +337,13 @@ The K.8 matched baseline validation was executed across 100 deterministic runs:
 The K.8 matched baseline validation was audited, verified, and merged into `exp` via PR #9 at merge commit `5590bf1`. Post-merge verification confirmed:
 1. Complete CTest suite passing 7/7 (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_baseline_tests`, `virtual_ui_contracts_test`, `matched_baseline_validation_test`.
 2. Deterministic execution of 100 runs (70 host runs + 30 demonstrator runs) verified identical to pre-merge evidence.
-3. Stable scenario digests preserved across all runs (S01: `0xB72131CB`, S02: `0xE8691374`, S05: `0xBDC168BD`, S06: P0 `0xFD5C2BA8` / P1-P4 `0xA123BB47`, S08: P0 `0x489DED5F` / P1-P4 `0x5A52628A`, S14: `0x9185616C`).
+3. Stable scenario digests preserved across all runs:
+   - S01: `0xB72131CB` (P0–P4)
+   - S02: `0xE8691374` (P0–P4)
+   - S05: `0xBDC168BD` (P0–P4)
+   - S06: P0 `0xFD5C2BA8` (escalate), P1/P3/P4 `0xA123BB47` (reinit success), P2 `0xCDAB2617` (retry success)
+   - S08: P0 `0x489DED5F` (stale ref), P1–P4 `0x5A52628A` (fail-closed escalate)
+   - S14: `0x9185616C` (P0–P4)
 4. Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` untouched; `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition; zero synthetic EventRefs.
 5. Known qualifications retained: W09/W10 `capacity_confounded=1` and P0–P3 `ablation_contract_valid=0`.
 
@@ -350,13 +356,14 @@ The K.8 matched baseline validation was audited, verified, and merged into `exp`
 The experimental methodology, evaluation protocol, attribution boundaries, and interpretation constraints governing the software comparison between P4 and baselines P0–P3 are formally locked:
 1. **Frozen Experimental Definitions (Items A–O):** Policy definitions (P0–P4), workload definitions (W01–W14), scenario definitions (S01–S14 with 6-scenario demonstrator subset), input/capacity conditions (`QMAX=16`, `XMAX=4`, `EPMAX=1`), fault taxonomy, recovery ladder ($T_1 \dots T_4$), EventRef association rules (`assoc == ASSOC_EXACT`), quarantine rules, attempt counting, terminal outcomes, trace-derived metrics, deterministic replay digests, confound handling, reproducibility protocol, and programmatic report generation are frozen in `research/phase2_k9_methodology_lock.md`.
 2. **Quarantine Limitation Locked:** Exact-event quarantine is applied across all variants (P0–P4) in `ref_runtime.c`. No empirical work-preservation advantage resulting from quarantine may be claimed for P4 over P0–P3 in this software harness (`ablation_contract_valid=0` on P0–P3).
-3. **S06 Limitation Locked:** P1, P2, P3, and P4 all achieve recovery (`OUTCOME_SUCCESS`, digest `0xA123BB47`) via peripheral reinitialization on attempt 3. P4 is not uniquely superior on persistent faults; the recovery advantage over P0 is attributable to peripheral recovery capability common to P1–P4.
+3. **S06 Limitation Locked:** P1, P2, P3, and P4 all achieve recovery (`OUTCOME_SUCCESS`; digests: P1/P3/P4 `0xA123BB47` via peripheral reinitialization, P2 `0xCDAB2617` via history-blind retry). P4 is not uniquely superior on persistent faults; the recovery advantage over P0 is attributable to peripheral recovery capability common to P1–P4.
 4. **Capacity Confound Locked:** W09 and W10 outcomes reflect table capacity limits (`QMAX`, `EPMAX`) and remain explicitly flagged as `capacity_confounded=1`. They must not be cited as evidence of policy intelligence.
 5. **Software-Only Boundary Locked:** Evidence is strictly host/virtual simulation. No claims regarding physical MCU cycle timing, STM32U575 RAM/Flash overhead, MPU fault hardware, electrical noise, or physical recovery are established.
 6. **Prohibited Claims Locked:** Prohibits universal superiority claims, statistical significance claims, novelty claims, patentability claims, hardware validity claims, and universal generalization claims.
 7. **Runtime Integrity Preserved:** `ref_runtime.c` and `ref_runtime.h` remain completely untouched.
 
 **Reason:** ensures all empirical research claims are strictly bounded, defensible, reproducible, and methodologically controlled prior to K.10 final packaging.
+
 
 
 

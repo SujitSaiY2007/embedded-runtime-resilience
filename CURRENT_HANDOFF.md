@@ -425,12 +425,13 @@ Files created/updated:
   6. `virtual_ui_contracts_test` (Passed)
   7. `matched_baseline_validation_test` (Passed)
 - Comparative findings:
-  - Persistent fault (W06/S06): P0 escalates blindly (`OUTCOME_TERMINAL_ESCALATE`), while P1, P2, P3, and P4 progress to `ACT_REINIT_OR_RESET` on attempt 3 and recover (`OUTCOME_SUCCESS`).
+  - Persistent fault (W06/S06): P0 escalates blindly (`OUTCOME_TERMINAL_ESCALATE`), while P1, P3, and P4 progress to `ACT_REINIT_OR_RESET` on attempt 3 (and P2 retries without history bounds), all achieving recovery (`OUTCOME_SUCCESS`).
   - Ambiguous association (W12/S08): P0 blindly retries unmapped target returning `OUTCOME_STALE_REF` and leaves episode active; P4 detects non-exact association, cleanly terminates with `OUTCOME_TERMINAL_ESCALATE` and closes episode with zero synthetic EventRefs.
   - Deferable work (W07): P0 escalates; P1–P4 cleanly degrade to `TERMINAL_DEGRADE`.
   - Independent work preservation (W01/S01): All variants preserve unassociated work under exact quarantine.
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
 - Post-merge verification on `exp`: 7/7 CTest passed; `evaluate_baselines.py --check` passed (100 runs); working tree clean.
+
 
 
 ## 2026-10-01 — Chat K.9 complete: full software re-verification and methodology lock verified
