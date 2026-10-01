@@ -427,3 +427,11 @@ The K.9.2 design/audit checkpoint is committed on `exp` at `04308f0fc797892da51e
 K.10 is strictly the P4 Advantage & Novelty Investigation. It must execute the locked matched scenarios, controls, admissible instrumentation and adversarial prior-art search without predetermining a positive result. Final synthesis/hardware-validation handoff remains downstream of the K.10 evidence.
 
 **Reason:** removes ambiguity between historical K.10 packaging prompts and the current K.10 investigation scope and provides an exact auditable starting point for the next chat.
+
+
+## D-115 — Post-K.10 checkpoint numbered K.11
+**Status:** Accepted
+
+The downstream checkpoint after K.10 is explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the P4 Advantage & Novelty Investigation and is not itself the final conclusion.
+
+K.11 will synthesize K.10 evidence, produce the evidence-bounded software-phase conclusion, package the final evidence, and define target-MCU hardware-validation requirements and success criteria. It must not redesign P4 or force a preferred outcome.
