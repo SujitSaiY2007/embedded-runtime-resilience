@@ -10,7 +10,7 @@ The frozen development topic is:
 
 Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**.
 
-**Current status:** Phase 1E.1 — Experimental Design / Formalization Foundation. Gates A, B, C, and D are accepted at the semantic/design-model level. Gate E — Baselines + Experimental Protocol — is next. Large-scale firmware implementation and physical validation remain deferred.
+**Current status:** **K.3 COMPLETE — final host/reference synthesis checkpoint.** Gates A-E are frozen and normative; the minimal reference implementation plus K.1/K.2 host evidence checkpoints are complete. MCU integration and physical validation remain unperformed.
 
 The intended outcome is not merely a functioning application. The target is a technically defensible research contribution that may support an academic publication and, if the evidence warrants it, a patent filing.
 
@@ -85,7 +85,7 @@ Current design-gate progression:
 - **Gate B:** Fault model + fault association — COMPLETE
 - **Gate C:** Recovery policy + bounded state machine — COMPLETE
 - **Gate D:** Formal properties + proof/check strategy — COMPLETE
-- **Gate E:** Baselines + experimental protocol — NEXT
+- **Gate E:** Baselines + experimental protocol — COMPLETE
 
 Avoid premature implementation. Code should follow a defined architecture and evaluation protocol.
 
