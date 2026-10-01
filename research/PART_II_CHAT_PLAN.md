@@ -147,3 +147,57 @@ Next checkpoint: K.10 (Final Software Packaging & Research Conclusion).
 
 
 
+
+
+
+
+## Active Scope Override — K.9.2 (2026-10-01)
+
+K.9 is historically CLOSED and remains unchanged. The previous K.10 “Final Software Conclusion + Hardware-Validation Handoff” definition is **superseded as the active next-step definition**.
+
+### K.9.2 — P4 Advantage & Novelty Investigation Design Lock
+Objective: systematically determine **where meaningful P4 advantage could exist** before any final research conclusion, and lock the experimental/measurement/prior-art design without predetermining the outcome.
+
+Required dimensions:
+- outcome resilience;
+- recovery attempts/actions/redundant retries;
+- recovery latency where faithfully measurable;
+- state-transition cost;
+- scheduler/context-switch cost only if the software model can validly expose it;
+- work preservation/re-execution/lost or delayed work;
+- fault containment;
+- escalation quality;
+- resource/CPU/step/storage/communication cost where valid;
+- memory/static overhead;
+- policy-decision cost where valid;
+- resilience overhead per recovery;
+- decision accuracy;
+- adaptability across transient/persistent/intermittent/recurring faults;
+- workload, dependency, criticality and queue-pressure effects;
+- compound-fault interactions;
+- graceful degradation;
+- worst-case behavior;
+- determinism/predictability as a validation property;
+- complexity-vs-benefit trade-offs.
+
+K.9.2 must enumerate the scenario/fault/history/workload/resource/association combinations that can meaningfully differentiate P4 from P0-P3, including negative/no-advantage cases. Compound cases are a priority because integrated context/history behavior may only become observable under interactions.
+
+K.9.2 must also lock the novelty-search decomposition: individual elements, pairwise combinations, higher-order combinations, and whole-combination disclosures across papers, patents, standards and technical systems. Novelty and inventive step/non-obviousness remain separate questions.
+
+K.9.2 does **not** run the decisive advantage matrix or make a superiority/novelty conclusion.
+
+### K.10 — P4 Advantage & Novelty Investigation
+K.10 follows K.9.2 and executes the locked design:
+- implement only approved non-invasive measurement/instrumentation changes;
+- run matched advantage/interaction experiments;
+- analyze P4 vs P0-P3 at metric level, including trade-offs and baseline-advantage cases;
+- perform the deeper adversarial prior-art search;
+- produce evidence-bounded findings.
+
+K.10 is **not** a predetermined proof of P4 superiority or novelty.
+
+### Later conclusion boundary
+A later checkpoint, after K.10 evidence is complete, will perform final synthesis and hardware-validation handoff. Do not move that conclusion into K.9.2 or K.10 merely for convenience.
+
+### Antigravity execution rule
+ChatGPT is the research-control/audit layer. Antigravity is the repository execution agent. Each chat must give Antigravity an exact bounded scope, require repository inspection from latest `exp`, preserve historical records, and return exact branch/commit/test/working-tree status. Antigravity must not invent new P4 behavior or a new policy merely to manufacture a measurable advantage.
