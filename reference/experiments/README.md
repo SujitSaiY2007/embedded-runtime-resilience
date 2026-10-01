@@ -81,3 +81,10 @@ K.2 validates corpus reproducibility and emitted evidence structure; it does not
 The generated `out/` and `out.replay/` directories are transient verification outputs and should not be treated as required committed source artifacts.
 
 **K.2 is complete.**
+
+
+## Final K.3 boundary — 2026-10-01
+
+K.3 packages the host/reference evidence without changing the harness semantics. The validated corpus remains 70 matched W01-W14 × P0-P4 runs. P0-P3 remain `ablation_contract_valid=0`, W09/W10 remain capacity-confounded, and the corpus remains host/reference + deterministic software-injection evidence only.
+
+See `research/phase1_final_evidence_synthesis.md` for the final evidence matrix and deferred-validation boundary. No generated `out/` or `out.replay/` directory is required as a committed artifact.
