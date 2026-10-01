@@ -79,3 +79,31 @@ Do not yet:
 - add unrelated peripherals;
 - optimize before correctness;
 - claim novelty, patentability, robustness, generalization, or statistical significance.
+
+## 2026-10-01 continuation
+
+The required startup audit is complete. Gates A-E remain frozen.
+
+The committed implementation review found one concrete ablation gap: exact-event quarantine is currently applied by `runtime_start_fault()` for P0-P4, although frozen Gate C/E define selective dependency-aware quarantine as the P4 mechanism. This is documented in `research/phase1_reference_implementation_audit.md` and in Decision Log D-076. No semantic patch was made.
+
+The next host checkpoint now exists under `reference/experiments/`:
+
+- declarative `workloads.csv`;
+- deterministic `fault_schedules.csv`;
+- `host_experiment.c` matched P0-P4 runner;
+- `run_host_experiment.py` deterministic-replay/matched-input driver;
+- CTest registration when Python 3 is available.
+
+The runner flags W09/W10 as capacity-confounded and flags P0-P3 as not valid for a clean quarantine ablation until their baseline containment semantics are separately specified.
+
+### Verification qualification
+
+The code was inspected against the committed API and frozen protocol, but this chat environment could not clone/compile the repository because external network resolution was unavailable. Therefore the harness is **committed but not execution-verified here**. Do not cite generated results until the host build and replay test pass.
+
+### Exact next task
+
+Build `reference/`, run CTest, execute `python3 experiments/run_host_experiment.py --check`, inspect the generated corpus, and fix only concrete compile/runtime/input errors. Do not change Gate A-E semantics. After successful execution, commit the generated raw-input-preserved corpus and update this handoff with actual run/test results.
+
+### Non-goals
+
+No STM32U575 integration, MCU timing/RAM/Flash claims, physical fault injection, RTOS, unrelated peripherals, ML/weighted scoring, statistical significance, generalization, novelty, or patentability claims.
