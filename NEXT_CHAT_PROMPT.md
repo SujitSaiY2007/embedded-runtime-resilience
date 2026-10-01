@@ -671,3 +671,53 @@ Canonical K.9.2 completion commit on `exp`:
 K.10 scope: **P4 Advantage & Novelty Investigation only**. Execute the locked measurement/experiment matrix and adversarial prior-art investigation. Do not predetermine superiority or novelty. Do not perform final synthesis or hardware validation in K.10.
 
 Antigravity is the repository execution agent. It must verify the live `exp` HEAD equals the expected K.9.2 starting point (or explicitly reconcile any legitimate intervening commit), inspect the working tree and protected runtime integrity, read the K.9.2 design/continuity files first, and return exact branch/commit/test/status information.
+
+
+---
+
+# DOWNSTREAM CHECKPOINT TEMPLATE — K.11 (ACTIVATES ONLY AFTER K.10 COMPLETES)
+
+Continue the canonical project in:
+
+SujitSaiY2007/embedded-runtime-resilience
+
+Branch: `exp`. Use the latest K.10-complete commit as the starting state. Do not execute this checkpoint until K.10 has produced its auditable advantage/interaction results and adversarial prior-art evidence.
+
+## K.11 — Final Software Synthesis + Hardware-Validation Handoff
+
+Read first:
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. research/PART_II_CHAT_PLAN.md
+7. research/phase2_k10_p4_advantage_novelty_results.md
+8. research/chat_records/chat_k10_record.md
+9. all relevant K.9/K.9.2 methodology and evidence records
+
+### Mission
+K.11 is the final software-phase synthesis and hardware-validation handoff. It must derive the conclusion from K.10 evidence rather than manufacture a preferred result.
+
+### Required work
+- reconcile K.10 metric-level results, interaction findings, trade-offs, baseline advantages and inconclusive cases;
+- reconcile the adversarial prior-art findings and distinguish technical novelty from inventive step/non-obviousness and legal patentability;
+- produce the evidence-bounded final software conclusion;
+- prepare the professor-facing final evidence/architecture package;
+- define target-MCU hardware-validation requirements, testbed specification, instrumentation, scenarios, controls, success/failure criteria, and evidence boundaries;
+- update continuity/state/decision records and produce the next hardware-validation/refinement handoff.
+
+### Hard boundaries
+- do not redesign P4 merely to improve K.10 results;
+- do not retroactively change K.10 methodology to force a conclusion;
+- do not claim hardware results before hardware validation;
+- do not claim universal superiority, novelty, patentability, or statistical generalization unless the evidence actually supports the precisely stated claim;
+- do not modify Gates A-E or protected reference runtime unless separately defect-approved and re-scoped.
+
+### Antigravity
+Use Antigravity as the repository execution agent. It must inspect the latest `exp` state, preserve historical records, verify protected runtime integrity, make only K.11 documentation/synthesis/handoff changes, and return exact branch/commit/tests/status.
+
+### Exit
+K.11 is complete when the final software-phase conclusion is evidence-bounded, the professor-facing package is coherent, the target-MCU validation plan is reproducible, all continuity files are updated, and the exact next hardware-validation/refinement starting point is recorded.
+
+STOP after K.11. Do not begin hardware implementation in K.11 unless explicitly re-scoped.
