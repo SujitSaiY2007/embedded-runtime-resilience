@@ -96,3 +96,16 @@ Do NOT say that hardware performance, statistical superiority, final novelty, or
 Update all necessary current-state documentation, preserve historical records, identify genuinely redundant files before deletion, and ensure main can represent the most defensible integrated state.
 
 When complete, verify the branch and merge/push the software-phase package to main if the user has authorized that action.
+
+---
+# Part-II K.4 Active Scope Override
+
+Part I (K.1-K.3) is COMPLETE. Part II begins at K.4.
+
+The active K.4 scope is **Novelty Re-Research + Conceptual Architecture Lock**. Do not implement the virtual system or UI in K.4. Do not alter Gates A-E or the recovery policy.
+
+Use the current Part-II plan in research/PART_II_CHAT_PLAN.md as the scope authority.
+
+Branch rule: exp is the active reference branch; main is the integrated mirror synchronized through PR/merge.
+
+At K.4 completion, the next checkpoint is K.5 — Virtual Embedded System Technical Design + Interface Contracts.
