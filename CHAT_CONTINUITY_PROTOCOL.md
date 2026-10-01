@@ -67,7 +67,7 @@ A new chat must first read the repository's continuity documents before performi
 
 `research/phase1_gateB_fault_model_final.md` is the authoritative Gate B artifact. `research/phase1_gateB_learning_summary.md` is an additive educational companion that explains the same gate in simpler terms and does not replace the normative artifact. The earlier `research/phase1_peripheral_testbed_fault_model.md` remains retained as historical/baseline material.
 
-## Chat K.1/K.2 checkpoint
+## Chat K.1/K.2/K.3 checkpoint
 
 **Chat K.1 — completed 2026-10-01**
 
@@ -80,12 +80,19 @@ A new chat must first read the repository's continuity documents before performi
 - 70 matched runs generated during verification.
 - Commit: `949bd4c`.
 
-**Chat K.2 — next**
+**Chat K.2 — completed 2026-10-01**
 
-- Regenerate and inspect the 70-run corpus.
-- Validate actual trace identifiers, lifecycle states, actions, outcomes, correctness fields, and metadata against Gate E.
-- Separate harness-level guarantees from policy-level evidence.
-- Preserve host/reference evidence boundaries.
-- Do not repeat the build/debug work unless corpus validation exposes a concrete defect.
+- Regenerated and inspected the 70-run W01-W14 × P0-P4 corpus.
+- Confirmed manifest PASS fields for replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Inspected representative run/trace slices for recovery, action/outcome, correctness, and metadata coherence.
+- Found no concrete corpus-generation, serialization, or runtime defect.
+- Preserved the P0-P3 exact-event-quarantine limitation and host-only evidence boundary.
 
-The earlier K.1 “execution pending” text in this document is historical and is superseded by this checkpoint.
+**Chat K.3 — next**
+
+- Finalize evidence-bounded synthesis and repository organization.
+- Separate demonstrated host/reference facts from MCU/physical evidence gaps.
+- Preserve the W09/W10 capacity-confound qualification and P0-P3 ablation limitation.
+- Do not introduce new design semantics merely to make the final package look complete.
+
+The earlier K.1/K.2 pending text in this document is historical and superseded by the completed checkpoints above.
