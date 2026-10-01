@@ -144,13 +144,12 @@ static int run_one(FILE *runs, FILE *trace, int workload_id, PolicyVariant varia
         const TraceRecord *t=&rt.trace[i];
         if((int)t->trace_seq<=last_trace_seq || t->run_id!=(uint32_t)run_id) harness_ok=0;
         last_trace_seq=(int)t->trace_seq;
-        fprintf(trace,"%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u\n",
+        fprintf(trace,"%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u\n",
             (unsigned)run_id,(unsigned)variant,(unsigned)workload_id,
             (unsigned)t->run_id,(unsigned)t->trace_seq,(unsigned)t->fault_episode_id,
             (unsigned)t->event_ref.slot_id,(unsigned)t->event_ref.generation,
             (unsigned)t->transaction_id,(unsigned)t->observation_seq,(unsigned)t->action_index,
             (unsigned)t->state,(unsigned)t->action,(unsigned)t->outcome,(unsigned)t->correctness,
-            (unsigned)rt.workload_id,(unsigned)rt.fault_schedule_id,
             (unsigned)(t->event_ref.slot_id<ACTIVE_MAX));
     }
 
@@ -174,7 +173,7 @@ int main(int argc,char **argv) {
     FILE *runs=fopen(argv[3],"w"), *trace=fopen(argv[4],"w");
     if(!runs || !trace) { fprintf(stderr,"output open failed\n"); return 2; }
     fprintf(runs,"run_id,variant_id,workload_id,capacity_confounded,ablation_contract_valid,admissions,admission_failures,queue_hwm,quarantine_hwm,trace_records,recovery_attempts,harness_correctness,terminal_outcome,capacity_status,ablation_status\n");
-    fprintf(trace,"run_id,variant_id,workload_id,trace_run_id,trace_seq,fault_episode_id,slot_id,generation,transaction_id,observation_seq,action_index,state,action,outcome,correctness,workload_id_meta,fault_schedule_id,event_ref_slot_in_range\n");
+    fprintf(trace,"run_id,variant_id,workload_id,trace_run_id,trace_seq,fault_episode_id,slot_id,generation,transaction_id,observation_seq,action_index,state,action,outcome,correctness,event_ref_slot_in_range\n");
     int all_ok=1, run_id=1000;
     int workloads_seen[256]={0};
     for(size_t i=0;i<op_count;i++) workloads_seen[ops[i].workload_id]=1;
