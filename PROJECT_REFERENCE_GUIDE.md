@@ -936,3 +936,25 @@ The GitHub repository remains the canonical continuity mechanism for the project
 > **Gate E — Baselines + Experimental Protocol**
 >
 > Recover the repository state, confirm Gates A–D and the Gate-D formal specification, then define and challenge the experimental baselines, workload composition, fault-injection schedule, measurement points, repetitions, reproducibility controls, and data schema. Ensure baseline fairness and clear separation between host/simulation evidence and physical MCU evidence. Do not begin large-scale firmware implementation until the Phase-1 experimental-design and feasibility gates are closed.
+
+## Chat K.1/K.2 Continuity Checkpoint
+
+**Last updated:** 2026-10-01
+
+The project has moved beyond the earlier Gate-E “next” wording. Gates A-E are frozen, the minimal host reference is implemented, and Chat K.1 verified the reproducible P0-P4 host harness.
+
+### Chat K.1 — completed
+
+- Audited reference implementation against Gates A-E.
+- Recorded the P0-P3 quarantine-ablation gap without changing semantics.
+- Verified Windows/MSVC build.
+- Verified CTest 2/2.
+- Verified deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Verified 70 matched workload/variant runs during the host check.
+- Checkpoint commit: `949bd4c`.
+
+### Chat K.2 — next
+
+Validate the actual regenerated `runs.csv`, `trace.csv`, and `corpus_manifest.csv` against Gate E. This is a corpus-evidence review, not another implementation/setup pass.
+
+Host evidence remains distinct from future STM32U575/physical evidence.
