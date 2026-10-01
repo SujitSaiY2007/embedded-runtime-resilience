@@ -62,3 +62,22 @@ Chat K.1 execution verification completed in the user-controlled Windows/MSVC en
 The generated `out/` and `out.replay/` directories were inspected during verification and then removed before the clean source checkpoint. Therefore the repository currently commits the reproducibility inputs/harness, not the transient generated CSV outputs.
 
 **Chat K.2 must validate the regenerated CSV corpus itself before any policy-level interpretation is made.**
+
+
+## Corpus validation checkpoint — Chat K.2 — 2026-10-01
+
+The regenerated corpus was inspected after the K.1 execution checkpoint.
+
+- **70 runs** were present for W01-W14 × P0-P4.
+- `corpus_manifest.csv` reported PASS for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- The manifest explicitly reports host evidence only (`host_evidence_only=1`) and no MCU/physical evidence.
+- Representative `runs.csv`/`trace.csv` slices were inspected for recovery attempts, action/outcome transitions, correctness, EventRef-related metadata, and capacity/ablation flags.
+- No concrete corpus-generation, serialization, or runtime defect was found.
+
+### Interpretation limits
+
+K.2 validates corpus reproducibility and emitted evidence structure; it does not establish experimental superiority or cleanly isolate quarantine as an ablation. P0-P3 remain invalid clean quarantine ablations under the current reference semantics because exact-event quarantine is applied across variants. W09/W10 remain capacity-confounded.
+
+The generated `out/` and `out.replay/` directories are transient verification outputs and should not be treated as required committed source artifacts.
+
+**K.2 is complete.**
