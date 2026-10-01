@@ -138,3 +138,31 @@ Regenerate and inspect the actual `runs.csv`, `trace.csv`, and `corpus_manifest.
 ### Non-goals remain unchanged
 
 No STM32U575 integration, physical fault injection, MCU resource/timing claims, RTOS, unrelated peripherals, ML/weighted scoring, statistical significance, generalization, novelty, or patentability claims.
+
+
+## Chat K.2 — 2026-10-01 completed host corpus validation
+
+### Completed
+
+The regenerated P0-P4 corpus was inspected at the CSV/trace level after the K.1 harness verification.
+
+- **70 matched runs**: W01-W14 × P0-P4.
+- Manifest checks remained PASS for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Host-only evidence boundary was explicit: no MCU or physical-fault evidence was generated.
+- Representative trace/run slices across W05-W08 and W11-W14 were internally coherent in the inspected fields.
+- No concrete corpus-generation, serialization, or runtime defect was found.
+
+### Interpretation constraints retained
+
+- W09/W10 are capacity-confounded and must remain explicitly scoped in later analysis.
+- P0-P3 are not clean quarantine ablations because exact-event quarantine is currently applied across all variants.
+- P4 is the only variant marked valid under the current implementation boundary.
+- Harness correctness must not be presented as policy superiority/correctness.
+
+Generated `reference/experiments/out/` and `out.replay/` remain transient verification outputs and are not required source-checkpoint artifacts.
+
+### Exact next task — K.3
+
+Prepare the **final evidence-bounded synthesis** from the current repository state. Consolidate the frozen design, host/reference implementation, K.1/K.2 evidence, known semantic/ablation limitations, and explicit MCU/physical evidence gaps. Review the repository for consistency and produce the final project-facing documentation/package without silently changing Gates A-E or manufacturing unsupported performance, novelty, or patentability claims.
+
+Do not begin MCU integration merely because the host corpus is complete.
