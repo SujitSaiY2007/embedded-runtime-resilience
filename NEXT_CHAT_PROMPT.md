@@ -288,3 +288,188 @@ Conclude with a clear, evidence-based software-phase conclusion:
 
 
 
+
+
+
+
+---
+
+# ACTIVE NEXT-CHAT PROMPT — K.9.2
+
+Continue the canonical project in:
+
+`SujitSaiY2007/embedded-runtime-resilience`
+
+Start from the latest `exp` state. At the time this prompt was prepared, the K.9 canonical closure was `72edc4f86986c868b2e7102c192441d069c6dba7`; first verify the actual latest `exp` head before doing anything.
+
+## Mission
+
+Execute **K.9.2 — P4 Advantage & Novelty Investigation Design Lock** ONLY.
+
+This chat exists because K.9 methodology lock is not a final proof of P4 superiority or novelty. We must first determine every defensible place where P4 could have a meaningful advantage, including non-success metrics, interactions, trade-offs and compound cases, and lock the novelty-search strategy.
+
+## Mandatory startup
+
+Use **Antigravity** as the repository execution agent.
+
+Antigravity MUST:
+1. inspect the latest `exp` branch and working tree first;
+2. read:
+   - `PROJECT_MANUAL.md`
+   - `PROJECT_STATE.md`
+   - `CURRENT_HANDOFF.md`
+   - `DECISION_LOG.md`
+   - `CHAT_CONTINUITY_PROTOCOL.md`
+   - `research/PART_II_CHAT_PLAN.md`
+   - `research/phase2_k9_methodology_lock.md`
+   - `research/phase2_k8_matched_baseline_validation.md`
+   - `research/phase2_k9_2_p4_advantage_novelty_design.md`
+   - `research/chat_records/chat_k9_record.md`
+   - existing experiment/virtual-system source and reports needed to assess measurement availability;
+3. verify that `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` remain unchanged;
+4. report the exact starting commit before modifications.
+
+## K.9.2 work to perform
+
+### A. Build the P4 Advantage Matrix
+For each candidate dimension, classify:
+- measurable now;
+- measurable with non-invasive instrumentation;
+- not faithfully measurable in the current model;
+- existing evidence available;
+- new K.10 experiment required;
+- possible P4 advantage;
+- possible baseline advantage;
+- possible trade-off;
+- no expected differentiator.
+
+Required dimensions:
+1. outcome resilience;
+2. recovery attempts/actions/redundant retries;
+3. detection/decision/recovery latency where valid;
+4. state-transition count/cost;
+5. scheduler/context-switch cost only if genuinely represented;
+6. work preserved, re-executed, lost/delayed;
+7. fault containment;
+8. retry efficiency;
+9. escalation quality;
+10. CPU/step/resource cost;
+11. memory/static/trace overhead;
+12. policy decision cost if valid;
+13. resilience overhead per successful recovery;
+14. decision accuracy;
+15. adaptability across fault classes;
+16. workload/queue/dependency/criticality effects;
+17. compound-fault interactions;
+18. graceful degradation;
+19. worst-case behavior;
+20. determinism/predictability;
+21. complexity-vs-benefit trade-off.
+
+### B. Exhaust the scenario-combination space
+Map current coverage and identify valid missing cases across:
+- transient/persistent/intermittent/recurring faults;
+- first/repeated/consecutive/alternating faults;
+- prior success/prior failure/prior escalation;
+- low/high load and queue pressure;
+- dependency chains and independent work;
+- mixed critical/deferable work;
+- early/middle/late queue position;
+- peripheral/event/resource faults;
+- recovery-resource contention;
+- exact/ambiguous/invalid/stale association;
+- fault during recovery;
+- fault after previous recovery;
+- compound combinations.
+
+Prioritize combinations where context/history integration can actually differ from P0-P3. Include explicit no-difference/negative controls. Do not cherry-pick only favorable cases.
+
+### C. Preserve attribution locks
+Do not attribute the following to unique P4 advantages:
+- shared exact-event quarantine;
+- S06 persistent-fault recovery, because P1/P2/P3/P4 also succeed;
+- W09/W10 capacity-bound outcomes;
+- any metric not supported by the actual model.
+
+Keep P2's S06 path distinct: authoritative digest `0xCDAB2617`.
+
+### D. Novelty investigation design
+Decompose P4 into:
+- context-aware decision;
+- bounded recovery history;
+- fixed recovery ladder;
+- peripheral recovery;
+- evidence-bounded fault-to-event association;
+- event-level quarantine/retention;
+- dependency/order-aware preservation;
+- deterministic verification/release/escalation;
+- zero-heap/static bounded implementation;
+- their specific integrated interaction.
+
+Define the K.10 search across:
+- academic papers;
+- patents/patent families;
+- standards/technical systems;
+- embedded/RTOS/bare-metal implementations;
+- driver/transaction/event/message quarantine;
+- safety-critical fault management.
+
+Search individual, pairwise, higher-order and whole-combination disclosures. Treat the existing novelty record as a starting point, not a conclusion.
+
+### E. Define falsification
+K.9.2 must explicitly allow:
+- no P4 advantage;
+- conditional P4 advantage;
+- P4 advantage with overhead;
+- baseline advantage on some metrics;
+- prior art that materially weakens the integrated novelty hypothesis.
+
+## Hard prohibitions
+
+DO NOT:
+- run the decisive K.10 advantage experiment matrix;
+- perform the final prior-art investigation intended for K.10;
+- modify Gates A-E;
+- modify `ref_runtime.c` or `ref_runtime.h`;
+- redesign P4;
+- add a new policy variant;
+- add a second recovery engine/scheduler;
+- fabricate MCU timing, RAM/Flash, context switches, energy or physical hardware metrics;
+- claim superiority, novelty, patentability or universal generalization.
+
+If a measurement is impossible, record it as unavailable and define the closest defensible software-level alternative. Do not change the mechanism merely to make it measurable.
+
+## Required outputs
+
+Create/update:
+1. `research/phase2_k9_2_p4_advantage_novelty_design.md`
+2. `research/chat_records/chat_k9_2_record.md`
+3. `research/PART_II_CHAT_PLAN.md`
+4. `CURRENT_HANDOFF.md`
+5. `PROJECT_STATE.md`
+6. `DECISION_LOG.md` if a new decision is required
+7. `NEXT_CHAT_PROMPT.md` with the K.10 execution prompt
+
+Preserve all historical K.1-K.9 records exactly; do not rewrite history to reflect the new roadmap.
+
+## Exit condition
+
+K.9.2 is complete only when the repository contains an auditable, non-predetermined K.10 design answering:
+- What could make P4 meaningfully better?
+- What could make P4 worse or equivalent?
+- Which metrics can actually be measured?
+- Which scenario combinations can reveal an interaction?
+- What controls prevent cherry-picking?
+- What exactly will be searched for in prior art?
+- What evidence would falsify the P4 advantage or novelty hypothesis?
+
+Then commit/push the K.9.2 work and report:
+- branch;
+- exact commit;
+- files changed;
+- tests/checks performed;
+- `ref_runtime.c/.h` integrity;
+- working-tree status;
+- exact K.10 starting point.
+
+STOP. Do not begin K.10 in this chat.
