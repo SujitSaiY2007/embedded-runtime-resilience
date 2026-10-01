@@ -1,4 +1,4 @@
-# Next Chat Prompt — Chat K.2: Host Corpus Validation
+# Next Chat Prompt — Chat K.3: Final Synthesis
 
 Copy/paste the following prompt into the next ChatGPT chat.
 
@@ -8,7 +8,7 @@ You are continuing my embedded-systems research project from the canonical GitHu
 
 `SujitSaiY2007/embedded-runtime-resilience`
 
-This is **Chat K.2**, continuing directly from **Chat K.1**. Do not restart the project.
+This is **Chat K.3**, continuing directly from **Chat K.2**. Do not restart the project or repeat K.1/K.2 execution work.
 
 ## Mandatory startup reading
 
@@ -20,18 +20,19 @@ Read, in order:
 4. `DECISION_LOG.md`
 5. `CHAT_CONTINUITY_PROTOCOL.md`
 6. `research/phase1_reference_implementation_audit.md`
-7. `research/phase1_gateA_event_model_final.md`
-8. `research/phase1_gateB_fault_model_final.md`
-9. `research/phase1_gateB_learning_summary.md`
-10. `research/phase1_gateC_recovery_policy_final.md`
-11. `research/phase1_gateD_formal_properties_final.md`
-12. `research/phase1_gateE_experimental_protocol_final.md`
-13. `research/phase1_reference_implementation_design.md`
-14. `reference/README.md`
-15. `reference/docs/minimal_reference_implementation.md`
-16. `reference/tests/canonical_workloads.md`
-17. `reference/experiments/README.md`
-18. relevant files under `reference/include`, `reference/src`, `reference/tests`, and `reference/experiments`
+7. `research/phase1_host_corpus_validation.md`
+8. `research/phase1_gateA_event_model_final.md`
+9. `research/phase1_gateB_fault_model_final.md`
+10. `research/phase1_gateB_learning_summary.md`
+11. `research/phase1_gateC_recovery_policy_final.md`
+12. `research/phase1_gateD_formal_properties_final.md`
+13. `research/phase1_gateE_experimental_protocol_final.md`
+14. `research/phase1_reference_implementation_design.md`
+15. `reference/README.md`
+16. `reference/docs/minimal_reference_implementation.md`
+17. `reference/tests/canonical_workloads.md`
+18. `reference/experiments/README.md`
+19. `research/chat_records/chat_k1_k2_record.md`
 
 Then give a concise continuity check. Do not repeat the entire research history.
 
@@ -39,90 +40,117 @@ Then give a concise continuity check. Do not repeat the entire research history.
 
 Gates A-E are frozen and normative.
 
-The reference implementation and host experiment harness are already committed on:
+The current host checkpoint branch is:
 
 `experiment/host-p0-p4-corpus-2026-10-01`
 
-Current checkpoint commit lineage begins with:
-
-`949bd4c`
-
-Chat K.1 already verified:
+Chat K.1 verified:
 
 - Windows/MSVC build succeeds.
-- `ctest --test-dir reference/build -C Debug --output-on-failure` passes 2/2.
-- `py experiments/run_host_experiment.py --check` passes:
-  - deterministic replay;
-  - matched-input equivalence;
-  - raw-input preservation;
-  - capacity-confound flagging;
-  - ablation-contract flagging.
-- 70 matched runs were generated: W01-W14 × P0-P4.
-- W09/W10 are capacity-confounded.
-- P0-P3 are not valid clean quarantine ablations under the current reference semantics.
-- P4 is marked valid under the current implementation boundary.
+- CTest passes 2/2.
+- The host experiment check passes all five reproducibility/metadata checks.
+- 70 matched runs exist: W01-W14 × P0-P4.
 
-## ONLY TASK FOR CHAT K.2
+Chat K.2 then regenerated and inspected the corpus and recorded:
 
-Validate the **actual generated host corpus**, not merely the harness execution.
+- manifest PASS for deterministic replay;
+- matched-input equivalence PASS;
+- raw-input preservation PASS;
+- capacity-confound flagging PASS;
+- ablation-contract flagging PASS;
+- host-only evidence boundary;
+- no concrete corpus-generation, serialization, or runtime defect in the inspected evidence.
 
-Regenerate the corpus from the committed source if necessary, then inspect:
+## Important limitations that MUST remain visible
 
-`reference/experiments/out/runs.csv`  
-`reference/experiments/out/trace.csv`  
-`reference/experiments/out/corpus_manifest.csv`
+1. **P0-P3 are not clean quarantine ablations.**
+   `runtime_start_fault()` applies exact-event quarantine across all variants. Therefore P0-P3 remain `ablation_contract_valid=0`; P4 is the only variant marked valid under the current implementation boundary.
 
-Check at minimum:
+2. **W09/W10 are capacity-confounded.**
+   Preserve that qualification in any later analysis.
 
-1. Every W01-W14 workload has exactly matched P0-P4 executions.
-2. Run identifiers, variant identifiers, workload identifiers, and trace metadata are consistent.
-3. Trace EventRef/generation identity is coherent, including W11 stale-generation/slot-reuse behavior.
-4. Recovery action sequences agree with the frozen Gate-C ladder.
-5. Terminal outcomes and correctness fields are internally consistent.
-6. W09/W10 capacity-confounded flags are explicit and correctly scoped.
-7. P0-P3/P4 ablation-contract flags are explicit and correctly scoped.
-8. Quarantine/preservation evidence visible in traces is consistent with the actual current reference semantics.
-9. Distinguish harness correctness from policy correctness.
-10. Identify any missing Gate-E evidence that must be addressed before interpreting experimental comparisons.
+3. **Host/reference evidence is not MCU/physical evidence.**
+   Do not convert the corpus into claims about STM32U575 timing, RAM/Flash, energy, electrical fault behavior, or physical recovery.
 
-If a concrete defect is found, make the **smallest** evidence-preserving correction. Do not redesign Gates A-E or silently redefine P0-P4.
+4. Do not claim statistical significance, generalization, novelty, or patentability merely from the current host corpus.
 
-## Important semantic limitation
+## ONLY TASK FOR CHAT K.3
 
-The audit already established:
+Perform the **final evidence-bounded synthesis and repository packaging**.
 
-`runtime_start_fault()` applies exact-event quarantine across all policy variants.
+### 1. Evidence audit
 
-Therefore P0-P3 currently cannot be treated as clean quarantine ablations. Do not erase, weaken, or hide this limitation.
+Create a concise evidence matrix separating:
 
-## Evidence boundary
+- frozen design/specification evidence;
+- host/reference correctness evidence;
+- host corpus/reproducibility evidence;
+- MCU evidence: absent;
+- physical fault/recovery evidence: absent;
+- remaining ablation/evidence limitations.
 
-Host/reference evidence only.
+Do not rank or score the project. Do not manufacture missing measurements.
 
-Do not claim:
+### 2. Research interpretation
 
-- STM32U575 timing;
-- MCU RAM/Flash;
-- physical electrical fault behavior;
-- energy measurements;
-- physical recovery;
-- statistical significance;
-- generalization;
-- novelty;
-- patentability.
+Determine exactly what can and cannot be concluded from the current evidence.
+
+In particular, distinguish:
+
+- implementation correctness vs research hypothesis support;
+- harness correctness vs policy correctness;
+- reproducibility vs external validity;
+- model-level evidence vs hardware evidence.
+
+### 3. Final repository consistency review
+
+Check that the continuity documents agree on:
+
+- K.1 completion;
+- K.2 completion;
+- current branch/checkpoint;
+- P0-P3 ablation limitation;
+- W09/W10 capacity limitation;
+- host-only evidence boundary;
+- K.3 scope.
+
+Do not rewrite historical artifacts unnecessarily. Prefer additive corrections and explicit supersession.
+
+### 4. Final project-facing documentation
+
+Prepare the minimum necessary final documentation for the current stage, such as:
+
+- final project status;
+- evidence/limitations summary;
+- reproducibility instructions;
+- known limitations and deferred validation;
+- final continuation/archive note.
+
+Do not create fake experimental measurements or imply that hardware validation occurred.
+
+### 5. Do NOT do these things
+
+Do not:
+
+- redesign Gates A-E;
+- change P0-P4 semantics just to improve comparisons;
+- integrate the MCU solely because K.2 is complete;
+- add unrelated features;
+- fabricate performance numbers;
+- claim a novelty winner or patentability conclusion;
+- delete historical research artifacts.
 
 ## Completion condition
 
-Stop after the smallest reproducible corpus-validation checkpoint.
+Stop at a coherent final-synthesis checkpoint.
 
-Update:
+Update only the necessary repository documents and add a K.3 continuity record.
 
-- `PROJECT_STATE.md`
-- `CURRENT_HANDOFF.md`
-- `DECISION_LOG.md`
-- `research/chat_records/chat_k1_k2_record.md`
-- relevant experiment documentation
+Then report:
 
-Do not begin MCU integration in Chat K.2.
+1. what is definitively established;
+2. what remains unvalidated;
+3. any repository inconsistencies found and fixed;
+4. whether any local commit/push is still required.
 
 ---
