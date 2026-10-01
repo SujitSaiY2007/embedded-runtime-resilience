@@ -72,3 +72,22 @@ K.5 is COMPLETE at the technical-design/contract level. The virtual system, peri
 K.6 is now the active implementation checkpoint. It may implement only the K.5 contracts around the existing C reference runtime.
 
 K.6 must not modify the recovery policy, add a second recovery engine, or silently add a peripheral-action callback to the C runtime. The current runtime API remains the integration boundary unless a separate design decision explicitly authorizes a change.
+
+
+## K.6 implementation update — 2026-10-01
+
+K.6 implementation is present on feature/k6-virtual-system-implementation-2026-10-01.
+
+Implemented surface:
+- bounded virtual scenario/workload structures;
+- I2C/SPI/UART environmental records;
+- immutable fault schedules;
+- existing-runtime adapter;
+- EventRef/dependency mapping;
+- correlated wrapper/runtime trace records;
+- deterministic replay digest;
+- focused S01/S02/S05/S06/S08/S14 tests.
+
+K.6 is not yet execution-verified in this chat environment because the repository cannot be cloned over external network resolution. The next chat remains within K.6 and must perform the build/CTest/replay exit check before K.7 can begin.
+
+No K.7 or later work has been executed.

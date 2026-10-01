@@ -331,3 +331,32 @@ Gates A-E, the existing C recovery mechanism, P0-P3 ablation qualification, W09/
 
 ### Next checkpoint
 K.6 — Virtual Embedded System Implementation around the existing C reference runtime. K.6 may implement only the contracts defined by K.5; it must not introduce a second recovery policy or redesign the C runtime.
+
+
+## 2026-10-01 — Chat K.6 implementation checkpoint
+
+K.6 implementation has been added on focused branch feature/k6-virtual-system-implementation-2026-10-01, based directly on exp after K.5.
+
+### Implemented
+
+- bounded virtual scenario/workload representation;
+- runtime-generated ScenarioEventKey -> EventRef correlation;
+- bounded virtual I2C/SPI/UART environmental observation records;
+- immutable per-scenario fault schedules;
+- adapter calls to the existing ref_runtime.h API for admission, dependency declaration, fault observation, scheduling, execution and recovery;
+- wrapper trace records correlated to authoritative runtime trace sequence/EventRef/transaction data;
+- deterministic replay digest;
+- focused K.6 tests for S01, S02, S05, S06, S08 and S14;
+- reference CMake integration without modifying ref_runtime.c or ref_runtime.h.
+
+### Authority/constraint verification
+
+The K.6 implementation does not add a peripheral-action callback and does not modify runtime_apply_policy(), policy_decide(), or the recovery mechanism. During recovery, the environment mirrors the immutable fault schedule only as an observation; the C runtime remains authoritative.
+
+### Verification status
+
+Repository-level diff inspection is complete. This chat environment cannot clone/compile the GitHub repository because direct external network resolution is unavailable, so the new K.6 CTest execution is not claimed as executed here.
+
+**K.6 implementation is present; K.6 exit verification remains pending a real build/run of the focused virtual-system test against the existing runtime.**
+
+No K.7 or later work has been executed. Gates A-E and K.5 history remain unchanged.

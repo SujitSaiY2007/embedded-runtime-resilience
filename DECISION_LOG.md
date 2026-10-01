@@ -263,3 +263,12 @@ Scenario keys may map to EventRefs returned by runtime_admit(), but the virtual 
 S01-S14 define workloads, dependencies, fault stimuli and evidence targets. They do not contain hidden recovery logic or hard-coded simulator recovery decisions.
 
 **Reason:** ensures K.6 scenarios exercise the existing mechanism rather than becoming a second specification.
+
+
+## D-104 — Keep K.6 environmental recovery mirroring observational
+
+**Status:** Accepted for K.6.
+
+K.6 implements deterministic environmental action mirroring from the immutable fault schedule but does not expose or invent a peripheral-action callback. The observed PolicyDecision comes from the existing C runtime, and the actual transition is performed by the existing runtime_apply_policy()/runtime_verify_and_release() path.
+
+**Reason:** this satisfies the K.5 integration contract without changing recovery semantics or creating a second recovery policy. Any future callback boundary remains a separate design decision.

@@ -222,3 +222,73 @@ The C runtime remains authoritative for EventRef identity, dependency eligibilit
 A controlled deterministic scenario must travel through the virtual environment, the existing C runtime, and back to an inspectable correlated trace without introducing a second recovery policy.
 
 At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new decisions arise, research/chat_records/chat_k6_record.md, and NEXT_CHAT_PROMPT.md. Preserve K.5 history.
+
+
+---
+# Active Next-Chat Prompt — K.6 Verification/Exit
+
+Continue the canonical project in:
+
+SujitSaiY2007/embedded-runtime-resilience
+
+Start from the focused K.6 implementation branch:
+
+feature/k6-virtual-system-implementation-2026-10-01
+
+Do not repeat K.5 design work and do not execute K.7 or later work.
+
+## Objective
+
+Execution-verify the already implemented K.6 virtual embedded system against the SAME existing C reference runtime, then close K.6 only if the controlled deterministic exit condition is demonstrated.
+
+## Read first
+
+1. PROJECT_MANUAL.md
+2. PROJECT_STATE.md
+3. CURRENT_HANDOFF.md
+4. DECISION_LOG.md
+5. CHAT_CONTINUITY_PROTOCOL.md
+6. NEXT_CHAT_PROMPT.md
+7. research/PART_II_CHAT_PLAN.md
+8. research/part_ii_conceptual_architecture.md
+9. research/part_ii_virtual_system_technical_design.md
+10. research/part_ii_interface_contracts_k5.md
+11. research/part_ii_deterministic_scenarios_k5.md
+12. research/chat_records/chat_k5_record.md
+13. research/chat_records/chat_k6_record.md
+14. reference/include/ref_runtime.h
+15. reference/src/ref_runtime.c
+16. reference/virtual/include/virtual_system.h
+17. reference/virtual/src/virtual_system.c
+18. reference/virtual/tests/test_virtual_system.c
+
+## Allowed
+
+- build and run the existing K.6 focused tests;
+- inspect deterministic runtime/wrapper trace correlation;
+- inspect replay digest equality;
+- fix concrete K.6 compile/runtime defects only;
+- update K.6 continuity records and merge the completed focused branch into exp after successful verification.
+
+## Explicitly prohibited
+
+- K.5 redesign;
+- recovery-policy redesign;
+- new recovery algorithm;
+- new policy variant;
+- UI implementation/polish;
+- baseline comparison experiment;
+- STM32U575/hardware integration;
+- physical fault injection;
+- Gates A-E changes;
+- K.7-K.10 execution.
+
+## Required K.6 exit
+
+A controlled deterministic scenario must execute through the virtual environment, the unchanged C runtime, and back into an inspectable correlated trace. Replay of the same scenario/run/variant must produce the same digest.
+
+If this cannot be demonstrated, document the concrete blocker and remain at K.6.
+
+## After successful exit
+
+Merge the focused K.6 implementation branch into exp, preserve the K.5 history, update K.6 records, and set the next chat prompt to K.7. Do not execute K.7 in this chat.
