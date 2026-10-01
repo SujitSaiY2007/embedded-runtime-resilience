@@ -107,3 +107,34 @@ Build `reference/`, run CTest, execute `python3 experiments/run_host_experiment.
 ### Non-goals
 
 No STM32U575 integration, MCU timing/RAM/Flash claims, physical fault injection, RTOS, unrelated peripherals, ML/weighted scoring, statistical significance, generalization, novelty, or patentability claims.
+
+## Chat K.1 — 2026-10-01 verified host-experiment checkpoint
+
+This section supersedes the earlier “execution verification pending” language above.
+
+### Completed
+
+The smallest reproducible host P0-P4 experiment harness was built and executed in the user-controlled Windows/MSVC environment.
+
+- Commit: `949bd4c`
+- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
+- Working tree: clean after commit and push.
+- Build: successful; `reference_tests.exe` and `host_experiment.exe` present.
+- CTest: **2/2 passed**.
+- Host experiment check: **all five harness checks passed**.
+- Corpus: **70 matched runs** across W01-W14 and P0-P4.
+- W09/W10 capacity confounds are explicit.
+- P0-P3 quarantine-ablation validity is explicitly false; P4 is valid under the current implementation.
+- The exact-event quarantine semantic gap remains documented; no frozen contract was changed.
+
+### Important artifact note
+
+The generated `out/` and `out.replay/` directories were used for verification and inspection, then removed before the clean commit. Do not describe those generated files as currently committed artifacts.
+
+### Chat K.2 exact next task
+
+Regenerate and inspect the actual `runs.csv`, `trace.csv`, and `corpus_manifest.csv`. Determine whether the traces themselves provide the expected Gate-E evidence and identify any remaining measurement/evidence boundary. Only after that inspection should another code change be considered.
+
+### Non-goals remain unchanged
+
+No STM32U575 integration, physical fault injection, MCU resource/timing claims, RTOS, unrelated peripherals, ML/weighted scoring, statistical significance, generalization, novelty, or patentability claims.
