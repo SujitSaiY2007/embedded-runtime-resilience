@@ -1,6 +1,6 @@
 # Embedded Runtime Resilience
 
-> **Research project — Phase 1E.1 / Gate D complete; Gate E next**
+> **Research project — Gates A-E frozen; Chat K.1 host-experiment checkpoint verified; Chat K.2 corpus validation next**
 
 A solo software-dominant embedded-systems research project investigating a **Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**.
 
@@ -14,12 +14,15 @@ The project is in **Phase 1 — System Design and Experimental Preparation**, sp
 - **Gate B — Fault Model + Fault Association** — complete
 - **Gate C — Recovery Policy + Bounded State Machine** — complete
 - **Gate D — Formal Properties + Proof/Check Strategy** — complete at the semantic/design-model level
+- **Gate E — Baselines + Experimental Protocol** — complete/frozen
+- **Minimal Reference Implementation** — host checkpoint complete
+- **Chat K.1 — matched P0-P4 host experiment harness** — execution verified
 
 ### Next
 
-- **Gate E — Baselines + Experimental Protocol**
+- **Chat K.2 — Corpus-level validation of the generated Gate-E host evidence**
 
-Gate E will define the experimental baselines, workload/dependency scenarios, fault schedule, capacities, metrics, logging, repetitions, reproducibility treatment, and acceptance/reporting criteria.
+The next task is to inspect the actual matched P0-P4 run/trace corpus and verify that the generated outcomes and trace records satisfy the frozen Gate-E evidence requirements. This does not reopen Gates A-E.
 
 **Large-scale firmware implementation has not started. Physical MCU validation has not started.** These remain downstream of the design and experimental gates.
 
@@ -78,3 +81,24 @@ Before substantive continuation, read:
 **Novelty is a hypothesis until demonstrated against prior art.**
 
 The repository documents research decisions and evidence progressively; completion of a design gate does not by itself establish experimental superiority, novelty, or patentability.
+
+## 2026-10-01 — Chat K.1 checkpoint
+
+Chat K.1 completed the smallest reproducible host-experiment checkpoint.
+
+- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
+- Commit: `949bd4c`
+- The branch was pushed and the working tree was clean after commit.
+- Windows/MSVC build produced `reference_tests.exe` and `host_experiment.exe`.
+- CTest: **2/2 passed**.
+- `py experiments/run_host_experiment.py --check`: **PASS** for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
+- Matched corpus size: **14 workloads × 5 variants = 70 runs**.
+- W09/W10 are explicitly capacity-confounded.
+- P0-P3 are explicitly marked `ablation_contract_valid=0`; P4 is marked valid under the current implementation boundary.
+- The P0-P3 quarantine-ablation gap remains documented and unchanged.
+
+The generated `out/` and `out.replay/` directories were inspected during verification and then cleaned before the checkpoint commit; the declarative input corpus and harness remain committed so the run is reproducible.
+
+### Chat K.2 starting boundary
+
+Do not rebuild or redesign the harness unless corpus inspection exposes a concrete defect. Start by regenerating/inspecting the corpus, validating trace/outcome semantics against Gate E, and recording any remaining evidence limitations.
