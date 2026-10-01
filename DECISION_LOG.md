@@ -313,5 +313,23 @@ The K.7 professor-facing UI implementation was verified, audited, and merged int
 
 **Reason:** locks the professor-facing UI layer onto `exp` and completes K.7, clearing the path to K.8 baseline validation.
 
+## D-108 — K.8 Matched Baseline Validation and Empirical Metric Verification
+
+**Status:** Accepted
+
+The K.8 matched baseline validation was executed across 100 deterministic runs:
+1. **Host Corpus (70 runs):** 14 canonical workloads (W01–W14) across 5 policy variants (P0–P4), recording completion rates, attempt counts, trace records, explicit capacity confounds (W09/W10), and ablation contract flags (P0–P3).
+2. **Virtual Demonstrator Matrix (30 runs):** 6 canonical scenarios (S01, S02, S05, S06, S08, S14) across P0–P4, validating baseline progression, failure containment, and deterministic replay digests.
+3. **Comparative Findings:**
+   - **Persistent Fault Progression (W06, S06):** Baseline P0 blindly escalates after 2 retries without resetting; P1, P2, P3, and P4 progress to `ACT_REINIT_OR_RESET` on attempt 3 and recover.
+   - **Ambiguous Association Safety (W12, S08):** P0 blindly retries unmapped targets yielding `OUTCOME_STALE_REF` and leaves episodes unclosed; P4 enforces exact association (`ctx->association == ASSOC_EXACT`), failing closed safely to `OUTCOME_TERMINAL_ESCALATE` with episode closed and zero synthetic EventRefs.
+   - **Independent Work Preservation (W01, S01):** Unassociated events continue executing under exact quarantine across all variants.
+   - **Dependency Blocking (W02, S02):** Dependent events remain blocked in `ST_QUEUED` while prerequisites are quarantined across all variants.
+4. **Harness & Verification:** Added `reference/virtual/tests/test_virtual_baselines.c` and `reference/experiments/evaluate_baselines.py`. CTest expanded from 5 to 7 tests, all passing 100%.
+5. **Runtime Integrity:** `ref_runtime.c` and `ref_runtime.h` remain 100% unchanged.
+
+**Reason:** establishes controlled, reproducible comparative software evidence sufficient to evaluate the software resilience hypothesis prior to K.9 methodology lock.
+
+
 
 

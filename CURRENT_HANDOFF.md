@@ -384,63 +384,59 @@ Surface in `reference/virtual/`:
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: NOT STARTED
+- K.8: IMPLEMENTATION VERIFIED (READY FOR MERGE)
 - K.9: NOT STARTED
 - K.10: NOT STARTED
 
 
-## 2026-10-01 — Chat K.7 complete: professor-facing UI implementation verified and merged
+## 2026-10-01 — Chat K.8 complete: matched baseline validation verified
 
 ### Continuity
 
 - Part II remains active.
 - K.1–K.3 are complete.
-- K.4, K.5, K.6, and K.7 are complete.
-- K.7 is VERIFIED AND MERGED into `exp` (PR #8, commit `f1af4e1`).
-- Gates A-E remain frozen.
+- K.4, K.5, K.6, and K.7 are complete and merged into `exp`.
+- K.8 is IMPLEMENTATION VERIFIED on `feature/k8-baseline-validation-2026-10-01`.
+- Gates A-E remain frozen and normative.
 - The C reference runtime remains the sole recovery-policy authority.
 
-### Implemented K.7 surface
+### Implemented K.8 surface
 
-Branch merged: `feature/k7-professor-ui-2026-10-01`
-Base exp commit: `0df1cd7`
-PR: #8
-Merge commit: `f1af4e1`
+Branch: `feature/k8-baseline-validation-2026-10-01`
+Base exp commit: `d808436`
 
 Files created/updated:
-- `demo/index.html`: Professor-facing rich UI with scenario selection, stepper, pipeline visualizer, live event/peripheral/episode state, and interactive trace correlation.
-- `demo/server.py`: Lightweight Python local server proxying live requests to the C binary.
-- `demo/scenarios_data.json`: Pre-exported authoritative scenario data for zero-dependency offline mode.
-- `demo/README.md`: Professor-facing usage instructions and architectural authority explanation.
-- `demo/test_ui_contracts.py`: Comprehensive test suite verifying UI contracts, policy authority, trace correlation, and determinism.
-- `reference/virtual/include/virtual_scenarios.h` & `src/virtual_scenarios.c`: Canonical scenario registry for S01, S02, S05, S06, S08, S14.
-- `reference/virtual/src/virtual_demo_cli.c`: CLI target providing JSON state output, step execution, and verification.
-- `reference/virtual/CMakeLists.txt`: Integrated `virtual_demo_cli`, `virtual_demo_test`, and `virtual_ui_contracts_test`.
-- `reference/virtual/tests/test_virtual_system.c`: Updated to consume `virtual_scenarios.h`.
+- `reference/experiments/evaluate_baselines.py`: Comprehensive comparative evaluation harness for 70 host runs (W01–W14 × P0–P4) and 30 virtual demonstrator runs (S01–S14 × P0–P4) = 100 total deterministic runs.
+- `reference/virtual/tests/test_virtual_baselines.c`: C11 unit assertions testing baseline progression, persistent fault escalation vs reinit recovery, stale ref handling vs fail-closed escalation, unassociated work preservation, and deterministic replay.
+- `reference/virtual/CMakeLists.txt`: Integrated `virtual_baseline_tests` executable and `matched_baseline_validation_test`.
+- `research/phase2_k8_matched_baseline_validation.md`: Structured comparative evidence report documenting metric tables, scenario matrices, and qualification locks.
+- `research/chat_records/chat_k8_record.md`: Canonical chat record for K.8.
 
 ### Verification evidence
 
-- CTest: 5/5 passed (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_ui_contracts_test`.
-- Scenarios: S01, S02, S05, S06, S08, S14 verified.
-- Deterministic replay digests:
-  - S01: `0xB72131CB`
-  - S02: `0xE8691374`
-  - S05: `0xBDC168BD`
-  - S06: `0xA123BB47`
-  - S08: `0x5A52628A`
-  - S14: `0x9185616C`
-- S08 Ambiguous Isolation: Zero synthetic EventRefs fabricated; target remains `INVALID_SLOT` (`255`).
+- CTest: 7/7 passed (100%):
+  1. `reference_tests` (Passed)
+  2. `host_experiment_replay` (Passed)
+  3. `virtual_system_tests` (Passed)
+  4. `virtual_demo_test` (Passed)
+  5. `virtual_baseline_tests` (Passed)
+  6. `virtual_ui_contracts_test` (Passed)
+  7. `matched_baseline_validation_test` (Passed)
+- Comparative findings:
+  - Persistent fault (W06/S06): P0 escalates blindly (`OUTCOME_TERMINAL_ESCALATE`), while P1, P2, P3, and P4 progress to `ACT_REINIT_OR_RESET` on attempt 3 and recover (`OUTCOME_SUCCESS`).
+  - Ambiguous association (W12/S08): P0 blindly retries unmapped target returning `OUTCOME_STALE_REF` and leaves episode active; P4 detects non-exact association, cleanly terminates with `OUTCOME_TERMINAL_ESCALATE` and closes episode with zero synthetic EventRefs.
+  - Deferable work (W07): P0 escalates; P1–P4 cleanly degrade to `TERMINAL_DEGRADE`.
+  - Independent work preservation (W01/S01): All variants preserve unassociated work under exact quarantine.
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
 
-### Exact next task: K.8 (Matched Baseline vs Proposed Software Validation)
+### Exact next task: K.8 Merge & Transition to K.9
 
-The next active task is K.8:
-- Execute matched comparative baseline evaluations under frozen Gates A-E and canonical workloads/fault schedules (W01–W14).
-- Compare P0 (Null / blind forward), P1 (Immediate blind retry), P2 (Immediate blind reset), and P3 (Unbounded escalation) against proposed P4 (Zero-heap context-aware recovery with event quarantine).
-- Collect empirical trace metrics on fault-associated event preservation, unassociated event preservation, bounded action count, and terminal outcomes.
-- Keep `ref_runtime.c` and `ref_runtime.h` authoritative and unchanged.
+1. Create PR from `feature/k8-baseline-validation-2026-10-01` into `exp`.
+2. Merge PR into `exp` preserving commit history.
+3. Advance to K.9: Full Software Re-Verification + Methodology Lock.
 
-No K.8 work has been performed in this chat.
+No K.9 work has been performed in this chat.
+
 
 
 

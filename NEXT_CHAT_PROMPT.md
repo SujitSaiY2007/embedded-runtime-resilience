@@ -225,31 +225,25 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 
 
 ---
-# Active Next-Chat Prompt — K.8: Matched Baseline vs Proposed Software Validation
+# Active Next-Chat Prompt — K.8 Merge & Transition to K.9 (Full Software Re-Verification + Methodology Lock)
 
 Continue the canonical project in:
 
 SujitSaiY2007/embedded-runtime-resilience
 
-Start from the canonical `exp` branch at commit `f1af4e1` (or latest documentation commit on `exp`).
+Start from the verified K.8 implementation branch:
 
-K.7 implementation, verification, and PR merge into `exp` are COMPLETE.
+feature/k8-baseline-validation-2026-10-01
 
-Do NOT repeat K.6 or K.7 implementation or verification work.
-Do NOT execute K.9 or K.10 work.
+Base exp commit: d808436
+
+Do not repeat K.6, K.7, or K.8 implementation work and do not execute K.10 work.
 
 ## Objective
 
-Execute **K.8: Matched Baseline vs Proposed Software Validation**.
-
-Under frozen Gates A-E, evaluate the comparative performance of the baseline policies against the proposed policy across canonical workloads and fault injection schedules:
-- Baselines:
-  - P0: Null / blind forward
-  - P1: Immediate blind retry
-  - P2: Immediate blind reset
-  - P3: Unbounded escalation
-- Proposed:
-  - P4: Zero-heap context-aware recovery with event quarantine
+1. Review, audit, and merge the verified K.8 Matched Baseline Validation into `exp` via PR.
+2. Advance to K.9: Full Software Re-Verification + Methodology Lock.
+3. In K.9, re-verify the complete software chain (build, tests, simulator determinism, UI integration, trace integrity, matched comparison checks) and freeze the software methodology before final packaging.
 
 ## Read first
 
@@ -260,18 +254,18 @@ Under frozen Gates A-E, evaluate the comparative performance of the baseline pol
 5. CHAT_CONTINUITY_PROTOCOL.md
 6. NEXT_CHAT_PROMPT.md
 7. research/PART_II_CHAT_PLAN.md
-8. research/chat_records/chat_k7_record.md
-9. reference/include/ref_runtime.h
-10. reference/src/ref_runtime.c
-11. reference/experiments/README.md
+8. research/chat_records/chat_k8_record.md
+9. research/phase2_k8_matched_baseline_validation.md
+10. reference/include/ref_runtime.h
+11. reference/src/ref_runtime.c
 
 ## Critical constraints
 
-- The C reference runtime (`reference/src/ref_runtime.c`) remains authoritative.
-- Do NOT modify `ref_runtime.c` or `ref_runtime.h` unless an unresolvable bug is formally diagnosed and documented.
-- Do NOT perform physical MCU hardware integration or physical fault injection (simulation/software only).
+- The C reference runtime remains the sole recovery-policy authority.
+- Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
+- Do NOT perform physical hardware integration or physical fault injection.
 - Gates A-E remain frozen and normative.
-- Deterministic trace collection and metrics must adhere strictly to Gate E.
+
 
 
 

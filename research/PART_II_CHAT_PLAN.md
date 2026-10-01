@@ -94,7 +94,7 @@ Status:
 - K.5: completed
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
-- K.8: NOT STARTED
+- K.8: IMPLEMENTATION VERIFIED (READY FOR MERGE)
 - K.9: NOT STARTED
 - K.10: NOT STARTED
 
@@ -112,7 +112,20 @@ Implemented surface:
 - CTest suite passing 5/5 targets (100%).
 
 K.7 preserves single-policy authority in `ref_runtime.c`. No recovery logic or peripheral callback was added to the UI.
-Next checkpoint: K.8 (Matched Baseline vs Proposed Software Validation).
+
+## K.8 completion update — 2026-10-01
+
+K.8 Matched Baseline vs Proposed Software Validation is IMPLEMENTATION VERIFIED on `feature/k8-baseline-validation-2026-10-01`.
+
+Implemented surface:
+- `reference/experiments/evaluate_baselines.py`: Comprehensive comparative evaluation harness for 70 host runs (W01–W14 × P0–P4) and 30 virtual demonstrator runs (S01–S14 × P0–P4) = 100 total runs.
+- `reference/virtual/tests/test_virtual_baselines.c`: C11 unit assertions testing baseline progression, persistent fault escalation vs reinit recovery, stale ref handling vs fail-closed escalation, unassociated work preservation, and deterministic replay.
+- `research/phase2_k8_matched_baseline_validation.md`: Structured comparative evidence report documenting metric tables, scenario matrices, and qualification locks.
+- CTest suite expanded to 7 targets (100% passing).
+- Authority preserved: `ref_runtime.c` and `ref_runtime.h` unchanged.
+
+Next checkpoint after PR merge: K.9 (Full Software Re-Verification + Methodology Lock).
+
 
 
 
