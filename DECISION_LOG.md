@@ -177,3 +177,6 @@ They have potentially distinct mechanisms, but the policy-level role is one boun
 | D-084 | Accepted | Advance from Chat K.2 to Chat K.3 final synthesis without reopening Gates A-E. | K.2 found no concrete corpus defect requiring a semantic redesign; the remaining work is evidence-bounded synthesis, limitation reporting, and project packaging. |
 
 | D-085 | Accepted | Treat Chat K.3 as the final host/reference synthesis checkpoint for the current stage and preserve an explicit evidence boundary: host reproducibility/correctness evidence is not MCU/physical evidence. | K.1/K.2 provide reproducible host evidence but leave MCU, physical, statistical, external-validity, and clean-ablation questions unresolved; the repository should stop at a coherent evidence-bounded checkpoint rather than imply completion of those validations. |
+
+
+| D-086 | Accepted | Treat the software demonstrator, host re-verification, methodology lock, professor-facing demonstration, and software-phase conclusion as one integrated checkpoint. | This is the immediate software objective before target-MCU validation; professor verification is its intended use, not a separate gate. |
