@@ -417,3 +417,13 @@ K.9.2 is complete as a design/audit checkpoint. The repository now locks:
 No K.10 experiment or final prior-art conclusion is included in K.9.2.
 
 **Reason:** K.9/K.8 evidence established reproducibility and bounded comparative observations but did not establish superiority or novelty. The project therefore requires a non-predetermined investigation before final synthesis.
+
+
+## D-114 — Canonical K.10 starting point after K.9.2
+**Status:** Accepted
+
+The K.9.2 design/audit checkpoint is committed on `exp` at `04308f0fc797892da51e2265edfc57b810d0acd9`. This commit is the canonical starting point for K.10.
+
+K.10 is strictly the P4 Advantage & Novelty Investigation. It must execute the locked matched scenarios, controls, admissible instrumentation and adversarial prior-art search without predetermining a positive result. Final synthesis/hardware-validation handoff remains downstream of the K.10 evidence.
+
+**Reason:** removes ambiguity between historical K.10 packaging prompts and the current K.10 investigation scope and provides an exact auditable starting point for the next chat.
