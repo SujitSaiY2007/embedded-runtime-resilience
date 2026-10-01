@@ -33,7 +33,7 @@ Never delete historical material merely to shorten the repository. Prefer additi
 | J | Analysis | Statistical/technical analysis, limitations, and interpretation are checkpointed |
 | K.1 | Host experiment verification | Harness builds/runs reproducibly, matched P0-P4 execution is verified, and checkpoint is committed |
 | K.2 | Host corpus validation | Generated traces/outcomes are inspected against Gate-E evidence requirements and remaining host-only limitations are recorded |
-| K.3 | Final synthesis | Report, paper/patent assessment, demonstrations, and final repository organization |
+| K.3 | Final synthesis | Evidence-bounded synthesis and final repository organization |
 
 ## Early-stop rule
 
@@ -54,10 +54,10 @@ A new chat must first read the repository's continuity documents before performi
 
 ## Current checkpoint
 
-**Phase:** 1E.1 — Experimental Design / Formalization Foundation  
-**Completed:** six core invariants; Gate A — exact Event Model and dependency semantics; Gate B — Fault Model and Fault Association; Gate C — Recovery Policy and Bounded State Machine.  
-**Next:** Gate D — Formal Properties + Proof/Check Strategy.  
-**Implementation status:** large-scale firmware implementation has not started and must remain deferred until the design gates are sufficiently complete.
+**Phase:** 1E.1 — Experimental Design / Formalization Foundation; K.3 final host/reference synthesis checkpoint.  
+**Completed:** Gates A-E; minimal reference implementation; K.1 host-experiment verification; K.2 host-corpus validation; K.3 evidence-bounded synthesis.  
+**Current boundary:** host/reference + deterministic software injection only. MCU/physical validation remains absent.  
+**Status:** K.3 COMPLETE. Any future work must explicitly select a deferred validation objective.
 
 ## Gate C checkpoint note
 
