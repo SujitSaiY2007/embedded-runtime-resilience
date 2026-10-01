@@ -252,3 +252,20 @@ Sequence:
 **K.9.2 design lock -> K.10 investigation -> K.11 final synthesis/hardware-validation handoff -> hardware validation/refinement**.
 
 K.11 must use K.10 evidence as its input and must not retroactively change the K.10 methodology merely to obtain a preferred conclusion.
+
+---
+
+## K.10 execution-blocker update — 2026-10-01
+
+K.10 is **ACTIVE / NOT COMPLETE**.
+
+The live `exp` HEAD is `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`. The five commits after the earlier declared `e28af7...` state modify only continuity/control documents. Protected `ref_runtime.c/.h` remain unchanged.
+
+Fresh adversarial prior-art research materially weakens broad individual/pairwise novelty framings, while the exact integrated MCU-specific combination remains unresolved.
+
+The decisive K.10 matched experiment matrix was **not executed** because Antigravity is unavailable and no local/CI execution path is exposed.
+
+Therefore K.10 does not satisfy its exit condition and **K.11 is not activated**.
+
+### Required next K.10 execution
+Use the designated Antigravity repository agent (or an explicitly authorized equivalent execution environment) to execute the locked scenarios/controls, generate auditable raw/derived metrics, analyze interactions/trade-offs, complete the prior-art record, update the K.10 results record, and commit/push a genuinely completed K.10 checkpoint.
