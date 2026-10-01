@@ -272,3 +272,18 @@ S01-S14 define workloads, dependencies, fault stimuli and evidence targets. They
 K.6 implements deterministic environmental action mirroring from the immutable fault schedule but does not expose or invent a peripheral-action callback. The observed PolicyDecision comes from the existing C runtime, and the actual transition is performed by the existing runtime_apply_policy()/runtime_verify_and_release() path.
 
 **Reason:** this satisfies the K.5 integration contract without changing recovery semantics or creating a second recovery policy. Any future callback boundary remains a separate design decision.
+
+## D-105 — K.6 Virtual System Verification and Merge into exp
+
+**Status:** Accepted
+
+The K.6 virtual embedded system implementation was verified against the existing C reference runtime without modifying `ref_runtime.c` or `ref_runtime.h`. Verification confirmed:
+1. CTest passed 3/3 (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`.
+2. Deterministic execution of scenarios S01, S02, S05, S06, S08, and S14 passed.
+3. Trace correlation between wrapper trace and authoritative runtime trace records confirmed.
+4. Identical replay digests across repeated runs confirmed determinism (S01: 0xB72131CB, S02: 0xE8691374, S05: 0xBDC168BD, S06: 0xA123BB47, S08: 0x5A52628A, S14: 0x9185616C).
+5. Zero synthetic EventRefs fabricated; no second recovery policy created; no peripheral callbacks introduced.
+6. Pull Request #7 was cleanly merged into `exp` at commit `b161589`.
+
+**Reason:** marks K.6 as verified and merged, locking the virtual embedded system foundation for the K.7 UI implementation.
+

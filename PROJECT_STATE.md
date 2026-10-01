@@ -333,30 +333,32 @@ Gates A-E, the existing C recovery mechanism, P0-P3 ablation qualification, W09/
 K.6 — Virtual Embedded System Implementation around the existing C reference runtime. K.6 may implement only the contracts defined by K.5; it must not introduce a second recovery policy or redesign the C runtime.
 
 
-## 2026-10-01 — Chat K.6 implementation checkpoint
+## 2026-10-01 — Chat K.6 complete: virtual-system implementation verified and merged
 
-K.6 implementation has been added on focused branch feature/k6-virtual-system-implementation-2026-10-01, based directly on exp after K.5.
+Part I (K.1-K.3) remains COMPLETE. Part II is ACTIVE.
+K.4 (novelty re-research + conceptual architecture lock) and K.5 (technical design and interface contracts) are COMPLETE.
 
-### Implemented
+K.6 (virtual embedded system implementation) is VERIFIED AND MERGED into `exp` via PR #7 (merge commit `b161589`).
 
-- bounded virtual scenario/workload representation;
-- runtime-generated ScenarioEventKey -> EventRef correlation;
-- bounded virtual I2C/SPI/UART environmental observation records;
-- immutable per-scenario fault schedules;
-- adapter calls to the existing ref_runtime.h API for admission, dependency declaration, fault observation, scheduling, execution and recovery;
-- wrapper trace records correlated to authoritative runtime trace sequence/EventRef/transaction data;
-- deterministic replay digest;
-- focused K.6 tests for S01, S02, S05, S06, S08 and S14;
-- reference CMake integration without modifying ref_runtime.c or ref_runtime.h.
+### K.6 verification summary
+- CTest suite: 3/3 passed (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`.
+- Scenarios verified: S01, S02, S05, S06, S08, S14 all passed.
+- Deterministic replay digest verified:
+  - S01: `0xB72131CB` == `0xB72131CB` (Equal: YES)
+  - S02: `0xE8691374` == `0xE8691374` (Equal: YES)
+  - S05: `0xBDC168BD` == `0xBDC168BD` (Equal: YES)
+  - S06: `0xA123BB47` == `0xA123BB47` (Equal: YES)
+  - S08: `0x5A52628A` == `0x5A52628A` (Equal: YES)
+  - S14: `0x9185616C` == `0x9185616C` (Equal: YES)
+- Authority preserved: `policy_decide()` remains sole recovery decider; `runtime_apply_policy()` remains authoritative transition.
+- Runtime integrity preserved: `ref_runtime.c` and `ref_runtime.h` unchanged. No peripheral-action callback added. No second recovery policy created. No synthetic EventRefs fabricated.
 
-### Authority/constraint verification
+### Canonical checkpoint status
+- K.1–K.3: completed
+- K.4: completed
+- K.5: completed
+- K.6: VERIFIED AND MERGED
+- K.7: NOT STARTED
 
-The K.6 implementation does not add a peripheral-action callback and does not modify runtime_apply_policy(), policy_decide(), or the recovery mechanism. During recovery, the environment mirrors the immutable fault schedule only as an observation; the C runtime remains authoritative.
+No K.7 or later implementation, experiment, or design execution was performed in K.6. Gates A-E remain unchanged.
 
-### Verification status
-
-Repository-level diff inspection is complete. This chat environment cannot clone/compile the GitHub repository because direct external network resolution is unavailable, so the new K.6 CTest execution is not claimed as executed here.
-
-**K.6 implementation is present; K.6 exit verification remains pending a real build/run of the focused virtual-system test against the existing runtime.**
-
-No K.7 or later work has been executed. Gates A-E and K.5 history remain unchanged.

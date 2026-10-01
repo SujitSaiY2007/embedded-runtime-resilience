@@ -74,20 +74,26 @@ K.6 is now the active implementation checkpoint. It may implement only the K.5 c
 K.6 must not modify the recovery policy, add a second recovery engine, or silently add a peripheral-action callback to the C runtime. The current runtime API remains the integration boundary unless a separate design decision explicitly authorizes a change.
 
 
-## K.6 implementation update — 2026-10-01
+## K.6 completion update — 2026-10-01
 
-K.6 implementation is present on feature/k6-virtual-system-implementation-2026-10-01.
+K.6 is COMPLETE, VERIFIED, and MERGED into `exp` via PR #7 (merge commit `b161589`).
 
-Implemented surface:
+Verified surface:
 - bounded virtual scenario/workload structures;
 - I2C/SPI/UART environmental records;
 - immutable fault schedules;
-- existing-runtime adapter;
-- EventRef/dependency mapping;
+- existing-runtime adapter using unchanged `ref_runtime.h`/`ref_runtime.c`;
+- EventRef/dependency mapping with no synthetic EventRefs;
 - correlated wrapper/runtime trace records;
-- deterministic replay digest;
-- focused S01/S02/S05/S06/S08/S14 tests.
+- deterministic replay digest equality;
+- focused S01/S02/S05/S06/S08/S14 tests passed under CTest (3/3 passed).
 
-K.6 is not yet execution-verified in this chat environment because the repository cannot be cloned over external network resolution. The next chat remains within K.6 and must perform the build/CTest/replay exit check before K.7 can begin.
+Status:
+- K.1–K.3: completed
+- K.4: completed
+- K.5: completed
+- K.6: VERIFIED AND MERGED
+- K.7: NOT STARTED
 
-No K.7 or later work has been executed.
+K.7 is now the active checkpoint: Professor-Facing UI Implementation.
+

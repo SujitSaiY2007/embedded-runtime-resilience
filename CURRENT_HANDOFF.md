@@ -337,59 +337,60 @@ The current runtime has no peripheral-action callback. K.6 must not silently mod
 No UI implementation/polish, no recovery-policy redesign, no new policy variant, no hardware integration, no physical fault injection, no final baseline comparison, and no K.7-K.10 work.
 
 
-## 2026-10-01 — Chat K.6 implementation checkpoint
+## 2026-10-01 — Chat K.6 verification and merge complete
 
 ### Continuity
 
 - Part II remains active.
-- K.1-K.3 are complete.
+- K.1–K.3 are complete.
 - K.4 is complete.
-- K.5 is complete at design/contract level.
-- K.6 implementation is now present on the focused branch below.
+- K.5 is complete.
+- K.6 is VERIFIED AND MERGED into `exp` via PR #7 (merge commit `b161589`).
 - Gates A-E remain frozen.
 - The C reference runtime remains the sole recovery-policy authority.
 
-### Focused branch
+### Merged K.6 implementation
 
-feature/k6-virtual-system-implementation-2026-10-01
+Branch: `feature/k6-virtual-system-implementation-2026-10-01`
+Final feature commit: `fc5be9d`
+Base exp commit: `c39fef6`
+Merged into `exp`: `b161589`
+PR: #7 (`K.6: implement bounded virtual embedded system`) — Merged and closed.
 
-Base exp commit: c39fef60c6570c2f2136e9b7fcf6b1d22b773172
+Surface in `reference/virtual/`:
+- `reference/virtual/include/virtual_system.h`
+- `reference/virtual/src/virtual_system.c`
+- `reference/virtual/tests/test_virtual_system.c`
+- `reference/virtual/CMakeLists.txt`
+- `reference/virtual/README.md`
+- `reference/CMakeLists.txt`
 
-K.6 implementation commit: 91b1e16825ec093c99aedaaa3213bc6482c77d12
+### Verification evidence
 
-### Implemented K.6 surface
+- CTest: 3/3 passed (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`.
+- Scenarios: S01, S02, S05, S06, S08, S14 passed.
+- Deterministic replay digests:
+  - S01: `0xB72131CB` == `0xB72131CB` (Equal: YES)
+  - S02: `0xE8691374` == `0xE8691374` (Equal: YES)
+  - S05: `0xBDC168BD` == `0xBDC168BD` (Equal: YES)
+  - S06: `0xA123BB47` == `0xA123BB47` (Equal: YES)
+  - S08: `0x5A52628A` == `0x5A52628A` (Equal: YES)
+  - S14: `0x9185616C` == `0x9185616C` (Equal: YES)
+- Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added. No fabricated EventRef created.
 
-- reference/virtual/include/virtual_system.h
-- reference/virtual/src/virtual_system.c
-- reference/virtual/tests/test_virtual_system.c
-- reference/virtual/CMakeLists.txt
-- reference/virtual/README.md
-- updated reference/CMakeLists.txt
+### Canonical status
+- K.1–K.3: completed
+- K.4: completed
+- K.5: completed
+- K.6: VERIFIED AND MERGED
+- K.7: NOT STARTED
 
-The adapter uses only the existing runtime API. EventRef values are runtime-generated. Recovery decisions are observed from policy_decide() and execution is performed by runtime_apply_policy(); the wrapper does not select a recovery action.
+### Exact next task: K.7 — Professor-Facing UI Implementation
 
-### Focused scenarios implemented
+Start from latest `exp` (`b161589`).
+Implement the web/electron/GUI front-end demonstrating the software-only mechanism end-to-end:
+topology/status -> queue view -> fault controls -> recovery action -> verification/release/degrade/escalation -> trace/explanation -> metrics -> scenarios -> simulator integration.
+UI must remain a read-only projection / stimulus injector; the existing C reference runtime remains the sole recovery-policy authority.
 
-S01 independent preservation, S02 ordered blocking, S05 retry success/correlation, S06 bounded retry/reinit progression, S08 ambiguous association without fabricated EventRef, and S14 mixed dependency/replay.
+No K.7 work has been performed in this chat.
 
-K.5 S03/S04/S07/S09-S13 definitions remain preserved and are not converted into a K.8 comparison experiment here.
-
-### Verification boundary
-
-The code was inspected against the K.5 contracts and existing runtime API. Actual compilation/CTest execution of the new K.6 target is pending because this chat runtime cannot clone the repository over the external network.
-
-Therefore do not report K.6 as execution-verified yet, and do not advance to K.7 until the focused K.6 build/test/replay check is run successfully.
-
-### Exact next task
-
-Run from the focused K.6 branch:
-
-1. configure/build reference/;
-2. run CTest;
-3. confirm virtual_system_tests passes against the actual existing ref_runtime.c;
-4. inspect that S01/S02/S05/S06/S08/S14 produce correlated runtime/wrapper traces and identical replay digests;
-5. if a concrete compile/runtime defect appears, fix only that defect;
-6. once verified, merge the focused branch into exp and update the K.6 exit record;
-7. only then prepare K.7 as the next checkpoint.
-
-No K.5 redesign, recovery-policy redesign, UI work, baseline experiment, hardware work, or K.7-K.10 execution is authorized in this verification step.

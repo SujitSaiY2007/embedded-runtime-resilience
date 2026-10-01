@@ -225,21 +225,30 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 
 
 ---
-# Active Next-Chat Prompt — K.6 Verification/Exit
+# Active Next-Chat Prompt — K.7: Professor-Facing UI Implementation
 
 Continue the canonical project in:
 
 SujitSaiY2007/embedded-runtime-resilience
 
-Start from the focused K.6 implementation branch:
+Start from the latest canonical `exp` branch (merge commit `b161589`).
 
-feature/k6-virtual-system-implementation-2026-10-01
-
-Do not repeat K.5 design work and do not execute K.7 or later work.
+Do not repeat K.5/K.6 work and do not execute K.8 or later work.
 
 ## Objective
 
-Execution-verify the already implemented K.6 virtual embedded system against the SAME existing C reference runtime, then close K.6 only if the controlled deterministic exit condition is demonstrated.
+Implement the professor-facing UI (K.7) as the front-end for the software-only demonstrator, connecting the UI to the K.6 bounded virtual embedded system and the authoritative C reference runtime.
+
+The full software mechanism must be observable without source-code inspection:
+topology/status
+-> queue view
+-> fault controls
+-> recovery action
+-> verification/release/degrade/escalation
+-> trace/explanation
+-> metrics
+-> scenarios
+-> simulator integration.
 
 ## Read first
 
@@ -262,33 +271,12 @@ Execution-verify the already implemented K.6 virtual embedded system against the
 17. reference/virtual/src/virtual_system.c
 18. reference/virtual/tests/test_virtual_system.c
 
-## Allowed
+## Critical constraints
 
-- build and run the existing K.6 focused tests;
-- inspect deterministic runtime/wrapper trace correlation;
-- inspect replay digest equality;
-- fix concrete K.6 compile/runtime defects only;
-- update K.6 continuity records and merge the completed focused branch into exp after successful verification.
+- The C reference runtime remains the sole recovery-policy authority.
+- The UI is a read-only projection and interactive stimulus injector; it MUST NOT contain a second recovery policy or alternative decision logic.
+- Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
+- Do NOT perform K.8 baseline comparison experiments.
+- Do NOT perform hardware integration or physical fault injection.
+- Gates A-E remain frozen and normative.
 
-## Explicitly prohibited
-
-- K.5 redesign;
-- recovery-policy redesign;
-- new recovery algorithm;
-- new policy variant;
-- UI implementation/polish;
-- baseline comparison experiment;
-- STM32U575/hardware integration;
-- physical fault injection;
-- Gates A-E changes;
-- K.7-K.10 execution.
-
-## Required K.6 exit
-
-A controlled deterministic scenario must execute through the virtual environment, the unchanged C runtime, and back into an inspectable correlated trace. Replay of the same scenario/run/variant must produce the same digest.
-
-If this cannot be demonstrated, document the concrete blocker and remain at K.6.
-
-## After successful exit
-
-Merge the focused K.6 implementation branch into exp, preserve the K.5 history, update K.6 records, and set the next chat prompt to K.7. Do not execute K.7 in this chat.
