@@ -128,3 +128,33 @@ The generated `out/` and `out.replay/` directories remain transient verification
 The current target is a complete software-only proof of concept for professor review. The UI demonstrates the end-to-end mechanism while the ISO C11 reference and host corpus remain the authoritative software evidence. See `research/phase1_software_demonstrator_methodology_lock.md`.
 
 The software conclusion is intentionally bounded: the project has a specified, implemented, reproducible host mechanism suitable for hardware validation, but MCU performance, physical recovery, statistical evidence, and final novelty/patentability remain unverified.
+
+---
+
+# Project Structure — Two-Part Research Program
+
+## Part I — K-Series Host/Reference Foundation — COMPLETE
+K.1 -> K.2 -> K.3 is Part I. K.3 is a completed Part-I checkpoint, not the end of the overall project.
+
+Part I established Gates A-E, the ISO C11 reference mechanism, deterministic host experiment infrastructure, K.1 execution verification, K.2 corpus validation, and K.3 evidence-bounded synthesis.
+
+## Part II — Software Demonstrator, Novelty Investigation, and Methodology Lock — ACTIVE
+Part II begins at K.4. Its purpose is to investigate the remaining novelty space, construct a software-only virtual embedded system, connect that environment to the same authoritative C reference runtime, build the professor-facing UI, perform matched software comparison, re-verify the software chain, and produce the hardware-validation handoff.
+
+Professor review is the intended use of Part II, not a separate stage.
+
+### Authoritative architecture
+UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace -> UI
+
+The UI is presentation/control only. The virtual system models the environment. The C reference runtime remains the authoritative recovery-policy implementation. A second competing recovery algorithm must not be created in the UI or simulator.
+
+### Branch-control policy
+- exp is the active research/reference branch.
+- Focused child branches may be created from exp.
+- Completed checkpoints return to exp.
+- main is the integrated stable mirror and is synchronized from exp through explicit PR/merge.
+- No active Part-II development is performed directly on main.
+- Every main update identifies the source exp commit and checkpoint.
+
+### Chat scope contract
+Every Part-II chat has a predefined scope in research/PART_II_CHAT_PLAN.md. A chat must read continuity files, perform only its assigned checkpoint, record completed and incomplete work, update continuity, and stop at its boundary.
