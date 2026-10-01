@@ -28,3 +28,10 @@ For each source, record:
 - whether it weakens or strengthens the novelty hypothesis.
 
 Search results are leads, not evidence by themselves.
+
+
+## 2026-10-01 current phase
+
+The research design and host-evidence foundation is complete through Gates A-E and K.1-K.3. The active software-phase record is `phase1_software_demonstrator_methodology_lock.md`, which integrates the professor-facing demonstrator, re-verification, methodology lock, novelty-positioning discipline, and hardware-validation handoff.
+
+Novelty remains a hypothesis until supported by the complete prior-art record and eventual empirical evidence. Host/reference evidence must remain distinct from MCU/physical evidence.
