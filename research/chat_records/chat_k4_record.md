@@ -41,3 +41,40 @@ No clearly useless file was identified. Earlier design/reference documents are r
 ## Next boundary
 
 Complete the final clean re-verification of the repository/software demonstrator, then merge the integrated software-phase package to main. After that, the next empirical objective is STM32U575 target validation.
+
+---
+## Part-II Scope Reclassification
+
+The project has now been formally divided into:
+- Part I = K.1-K.3, COMPLETE.
+- Part II = K.4 onward, ACTIVE.
+
+The previous K.4 document described an integrated software-phase objective. Under the new project structure, that material is retained as historical context, while the active K.4 checkpoint is strictly narrowed to **Novelty Re-Research + Conceptual Architecture Lock**.
+
+### Active branch contract
+
+- exp is the active reference branch.
+- main is the integrated stable mirror.
+- Part-II work must originate from exp.
+- Completed checkpoints return to exp and are then synchronized to main through an explicit PR/merge.
+
+### Active K.4 scope
+
+Allowed:
+- focused prior-art research;
+- claim-element and combination analysis;
+- novelty hypothesis refinement;
+- conceptual virtual-system/UI/runtime architecture;
+- interface ownership and evidence-boundary decisions.
+
+Out of scope:
+- simulator implementation;
+- UI implementation;
+- recovery-policy redesign;
+- Gates A-E redesign;
+- hardware work;
+- K.5-K.10 execution.
+
+### Required next checkpoint
+
+K.5 — Virtual Embedded System Technical Design + Interface Contracts.
