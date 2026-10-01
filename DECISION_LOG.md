@@ -287,3 +287,18 @@ The K.6 virtual embedded system implementation was verified against the existing
 
 **Reason:** marks K.6 as verified and merged, locking the virtual embedded system foundation for the K.7 UI implementation.
 
+## D-106 — K.7 Professor-Facing UI Architecture and Dual-Mode Delivery
+
+**Status:** Accepted
+
+The K.7 front-end demonstrator is implemented under `demo/` and connected directly to the C reference runtime via `virtual_demo_cli`:
+1. **Zero-Authority UI:** The UI is purely an inspectable visualization and interactive control layer. It does not select recovery actions, duplicate `policy_decide()`, or manipulate runtime internal state.
+2. **Dual-Mode Delivery:** The UI supports both:
+   - *Live C Backend Mode:* `demo/server.py` proxies live execution requests to `virtual_demo_cli.exe` in real-time.
+   - *Standalone Offline Mode:* `demo/index.html` loads pre-exported authoritative dataset `demo/scenarios_data.json` directly in any web browser without dependencies.
+3. **Trace Linkage:** Interactive trace correlation highlights the exact `TraceRecord` sequences (`rt_first`..`rt_last`) corresponding to wrapper events.
+4. **No-Fabricated-EventRef:** Verified on ambiguous fault scenario S08 (`INVALID_SLOT` / `255`).
+
+**Reason:** provides a polished, interactive, professor-facing demonstrator while strictly preserving the single-policy authority of the existing C reference runtime.
+
+

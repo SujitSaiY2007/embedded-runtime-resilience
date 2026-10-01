@@ -1,0 +1,7619 @@
+{
+  "timestamp": "2026-10-01T20:00:00Z",
+  "scenarios": {
+    "S01": {
+      "id": "S01",
+      "name": "Independent Preservation Under Transient Fault",
+      "description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+      "step_count": 7,
+      "timeline": [
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0x69AFAD9D",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x8927F27F",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xFF5B8A84",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xCCC7C24E",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 4,
+    "kind": "VSTEP_START_FAULT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 103,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 4,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xFA030A4E",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 4,
+    "kind": "VSTEP_START_FAULT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 5,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 1,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 103,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "NACK",
+      "fault_class": "I2C_NACK",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 5,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xB5FEB8D8",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 5,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 6,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 1,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 103,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 2
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 6,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 6,
+  "step_count": 7,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x0C2F98B1",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 6,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 7,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 1,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 103,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 3
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 7,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 8,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 6,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 6,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 7,
+      "rt_last": 8,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S01",
+  "scenario_name": "Independent Preservation Under Transient Fault",
+  "scenario_description": "Task 2 on I2C0 experiences transient NACK. Independent tasks 1 (I2C0) and 3 (UART0) continue and complete while task 2 recovers.",
+  "run_id": 1001,
+  "variant": 4,
+  "step_index": 7,
+  "step_count": 7,
+  "is_complete": true,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xB72131CB",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 7,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 1,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 101,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 102,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 103,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 4
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 101,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 103,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 7,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 8,
+      "episode_id": 1,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 9,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 102,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 101,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 5,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 103,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 6,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 6,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 7,
+      "rt_last": 8,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 8,
+      "step_seq": 7,
+      "key": 255,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 102,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 9,
+      "rt_last": 9,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    },
+    "S02": {
+      "id": "S02",
+      "name": "Ordered Dependency Blocking",
+      "description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+      "step_count": 8,
+      "timeline": [
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0x1929110A",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x089A84E6",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xB238177B",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x7E954883",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 4,
+    "kind": "VSTEP_DEPEND",
+    "a": 1, "b": 0, "c": 1, "d": 7
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 4,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xC28FB546",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 4,
+    "kind": "VSTEP_DEPEND",
+    "a": 1, "b": 0, "c": 1, "d": 7
+  },
+  "next_step": {
+    "sequence": 5,
+    "kind": "VSTEP_START_FAULT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 5,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x31C9FEA2",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 5,
+    "kind": "VSTEP_START_FAULT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 6,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 6,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xC6779E30",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 6,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 7,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 7,
+  "step_count": 8,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x16422801",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 7,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 8,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 2
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 7,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 7,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 6,
+      "rt_last": 7,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S02",
+  "scenario_name": "Ordered Dependency Blocking",
+  "scenario_description": "Task 2 depends on Task 1 (ORDERED). When Task 1 encounters a fault, Task 2 is blocked in ST_QUEUED while independent Task 3 completes.",
+  "run_id": 1002,
+  "variant": 4,
+  "step_index": 8,
+  "step_count": 8,
+  "is_complete": true,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xE8691374",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 8,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 201,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 202,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 203,
+      "state": "ST_COMPLETED",
+      "peripheral": "UART0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 3
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 1
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 202,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 203,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 7,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 8,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 201,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 202,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 255,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 203,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 5,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 7,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 6,
+      "rt_last": 7,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 8,
+      "step_seq": 8,
+      "key": 255,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 201,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 8,
+      "rt_last": 8,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    },
+    "S05": {
+      "id": "S05",
+      "name": "Retry Success and Trace Correlation",
+      "description": "Single-event transient I2C NACK resolved by recovery retry. Demonstrates exact 1:1 wrapper-to-runtime trace correlation.",
+      "step_count": 3,
+      "timeline": [
+{
+  "scenario_id": "S05",
+  "scenario_name": "Retry Success and Trace Correlation",
+  "scenario_description": "Single-event transient I2C NACK resolved by recovery retry. Demonstrates exact 1:1 wrapper-to-runtime trace correlation.",
+  "run_id": 1005,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0xF42A3119",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S05",
+  "scenario_name": "Retry Success and Trace Correlation",
+  "scenario_description": "Single-event transient I2C NACK resolved by recovery retry. Demonstrates exact 1:1 wrapper-to-runtime trace correlation.",
+  "run_id": 1005,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xAF6718B3",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 5, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 501,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S05",
+  "scenario_name": "Retry Success and Trace Correlation",
+  "scenario_description": "Single-event transient I2C NACK resolved by recovery retry. Demonstrates exact 1:1 wrapper-to-runtime trace correlation.",
+  "run_id": 1005,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x258A7A48",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 5, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 5, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 501,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "NACK",
+      "fault_class": "I2C_NACK",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S05",
+  "scenario_name": "Retry Success and Trace Correlation",
+  "scenario_description": "Single-event transient I2C NACK resolved by recovery retry. Demonstrates exact 1:1 wrapper-to-runtime trace correlation.",
+  "run_id": 1005,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 3,
+  "is_complete": true,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xBDC168BD",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 5, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 501,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 2
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 3,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 501,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 501,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    },
+    "S06": {
+      "id": "S06",
+      "name": "Bounded Progression to Subsystem Restart",
+      "description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+      "step_count": 5,
+      "timeline": [
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 5,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0xA3A39486",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 5,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x2ED9AB1A",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 601,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 5,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x5F4A100B",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 601,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 5,
+  "is_complete": false,
+  "outcome_code": 2,
+  "outcome_str": "OUTCOME_FAILURE",
+  "digest": "0x18A4A038",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 4,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 2,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 601,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "op_seq": 2
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 3,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 2,
+      "action_index": 1,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 3,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 4,
+  "step_count": 5,
+  "is_complete": false,
+  "outcome_code": 2,
+  "outcome_str": "OUTCOME_FAILURE",
+  "digest": "0xC1388AF4",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 4,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 5,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 2,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 3,
+    "policy_action": "ACT_REINIT_OR_RESET",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 601,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "op_seq": 3
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 3,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 2,
+      "action_index": 1,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 2,
+      "action_index": 1,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 3,
+      "action_index": 2,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 3,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 5,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S06",
+  "scenario_name": "Bounded Progression to Subsystem Restart",
+  "scenario_description": "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+  "run_id": 1006,
+  "variant": 4,
+  "step_index": 5,
+  "step_count": 5,
+  "is_complete": true,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xA123BB47",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 5,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 6, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 3,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_TIMEOUT",
+    "observation_count": 3,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 601,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 4
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 3,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 2,
+      "action_index": 1,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 2,
+      "action_index": 1,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 3,
+      "action_index": 2,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 7,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 3,
+      "action_index": 2,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_REINIT_OR_RESET",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 8,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 601,
+      "obs_seq": 3,
+      "action_index": 3,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 3,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_FAILURE",
+      "env_status": "TIMEOUT",
+      "fault_class": "I2C_TIMEOUT",
+      "rt_first": 5,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 601,
+      "action": "ACT_REINIT_OR_RESET",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 7,
+      "rt_last": 8,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    },
+    "S08": {
+      "id": "S08",
+      "name": "Ambiguous Association Isolation",
+      "description": "Unmapped environmental fault with unknown association. Runtime terminates safely without fabricating synthetic EventRefs.",
+      "step_count": 3,
+      "timeline": [
+{
+  "scenario_id": "S08",
+  "scenario_name": "Ambiguous Association Isolation",
+  "scenario_description": "Unmapped environmental fault with unknown association. Runtime terminates safely without fabricating synthetic EventRefs.",
+  "run_id": 1008,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0x781BD7E4",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S08",
+  "scenario_name": "Ambiguous Association Isolation",
+  "scenario_description": "Unmapped environmental fault with unknown association. Runtime terminates safely without fabricating synthetic EventRefs.",
+  "run_id": 1008,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xC94DBD14",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 8, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 801,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "CRITICAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": false,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 801,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 801,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S08",
+  "scenario_name": "Ambiguous Association Isolation",
+  "scenario_description": "Unmapped environmental fault with unknown association. Runtime terminates safely without fabricating synthetic EventRefs.",
+  "run_id": 1008,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 3,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x4AE3F0D9",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_START_FAULT",
+    "a": 8, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 8, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "AMBIGUOUS",
+    "observation_count": 1,
+    "policy_action": "ACT_ESCALATE",
+    "quarantine_required": false,
+    "terminal": true
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 801,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "CRITICAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": false,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 801,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 801,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 255,
+      "slot_id": 255,
+      "generation": 0,
+      "peripheral": "NONE",
+      "tx_id": 65535,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "PROTOCOL_ERROR",
+      "fault_class": "AMBIGUOUS",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S08",
+  "scenario_name": "Ambiguous Association Isolation",
+  "scenario_description": "Unmapped environmental fault with unknown association. Runtime terminates safely without fabricating synthetic EventRefs.",
+  "run_id": 1008,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 3,
+  "is_complete": true,
+  "outcome_code": 4,
+  "outcome_str": "OUTCOME_TERMINAL_ESCALATE",
+  "digest": "0x5A52628A",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 8, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "AMBIGUOUS",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 801,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "CRITICAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": false,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 801,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 801,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 255,
+      "slot_id": 255,
+      "generation": 0,
+      "peripheral": "NONE",
+      "tx_id": 65535,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "PROTOCOL_ERROR",
+      "fault_class": "AMBIGUOUS",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 255,
+      "slot_id": 255,
+      "generation": 0,
+      "peripheral": "NONE",
+      "tx_id": 65535,
+      "action": "ACT_ESCALATE",
+      "outcome": "OUTCOME_TERMINAL_ESCALATE",
+      "env_status": "PROTOCOL_ERROR",
+      "fault_class": "AMBIGUOUS",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    },
+    "S14": {
+      "id": "S14",
+      "name": "Mixed Dependencies and Deterministic Replay",
+      "description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+      "step_count": 9,
+      "timeline": [
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 0,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 0,
+  "outcome_str": "OUTCOME_NONE",
+  "digest": "0x8EAE8D8E",
+  "runtime_authoritative": true,
+  "last_executed_step": null,
+  "next_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+  ],
+  "wrapper_trace": [
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 1,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xE25B5EB2",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 1,
+    "kind": "VSTEP_ADMIT",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 2,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x8EDFD59F",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 2,
+    "kind": "VSTEP_ADMIT",
+    "a": 1, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 3,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x0894612F",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 3,
+    "kind": "VSTEP_ADMIT",
+    "a": 2, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 4,
+    "kind": "VSTEP_DEPEND",
+    "a": 1, "b": 0, "c": 1, "d": 7
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 4,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xCDA9B452",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 4,
+    "kind": "VSTEP_DEPEND",
+    "a": 1, "b": 0, "c": 1, "d": 7
+  },
+  "next_step": {
+    "sequence": 5,
+    "kind": "VSTEP_DEPEND",
+    "a": 2, "b": 1, "c": 2, "d": 7
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 5,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x5D4FA226",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 5,
+    "kind": "VSTEP_DEPEND",
+    "a": 2, "b": 1, "c": 2, "d": 7
+  },
+  "next_step": {
+    "sequence": 6,
+    "kind": "VSTEP_START_FAULT",
+    "a": 14, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 0,
+    "target_slot": 255,
+    "target_gen": 0,
+    "fault_class": "NONE",
+    "observation_count": 0,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 6,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xBC07DBB1",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 6,
+    "kind": "VSTEP_START_FAULT",
+    "a": 14, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 7,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "NACK",
+      "fault_class": "I2C_NACK",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 7,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0xBC07DBB1",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 7,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 8,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 14, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": true,
+    "episode_id": 1,
+    "attempt_count": 0,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_RETRY",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUARANTINED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": true,
+      "fault_associated": true,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "NACK",
+      "fault_class": "I2C_NACK",
+      "op_seq": 1
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 8,
+  "step_count": 9,
+  "is_complete": false,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x402B6D12",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 8,
+    "kind": "VSTEP_APPLY_FAULT",
+    "a": 14, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": {
+    "sequence": 9,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": true,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 2
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 8,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    }
+  ]
+}
+,
+{
+  "scenario_id": "S14",
+  "scenario_name": "Mixed Dependencies and Deterministic Replay",
+  "scenario_description": "Chained dependencies (ORDERED + COUPLED) with transient fault recovery. Verifies bit-for-bit replay digest reproducibility.",
+  "run_id": 1014,
+  "variant": 4,
+  "step_index": 9,
+  "step_count": 9,
+  "is_complete": true,
+  "outcome_code": 1,
+  "outcome_str": "OUTCOME_SUCCESS",
+  "digest": "0x9185616C",
+  "runtime_authoritative": true,
+  "last_executed_step": {
+    "sequence": 9,
+    "kind": "VSTEP_DRAIN",
+    "a": 0, "b": 0, "c": 0, "d": 0
+  },
+  "next_step": null,
+  "episode": {
+    "in_use": false,
+    "episode_id": 0,
+    "attempt_count": 1,
+    "target_slot": 0,
+    "target_gen": 1,
+    "fault_class": "I2C_NACK",
+    "observation_count": 1,
+    "policy_action": "ACT_NONE",
+    "quarantine_required": false,
+    "terminal": false
+  },
+  "active_slots": [
+    {
+      "slot_id": 0,
+      "generation": 1,
+      "ref_str": "0:1",
+      "tx_id": 1401,
+      "state": "ST_COMPLETED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 0
+    },
+    {
+      "slot_id": 1,
+      "generation": 1,
+      "ref_str": "1:1",
+      "tx_id": 1402,
+      "state": "ST_QUEUED",
+      "peripheral": "I2C0",
+      "criticality": "NORMAL",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    },
+    {
+      "slot_id": 2,
+      "generation": 1,
+      "ref_str": "2:1",
+      "tx_id": 1403,
+      "state": "ST_QUEUED",
+      "peripheral": "UART0",
+      "criticality": "DEFERABLE",
+      "quarantined": false,
+      "fault_associated": false,
+      "eligible": false,
+      "degradable": true,
+      "dep_count": 1
+    }
+  ],
+  "peripherals": [
+    {
+      "id": 1,
+      "name": "I2C0",
+      "status": "SUCCESS",
+      "fault_class": "NONE",
+      "op_seq": 3
+    },
+    {
+      "id": 2,
+      "name": "SPI0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    },
+    {
+      "id": 3,
+      "name": "UART0",
+      "status": "READY",
+      "fault_class": "NONE",
+      "op_seq": 0
+    }
+  ],
+  "runtime_trace": [
+    {
+      "seq": 1,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 2,
+      "episode_id": 0,
+      "slot_id": 1,
+      "generation": 1,
+      "tx_id": 1402,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 3,
+      "episode_id": 0,
+      "slot_id": 2,
+      "generation": 1,
+      "tx_id": 1403,
+      "obs_seq": 0,
+      "action_index": 0,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 4,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_QUARANTINED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_FAILURE",
+      "correctness": 0
+    },
+    {
+      "seq": 5,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 0,
+      "state": "ST_RETRY_PENDING",
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_NONE",
+      "correctness": 1
+    },
+    {
+      "seq": 6,
+      "episode_id": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_QUEUED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    },
+    {
+      "seq": 7,
+      "episode_id": 0,
+      "slot_id": 0,
+      "generation": 1,
+      "tx_id": 1401,
+      "obs_seq": 1,
+      "action_index": 1,
+      "state": "ST_COMPLETED",
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "correctness": 1
+    }
+  ],
+  "wrapper_trace": [
+    {
+      "wrap_seq": 1,
+      "step_seq": 1,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 1,
+      "rt_last": 1,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 2,
+      "step_seq": 2,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 2,
+      "rt_last": 2,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 3,
+      "step_seq": 3,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 4,
+      "step_seq": 4,
+      "key": 2,
+      "slot_id": 1,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1402,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 5,
+      "step_seq": 5,
+      "key": 3,
+      "slot_id": 2,
+      "generation": 1,
+      "peripheral": "UART0",
+      "tx_id": 1403,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "READY",
+      "fault_class": "NONE",
+      "rt_first": 3,
+      "rt_last": 3,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 6,
+      "step_seq": 6,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "NACK",
+      "fault_class": "I2C_NACK",
+      "rt_first": 4,
+      "rt_last": 4,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 7,
+      "step_seq": 8,
+      "key": 1,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_RETRY",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 5,
+      "rt_last": 6,
+      "runtime_authoritative": true
+    },
+    {
+      "wrap_seq": 8,
+      "step_seq": 9,
+      "key": 255,
+      "slot_id": 0,
+      "generation": 1,
+      "peripheral": "I2C0",
+      "tx_id": 1401,
+      "action": "ACT_NONE",
+      "outcome": "OUTCOME_SUCCESS",
+      "env_status": "SUCCESS",
+      "fault_class": "NONE",
+      "rt_first": 7,
+      "rt_last": 7,
+      "runtime_authoritative": true
+    }
+  ]
+}
+
+      ]
+    }
+  }
+}

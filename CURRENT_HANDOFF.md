@@ -383,14 +383,57 @@ Surface in `reference/virtual/`:
 - K.4: completed
 - K.5: completed
 - K.6: VERIFIED AND MERGED
-- K.7: NOT STARTED
+- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.8: NOT STARTED
 
-### Exact next task: K.7 — Professor-Facing UI Implementation
 
-Start from latest `exp` (`b161589`).
-Implement the web/electron/GUI front-end demonstrating the software-only mechanism end-to-end:
-topology/status -> queue view -> fault controls -> recovery action -> verification/release/degrade/escalation -> trace/explanation -> metrics -> scenarios -> simulator integration.
-UI must remain a read-only projection / stimulus injector; the existing C reference runtime remains the sole recovery-policy authority.
+## 2026-10-01 — Chat K.7 implementation and verification complete
 
-No K.7 work has been performed in this chat.
+### Continuity
+
+- Part II remains active.
+- K.1–K.3 are complete.
+- K.4, K.5, and K.6 are complete.
+- K.7 is IMPLEMENTATION VERIFIED on `feature/k7-professor-ui-2026-10-01`.
+- Gates A-E remain frozen.
+- The C reference runtime remains the sole recovery-policy authority.
+
+### Implemented K.7 surface
+
+Branch: `feature/k7-professor-ui-2026-10-01`
+Base exp commit: `0df1cd7`
+
+Files created/updated:
+- `demo/index.html`: Professor-facing rich UI with scenario selection, stepper, pipeline visualizer, live event/peripheral/episode state, and interactive trace correlation.
+- `demo/server.py`: Lightweight Python local server proxying live requests to the C binary.
+- `demo/scenarios_data.json`: Pre-exported authoritative scenario data for zero-dependency offline mode.
+- `demo/README.md`: Professor-facing usage instructions and architectural authority explanation.
+- `demo/test_ui_contracts.py`: Comprehensive test suite verifying UI contracts, policy authority, trace correlation, and determinism.
+- `reference/virtual/include/virtual_scenarios.h` & `src/virtual_scenarios.c`: Canonical scenario registry for S01, S02, S05, S06, S08, S14.
+- `reference/virtual/src/virtual_demo_cli.c`: CLI target providing JSON state output, step execution, and verification.
+- `reference/virtual/CMakeLists.txt`: Integrated `virtual_demo_cli`, `virtual_demo_test`, and `virtual_ui_contracts_test`.
+- `reference/virtual/tests/test_virtual_system.c`: Updated to consume `virtual_scenarios.h`.
+
+### Verification evidence
+
+- CTest: 5/5 passed (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_ui_contracts_test`.
+- Scenarios: S01, S02, S05, S06, S08, S14 verified.
+- Deterministic replay digests:
+  - S01: `0xB72131CB`
+  - S02: `0xE8691374`
+  - S05: `0xBDC168BD`
+  - S06: `0xA123BB47`
+  - S08: `0x5A52628A`
+  - S14: `0x9185616C`
+- S08 Ambiguous Isolation: Zero synthetic EventRefs fabricated; target remains `INVALID_SLOT` (`255`).
+- Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
+
+### Exact next task: K.7 Merge & Transition to K.8
+
+1. Create PR from `feature/k7-professor-ui-2026-10-01` into `exp`.
+2. Merge PR into `exp` preserving commit history.
+3. Advance to K.8: Matched Baseline vs Proposed Software Validation.
+
+No K.8 work has been performed in this chat.
+
 

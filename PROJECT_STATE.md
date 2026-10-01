@@ -358,7 +358,49 @@ K.6 (virtual embedded system implementation) is VERIFIED AND MERGED into `exp` v
 - K.4: completed
 - K.5: completed
 - K.6: VERIFIED AND MERGED
-- K.7: NOT STARTED
+- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.8: NOT STARTED
 
-No K.7 or later implementation, experiment, or design execution was performed in K.6. Gates A-E remain unchanged.
+No K.8 or later implementation, experiment, or design execution was performed. Gates A-E remain unchanged.
+
+
+## 2026-10-01 — Chat K.7 complete: professor-facing UI implementation verified
+
+K.7 implementation and verification are complete on focused branch `feature/k7-professor-ui-2026-10-01`.
+
+### Implemented architecture
+```text
+Professor-Facing UI (demo/index.html)
+       ↓
+Local Bridge (demo/server.py) or Static Dataset (demo/scenarios_data.json)
+       ↓
+Virtual System Adapter & CLI (reference/virtual/src/virtual_demo_cli.c)
+       ↓
+SAME C Reference Runtime (reference/src/ref_runtime.c)
+       ↓
+Authoritative Decision (policy_decide, runtime_apply_policy)
+       ↓
+Correlated Inspectable Trace
+```
+
+### K.7 verification summary
+- CTest suite: 5/5 passed (100%):
+  1. `reference_tests` (Passed)
+  2. `host_experiment_replay` (Passed)
+  3. `virtual_system_tests` (Passed)
+  4. `virtual_demo_test` (Passed)
+  5. `virtual_ui_contracts_test` (Passed)
+- Scenarios exposed and verified: S01, S02, S05, S06, S08, S14.
+- Deterministic replay digests: verified equal across runs for all scenarios.
+- UI contract tests (`demo/test_ui_contracts.py`): verified scenario selection, step execution, policy authority, zero fabricated EventRefs on S08, trace sequence correlation, and pre-exported offline dataset completeness.
+- Runtime authority: verified that `policy_decide()` and `runtime_apply_policy()` in `ref_runtime.c` remain the sole recovery engine. No peripheral-action callback added. No second recovery policy created. `ref_runtime.c` and `ref_runtime.h` unchanged.
+
+### Current status
+- K.1–K.3: completed
+- K.4: completed
+- K.5: completed
+- K.6: VERIFIED AND MERGED
+- K.7: IMPLEMENTATION VERIFIED — READY FOR MERGE
+- K.8: NOT STARTED
+
 
