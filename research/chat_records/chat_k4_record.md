@@ -1,96 +1,125 @@
-# Chat K.4 Record — Novelty Re-Research + Conceptual Architecture Lock
+# Chat K.4 Record — Integrated Software Proof of Concept and Methodology Lock
 
-Date: 2026-10-01
-Active branch: research/k4-novelty-architecture-2026-10-01
-Checkpoint: K.4
-Part: Part II
+**Date:** 2026-10-01
 
-## Continuity check
+## Objective
 
-- Part I: K.1-K.3 COMPLETE.
-- Part II: K.4 onward ACTIVE.
-- Last completed checkpoint: K.3.
-- Active checkpoint: K.4.
-- exp: canonical active reference branch; starting commit 1f3a471d2987b066ee995f4bf563fcdcbcd74d97.
-- main: one merge commit ahead of exp; that merge contains the older integrated-software-phase K.4 material and is not treated as the active Part-II research state.
-- K.4 allowed: prior-art research, falsification, element matrix, conceptual architecture, interface/data-boundary definition, continuity documentation.
-- K.4 prohibited: simulator/UI implementation, K.5 interface implementation, Gates A-E changes, recovery-policy redesign, hardware, K.8 experiments, K.9/K.10 work.
+Continue from K.3 and change the immediate goal to a single integrated software phase: construct the professor-facing software demonstrator; re-verify the existing software methodology; lock the research process and evidence boundaries; present the novelty hypothesis accurately; and conclude the software phase before target-MCU validation.
 
-## 1. Prior-art re-research
+Professor verification is part of this phase and is not a separate stage.
 
-The search was intentionally adversarial and covered peripheral recovery, isolation, recovery history, failed-event queues, quarantine, dependency-aware containment, selective rollback, constrained runtime verification, and zero-dynamic-allocation embedded execution.
+## Repository changes
 
-Key findings:
+- Added demo/index.html.
+- Added research/phase1_software_demonstrator_methodology_lock.md.
+- Updated README.md, PROJECT_MANUAL.md, PROJECT_STATE.md, CURRENT_HANDOFF.md, CHAT_CONTINUITY_PROTOCOL.md, NEXT_CHAT_PROMPT.md, PROJECT_REFERENCE_GUIDE.md, DECISION_LOG.md, research/README.md, research/phase1_final_evidence_synthesis.md, reference/README.md, and reference/experiments/README.md.
 
-1. Phoenix and US8510592B1 materially establish peripheral fault recovery, isolation, reinitialization and escalation.
-2. US10921871B2 establishes recovery history affecting later recovery action.
-3. US10331522/US10929373 and US20180365126 establish failed-event retention/quarantine, association with resources, retry and corrective action.
-4. Dependency-aware containment is established in fault-tolerant service-robot work.
-5. Selective rollback/preservation based on dependencies is established in distributed/dataflow recovery.
-6. R2U2 and runtime-verification literature establish resource-constrained event observation, fault disambiguation and trace/verdict reasoning.
-7. Zero-heap/static allocation is established engineering practice.
-8. Recent 2026 patent activity demonstrates retaining queued events during recoverable errors and releasing them after recovery.
+No Gates A-E semantics were changed.
 
-The detailed element-by-element matrix is in research/novelty_investigation.md.
+## Demonstrator boundary
 
-## 2. Falsification result
+The UI is a presentation layer for the frozen research mechanism. The ISO C11 reference runtime and host corpus remain authoritative. The UI is not a second specification and does not establish MCU or physical evidence.
 
-The broad novelty framing is not defensible. Close prior art exists for nearly every individual ingredient and for several meaningful combinations.
+## Locked limitations
 
-The remaining hypothesis is narrower:
+- P0-P3 remain non-clean quarantine ablations.
+- W09/W10 remain capacity-confounded.
+- Host evidence remains distinct from MCU/physical evidence.
+- Host layout observations remain distinct from STM32U575 resource measurements.
+- Novelty and patentability remain unestablished.
+
+## Software-phase conclusion
+
+The mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation.
+
+This is not a claim that hardware performance, statistical superiority, final novelty, or patentability has already been proven.
+
+## File hygiene assessment
+
+No clearly useless file was identified. Earlier design/reference documents are retained because they provide research history and provenance. PROJECT_REFERENCE_GUIDE.md contains older planning language but is explicitly marked as superseded by the current continuity documents rather than deleted.
+
+## Next boundary
+
+Complete the final clean re-verification of the repository/software demonstrator, then merge the integrated software-phase package to main. After that, the next empirical objective is STM32U575 target validation.
+
+---
+## Part-II Scope Reclassification
+
+The project has now been formally divided into:
+- Part I = K.1-K.3, COMPLETE.
+- Part II = K.4 onward, ACTIVE.
+
+The previous K.4 document described an integrated software-phase objective. Under the new project structure, that material is retained as historical context, while the active K.4 checkpoint is strictly narrowed to **Novelty Re-Research + Conceptual Architecture Lock**.
+
+### Active branch contract
+
+- exp is the active reference branch.
+- main is the integrated stable mirror.
+- Part-II work must originate from exp.
+- Completed checkpoints return to exp and are then synchronized to main through an explicit PR/merge.
+
+### Active K.4 scope
+
+Allowed:
+- focused prior-art research;
+- claim-element and combination analysis;
+- novelty hypothesis refinement;
+- conceptual virtual-system/UI/runtime architecture;
+- interface ownership and evidence-boundary decisions.
+
+Out of scope:
+- simulator implementation;
+- UI implementation;
+- recovery-policy redesign;
+- Gates A-E redesign;
+- hardware work;
+- K.5-K.10 execution.
+
+### Required next checkpoint
+
+K.5 — Virtual Embedded System Technical Design + Interface Contracts.
+
+
+---
+## K.4 Active Scope Execution Record — 2026-10-01
+
+The earlier sections are retained as historical context. The active K.4 scope was narrowed by the Part-II scope override to novelty re-research + conceptual architecture lock.
+
+### Adversarial prior-art findings
+
+The search found strong prior art for:
+- peripheral recovery/isolation/reinitialization/escalation — Phoenix; US8510592B1;
+- recovery history affecting later action — US10921871B2;
+- failed-event association, retry and message quarantine — US10331522/US10929373;
+- failed-event queue and replay/corrective action — US20180365126;
+- retaining queued work during recoverable errors — US12688084;
+- dependency-aware fault containment — Ahn et al. service-robot framework;
+- selective rollback/preservation — distributed/dataflow recovery literature;
+- resource-constrained runtime fault disambiguation and trace/verdict monitoring — R2U2 and related runtime-verification work;
+- zero-dynamic-allocation embedded execution — established open-source embedded state-machine practice.
+
+### Narrowed hypothesis
+
+The broad claim is rejected as insufficiently differentiated.
+
+Remaining hypothesis:
 
 > There may be a technically meaningful distinction in implementing evidence-limited fault-to-event association together with retained event quarantine, dependency/order-aware preservation, and bounded history-conditioned recovery as one statically bounded mechanism for constrained event-driven MCU firmware.
 
 Status: UNRESOLVED.
 
-No novelty or patentability claim is made.
+### Conceptual architecture
 
-## 3. Conceptual architecture lock
-
-The Part-II chain is locked as:
+Locked:
 
 UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace/Evidence -> UI
 
-Responsibilities:
+The C runtime is the only recovery-policy authority. Recovery Decision is a presentation stage, not a second algorithm. The virtual system models environment/stimulus; it does not decide recovery. The trace records runtime-produced evidence; it does not infer policy.
 
-- UI = presentation and scenario control only.
-- Virtual embedded system = deterministic workload/peripheral/fault environment only.
-- C runtime = sole recovery-policy authority.
-- Recovery Decision = observable C-runtime result, not a second algorithm.
-- Trace/Evidence = authoritative runtime-produced evidence.
+### Documentation integrity
 
-The architecture is documented in research/part_ii_conceptual_architecture.md.
+The older integrated-software K.4 record is intentionally retained. It is not the active scope. Current scope is controlled by research/PART_II_CHAT_PLAN.md and the Part-II scope override.
 
-## 4. Authority constraints
-
-- UI cannot choose recovery actions.
-- Virtual system cannot choose recovery actions.
-- Trace cannot infer policy.
-- Event identity and evidence precision must survive across layers.
-- Gates A-E remain frozen.
-
-## 5. Documentation inconsistency
-
-Historical files still contain the earlier integrated-software interpretation of K.4, including research/chat_records/chat_k4_record.md and research/phase1_software_demonstrator_methodology_lock.md.
-
-These are preserved for provenance. They are superseded for active scope by research/PART_II_CHAT_PLAN.md and the current Part-II scope override. Current continuity documents explicitly identify this.
-
-## 6. Branch finding
-
-At K.4 entry:
-- exp = 1f3a471d2987b066ee995f4bf563fcdcbcd74d97
-- main = e413a5986df9a486622bb4b34ef13ebc1e63ae80
-
-main is one merge commit ahead because of the earlier integrated-software-phase package. K.4 research is based on exp as required.
-
-## 7. Exit condition
-
-K.4 is complete when the novelty record, conceptual architecture, continuity state, and exact K.5 handoff are committed to exp through the focused-work branch.
-
-No simulator/UI implementation is performed in K.4.
-
-## 8. Next checkpoint
+### Next checkpoint
 
 K.5 — Virtual Embedded System Technical Design + Interface Contracts.
-
-K.5 must turn the locked conceptual boundaries into implementable contracts and must not implement the simulator/UI or redesign the recovery policy.
