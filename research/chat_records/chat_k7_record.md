@@ -112,18 +112,28 @@ The UI is purely a presentation and stimulus injection layer:
 ### Replay determinism
 - Repeated runs across all scenarios produced identical 32-bit digests.
 
+## Pull request and merge
+
+- **Pull Request:** #8 (`feature/k7-professor-ui-2026-10-01` -> `exp`)
+- **Merge Commit:** `f1af4e1`
+- **Merge Strategy:** Non-fast-forward (`--no-ff`), full commit history preserved.
+- **Post-Merge Verification:** CTest suite 5/5 passed (100%) on `exp`.
+
 ## K.7 exit status
 
-**`K.7 IMPLEMENTATION VERIFIED — READY FOR MERGE`**
+**`K.7 CLOSED — MERGED INTO EXP`**
 
 Canonical checkpoint status:
 - K.1–K.3: completed
 - K.4: completed
 - K.5: completed
-- K.6: VERIFIED AND MERGED
-- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.6: VERIFIED AND MERGED INTO EXP
+- K.7: VERIFIED AND MERGED INTO EXP
 - K.8: NOT STARTED
+- K.9: NOT STARTED
+- K.10: NOT STARTED
 
 ## Scope discipline
 
 No recovery-policy redesign, new algorithm, new policy variant, baseline comparison experiment, hardware integration, physical fault injection, Gates A-E change, or K.8–K.10 work was performed.
+

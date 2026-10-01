@@ -301,4 +301,17 @@ The K.7 front-end demonstrator is implemented under `demo/` and connected direct
 
 **Reason:** provides a polished, interactive, professor-facing demonstrator while strictly preserving the single-policy authority of the existing C reference runtime.
 
+## D-107 — K.7 Professor-Facing UI Merge into exp
+
+**Status:** Accepted
+
+The K.7 professor-facing UI implementation was verified, audited, and merged into `exp` via PR #8 at commit `f1af4e1`. Verification confirmed:
+1. 5/5 CTest targets passed (100%): `reference_tests`, `host_experiment_replay`, `virtual_system_tests`, `virtual_demo_test`, `virtual_ui_contracts_test`.
+2. All six canonical scenarios (S01, S02, S05, S06, S08, S14) passed with deterministic replay digests matching canonical records: S01 (`0xB72131CB`), S02 (`0xE8691374`), S05 (`0xBDC168BD`), S06 (`0xA123BB47`), S08 (`0x5A52628A`), S14 (`0x9185616C`).
+3. Runtime authority preserved: `ref_runtime.c` and `ref_runtime.h` unchanged; no second recovery policy; no second scheduler; no EventRef fabrication in S08.
+4. UI architecture confirmed as zero-authority presentation layer over K.6 Virtual Embedded System and C reference runtime.
+
+**Reason:** locks the professor-facing UI layer onto `exp` and completes K.7, clearing the path to K.8 baseline validation.
+
+
 

@@ -382,26 +382,30 @@ Surface in `reference/virtual/`:
 - K.1–K.3: completed
 - K.4: completed
 - K.5: completed
-- K.6: VERIFIED AND MERGED
-- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.6: VERIFIED AND MERGED INTO EXP
+- K.7: VERIFIED AND MERGED INTO EXP
 - K.8: NOT STARTED
+- K.9: NOT STARTED
+- K.10: NOT STARTED
 
 
-## 2026-10-01 — Chat K.7 implementation and verification complete
+## 2026-10-01 — Chat K.7 complete: professor-facing UI implementation verified and merged
 
 ### Continuity
 
 - Part II remains active.
 - K.1–K.3 are complete.
-- K.4, K.5, and K.6 are complete.
-- K.7 is IMPLEMENTATION VERIFIED on `feature/k7-professor-ui-2026-10-01`.
+- K.4, K.5, K.6, and K.7 are complete.
+- K.7 is VERIFIED AND MERGED into `exp` (PR #8, commit `f1af4e1`).
 - Gates A-E remain frozen.
 - The C reference runtime remains the sole recovery-policy authority.
 
 ### Implemented K.7 surface
 
-Branch: `feature/k7-professor-ui-2026-10-01`
+Branch merged: `feature/k7-professor-ui-2026-10-01`
 Base exp commit: `0df1cd7`
+PR: #8
+Merge commit: `f1af4e1`
 
 Files created/updated:
 - `demo/index.html`: Professor-facing rich UI with scenario selection, stepper, pipeline visualizer, live event/peripheral/episode state, and interactive trace correlation.
@@ -428,12 +432,15 @@ Files created/updated:
 - S08 Ambiguous Isolation: Zero synthetic EventRefs fabricated; target remains `INVALID_SLOT` (`255`).
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
 
-### Exact next task: K.7 Merge & Transition to K.8
+### Exact next task: K.8 (Matched Baseline vs Proposed Software Validation)
 
-1. Create PR from `feature/k7-professor-ui-2026-10-01` into `exp`.
-2. Merge PR into `exp` preserving commit history.
-3. Advance to K.8: Matched Baseline vs Proposed Software Validation.
+The next active task is K.8:
+- Execute matched comparative baseline evaluations under frozen Gates A-E and canonical workloads/fault schedules (W01–W14).
+- Compare P0 (Null / blind forward), P1 (Immediate blind retry), P2 (Immediate blind reset), and P3 (Unbounded escalation) against proposed P4 (Zero-heap context-aware recovery with event quarantine).
+- Collect empirical trace metrics on fault-associated event preservation, unassociated event preservation, bounded action count, and terminal outcomes.
+- Keep `ref_runtime.c` and `ref_runtime.h` authoritative and unchanged.
 
 No K.8 work has been performed in this chat.
+
 
 

@@ -225,25 +225,31 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 
 
 ---
-# Active Next-Chat Prompt — K.7 Merge & Transition to K.8 (Matched Baseline Software Validation)
+# Active Next-Chat Prompt — K.8: Matched Baseline vs Proposed Software Validation
 
 Continue the canonical project in:
 
 SujitSaiY2007/embedded-runtime-resilience
 
-Start from the verified K.7 implementation branch:
+Start from the canonical `exp` branch at commit `f1af4e1` (or latest documentation commit on `exp`).
 
-feature/k7-professor-ui-2026-10-01
+K.7 implementation, verification, and PR merge into `exp` are COMPLETE.
 
-Base exp commit: 0df1cd7
-
-Do not repeat K.6/K.7 implementation work and do not execute K.9 or later work.
+Do NOT repeat K.6 or K.7 implementation or verification work.
+Do NOT execute K.9 or K.10 work.
 
 ## Objective
 
-1. Review and merge the verified K.7 Professor-Facing UI into `exp` via PR.
-2. Advance to K.8: Matched Baseline vs Proposed Software Validation.
-3. In K.8, execute the matched comparative evaluations under frozen Gates A-E and canonical workloads/fault schedules (W01-W14).
+Execute **K.8: Matched Baseline vs Proposed Software Validation**.
+
+Under frozen Gates A-E, evaluate the comparative performance of the baseline policies against the proposed policy across canonical workloads and fault injection schedules:
+- Baselines:
+  - P0: Null / blind forward
+  - P1: Immediate blind retry
+  - P2: Immediate blind reset
+  - P3: Unbounded escalation
+- Proposed:
+  - P4: Zero-heap context-aware recovery with event quarantine
 
 ## Read first
 
@@ -255,15 +261,17 @@ Do not repeat K.6/K.7 implementation work and do not execute K.9 or later work.
 6. NEXT_CHAT_PROMPT.md
 7. research/PART_II_CHAT_PLAN.md
 8. research/chat_records/chat_k7_record.md
-9. demo/README.md
-10. reference/include/ref_runtime.h
-11. reference/src/ref_runtime.c
+9. reference/include/ref_runtime.h
+10. reference/src/ref_runtime.c
+11. reference/experiments/README.md
 
 ## Critical constraints
 
-- The C reference runtime remains the sole recovery-policy authority.
-- Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
-- Do NOT perform physical hardware integration or physical fault injection.
+- The C reference runtime (`reference/src/ref_runtime.c`) remains authoritative.
+- Do NOT modify `ref_runtime.c` or `ref_runtime.h` unless an unresolvable bug is formally diagnosed and documented.
+- Do NOT perform physical MCU hardware integration or physical fault injection (simulation/software only).
 - Gates A-E remain frozen and normative.
+- Deterministic trace collection and metrics must adhere strictly to Gate E.
+
 
 

@@ -92,13 +92,15 @@ Status:
 - K.1–K.3: completed
 - K.4: completed
 - K.5: completed
-- K.6: VERIFIED AND MERGED
-- K.7: IMPLEMENTATION VERIFIED (READY FOR MERGE)
+- K.6: VERIFIED AND MERGED INTO EXP
+- K.7: VERIFIED AND MERGED INTO EXP
 - K.8: NOT STARTED
+- K.9: NOT STARTED
+- K.10: NOT STARTED
 
-## K.7 completion update — 2026-10-01
+## K.7 completion and merge update — 2026-10-01
 
-K.7 Professor-Facing UI is COMPLETE and IMPLEMENTATION VERIFIED on `feature/k7-professor-ui-2026-10-01`.
+K.7 Professor-Facing UI is VERIFIED AND MERGED into `exp` (PR #8, merge commit `f1af4e1`).
 
 Implemented surface:
 - `demo/index.html`: Web front-end demonstrator with scenario selection, execution controls, pipeline indicator, live event slot inspector, peripheral mirror, and interactive trace correlation.
@@ -110,6 +112,7 @@ Implemented surface:
 - CTest suite passing 5/5 targets (100%).
 
 K.7 preserves single-policy authority in `ref_runtime.c`. No recovery logic or peripheral callback was added to the UI.
-Next checkpoint after PR merge: K.8 (Matched Baseline vs Proposed Software Validation).
+Next checkpoint: K.8 (Matched Baseline vs Proposed Software Validation).
+
 
 
