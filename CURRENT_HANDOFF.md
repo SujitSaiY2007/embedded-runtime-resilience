@@ -572,3 +572,30 @@ Do not proceed to final synthesis or hardware-validation handoff merely because 
 The downstream stage is explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the P4 Advantage & Novelty Investigation.
 
 K.11 will synthesize K.10 evidence, state the evidence-bounded software conclusion, package final evidence, and define target-MCU validation requirements and success criteria. Do not start K.11 before K.10 is complete. The historical K.10 handoff wording is superseded.
+
+---
+
+# ACTIVE HANDOFF — K.10 EXECUTION REMAINS OPEN (2026-10-01)
+
+K.10 is **NOT COMPLETE**. The previous checkpoint audited the live `exp` state and performed fresh adversarial prior-art research, but the decisive K.10 experiment matrix was not executed.
+
+## Verified live state
+- branch: `exp`
+- pre-change K.10 audit HEAD: `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`
+- earlier expected continuity HEAD: `e28af7a539eec790aa7b9fc7a3bdc819f1992403`
+- K.9.2 canonical completion: `04308f0fc797892da51e2265edfc57b810d0acd9`
+- protected runtime blobs unchanged
+
+The five commits after `e28af7...` were continuity/control-document changes only.
+
+## K.10 remaining work
+Execute the locked 21-dimension investigation, 15 matched case families, negative/no-difference controls, baseline-advantage/cost controls, admissible instrumentation only, interaction analysis, trade-off analysis, and adversarial prior-art evidence.
+
+## Hard boundary
+Do not redesign P4, modify Gates A-E, modify `ref_runtime.c/.h`, introduce a new policy/engine/scheduler, claim superiority or novelty, perform hardware validation, or start K.11.
+
+## Antigravity requirement
+Antigravity is the designated repository execution agent and must return exact branch, starting/ending commit, tests/checks, protected-file integrity, and working-tree status.
+
+## Current limitation
+The current ChatGPT environment does not expose Antigravity or a runnable local repository checkout. K.10 therefore remains active/open rather than being falsely marked complete.
