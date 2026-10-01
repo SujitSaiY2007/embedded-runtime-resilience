@@ -343,6 +343,22 @@ The K.8 matched baseline validation was audited, verified, and merged into `exp`
 
 **Reason:** locks the comparative baseline validation onto `exp` and formally closes K.8, clearing the path to K.9 full software re-verification and methodology lock.
 
+## D-110 — K.9 Formal Software Experimental Methodology Lock
+
+**Status:** Accepted
+
+The experimental methodology, evaluation protocol, attribution boundaries, and interpretation constraints governing the software comparison between P4 and baselines P0–P3 are formally locked:
+1. **Frozen Experimental Definitions (Items A–O):** Policy definitions (P0–P4), workload definitions (W01–W14), scenario definitions (S01–S14 with 6-scenario demonstrator subset), input/capacity conditions (`QMAX=16`, `XMAX=4`, `EPMAX=1`), fault taxonomy, recovery ladder ($T_1 \dots T_4$), EventRef association rules (`assoc == ASSOC_EXACT`), quarantine rules, attempt counting, terminal outcomes, trace-derived metrics, deterministic replay digests, confound handling, reproducibility protocol, and programmatic report generation are frozen in `research/phase2_k9_methodology_lock.md`.
+2. **Quarantine Limitation Locked:** Exact-event quarantine is applied across all variants (P0–P4) in `ref_runtime.c`. No empirical work-preservation advantage resulting from quarantine may be claimed for P4 over P0–P3 in this software harness (`ablation_contract_valid=0` on P0–P3).
+3. **S06 Limitation Locked:** P1, P2, P3, and P4 all achieve recovery (`OUTCOME_SUCCESS`, digest `0xA123BB47`) via peripheral reinitialization on attempt 3. P4 is not uniquely superior on persistent faults; the recovery advantage over P0 is attributable to peripheral recovery capability common to P1–P4.
+4. **Capacity Confound Locked:** W09 and W10 outcomes reflect table capacity limits (`QMAX`, `EPMAX`) and remain explicitly flagged as `capacity_confounded=1`. They must not be cited as evidence of policy intelligence.
+5. **Software-Only Boundary Locked:** Evidence is strictly host/virtual simulation. No claims regarding physical MCU cycle timing, STM32U575 RAM/Flash overhead, MPU fault hardware, electrical noise, or physical recovery are established.
+6. **Prohibited Claims Locked:** Prohibits universal superiority claims, statistical significance claims, novelty claims, patentability claims, hardware validity claims, and universal generalization claims.
+7. **Runtime Integrity Preserved:** `ref_runtime.c` and `ref_runtime.h` remain completely untouched.
+
+**Reason:** ensures all empirical research claims are strictly bounded, defensible, reproducible, and methodologically controlled prior to K.10 final packaging.
+
+
 
 
 

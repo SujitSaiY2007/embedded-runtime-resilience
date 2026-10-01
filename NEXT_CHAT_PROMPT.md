@@ -226,36 +226,26 @@ At the end update PROJECT_STATE.md, CURRENT_HANDOFF.md, DECISION_LOG.md if new d
 
 ---
 ---
-# Active Next-Chat Prompt — K.9: Full Software Re-Verification + Methodology Lock
+---
+# Active Next-Chat Prompt — K.9 Merge & Transition to K.10 (Final Software Packaging & Research Conclusion)
 
 Continue the canonical project in:
 
 `SujitSaiY2007/embedded-runtime-resilience`
 
-Start from the canonical `exp` branch after K.8 closure.
+Start from the verified K.9 implementation branch:
 
-Do not repeat K.6, K.7, or K.8 implementation work and do not execute K.10 packaging or physical hardware deployment.
+`feature/k9-methodology-lock-2026-10-01`
+
+Base exp commit: `9ebd84c`
+
+Do not repeat K.6–K.9 implementation work and do not execute K.10 packaging or physical hardware deployment in this chat.
 
 ## Objective
 
-Execute **K.9: Full Software Re-Verification + Methodology Lock**.
-
-1. Re-verify the complete software chain across all test layers:
-   - Reference runtime ISO C11 correctness & accounting checks (`reference_tests`).
-   - Host experiment corpus replay & matching checks (`host_experiment_replay`).
-   - Virtual embedded system unit assertions (`virtual_system_tests`).
-   - Virtual demo step execution & CLI tests (`virtual_demo_test`).
-   - Virtual baseline unit assertions (`virtual_baseline_tests`).
-   - Front-end UI contract tests (`virtual_ui_contracts_test`).
-   - Matched baseline validation comparative suite (`matched_baseline_validation_test`).
-2. Verify cross-layer determinism and digest stability:
-   - Replay digests across all canonical scenarios (S01, S02, S05, S06, S08, S14) under all policies (P0–P4).
-   - Ensure zero non-deterministic variation across repeated runs.
-3. Lock software methodology and evidence boundaries:
-   - Re-verify retained qualifications: W09/W10 capacity confound (`capacity_confounded=1`), P0–P3 quarantine contract gap (`ablation_contract_valid=0`).
-   - Document formal claims boundary: no physical MCU performance/timing claims, no physical fault injection claims, no statistical significance beyond measured workloads, no claims of patentability/novelty.
-   - Author `research/phase2_k9_methodology_lock.md`.
-4. Update canonical records and prepare handoff to K.10 (Final Packaging & Research Conclusion).
+1. Review, audit, and merge the verified K.9 Methodology Lock and Software Re-Verification into `exp` via PR.
+2. Advance to K.10: Final Software Packaging & Research Conclusion.
+3. In K.10, prepare the final software-phase release, freeze documentation, package the research findings under the locked evidence boundaries, and conclude the software phase prior to target-MCU validation.
 
 ## Read first
 
@@ -266,19 +256,19 @@ Execute **K.9: Full Software Re-Verification + Methodology Lock**.
 5. `CHAT_CONTINUITY_PROTOCOL.md`
 6. `NEXT_CHAT_PROMPT.md`
 7. `research/PART_II_CHAT_PLAN.md`
-8. `research/phase2_k8_matched_baseline_validation.md`
-9. `research/chat_records/chat_k8_record.md`
+8. `research/phase2_k9_methodology_lock.md`
+9. `research/chat_records/chat_k9_record.md`
 10. `reference/include/ref_runtime.h`
 11. `reference/src/ref_runtime.c`
-12. `reference/virtual/include/virtual_system.h`
 
 ## Critical constraints
 
 - The C reference runtime remains the sole recovery-policy authority.
 - Do NOT modify `ref_runtime.c` or `ref_runtime.h`.
 - Do NOT perform physical hardware integration or physical fault injection.
-- Gates A-E remain frozen and normative.
-- Do NOT execute K.10.
+- Gates A–E remain frozen and normative.
+- Enforce the locked limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims).
+
 
 
 

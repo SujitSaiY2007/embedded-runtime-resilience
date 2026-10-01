@@ -385,7 +385,7 @@ Surface in `reference/virtual/`:
 - K.6: VERIFIED AND MERGED INTO EXP
 - K.7: VERIFIED AND MERGED INTO EXP
 - K.8: VERIFIED AND MERGED INTO EXP
-- K.9: NOT STARTED
+- K.9: IMPLEMENTATION VERIFIED — READY FOR CLOSURE
 - K.10: NOT STARTED
 
 
@@ -432,13 +432,49 @@ Files created/updated:
 - Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` unchanged. `policy_decide()` remains sole decider; `runtime_apply_policy()` remains authoritative transition. No peripheral-action callback added.
 - Post-merge verification on `exp`: 7/7 CTest passed; `evaluate_baselines.py --check` passed (100 runs); working tree clean.
 
-### Exact next task: K.9 (Full Software Re-Verification + Methodology Lock)
 
-1. Re-verify full software chain (reference runtime C unit tests, host experiment corpus replay, virtual system tests, demo CLI & UI contract tests, matched baseline validation suite).
-2. Verify cross-layer determinism and digest stability.
-3. Lock software methodology, evidence boundaries, and formal claims boundary prior to final packaging (K.10).
+## 2026-10-01 — Chat K.9 complete: full software re-verification and methodology lock verified
 
-No K.9 work has been performed in this chat.
+### Continuity
+
+- Part II remains active.
+- K.1–K.3 are complete.
+- K.4–K.8 are complete and merged into `exp`.
+- K.9 is IMPLEMENTATION VERIFIED on `feature/k9-methodology-lock-2026-10-01`.
+- Gates A–E remain frozen and normative.
+- The C reference runtime remains the sole recovery-policy authority.
+
+### Implemented K.9 surface
+
+Branch: `feature/k9-methodology-lock-2026-10-01`
+Base exp commit: `9ebd84c`
+
+Files created/updated:
+- `research/phase2_k9_methodology_lock.md`: Comprehensive formal methodology lock freezing Items A through O, locking limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims), and clarifying scenario scope (S01–S14 vs 6-scenario demonstrator subset).
+- `research/chat_records/chat_k9_record.md`: Canonical chat record for K.9.
+- `DECISION_LOG.md`: Added architectural decision `D-110` formally recording the methodology lock.
+
+### Verification evidence
+
+- CTest: 7/7 passed (100%):
+  1. `reference_tests` (Passed)
+  2. `host_experiment_replay` (Passed)
+  3. `virtual_system_tests` (Passed)
+  4. `virtual_demo_test` (Passed)
+  5. `virtual_baseline_tests` (Passed)
+  6. `virtual_ui_contracts_test` (Passed)
+  7. `matched_baseline_validation_test` (Passed)
+- Deterministic 100-run reproduction: 70 host runs + 30 demonstrator runs, 100% bit-for-bit identical digests.
+- Runtime integrity verified: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
+
+### Exact next task: K.9 Audit, Merge & Transition to K.10
+
+1. Audit and merge PR for `feature/k9-methodology-lock-2026-10-01` into `exp`.
+2. Formally close K.9 on `exp`.
+3. Transition to K.10: Final Software Packaging & Research Conclusion.
+
+No K.10 work has been performed in this chat.
+
 
 
 
