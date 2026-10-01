@@ -1,7 +1,7 @@
 # Part II — Multi-Chat Execution Plan
 
 Part I: K.1-K.3 — COMPLETE
-Part II: K.4-K.10 — ACTIVE
+Part II: K.4-K.11 — ACTIVE
 Reference branch: exp
 Integrated mirror: main
 
@@ -56,11 +56,20 @@ Allowed: clean build/test, reference checks, simulator determinism/replay, UI in
 Out of scope: MCU integration, physical fault injection, hardware measurements, Gates A-E redesign.
 Exit: software path is reproducible, demonstrable, traceable, and internally consistent.
 
-## K.10 — Final Software Conclusion + Hardware-Validation Handoff
-Objective: package the software proof of concept and establish the exact hardware-validation next step.
-Allowed: final conclusion, professor-facing evidence summary, architecture documentation, bounded novelty statement, hardware-validation requirements and success criteria, final continuity.
-Out of scope: final novelty/patentability claim; unproduced hardware evidence; hardware implementation unless separately authorized.
-Exit: Part II is complete as a software proof-of-concept and methodology-lock phase.
+## Historical K.10 definition — SUPERSEDED
+The earlier K.10 definition (“Final Software Conclusion + Hardware-Validation Handoff”) is retained only as historical planning context. It is superseded by the K.9.2 decision and must not govern execution.
+
+## K.10 — P4 Advantage & Novelty Investigation
+Objective: execute the locked P4 advantage/novelty investigation and determine the evidence-supported outcome without predetermining superiority or novelty.
+Allowed: approved non-invasive instrumentation, matched advantage/interaction experiments, negative/no-difference controls, baseline-advantage/cost controls, metric-level analysis, adversarial prior-art investigation, evidence-bounded findings.
+Out of scope: final synthesis, hardware validation, Gates A-E changes, protected reference-runtime changes, redesigned P4 behavior, universal superiority/novelty/patentability claims.
+Exit: auditable metric-level evidence, interaction analysis, prior-art evidence, limitations, and falsification outcomes are recorded.
+
+## K.11 — Final Software Synthesis + Hardware-Validation Handoff
+Objective: synthesize the completed K.10 evidence into the final software-phase conclusion and define the exact target-MCU hardware-validation handoff.
+Allowed: evidence synthesis, conclusion bounded by K.10 results, professor-facing summary, final architecture/evidence packaging, target-MCU validation requirements, testbed specification, success/failure criteria, hardware-validation handoff documentation, final continuity.
+Out of scope: inventing new P4 behavior to improve results, retrofitting experiments to force a preferred conclusion, claiming hardware results before hardware testing, or making unsupported novelty/patentability claims.
+Exit: the software research question is concluded from K.10 evidence and the hardware-validation work has an explicit, reproducible starting specification.
 
 ## Scope escalation rule
 If a later dependency is discovered: document it, do not implement it, add it to the next handoff, and stop at the current boundary.
@@ -233,3 +242,13 @@ K.10 must:
 5. record evidence that strengthens, narrows or falsifies the advantage and integrated-novelty hypotheses.
 
 A later checkpoint will perform final synthesis/hardware-validation handoff only after K.10 evidence exists.
+
+
+## Roadmap normalization — K.10 -> K.11
+
+The post-K.10 checkpoint is now explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the final major investigative stage; K.11 is synthesis/handoff, not another open-ended architecture-design stage.
+
+Sequence:
+**K.9.2 design lock -> K.10 investigation -> K.11 final synthesis/hardware-validation handoff -> hardware validation/refinement**.
+
+K.11 must use K.10 evidence as its input and must not retroactively change the K.10 methodology merely to obtain a preferred conclusion.
