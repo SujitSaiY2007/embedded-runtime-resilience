@@ -34,6 +34,7 @@ Never delete historical material merely to shorten the repository. Prefer additi
 | K.1 | Host experiment verification | Harness builds/runs reproducibly, matched P0-P4 execution is verified, and checkpoint is committed |
 | K.2 | Host corpus validation | Generated traces/outcomes are inspected against Gate-E evidence requirements and remaining host-only limitations are recorded |
 | K.3 | Final synthesis | Evidence-bounded synthesis and final repository organization |
+| K.4 | Integrated software proof of concept + methodology lock | Professor-facing demonstrator, re-verification, methodology lock, final software-phase conclusion, then handoff to MCU validation |
 
 ## Early-stop rule
 
@@ -54,10 +55,10 @@ A new chat must first read the repository's continuity documents before performi
 
 ## Current checkpoint
 
-**Phase:** 1E.1 — Experimental Design / Formalization Foundation; K.3 final host/reference synthesis checkpoint.  
+**Phase:** Integrated software proof-of-concept and methodology-lock phase after K.3.  
 **Completed:** Gates A-E; minimal reference implementation; K.1 host-experiment verification; K.2 host-corpus validation; K.3 evidence-bounded synthesis.  
-**Current boundary:** host/reference + deterministic software injection only. MCU/physical validation remains absent.  
-**Status:** K.3 COMPLETE. Any future work must explicitly select a deferred validation objective.
+**Current boundary:** host/reference + deterministic software injection + professor-facing software demonstrator. MCU/physical validation remains absent.  
+**Status:** K.4 ACTIVE. Professor verification is part of this integrated phase, not a separate stage.
 
 ## Gate C checkpoint note
 
@@ -96,3 +97,14 @@ A new chat must first read the repository's continuity documents before performi
 - Do not introduce new design semantics merely to make the final package look complete.
 
 The earlier K.1/K.2 pending text in this document is historical and superseded by the completed checkpoints above.
+
+
+## K.4 — Integrated software proof of concept + methodology lock — 2026-10-01
+
+K.4 is the current continuation boundary. The objective is to demonstrate the whole software mechanism, re-verify the methodology, lock the evidence boundaries, and produce a clear conclusion for proceeding to target-MCU validation.
+
+The professor-facing activity is not a separate gate. It is the intended use of this checkpoint.
+
+Authoritative record: `research/phase1_software_demonstrator_methodology_lock.md`.
+
+Current limitations remain unchanged: P0-P3 are not clean quarantine ablations; W09/W10 are capacity-confounded; host evidence is not MCU/physical evidence; novelty/patentability are not established.
