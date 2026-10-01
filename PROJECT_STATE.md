@@ -465,3 +465,20 @@ K.9 implementation, evidence reconciliation, and verification are complete, audi
 
 
 
+
+
+
+
+---
+
+# 2026-10-01 — K.9.2 active research-control boundary
+
+K.9 remains closed and historically immutable. The next checkpoint is **K.9.2 — P4 Advantage & Novelty Investigation Design Lock**.
+
+The purpose is to avoid a premature conclusion based only on success rate. Before final synthesis, the project must systematically examine outcome, recovery efficiency, latency where valid, transitions, work preservation, containment, escalation quality, resource cost, decision accuracy, fault-class adaptability, compound interactions, graceful degradation, worst-case behavior, and resilience-vs-overhead trade-offs.
+
+K.9.2 also defines the deeper prior-art search: individual elements, pairwise/higher-order combinations, and complete integrated disclosures. It must distinguish technical novelty from inventive step/non-obviousness and must remain non-legal.
+
+K.9.2 is design/measurement/search planning only. K.10 will execute the locked P4 advantage and novelty investigation. Neither stage is permitted to assume that P4 will prove superior or novel.
+
+Antigravity remains the repository execution agent; ChatGPT remains the research-control/audit layer. Historical K.1-K.9 records must remain intact.
