@@ -40,6 +40,7 @@ static void test_S05_retry_success_and_correlation(void) {
     const VirtualTraceRecord *last = virtual_system_trace_at(
         &vs, (uint16_t)(vs.trace_count - 1u));
     assert(last != NULL && last->runtime_authoritative);
+    (void)last;
     assert(vs.runtime.episode_in_use == false);
 }
 
