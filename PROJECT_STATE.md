@@ -296,3 +296,38 @@ Historical K.4 integrated-software records remain in the repository and are pres
 K.5 — Virtual Embedded System Technical Design + Interface Contracts.
 
 K.5 must not implement the simulator/UI and must not redesign the recovery policy.
+
+
+## 2026-10-01 — Chat K.5 complete: virtual-system contracts
+
+Part I (K.1-K.3) remains COMPLETE. Part II is ACTIVE.
+
+K.4 is COMPLETE as prior-art re-research + conceptual architecture lock. Its narrowed novelty hypothesis remains UNRESOLVED; no novelty or patentability claim is made.
+
+K.5 is COMPLETE at the technical-design/contract level. The virtual embedded system is now specified around the actual existing C reference runtime. The runtime remains the sole recovery-policy authority.
+
+### K.5 completed
+- deterministic virtual scheduler/environment boundary defined;
+- virtual event/workload representation defined around existing EventSlot/runtime_admit();
+- EventRef ownership and scenario-to-runtime identity correlation defined;
+- INDEPENDENT/ORDERED/COUPLED dependency representation and ordering boundary defined;
+- I2C/SPI/UART environmental contracts defined;
+- deterministic fault-injection contract mapped to existing FaultInjection/runtime_start_fault();
+- runtime input/output and ownership/lifetime boundaries defined;
+- UI control versus runtime authority defined;
+- authoritative trace/evidence boundary defined;
+- S01-S14 deterministic scenarios defined for K.6;
+- baseline boundary defined as existing Runtime.variant/P0-P4, with no second baseline engine;
+- current runtime adapter limitation documented: no peripheral-action callback exists, so K.6 must not silently add one or modify recovery semantics.
+
+### K.5 artifacts
+- research/part_ii_virtual_system_technical_design.md
+- research/part_ii_interface_contracts_k5.md
+- research/part_ii_deterministic_scenarios_k5.md
+- research/chat_records/chat_k5_record.md
+
+### K.5 non-changes
+Gates A-E, the existing C recovery mechanism, P0-P3 ablation qualification, W09/W10 capacity qualification, and all host/MCU/physical evidence boundaries remain unchanged.
+
+### Next checkpoint
+K.6 — Virtual Embedded System Implementation around the existing C reference runtime. K.6 may implement only the contracts defined by K.5; it must not introduce a second recovery policy or redesign the C runtime.
