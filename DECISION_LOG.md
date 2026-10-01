@@ -180,3 +180,13 @@ They have potentially distinct mechanisms, but the policy-level role is one boun
 
 
 | D-086 | Accepted | Treat the software demonstrator, host re-verification, methodology lock, professor-facing demonstration, and software-phase conclusion as one integrated checkpoint. | This is the immediate software objective before target-MCU validation; professor verification is its intended use, not a separate gate. |
+
+
+| D-087 | Accepted | Divide the project explicitly into Part I (K.1-K.3) and Part II (K.4 onward). | K.3 is a completed host/reference synthesis checkpoint while the objective continues into software demonstration, virtual-system work, novelty investigation and methodology lock. |
+| D-088 | Accepted | Make exp the canonical active research/reference branch and main the integrated stable mirror. | Separates experimental development from stable project state while preserving an auditable synchronization path. |
+| D-089 | Accepted | Require every Part-II chat to have a predefined scope and explicit out-of-scope boundary. | Prevents scope creep, accidental redesign and cross-chat task repetition. |
+| D-090 | Accepted | Require every Part-II chat to emit a continuity record and exact next-checkpoint handoff. | The project must remain reconstructable without relying on conversation history. |
+| D-091 | Accepted | Treat professor review as the intended use of Part II rather than a separate stage. | The software demonstrator is being constructed specifically to support professor-facing proof of concept and approval for hardware validation. |
+| D-092 | Accepted | Do not claim novelty from individual ingredients; conduct a fresh element-by-element prior-art investigation of the integrated mechanism. | Current prior art covers peripheral recovery, checkpointing, selective recovery, fault containment and policy-driven recovery. The remaining question concerns the specific combination and constraints. |
+| D-093 | Accepted | Preserve the C reference runtime as the sole authoritative recovery-policy implementation for the virtual demonstrator. | Prevents the UI/simulator from becoming a second competing specification. |
+| D-094 | Accepted | Freeze the Part-II demonstrator architecture as UI -> Virtual Embedded System -> C Reference Runtime -> Recovery Decision -> Trace -> UI before implementation. | Keeps presentation, environment modelling, policy execution and evidence traceability distinct. |
