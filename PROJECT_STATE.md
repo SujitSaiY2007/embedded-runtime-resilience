@@ -507,3 +507,8 @@ K.9.2 does **not** establish P4 superiority, statistical superiority, hardware s
 **K.10 — P4 Advantage & Novelty Investigation**
 
 K.10 is responsible for executing the locked experiment/search design. Final software conclusion and hardware-validation handoff remain downstream of K.10 evidence.
+
+### K.9.2 canonical completion
+- K.9.2 completion commit: `04308f0fc797892da51e2265edfc57b810d0acd9`.
+- This commit is the canonical K.10 starting point on `exp`.
+- K.10 must not assume P4 superiority or novelty; both are empirical/research questions to be tested.
