@@ -3,6 +3,7 @@
 # DEPEND: a=target_event,b=predecessor_event,c=dependency_kind,d=acceptable_state
 # START: a=fault_schedule_id
 # DRAIN: execute all currently eligible ordinary events
+# REUSE_CHECK: a=old_event_id,b=service,c=peripheral,d=criticality,e=transaction_id; require slot reuse + stale-ref rejection
 # APPLY: a=fault_schedule_id; one bounded recovery action is applied
 1,1,ADMIT,1,1,1,1,101
 1,2,ADMIT,2,2,1,1,102
