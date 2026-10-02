@@ -6,27 +6,24 @@ A solo software-dominant embedded-systems research project investigating a **Lig
 
 ## Current status
 
-The project has completed the frozen design, host/reference implementation, K.1/K.2 host verification, and K.3 evidence synthesis checkpoints. It is now in the **integrated software proof-of-concept and methodology-lock phase**: build the professor-facing demonstrator, re-verify the complete software chain, lock the methodology, and prepare the hardware-validation handoff.
+**K.10 is COMPLETE.** The decisive software-model P0-P4 investigation has been executed and recorded. The project now enters the **post-K.10 adversarial technical-distinction review** before K.11.
 
-### Completed
+K.10 established a **demonstrated bounded advantage** for P4 in specific controlled fault conditions, while also identifying explicit no-difference cases and trade-offs. The prior-art investigation found no single investigated reference disclosing the complete proposed combination, but individual mechanisms and sub-combinations are established and multi-reference recombination remains an unresolved technical/legal risk.
 
-- **Gate A — Event Model + Dependency Semantics** — complete
-- **Gate B — Fault Model + Fault Association** — complete
-- **Gate C — Recovery Policy + Bounded State Machine** — complete
-- **Gate D — Formal Properties + Proof/Check Strategy** — complete at the semantic/design-model level
-- **Gate E — Baselines + Experimental Protocol** — complete/frozen
-- **Minimal Reference Implementation** — host checkpoint complete
-- **Chat K.1 — matched P0-P4 host experiment harness** — execution verified
+### Current active sequence
 
-### Current integrated objective
+**K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12 -> final exp audit -> main synchronization**
 
-- **Software demonstrator** — professor-facing proof of concept
-- **Re-verification** — re-run/confirm the complete host/reference methodology
-- **Methodology lock** — freeze the research chain and its evidence boundaries
-- **Novelty showcase** — present the integrated mechanism as a research hypothesis supported by prior-art positioning, not as an already-proven patentability result
-- **Conclusion** — establish the software phase as ready for target-MCU validation
+- **K.10.1:** adversarial prior-art + feature/limitation distinction review
+- **K.10.2:** deep single-reference anticipation review
+- **K.10.3:** multi-reference combination / technical obviousness analysis
+- **K.10.4:** final technical distinction + evidence-bounded research conclusion
+- **K.11:** final software synthesis + target-MCU validation handoff
+- **K.12:** final software productization + clean professor-facing UI demonstration
 
-**Hardware validation has not started.** The software phase is being completed deliberately before moving to the STM32U575 target.
+**ChatGPT owns this sequence. Antigravity is an execution agent inside a ChatGPT-defined checkpoint and does not define the chat-wise roadmap.**
+
+Hardware validation has not started.
 
 ## Research question
 
@@ -175,3 +172,16 @@ This is intentional: the existing K.8/K.9 evidence does not establish universal 
 **Later checkpoint:** final synthesis and hardware-validation handoff only after K.10 evidence exists.
 
 Antigravity is the repository execution agent; ChatGPT controls/audits checkpoint scope. Historical K.1-K.9 records are preserved.
+
+
+---
+
+## 2026-10-02 — Canonical post-K.10 roadmap
+
+The active Part-II sequence is now defined exclusively by `research/PART_II_CHAT_PLAN.md`. Earlier roadmap wording that conflicts with that file is historical/superseded; historical records remain for provenance.
+
+K.10 is complete. The next work is adversarial technical review, not another P4 redesign or another generic experiment cycle.
+
+**Canonical sequence:** K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12.
+
+Every stage is controlled by a ChatGPT chat. Antigravity may execute work only inside the currently authorized stage. Each stage must close with continuity updates and the exact next ChatGPT prompt.
