@@ -1,291 +1,270 @@
-# Part II — Multi-Chat Execution Plan
-
-Part I: K.1-K.3 — COMPLETE
-Part II: K.4-K.11 — ACTIVE
-Reference branch: exp
-Integrated mirror: main
-
-## Global rules
-1. Every chat starts from the latest exp state.
-2. Every chat begins with a Continuity Check.
-3. Every chat has exactly one checkpoint scope.
-4. A chat must not execute work assigned to a later checkpoint.
-5. Gates A-E are frozen and normative.
-6. The C reference runtime remains authoritative.
-7. UI and simulator layers must not implement a second recovery policy.
-8. Every chat ends with a continuity record and exact next-chat handoff.
-9. Completed checkpoints merge into exp.
-10. Completed exp checkpoints are synchronized to main through an explicit PR/merge.
-11. No software-only result is presented as hardware evidence.
-12. Novelty remains a hypothesis until element-by-element prior-art analysis supports a defensible distinction.
-
-## K.4 — Novelty Re-Research + Conceptual Architecture Lock
-Objective: refresh prior art and lock the conceptual demonstrator architecture before coding.
-Allowed: papers, patents, standards, products, open-source searches; claim-element matrix; overlap/differentiator analysis; simulator/runtime/UI boundaries; trace ownership; rejected novelty framings.
-Out of scope: simulator implementation, UI implementation, Gates A-E changes, recovery-policy changes, hardware work, baseline experiments.
-Deliverables: novelty investigation, conceptual architecture record, K.4 chat record, continuity updates.
-Exit: bounded novelty hypothesis and architecture documented; otherwise explicitly incomplete.
-
-## K.5 — Virtual Embedded System Technical Design
-Objective: turn K.4 into implementable contracts.
-Allowed: virtual MCU/peripheral models, I2C/SPI/UART models, event/workload model, deterministic fault injection API, simulator-to-C-runtime adapter, simulator-to-UI API/schema, trace/metrics schema, baseline interface boundary.
-Out of scope: full implementation, UI polish, final comparison, hardware integration, recovery-policy redesign.
-Deliverables: technical design, interfaces, scenarios, K.5 record, continuity.
-
-## K.6 — Virtual Embedded System Implementation
-Objective: implement the virtual system and connect it to the existing C reference runtime.
-Allowed: virtual scheduler, peripherals, workloads, fault injection, runtime adapter, traces, focused tests.
-Out of scope: full UI, new recovery logic, baseline superiority claims, hardware support.
-Exit: a controlled fault travels through the actual C recovery runtime and produces an inspectable trace.
-
-## K.7 — Professor-Facing UI Implementation
-Objective: build the UI as the face of the working demonstrator.
-Allowed: topology/status, queue view, fault controls, recovery action, verification/release/degrade/escalation, trace/explanation, metrics, scenarios, simulator integration.
-Out of scope: recovery-policy changes, hidden recovery logic in UI, hardware claims, baseline experiment implementation.
-Exit: the full software mechanism is observable without source-code inspection.
-
-## K.8 — Matched Baseline vs Proposed Software Validation
-Objective: compare proposed and baseline mechanisms under matched software workloads/fault schedules.
-Allowed: baseline behavior, matched scenarios, recovery time, attempts, resets, events lost/delayed, quarantine, correctness, trace analysis, failure cases.
-Out of scope: hardware claims, new mechanism design, uncontrolled comparisons, unsupported statistical claims.
-Exit: controlled comparative evidence sufficient to evaluate the software hypothesis.
-
-## K.9 — Full Software Re-Verification + Methodology Lock
-Objective: re-verify the complete chain and freeze the software methodology.
-Allowed: clean build/test, reference checks, simulator determinism/replay, UI integration, trace integrity, matched comparison checks, documentation reconciliation, evidence-boundary lock.
-Out of scope: MCU integration, physical fault injection, hardware measurements, Gates A-E redesign.
-Exit: software path is reproducible, demonstrable, traceable, and internally consistent.
-
-## Historical K.10 definition — SUPERSEDED
-The earlier K.10 definition (“Final Software Conclusion + Hardware-Validation Handoff”) is retained only as historical planning context. It is superseded by the K.9.2 decision and must not govern execution.
-
-## K.10 — P4 Advantage & Novelty Investigation
-Objective: execute the locked P4 advantage/novelty investigation and determine the evidence-supported outcome without predetermining superiority or novelty.
-Allowed: approved non-invasive instrumentation, matched advantage/interaction experiments, negative/no-difference controls, baseline-advantage/cost controls, metric-level analysis, adversarial prior-art investigation, evidence-bounded findings.
-Out of scope: final synthesis, hardware validation, Gates A-E changes, protected reference-runtime changes, redesigned P4 behavior, universal superiority/novelty/patentability claims.
-Exit: auditable metric-level evidence, interaction analysis, prior-art evidence, limitations, and falsification outcomes are recorded.
-
-## K.11 — Final Software Synthesis + Hardware-Validation Handoff
-Objective: synthesize the completed K.10 evidence into the final software-phase conclusion and define the exact target-MCU hardware-validation handoff.
-Allowed: evidence synthesis, conclusion bounded by K.10 results, professor-facing summary, final architecture/evidence packaging, target-MCU validation requirements, testbed specification, success/failure criteria, hardware-validation handoff documentation, final continuity.
-Out of scope: inventing new P4 behavior to improve results, retrofitting experiments to force a preferred conclusion, claiming hardware results before hardware testing, or making unsupported novelty/patentability claims.
-Exit: the software research question is concluded from K.10 evidence and the hardware-validation work has an explicit, reproducible starting specification.
-
-## Scope escalation rule
-If a later dependency is discovered: document it, do not implement it, add it to the next handoff, and stop at the current boundary.
-
-## K.5 completion update — 2026-10-01
-
-K.5 is COMPLETE at the technical-design/contract level. The virtual system, peripheral contracts, deterministic fault injection, C-runtime adapter boundary, runtime I/O, UI authority boundary, ownership rules and S01-S14 deterministic scenarios are documented.
-
-K.6 is now the active implementation checkpoint. It may implement only the K.5 contracts around the existing C reference runtime.
-
-K.6 must not modify the recovery policy, add a second recovery engine, or silently add a peripheral-action callback to the C runtime. The current runtime API remains the integration boundary unless a separate design decision explicitly authorizes a change.
-
-
-## K.6 completion update — 2026-10-01
-
-K.6 is COMPLETE, VERIFIED, and MERGED into `exp` via PR #7 (merge commit `b161589`).
-
-Verified surface:
-- bounded virtual scenario/workload structures;
-- I2C/SPI/UART environmental records;
-- immutable fault schedules;
-- existing-runtime adapter using unchanged `ref_runtime.h`/`ref_runtime.c`;
-- EventRef/dependency mapping with no synthetic EventRefs;
-- correlated wrapper/runtime trace records;
-- deterministic replay digest equality;
-- focused S01/S02/S05/S06/S08/S14 tests passed under CTest (3/3 passed).
-
-Status:
-- K.1–K.3: completed
-- K.4: completed
-- K.5: completed
-- K.6: VERIFIED AND MERGED INTO EXP
-- K.7: VERIFIED AND MERGED INTO EXP
-- K.8: VERIFIED AND MERGED INTO EXP
-- K.9: CLOSED AND MERGED INTO EXP
-- K.10: COMPLETE
-- K.11: NOT STARTED
-
-## K.7 completion and merge update — 2026-10-01
-
-K.7 Professor-Facing UI is VERIFIED AND MERGED into `exp` (PR #8, merge commit `f1af4e1`).
-
-Implemented surface:
-- `demo/index.html`: Web front-end demonstrator with scenario selection, execution controls, pipeline indicator, live event slot inspector, peripheral mirror, and interactive trace correlation.
-- `demo/server.py`: Lightweight Python local server proxying requests to the compiled C binary.
-- `demo/scenarios_data.json`: Offline authoritative dataset allowing instant in-browser demonstration without external tooling.
-- `reference/virtual/src/virtual_demo_cli.c`: CLI tool for JSON state serialization, step execution, and verification.
-- `reference/virtual/include/virtual_scenarios.h` & `src/virtual_scenarios.c`: Canonical scenario registry for S01, S02, S05, S06, S08, S14.
-- `demo/test_ui_contracts.py`: Comprehensive test suite verifying contract integrity, policy authority, trace correlation, and determinism.
-- CTest suite passing 5/5 targets (100%).
-
-K.7 preserves single-policy authority in `ref_runtime.c`. No recovery logic or peripheral callback was added to the UI.
-
-## K.8 completion and merge update — 2026-10-01
-
-K.8 Matched Baseline vs Proposed Software Validation is VERIFIED AND MERGED into `exp` (PR #9, merge commit `5590bf1`).
-
-Implemented surface:
-- `reference/experiments/evaluate_baselines.py`: Comprehensive comparative evaluation harness for 70 host runs (W01–W14 × P0–P4) and 30 virtual demonstrator runs (S01–S14 × P0–P4) = 100 total runs.
-- `reference/virtual/tests/test_virtual_baselines.c`: C11 unit assertions testing baseline progression, persistent fault escalation vs reinit recovery, stale ref handling vs fail-closed escalation, unassociated work preservation, and deterministic replay.
-- `research/phase2_k8_matched_baseline_validation.md`: Structured comparative evidence report documenting metric tables, scenario matrices, and qualification locks.
-- CTest suite expanded to 7 targets (100% passing).
-- Authority preserved: `ref_runtime.c` and `ref_runtime.h` unchanged.
-
-Next checkpoint: K.9 (Full Software Re-Verification + Methodology Lock).
-
-## K.9 completion and merge update — 2026-10-01
-
-K.9 Full Software Re-Verification + Methodology Lock is CLOSED AND MERGED into `exp` (PR #10, merge commit `d1e0dcb`).
-
-Implemented surface:
-- `research/phase2_k9_methodology_lock.md`: Formal methodology lock freezing experimental dimensions A through O, locking limitations (quarantine symmetry, S06 multi-policy recovery, capacity confounds, software-only scope, prohibited claims), and clarifying scenario scope (S01–S14 vs 6-scenario demonstrator subset).
-- `research/chat_records/chat_k9_record.md`: Canonical chat record for K.9.
-- `DECISION_LOG.md`: Added architectural decisions `D-110` and `D-111`.
-- S06/P2 Reconciliation: Authoritative digest `0xCDAB2617` confirmed across 100-run baseline validation and 10/10 independent replay runs.
-- Complete CTest suite passing 7/7 (100%).
-- Full 100-run baseline reproduction verified with zero divergence.
-- Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% unchanged.
-
-Next checkpoint: K.10 (P4 Advantage & Novelty Investigation).
-
-## K.10 completion update — 2026-10-01
-
-K.10 P4 Advantage & Novelty Investigation is COMPLETE on `exp`.
-
-Implemented surface:
-- `research/phase2_k9_2_p4_advantage_novelty_design.md`: Authoritative design specification for 16-case-family matched matrix, hypotheses (H1–H5), metrics, and attribution rules.
-- `reference/experiments/k10_experiment.c`: C11 runner executing 16 case families across P0–P4 with 5 repetitions (400 runs) logging raw CSV data.
-- `reference/experiments/evaluate_k10_advantage.py`: Evaluation harness and report generator.
-- `research/phase2_k10_p4_advantage_novelty_results.md`: Complete results report documenting 16-case matrix, attribution analysis, trade-offs, interactions, controls, prior art, and classifications.
-- `research/chat_records/chat_k10_record.md`: Canonical chat record for K.10.
-- `DECISION_LOG.md`: Added architectural decision `D-117`.
-- Complete CTest suite expanded to 8 targets (8/8 passed, 100%).
-- 400 matched executions verified with 100% determinism.
-- Classifications: Performance: `Demonstrated bounded advantage`; Prior Art: `Potentially distinguishable combination — further legal/technical review required`.
-- Authority preserved: `ref_runtime.c` and `ref_runtime.h` 100% untouched.
-
-Next checkpoint: K.11 (Target-MCU Handoff & Final Part II Synthesis).
-
-
-
-
-
-
-
-
-
-
-
-
-## Active Scope Override — K.9.2 (2026-10-01)
-
-K.9 is historically CLOSED and remains unchanged. The previous K.10 “Final Software Conclusion + Hardware-Validation Handoff” definition is **superseded as the active next-step definition**.
-
-### K.9.2 — P4 Advantage & Novelty Investigation Design Lock
-Objective: systematically determine **where meaningful P4 advantage could exist** before any final research conclusion, and lock the experimental/measurement/prior-art design without predetermining the outcome.
-
-Required dimensions:
-- outcome resilience;
-- recovery attempts/actions/redundant retries;
-- recovery latency where faithfully measurable;
-- state-transition cost;
-- scheduler/context-switch cost only if the software model can validly expose it;
-- work preservation/re-execution/lost or delayed work;
-- fault containment;
-- escalation quality;
-- resource/CPU/step/storage/communication cost where valid;
-- memory/static overhead;
-- policy-decision cost where valid;
-- resilience overhead per recovery;
-- decision accuracy;
-- adaptability across transient/persistent/intermittent/recurring faults;
-- workload, dependency, criticality and queue-pressure effects;
-- compound-fault interactions;
-- graceful degradation;
-- worst-case behavior;
-- determinism/predictability as a validation property;
-- complexity-vs-benefit trade-offs.
-
-K.9.2 must enumerate the scenario/fault/history/workload/resource/association combinations that can meaningfully differentiate P4 from P0-P3, including negative/no-advantage cases. Compound cases are a priority because integrated context/history behavior may only become observable under interactions.
-
-K.9.2 must also lock the novelty-search decomposition: individual elements, pairwise combinations, higher-order combinations, and whole-combination disclosures across papers, patents, standards and technical systems. Novelty and inventive step/non-obviousness remain separate questions.
-
-K.9.2 does **not** run the decisive advantage matrix or make a superiority/novelty conclusion.
-
-### K.10 — P4 Advantage & Novelty Investigation
-K.10 follows K.9.2 and executes the locked design:
-- implement only approved non-invasive measurement/instrumentation changes;
-- run matched advantage/interaction experiments;
-- analyze P4 vs P0-P3 at metric level, including trade-offs and baseline-advantage cases;
-- perform the deeper adversarial prior-art search;
-- produce evidence-bounded findings.
-
-K.10 is **not** a predetermined proof of P4 superiority or novelty.
-
-### Later conclusion boundary
-A later checkpoint, after K.10 evidence is complete, will perform final synthesis and hardware-validation handoff. Do not move that conclusion into K.9.2 or K.10 merely for convenience.
-
-### Antigravity execution rule
-ChatGPT is the research-control/audit layer. Antigravity is the repository execution agent. Each chat must give Antigravity an exact bounded scope, require repository inspection from latest `exp`, preserve historical records, and return exact branch/commit/test/working-tree status. Antigravity must not invent new P4 behavior or a new policy merely to manufacture a measurable advantage.
-
-
-## K.9.2 completion update — 2026-10-01
-
-K.9.2 — P4 Advantage & Novelty Investigation Design Lock is COMPLETE as a design/audit checkpoint.
-
-Completed:
-- audited the current `exp` starting state;
-- preserved Gates A-E and the C reference runtime;
-- locked the 21-dimensional P4 advantage matrix;
-- separated currently measurable, partially measurable, instrumentable and inadmissible metrics;
-- mapped current W01-W14 and S01/S02/S05/S06/S08/S14 coverage;
-- identified the missing compound/history/load/contention case families for K.10;
-- reaffirmed quarantine, S06/P2, capacity-confound and host-only attribution locks;
-- locked negative/no-difference controls and baseline-advantage cases;
-- locked the element/pairwise/higher-order/whole-combination prior-art search structure;
-- locked falsification criteria.
-
-No decisive K.10 experiment, final prior-art investigation, hardware experiment, or superiority/novelty conclusion was performed.
-
-### K.10 — P4 Advantage & Novelty Investigation
-
-K.10 is now the active checkpoint. It executes the K.9.2 design rather than assuming a positive result.
-
-K.10 must:
-1. add only approved non-invasive measurement instrumentation;
-2. execute the matched advantage/interaction cases and controls;
-3. analyze metric-level benefits, neutral outcomes, costs/trade-offs and baseline-advantage cases;
-4. perform the deeper adversarial prior-art search;
-5. record evidence that strengthens, narrows or falsifies the advantage and integrated-novelty hypotheses.
-
-A later checkpoint will perform final synthesis/hardware-validation handoff only after K.10 evidence exists.
-
-
-## Roadmap normalization — K.10 -> K.11
-
-The post-K.10 checkpoint is now explicitly numbered **K.11 — Final Software Synthesis + Hardware-Validation Handoff**. K.10 remains the final major investigative stage; K.11 is synthesis/handoff, not another open-ended architecture-design stage.
-
-Sequence:
-**K.9.2 design lock -> K.10 investigation -> K.11 final synthesis/hardware-validation handoff -> hardware validation/refinement**.
-
-K.11 must use K.10 evidence as its input and must not retroactively change the K.10 methodology merely to obtain a preferred conclusion.
+# Part II — Canonical Multi-Chat Execution Plan
+
+**Status:** ACTIVE — canonical post-K.10 roadmap  
+**Canonical research branch:** `exp`  
+**Integrated mirror:** `main`  
+**Chat sequence owner:** ChatGPT  
+**Repository execution agent:** Antigravity, only when explicitly invoked inside a ChatGPT-defined checkpoint
+
+> **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
+
+## Global execution rules
+
+1. Every new ChatGPT chat starts from the latest verified `exp` state.
+2. Read `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, `DECISION_LOG.md`, this file, and the latest checkpoint record before substantive work.
+3. Every ChatGPT chat has exactly one numbered checkpoint scope.
+4. ChatGPT owns the checkpoint sequence and decides when a checkpoint is closed.
+5. Antigravity may execute repository work, experiments, searches, or documentation updates only within the current ChatGPT checkpoint.
+6. Antigravity does not create or redefine the chat-wise sequence.
+7. A checkpoint may remain open if evidence is incomplete; the next chat must not silently assume completion.
+8. Each completed chat must update continuity artifacts and generate the exact continuation prompt for the next ChatGPT chat.
+9. `exp` is the active research/integration branch.
+10. `main` is the stable integrated mirror. Validated `exp` checkpoints are synchronized to `main` through the normal PR/merge path.
+11. Historical feature/design/experiment branches are preserved as provenance. They are not active roadmap authorities.
+12. Gates A–E, `policy_decide()`, `runtime_apply_policy()`, and the protected reference runtime remain frozen unless a future checkpoint explicitly authorizes a change.
+13. No host/software-model result may be presented as physical MCU evidence.
+14. No research stage may claim universal P4 superiority, novelty, inventive step, or patentability without evidence supporting that exact claim.
+15. No checkpoint may execute work assigned to a later checkpoint merely because it becomes convenient.
 
 ---
 
-## K.10 execution-blocker update — 2026-10-01
+# Part I — K.1–K.3
 
-K.10 is **ACTIVE / NOT COMPLETE**.
+**COMPLETE.** Historical foundation containing the host/reference mechanism, Gates A–E, deterministic host corpus, and initial evidence synthesis.
 
-The live `exp` HEAD is `da2c89e2ea3a78fb61dcb4eb39c1f38cd6a6a0de`. The five commits after the earlier declared `e28af7...` state modify only continuity/control documents. Protected `ref_runtime.c/.h` remain unchanged.
+# Part II — K.4–K.10
 
-Fresh adversarial prior-art research materially weakens broad individual/pairwise novelty framings, while the exact integrated MCU-specific combination remains unresolved.
+**COMPLETE.** Historical records are retained.
 
-The decisive K.10 matched experiment matrix was **not executed** because Antigravity is unavailable and no local/CI execution path is exposed.
+- K.4 — Novelty re-research + conceptual architecture lock
+- K.5 — Virtual embedded-system technical design
+- K.6 — Virtual embedded-system implementation
+- K.7 — Professor-facing UI implementation
+- K.8 — Matched baseline validation
+- K.9 — Full software re-verification + methodology lock
+- K.9.2 — P4 advantage/novelty investigation design lock
+- K.10 — P4 advantage & novelty investigation
 
-Therefore K.10 does not satisfy its exit condition and **K.11 is not activated**.
+K.10's evidence-bounded result is:
+- experimental classification: **Demonstrated bounded advantage**;
+- prior-art classification: **Potentially distinguishable combination — further legal/technical review required**;
+- no universal superiority claim;
+- no legal patentability conclusion.
 
-### Required next K.10 execution
-Use the designated Antigravity repository agent (or an explicitly authorized equivalent execution environment) to execute the locked scenarios/controls, generate auditable raw/derived metrics, analyze interactions/trade-offs, complete the prior-art record, update the K.10 results record, and commit/push a genuinely completed K.10 checkpoint.
+---
+
+# Post-K.10 — Final Research/Development Sequence
+
+## K.10.1 — Adversarial Prior-Art & Feature-Distinction Review
+
+### Purpose
+Attack the K.10 technical-distinction conclusion from the strongest opposing direction.
+
+### Required work
+- Freeze the K.10 experimental conclusion; do not redesign P4.
+- Build a complete P4 feature/limitation decomposition.
+- Map every limitation against the strongest identified references.
+- Separate exact disclosure, partial overlap, absence, and unresolved evidence.
+- Identify missing references through adversarial searches.
+- Distinguish individual mechanisms, pairwise combinations, higher-order combinations, and the complete combination.
+- Separate technical distinction from legal novelty, inventive step/non-obviousness, and patentability.
+- Identify which distinctions are actually supported by the technical record.
+
+### Out of scope
+- P4 redesign.
+- New recovery policy.
+- New experiment matrix.
+- Hardware validation.
+- Legal opinion.
+- Patent filing.
+- K.10.2/K.10.3/K.10.4 execution.
+
+### Required deliverables
+- feature/limitation matrix;
+- adversarial reference set;
+- overlap/distinction table;
+- missing-evidence list;
+- K.10.1 record;
+- updated continuity;
+- exact K.10.2 continuation prompt.
+
+### Exit
+K.10.1 is complete only when the technical distinction matrix is auditable and the strongest known attack paths are documented. Otherwise mark INCOMPLETE.
+
+---
+
+## K.10.2 — Deep Single-Reference Anticipation Review
+
+### Purpose
+Determine whether any single reference actually discloses the complete relevant P4 combination.
+
+### Required work
+For each strongest reference:
+- identify the exact disclosed elements;
+- map them to P4 limitations;
+- identify explicit versus inferred elements;
+- identify architectural/context mismatches;
+- determine whether the complete arrangement is actually disclosed;
+- record unresolved evidence rather than filling gaps by inference.
+
+### Required distinction
+"Every ingredient exists somewhere" is not equivalent to "one reference discloses the complete combination."
+
+### Out of scope
+- Multi-reference obviousness conclusion.
+- P4 redesign.
+- Hardware.
+- Patent/legal opinion.
+- K.10.3/K.10.4 work.
+
+### Exit
+A defensible single-reference anticipation matrix exists, with explicit evidence for every mapped limitation and every missing limitation.
+
+---
+
+## K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis
+
+### Purpose
+Attack the remaining distinction by asking whether the complete P4 combination follows naturally from multiple references.
+
+### Required work
+For each serious combination:
+- identify the starting reference;
+- identify the secondary reference(s);
+- state the technical teaching contributed by each;
+- identify the reason/motivation for combining them;
+- check architectural compatibility;
+- check whether the combination actually produces P4's claimed interaction;
+- identify technical conflicts or missing steps;
+- distinguish "possible to combine" from "supported reason to combine";
+- identify combinations that reproduce only part of P4.
+
+### Important
+This remains a technical research analysis, not a legal opinion.
+
+### Out of scope
+- P4 redesign to evade references.
+- New experiments unless a narrowly necessary verification is explicitly approved by ChatGPT.
+- Hardware validation.
+- K.10.4 conclusion.
+
+### Exit
+The strongest plausible multi-reference attacks and their remaining technical gaps are documented.
+
+---
+
+## K.10.4 — Final Technical Distinction & Research Conclusion
+
+### Purpose
+Integrate K.10.1–K.10.3 with the actual K.10 experimental evidence.
+
+### Required work
+Produce one evidence-bounded final assessment covering:
+1. experimental contribution;
+2. technical distinction;
+3. known prior art;
+4. unresolved prior-art risks;
+5. trade-offs;
+6. limitations;
+7. what can and cannot be claimed academically;
+8. what requires professional patent/legal review.
+
+### Possible outcomes
+Do not force a positive result. The final technical conclusion may state:
+- distinguishable under the investigated record;
+- not distinguishable from identified prior art;
+- partially distinguishable with material unresolved risk;
+- inconclusive.
+
+### Exit
+K.10.4 closes the investigative phase and produces the definitive research conclusion used by K.11.
+
+---
+
+# K.11 — Final Software Synthesis + Hardware-Validation Handoff
+
+### Purpose
+Synthesize the completed K.10.x research investigation and K.10 experiment evidence into the final software-phase research package.
+
+### Required work
+- final architecture summary;
+- final mechanism description;
+- final experimental evidence summary;
+- final prior-art/distinction summary;
+- explicit evidence boundaries;
+- final limitations;
+- publication-oriented results structure;
+- target-MCU validation requirements;
+- hardware-validation success criteria;
+- professor-facing conclusion.
+
+### Out of scope
+- claiming completed hardware validation;
+- silently redesigning P4;
+- new novelty claims beyond K.10.x evidence;
+- starting the physical MCU campaign.
+
+### Exit
+The software research phase is closed and the project has a clean, evidence-bounded handoff into the final implementation/demo phase.
+
+---
+
+# K.12 — Final Software Productization & Clean UI Demonstration
+
+### Purpose
+Prepare and demonstrate the complete project cleanly after the research conclusion is frozen.
+
+### Required work
+- reconcile UI with the final frozen research terminology;
+- remove stale/duplicated UI messaging;
+- ensure UI uses the authoritative C runtime and existing virtual system;
+- ensure every displayed metric is traceable to committed evidence;
+- present P0–P4 comparison without misleading ranking;
+- clearly label software-model evidence versus future hardware evidence;
+- clean scenario selection, trace visualization, fault injection, recovery decision, verification/release/escalation and evidence explanation;
+- perform final reproducibility/build/test checks;
+- create the final professor-facing demonstration path.
+
+### Out of scope
+- changing P4 to improve appearance or measured performance;
+- introducing a second policy;
+- inventing measurements;
+- new research claims;
+- hardware validation unless separately authorized.
+
+### Exit
+A clean, reproducible, complete software demonstration exists and is consistent with the final research conclusion.
+
+---
+
+# Final integration
+
+After K.12:
+1. verify `exp`;
+2. verify protected runtime integrity;
+3. verify tests and documentation;
+4. perform final audit;
+5. synchronize the validated final state to `main`;
+6. record the exact source `exp` commit and merge;
+7. do not continue speculative roadmap expansion unless a new research objective is explicitly approved.
+
+---
+
+# Chat-to-chat continuity contract
+
+At the end of every checkpoint, the current chat MUST leave:
+
+- checkpoint status;
+- exact branch;
+- exact starting/ending SHA;
+- files changed;
+- tests/checks;
+- evidence produced;
+- unresolved items;
+- explicit prohibited next-stage work;
+- exact next checkpoint;
+- complete copy-paste continuation prompt in `NEXT_CHAT_PROMPT.md`.
+
+The next ChatGPT chat begins by reading the repository state and that exact prompt.
+
+**Antigravity execution never becomes the chat sequence. It is an execution tool inside the ChatGPT-defined checkpoint.**
