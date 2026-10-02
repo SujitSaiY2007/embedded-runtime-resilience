@@ -580,3 +580,28 @@ K.10 remains **ACTIVE / NOT COMPLETE**.
 - no superiority, universal advantage, novelty, patentability, hardware or statistical conclusion is established
 
 K.11 remains inactive. The next required action is actual K.10 execution through the designated Antigravity repository execution agent.
+
+
+---
+
+# CURRENT CANONICAL STATE — 2026-10-02
+
+## K.10 closure
+
+K.10 is **COMPLETE** based on the Antigravity execution record: 16 case families, P0-P4, 5 deterministic repetitions per variant/case (400 matched executions), deterministic replay, and 8/8 CTest checks passing. The K.10 result record is the authoritative evidence artifact.
+
+Experimental classification: **Demonstrated bounded advantage**.
+
+Integrated prior-art classification: **Potentially distinguishable combination — further legal/technical review required**.
+
+The wording in the K.10 record concerning H4 has been clarified: individual mechanisms/sub-combinations are established, but whole-combination anticipation was not confirmed. The K.10 software-model boundary remains in force.
+
+## Active post-K.10 sequence
+
+**K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12 -> final exp audit -> main synchronization**
+
+K.10.1 attacks the remaining technical distinction. K.10.2 tests single-reference anticipation. K.10.3 tests multi-reference combination. K.10.4 produces the final evidence-bounded research conclusion. K.11 packages the final software synthesis and target-MCU handoff. K.12 produces the final clean software demonstration.
+
+## Governance
+
+ChatGPT owns the chat-wise sequence. Antigravity may execute only inside the active ChatGPT-defined checkpoint. Historical branch plans and old prompts are provenance, not active instructions. The canonical active plan is `research/PART_II_CHAT_PLAN.md`; the exact current continuation prompt is `NEXT_CHAT_PROMPT.md`.
