@@ -139,3 +139,79 @@ K.4 is complete and K.5 is complete at design/contract level. The current next c
 K.5 established the implementation boundary around the existing C runtime and preserved Gates A-E. The next chat must read the K.5 technical design, interface contracts, deterministic scenarios and K.5 record before coding.
 
 K.6 must not redesign the recovery policy or create a second policy authority. The current runtime has no peripheral-action callback; this is a documented adapter limitation and must not be silently solved by changing runtime semantics.
+
+---
+
+# Canonical Post-K.10 Continuity Protocol — 2026-10-02
+
+The historical checkpoint tables and earlier current-checkpoint sections above are retained for provenance. They are superseded for active execution by this section and by research/PART_II_CHAT_PLAN.md.
+
+## Active project partition
+- Part I — K.1-K.3: COMPLETE.
+- Part II — K.4-K.10: COMPLETE.
+- Post-K.10 research closure: ACTIVE.
+- Final software demonstration: follows research closure.
+
+## Current canonical checkpoint
+**K.10.1 — Adversarial Prior-Art & Technical-Distinction Review**
+
+K.10 itself is complete. Its experimental result is frozen and must not be rerun or reinterpreted merely to obtain a preferred conclusion.
+
+## Canonical sequence
+**K.10.1 → K.10.2 → K.10.3 → K.10.4 → K.11 → K.12 → final exp audit → validated synchronization to main**
+
+### K.10.1
+Attack the remaining technical distinction. Build the P4 feature/limitation matrix, map strong prior art, perform adversarial searching, and identify genuine remaining distinctions.
+
+### K.10.2
+Perform deep single-reference anticipation analysis. Determine whether one reference actually discloses the complete relevant P4 combination.
+
+### K.10.3
+Perform multi-reference combination and technical-obviousness analysis. Identify the strongest technically supported combination attacks and their missing steps/interactions.
+
+### K.10.4
+Integrate K.10 evidence with K.10.1-K.10.3 and produce the final evidence-bounded technical-distinction/research conclusion.
+
+### K.11
+Produce the final software research synthesis and target-MCU validation handoff. Do not claim hardware validation unless it is actually performed.
+
+### K.12
+Finalize the software productization and clean professor-facing UI demonstration without changing the research mechanism to improve presentation.
+
+## ChatGPT / Antigravity rule
+**ChatGPT owns the chat-wise sequence.**
+
+Antigravity is an execution agent inside the current ChatGPT-defined checkpoint only. It may execute repository work, tests, searches, experiments, and documentation updates explicitly authorized by that checkpoint.
+
+Antigravity must not create or redefine the roadmap, renumber checkpoints, advance to the next checkpoint, or redesign P4 outside the active scope.
+
+Every ChatGPT checkpoint must close with exact branch/SHA, completed work, evidence/tests, changed files, unresolved items, explicit non-goals, exact next checkpoint, and complete next-ChatGPT continuation prompt.
+
+## Branch rule
+- exp = active research/integration branch.
+- main = stable integrated mirror.
+- Historical child branches = provenance only; they are not active roadmap authorities.
+
+Completed checkpoint work is developed and verified on exp. main is synchronized only after the checkpoint is reviewed and explicitly closed.
+
+## Startup order for every new ChatGPT chat
+1. Read PROJECT_MANUAL.md.
+2. Read PROJECT_STATE.md.
+3. Read CURRENT_HANDOFF.md.
+4. Read DECISION_LOG.md.
+5. Read research/PART_II_CHAT_PLAN.md.
+6. Read NEXT_CHAT_PROMPT.md.
+7. Read the active checkpoint's research artifacts.
+8. State the continuity check.
+9. Execute only the current checkpoint.
+
+## Canonical source files
+- Active roadmap: research/PART_II_CHAT_PLAN.md
+- Current next-chat prompt: NEXT_CHAT_PROMPT.md
+- Current state: PROJECT_STATE.md
+- Exact handoff: CURRENT_HANDOFF.md
+- Decisions: DECISION_LOG.md
+- K.10 evidence: research/phase2_k10_p4_advantage_novelty_results.md
+- Post-K.10 plan: research/phase2_post_k10_review_plan.md
+
+No earlier roadmap section should override these active sources.
