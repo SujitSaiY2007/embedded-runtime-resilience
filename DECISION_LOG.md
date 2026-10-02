@@ -460,3 +460,41 @@ The K.10 controlled empirical evaluation and adversarial prior-art analysis were
 6. **Runtime Integrity:** `ref_runtime.c` and `ref_runtime.h` 100% untouched.
 
 **Reason:** provides controlled empirical evidence isolating genuine P4 advantages from shared infrastructure and establishing baseline trade-offs prior to K.11 target-MCU handoff.
+
+
+---
+
+## D-117 — Insert post-K.10 adversarial review sequence before K.11
+**Status:** Accepted
+
+K.10 is complete, but its integrated prior-art classification remains potentially distinguishable rather than conclusively resolved. Therefore K.10.1-K.10.4 are inserted before the previously planned K.11 synthesis stage. The sequence is: adversarial feature distinction, single-reference anticipation, multi-reference combination analysis, then final technical distinction and evidence-bounded conclusion.
+
+**Reason:** separates experimental advantage from technical prior-art distinction and prevents K.11 from prematurely packaging an unresolved novelty conclusion.
+
+## D-118 — ChatGPT owns checkpoint sequence; Antigravity is execution-only
+**Status:** Accepted
+
+Every research checkpoint is defined and closed by ChatGPT. Antigravity may execute repository work within the current checkpoint but must not define, renumber, or advance the chat-wise roadmap.
+
+**Reason:** preserves one deterministic continuity path and prevents parallel/competing plans.
+
+## D-119 — Canonical active roadmap is singular
+**Status:** Accepted
+
+`research/PART_II_CHAT_PLAN.md` is the sole active Part-II roadmap and `NEXT_CHAT_PROMPT.md` is the sole active next-chat prompt. Earlier prompts and roadmap wording are historical/superseded and must not control future work.
+
+**Reason:** eliminates competing active plans while preserving historical research provenance.
+
+## D-120 — exp is the active research/integration branch; main is the validated mirror
+**Status:** Accepted
+
+Post-K.10 work proceeds in `exp`. `main` is synchronized only after checkpoint closure through the normal PR/merge path. Historical child branches remain preserved as provenance.
+
+**Reason:** provides a single active development line without destroying historical branch evidence.
+
+## D-121 — Final software phase ends with K.12 clean demonstration
+**Status:** Accepted
+
+After K.10.4 and K.11 close the research conclusion and software synthesis, K.12 performs final software productization and a clean professor-facing UI demonstration. No new research mechanism is introduced during K.12.
+
+**Reason:** separates research closure from final presentation/productization and prevents UI work from altering the research conclusion.
