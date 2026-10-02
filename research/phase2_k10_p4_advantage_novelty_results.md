@@ -170,3 +170,15 @@ Prior-art analysis against PA-01 through PA-10 under adversarial decomposition:
 
 - **Software-Only Boundary:** All evidence is derived from host simulation. No physical STM32U575 cycle latency, RAM/Flash footprint, electrical noise, or MPU hardware fault behavior is claimed.
 - **Target-MCU Requirement:** Hardware validation on STM32U575 is required to determine physical timing overhead, memory footprint, and electrical recovery behavior.
+
+
+---
+
+## 2026-10-02 — K.10 wording correction and post-K.10 boundary
+
+Two interpretation safeguards are now explicit:
+
+1. The CF16 comparison is an **attempt-count/software-model cost comparison** (P2: 1 attempt; P4: 3 attempts), not a physical statement that P2 is literally 3x faster. Physical timing remains unmeasured.
+2. H4 is corrected to: **whole-combination anticipation was not confirmed**. Individual mechanisms and sub-combinations are established in prior art, while multi-reference recombination remains a technical/legal risk. The final classification therefore remains potentially distinguishable, not proven novel or patentable.
+
+K.10 is closed. The next stage is **K.10.1 — Adversarial Prior-Art & Feature-Distinction Review**, whose purpose is to attack the remaining technical distinction without redesigning P4.
