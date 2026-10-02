@@ -10,7 +10,7 @@ The frozen development topic is:
 
 Short working title: **Zero-Heap Context-Aware Peripheral Recovery with Event Quarantine**.
 
-**Current status:** **Part II K.4 — Novelty Re-Research + Conceptual Architecture Lock.** Part I (K.1-K.3) is complete. Gates A-E remain frozen and normative. The current objective is adversarial prior-art investigation and conceptual architecture lock before any K.5 implementation.
+**Current status:** **K.10 COMPLETE; post-K.10 adversarial technical-distinction review ACTIVE.** Part I and K.4-K.10 are complete. The active sequence is K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12. Gates A-E remain frozen and normative. The current research objective is to attack the remaining technical distinction against prior art before final synthesis.
 
 The intended outcome is not merely a functioning application. The target is a technically defensible research contribution that may support an academic publication and, if the evidence warrants it, a patent filing.
 
@@ -210,3 +210,29 @@ K.5 defined the virtual embedded-system boundary around the actual existing ISO 
 The current C runtime remains the sole recovery-policy authority. K.5 identified but did not modify the runtime limitation that there is no peripheral-action callback. Future implementation must not silently add one or otherwise redesign recovery semantics.
 
 Current active checkpoint: K.6 — Virtual Embedded System Implementation around the existing C runtime.
+
+
+## 13. Canonical post-K.10 execution governance — 2026-10-02
+
+The active checkpoint sequence is maintained exclusively in `research/PART_II_CHAT_PLAN.md`. Conflicting earlier roadmap wording is historical/superseded and must not be used as an active instruction.
+
+### Chat ownership
+ChatGPT owns the sequence and checkpoint boundaries. Antigravity is a repository execution agent only within the currently authorized ChatGPT checkpoint. Antigravity must not create, renumber, or advance the chat sequence.
+
+### Post-K.10 sequence
+1. K.10.1 — adversarial prior-art + feature/limitation distinction review.
+2. K.10.2 — deep single-reference anticipation review.
+3. K.10.3 — multi-reference combination / technical obviousness analysis.
+4. K.10.4 — final technical distinction + evidence-bounded research conclusion.
+5. K.11 — final software synthesis + target-MCU validation handoff.
+6. K.12 — final software productization + clean professor-facing UI demonstration.
+7. Final `exp` audit followed by synchronization to `main`.
+
+### Branch governance
+`exp` is the active research/integration branch. `main` is the integrated mirror and is synchronized only after validated checkpoint closure through the normal PR/merge path. Historical child branches remain provenance records and are not active roadmap authorities.
+
+### Continuity rule
+Every checkpoint must close with exact branch/SHA state, changed files, validation, unresolved items, explicit scope boundary, and a complete next-ChatGPT continuation prompt in `NEXT_CHAT_PROMPT.md`.
+
+### Research boundary
+K.10 established bounded experimental evidence, not universal superiority. The post-K.10 review may strengthen or weaken the technical-distinction assessment but must not rewrite evidence to obtain a preferred result. Legal patentability remains outside the project's authority and requires professional review.
