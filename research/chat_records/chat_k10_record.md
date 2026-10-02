@@ -53,3 +53,12 @@ Execute **K.10: P4 Advantage & Novelty Investigation** to determine from control
 - `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` were **100% untouched** (verified by SHA256 hashes and git diff).
 - Gates A–E remain frozen.
 - K.11 has NOT been started.
+
+
+---
+
+## Post-K.10 closure correction — 2026-10-02
+
+The K.10 result is accepted as complete. The CF16 wording is treated as an attempt-count/software-model cost comparison, not physical speed. H4 is interpreted as confirmation that individual mechanisms/sub-combinations are established, not as confirmation that the complete P4 combination is anticipated.
+
+The active next checkpoint is K.10.1. K.10.1-K.10.4 are intentionally inserted before K.11 so the unresolved technical distinction is attacked before final synthesis.
