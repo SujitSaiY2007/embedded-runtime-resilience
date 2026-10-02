@@ -633,3 +633,31 @@ Antigravity is the designated repository execution agent and must return exact b
 
 ## Current limitation
 The current ChatGPT environment does not expose Antigravity or a runnable local repository checkout. K.10 therefore remains active/open rather than being falsely marked complete.
+
+
+---
+
+# ACTIVE HANDOFF — POST-K.10 / K.10.1
+
+K.10 is COMPLETE. Do not repeat the K.10 experiment matrix unless ChatGPT explicitly authorizes a narrowly scoped verification.
+
+## Current checkpoint
+**K.10.1 — Adversarial Prior-Art & Feature-Distinction Review**
+
+## Canonical sequence
+K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12.
+
+## Ownership
+ChatGPT controls checkpoint sequencing. Antigravity is execution-only within the current checkpoint.
+
+## Required K.10.1 focus
+Decompose P4 into concrete technical limitations; map each against the strongest prior art; distinguish exact disclosure from inference; search for adversarial references; identify genuine remaining technical distinctions; do not redesign P4 and do not issue a legal patentability conclusion.
+
+## Branch
+Work on `exp`. Do not synchronize to `main` until the current checkpoint has been reviewed and explicitly closed.
+
+## Protected boundaries
+Gates A-E, `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, and the K.10 experimental result remain frozen.
+
+## Exact next-chat prompt
+See `NEXT_CHAT_PROMPT.md`. That file is the current authoritative ChatGPT startup prompt and must be replaced with the next checkpoint prompt whenever K.10.1 closes.
