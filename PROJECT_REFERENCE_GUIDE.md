@@ -967,3 +967,85 @@ Sections written before the Gates A-E/K.1/K.2/K.3 checkpoints contain historical
 The current integrated objective is software proof of concept + re-verification + methodology lock + final software-phase conclusion. Professor verification is part of this objective, not a separate stage.
 
 The current defensible conclusion is that the mechanism is sufficiently specified, implemented, reproducible, demonstrable, and evidence-bounded to justify target-MCU validation. This does not establish hardware performance, final novelty, or patentability.
+
+---
+
+# Canonical Current-State Addendum — 2026-10-02
+
+The older sections of this guide are retained as historical technical/reference material. They contain earlier planning snapshots and must not override the canonical current state below.
+
+## 1. Current research status
+**K.10 is COMPLETE.**
+
+K.10 executed the locked software-model P0-P4 investigation and recorded the evidence-bounded result.
+
+Experimental classification: **Demonstrated bounded advantage**.
+
+This means P4 demonstrated an advantage in specific controlled fault conditions; it does not mean P4 is universally superior. K.10 also recorded explicit no-difference cases and trade-offs.
+
+Physical MCU timing, physical RAM/Flash, energy, RTOS context-switch timing, and electrical behavior remain outside the software-model evidence boundary.
+
+## 2. Current prior-art status
+- Individual P4 mechanisms are substantially represented in existing prior art.
+- Multiple pairwise/sub-combination overlaps exist.
+- No single investigated reference was found to disclose the complete proposed combination.
+- Multi-reference recombination remains an unresolved technical/legal risk.
+
+Correct research wording: **Potentially distinguishable combination — further legal/technical review required.**
+
+This is not a legal opinion and does not establish patentability, inventive step, or final legal novelty.
+
+## 3. Active post-K.10 sequence
+1. K.10.1 — Adversarial Prior-Art & Feature-Distinction Review
+2. K.10.2 — Deep Single-Reference Anticipation Review
+3. K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis
+4. K.10.4 — Final Technical Distinction & Research Conclusion
+5. K.11 — Final Software Synthesis + Hardware-Validation Handoff
+6. K.12 — Final Software Productization + Clean UI Demonstration
+7. Final exp audit → validated synchronization to main
+
+## 4. ChatGPT / Antigravity governance
+The chat-wise sequence is owned by **ChatGPT only**.
+
+Antigravity is used only as an execution agent inside a specific ChatGPT checkpoint. It must not define the next chat, create an alternate roadmap, skip checkpoints, or advance itself into later stages.
+
+Each ChatGPT chat must leave a complete continuation record so the next chat can proceed without relying on conversational memory.
+
+## 5. Branch governance
+- exp is the active research/integration branch.
+- main is the stable integrated mirror.
+- Historical feature/design/experiment branches remain preserved as provenance and are not active instructions.
+
+K.10.1 onward proceeds in exp. main is synchronized only after the relevant checkpoint is reviewed and explicitly closed.
+
+## 6. Protected research boundaries
+Unless a checkpoint explicitly authorizes otherwise:
+- Gates A-E remain frozen.
+- policy_decide() remains policy authority.
+- runtime_apply_policy() remains transition authority.
+- reference/src/ref_runtime.c remains protected.
+- reference/include/ref_runtime.h remains protected.
+- K.10 experimental evidence remains frozen.
+
+No new policy/engine/scheduler may be introduced merely to improve results or presentation.
+
+## 7. Final development/research path
+The project is now in its final research/development phase:
+
+**K.10.1 → K.10.2 → K.10.3 → K.10.4 → K.11 → K.12**
+
+The first four checkpoints close the unresolved technical-distinction question. K.11 packages the final research result. K.12 produces the final clean software demonstration.
+
+The final merge into main occurs only after the exp state has passed the final audit.
+
+## 8. Source-of-truth hierarchy
+For current status and execution, use:
+1. research/PART_II_CHAT_PLAN.md
+2. NEXT_CHAT_PROMPT.md
+3. PROJECT_STATE.md
+4. CURRENT_HANDOFF.md
+5. DECISION_LOG.md
+6. research/phase2_post_k10_review_plan.md
+7. K.10 and later checkpoint records
+
+Earlier sections in this guide remain valuable historical/reference material but are superseded where they conflict with this hierarchy.
