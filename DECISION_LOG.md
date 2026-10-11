@@ -498,3 +498,11 @@ Post-K.10 work proceeds in `exp`. `main` is synchronized only after checkpoint c
 After K.10.4 and K.11 close the research conclusion and software synthesis, K.12 performs final software productization and a clean professor-facing UI demonstration. No new research mechanism is introduced during K.12.
 
 **Reason:** separates research closure from final presentation/productization and prevents UI work from altering the research conclusion.
+
+
+## D-122 — K.10.1 technical distinction remains unresolved; require explicit checkpoint approval
+**Status:** Accepted
+
+The K.10.1 review narrows the candidate distinction to the combined operational invariant set of evidence-limited association, retained event quarantine, dependency/order-aware eligibility, history-conditioned bounded recovery, verification/release or terminal closure, and deterministic traceability. It does not establish novelty or patentability. K.10.2 may begin only after ChatGPT explicitly reviews and approves the K.10.1 package. `main` must remain unsynchronized until that approval and subsequent checkpoint governance permit it.
+
+**Reason:** preserves evidence discipline, separates single-reference review from later combination analysis, and prevents automatic advancement or premature integration.
