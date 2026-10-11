@@ -2,9 +2,9 @@
 
 ## Session status — authoritative current state (2026-10-11)
 
-**K.10 COMPLETE. The only active checkpoint is K.10.1 — Adversarial Prior-Art & Technical-Distinction Review.** The preflight has reconciled this handoff with the canonical post-K.10 roadmap. Do not restart K.10 experiments. Do not begin K.10.2, K.10.3, K.10.4, K.11, K.12, or hardware validation in this checkpoint.
+**K.10 COMPLETE. The K.10.1 research package is committed; the technical distinction remains UNRESOLVED and the checkpoint awaits ChatGPT review/approval.** Do not restart K.10 experiments. Do not begin K.10.2, K.10.3, K.10.4, K.11, K.12, or hardware validation until the required checkpoint approval.
 
-- Canonical branch: `exp`; current starting HEAD before the preflight documentation commits was `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`.
+- Canonical branch: `exp`; preflight starting HEAD before the documentation reconciliation was `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`. See `research/chat_records/chat_k10_1_record.md` for the final checkpoint commit and exact integrity comparison.
 - `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` have been compared with K.10's canonical starting commit `79f394a045bb5db357fd319d339976b5b85b4865`; their Git blob SHAs match exactly.
 - Gate-defining artifacts `research/phase2_k9_methodology_lock.md`, `research/phase2_k9_2_p4_advantage_novelty_design.md`, and `research/phase1_reference_implementation_design.md` have matching Git blob SHAs at that baseline and current `exp` before the preflight documentation edits.
 - Keep Gates A–E, `policy_decide()`, `runtime_apply_policy()`, both protected runtime files, and K.10 results frozen. Do not sync `main` until ChatGPT reviews and explicitly approves the completed K.10.1 checkpoint.
