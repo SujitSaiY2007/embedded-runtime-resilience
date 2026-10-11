@@ -2,8 +2,10 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Gates A-E complete; Minimal Reference Implementation, K.1, K.2, and K.3 complete; integrated software demonstrator/methodology-lock phase active before MCU validation.  
+**Status (authoritative current state, 2026-10-11):** K.10 COMPLETE. Current checkpoint: K.10.1 — Adversarial Prior-Art & Technical-Distinction Review. Preflight reconciliation is complete; K.10.1 analysis is now the only authorized active scope. K.10.2 onward and hardware validation are NOT STARTED. `exp` is canonical; do not synchronize to `main` until ChatGPT reviews and explicitly approves the checkpoint.  
 **Project mode:** Solo software-dominant embedded-systems research project.
+
+> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. The only active checkpoint is K.10.1. Gates A–E and the protected C runtime remain frozen.
 
 ## Frozen development topic
 
