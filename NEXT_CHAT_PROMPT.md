@@ -1,223 +1,101 @@
-# ACTIVE NEXT-CHAT PROMPT — K.10.1
-## Adversarial Prior-Art & Technical-Distinction Review
-
-Repository: `SujitSaiY2007/embedded-runtime-resilience`
-
-Branch: `exp`
-
-You are ChatGPT conducting **K.10.1 only**.
-
-K.10 is COMPLETE. Do not restart K.10 experiments. Do not begin K.10.2, K.10.3, K.10.4, K.11, K.12, or hardware validation.
-
-## 1. Continuity check
-
-Before substantive work, read:
-
-1. `PROJECT_MANUAL.md`
-2. `PROJECT_STATE.md`
-3. `CURRENT_HANDOFF.md`
-4. `DECISION_LOG.md`
-5. `research/PART_II_CHAT_PLAN.md`
-6. `research/phase2_k10_p4_advantage_novelty_results.md`
-7. `research/chat_records/chat_k10_record.md`
-8. the prior-art artifacts referenced by K.10.
-
-Verify:
-- current branch is `exp`;
-- current HEAD;
-- working-tree state;
-- K.10 is actually recorded as COMPLETE;
-- K.10 protected-runtime integrity remains intact.
-
-If the live state conflicts with the continuity records, stop and reconcile before research work.
-
-## 2. Objective
-
-K.10.1 must adversarially test the **technical distinction** remaining after K.10.
-
-Do not try to prove P4 novel.
-
-Try to break the distinction.
-
-The research question is:
-
-> After decomposing P4 into concrete technical limitations, what is actually disclosed by the strongest prior art, what remains missing, and which distinctions are supported by evidence rather than by interpretation?
-
-## 3. Freeze K.10
-
-Do not modify:
-- P4 semantics;
-- Gates A-E;
-- `reference/src/ref_runtime.c`;
-- `reference/include/ref_runtime.h`;
-- K.10 experimental results.
-
-Do not reinterpret K.10's bounded experimental advantage as universal superiority.
-
-## 4. Build the P4 limitation matrix
-
-Decompose the complete proposed mechanism into concrete, testable limitations, including as applicable:
-
-- evidence-bounded fault-to-event association;
-- retained event-level quarantine;
-- dependency/order-aware preservation of unrelated queued work;
-- bounded history-conditioned recovery ladder;
-- static/zero-heap bounded implementation;
-- deterministic verification/release/escalation;
-- peripheral-fault initiation;
-- the interaction of these mechanisms in a constrained event-driven MCU runtime.
-
-For every limitation record:
-- precise definition;
-- where it appears in the project;
-- whether it is essential to the proposed combination;
-- what evidence supports it.
-
-Do not broaden the claim after seeing prior art.
-
-## 5. Adversarial reference analysis
-
-Use the strongest references already identified by K.10, then search for additional references specifically designed to challenge the remaining distinction.
-
-For each reference record:
-
-Reference
-→ date/type
-→ technical problem
-→ disclosed mechanism
-→ exact P4 overlap
-→ partial overlap
-→ missing P4 limitation
-→ explicit disclosure versus inference
-→ architectural/context mismatch
-→ residual distinction
-→ confidence/evidence note
-
-Search across:
-- academic papers;
-- patents/patent applications;
-- technical reports;
-- standards/specifications;
-- open-source embedded implementations;
-- relevant commercial/industrial documentation.
-
-Do not search only for supportive references.
-
-## 6. Analyze mechanism levels separately
-
-Perform four separate analyses:
-
-A. Individual mechanisms.
-
-B. Pairwise combinations.
-
-C. Higher-order combinations.
-
-D. Complete P4 combination.
-
-Do not collapse these into one novelty statement.
-
-## 7. Technical distinction test
-
-For every apparent distinction ask:
-
-1. Is it actually disclosed?
-2. Is it merely implied?
-3. Is it only a difference in terminology?
-4. Is it only a difference in application domain?
-5. Does the constrained MCU/zero-heap context materially affect implementation?
-6. Does the association rule impose a concrete technical constraint?
-7. Does the interaction between mechanisms produce behavior absent from the reference?
-8. Is the distinction experimentally supported by K.10?
-
-If a distinction is weak, say so.
-
-## 8. No legal conclusion
-
-Do not state that the project is patentable.
-
-Do not state that a patent claim would be valid.
-
-Do not provide a legal opinion.
-
-You may identify technical evidence relevant to later professional legal review.
-
-## 9. Antigravity rule
-
-If repository execution/search automation is useful, Antigravity may be used only as the execution agent for this K.10.1 scope.
-
-Antigravity MUST NOT:
-- define the next chat;
-- start K.10.2;
-- redesign P4;
-- modify the frozen runtime;
-- rewrite the experimental conclusion.
-
-ChatGPT remains the sequence owner and audit layer.
-
-## 10. Repository outputs
-
-Create/update only the K.10.1 research and continuity artifacts needed for this checkpoint.
-
-At minimum produce:
-- a complete P4 limitation/feature matrix;
-- adversarial reference mapping;
-- overlap/distinction analysis;
-- unresolved evidence list;
-- `research/chat_records/chat_k10_1_record.md`;
-- updated `PROJECT_STATE.md`;
-- updated `CURRENT_HANDOFF.md`;
-- updated `DECISION_LOG.md` if a consequential decision is made;
-- updated `NEXT_CHAT_PROMPT.md` with the complete K.10.2 prompt.
-
-Do not delete historical K.10 records.
-
-## 11. Exit criteria
-
-K.10.1 is COMPLETE only when:
-- the P4 limitation matrix is auditable;
-- strongest prior-art overlaps are mapped;
-- missing/uncertain disclosures are explicitly identified;
-- no unsupported distinction is being treated as established;
-- K.10 remains frozen;
-- continuity is updated;
-- K.10.2 has a complete continuation prompt.
-
-If any of these are incomplete, report:
-
-`K.10.1 INCOMPLETE — <specific reason>`
-
-Otherwise report:
-
-`K.10.1 COMPLETE`
-
-## 12. Git boundary
-
-Commit K.10.1 work to `exp`.
-
-Before commit:
-- inspect changed files;
-- verify protected runtime files are unchanged;
-- verify no secrets;
-- run relevant repository checks;
-- confirm working tree state.
-
-Do not synchronize to `main` until the checkpoint is reviewed and explicitly approved.
-
-## 13. Final response
-
-Return:
-- continuity check;
-- exact branch/SHA;
-- sources reviewed;
-- limitation matrix status;
-- strongest overlaps;
-- strongest remaining distinctions;
-- unresolved issues;
-- tests/checks;
-- changed files;
-- commit SHA;
-- K.10.1 status;
-- exact next checkpoint: K.10.2.
-
-STOP after K.10.1.
+# ACTIVE NEXT-CHAT PROMPT — K.10.2
+## Deep Single-Reference Anticipation Review
+
+Repository: `SujitSaiY2007/embedded-runtime-resilience`  
+Canonical branch: `exp`  
+Current checkpoint owner: ChatGPT  
+Execution agent: Antigravity only when explicitly invoked by ChatGPT
+
+**This prompt becomes active only after ChatGPT has reviewed and explicitly approved the K.10.1 checkpoint package.** If that approval is absent, do not start K.10.2. First report the approval gate and wait.
+
+## 1. Current canonical state
+
+- K.10 is COMPLETE. Do not rerun the 400-run experiment matrix.
+- K.10.1 analysis package is committed and its technical-distinction hypothesis remains UNRESOLVED.
+- Read first: `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, `DECISION_LOG.md`, `research/PART_II_CHAT_PLAN.md`, `research/phase2_k10_p4_advantage_novelty_results.md`, `research/phase2_k10_1_adversarial_distinction_review.md`, `research/chat_records/chat_k10_record.md`, and `research/chat_records/chat_k10_1_record.md`.
+- Confirm the current `exp` HEAD and compare the protected runtime files with the K.10 baseline before research. Do not assume hashes or clean working-tree state from old messages.
+- `main` is not to be synchronized until ChatGPT reviews and explicitly approves the relevant checkpoint.
+
+## 2. K.10.2 objective — single-reference anticipation attack only
+
+Determine whether any one reference, considered individually and in its relevant disclosure/claims, anticipates or materially discloses most or all of the remaining candidate technical combination. This is a technical research exercise, not a legal opinion.
+
+Prioritize primary-source inspection of:
+1. Phoenix — Smith & Rixner, “Surviving Peripheral Failures in Embedded Systems,” USENIX ATC 2015.
+2. Karma — Branco et al., “Intermittent Asynchronous Peripheral Operations,” SenSys 2019.
+3. US9547557B2 — peripheral bus error containment and recovery.
+4. US9411667B2 — recovery after I/O error-containment events.
+5. US8510592B1 — PCI error resilience.
+6. US10921871B2 — recovery-history-driven action selection.
+7. US10331522 and US10929373 — association/retry/quarantine leads.
+8. US20180365126A1 — failed-event queue/corrective action/replay lead.
+9. US12688084 — retained events/retry/verification/release lead.
+10. Swift et al., “Recovering Device Drivers” (OSDI 2004), and Herder et al., “Failure Resilience for Device Drivers.”
+
+These identifiers are research leads from prior notes, not pre-verified claim charts. Verify exact title, inventors/authors, publication/priority dates, family members, jurisdiction and primary source before relying on each.
+
+## 3. Required method
+
+For each source:
+- Retrieve the full paper, patent specification and claims, or canonical technical document where accessible.
+- Record exact bibliographic metadata and primary URL.
+- For patents, record priority/filing/publication dates, family information and claim numbers/paragraphs supporting each relevant limitation. Do not treat a search snippet or abstract as sufficient.
+- Map each L.1–L.12 limitation in `research/phase2_k10_1_adversarial_distinction_review.md` as:
+  - **Explicitly disclosed** (quote or precisely summarize the source passage/claim);
+  - **Necessarily implied** (explain why it necessarily follows, not merely why it would be sensible);
+  - **Not found in the inspected material** (state which sections/claims were inspected);
+  - **Unverified / inaccessible** (state the missing evidence).
+- Keep “not found” distinct from “absent.” Do not conclude novelty from incomplete search.
+- Test whether one reference discloses the complete combination or a materially equivalent operational invariant set, not merely whether it discusses peripheral recovery generally.
+- Separate single-reference anticipation from obviousness/recombination, which belongs to K.10.3.
+- Map the source's fault model, target architecture, event/request identity, association precision, queue retention/quarantine, dependency/order eligibility, recovery history, finite ladder, verification/release, bounded memory and traceability.
+- Identify the strongest single-reference threat and explain which exact limitation(s), if any, remain unaccounted for by that source.
+
+## 4. Frozen boundaries
+
+Do NOT:
+- modify Gates A–E;
+- modify `reference/src/ref_runtime.c` or `reference/include/ref_runtime.h`;
+- modify `policy_decide()` or `runtime_apply_policy()`;
+- change P4 semantics, add variants or redesign the runtime;
+- rerun or edit K.10 experiments/results/raw traces;
+- conduct K.10.3 multi-reference combination analysis;
+- start K.10.4, K.11, K.12, or hardware validation;
+- claim novelty, non-obviousness, legal anticipation, or patentability;
+- synchronize `main`.
+
+## 5. Required artifacts and continuity
+
+Create:
+- `research/phase2_k10_2_single_reference_anticipation_review.md` — source-by-source limitation chart, primary-source citations, chronology, disclosure classification, threat ranking and unresolved gaps.
+- `research/chat_records/chat_k10_2_record.md` — objective, exact starting/ending commit, source access limitations, files changed, checks and conclusion.
+
+Update only as warranted:
+- `PROJECT_STATE.md` and `CURRENT_HANDOFF.md` opening current status;
+- `DECISION_LOG.md` only if a consequential research/governance decision is made;
+- `NEXT_CHAT_PROMPT.md` with the complete K.10.3 prompt only if K.10.2 is actually closed and ChatGPT approves the checkpoint.
+
+Preserve all historical records. Do not represent an inaccessible reference as reviewed. Include direct source links and claim/page/section locators.
+
+## 6. Validation and reporting
+
+- Confirm the exact `exp` HEAD before and after.
+- Confirm both protected runtime files retain the exact K.10 baseline blob/content hashes.
+- Confirm Gate-defining artifacts remain unchanged.
+- Do not claim local tests or clean working tree unless actually run/observed in a repository checkout.
+- Commit K.10.2 artifacts to `exp` only.
+- Do not update `main`.
+
+## 7. Exit criteria
+
+K.10.2 can be marked complete only if the strongest accessible single-reference candidates have been examined at primary-source level, the limitation mapping is auditable, inaccessible material is clearly bounded, and the single-reference conclusion is evidence-supported. If not, mark **K.10.2 INCOMPLETE — [specific missing evidence]**.
+
+End with:
+- status;
+- branch and exact starting/ending SHA;
+- files changed;
+- exact protected-file hash comparisons;
+- tests/checks actually performed;
+- strongest single-reference threat;
+- remaining gaps;
+- explicit stop at K.10.2.
