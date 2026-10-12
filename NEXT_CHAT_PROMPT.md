@@ -1,76 +1,141 @@
 # ACTIVE NEXT-CHAT PROMPT — K.10.3
 ## Multi-Reference Combination & Technical Obviousness Analysis
 
-Repository: `SujitSaiY2007/embedded-runtime-resilience`  
-Canonical branch: `exp`  
-Current checkpoint owner: ChatGPT  
-Execution agent: Antigravity only when explicitly invoked by ChatGPT
+Repository: `SujitSaiY2007/embedded-runtime-resilience`
+Canonical research branch: `exp`
+Active checkpoint: **K.10.3**
+Checkpoint authority: ChatGPT
+Repository execution agent: Antigravity, only when explicitly invoked by ChatGPT
 
-**This prompt becomes active only after ChatGPT has reviewed and explicitly approved the K.10.2 checkpoint package.** If that approval is absent, do not start K.10.3. First report the approval gate and wait.
+**K.10.2 has been formally approved and closed by ChatGPT on 2026-10-12. K.10.3 is authorized to begin.** Do not ask the user to repeat this authorization. Do not synchronize `main`.
 
-## 1. Current canonical state
+## 1. Mandatory startup audit
 
-- K.10 is COMPLETE. Do not rerun the 400-run experiment matrix.
-- K.10.1 is COMPLETE (adversarial limitation decomposition established).
-- K.10.2 is COMPLETE (single-reference anticipation refuted across all primary inspected references; PA-01 Phoenix, PA-02 Karma, PA-03 Dell, PA-04 Intel, PA-05 NetApp, PA-06 Trane, PA-07/PA-08 IBM, PA-09 Oracle, PA-10 Swift/Herder).
-- The candidate technical distinction remains UNRESOLVED against multi-reference combination attacks.
-- Read first: `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, `DECISION_LOG.md`, `research/PART_II_CHAT_PLAN.md`, `research/phase2_k10_1_adversarial_distinction_review.md`, `research/phase2_k10_2_single_reference_anticipation_review.md`, and `research/chat_records/chat_k10_2_record.md`.
-- Confirm current `exp` HEAD and compare protected runtime files with the K.10 baseline before research.
-- `main` must not be synchronized until ChatGPT reviews and explicitly approves the checkpoint.
+Start from the latest canonical `origin/exp`, not an assumed local checkout.
 
-## 2. K.10.3 objective — multi-reference combination & technical obviousness attack
+Read, in this order:
+1. `PROJECT_MANUAL.md`
+2. `PROJECT_STATE.md`
+3. `CURRENT_HANDOFF.md`
+4. `DECISION_LOG.md`
+5. `research/PART_II_CHAT_PLAN.md`
+6. `research/phase2_k10_1_adversarial_distinction_review.md`
+7. `research/phase2_k10_2_single_reference_anticipation_review.md`
+8. `research/chat_records/chat_k10_2_record.md`
+9. `research/phase2_k9_methodology_lock.md`
+10. `research/phase2_k9_2_p4_advantage_novelty_design.md`
+11. `research/phase1_reference_implementation_design.md`
 
-Evaluate whether the complete P4 combination follows predictably or naturally from combining two or more primary references. This is a technical research analysis, not a legal patent opinion.
+Verify the current `exp` HEAD and ancestry. Confirm that `main` remains unchanged and do not alter it. Preserve the original checkout's local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38`; never reset, overwrite, merge, or force-push that local history. Use a clean isolated worktree based on the latest `origin/exp` for repository changes.
 
-Prioritize analyzing the primary multi-reference combinations identified in K.10.1 and K.10.2:
-1. **Combination C1 (Embedded Recovery + Enterprise Failed-Event Queue):**
-   - Primary: Phoenix (PA-01, Smith & Rixner 2015).
-   - Secondary: IBM Failed Event Queue (PA-08, US 10,838,845 B2 / US 2018/0365126 A1).
-   - Tertiary: Quantum Leaps QP (PA-10, Miro Samek / static zero-heap event pools).
-   - Question: Would a PHOSITA in embedded systems combine Phoenix's peripheral reset with IBM's failed-event quarantine on QP static event queues? What is the technical friction (rollback elimination, in-pool non-executable retention, heap fragmentation avoidance)?
-2. **Combination C2 (Embedded Equipment History + Driver Link Error Containment):**
-   - Primary: Trane BAS/HVAC failure recovery (PA-06, US 10,921,871 B2).
-   - Secondary: Dell / Intel peripheral error containment (PA-03 / PA-04).
-3. **Combination C3 (Storage Peripheral Migration + Enterprise Component Association):**
-   - Primary: NetApp PCIe error resilience (PA-05, US 8,510,592 B1).
-   - Secondary: IBM event failure management (PA-07, US 10,331,522 B2).
+Independently confirm the final K.10.2 correction:
+- PA-01 (Phoenix) L1 is now `NO — NOT FOUND IN INSPECTED MATERIAL`: the inspected paper establishes Cortex-M hardware, but its described FreeRTOS task/checkpoint/stack-rollback execution model does not establish the frozen event-driven runtime/asynchronous queue semantics. Cortex-M is illustrative, not an exclusive ISA requirement.
+- PA-02 and PA-06 remain L1 = NO.
+- PA-10/L6 remains NO.
+- The report and matrix must agree.
+- K.10.2 conclusion remains bounded: “No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence.” This is not a legal novelty, obviousness, or patentability conclusion.
 
-## 3. Required method
+Check protected Git blob SHAs against these frozen values:
+- `reference/src/ref_runtime.c`: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`
+- `reference/include/ref_runtime.h`: `fbb7bb07bdb712fbadcde3d83bca19f82b5c8198`
+- `research/phase1_reference_implementation_design.md`: `b7fb120692756740bc969aa3412acaa89320c188`
+- `research/phase2_k9_methodology_lock.md`: `bd75f2c2c21c3964ec15b338eea99b386eff7aec`
+- `research/phase2_k9_2_p4_advantage_novelty_design.md`: `98d88ea2a0fc3a88d9d38f5b48aa274498d5e00d`
+
+If any status or hash disagrees, report the discrepancy and stop before substantive work. Do not modify Gates A–E, the protected runtime files, `policy_decide()`, `runtime_apply_policy()`, or K.10 experimental evidence.
+
+## 2. K.10.3 objective
+
+Conduct an adversarial, evidence-grounded technical analysis of whether the proposed P4 mechanism's integrated L1–L12 combination follows predictably from two or more prior-art references. Distinguish:
+- the individual technical teaching of each reference;
+- an explicit and technically supported reason to combine them;
+- architectural compatibility and adaptation costs;
+- whether the proposed combination actually supplies P4's full operational invariants;
+- remaining missing mechanisms or unsupported inferential steps;
+- an imaginable combination versus a combination supported by a plausible reason and predictable technical result.
+
+This is technical research, **not** a legal opinion. Do not assert a legal conclusion under 35 U.S.C. § 103, legal non-obviousness, patentability, or guaranteed novelty. Use careful language such as “technical combination risk,” “plausible argument,” “not established by inspected evidence,” and “requires qualified legal review.”
+
+## 3. Required adversarial combinations
+
+Investigate at least these three combinations; add others only when the evidence justifies them.
+
+### C1 — Embedded peripheral recovery + failed-event queue + static event pool
+- Primary: Phoenix, Smith & Rixner, “Surviving Peripheral Failures in Embedded Systems,” USENIX ATC 2015 (PA-01).
+- Secondary: IBM Failed Event Queue, US 10,838,845 B2 / US 2018/0365126 A1 (PA-08).
+- Additional architectural reference: official Quantum Leaps QP/C documentation on static pool backing storage, dynamic allocation/recycling of event blocks, and reference-counted garbage collection.
+- Test the argument that an embedded recovery system could adopt a known failed-event queue and a known statically preallocated event pool.
+- Explicitly distinguish QP's caller-provided static pool buffer from dynamic allocation/recycling of event blocks within that pool. Do not call pool allocation general-purpose heap allocation, and do not claim it is identical to P4's fixed-slot `EventSlot[20]` lifecycle.
+
+### C2 — Embedded equipment recovery + driver/link error containment
+- Primary: Trane BAS/HVAC recovery, US 10,921,871 B2 (PA-06).
+- Secondary: Dell US 9,547,557 B2 (PA-03) and/or Intel US 9,411,667 B2 (PA-04).
+- Test whether combining equipment-level recovery with PCIe/link error containment contributes anything material to the event-level MCU contract, and identify the architecture/domain mismatch without dismissing the strongest overlap.
+
+### C3 — Storage adapter recovery/migration + enterprise component/event association
+- Primary: NetApp US 8,510,592 B1 (PA-05).
+- Secondary: IBM US 10,331,522 B2 (PA-07).
+- Analyze failure-to-component mapping, retries, adapter recovery and traffic migration against evidence-bounded event association, retained in-pool quarantine, dependency eligibility, and bounded recovery.
+
+For every reference, verify the identity, publication/issue status and date where relevant, and technical teaching from primary-source text. Use the papers, patent specifications/claims, and official QP/C documentation. Record exact claim/section/page locators and links. Do not infer missing claim text from search snippets. Clearly label any inaccessible or unverified portions.
+
+## 4. Required analytical method
 
 For each combination:
-- State the base reference and each modifying/secondary reference.
-- Identify the exact technical teaching contributed by each reference.
-- Formulate the adversarial examiner's rationale for combining them (e.g. routine substitution, known technique to improve similar system).
-- Evaluate technical compatibility and adaptation friction:
-  - Memory allocation model (dynamic heap vs static bounded array).
-  - Execution boundary (call-stack rollback vs cooperative event dispatch).
-  - Association precision model (fail-closed Gate B contract vs blind retry).
-- Determine whether the combination achieves the full operational invariant set or leaves genuine technical gaps.
-- Distinguish "theoretically imaginable combination" from "technically supported rationale with predictable result".
+1. Define the adversarial combination and starting reference.
+2. Identify the exact teaching contributed by each secondary reference.
+3. State the strongest plausible motivation/rationale to combine them.
+4. Evaluate technical compatibility/friction in:
+   - execution model: call-stack checkpoint/rollback versus asynchronous event dispatch;
+   - event identity and lifecycle: generation-qualified slot identity versus queue movement/replay;
+   - quarantine: retained non-executable event in the original fixed pool versus deletion/reinsertion into a secondary queue;
+   - memory: fixed-capacity zero-heap runtime versus static backing storage with dynamic pool-block allocation/recycling;
+   - fault association: evidence precision lattice and fail-closed `assoc <= evidence` invariant versus component/flow mapping or blind retry;
+   - dependency-aware scheduling: explicit dependency classes and dispatchability predicate versus process isolation, FIFO, or unrelated service continuity;
+   - recovery ladder, verification-before-release, episode closure/escalation, deterministic trace and sole runtime transition authority.
+5. For each L1–L12 limitation, label the combination as explicitly supplied, partially overlapping, absent, or unresolved. Do not count a limitation as supplied merely because different references each mention adjacent concepts.
+6. Determine whether the combined system would require routine adaptation, substantial redesign, or unsupported assumptions; explain the evidence for the classification.
+7. Present the strongest argument against P4 and the strongest evidence-grounded response, then identify what remains vulnerable.
+8. Keep technical assessment separate from legal standards and professional patent review.
 
-## 4. Frozen boundaries
+Do not treat “three references can be listed together” as proof that their combination is motivated or predictable. Conversely, do not assume architecture differences automatically defeat a combination. Evaluate both sides.
+
+## 5. Frozen boundaries
 
 Do NOT:
-- modify Gates A–E;
-- modify `reference/src/ref_runtime.c` or `reference/include/ref_runtime.h`;
-- modify `policy_decide()` or `runtime_apply_policy()`;
-- redesign P4 to artificially evade prior art;
-- rerun or edit K.10 experiments/traces;
-- start K.10.4 final synthesis, K.11, K.12, or hardware validation;
-- claim legal non-obviousness or patentability;
-- synchronize `main`.
+- modify Gates A–E or the runtime/header;
+- change `policy_decide()` or `runtime_apply_policy()`;
+- redesign P4 to evade prior art;
+- rerun, edit, or regenerate the K.10 experiment matrix or traces;
+- claim that P4 is universally superior;
+- issue a legal conclusion on obviousness, novelty, or patentability;
+- start K.10.4, K.11, K.12, hardware validation, or `main` synchronization.
 
-## 5. Required deliverables
+## 6. Required deliverables and repository updates
 
 Create:
 - `research/phase2_k10_3_multi_reference_combination_review.md`
 - `research/chat_records/chat_k10_3_record.md`
 
-Update only as warranted:
-- `PROJECT_STATE.md` and `CURRENT_HANDOFF.md` opening current status;
-- `DECISION_LOG.md` with relevant checkpoint decisions;
-- `NEXT_CHAT_PROMPT.md` with the complete K.10.4 continuation prompt upon closure.
+Update, where necessary and only to reflect verified facts:
+- `CURRENT_HANDOFF.md` opening current status;
+- `PROJECT_STATE.md` authoritative current status;
+- `DECISION_LOG.md` with K.10.3 decisions;
+- `research/PART_II_CHAT_PLAN.md`;
+- `NEXT_CHAT_PROMPT.md` with the complete K.10.4 continuation prompt only after K.10.3 is formally approved.
 
-## 6. Exit criteria
+The report must include an executive summary, evidence/methodology boundary, source register, combination-by-combination analysis, limitation coverage matrix, strongest adversarial theory, technical friction and gaps, uncertainty/accessibility register, bounded conclusion, and exact K.10.4 handoff. The chat record must include exact start/end SHAs, files changed, sources inspected, verification performed, unresolved issues, and approval-gated status.
 
-K.10.3 is complete only when the multi-reference combinations are rigorously analyzed, the technical friction and non-obviousness arguments are objectively evaluated, and the remaining distinction is clearly bounded for K.10.4.
+## 7. K.10.3 exit criteria
+
+K.10.3 is complete only if:
+- all required combinations are analyzed from primary-source evidence;
+- the strongest technically plausible combination attack is fairly represented;
+- all L1–L12 mappings distinguish exact disclosure from partial overlap and inference;
+- technical friction is neither exaggerated nor ignored;
+- all conclusions are consistent across the report, matrix, record and continuity files;
+- protected hashes and branch ancestry are verified;
+- K.10.4 is clearly bounded and its prompt is prepared;
+- ChatGPT has independently reviewed and explicitly approved the checkpoint.
+
+At completion, **stop and await ChatGPT approval**. Do not begin K.10.4 in this chat. Do not synchronize `main`.
