@@ -120,7 +120,7 @@ For each strongest reference:
 - K.10.3/K.10.4 work.
 
 ### Exit
-**APPROVED AND CLOSED (2026-10-12).** The final matrix includes the PA-01/L1 correction: bare-metal Cortex-M hardware correspondence does not alone establish the frozen event-driven runtime/async queue requirement. No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination based on reviewed evidence. This is not a legal novelty or patentability conclusion.
+**APPROVED AND CLOSED (2026-10-12).** The final matrix retains PA-01/L1 = YES because Phoenix describes the event-driven embedded setting (Section 1, pp. 125–126), the bare-metal Owl runtime (Section 3, pp. 128–129), and an evaluated application event loop (Section 6.2, p. 134). This setting match does not establish P4's separate queue-level dependency/quarantine contract. No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination based on reviewed evidence. This is not a legal novelty or patentability conclusion.
 
 ---
 
