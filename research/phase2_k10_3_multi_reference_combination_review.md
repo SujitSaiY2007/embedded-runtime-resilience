@@ -1,6 +1,6 @@
 # K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis
 
-**Status:** Technical analysis complete; bounded result recorded; ChatGPT review/closure required.  
+**Status:** APPROVED AND CLOSED BY CHATGPT — 2026-10-12. The bounded technical-combination analysis is complete; K.10.4 is the next active checkpoint.  
 **Branch:** exp  
 **Scope:** Technical research only. This is not a legal opinion on novelty, obviousness, inventive step, or patentability.  
 **K.10 evidence:** Frozen — 16 case families × P0–P4 × 5 deterministic repetitions = 400 matched executions. No experiments were rerun.  
@@ -177,4 +177,4 @@ Legend: **E** = explicitly supplied by an inspected source in the combination; *
 - Gates A–E, protected runtime/header and normative design artifacts: frozen.
 - main: untouched.
 - This checkpoint's report and chat record are documentation-only artifacts.
-- K.10.3 status remains subject to ChatGPT's explicit closure decision; K.10.4 must not start until that approval is recorded.
+- **K.10.3 is formally approved and closed by ChatGPT on 2026-10-12.** K.10.4 is authorized as the next checkpoint. No K.10.4 work was performed in this checkpoint.
