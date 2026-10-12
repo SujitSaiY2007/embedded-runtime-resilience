@@ -2,10 +2,10 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status (authoritative current state, 2026-10-12):** K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 deep single-reference anticipation package is committed to `exp`; no single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence; multi-reference combination remains an open vulnerability awaiting K.10.3. Awaiting ChatGPT review/approval before K.10.3. K.10.3 onward and hardware validation are NOT STARTED. `exp` is canonical; do not synchronize to `main` until ChatGPT explicitly approves the checkpoint.  
+**Status (authoritative current state, 2026-10-12):** K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 APPROVED AND CLOSED after the final PA-01/L1 correction; its bounded result is that no single reference in the inspected candidate set was found to disclose the complete L1–L12 combination based on reviewed evidence. K.10.3 is the active next checkpoint and is authorized to begin in the next ChatGPT chat; multi-reference combination remains unresolved. `exp` is canonical; do not synchronize to `main` until the later checkpoint sequence is complete and ChatGPT explicitly approves final synchronization.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
-> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. The only active checkpoint was K.10.2, now corrected and awaiting ChatGPT review before K.10.3. Gates A–E and the protected C runtime remain frozen.
+> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. K.10.2 is approved and closed; K.10.3 is the active checkpoint. Gates A–E, the protected C runtime, and K.10 empirical evidence remain frozen.
 
 
 
