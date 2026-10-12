@@ -104,7 +104,7 @@ Every candidate reference was evaluated at primary-source level:
 * **Architecture & Domain:** Bare-metal ARM Cortex-M microcontrollers (Stellaris LM3S8962, TI CC2538).
 * **Mechanism:** Checkpoints program state at safe transaction boundaries, logs peripheral register writes in a circular redo log, detects peripheral stalls via hardware timers/interrupts, resets the peripheral controller, replays register logs, and **rolls back the CPU call stack to the checkpoint** to restart the failed transaction.
 * **Limitation Mapping & Locators:**
-  * **L1 (resource-constrained event-driven MCU setting):** **[NOT FOUND IN INSPECTED MATERIAL]** (Sections 1 and 4, pp. 125, 129–130 establish evaluation on bare-metal ARM Cortex-M3/M4 hardware, but the inspected disclosure describes a multi-threaded FreeRTOS task/checkpoint/stack-rollback execution model rather than the frozen L1 requirement for an event-driven runtime with asynchronous event-loop/queue semantics. Cortex-M is illustrative, not an exclusive ISA requirement; hardware correspondence alone does not establish the full L1 execution model).
+  * **L1 (resource-constrained event-driven MCU setting):** **[EXPLICITLY DISCLOSED]** (Section 1, pp. 125–126 describes embedded systems as event-driven; Section 3, pp. 128–129 identifies Owl as an embedded runtime with a Python bytecode interpreter running bare-metal; Section 6.2, p. 134 describes an evaluated application whose event loop controls the car's movements. This supports the L1 *setting*. It does not establish P4's separate queue-level dependency dispatchability, retained in-pool quarantine, or evidence-bounded association limitations, which are assessed under L3–L6 and L10).
   * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (Section 5.3 "Memory Overhead", p. 133; requires ~6 KB RAM for dynamic shadow stacks, redo logs, and checkpoint buffers; not a fixed static-pool queue architecture).
   * **L3 (Evidence-bounded association):** **[NOT FOUND IN INSPECTED MATERIAL]** (Associates faults with currently executing driver thread context; no 4-tier precision lattice).
   * **L4 (Generation-qualified event identity):** **[NOT FOUND IN INSPECTED MATERIAL]** (Operates on thread execution contexts, not generation-qualified `EventRef` handles).
@@ -269,7 +269,7 @@ Every candidate reference was evaluated at primary-source level:
 
 | Ref ID | Primary Reference | Target Domain | L1 (MCU) | L2 (ZeroHeap) | L3 (Assoc) | L4 (GenRef) | L5 (InPoolQuaran) | L6 (DepPres) | L7 (Hist) | L8 (FixedLadder) | L9 (VerifyRelease) | L10 (FailClose) | L11 (Trace) | L12 (Decouple) | Anticipated? |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **PA-01** | Smith & Rixner (Phoenix, 2015) | MCU | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-01** | Smith & Rixner (Phoenix, 2015) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-02** | Branco et al. (Karma, 2019) | MCU | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-03** | US 9,547,557 B2 (Dell, 2017) | PCIe Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-04** | US 9,411,667 B2 (Intel, 2016) | PCIe Hypervisor | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
@@ -318,4 +318,4 @@ While single-reference anticipation is refuted within the inspected candidate se
 3. Gates A–E Contract Documents: **100% UNTOUCHED**.
 4. K.10 Empirical Evidence: **Frozen**; no tests rerun.
 5. `main` Branch: **Untouched**.
-6. Checkpoint Governance: **K.10.2 APPROVED AND CLOSED by ChatGPT on 2026-10-12** after the final PA-01/L1 consistency correction. K.10.3 is now authorized as the next active checkpoint; this approval authorizes technical analysis only, not any legal conclusion. `main` remains untouched.
+6. Checkpoint Governance: **K.10.2 APPROVED AND CLOSED by ChatGPT on 2026-10-12** after the final PA-01/L1 source-grounded reconciliation. PA-01/L1 remains YES because Phoenix's primary paper establishes the resource-constrained event-driven MCU setting; its differing recovery mechanism remains mapped under other limitations. K.10.3 is the active next checkpoint; this approval authorizes technical analysis only, not any legal conclusion. `main` remains untouched.
