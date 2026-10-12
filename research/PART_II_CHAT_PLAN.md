@@ -8,7 +8,7 @@
 
 > **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
 
-**Current checkpoint status (2026-10-12): K.10.2 APPROVED AND CLOSED. K.10.3 is ACTIVE and authorized for the next ChatGPT chat.** The exact execution brief is NEXT_CHAT_PROMPT.md. K.10.4, K.11, K.12, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
+**Current checkpoint status (2026-10-12): K.10.2 and K.10.3 APPROVED AND CLOSED. K.10.4 — Final Technical Distinction & Research Conclusion — is ACTIVE.** The exact execution brief is NEXT_CHAT_PROMPT.md. K.11, K.12, hardware validation, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
 
 ## Global execution rules
 
@@ -151,7 +151,7 @@ This remains a technical research analysis, not a legal opinion.
 - K.10.4 conclusion.
 
 ### Exit
-The strongest plausible multi-reference attacks and their remaining technical gaps are documented.
+**APPROVED AND CLOSED (2026-10-12).** The report covers C1 (Phoenix + IBM PA-08 + QP/C), C2 (Trane + Dell/Intel), and C3 (NetApp + IBM PA-07), with source-grounded technical teachings, combination rationales, friction/gaps and an L1–L12 coverage matrix. C1 is the strongest technical-combination risk; C3 is next; C2 is a more distant generic-recovery attack. No legal obviousness or patentability conclusion is made.
 
 ---
 
