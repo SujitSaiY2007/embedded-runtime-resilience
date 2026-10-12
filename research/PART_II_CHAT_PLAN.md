@@ -8,6 +8,8 @@
 
 > **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
 
+**Current checkpoint status (2026-10-12): K.10.2 APPROVED AND CLOSED. K.10.3 is ACTIVE and authorized for the next ChatGPT chat.** The exact execution brief is NEXT_CHAT_PROMPT.md. K.10.4, K.11, K.12, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
+
 ## Global execution rules
 
 1. Every new ChatGPT chat starts from the latest verified `exp` state.
@@ -118,7 +120,7 @@ For each strongest reference:
 - K.10.3/K.10.4 work.
 
 ### Exit
-A defensible single-reference anticipation matrix exists, with explicit evidence for every mapped limitation and every missing limitation.
+**APPROVED AND CLOSED (2026-10-12).** The final matrix includes the PA-01/L1 correction: bare-metal Cortex-M hardware correspondence does not alone establish the frozen event-driven runtime/async queue requirement. No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination based on reviewed evidence. This is not a legal novelty or patentability conclusion.
 
 ---
 
