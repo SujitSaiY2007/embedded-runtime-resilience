@@ -2,7 +2,7 @@
 
 **Status:** Complete at the single-reference level; single-reference anticipation **refuted** across all inspected primary candidates; technical distinction remains **unresolved and vulnerable to multi-reference combination (K.10.3)**.  
 **Branch:** `exp`  
-**Base Commit:** `7a5bcb099be66f55cc0a18acfe51af79413ddf68`  
+**Base Commit:** `7a5bcb099be66f55cc0a18acfe51af79413ddf68` (Starting HEAD: `51d351655d5b802f2f19437424fa04a7d5e61422`)  
 **Scope:** Technical research analysis only; not a legal opinion or patentability assessment.  
 **K.10 Evidence Baseline:** Frozen (16 Case Families × P0–P4 × 5 deterministic repetitions = 400 matched executions).  
 **Protected Boundaries:** Gates A–E, `reference/src/ref_runtime.c`, and `reference/include/ref_runtime.h` 100% untouched.
@@ -33,12 +33,12 @@ The candidate distinction therefore survives single-reference anticipation withi
 
 As codified in `research/phase2_k10_1_adversarial_distinction_review.md`, the 12 limitations comprising the candidate combination are:
 
-* **L1:** Resource-constrained event-driven MCU setting (Cortex-M bare metal, single address space).
+* **L1:** Resource-constrained event-driven MCU setting (single address space without MMU; Cortex-M bare metal represents the illustrative target architecture).
 * **L2:** Fixed-capacity, zero-heap state (static allocation; no `malloc`/`free`; bounded queue arrays; no dynamic pool recycling).
 * **L3:** Fault-to-event association has explicit precision levels and cannot exceed evidence precision (`assoc <= evidence`; levels: EXACT, SERVICE, PERIPHERAL, UNKNOWN; Gate B contract).
 * **L4:** Event identity is generation-qualified; stale references are rejected (`EventRef={slot_id, generation}`).
 * **L5:** Fault-associated event is quarantined/retained in-pool rather than indiscriminately flushing all queued work (retained non-executable state in original static pool).
-* **L6:** Independent work remains eligible while related/ordered/coupled work is blocked (dependency classes and dispatchability predicate).
+* **L6:** Independent work remains eligible while related/ordered/coupled work is blocked (queue-level dependency classes and dispatchability predicate; Gate A/D contract).
 * **L7:** Short recovery history changes action selection (history/episode attributes condition next action).
 * **L8:** Fixed ladder has an expressly disclosed fixed sequence with a finite terminal rung (Gate C: T1 retry $\to$ T2 retry $\to$ T3 reset $\to$ T4 terminal; `MAX_RECOVERY_ACTIONS=4`).
 * **L9:** Verification precedes release/continuation; failed recovery closes/escalates explicitly (runtime retains transition authority; Gates C/D contract).
@@ -75,8 +75,22 @@ We strictly distinguish:
 - **In-pool non-executable retention (P4 contract):** The failed event remains in its assigned slot within the fixed-capacity event array as non-executable, preserving its slot identity without queue reallocation or data movement.
 - **Secondary queue movement (e.g. IBM PA-08):** Deleting or extracting an event from an active queue and inserting it into a separate failed-event queue (FEQ) or dead-letter queue.
 - **Database persistence (e.g. IBM PA-07):** Writing failed event records to an external relational/NoSQL table.
-- **I/O buffering (e.g. Swift PA-10):** Buffering incoming requests in a driver wrapper while restarting hardware.
 Only the first mechanism satisfies L5.
+
+### 3.5. Resource-Constrained Event-Driven MCU Setting Semantics (L1)
+As anchored in the frozen project topic and K.10.1 limitation matrix, L1 specifies a **resource-constrained event-driven MCU setting** (bare-metal microcontroller operating in a single physical address space without MMU, running an event-driven runtime architecture with an asynchronous event loop).
+- **Illustrative Target Architecture vs. Mandatory Limitation:** Bare-metal ARM Cortex-M (specifically Cortex-M33 / STM32U575) is the repository's illustrative target platform and frozen reference platform direction, rather than an exclusive ISA restriction that would disregard an otherwise identical event-driven MCU runtime on another resource-constrained MCU architecture (e.g. RISC-V or MSP430).
+- **Exact Architectural Correspondence vs. General Relevance:** However, to satisfy L1, a reference must disclose the actual elements established by primary evidence:
+  - References evaluated on bare-metal Cortex-M microcontrollers (e.g. Phoenix, PA-01) establish *exact architectural correspondence* to the target MCU setting.
+  - References evaluated on alternative microcontrollers (e.g. MSP430 in Karma, PA-02) establish *general MCU relevance*, but do not disclose Cortex-M architecture or an event-driven runtime architecture (Karma checkpoints sequential/threaded execution across energy outages).
+  - References describing building automation equipment (e.g. Trane, PA-06) disclose commercial HVAC control devices (general embedded controller relevance), but do not disclose Cortex-M bare-metal microcontrollers or a resource-constrained event-driven MCU runtime.
+Where a reference provides general MCU or embedded controller relevance without disclosing the complete resource-constrained event-driven MCU setting, this is documented as partial conceptual overlap, but the limitation is classified as **NOT FOUND IN INSPECTED MATERIAL**.
+
+### 3.6. Queue Dependency Classes & Dispatchability Predicate Semantics (L6)
+L6 strictly requires that independent work can remain eligible while related, ordered, or coupled work is blocked. As anchored in Gate A/D and implemented in `ref_runtime.c`, this requires:
+- Explicit queue-level dependency classes (e.g. `EVENT_DEP_NONE`, `EVENT_DEP_FIFO`, `EVENT_DEP_CAUSAL`, `EVENT_DEP_DOMAIN`); and
+- An event queue dispatchability predicate (`is_dispatchable(event)`) evaluated by the scheduler to hold dependent work while dispatching independent events from the shared pool.
+Macroscopic OS process isolation (e.g. Nooks/MINIX 3 in PA-10), where independent user processes or driver processes continue running in separate address spaces via hardware MMU page tables and multi-threaded kernel scheduling across a driver crash, provides *partial conceptual overlap* with the principle of fault containment, but does **not** disclose queue-level dependency classes or dispatchability predicates. The complete limitation is classified as **NOT FOUND IN INSPECTED MATERIAL**.
 
 ---
 
@@ -90,7 +104,7 @@ Every candidate reference was evaluated at primary-source level:
 * **Architecture & Domain:** Bare-metal ARM Cortex-M microcontrollers (Stellaris LM3S8962, TI CC2538).
 * **Mechanism:** Checkpoints program state at safe transaction boundaries, logs peripheral register writes in a circular redo log, detects peripheral stalls via hardware timers/interrupts, resets the peripheral controller, replays register logs, and **rolls back the CPU call stack to the checkpoint** to restart the failed transaction.
 * **Limitation Mapping & Locators:**
-  * **L1 (MCU setting):** **[EXPLICITLY DISCLOSED]** (Section 1 "Introduction", p. 125, and Section 4 "Implementation", pp. 129–130; evaluated on ARM Cortex-M3/M4 bare-metal microcontrollers).
+  * **L1 (MCU setting):** **[EXPLICITLY DISCLOSED]** (Section 1 "Introduction", p. 125, and Section 4 "Implementation", pp. 129–130; evaluated on bare-metal ARM Cortex-M3/M4 microcontrollers [Stellaris LM3S8962, TI CC2538], establishing exact architectural correspondence to the resource-constrained MCU setting; notes that its software execution model is multi-threaded FreeRTOS tasks with stack-frame rollback rather than an event-driven queue, an architectural distinction captured under L2, L4, and L5).
   * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (Section 5.3 "Memory Overhead", p. 133; requires ~6 KB RAM for dynamic shadow stacks, redo logs, and checkpoint buffers; not a fixed static-pool queue architecture).
   * **L3 (Evidence-bounded association):** **[NOT FOUND IN INSPECTED MATERIAL]** (Associates faults with currently executing driver thread context; no 4-tier precision lattice).
   * **L4 (Generation-qualified event identity):** **[NOT FOUND IN INSPECTED MATERIAL]** (Operates on thread execution contexts, not generation-qualified `EventRef` handles).
@@ -110,7 +124,7 @@ Every candidate reference was evaluated at primary-source level:
 * **Architecture & Domain:** Intermittently powered energy-harvesting microcontrollers (TI MSP430 with FRAM).
 * **Mechanism:** Manages peripheral operations across power failures by recording non-volatile operation descriptors in FRAM, rolling forward completed hardware operations, and rolling back uncommitted computation tasks upon power restoration.
 * **Limitation Mapping & Locators:**
-  * **L1 (MCU setting):** **[EXPLICITLY DISCLOSED]** (Section 1 and Section 5, pp. 248, 254; evaluated on MSP430FR5969 microcontrollers).
+  * **L1 (MCU setting):** **[NOT FOUND IN INSPECTED MATERIAL]** (Section 1 and Section 5, pp. 248, 254; evaluated on Texas Instruments MSP430FR5969 microcontrollers. While MSP430 provides *general MCU relevance* as a resource-constrained microcontroller, it lacks exact architectural correspondence with the Cortex-M bare-metal target, and Karma's intermittent computing runtime checkpoints sequential/threaded execution across power outages rather than providing an event-driven MCU runtime).
   * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (Allocates NVRAM descriptors for intermittent peripheral operations, but does not disclose a fixed-capacity zero-heap event runtime queue contract).
   * **L3–L5:** **[NOT FOUND IN INSPECTED MATERIAL]** (Addresses power failures, not runtime peripheral faults; no fault association lattice or in-pool event quarantine).
   * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Manages operation completion ordering across reboots, but does not disclose queue dependency classes or eligibility predicates).
@@ -169,7 +183,7 @@ Every candidate reference was evaluated at primary-source level:
 * **Architecture & Domain:** Building Automation Systems (BAS) and HVAC embedded controllers.
 * **Mechanism:** Monitors component health (sensors, actuators, firmware modules) in building automation controllers. Selects recovery actions to repair software/firmware or hardware faults.
 * **Limitation Mapping & Locators:**
-  * **L1 (MCU setting):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–21; BAS control device and HVAC control device embedded microcontrollers).
+  * **L1 (MCU setting):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 19–21; describes BAS and HVAC control devices. While building automation equipment utilizes embedded controllers [general embedded controller relevance], the patent specification does not disclose ARM Cortex-M bare metal or a resource-constrained event-driven MCU runtime architecture).
   * **L2–L6:** **[NOT FOUND IN INSPECTED MATERIAL]** (Manages macroscopic physical equipment modules; no event queue, in-pool quarantine, or queue dependency scheduling).
   * **L7 (History changes action selection):** **[UNVERIFIED / INACCESSIBLE AT CLAIM LEVEL]** (Reported in repository notes to use failure history logs, but full claim text was not rendered in static scrape; not established from abstract alone).
   * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Does not disclose an expressly disclosed fixed sequence with finite terminal rung).
@@ -242,7 +256,7 @@ Every candidate reference was evaluated at primary-source level:
 * **Limitation Mapping & Locators:**
   * **L1–L2:** **[NOT FOUND IN INSPECTED MATERIAL]** (Requires MMU page tables, separate address spaces, and heavy dynamic kernel structures).
   * **L3–L5:** **[NOT FOUND IN INSPECTED MATERIAL]** (Process-level crash containment; buffering incoming I/O packets in shadow driver wrapper during driver restart is I/O buffering, not in-pool non-executable retention in a fixed-capacity event queue).
-  * **L6 (Dependency preservation):** **[EXPLICITLY DISCLOSED]** (Swift et al., Section 4, pp. 6–7: non-crashing drivers and unrelated applications continue execution; Herder et al., Section 3, pp. 3–4: isolated user-space processes prevent cascading failures).
+  * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Swift et al., Section 4, pp. 6–7: non-crashing drivers and unrelated applications continue execution; Herder et al., Section 3, pp. 3–4: isolated user-space processes prevent cascading failures. While this provides *partial conceptual overlap* with fault containment via MMU hardware protection domains or microkernel process scheduling, it does **not** disclose queue-level dependency classes [e.g. `EVENT_DEP_NONE`, `EVENT_DEP_FIFO`, `EVENT_DEP_CAUSAL`, `EVENT_DEP_DOMAIN`] or an event queue dispatchability predicate [Gate A/D contract]).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Standard restart policy).
   * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Discloses restart attempt threshold, but lacks an expressly disclosed fixed sequence with finite terminal rung).
   * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Swift et al., Section 4.3; verifies driver reinitialization handshake before releasing held I/O; does not disclose event episode verification, runtime transition authority, or failed-recovery closure/escalation).
@@ -256,15 +270,15 @@ Every candidate reference was evaluated at primary-source level:
 | Ref ID | Primary Reference | Target Domain | L1 (MCU) | L2 (ZeroHeap) | L3 (Assoc) | L4 (GenRef) | L5 (InPoolQuaran) | L6 (DepPres) | L7 (Hist) | L8 (FixedLadder) | L9 (VerifyRelease) | L10 (FailClose) | L11 (Trace) | L12 (Decouple) | Anticipated? |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **PA-01** | Smith & Rixner (Phoenix, 2015) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
-| **PA-02** | Branco et al. (Karma, 2019) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-02** | Branco et al. (Karma, 2019) | MCU | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-03** | US 9,547,557 B2 (Dell, 2017) | PCIe Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-04** | US 9,411,667 B2 (Intel, 2016) | PCIe Hypervisor | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-05** | US 8,510,592 B1 (NetApp, 2013) | Storage Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
-| **PA-06** | US 10,921,871 B2 (Trane, 2021) | HVAC Controller | **YES** | NO | NO | NO | NO | NO | UNV | NO | UNV | NO | NO | NO | **NO** |
+| **PA-06** | US 10,921,871 B2 (Trane, 2021) | HVAC Controller | NO | NO | NO | NO | NO | NO | UNV | NO | UNV | NO | NO | NO | **NO** |
 | **PA-07** | US 10,331,522 B2 (IBM, 2019) | Enterprise SOA | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-08** | US 10,838,845 B2 (IBM, 2020) | App Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-09** | US 12,688,084 B2 (Oracle, 2026) | Cloud Middleware | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
-| **PA-10** | Swift / Herder (OSDI/DSN) | OS Kernel | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-10** | Swift / Herder (OSDI/DSN) | OS Kernel | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **P4** | **Proposed Mechanism** | **MCU Runtime** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | — |
 
 *Legend:*  
