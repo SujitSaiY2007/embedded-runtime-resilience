@@ -508,14 +508,15 @@ The K.10.1 review narrows the candidate distinction to the combined operational 
 **Reason:** preserves evidence discipline, separates single-reference review from later combination analysis, and prevents automatic advancement or premature integration.
 
 
-## D-123 — Single-reference anticipation refuted; handoff to K.10.3 multi-reference combination review
+## D-123 — Single-reference anticipation refuted within candidate set; handoff to K.10.3
 **Status:** Accepted (Approval-Gated: Pending ChatGPT Review)
 
 The K.10.2 deep single-reference review audited primary publications, official patent specifications, and grant records across PA-01 through PA-10 against the 12-point limitation matrix (L1–L12).
 
-1. **Anticipation Finding:** No single reference anticipates the complete combination or operational equivalent. Prior art cleanly bifurcates into embedded recovery with execution rollback/checkpointing (Phoenix, Karma, Trane) and enterprise message brokers with dynamic heap/database queues (IBM, Oracle).
-2. **Persistence of Obviousness Threat:** While single-reference anticipation is defeated, a multi-reference combination attack (combining Phoenix embedded reset + IBM failed-event quarantine + QP static event pools) remains plausible under 35 U.S.C. § 103.
-3. **Approval Gate:** K.10.2 is complete. K.10.3 remains locked and gated until ChatGPT grants formal review and approval. `main` remains unsynchronized.
+1. **Anticipation Finding:** No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence. Prior art cleanly bifurcates into embedded recovery with execution rollback/checkpointing (Phoenix, Karma, Trane) and enterprise/cloud message systems (IBM, Oracle).
+2. **Persistence of Obviousness Threat:** While single-reference anticipation is refuted within the inspected set, a multi-reference combination attack (combining Phoenix embedded reset + IBM failed-event queue + QP static event pools) remains plausible under 35 U.S.C. § 103.
+3. **Approval Gate:** K.10.2 is complete with targeted evidence corrections. K.10.3 remains locked and gated until ChatGPT grants formal review and approval. `main` remains unsynchronized.
 
 **Reason:** preserves strict audit standards, formally separates single-reference anticipation from combinatorial obviousness analysis, and enforces checkpoint governance.
+
 

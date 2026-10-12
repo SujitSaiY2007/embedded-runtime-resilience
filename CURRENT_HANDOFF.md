@@ -2,13 +2,14 @@
 
 ## Session status — authoritative current state (2026-10-12)
 
-**K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 deep single-reference anticipation package is committed; single-reference anticipation is REFUTED across all inspected primary candidates; multi-reference combination remains an open vulnerability awaiting K.10.3.** Awaiting ChatGPT review/approval before K.10.3. Do not restart K.10 experiments. Do not begin K.10.3, K.10.4, K.11, K.12, or hardware validation until the required checkpoint approval.
+**K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 deep single-reference anticipation package is committed with targeted evidence corrections; no single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence; multi-reference combination remains an open vulnerability awaiting K.10.3.** Awaiting ChatGPT review/approval before K.10.3. Do not restart K.10 experiments. Do not begin K.10.3, K.10.4, K.11, K.12, or hardware validation until the required checkpoint approval.
 
 - Canonical branch: `exp`. See `research/phase2_k10_2_single_reference_anticipation_review.md` and `research/chat_records/chat_k10_2_record.md` for the complete single-reference anticipation findings and audit records.
 - `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` have been compared with K.10's canonical baseline; their SHA-256 digests and Git blob SHAs match exactly (100% byte-identical).
 - Gate-defining artifacts `research/phase2_k9_methodology_lock.md`, `research/phase2_k9_2_p4_advantage_novelty_design.md`, and `research/phase1_reference_implementation_design.md` remain 100% byte-identical.
 - Keep Gates A–E, `policy_decide()`, `runtime_apply_policy()`, both protected runtime files, and K.10 results frozen. Do not sync `main` until ChatGPT reviews and explicitly approves the completed checkpoints.
 - Historical handoff sections below are retained as provenance. Any old “active handoff” block is superseded by this opening section and `research/PART_II_CHAT_PLAN.md`.
+
 
 
 ## Frozen topic

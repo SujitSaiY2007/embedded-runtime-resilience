@@ -2,10 +2,11 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status (authoritative current state, 2026-10-12):** K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 deep single-reference anticipation package is committed to `exp`; single-reference anticipation is REFUTED across all primary inspected candidates, while multi-reference combination remains an open vulnerability awaiting K.10.3. Awaiting ChatGPT review/approval before K.10.3. K.10.3 onward and hardware validation are NOT STARTED. `exp` is canonical; do not synchronize to `main` until ChatGPT explicitly approves the checkpoint.  
+**Status (authoritative current state, 2026-10-12):** K.10 COMPLETE. K.10.1 COMPLETE. K.10.2 deep single-reference anticipation package is committed to `exp`; no single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence; multi-reference combination remains an open vulnerability awaiting K.10.3. Awaiting ChatGPT review/approval before K.10.3. K.10.3 onward and hardware validation are NOT STARTED. `exp` is canonical; do not synchronize to `main` until ChatGPT explicitly approves the checkpoint.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
-> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. The only active checkpoint was K.10.2, now committed and awaiting ChatGPT review before K.10.3. Gates A–E and the protected C runtime remain frozen.
+> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. The only active checkpoint was K.10.2, now corrected and awaiting ChatGPT review before K.10.3. Gates A–E and the protected C runtime remain frozen.
+
 
 
 ## Frozen development topic
