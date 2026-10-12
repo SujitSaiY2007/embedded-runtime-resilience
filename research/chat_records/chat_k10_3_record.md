@@ -3,8 +3,9 @@
 **Date:** 2026-10-12  
 **Checkpoint:** K.10.3  
 **Branch:** exp  
-**Starting HEAD:** Latest canonical exp HEAD verified at checkpoint start; see the K.10.3 report and final commit metadata for the exact start/end SHAs.  
-**Status:** Technical analysis completed; awaiting ChatGPT formal closure decision.  
+**Starting HEAD:** 07552f72dd933bea9115e7e62542ae426158f532 (latest exp HEAD before substantive K.10.3 analysis).  
+**End-of-checkpoint HEAD before final chat-record closeout:** 56ad8fcbd30339b4cfbe734fcde6697e627f112b.  
+**Status:** **APPROVED AND CLOSED BY CHATGPT — 2026-10-12**.  
 **Scope:** Documentation/research only. No runtime, Gates A–E, or K.10 experimental evidence changes.
 
 ## 1. Work performed
@@ -40,4 +41,4 @@ The inspected combinations do not expressly provide the entire P4 L1–L12 contr
 - Gates A–E and protected runtime/header were not modified.
 - main was not synchronized or modified.
 - The report is the authoritative K.10.3 technical analysis.
-- K.10.4 is the next checkpoint only after ChatGPT explicitly approves K.10.3.
+- ChatGPT formally approved and closed K.10.3 on 2026-10-12. K.10.4 is authorized as the next active checkpoint; no K.10.4 work was performed here.
