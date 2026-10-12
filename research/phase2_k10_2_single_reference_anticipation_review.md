@@ -2,7 +2,7 @@
 
 **Status:** Complete at the single-reference level; single-reference anticipation **refuted** across all inspected primary candidates; technical distinction remains **unresolved and vulnerable to multi-reference combination (K.10.3)**.  
 **Branch:** `exp`  
-**Base Commit:** `598627d713687402f1982ebefbdec7cf0204de38`  
+**Base Commit:** `7a5bcb099be66f55cc0a18acfe51af79413ddf68`  
 **Scope:** Technical research analysis only; not a legal opinion or patentability assessment.  
 **K.10 Evidence Baseline:** Frozen (16 Case Families × P0–P4 × 5 deterministic repetitions = 400 matched executions).  
 **Protected Boundaries:** Gates A–E, `reference/src/ref_runtime.c`, and `reference/include/ref_runtime.h` 100% untouched.
@@ -17,7 +17,7 @@ The objective of **K.10.2** is strictly bounded:
 ### Bounded Conclusion
 > **"No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence."**
 
-This review does not assert universal absence of anticipating prior art across all existing literature, nor does it assert legal novelty or patentability.
+This review does not assert universal absence of anticipating prior art across all existing literature, nor does it assert legal novelty, patentability, or legal non-obviousness.
 
 Prior art separates into two distinct clusters:
 1. **Embedded / Low-Level Recovery Cluster (PA-01, PA-02, PA-03, PA-04, PA-06, PA-10):**
@@ -35,49 +35,54 @@ As codified in `research/phase2_k10_1_adversarial_distinction_review.md`, the 12
 
 * **L1:** Resource-constrained event-driven MCU setting (Cortex-M bare metal, single address space).
 * **L2:** Fixed-capacity, zero-heap state (static allocation; no `malloc`/`free`; bounded queue arrays; no dynamic pool recycling).
-* **L3:** Fault-to-event association has explicit precision levels and cannot exceed evidence precision (`assoc <= evidence`; levels: EXACT, SERVICE, PERIPHERAL, UNKNOWN).
+* **L3:** Fault-to-event association has explicit precision levels and cannot exceed evidence precision (`assoc <= evidence`; levels: EXACT, SERVICE, PERIPHERAL, UNKNOWN; Gate B contract).
 * **L4:** Event identity is generation-qualified; stale references are rejected (`EventRef={slot_id, generation}`).
 * **L5:** Fault-associated event is quarantined/retained in-pool rather than indiscriminately flushing all queued work (retained non-executable state in original static pool).
 * **L6:** Independent work remains eligible while related/ordered/coupled work is blocked (dependency classes and dispatchability predicate).
 * **L7:** Short recovery history changes action selection (history/episode attributes condition next action).
 * **L8:** Fixed ladder has an expressly disclosed fixed sequence with a finite terminal rung (Gate C: T1 retry $\to$ T2 retry $\to$ T3 reset $\to$ T4 terminal; `MAX_RECOVERY_ACTIONS=4`).
-* **L9:** Verification precedes release/continuation; failed recovery closes/escalates explicitly (runtime retains transition authority).
+* **L9:** Verification precedes release/continuation; failed recovery closes/escalates explicitly (runtime retains transition authority; Gates C/D contract).
 * **L10:** No fabricated target `EventRef` for service/peripheral/unknown association (fail-closed association contract).
 * **L11:** Deterministic trace ties fault, association, action, episode, lifecycle and outcome (structured event audit trace).
 * **L12:** Entire mechanism is a single bounded C runtime with decoupled policy and transition authorities (`policy_decide()` vs `runtime_apply_policy()`).
 
 ---
 
-## 3. Methodological Clarifications on Disclosed Mechanisms
+## 3. Methodological Clarifications on Limitation Semantics
 
-To ensure strict evidentiary discipline:
+To preserve strict evidentiary integrity:
 
-### 3.1. Dynamic Memory vs. Static Allocation (Requirement B)
-References targeting enterprise application servers or databases (e.g., PA-07, PA-08) are not assumed to require dynamic heap allocation unless explicitly specified in their text. We separate:
-- **Expressly specified:** What the patent specification or claims literally state (e.g., "storing in a database", "inserting into a failed event queue").
-- **Described implementation:** The exemplary embodiment described in the specification (e.g., IBM WebSphere Application Server running on general-purpose OS).
-- **Platform typical:** Conventional engineering practice on that platform (e.g., Java virtual machines typically utilize garbage-collected heap memory).
-- **Unknown / Unspecified:** The low-level memory allocation model (heap vs. static buffer) is left unconstrained by the patent claims.
+### 3.1. Evidence-Bounded Association Semantics (L3)
+A generic association between a failure and a component ID, software flow ID, or downstream endpoint (as found in PA-07, PA-08, PA-09) does **not** establish L3. L3 strictly requires:
+- An explicit multi-tier association precision lattice (e.g., EXACT, SERVICE, PERIPHERAL, UNKNOWN); and
+- The normative fail-closed invariant that **association precision cannot exceed evidence precision** (`association <= evidence`), preventing synthetic target generation during ambiguous fault scenarios.
+Where a reference associates failures with components or flows, this is documented as partial conceptual overlap, but the complete limitation is classified as **NOT FOUND IN INSPECTED MATERIAL**.
 
-### 3.2. Fixed Recovery Ladder vs. General Escalation (Requirement C)
-For L8, a general retry count, backoff policy, or multi-stage escalation (e.g., retry $\to$ reset) is **not** classified as disclosing P4's ladder. L8 strictly requires an **expressly disclosed fixed sequence with a finite terminal rung** matching or functionally equivalent to Gate C ($T_1 \to T_2 \to T_3 \to T_4$).
+### 3.2. Verification Before Release Semantics (L9)
+L9 is not satisfied merely because a system records a retry result, updates a database status, or polls a hardware register. L9 strictly requires:
+- An **explicit runtime verification gate** that validates recovery success before quarantined work is released for execution; and
+- A runtime architecture where **failed recovery deterministically closes the episode or escalates to terminal action**, with the runtime retaining sole state transition authority.
+General hardware readiness polling (Phoenix, Karma) or retry-result logging (IBM) represents partial conceptual overlap, but the complete L9 contract is classified as **NOT FOUND IN INSPECTED MATERIAL** (or **UNVERIFIED** where claims were not rendered).
 
-### 3.3. In-Pool Quarantine vs. External Holding (Requirement D)
-For L5, we strictly distinguish:
-- **In-pool retention (P4 contract):** The failed event remains in its assigned slot within the fixed-capacity event array as non-executable, preserving its slot identity without queue reallocation or data movement.
-- **Secondary queue movement:** Deleting or extracting an event from an active queue and inserting it into a separate failed-event queue (FEQ) or dead-letter queue.
-- **Database persistence:** Writing failed event records to an external relational/NoSQL table.
-- **I/O buffering:** Pausing or buffering incoming requests in a driver wrapper while restarting hardware.
+### 3.3. Memory Allocation Terminology & Quantum Leaps QP (L2)
+We distinguish three distinct memory management models:
+1. **General-Purpose Heap Allocation:** Unconstrained dynamic allocation (`malloc()` / `free()`) prone to heap fragmentation and non-deterministic execution times.
+2. **Preallocated Static Pools with Dynamic Block Allocation (Quantum Leaps QP `QMPool`):** Memory is preallocated in static buffer storage to eliminate heap fragmentation. However, event blocks are *dynamically allocated from and recycled back into the pool* at runtime via `Q_NEW()` and reference-counted garbage collection (`QF_gc()`).
+3. **Fixed-Slot Static Array Contract (P4 `EventSlot[20]`):** Events are admitted directly into pre-indexed static slots. Each event *remains bound to its assigned static slot throughout its entire lifecycle* (admission, dispatch, in-pool non-executable quarantine, and terminal release). There is no dynamic pool allocation, no block recycling, and no reference counting.
+
+### 3.4. In-Pool Quarantine vs. External Holding (L5)
+We strictly distinguish:
+- **In-pool non-executable retention (P4 contract):** The failed event remains in its assigned slot within the fixed-capacity event array as non-executable, preserving its slot identity without queue reallocation or data movement.
+- **Secondary queue movement (e.g. IBM PA-08):** Deleting or extracting an event from an active queue and inserting it into a separate failed-event queue (FEQ) or dead-letter queue.
+- **Database persistence (e.g. IBM PA-07):** Writing failed event records to an external relational/NoSQL table.
+- **I/O buffering (e.g. Swift PA-10):** Buffering incoming requests in a driver wrapper while restarting hardware.
 Only the first mechanism satisfies L5.
-
-### 3.4. Static State vs. Memory Pool Allocation (Requirement E)
-For L2, preallocated memory pools (such as Quantum Leaps QP `QMPool`) are distinguished from P4's static-state contract. QP dynamically allocates event blocks from pools via `Q_NEW()` and recycles them back to the pool via automatic reference-counted garbage collection (`QF_gc()`). In contrast, P4's static contract binds each event to a fixed slot (`EventSlot[20]`) where it remains without runtime dynamic pool allocation, pointer recycling, or reference counting.
 
 ---
 
 ## 4. Audited Primary Sources & Evidence Locators
 
-Every candidate reference was evaluated at primary-source level (full proceedings paper, official patent specification and claims, or published patent application):
+Every candidate reference was evaluated at primary-source level:
 
 ### 4.1. PA-01: Phoenix (Smith & Rixner, USENIX ATC 2015)
 * **Citation:** Rebecca Smith and Scott Rixner, *"Surviving Peripheral Failures in Embedded Systems,"* Proceedings of the 2015 USENIX Annual Technical Conference (USENIX ATC '15), Santa Clara, CA, July 8–10, 2015, pp. 125–137.
@@ -93,7 +98,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
   * **L6 (Dependency-aware preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Calling task is suspended/rewound; independent RTOS tasks continue only via standard OS scheduling).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Static reset-and-replay policy; no history-conditioned action adaptation).
   * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Uses retry/timeout counters, but lacks an expressly disclosed fixed sequence with finite terminal rung).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Section 3.2 "Recovery", p. 128, and Section 4.2 "Peripheral Reset and Replay", p. 130; polls peripheral status register until ready before resuming application execution; timeouts trigger fatal alert).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Section 3.2 "Recovery", p. 128, and Section 4.2 "Peripheral Reset and Replay", p. 130; polls peripheral status register until ready before resuming thread execution; however, does not disclose event episode lifecycle closure or escalation authority).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Phoenix addresses embedded MCU peripheral recovery, but relies fundamentally on **checkpointing, execution stack rollback, and redo logging**, incurring substantial RAM overhead. It does not disclose event-boundary quarantine or zero-heap static scheduling.
 
@@ -110,7 +115,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
   * **L3–L5:** **[NOT FOUND IN INSPECTED MATERIAL]** (Addresses power failures, not runtime peripheral faults; no fault association lattice or in-pool event quarantine).
   * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Manages operation completion ordering across reboots, but does not disclose queue dependency classes or eligibility predicates).
   * **L7–L8:** **[NOT FOUND IN INSPECTED MATERIAL]** (No history-driven recovery action selection; deterministic roll-forward/rollback).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Section 3.3, p. 252; verifies peripheral ready status before releasing tasks).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Section 3.3, p. 252; verifies peripheral ready status before releasing tasks; does not disclose event-level verification or episode closure/escalation).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Solves power-intermittency consistency, not runtime peripheral fault recovery, event quarantine, or association ambiguity.
 
@@ -123,7 +128,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Mechanism:** Fatal bus error detected at downstream PCIe port $\to$ deactivates data link layer $\to$ triggers OS hot-plug service to uninstall device driver without OS crash $\to$ reactivates link $\to$ reinstalls driver without physical removal.
 * **Limitation Mapping & Locators:**
   * **L1–L8:** **[NOT FOUND IN INSPECTED MATERIAL]** (Server architecture with PCIe bus, ACPI, and full OS memory; lacks event queues, zero-heap constraints, and ladder policies).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–22, and Claim 1; verifies data link layer re-establishment before reinstalling OS device driver).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 19–22, and Claim 1; data link layer training precedes driver reinstallation, but does not disclose an explicit runtime verification gate preceding event release or episode escalation).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Hardware/driver hot-plug error containment for enterprise servers.
 
@@ -136,7 +141,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Mechanism:** Platform interrupt handler isolates an I/O link upon error containment event, generates error record, notifies OS/VMM, and recovers link upon directive.
 * **Limitation Mapping & Locators:**
   * **L1–L8:** **[NOT FOUND IN INSPECTED MATERIAL]** (Server hypervisor/PCIe hardware architecture; lacks MCU event queue concepts).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–21, and Claim 1; platform entity verifies link recovery before notifying OS/VMM of availability).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Platform entity facilitates link recovery before notifying OS/VMM; does not disclose event runtime verification or closure/escalation authority).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** PCIe root port isolation for hypervisors.
 
@@ -152,7 +157,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
   * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Uses redundant physical backup hardware to continue I/O, not queue dependency scheduling).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Distinguishes recoverable vs unrecoverable errors, but does not disclose short episode history conditioning next action).
   * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Calls recovery and reinitialization routines, but does not disclose an expressly disclosed fixed sequence with a finite terminal rung).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–21; verifies device recovery is complete before migrating operations back from backup peripheral).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 19–21; verifies device recovery before migrating traffic back, but does not disclose event episode verification and escalation authority).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Enterprise storage server failover to redundant hardware; lacks MCU constraints, zero-heap event queues, and in-pool event quarantine.
 
@@ -165,8 +170,7 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Mechanism:** Monitors component health (sensors, actuators, firmware modules) in building automation controllers. Selects recovery actions to repair software/firmware or hardware faults.
 * **Limitation Mapping & Locators:**
   * **L1 (MCU setting):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–21; BAS control device and HVAC control device embedded microcontrollers).
-  * **L2–L5:** **[NOT FOUND IN INSPECTED MATERIAL]** (Manages macroscopic physical equipment modules; no event queue or in-pool quarantine).
-  * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Zone isolation is macroscopic building automation behavior, not queue-level dependency scheduling).
+  * **L2–L6:** **[NOT FOUND IN INSPECTED MATERIAL]** (Manages macroscopic physical equipment modules; no event queue, in-pool quarantine, or queue dependency scheduling).
   * **L7 (History changes action selection):** **[UNVERIFIED / INACCESSIBLE AT CLAIM LEVEL]** (Reported in repository notes to use failure history logs, but full claim text was not rendered in static scrape; not established from abstract alone).
   * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Does not disclose an expressly disclosed fixed sequence with finite terminal rung).
   * **L9 (Verification precedes release):** **[UNVERIFIED / INACCESSIBLE AT CLAIM LEVEL]** (Abstract mentions automated repair; claim-level verification step not rendered in static scrape).
@@ -180,23 +184,18 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Primary URL:** `https://patents.google.com/patent/US10331522B2/en`
 * **Architecture & Domain:** Enterprise message brokers and Business Process Management (BPM) middleware.
 * **Mechanism:** Failed Event Database (FEDB) stores failed event payloads and associated failing component IDs. When a component is modified/restored, matching failed events are retried and the database is updated.
-* **Memory & Execution Model Analysis (Requirement B):**
-  - *Expressly specified:* Storing failed events in a failed event database containing failed event information and associated components.
-  - *Described implementation:* Enterprise database-backed event failure management facility.
-  - *Platform typical:* Relational/NoSQL databases with dynamic heap allocations.
-  - *Unknown / Unspecified:* The patent claims are silent on memory allocation mechanics (neither requiring dynamic heap nor specifying zero-heap static allocation).
 * **Limitation Mapping & Locators:**
   * **L1 (MCU setting):** **[NOT FOUND IN INSPECTED MATERIAL]** (Enterprise event management facility).
-  * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (The patent text does not specify a zero-heap static state contract).
-  * **L3 (Evidence-bounded association):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 19–21; "failed event database containing failed event information relating to failed events and one or more components associated with each of the failed events").
+  * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (The patent claims do not specify a zero-heap static state contract).
+  * **L3 (Evidence-bounded association):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 19–21; describes a "failed event database containing failed event information relating to failed events and one or more components associated with each of the failed events". While this provides *partial conceptual overlap* by associating events with failing component IDs, it does **not** disclose explicit association precision levels or the fail-closed invariant `assoc <= evidence`).
   * **L4 (Generation-qualified event identity):** **[NOT FOUND IN INSPECTED MATERIAL]** (Uses database primary keys/records, not generation ring handles).
-  * **L5 (In-pool event quarantine):** **[NOT FOUND IN INSPECTED MATERIAL]** (Events are stored in an external "failed event database", not retained in their original fixed-capacity queue pool as non-executable; per Requirement D).
+  * **L5 (In-pool event quarantine):** **[NOT FOUND IN INSPECTED MATERIAL]** (Events are stored in an external "failed event database", not retained in their original fixed-capacity queue pool as non-executable).
   * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Does not disclose queue-level dependency classes or dispatchability predicates).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Updates database based on retry results, but does not disclose short episode history conditioning next action).
-  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Retries failed events upon component modification; lacks an expressly disclosed fixed sequence with finite terminal rung; per Requirement C).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 20–22; "Upon modification to a component associated with a failed event, the failed event is retried. Based on a result of retrying the failed event, failed event information of the failed event database is updated").
+  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Retries failed events upon component modification; lacks an expressly disclosed fixed sequence with finite terminal rung).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 20–22; "Based on a result of retrying the failed event, failed event information of the failed event database is updated". Recording retry outcomes in a database updates records, but does **not** disclose an explicit runtime verification gate preceding event release or episode closure/escalation authority).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
-* **Anticipation Finding:** **NOT ANTICIPATED.** Enterprise database-backed failed event management; lacks zero-heap MCU runtime constraints and in-pool queue retention.
+* **Anticipation Finding:** **NOT ANTICIPATED.** Enterprise database-backed failed event management; lacks zero-heap MCU runtime constraints, evidence-bounded association lattice, and in-pool queue retention.
 
 ---
 
@@ -205,21 +204,16 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Primary URL:** `https://patents.google.com/patent/US10838845B2/en`
 * **Architecture & Domain:** Enterprise application servers (IBM WebSphere).
 * **Mechanism:** When an event fails in an application flow, the server **deletes the event from the main event queue** and inserts it into a separate **Failed Event Queue (FEQ)** with linked failure reasons. Replay occurs after corrective action.
-* **Memory & Execution Model Analysis (Requirement B):**
-  - *Expressly specified:* An application server comprising an event queue, an event processor, and a failed event queue; deleting the event from the event queue and inserting it into the failed event queue.
-  - *Described implementation:* Enterprise application server event processing software.
-  - *Platform typical:* Middleware message queues running on general-purpose servers.
-  - *Unknown / Unspecified:* The patent claims do not specify low-level memory allocation; dynamic heap vs. static buffer is an unconstrained implementation detail.
 * **Limitation Mapping & Locators:**
   * **L1 (MCU setting):** **[NOT FOUND IN INSPECTED MATERIAL]** (Specifies an application server).
   * **L2 (Zero-heap static state):** **[NOT FOUND IN INSPECTED MATERIAL]** (Does not specify zero-heap static allocation).
-  * **L3 (Evidence-bounded association):** **[EXPLICITLY DISCLOSED]** (Abstract, lines 20–22; links failed event to related software application, processing flow ID, and failure reasons).
+  * **L3 (Evidence-bounded association):** **[NOT FOUND IN INSPECTED MATERIAL]** (Abstract, lines 20–22; links failed events to related application flow IDs and failure reasons. While this provides *partial conceptual overlap* by mapping failures to flow IDs, it does **not** disclose explicit precision levels or the fail-closed rule `assoc <= evidence`).
   * **L4 (Generation-qualified event identity):** **[NOT FOUND IN INSPECTED MATERIAL]** (Uses flow IDs, not generation ring handles).
-  * **L5 (In-pool event quarantine):** **[NOT FOUND IN INSPECTED MATERIAL]** (Expressly discloses **"deletes the event... from the event queue, then inserts... into a failed event queue"**; moving an event to a secondary queue does not satisfy in-pool non-executable retention in the original fixed pool; per Requirement D).
+  * **L5 (In-pool event quarantine):** **[NOT FOUND IN INSPECTED MATERIAL]** (Expressly discloses **"deletes the event... from the event queue, then inserts... into a failed event queue"**; moving an event to a secondary queue does not satisfy in-pool non-executable retention in the original fixed pool).
   * **L6 (Dependency preservation):** **[NOT FOUND IN INSPECTED MATERIAL]** (Unrelated flows continue processing, but does not claim queue-level dependency classes or dispatchability predicates).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Links failure reasons, but does not disclose history-driven action selection).
-  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Moves event to FEQ upon failure; lacks an expressly disclosed fixed sequence with finite terminal rung; per Requirement C).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Replay from FEQ after error resolution).
+  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Moves event to FEQ upon failure; lacks an expressly disclosed fixed sequence with finite terminal rung).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Discloses replaying from FEQ after administrative or corrective intervention, but does not disclose a runtime verification gate preceding release or failed-recovery closure/escalation).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Primary art for failed event queues, but relies on separate queue creation and event deletion/re-insertion, not in-pool static array retention on an MCU.
 
@@ -231,9 +225,9 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Mechanism:** Monitors activity stream; on recoverable downstream endpoint error, instructs upstream system to pause transmission; resumes upon error resolution.
 * **Limitation Mapping & Locators:**
   * **L1–L2:** **[NOT FOUND IN INSPECTED MATERIAL]** (Cloud platform middleware).
-  * **L3 (Association):** **[EXPLICITLY DISCLOSED]** (Monitors stream between integration layer and downstream destination; identifies recoverable error with downstream system).
+  * **L3 (Association):** **[NOT FOUND IN INSPECTED MATERIAL]** (Identifies recoverable downstream error for an integration stream. Provides *partial conceptual overlap* by associating errors with downstream endpoints, but lacks an explicit multi-tier precision lattice and fail-closed evidence-bounded invariant).
   * **L4–L8:** **[NOT FOUND IN INSPECTED MATERIAL]** (Pauses entire upstream stream; no in-pool quarantine or fixed ladder).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Monitors activity stream until error is resolved before signaling upstream resumption).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Monitors activity stream until error resolution before resuming transmission; stream-level flow control does not disclose an event runtime verification gate or episode closure/escalation authority).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** High-level stream pause-and-resume valve in cloud integration; lacks embedded queue mechanisms.
 
@@ -247,12 +241,11 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 * **Mechanism:** Isolates device drivers into user-space processes (MINIX 3) or hardware page-table domains (Nooks). Shadow drivers / Reincarnation Servers detect driver crash, restart the driver process, replay state, and unblock held I/O requests.
 * **Limitation Mapping & Locators:**
   * **L1–L2:** **[NOT FOUND IN INSPECTED MATERIAL]** (Requires MMU page tables, separate address spaces, and heavy dynamic kernel structures).
-  * **L3–L4:** **[NOT FOUND IN INSPECTED MATERIAL]** (Coarse process-level crash containment).
-  * **L5 (In-pool event quarantine):** **[NOT FOUND IN INSPECTED MATERIAL]** (Buffers pending I/O packets in shadow driver wrapper during driver restart; buffering I/O does not satisfy in-pool non-executable retention in a fixed-capacity event queue; per Requirement D).
+  * **L3–L5:** **[NOT FOUND IN INSPECTED MATERIAL]** (Process-level crash containment; buffering incoming I/O packets in shadow driver wrapper during driver restart is I/O buffering, not in-pool non-executable retention in a fixed-capacity event queue).
   * **L6 (Dependency preservation):** **[EXPLICITLY DISCLOSED]** (Swift et al., Section 4, pp. 6–7: non-crashing drivers and unrelated applications continue execution; Herder et al., Section 3, pp. 3–4: isolated user-space processes prevent cascading failures).
   * **L7 (History changes action selection):** **[NOT FOUND IN INSPECTED MATERIAL]** (Standard restart policy).
-  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Discloses restart attempt threshold, but lacks an expressly disclosed fixed sequence with finite terminal rung; per Requirement C).
-  * **L9 (Verification precedes release):** **[EXPLICITLY DISCLOSED]** (Swift et al., Section 4.3; verifies driver reinitialization and device state restoration before releasing held I/O).
+  * **L8 (Fixed ladder with finite terminal rung):** **[NOT FOUND IN INSPECTED MATERIAL]** (Discloses restart attempt threshold, but lacks an expressly disclosed fixed sequence with finite terminal rung).
+  * **L9 (Verification precedes release):** **[NOT FOUND IN INSPECTED MATERIAL]** (Swift et al., Section 4.3; verifies driver reinitialization handshake before releasing held I/O; does not disclose event episode verification, runtime transition authority, or failed-recovery closure/escalation).
   * **L10–L12:** **[NOT FOUND IN INSPECTED MATERIAL]**.
 * **Anticipation Finding:** **NOT ANTICIPATED.** Relies on MMU hardware memory protection and multi-process/shadow virtualization.
 
@@ -262,16 +255,16 @@ Every candidate reference was evaluated at primary-source level (full proceeding
 
 | Ref ID | Primary Reference | Target Domain | L1 (MCU) | L2 (ZeroHeap) | L3 (Assoc) | L4 (GenRef) | L5 (InPoolQuaran) | L6 (DepPres) | L7 (Hist) | L8 (FixedLadder) | L9 (VerifyRelease) | L10 (FailClose) | L11 (Trace) | L12 (Decouple) | Anticipated? |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **PA-01** | Smith & Rixner (Phoenix, 2015) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-02** | Branco et al. (Karma, 2019) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-03** | US 9,547,557 B2 (Dell, 2017) | PCIe Server | NO | NO | NO | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-04** | US 9,411,667 B2 (Intel, 2016) | PCIe Hypervisor | NO | NO | NO | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-05** | US 8,510,592 B1 (NetApp, 2013) | Storage Server | NO | NO | NO | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
+| **PA-01** | Smith & Rixner (Phoenix, 2015) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-02** | Branco et al. (Karma, 2019) | MCU | **YES** | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-03** | US 9,547,557 B2 (Dell, 2017) | PCIe Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-04** | US 9,411,667 B2 (Intel, 2016) | PCIe Hypervisor | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-05** | US 8,510,592 B1 (NetApp, 2013) | Storage Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
 | **PA-06** | US 10,921,871 B2 (Trane, 2021) | HVAC Controller | **YES** | NO | NO | NO | NO | NO | UNV | NO | UNV | NO | NO | NO | **NO** |
-| **PA-07** | US 10,331,522 B2 (IBM, 2019) | Enterprise SOA | NO | NO | **YES** | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-08** | US 10,838,845 B2 (IBM, 2020) | App Server | NO | NO | **YES** | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-09** | US 12,688,084 B2 (Oracle, 2026) | Cloud Middleware | NO | NO | **YES** | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | **NO** |
-| **PA-10** | Swift / Herder (OSDI/DSN) | OS Kernel | NO | NO | NO | NO | NO | **YES** | NO | NO | **YES** | NO | NO | NO | **NO** |
+| **PA-07** | US 10,331,522 B2 (IBM, 2019) | Enterprise SOA | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-08** | US 10,838,845 B2 (IBM, 2020) | App Server | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-09** | US 12,688,084 B2 (Oracle, 2026) | Cloud Middleware | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | NO | **NO** |
+| **PA-10** | Swift / Herder (OSDI/DSN) | OS Kernel | NO | NO | NO | NO | NO | **YES** | NO | NO | NO | NO | NO | NO | **NO** |
 | **P4** | **Proposed Mechanism** | **MCU Runtime** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | **YES** | — |
 
 *Legend:*  
@@ -288,8 +281,8 @@ Every candidate reference was evaluated at primary-source level (full proceeding
    Targets the identical problem domain (peripheral recovery on resource-constrained ARM Cortex-M MCUs).  
    *Why it fails single-reference anticipation:* Phoenix relies fundamentally on **thread checkpointing, stack frame rollback, and peripheral redo logging**, requiring ~6 KB RAM overhead. It does not operate at the asynchronous event boundary, has no in-pool quarantine, and lacks zero-heap static scheduling.
 2. **Rank 2 (Strongest Queue/Quarantine Threat): PA-08 (IBM WebSphere FEQ) / PA-07 (IBM FEDB).**  
-   Discloses failed-event retention, component-level association, and retry verification.  
-   *Why it fails single-reference anticipation:* Operates on **application servers and database persistence**, using separate queue instantiation. Failed events are deleted from the main queue rather than retained in-pool. It does not disclose bare-metal MCU static constraints (L1, L2).
+   Discloses failed-event retention, component-level failure mapping, and retry mechanisms.  
+   *Why it fails single-reference anticipation:* Operates on **application servers and database persistence**, using separate queue instantiation. Failed events are deleted from the main queue rather than retained in-pool. It does not disclose bare-metal MCU static constraints (L1, L2) or the Gate B evidence-bounded association lattice (L3).
 3. **Rank 3 (Strongest Recovery History Threat): PA-06 (Trane HVAC) / PA-05 (NetApp).**  
    Discloses recovery routines and automated component repair.  
    *Why it fails single-reference anticipation:* Operates at coarse physical subsystem / storage adapter levels, lacking event queue mechanics.
@@ -311,4 +304,4 @@ While single-reference anticipation is refuted within the inspected candidate se
 3. Gates A–E Contract Documents: **100% UNTOUCHED**.
 4. K.10 Empirical Evidence: **Frozen**; no tests rerun.
 5. `main` Branch: **Untouched**.
-6. Checkpoint Governance: K.10.2 corrections complete. **K.10.3 remains locked and gated until ChatGPT grants formal approval.**
+6. Checkpoint Governance: K.10.2 final limitation-semantics corrections complete. **K.10.3 remains locked and gated until ChatGPT grants formal approval.**

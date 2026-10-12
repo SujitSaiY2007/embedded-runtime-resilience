@@ -1,58 +1,46 @@
 # Chat Record — K.10.2 Deep Single-Reference Anticipation Review
 
 **Date:** 2026-10-12  
-**Checkpoint:** K.10.2 — Deep Single-Reference Anticipation Review (Evidence-Corrected)  
+**Checkpoint:** K.10.2 — Deep Single-Reference Anticipation Review (Final Limitation-Semantics Correction)  
 **Branch:** `exp` (canonical remote branch)  
-**Base Commit:** `598627d713687402f1982ebefbdec7cf0204de38`  
+**Base Commit:** `7a5bcb099be66f55cc0a18acfe51af79413ddf68`  
 **Status:** **AUDITED — PENDING CHATGPT FORMAL APPROVAL (APPROVAL-GATED)**  
 
 ---
 
 ## 1. Objective & Scope
 
-Execute the targeted evidence corrections for **K.10.2: Deep Single-Reference Anticipation Review** under the governance of the canonical post-K.10 roadmap (`research/PART_II_CHAT_PLAN.md`):
-- Provide exact primary-source locators (pages, sections, paragraphs, claim numbers) for every material `YES` classification in the L1–L12 matrix.
-- Reclassify unverified or unsupported classifications as `NOT FOUND IN INSPECTED MATERIAL` or `UNVERIFIED / INACCESSIBLE AT CLAIM LEVEL`.
-- Reconcile dynamic memory claims (Requirement B): clearly distinguish what patents explicitly state from implementation embodiments, platform norms, and unknown low-level memory allocators (especially for PA-07 and PA-08).
-- Reconcile fixed recovery ladder claims (Requirement C): distinguish retry thresholds and general recovery routines from an expressly disclosed fixed ladder with a finite terminal rung (L8).
-- Reconcile in-pool quarantine claims (Requirement D): distinguish in-pool non-executable retention from moving events to secondary queues/databases or buffering I/O (L5).
-- Reconcile static pool contracts (Requirement E): distinguish preallocated memory pools with dynamic event recycling (Quantum Leaps QP `QMPool`) from P4's fixed in-slot static array contract (L2).
-- Restrict scope of conclusion (Requirement F): bound the conclusion strictly to the inspected candidate set without claiming universal absence of prior art, legal novelty, or patentability.
+Execute the final, narrowly scoped limitation-semantics corrections for **K.10.2: Deep Single-Reference Anticipation Review** under the governance of the canonical post-K.10 roadmap (`research/PART_II_CHAT_PLAN.md`):
+- Reassess **L3 (Evidence-bounded association)** across PA-07, PA-08, and PA-09: confirm that component, flow, or downstream endpoint associations do not establish the complete L3 contract (explicit precision levels and fail-closed rule `assoc <= evidence`). Downgrade to `NOT FOUND IN INSPECTED MATERIAL` while preserving descriptions of partial conceptual overlap.
+- Reassess **L9 (Verification before release)** across all candidates: distinguish hardware readiness polling, retry-result recording, database updating, or link training from an explicit runtime verification gate preceding event release with failed-recovery episode closure/escalation authority. Downgrade unsupported classifications to `NOT FOUND IN INSPECTED MATERIAL` (or `UNVERIFIED / INACCESSIBLE AT CLAIM LEVEL` where claims were unrendered).
+- Refine **Quantum Leaps QP memory terminology**: distinguish preallocated static pool storage from dynamic allocation of blocks from that pool and general-purpose heap allocation. Accurately contrast QP's `QMPool` allocation/recycling against P4's fixed-slot `EventSlot[20]` contract without overstating similarities or differences.
+- Conduct a strict **consistency audit**: ensure the detailed reference analyses, master matrix, executive summary, chat record, decision log, and handoff all agree on the bounded conclusion: *"No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence."*
 
 ---
 
-## 2. Corrections Applied & Rationale
+## 2. Summary of Limitation-Semantics Reclassifications
 
-| Reference | Limitation | Original Class | Corrected Class | Evidentiary Locator & Rationale |
+| Reference | Limitation | Previous Class | Final Class | Evidentiary Rationale |
 | :--- | :---: | :---: | :---: | :--- |
-| **PA-01 (Phoenix)** | L8 (Ladder) | `IMP` | `NO` | Phoenix uses timeout counters and resets, but does not disclose an expressly disclosed fixed sequence with a finite terminal rung ($T_1 \to T_2 \to T_3 \to T_4$). |
-| **PA-02 (Karma)** | L2 (ZeroHeap) | `YES` | `NO` | Karma uses preallocated FRAM descriptors for peripheral operations, but does not disclose a fixed-capacity zero-heap event runtime queue contract. |
-| **PA-02 (Karma)** | L6 (DepPres) | `IMP` | `NO` | Operation completion ordering across reboots does not disclose queue-level dependency classes or dispatchability predicates. |
-| **PA-05 (NetApp)** | L6 (DepPres) | `IMP` | `NO` | Migration of I/O to a redundant physical backup adapter is hardware failover, not queue-level dependency-aware preservation of unrelated work. |
-| **PA-05 (NetApp)** | L7 (History) | `YES` | `NO` | Distinguishes recoverable vs unrecoverable errors, but does not disclose short episode history conditioning next action. |
-| **PA-05 (NetApp)** | L8 (Ladder) | `YES` | `NO` | Calls recovery and reinitialization routines, but does not disclose an expressly disclosed fixed sequence with a finite terminal rung. |
-| **PA-06 (Trane)** | L6 (DepPres) | `IMP` | `NO` | Zone isolation is macroscopic building automation behavior, not queue-level dependency scheduling. |
-| **PA-06 (Trane)** | L7 (History) | `YES` | `UNV` | Reported in notes to use failure history logs, but full claim text was not rendered in static scrape; not established from abstract alone. |
-| **PA-06 (Trane)** | L8 (Ladder) | `YES` | `NO` | Does not disclose an expressly disclosed fixed sequence with finite terminal rung. |
-| **PA-06 (Trane)** | L9 (Verify) | `YES` | `UNV` | Claim-level verification step not rendered in static scrape. |
-| **PA-07 (IBM)** | L2 (ZeroHeap) | `NO` | `NO` | Clarified: patent claims are silent on memory allocation; dynamic heap is typical of enterprise platforms, but not expressly required by claims. |
-| **PA-07 (IBM)** | L5 (Quaran) | `NO` | `NO` | Retained as `NO`: storing in a "failed event database" is external storage, not in-pool non-executable retention in the original fixed pool. |
-| **PA-07 (IBM)** | L6 (DepPres) | `YES` | `NO` | Abstract discloses retrying upon component modification; does not claim queue-level dependency classes or dispatchability predicates. |
-| **PA-07 (IBM)** | L7 (History) | `YES` | `NO` | Updates database with retry results, but does not disclose short episode history conditioning next action. |
-| **PA-07 (IBM)** | L8 (Ladder) | `YES` | `NO` | Retrying upon component modification does not disclose an expressly disclosed fixed sequence with finite terminal rung. |
-| **PA-08 (IBM)** | L2 (ZeroHeap) | `NO` | `NO` | Clarified: patent claims do not specify memory allocator; heap allocation is typical but unconstrained by claims. |
-| **PA-08 (IBM)** | L5 (Quaran) | `NO` | `NO` | Retained as `NO`: expressly specifies *deleting* event from the event queue and inserting into a secondary failed event queue. |
-| **PA-08 (IBM)** | L6 (DepPres) | `YES` | `NO` | Processing of unrelated flows continues, but does not claim queue-level dependency classes or dispatchability predicates. |
-| **PA-08 (IBM)** | L7 (History) | `YES` | `NO` | Linking failure reasons to flow ID does not disclose short episode history conditioning next action. |
-| **PA-08 (IBM)** | L8 (Ladder) | `YES` | `NO` | Retry threshold before moving to FEQ is not an expressly disclosed fixed sequence with finite terminal rung. |
-| **PA-10 (Swift/Herder)** | L5 (Quaran) | `IMP` | `NO` | Buffering pending I/O packets during driver reboot is I/O buffering, not in-pool non-executable retention in a fixed-capacity event queue. |
-| **PA-10 (Swift/Herder)** | L8 (Ladder) | `YES` | `NO` | Restart threshold does not disclose an expressly disclosed fixed sequence with finite terminal rung. |
+| **PA-01 (Phoenix)** | L9 (VerifyRelease) | `YES` | `NO` | Section 3.2 & 4.2; polls peripheral status register until ready before resuming thread execution; does not disclose event episode verification, runtime transition authority, or failed-recovery closure/escalation. |
+| **PA-02 (Karma)** | L9 (VerifyRelease) | `YES` | `NO` | Section 3.3; verifies hardware peripheral ready status before task resumption; does not disclose event runtime verification or episode closure/escalation authority. |
+| **PA-03 (Dell)** | L9 (VerifyRelease) | `YES` | `NO` | Abstract & Claim 1; data link training precedes driver reinstallation; does not disclose an explicit event runtime verification gate preceding event release. |
+| **PA-04 (Intel)** | L9 (VerifyRelease) | `YES` | `NO` | Platform interrupt handler facilitates link recovery before notifying OS/VMM; does not disclose event runtime verification or closure/escalation authority. |
+| **PA-05 (NetApp)** | L9 (VerifyRelease) | `YES` | `NO` | Abstract; verifies device recovery completion before migrating traffic back from backup adapter; does not disclose event episode verification and escalation authority. |
+| **PA-06 (Trane)** | L9 (VerifyRelease) | `UNV` | `UNV` | Abstract mentions automated repair; claim-level verification not rendered in static scrape. |
+| **PA-07 (IBM)** | L3 (Assoc) | `YES` | `NO` | Abstract; associates failures with failing component IDs (partial conceptual overlap), but lacks explicit multi-tier association precision lattice and fail-closed rule `assoc <= evidence`. |
+| **PA-07 (IBM)** | L9 (VerifyRelease) | `YES` | `NO` | Abstract; updates failed event database based on retry results; recording retry outcomes updates records, but does not disclose an explicit runtime verification gate preceding event release or episode closure/escalation. |
+| **PA-08 (IBM)** | L3 (Assoc) | `YES` | `NO` | Abstract; links failed events to application flow IDs and failure reasons (partial conceptual overlap), but lacks explicit precision levels and fail-closed rule `assoc <= evidence`. |
+| **PA-08 (IBM)** | L9 (VerifyRelease) | `YES` | `NO` | Abstract; replaying from Failed Event Queue after corrective action does not disclose a runtime verification gate preceding release or failed-recovery closure/escalation. |
+| **PA-09 (Oracle)** | L3 (Assoc) | `YES` | `NO` | Abstract; identifies recoverable error with downstream system (partial conceptual overlap), but lacks an explicit multi-tier precision lattice and fail-closed rule `assoc <= evidence`. |
+| **PA-09 (Oracle)** | L9 (VerifyRelease) | `YES` | `NO` | Abstract; monitors activity stream until error resolution before resuming transmission; stream flow control does not disclose an event runtime verification gate or episode closure/escalation authority. |
+| **PA-10 (Swift/Herder)** | L9 (VerifyRelease) | `YES` | `NO` | Swift et al. Section 4.3; shadow driver verifies driver reinitialization handshake before releasing held I/O; does not disclose event episode verification, runtime transition authority, or failed-recovery closure/escalation. |
 
 ---
 
 ## 3. Environment & Ancestry Verification
 
-- **Workspace Setup:** Isolated clean worktree (`.worktree-k10-2`) based on canonical remote `origin/exp` at `598627d713687402f1982ebefbdec7cf0204de38`.
+- **Workspace Setup:** Isolated clean worktree (`.worktree-k10-2`) based on canonical remote `origin/exp` at `7a5bcb099be66f55cc0a18acfe51af79413ddf68`.
 - **Preservation of Local History:** Main checkout directory and its local-only commit `9c6596b` preserved 100% untouched without reset, force-push, or merge.
 - **Protected File Hashes:**
   - `reference/src/ref_runtime.c`: SHA-256 `9339FCC34C0165820F5B7E5C410589EC3D6CE78E3F4511423467057869F933CA` (Blob: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`) — 100% BYTE-IDENTICAL.
@@ -68,4 +56,4 @@ Execute the targeted evidence corrections for **K.10.2: Deep Single-Reference An
 - **Single-Reference Anticipation:** Refuted across all inspected candidates.
 - **Obviousness Vulnerability:** Multi-reference combination attack (combining Phoenix embedded reset + IBM failed-event queue + QP static event pools) remains open.
 - **Handoff:** Assigned to **K.10.3**.
-- **Stop Condition:** K.10.2 corrections complete. K.10.3 remains **locked and gated** awaiting ChatGPT review and approval. `main` untouched.
+- **Stop Condition:** K.10.2 final limitation-semantics corrections complete. K.10.3 remains **locked and gated** awaiting ChatGPT review and approval. `main` untouched.
