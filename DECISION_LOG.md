@@ -524,7 +524,7 @@ The K.10.2 deep single-reference review audited primary publications, official p
 ## D-124 — K.10.2 approved and K.10.3 authorized
 **Status:** Accepted — ChatGPT approval, 2026-10-12
 
-K.10.2 is formally approved and closed after the final PA-01/L1 consistency correction. Phoenix (PA-01) is classified L1 = NO / NOT FOUND IN INSPECTED MATERIAL because the inspected evidence establishes bare-metal Cortex-M hardware but describes a multi-threaded FreeRTOS task/checkpoint/stack-rollback model, not the frozen event-driven runtime/async queue semantics. Cortex-M remains illustrative rather than an exclusive ISA requirement. The report, master matrix, and K.10.2 chat record were aligned.
+K.10.2 is formally approved and closed after the final PA-01/L1 source-grounded reconciliation. Phoenix (PA-01) remains L1 = YES / EXPLICITLY DISCLOSED: the primary paper describes an event-driven embedded setting (Section 1, pp. 125–126), the bare-metal Owl embedded runtime (Section 3, pp. 128–129), and an evaluated application event loop (Section 6.2, p. 134). L1 is the target setting, not P4's separate queue-level dependency/quarantine contract. The prior FreeRTOS characterization was unsupported by the inspected paper and is removed. The report, matrix, and K.10.2 chat record are aligned.
 
 K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis — is authorized as the next active checkpoint. This is technical research, not a legal opinion. K.10 experiments, Gates A–E, protected runtime files, and main remain untouched; no K.10.4 or later work is authorized by this decision.
 
