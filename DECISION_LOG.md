@@ -529,3 +529,12 @@ K.10.2 is formally approved and closed after the final PA-01/L1 source-grounded 
 K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis — is authorized as the next active checkpoint. This is technical research, not a legal opinion. K.10 experiments, Gates A–E, protected runtime files, and main remain untouched; no K.10.4 or later work is authorized by this decision.
 
 **Reason:** closes the remaining matrix/detail inconsistency while preserving the frozen limitation semantics and enforces an explicit transition from single-reference analysis to multi-reference combination analysis.
+
+## D-125 — K.10.3 multi-reference review closed; K.10.4 authorized
+**Status:** Accepted — ChatGPT approval, 2026-10-12
+
+K.10.3 is formally approved and closed. The report analyzes three primary combinations using source text: C1 Phoenix + IBM US 10,838,845 B2 + QP/C event-pool documentation; C2 Trane US 10,921,871 B2 + Dell US 9,547,557 B2 and Intel US 9,411,667 B2; C3 NetApp US 8,510,592 B1 + IBM US 10,331,522 B2. C1 presents the highest technical-combination risk, C3 moderate-to-high risk, and C2 moderate risk for generic recovery but a less direct fit to P4's event-level contract. The integrated technical distinction remains unresolved and vulnerable. No legal obviousness, novelty, or patentability conclusion is made.
+
+K.10.4 — Final Technical Distinction & Research Conclusion — is authorized as the next active checkpoint. It must synthesize K.10 evidence and K.10.1–K.10.3 findings, preserve measured trade-offs and limitations, and not rerun experiments or modify the runtime. main remains untouched.
+
+**Reason:** explicitly separates measured host-model behavior from the still-unresolved technical distinction, and records the strongest combination attacks before final research synthesis.
