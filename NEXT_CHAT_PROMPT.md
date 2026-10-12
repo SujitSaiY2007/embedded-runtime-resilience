@@ -29,7 +29,7 @@ Read, in this order:
 Verify the current `exp` HEAD and ancestry. Confirm that `main` remains unchanged and do not alter it. Preserve the original checkout's local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38`; never reset, overwrite, merge, or force-push that local history. Use a clean isolated worktree based on the latest `origin/exp` for repository changes.
 
 Independently confirm the final K.10.2 correction:
-- PA-01 (Phoenix) L1 is now `NO — NOT FOUND IN INSPECTED MATERIAL`: the inspected paper establishes Cortex-M hardware, but its described FreeRTOS task/checkpoint/stack-rollback execution model does not establish the frozen event-driven runtime/asynchronous queue semantics. Cortex-M is illustrative, not an exclusive ISA requirement.
+- PA-01 (Phoenix) L1 remains `YES — EXPLICITLY DISCLOSED` for the resource-constrained event-driven MCU setting: the primary paper describes embedded systems as event-driven (Section 1, pp. 125–126), Owl as an embedded runtime running bare-metal (Section 3, pp. 128–129), and an evaluated application event loop (Section 6.2, p. 134). L1 is a setting limitation; it does not establish P4's separate queue-level dependency dispatchability or retained in-pool quarantine. The earlier FreeRTOS characterization was unsupported by the inspected paper and has been removed.
 - PA-02 and PA-06 remain L1 = NO.
 - PA-10/L6 remains NO.
 - The report and matrix must agree.
