@@ -24,7 +24,7 @@ Execute the final, narrowly scoped limitation-semantics and classification-consi
 
 | Reference | Limitation | Previous Class | Final Class | Evidentiary Rationale |
 | :--- | :---: | :---: | :---: | :--- |
-| **PA-01 (Phoenix)** | L1 (event-driven MCU setting) | `YES` | `NO` | Sections 1 and 4 establish bare-metal Cortex-M hardware, but the inspected disclosure describes a multi-threaded FreeRTOS task/checkpoint/stack-rollback model rather than the frozen event-driven runtime/async queue setting. Cortex-M is illustrative, not exclusive. |
+| **PA-01 (Phoenix)** | L1 (event-driven MCU setting; consistency audit) | `YES` | `YES` | Primary paper Section 1, pp. 125–126 describes embedded systems as event-driven; Section 3, pp. 128–129 identifies Owl as an embedded runtime running bare-metal; Section 6.2, p. 134 describes an evaluated application's event loop. L1 concerns the setting, not P4's separate queue-level dependency/quarantine semantics. No FreeRTOS claim is used. |
 | **PA-01 (Phoenix)** | L9 (VerifyRelease) | `YES` | `NO` | Section 3.2 & 4.2; polls peripheral status register until ready before resuming thread execution; does not disclose event episode verification, runtime transition authority, or failed-recovery closure/escalation. |
 | **PA-02 (Karma)** | L1 (MCU) | `YES` | `NO` | Section 1 & 5; evaluated on TI MSP430FR5969; provides general MCU relevance, but lacks Cortex-M correspondence and operates on intermittent thread checkpointing rather than an event-driven MCU runtime. |
 | **PA-02 (Karma)** | L9 (VerifyRelease) | `YES` | `NO` | Section 3.3; verifies hardware peripheral ready status before task resumption; does not disclose event runtime verification or episode closure/escalation authority. |
@@ -62,5 +62,5 @@ Execute the final, narrowly scoped limitation-semantics and classification-consi
 - **Single-Reference Anticipation:** Refuted across all inspected candidates.
 - **Obviousness Vulnerability:** Multi-reference combination attack (combining Phoenix embedded reset + IBM failed-event queue + QP static event pools) remains open.
 - **Handoff:** Assigned to **K.10.3**.
-- **Final PA-01/L1 consistency correction:** The detailed analysis and master matrix now classify PA-01/L1 as `NO — NOT FOUND IN INSPECTED MATERIAL`; Cortex-M hardware correspondence alone does not establish the required event-driven runtime semantics.
-- **Formal closure:** ChatGPT approved and closed K.10.2 on 2026-10-12 after independently verifying the correction and protected blob hashes. K.10.3 is authorized as the next active checkpoint. `main` remains untouched.
+- **Final PA-01/L1 source-grounded reconciliation:** The detailed analysis and master matrix retain PA-01/L1 as `YES — EXPLICITLY DISCLOSED`. The Phoenix primary paper describes an event-driven embedded setting, bare-metal Owl runtime, and an evaluated application event loop. This is a setting match only; P4's queue-level dependency dispatchability and retained in-pool quarantine remain separate limitations not established by Phoenix.
+- **Formal closure:** ChatGPT approved and closed K.10.2 on 2026-10-12 after independently verifying the source-grounded reconciliation and protected blob hashes. K.10.3 is authorized as the next active checkpoint. `main` remains untouched.
