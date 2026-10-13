@@ -75,7 +75,7 @@ const VirtualScenario scenario_S05 = {
 };
 
 /* ============================================================================
- * S06: Bounded Recovery Progression (Retry to Subsystem Restart)
+ * S06: Bounded Recovery Progression (Retry to Reinitialization)
  * ============================================================================ */
 static const VirtualEventSpec s06_events[] = {
     {1u, EVT_PERIPHERAL_READ, 1u, 1u, 1u, PERIPH_I2C0, NORMAL, 601u, true}
@@ -173,8 +173,8 @@ static const ScenarioRegistryEntry registry[] = {
     },
     {
         "S06",
-        "Bounded Progression to Subsystem Restart",
-        "Repeated I2C timeout exhausts retry budget (attempt 1 and 2 retry), escalating to ACT_RESTART (attempt 3) to achieve recovery.",
+        "Bounded Recovery Progression to Reinitialization",
+        "Repeated I2C timeouts trigger retry actions, followed by ACT_REINIT_OR_RESET on the third observation and a successful runtime transition.",
         &scenario_S06
     },
     {

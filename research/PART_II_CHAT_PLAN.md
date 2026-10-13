@@ -1,3 +1,5 @@
+> **Latest checkpoint status (2026-10-13): K.12 APPROVED AND CLOSED by ChatGPT based on user-reported successful local tests and working UI. The next action is controlled final integration to `main` and ref verification. Physical hardware implementation is future work; do not rerun frozen K.10 or modify protected runtime/Gate artifacts.**
+
 # Part II — Canonical Multi-Chat Execution Plan
 
 **Status:** ACTIVE — canonical post-K.10 roadmap  
@@ -7,6 +9,8 @@
 **Repository execution agent:** Antigravity, only when explicitly invoked inside a ChatGPT-defined checkpoint
 
 > **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
+
+**Current checkpoint status (2026-10-13): K.10, K.10.1, K.10.2, K.10.3, K.10.4, AND K.11 APPROVED AND CLOSED BY CHATGPT. K.12 — Professor-Facing Software Demonstration Productization & Final Software Audit — is ACTIVE AND AUTHORIZED.** The exact execution brief is `NEXT_CHAT_PROMPT.md`. K.12 is software-only; physical hardware execution and main synchronization remain gated until separately authorized.
 
 ## Global execution rules
 
@@ -118,7 +122,7 @@ For each strongest reference:
 - K.10.3/K.10.4 work.
 
 ### Exit
-A defensible single-reference anticipation matrix exists, with explicit evidence for every mapped limitation and every missing limitation.
+**APPROVED AND CLOSED (2026-10-12).** The final matrix retains PA-01/L1 = YES because Phoenix describes the event-driven embedded setting (Section 1, pp. 125–126), the bare-metal Owl runtime (Section 3, pp. 128–129), and an evaluated application event loop (Section 6.2, p. 134). This setting match does not establish P4's separate queue-level dependency/quarantine contract. No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination based on reviewed evidence. This is not a legal novelty or patentability conclusion.
 
 ---
 
@@ -149,7 +153,7 @@ This remains a technical research analysis, not a legal opinion.
 - K.10.4 conclusion.
 
 ### Exit
-The strongest plausible multi-reference attacks and their remaining technical gaps are documented.
+**APPROVED AND CLOSED (2026-10-12).** The report covers C1 (Phoenix + IBM PA-08 + QP/C), C2 (Trane + Dell/Intel), and C3 (NetApp + IBM PA-07), with source-grounded technical teachings, combination rationales, friction/gaps and an L1–L12 coverage matrix. C1 is the strongest technical-combination risk; C3 is next; C2 is a more distant generic-recovery attack. No legal obviousness or patentability conclusion is made.
 
 ---
 
@@ -177,7 +181,7 @@ Do not force a positive result. The final technical conclusion may state:
 - inconclusive.
 
 ### Exit
-K.10.4 closes the investigative phase and produces the definitive research conclusion used by K.11.
+**APPROVED AND CLOSED BY CHATGPT — 2026-10-13.** The authoritative final research report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and chat record (`research/chat_records/chat_k10_4_record.md`) are formally accepted without modification. The research conclusion confirms bounded P4 advantages in CF04/CF07 and CF05, preserves shared quarantine preservation and the CF16 baseline win, confirms single-reference anticipation is refuted across PA-01–PA-10, and documents unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C). Checkpoint K.11 is authorized as the active next checkpoint, focusing strictly on software synthesis and hardware validation protocol specification without initiating physical hardware execution.
 
 ---
 
@@ -268,3 +272,32 @@ At the end of every checkpoint, the current chat MUST leave:
 The next ChatGPT chat begins by reading the repository state and that exact prompt.
 
 **Antigravity execution never becomes the chat sequence. It is an execution tool inside the ChatGPT-defined checkpoint.**
+
+
+---
+
+## K.11 checkpoint record — 2026-10-13
+
+K.11 deliverables are drafted on the isolated K.10.4 working branch:
+- `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`
+- `research/chat_records/chat_k11_record.md`
+
+Startup integrity checks confirmed the expected `exp` and `main` HEADs and all five protected blob SHAs. The K.11 report carries forward the 400-run matrix without rerunning it; bounded P4 advantages in CF04/CF07 and CF05; shared quarantine; CF16's P2 one-attempt baseline advantage over P4's three attempts; `QMAX=16` / `EPMAX=1` capacity caveats; and unresolved C1 combination risk.
+
+**Checkpoint state: pending ChatGPT approval.** The K.11 report defines hardware procedures only. No physical MCU execution, flashing, or measurement occurred. Do not merge to `exp` or synchronize `main`. K.12 productization may begin only after K.11 is explicitly approved and closed.
+
+
+## K.11 closure record — 2026-10-13
+
+K.11 is formally approved and closed by ChatGPT. The synthesis report and chat record document the evidence boundaries, the future STM32U575ZI / NUCLEO-U575ZI-Q protocol, and an unresolved CF01 P2 attempt-count discrepancy in the frozen K.10 documents. K.12 must reconcile CF01 from original raw records if available without rerunning the K.10 matrix or editing frozen K.10 results.
+
+**K.12 is now the active authorized checkpoint** for software-only professor-facing demonstration productization and final audit. No MCU flashing, physical fault injection, physical measurements, merge to `exp`, or synchronization of `main` is authorized absent a later explicit approval.
+
+
+---
+
+## K.12 execution update — 2026-10-13
+
+K.12 remote implementation is underway: workbench and evidence UI, C virtual link-availability plumbing, bounded Python CLI bridge, cross-platform CLI contract script, and demo guide are updated on the authorized feature branch. The research-evidence UI preserves CF01 as unresolved and labels future STM32U575ZI / NUCLEO-U575ZI-Q validation as pending.
+
+**Still required before closure:** inspect complete final diff and protected-file SHAs; execute CMake build, CTest and live HTTP/UI checks in a runnable environment; resolve CF01 only if original raw records become available; finish K.12 report/record and continuity consistency. If these execution checks cannot be run, verdict must remain INCOMPLETE/BLOCKED. Do not rerun K.10, change the protected runtime, merge to `exp`, move `main`, or claim the original local-only commit verified remotely.

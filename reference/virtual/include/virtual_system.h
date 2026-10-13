@@ -123,6 +123,7 @@ typedef struct {
     uint16_t step_index;
     uint32_t wrapper_sequence;
     uint32_t peripheral_sequence[VIRTUAL_MAX_PERIPHERALS];
+    bool peripheral_connected[VIRTUAL_MAX_PERIPHERALS];
     VirtualPeripheralRecord peripheral_trace[VIRTUAL_MAX_ENV_TRACE];
     uint16_t peripheral_trace_count;
     VirtualTraceRecord trace[VIRTUAL_MAX_ENV_TRACE];
@@ -133,6 +134,9 @@ typedef struct {
 
 void virtual_system_init(VirtualSystem *vs, const VirtualScenario *scenario,
                          PolicyVariant variant, uint32_t run_id);
+bool virtual_system_set_peripheral_connected(VirtualSystem *vs,
+                                           PeripheralId peripheral,
+                                           bool connected);
 OutcomeCode virtual_system_run(VirtualSystem *vs);
 OutcomeCode virtual_system_step(VirtualSystem *vs);
 bool virtual_system_complete(const VirtualSystem *vs);

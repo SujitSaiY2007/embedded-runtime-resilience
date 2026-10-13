@@ -498,3 +498,96 @@ Post-K.10 work proceeds in `exp`. `main` is synchronized only after checkpoint c
 After K.10.4 and K.11 close the research conclusion and software synthesis, K.12 performs final software productization and a clean professor-facing UI demonstration. No new research mechanism is introduced during K.12.
 
 **Reason:** separates research closure from final presentation/productization and prevents UI work from altering the research conclusion.
+
+
+## D-122 — K.10.1 technical distinction remains unresolved; require explicit checkpoint approval
+**Status:** Accepted
+
+The K.10.1 review narrows the candidate distinction to the combined operational invariant set of evidence-limited association, retained event quarantine, dependency/order-aware eligibility, history-conditioned bounded recovery, verification/release or terminal closure, and deterministic traceability. It does not establish novelty or patentability. K.10.2 may begin only after ChatGPT explicitly reviews and approves the K.10.1 package. `main` must remain unsynchronized until that approval and subsequent checkpoint governance permit it.
+
+**Reason:** preserves evidence discipline, separates single-reference review from later combination analysis, and prevents automatic advancement or premature integration.
+
+
+## D-123 — Single-reference anticipation refuted within candidate set; handoff to K.10.3
+**Status:** Accepted (Approval-Gated: Pending ChatGPT Review)
+
+The K.10.2 deep single-reference review audited primary publications, official patent specifications, and grant records across PA-01 through PA-10 against the 12-point limitation matrix (L1–L12).
+
+1. **Anticipation Finding:** No single reference in the inspected candidate set was found to disclose the complete L1–L12 combination, based on the reviewed evidence. Prior art cleanly bifurcates into embedded recovery with execution rollback/checkpointing (Phoenix, Karma, Trane) and enterprise/cloud message systems (IBM, Oracle).
+2. **Persistence of Obviousness Threat:** While single-reference anticipation is refuted within the inspected set, a multi-reference combination attack (combining Phoenix embedded reset + IBM failed-event queue + QP static event pools) remains plausible under 35 U.S.C. § 103.
+3. **Approval Gate:** K.10.2 is complete with targeted evidence corrections. K.10.3 remains locked and gated until ChatGPT grants formal review and approval. `main` remains unsynchronized.
+
+**Reason:** preserves strict audit standards, formally separates single-reference anticipation from combinatorial obviousness analysis, and enforces checkpoint governance.
+
+
+
+## D-124 — K.10.2 approved and K.10.3 authorized
+**Status:** Accepted — ChatGPT approval, 2026-10-12
+
+K.10.2 is formally approved and closed after the final PA-01/L1 source-grounded reconciliation. Phoenix (PA-01) remains L1 = YES / EXPLICITLY DISCLOSED: the primary paper describes an event-driven embedded setting (Section 1, pp. 125–126), the bare-metal Owl embedded runtime (Section 3, pp. 128–129), and an evaluated application event loop (Section 6.2, p. 134). L1 is the target setting, not P4's separate queue-level dependency/quarantine contract. The prior FreeRTOS characterization was unsupported by the inspected paper and is removed. The report, matrix, and K.10.2 chat record are aligned.
+
+K.10.3 — Multi-Reference Combination & Technical Obviousness Analysis — is authorized as the next active checkpoint. This is technical research, not a legal opinion. K.10 experiments, Gates A–E, protected runtime files, and main remain untouched; no K.10.4 or later work is authorized by this decision.
+
+**Reason:** closes the remaining matrix/detail inconsistency while preserving the frozen limitation semantics and enforces an explicit transition from single-reference analysis to multi-reference combination analysis.
+
+## D-125 — K.10.3 multi-reference review closed; K.10.4 authorized
+**Status:** Accepted — ChatGPT approval, 2026-10-12
+
+K.10.3 is formally approved and closed. The report analyzes three primary combinations using source text: C1 Phoenix + IBM US 10,838,845 B2 + QP/C event-pool documentation; C2 Trane US 10,921,871 B2 + Dell US 9,547,557 B2 and Intel US 9,411,667 B2; C3 NetApp US 8,510,592 B1 + IBM US 10,331,522 B2. C1 presents the highest technical-combination risk, C3 moderate-to-high risk, and C2 moderate risk for generic recovery but a less direct fit to P4's event-level contract. The integrated technical distinction remains unresolved and vulnerable. No legal obviousness, novelty, or patentability conclusion is made.
+
+K.10.4 — Final Technical Distinction & Research Conclusion — is authorized as the next active checkpoint. It must synthesize K.10 evidence and K.10.1–K.10.3 findings, preserve measured trade-offs and limitations, and not rerun experiments or modify the runtime. main remains untouched.
+
+**Reason:** explicitly separates measured host-model behavior from the still-unresolved technical distinction, and records the strongest combination attacks before final research synthesis.
+
+## D-126 — K.10.4 final research synthesis completed; handoff to ChatGPT review
+**Status:** Accepted (Historical completion record; formally approved in D-127) — 2026-10-13
+
+The K.10.4 final technical distinction and research conclusion has been prepared (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`).
+1. **Evidence Boundary:** Synthesizes the 400-execution host/reference dataset across 16 case families. Confirms bounded P4 advantages in CF04/CF07 (fail-closed ambiguous association) and CF05 (ladder termination bounds).
+2. **Attribution Locks:** Explicitly preserves that exact-event quarantine is shared across P0–P4 in `ref_runtime.c` and is not a P4-exclusive advantage; preserves the CF16 baseline win (P2 succeeds in 1 attempt vs P4 in 3 attempts); preserves 6/16 parity outcomes (CF02, CF09, CF11–CF13, CF15) and capacity confounds (`QMAX=16`, `EPMAX=1`).
+3. **Prior-Art Status:** Confirms single-reference anticipation is refuted across all inspected primary candidates (PA-01 through PA-10). Documents persistent, unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C).
+4. **Claim Boundaries:** Strictly prohibits claims of universal superiority, legal novelty, non-obviousness, patentability, or target-MCU hardware performance.
+5. **Hardware Boundary:** Physical MCU validation remains strictly deferred until authorized target hardware (NUCLEO-U575ZI-Q) and instrumentation are available.
+6. **Approval Gate:** K.10.4 is complete at execution/documentation level, pending formal ChatGPT review and closure. `main` remains unsynchronized. Next checkpoint upon approval is K.11.
+
+**Reason:** completes the post-K.10 adversarial research synthesis with strict evidence discipline, provides an auditable trade-off register, and establishes an evidence-bounded handoff into the final software synthesis phase.
+
+## D-127 — K.10.4 approved and closed; K.11 authorized
+**Status:** Accepted — ChatGPT approval, 2026-10-13
+
+K.10.4 — Final Technical Distinction & Research Conclusion — is formally **APPROVED AND CLOSED BY CHATGPT on 2026-10-13**. The authoritative research synthesis report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and audit record (`research/chat_records/chat_k10_4_record.md`) are accepted without modification.
+
+Checkpoint K.11 — Final Software Synthesis + Hardware-Validation Handoff — is authorized as the active next checkpoint.
+1. **Scope Limit:** K.11 is strictly limited to software research synthesis, publication results structure, and target-MCU hardware-validation specification.
+2. **Hardware Restriction:** No physical MCU execution, flashing, or hardware validation is authorized.
+3. **Branch Governance:** Canonical research branch remains `exp` (active feature branch: `feature/k10-4-final-technical-conclusion-2026-10-13`). `main` remains untouched and unsynchronized.
+4. **History Preservation:** The original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` remains protected.
+5. **Integrity:** Protected runtime files, Gates A–E, and the 400-execution K.10 empirical dataset remain 100% frozen.
+
+**Reason:** records formal closure of the P4 advantage/novelty investigation (K.10 through K.10.4) and authorizes the transition to the software closure and hardware handoff phase.
+
+
+
+
+| D-116 | Accepted for K.11 review | Keep the K.10 evidence interpretation bounded to CF04/CF07 and CF05 advantages, explicit counterexamples, shared quarantine, and fixed-capacity limitations. | Prevents unsupported universal-superiority claims and preserves the empirical record. |
+| D-117 | Accepted for K.11 review | Describe PA-01–PA-10 single-reference review as a bounded reviewed-set result; retain C1 multi-reference combination risk as unresolved. | Avoids overstating prior-art conclusions or implying legal novelty. |
+| D-118 | Accepted for K.11 review | Treat STM32U575ZI / NUCLEO-U575ZI-Q procedures as a future validation specification only. | K.11 does not authorize flashing, physical fault injection, or measurements. |
+| D-119 | Accepted for K.11 review | Keep `exp` and `main` unchanged during K.11; K.12 remains gated until explicit K.11 approval. | Preserves canonical history and prevents premature integration. |
+
+
+| D-120 | Accepted — K.11 formally approved and closed by ChatGPT (2026-10-13) | Approve the final software synthesis and hardware-validation specification as a future handoff, and authorize K.12 software-only demonstration productization and final audit. | The synthesis preserves the bounded host-model evidence, trade-offs, prior-art uncertainty, and physical-validation boundary. |
+| D-121 | Accepted — follow-up required in K.12 | Preserve and explicitly reconcile the CF01 P2 attempt-count discrepancy between the frozen K.10 results table/narrative and K.10.4 summary using original raw records if available; do not rerun K.10 or silently edit its results. | Maintains evidence integrity and prevents a conflicting attempt-count claim from entering the demonstration or publication narrative. |
+| D-122 | Accepted — frozen boundary | Keep `exp` and `main` unchanged during K.12 unless a later explicit ChatGPT decision authorizes integration; preserve the local-only commit in the original checkout. | Protects research provenance and prevents premature synchronization. |
+
+
+## D-123 — K.12 virtual connection interface and final-audit evidence boundary
+**Status:** Accepted for K.12 implementation — 2026-10-13
+
+K.12 may expose connect/disconnect controls only for the finite modeled virtual peripheral IDs I2C0, SPI0 and UART0. The virtual-system adapter stores link availability, includes it in the run digest, and rejects admission when a fixed scenario event refers to a disconnected resource. This is a virtual resource-availability test, not arbitrary pin remapping, not physical wiring and not a change to Gates A–E or recovery policy logic. 
+
+**Verification boundary:** Source and Git blob integrity can be checked remotely; compiler/CTest/browser behavior cannot be claimed without observed execution output. The absent original `k10_runs.csv` and `k10_traces.csv` prevent resolving the frozen CF01 P2 count discrepancy. No K.10 matrix rerun or edits to frozen results are permitted. No `exp` merge or `main` synchronization is authorized as part of K.12.
+
+
+| D-K12-01 | Accepted | Close K.12 after user-reported local CTest/UI-contract success and working browser UI; retain provenance as user-run, not independently CI-verified. | User confirmed the live software demonstration works; remote-only inspection cannot reproduce their local Windows environment. |
+| D-K12-02 | Accepted | Treat physical MCU implementation and measurements as future work. | The current milestone is a software-only research demonstration; the board plan is preparatory only. |
+| D-K12-03 | Accepted | Keep the CF01 P2 attempt-count discrepancy unresolved and exclude it from comparative claims until original run/trace records are available. | The original primary records were not present in the inspected remote branch; do not rerun the frozen matrix to replace them. |

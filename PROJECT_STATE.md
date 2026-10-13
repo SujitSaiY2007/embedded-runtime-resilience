@@ -1,9 +1,15 @@
+> **Latest closure update (2026-10-13): K.12 APPROVED AND CLOSED by ChatGPT based on user-reported successful local CTest/UI-contract checks and working browser UI. Physical MCU work is future work. CF01 attempt-count discrepancy remains documented and excluded from comparative claims. Main synchronization is the final repository integration step and must be verified by resulting remote refs.**
+
 # Project State
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status:** Gates A-E complete; Minimal Reference Implementation, K.1, K.2, and K.3 complete; integrated software demonstrator/methodology-lock phase active before MCU validation.  
+**Status (authoritative current state, 2026-10-13):** K.10, K.10.1, K.10.2, K.10.3, K.10.4, AND K.11 APPROVED AND CLOSED BY CHATGPT. K.12 — Professor-Facing Software Demonstration Productization & Final Software Audit — is the active authorized checkpoint. K.12 is software-only; physical MCU flashing, fault injection, and measurement remain unauthorized. `exp` is canonical (working branch: `feature/k10-4-final-technical-conclusion-2026-10-13`); `main` remains unchanged and unsynchronized.  
 **Project mode:** Solo software-dominant embedded-systems research project.
+
+> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. K.10.1–K.10.4 and K.11 are approved and closed; K.12 is authorized. Gates A–E, the protected C runtime, and K.10 empirical evidence remain frozen.
+
+
 
 ## Frozen development topic
 
@@ -605,3 +611,36 @@ K.10.1 attacks the remaining technical distinction. K.10.2 tests single-referenc
 ## Governance
 
 ChatGPT owns the chat-wise sequence. Antigravity may execute only inside the active ChatGPT-defined checkpoint. Historical branch plans and old prompts are provenance, not active instructions. The canonical active plan is `research/PART_II_CHAT_PLAN.md`; the exact current continuation prompt is `NEXT_CHAT_PROMPT.md`.
+
+
+---
+
+## K.11 status update — 2026-10-13
+
+K.11's synthesis and target-MCU validation specification have been drafted on the isolated working branch. See `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md` and `research/chat_records/chat_k11_record.md`.
+
+Startup verification observed working HEAD `26b037584bb0a0acce3a293bed3f5a516ffab6c2`, canonical `exp` at `ab766b47ce7bae2791028cea22b7915f8debc41c`, and `main` at `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`. All five protected Git blobs matched their expected SHAs. The local-only commit remains a local preservation obligation, not remotely verified.
+
+The K.11 report explicitly limits findings to the 400 deterministic host/reference executions. P4's measured advantages are bounded to CF04/CF07 and CF05; quarantine is shared across P0–P4; P2 wins the attempt-count comparison in CF16 (one attempt versus P4's three); `QMAX=16` and `EPMAX=1` are stated capacity confounds; and C1 multi-reference combination risk remains unresolved. No hardware validation has been performed.
+
+**K.11 status: deliverables drafted; formal checkpoint approval pending.** No physical hardware execution, MCU flashing, runtime redesign, experiment rerun, merge to `exp`, or synchronization of `main` is authorized. K.12 remains gated pending explicit K.11 closure.
+
+
+## K.11 formal closure — 2026-10-13
+
+ChatGPT completed substantive review and approved K.11. See `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md` and `research/chat_records/chat_k11_record.md`. The hardware section now defines a concrete future board/pin/clock/timeout baseline and clearly marks it as unexecuted. The unresolved K.10 CF01 P2 attempt-count discrepancy is documented; K.12 must reconcile it against original raw records if available and must not use the conflicting count as evidence.
+
+K.12 is authorized for software-only demo productization and final audit. No hardware execution or flashing is authorized. `exp` and `main` must remain unchanged until a later explicit integration authorization. Preserve the original local-only commit in the original checkout.
+
+
+---
+
+## K.12 implementation and audit status — 2026-10-13
+
+K.12 implementation is in progress on `feature/k10-4-final-technical-conclusion-2026-10-13`. The professor UI now includes the virtual I2C0/SPI0/UART0 connection workbench, frozen K.10 evidence summary, CF01 unresolved warning, and a future STM32U575ZI / NUCLEO-U575ZI-Q mapping explicitly marked pending physical validation. The C adapter exposes connection availability, includes it in the reproducibility digest, and rejects an event admission referencing a disconnected resource before reference-runtime state mutation. The CLI/bridge carry the configuration and expose adapter errors; CLI/UI contract tests were extended.
+
+The K.12 report, chat record and updated demo guide will document exact commit/tree evidence. Remote-only integrity checks cannot demonstrate that the original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` persists in the user's local checkout.
+
+**Verification limitation:** This ChatGPT session can retrieve/edit GitHub source but has no runnable local checkout/compiler/browser runtime. CMake build, CTest, server/API smoke tests and manual responsive/accessibility review are not executed here. K.12 must remain INCOMPLETE/BLOCKED unless these checks can be run and evidenced. The frozen K.10 campaign must not be rerun.
+
+**CF01:** Original raw K.10 CSV records are absent from the non-truncated remote branch tree. Keep the discrepancy unresolved and exclude CF01 P2 attempt count from comparison until original raw records are supplied. `exp` and `main` are frozen and must not be moved.

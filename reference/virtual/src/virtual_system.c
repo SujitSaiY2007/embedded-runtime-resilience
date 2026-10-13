@@ -104,6 +104,12 @@ static OutcomeCode admit_event(VirtualSystem *vs, uint16_t event_index_value,
         vs->adapter_error = true;
         return OUTCOME_INVALID_DEPENDENCY;
     }
+    const uint8_t peripheral_index = (uint8_t)spec->peripheral - 1u;
+    if (!vs->peripheral_connected[peripheral_index]) {
+        /* A disconnected virtual link blocks admission before runtime mutation. */
+        vs->adapter_error = true;
+        return OUTCOME_INVALID_DEPENDENCY;
+    }
     EventSlot e;
     memset(&e, 0, sizeof(e));
     e.type = spec->event_type;
@@ -271,6 +277,19 @@ void virtual_system_init(VirtualSystem *vs, const VirtualScenario *scenario,
                                0u);
     for (uint8_t i = 0u; i < VIRTUAL_MAX_EVENTS; ++i)
         vs->event_refs[i] = invalid_ref();
+    for (uint8_t p = 0u; p < VIRTUAL_MAX_PERIPHERALS; ++p)
+        vs->peripheral_connected[p] = true;
+}
+
+bool virtual_system_set_peripheral_connected(VirtualSystem *vs,
+                                           PeripheralId peripheral,
+                                           bool connected) {
+    if (vs == NULL || vs->scenario == NULL || vs->step_index != 0u ||
+        peripheral < PERIPH_I2C0 || peripheral > PERIPH_UART0) {
+        return false;
+    }
+    vs->peripheral_connected[(uint8_t)peripheral - 1u] = connected;
+    return true;
 }
 
 OutcomeCode virtual_system_step(VirtualSystem *vs) {
@@ -363,6 +382,8 @@ uint32_t virtual_system_digest(const VirtualSystem *vs) {
     if (vs == NULL) return 0u;
     uint32_t h = 2166136261u;
     h = hash_u32(h, vs->run_id);
+    for (uint8_t p = 0u; p < VIRTUAL_MAX_PERIPHERALS; ++p)
+        h = hash_byte(h, vs->peripheral_connected[p] ? 1u : 0u);
     h = hash_u32(h, vs->runtime.trace_count);
     for (uint16_t i = 0u; i < vs->runtime.trace_count; ++i) {
         const TraceRecord *t = &vs->runtime.trace[i];
