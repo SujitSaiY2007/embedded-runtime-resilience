@@ -68,3 +68,18 @@ Reasons:
 The new `PROJECT_COMPLETE_GUIDE.md` provides the end-to-end project explanation and the integration checklist. The remote graph has been inspected and the main gap quantified. That makes the next integration review actionable; it does not mean `main` has been updated or that K.12 is formally closed.
 
 **Current safe state:** keep `main` and `exp` unchanged; finish local-change reconciliation and final K.12 audit on the authorized feature branch, then request/record the explicit synchronization approval.
+
+
+## Final integration result — 2026-10-13
+
+**Integration status: MERGED AND REMOTE REFS VERIFIED.** Pull request [#9](https://github.com/SujitSaiY2007/embedded-runtime-resilience/pull/9) was merged using a merge commit after the user authorized project completion.
+
+- PR: #9 — K.10.4–K.12: Final research synthesis and software demonstrator
+- Merge commit: `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`
+- `main`: `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46` (verified after merge)
+- `exp`: `ab766b47ce7bae2791028cea22b7915f8debc41c` (unchanged)
+- `feature/k10-4-final-technical-conclusion-2026-10-13`: `0b7a3d2c7f0be1a14395598fb027d39c53506550` (preserved)
+
+The protected runtime files and Gate-defining artifacts were verified byte-identical to `exp` before merge. The K.8 matched-baseline report and frozen K.10 results were also unchanged between `exp` and the feature branch. The user reported successful local tests and a working UI; this was recorded as user-run validation, not independently reproduced CI. CF01 remains unresolved and excluded from comparative claims. Physical hardware remains future work.
+
+**Final disposition:** K.12 software-demo checkpoint is closed; `main` now contains the approved research synthesis, virtual software demonstrator, project guide and audit records. The `exp` reference branch was deliberately left unchanged. Do not claim physical MCU implementation or measurements have been completed.
