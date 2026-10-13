@@ -7,7 +7,7 @@
 **Startup working HEAD observed:** `26b037584bb0a0acce3a293bed3f5a516ffab6c2`  
 **Canonical `exp` HEAD observed:** `ab766b47ce7bae2791028cea22b7915f8debc41c`  
 **`main` HEAD observed:** `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`  
-**Status:** Deliverables drafted and committed; formal K.11 closure pending ChatGPT review.
+**Status:** APPROVED AND CLOSED BY CHATGPT (2026-10-13).
 
 ## 1. Authorized scope
 
@@ -52,3 +52,13 @@ The report specifies future toolchain/startup integration, clock-tree documentat
 ## 6. Protected state and next checkpoint
 
 The protected runtime and five protected blobs remain unchanged at the observed state. `exp` and `main` are not to be moved. K.12 is the next software demonstration productization checkpoint. K.11 closure is pending ChatGPT's substantive review of the committed deliverables; the existence of this record is not itself a closure approval.
+
+
+## 7. Substantive review and formal closure — 2026-10-13
+
+ChatGPT reviewed the K.11 report against the frozen K.10 results report and K.10.4 conclusion, checked continuity status, and verified the protected artifact hashes and branch boundaries. The report was approved with two explicit review notes:
+
+1. A concrete future hardware baseline is documented for NUCLEO-U575ZI-Q / STM32U575ZIT6Q: I2C1 PB8/PB9 at 100 kHz; SPI1 PA5/PA6/PA7 at 1 MHz, mode 0, 8-bit MSB-first; PD14 as GPIO chip select; MSI 16 MHz SYSCLK without PLL for initial baseline; 1 MHz timer tick where feasible; 10 ms initial transfer timeout. Pin mapping is grounded in ST UM2861 and must be checked against the actual board revision. These are planned settings, not physical measurements or executed configuration.
+2. The frozen K.10 CF01 row contains an unresolved internal discrepancy: P2's result cell states att=3 in the K.10 results report while its narrative says one attempt; the K.10.4 table says att=1. The original raw CSV was not retrievable through the inspected branch. No experiment was rerun and no K.10 data was edited. K.12 must reconcile from original raw records if available; CF01 P2 attempt count must not be used as a comparative claim until resolved. This does not change the separate CF16 P2-one-attempt vs P4-three-attempt finding.
+
+**Formal decision:** K.11 is APPROVED AND CLOSED. K.12 is authorized to begin software-only professor-facing demo productization and final audit. No physical MCU flashing, fault injection, or physical measurement is authorized. `exp` and `main` remain unchanged; no merge or main synchronization occurred. The original local-only commit remains a local preservation obligation.
