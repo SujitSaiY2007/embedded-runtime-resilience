@@ -221,3 +221,12 @@ The approved K.12 deliverables were integrated into `main` through pull request 
 - Preserved feature branch: `0b7a3d2c7f0be1a14395598fb027d39c53506550`
 
 K.12 is closed for the software demonstration based on the user's successful local test/UI report. The remote integration is verified; local execution is not independently reproducible from the remote connector and no CI run was found for the merge. Physical implementation, flashing, fault injection, and measurements are explicitly future work. CF01 remains unresolved and is not used as comparative evidence.
+
+
+## CF01 editorial reconciliation and project-closeout interpretation — 2026-10-13
+
+The CF01 issue is classified as a **historical table-versus-narrative transcription discrepancy**, not an open software-implementation defect or a blocker to K.12 closure. The frozen K.10 row reports P2 `SUCCESS, att=3` while its own explanatory text and the later K.10.4 synthesis report P2 `SUCCESS (att=1)`. The later interpretation is therefore consistent across two narrative records, but those records are not independent primary run logs. The original K.10 run/trace CSVs were not available in the inspected remote repository, so this audit cannot certify which numerical attempt count occurred in the original run.
+
+**Final presentation rule:** For CF01, state only the uncontested qualitative result: P2 reaches `SUCCESS`, P4 reaches `SUCCESS`, and P0 reaches `TERMINAL_ESCALATE` in the reported persistent-history case. Omit CF01's P2 attempt count and any numerical P2-vs-P4 cost ranking. Use the separately documented CF16 trade-off for the supported baseline lower-attempt example. This supersedes older instructions that treat CF01 as an ongoing *project-closure blocker*. The frozen source reports are retained unchanged as historical provenance; no attempt count is fabricated, no 400-run matrix is rerun, and no result is retroactively rewritten.
+
+**Disposition:** CF01 editorial reconciliation is CLOSED FOR SOFTWARE PROJECT PRESENTATION, with the historical numeric provenance limitation disclosed here. The project itself remains closed. Hardware validation remains future work.
