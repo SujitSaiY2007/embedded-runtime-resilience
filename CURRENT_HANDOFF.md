@@ -670,3 +670,16 @@ Gates A-E, `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, and
 
 ## Exact next-chat prompt
 See `NEXT_CHAT_PROMPT.md`. That file is the current authoritative ChatGPT startup prompt and must be replaced with the next checkpoint prompt whenever K.10.1 closes.
+
+
+---
+
+## K.11 update — 2026-10-13
+
+K.11 startup verification was performed against the working feature branch. The observed working HEAD was `26b037584bb0a0acce3a293bed3f5a516ffab6c2`, descended from K.10.4 closure. `exp` remained at `ab766b47ce7bae2791028cea22b7915f8debc41c`; `main` remained at `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`. All five protected Git blob SHAs matched the authorized values. The original local-only commit cannot be checked remotely and must be preserved locally.
+
+K.11 synthesis report: `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`. K.11 record: `research/chat_records/chat_k11_record.md`.
+
+The report preserves all empirical boundaries: 400 matched host/reference executions; bounded P4 advantages in CF04/CF07 and CF05; shared quarantine across P0–P4; P2's CF16 one-attempt result versus P4's three attempts; `QMAX=16` and `EPMAX=1` capacity limitations; PA-01–PA-10 single-reference conclusion scoped to reviewed references; and unresolved C1 multi-reference combination risk. No universal superiority, legal novelty, or hardware-validation claim is made.
+
+**Current status:** K.11 deliverables drafted and committed on the isolated working branch; formal K.11 closure awaits ChatGPT review. No hardware execution or MCU flashing occurred. No merge to `exp` and no synchronization of `main` is authorized. K.12 must not begin until K.11 is explicitly approved and closed.
