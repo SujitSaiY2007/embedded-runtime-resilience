@@ -8,7 +8,7 @@
 
 > **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
 
-**Current checkpoint status (2026-10-13): K.10, K.10.1, K.10.2, K.10.3, AND K.10.4 APPROVED AND CLOSED BY CHATGPT. K.11 — Final Software Synthesis + Hardware-Validation Handoff — is ACTIVE.** The exact execution brief is `NEXT_CHAT_PROMPT.md`. K.11 is strictly software synthesis and hardware specification; physical hardware execution, K.12, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
+**Current checkpoint status (2026-10-13): K.10, K.10.1, K.10.2, K.10.3, K.10.4, AND K.11 APPROVED AND CLOSED BY CHATGPT. K.12 — Professor-Facing Software Demonstration Productization & Final Software Audit — is ACTIVE AND AUTHORIZED.** The exact execution brief is `NEXT_CHAT_PROMPT.md`. K.12 is software-only; physical hardware execution and main synchronization remain gated until separately authorized.
 
 ## Global execution rules
 
@@ -283,3 +283,10 @@ K.11 deliverables are drafted on the isolated K.10.4 working branch:
 Startup integrity checks confirmed the expected `exp` and `main` HEADs and all five protected blob SHAs. The K.11 report carries forward the 400-run matrix without rerunning it; bounded P4 advantages in CF04/CF07 and CF05; shared quarantine; CF16's P2 one-attempt baseline advantage over P4's three attempts; `QMAX=16` / `EPMAX=1` capacity caveats; and unresolved C1 combination risk.
 
 **Checkpoint state: pending ChatGPT approval.** The K.11 report defines hardware procedures only. No physical MCU execution, flashing, or measurement occurred. Do not merge to `exp` or synchronize `main`. K.12 productization may begin only after K.11 is explicitly approved and closed.
+
+
+## K.11 closure record — 2026-10-13
+
+K.11 is formally approved and closed by ChatGPT. The synthesis report and chat record document the evidence boundaries, the future STM32U575ZI / NUCLEO-U575ZI-Q protocol, and an unresolved CF01 P2 attempt-count discrepancy in the frozen K.10 documents. K.12 must reconcile CF01 from original raw records if available without rerunning the K.10 matrix or editing frozen K.10 results.
+
+**K.12 is now the active authorized checkpoint** for software-only professor-facing demonstration productization and final audit. No MCU flashing, physical fault injection, physical measurements, merge to `exp`, or synchronization of `main` is authorized absent a later explicit approval.
