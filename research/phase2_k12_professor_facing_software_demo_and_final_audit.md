@@ -1,6 +1,6 @@
 # K.12 — Integrated Virtual Embedded-System Demonstration & Final Software Audit
 
-**Checkpoint verdict: INCOMPLETE / BLOCKED — remote source implementation committed; execution gate not yet satisfied.**
+**Checkpoint verdict: APPROVED AND CLOSED by ChatGPT (2026-10-13), based on user-reported local tests and working browser UI; not independently reproduced by remote CI.**
 
 **Date:** 2026-10-13  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
@@ -190,3 +190,22 @@ To finish without requesting an entire ZIP, the minimum missing evidence is:
 3. Access to the original local checkout only to verify local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` and any uncommitted files; remote GitHub data cannot establish that local state.
 
 Do not merge this feature branch to `exp`, move `main`, rerun K.10, modify protected runtime files, flash firmware, perform physical fault injection, or claim hardware validation as part of this blocked checkpoint.
+
+
+## Final user-run verification and closure addendum — 2026-10-13
+
+**Checkpoint disposition: K.12 APPROVED AND CLOSED by ChatGPT, based on user-reported local execution and live demonstration.** The user reported that the corrected UI contract checks passed, the complete CTest suite passed, and the browser UI was working. The screenshots establish a prior failing run due to stale digest expectations followed by updated expectations and a subsequent user report that everything passed. ChatGPT did not independently execute the local Windows build, tests, or browser; the verification provenance remains user-run, not CI-verified.
+
+The digest expectations were updated to the outputs observed from the current executable. This is a compatibility/test-contract update for the K.12 demonstrator. It must not be used to rewrite frozen K.10 evidence or to claim that the K.10 matrix was rerun. The frozen K.10 report remains unchanged. The K.8 matched-baseline report is byte-identical to the `exp` baseline in the remote feature branch; do not commit local edits that replace historical K.8 evidence with K.12 virtual-system digests.
+
+### Final scope and limitations
+
+- The software demonstration is complete for the user-reported environment: browser UI → Python bridge → C virtual-system adapter/CLI → existing C reference runtime → traces/outcome/digest → UI.
+- Physical MCU implementation, flashing, fault injection, and hardware measurements are **future work**. The NUCLEO-U575ZI-Q / STM32U575ZI information remains a proposed validation plan, not a completed implementation.
+- CF01's historical P2 attempt-count discrepancy remains unresolved because the original K.10 run/trace CSVs were unavailable in the inspected remote repository. The disputed count is excluded from comparative claims; the frozen matrix was not rerun.
+- Protected runtime and Gate artifacts remain byte-identical to `exp` as checked during this audit.
+- No API keys or paid cloud services are required for the software demo.
+
+### Repository integration disposition
+
+The complete guide and main-readiness audit are committed to the feature branch. The user has now authorized completing the project and preparing `main`. However, a final remote merge must still be executed and the resulting refs verified; this addendum itself does not claim that `main` has already changed. The exact merge decision and resulting SHAs must be appended after synchronization.
