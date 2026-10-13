@@ -34,7 +34,12 @@ This directory contains the normative design gates, experimental method and resu
 - [Prior-art investigation](novelty_investigation.md)
 - [Deep prior-art attack / topic freeze](deep_prior_art_attack_topic_freeze.md)
 
-### 5. Historical provenance
+### 5. References used and prior-art source inventory
+- [References Used folder](references_used/README.md) — consolidated register reconstructed from canonical research reports and checkpoint records.
+- [Reference register](references_used/REFERENCE_REGISTER.md) — source records, relevance, and verification status.
+- [Counting and verification notes](references_used/COUNTING_AND_VERIFICATION.md) — current inventory counts and explicit limits on what can be claimed about the full-month total.
+
+### 6. Historical provenance
 - [Checkpoint records](chat_records/) — original K.1–K.12 chat/checkpoint records retained for auditability.
 - [Part-II checkpoint plan](PART_II_CHAT_PLAN.md) — roadmap and closure record; read its final status first.
 - [Post-K.10 review plan](phase2_post_k10_review_plan.md).
