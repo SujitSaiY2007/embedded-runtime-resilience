@@ -47,7 +47,7 @@ The report specifies future toolchain/startup integration, clock-tree documentat
 
 - `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`
 - `research/chat_records/chat_k11_record.md`
-- Updated continuity artifacts and K.12 prompt (pending updates in this commit sequence).
+- Updated continuity artifacts and the gated K.12 continuation prompt are included in this K.11 commit sequence.
 
 ## 6. Protected state and next checkpoint
 
