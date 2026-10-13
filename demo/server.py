@@ -17,20 +17,47 @@ from pathlib import Path
 
 DEMO_DIR = Path(__file__).resolve().parent
 REPO_ROOT = DEMO_DIR.parent
+ALLOWED_SCENARIOS = {"S01", "S02", "S05", "S06", "S08", "S14"}
+ALLOWED_PERIPHERALS = {"I2C0", "SPI0", "UART0"}
 
-# Locate the compiled C virtual demo executable
+# CMake binary candidates across Windows and Unix builds.
 BIN_CANDIDATES = [
     REPO_ROOT / "reference" / "build" / "virtual" / "Debug" / "virtual_demo_cli.exe",
     REPO_ROOT / "reference" / "build" / "virtual" / "Release" / "virtual_demo_cli.exe",
     REPO_ROOT / "reference" / "build" / "virtual" / "virtual_demo_cli.exe",
+    REPO_ROOT / "reference" / "build" / "virtual" / "Debug" / "virtual_demo_cli",
+    REPO_ROOT / "reference" / "build" / "virtual" / "Release" / "virtual_demo_cli",
     REPO_ROOT / "reference" / "build" / "virtual" / "virtual_demo_cli",
 ]
 
+
 def find_cli_binary():
     for candidate in BIN_CANDIDATES:
-        if candidate.exists() and os.access(candidate, os.X_OK):
+        if candidate.is_file() and (os.name == "nt" or os.access(candidate, os.X_OK)):
             return candidate
     return None
+
+
+def parse_run_options(query):
+    scenario = query.get("scenario", ["S01"])[0]
+    variant_text = query.get("variant", ["4"])[0]
+    if scenario not in ALLOWED_SCENARIOS:
+        raise ValueError(f"Unsupported scenario: {scenario}")
+    try:
+        variant = int(variant_text)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("variant must be an integer from 0 to 4") from exc
+    if variant not in range(5):
+        raise ValueError("variant must be an integer from 0 to 4")
+    disconnected = []
+    for name in query.get("disconnect", []):
+        normalized = name.upper()
+        if normalized not in ALLOWED_PERIPHERALS:
+            raise ValueError(f"Unsupported virtual peripheral: {name}")
+        if normalized not in disconnected:
+            disconnected.append(normalized)
+    return scenario, variant, disconnected
+
 
 class DemoRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -39,18 +66,16 @@ class DemoRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
-        query = urllib.parse.parse_qs(parsed.query)
+        query = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
 
         if path == "/api/status":
             self.handle_api_status()
         elif path == "/api/scenarios":
             self.handle_api_scenarios()
-        elif path == "/api/step":
-            self.handle_api_step(query)
-        elif path == "/api/run":
-            self.handle_api_run(query)
+        elif path in {"/api/step", "/api/run"}:
+            self.handle_api_execution(path, query)
         else:
-            # Fall back to serving static files from demo/
+            # Serve static demo assets only; API calls never fall back to static results.
             super().do_GET()
 
     def send_json(self, data, status=200):
@@ -58,48 +83,23 @@ class DemoRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
-
-    def send_json_raw(self, raw_bytes, status=200):
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(raw_bytes)))
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
-        self.wfile.write(raw_bytes)
 
     def handle_api_status(self):
         cli = find_cli_binary()
         self.send_json({
-            "status": "ok",
+            "status": "ok" if cli else "degraded",
             "c_binary_found": cli is not None,
             "c_binary_path": str(cli) if cli else None,
-            "architecture": "UI -> Python Bridge -> C Virtual System -> C Reference Runtime"
+            "architecture": "UI -> Python Bridge -> C Virtual System -> C Reference Runtime",
+            "connection_configuration_supported": cli is not None,
+            "research_evidence_source": "frozen K.10 reports; not recomputed by UI"
         })
 
     def handle_api_scenarios(self):
-        cli = find_cli_binary()
-        if not cli:
-            self.send_json({"error": "C virtual system binary not found. Build reference/ first."}, 500)
-            return
-        # If pre-exported scenarios_data.json exists, return scenario metadata from it
-        data_file = DEMO_DIR / "scenarios_data.json"
-        if data_file.exists():
-            with open(data_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                summaries = []
-                for k, v in data.get("scenarios", {}).items():
-                    summaries.append({
-                        "id": v["id"],
-                        "name": v["name"],
-                        "description": v["description"],
-                        "step_count": v["step_count"]
-                    })
-                self.send_json({"scenarios": summaries})
-                return
-
+        # Registry is intentionally limited to scenarios compiled into the C CLI.
         self.send_json({"scenarios": [
             {"id": "S01", "name": "Independent Preservation Under Transient Fault", "step_count": 7},
             {"id": "S02", "name": "Ordered Dependency Blocking", "step_count": 8},
@@ -109,46 +109,56 @@ class DemoRequestHandler(http.server.SimpleHTTPRequestHandler):
             {"id": "S14", "name": "Mixed Dependencies and Deterministic Replay", "step_count": 9}
         ]})
 
-    def handle_api_step(self, query):
+    def handle_api_execution(self, path, query):
         cli = find_cli_binary()
         if not cli:
-            self.send_json({"error": "C virtual system binary not found. Build reference/ first."}, 500)
-            return
-
-        scenario = query.get("scenario", ["S01"])[0]
-        step = query.get("step", ["0"])[0]
-        variant = query.get("variant", ["4"])[0]
-
-        cmd = [str(cli), "--scenario", scenario, "--step", step, "--variant", variant]
-        try:
-            res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-            self.send_json_raw(res.stdout)
-        except subprocess.CalledProcessError as e:
             self.send_json({
-                "error": "C binary execution error",
-                "stderr": e.stderr.decode("utf-8", errors="replace"),
-                "cmd": cmd
-            }, 500)
-
-    def handle_api_run(self, query):
-        cli = find_cli_binary()
-        if not cli:
-            self.send_json({"error": "C virtual system binary not found. Build reference/ first."}, 500)
+                "error": "C virtual-system executable not found. Build reference/ first.",
+                "c_binary_found": False,
+                "hint": "Run: cmake -S reference -B reference/build && cmake --build reference/build"
+            }, 503)
             return
-
-        scenario = query.get("scenario", ["S01"])[0]
-        variant = query.get("variant", ["4"])[0]
-
-        cmd = [str(cli), "--scenario", scenario, "--run", "--variant", variant]
         try:
-            res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-            self.send_json_raw(res.stdout)
-        except subprocess.CalledProcessError as e:
-            self.send_json({
-                "error": "C binary execution error",
-                "stderr": e.stderr.decode("utf-8", errors="replace"),
-                "cmd": cmd
-            }, 500)
+            scenario, variant, disconnected = parse_run_options(query)
+            if path == "/api/step":
+                step_text = query.get("step", ["0"])[0]
+                try:
+                    step = int(step_text)
+                except (TypeError, ValueError) as exc:
+                    raise ValueError("step must be an integer") from exc
+                if step < 0:
+                    raise ValueError("step must be zero or greater")
+                cmd = [str(cli), "--scenario", scenario, "--step", str(step), "--variant", str(variant)]
+            else:
+                cmd = [str(cli), "--scenario", scenario, "--run", "--variant", str(variant)]
+            for name in disconnected:
+                cmd.extend(["--disconnect", name])
+            res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 check=False, timeout=10)
+            if res.returncode != 0:
+                self.send_json({
+                    "error": "C virtual-system execution failed",
+                    "stderr": res.stderr.decode("utf-8", errors="replace"),
+                    "return_code": res.returncode
+                }, 500)
+                return
+            try:
+                payload = json.loads(res.stdout.decode("utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                self.send_json({"error": "C executable returned malformed JSON"}, 502)
+                return
+            # UI callers can reliably distinguish authoritative output from offline export.
+            if payload.get("runtime_authoritative") is not True:
+                self.send_json({"error": "C output did not declare runtime authority"}, 502)
+                return
+            self.send_json(payload)
+        except ValueError as exc:
+            self.send_json({"error": str(exc)}, 400)
+        except subprocess.TimeoutExpired:
+            self.send_json({"error": "C execution timed out after 10 seconds"}, 504)
+        except OSError as exc:
+            self.send_json({"error": f"Could not launch C executable: {exc}"}, 500)
+
 
 def main():
     port = 8000
