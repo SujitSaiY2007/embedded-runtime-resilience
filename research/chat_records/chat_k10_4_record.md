@@ -131,3 +131,15 @@ The five protected Git blob SHAs were verified against the canonical base:
 ## 8. Explicit Approval Status Declaration
 
 > **K.10.4 documentation and research synthesis are prepared for ChatGPT review. K.10.4 is NOT formally approved or closed. No hardware validation has been authorized, and `main` remains unsynchronized.**
+
+---
+
+## 9. Formal ChatGPT Approval & Closure (2026-10-13)
+
+- **Formal Approval Event:** ChatGPT formally reviewed, approved, and closed checkpoint K.10.4 on 2026-10-13.
+- **Accepted Artifacts:**
+  - `research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md` accepted without modification.
+  - Historical execution record in Sections 1–8 of this document accepted without modification.
+- **Handoff Decision:** Decision D-127 formally closes K.10.4 and authorizes checkpoint K.11 (Final Software Synthesis + Hardware-Validation Handoff).
+- **Scope Restrictions for K.11:** Software synthesis, publication results structuring, and target-MCU validation specification only. Physical hardware execution remains strictly prohibited. `exp` remains canonical; `main` remains unsynchronized. Original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` remains protected.
+

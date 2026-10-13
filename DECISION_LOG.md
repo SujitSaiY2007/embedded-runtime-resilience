@@ -540,7 +540,7 @@ K.10.4 — Final Technical Distinction & Research Conclusion — is authorized a
 **Reason:** explicitly separates measured host-model behavior from the still-unresolved technical distinction, and records the strongest combination attacks before final research synthesis.
 
 ## D-126 — K.10.4 final research synthesis completed; handoff to ChatGPT review
-**Status:** Accepted (Approval-Gated: Pending ChatGPT Review) — 2026-10-13
+**Status:** Accepted (Historical completion record; formally approved in D-127) — 2026-10-13
 
 The K.10.4 final technical distinction and research conclusion has been prepared (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`).
 1. **Evidence Boundary:** Synthesizes the 400-execution host/reference dataset across 16 case families. Confirms bounded P4 advantages in CF04/CF07 (fail-closed ambiguous association) and CF05 (ladder termination bounds).
@@ -551,4 +551,19 @@ The K.10.4 final technical distinction and research conclusion has been prepared
 6. **Approval Gate:** K.10.4 is complete at execution/documentation level, pending formal ChatGPT review and closure. `main` remains unsynchronized. Next checkpoint upon approval is K.11.
 
 **Reason:** completes the post-K.10 adversarial research synthesis with strict evidence discipline, provides an auditable trade-off register, and establishes an evidence-bounded handoff into the final software synthesis phase.
+
+## D-127 — K.10.4 approved and closed; K.11 authorized
+**Status:** Accepted — ChatGPT approval, 2026-10-13
+
+K.10.4 — Final Technical Distinction & Research Conclusion — is formally **APPROVED AND CLOSED BY CHATGPT on 2026-10-13**. The authoritative research synthesis report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and audit record (`research/chat_records/chat_k10_4_record.md`) are accepted without modification.
+
+Checkpoint K.11 — Final Software Synthesis + Hardware-Validation Handoff — is authorized as the active next checkpoint.
+1. **Scope Limit:** K.11 is strictly limited to software research synthesis, publication results structure, and target-MCU hardware-validation specification.
+2. **Hardware Restriction:** No physical MCU execution, flashing, or hardware validation is authorized.
+3. **Branch Governance:** Canonical research branch remains `exp` (active feature branch: `feature/k10-4-final-technical-conclusion-2026-10-13`). `main` remains untouched and unsynchronized.
+4. **History Preservation:** The original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` remains protected.
+5. **Integrity:** Protected runtime files, Gates A–E, and the 400-execution K.10 empirical dataset remain 100% frozen.
+
+**Reason:** records formal closure of the P4 advantage/novelty investigation (K.10 through K.10.4) and authorizes the transition to the software closure and hardware handoff phase.
+
 

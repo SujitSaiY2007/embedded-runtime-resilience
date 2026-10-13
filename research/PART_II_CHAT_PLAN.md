@@ -8,7 +8,7 @@
 
 > **Authority rule:** This file is the only active Part-II chat sequence. Earlier roadmap wording that conflicts with this document is historical/superseded. Historical chat records are retained for provenance and are not active instructions.
 
-**Current checkpoint status (2026-10-13): K.10, K.10.1, K.10.2, and K.10.3 APPROVED AND CLOSED. K.10.4 — Final Technical Distinction & Research Conclusion — IMPLEMENTATION COMPLETE, PENDING CHATGPT APPROVAL.** The exact execution brief for the upcoming checkpoint is in `NEXT_CHAT_PROMPT.md` (K.11 software synthesis). K.11, K.12, hardware validation, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
+**Current checkpoint status (2026-10-13): K.10, K.10.1, K.10.2, K.10.3, AND K.10.4 APPROVED AND CLOSED BY CHATGPT. K.11 — Final Software Synthesis + Hardware-Validation Handoff — is ACTIVE.** The exact execution brief is `NEXT_CHAT_PROMPT.md`. K.11 is strictly software synthesis and hardware specification; physical hardware execution, K.12, and main synchronization remain gated until their own checkpoints are completed and explicitly approved.
 
 ## Global execution rules
 
@@ -179,7 +179,7 @@ Do not force a positive result. The final technical conclusion may state:
 - inconclusive.
 
 ### Exit
-**IMPLEMENTATION COMPLETE (Pending ChatGPT Approval, 2026-10-13).** The final report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and chat record (`research/chat_records/chat_k10_4_record.md`) have been authored and cross-audited. The research conclusion confirms bounded P4 advantages in CF04/CF07 and CF05, preserves shared quarantine preservation and the CF16 baseline win, confirms single-reference anticipation is refuted across PA-01–PA-10, and documents unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C). K.11 is the authorized next checkpoint upon ChatGPT approval, focusing strictly on software synthesis and hardware validation protocol specification without initiating hardware execution.
+**APPROVED AND CLOSED BY CHATGPT — 2026-10-13.** The authoritative final research report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and chat record (`research/chat_records/chat_k10_4_record.md`) are formally accepted without modification. The research conclusion confirms bounded P4 advantages in CF04/CF07 and CF05, preserves shared quarantine preservation and the CF16 baseline win, confirms single-reference anticipation is refuted across PA-01–PA-10, and documents unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C). Checkpoint K.11 is authorized as the active next checkpoint, focusing strictly on software synthesis and hardware validation protocol specification without initiating physical hardware execution.
 
 ---
 

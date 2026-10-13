@@ -2,13 +2,13 @@
 
 ## Session status — authoritative current state (2026-10-13)
 
-**K.10, K.10.1, K.10.2, and K.10.3 APPROVED AND CLOSED. K.10.4 — Final Technical Distinction & Research Conclusion — IMPLEMENTATION COMPLETE, PENDING CHATGPT APPROVAL.** The K.10.4 final report (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`) and chat record (`research/chat_records/chat_k10_4_record.md`) have been prepared and cross-audited. The research conclusion synthesizes 400 matched executions across 16 case families, confirms bounded P4 advantages in CF04/CF07 (fail-closed ambiguous association) and CF05 (ladder termination bounds), preserves shared quarantine preservation across P0–P4, records the CF16 baseline win (P2: 1 attempt vs P4: 3 attempts), confirms single-reference anticipation is refuted across PA-01–PA-10, and documents unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C). K.11 is the next authorized checkpoint upon ChatGPT approval. Do not restart K.10 experiments, modify runtime files, begin hardware validation, or sync `main`.
+**K.10, K.10.1, K.10.2, K.10.3, AND K.10.4 APPROVED AND CLOSED BY CHATGPT (2026-10-13). K.11 — Final Software Synthesis + Hardware-Validation Handoff — is now the active authorized next checkpoint.** The K.10.4 final technical distinction report and chat record have been accepted without revision. K.11 is strictly limited to software research synthesis, publication results structure, and target-MCU hardware-validation specification. No physical hardware execution or MCU flashing is authorized. The original local-only commit (`9c6596b2c32bf79bb652f3881e6d41695d43bb38`) remains preserved. `exp` is canonical; `main` remains unsynchronized until post-K.12 closure.
 
 - Canonical branch: `exp`. Current working branch: `feature/k10-4-final-technical-conclusion-2026-10-13`.
 - `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` have been compared with K.10's canonical baseline; their SHA-256 digests and Git blob SHAs match exactly (100% byte-identical).
 - Gate-defining artifacts `research/phase2_k9_methodology_lock.md`, `research/phase2_k9_2_p4_advantage_novelty_design.md`, and `research/phase1_reference_implementation_design.md` remain 100% byte-identical.
 - Keep Gates A–E, `policy_decide()`, `runtime_apply_policy()`, both protected runtime files, and K.10 results frozen. Do not sync `main` until ChatGPT reviews and explicitly approves the completed checkpoints.
-- **Active checkpoint status:** K.10.4 pending ChatGPT review. Next checkpoint: K.11. Exact next-chat instructions are in `NEXT_CHAT_PROMPT.md`.
+- **Active checkpoint:** K.11 authorized. Exact next-chat instructions are in `NEXT_CHAT_PROMPT.md`.
 - Historical handoff sections below are retained as provenance. Any old “active handoff” block is superseded by this opening section and `research/PART_II_CHAT_PLAN.md`.
 
 
