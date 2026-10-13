@@ -1,6 +1,6 @@
 # K.11 — Final Software Synthesis and Hardware-Validation Handoff
 
-**Status:** DRAFTED FOR CHATGPT CHECKPOINT REVIEW  
+**Status:** APPROVED AND CLOSED BY CHATGPT (2026-10-13)  
 **Date:** 2026-10-13  
 **Working branch:** `feature/k10-4-final-technical-conclusion-2026-10-13`  
 **Canonical reference branch:** `exp` at `ab766b47ce7bae2791028cea22b7915f8debc41c`  
@@ -251,3 +251,50 @@ Recommended tables/figures: system-state/transition diagram; experimental matrix
 - [ ] Merge to `exp` and sync to `main` — not authorized by K.11.
 
 **Checkpoint conclusion:** K.11 defines the evidence-bounded software synthesis and a concrete future hardware-validation protocol. Formal K.11 closure remains subject to ChatGPT review of the committed deliverables.
+
+---
+
+## 12. Substantive review addendum and locked implementation baseline
+
+**Review disposition:** K.11 is approved and closed by ChatGPT on 2026-10-13, subject to the explicit non-blocking evidence-reconciliation item below being carried into K.12. This approval validates the K.11 synthesis and specification as a handoff; it does not assert hardware execution, legal novelty, or universal superiority.
+
+### 12.1 Concrete target-board baseline for the future authorized hardware phase
+
+The selected board is **NUCLEO-U575ZI-Q**, whose on-board MCU is **STM32U575ZIT6Q**. At the start of the hardware phase, record the board revision and MCU silicon revision printed/identified on the actual unit and consult the matching STM32U575 device errata and NUCLEO-U575ZI-Q board manual. ST's board manual is UM2861; ST's product page identifies the MCU fitted to this board. Sources:
+- ST NUCLEO-U575ZI-Q product page: https://www.st.com/en/evaluation-tools/nucleo-u575zi-q.html
+- ST STM32U5 Nucleo-144 board user manual UM2861: https://www.st.com/resource/en/user_manual/um2861-stm32u5-nucleo144-board-mb1549-stmicroelectronics.pdf
+- ST STM32U575 device page: https://www.st.com/en/microcontrollers-microprocessors/stm32u575zi.html
+
+Use this documented **initial baseline** unless a separately recorded pin-conflict or board-revision check requires an approved alternative:
+
+| Function | MCU pin | Board header / signal | Baseline setting |
+|---|---|---|---|
+| I2C1 SCL | PB8 | Arduino Zio CN7, D15 / I2C_A_SCL | 100 kHz standard mode |
+| I2C1 SDA | PB9 | Arduino Zio CN7, D14 / I2C_A_SDA | 3.3 V bus; external pull-ups only after checking existing board/fixture pull-ups |
+| SPI1 SCK | PA5 | Arduino Zio CN7, D13 / SPI_A_SCK | SPI mode 0, 1 MHz initial clock |
+| SPI1 MISO | PA6 | Arduino Zio CN7, D12 / SPI_A_MISO | 8-bit frames, MSB first |
+| SPI1 MOSI | PA7 | Arduino Zio CN7, D11 / SPI_A_MOSI | 8-bit frames, MSB first |
+| SPI1 software chip select | PD14 | Arduino Zio CN7, D10 / SPI_A_CS | GPIO-controlled, inactive high for the test fixture unless the fixture protocol requires otherwise |
+| Ground reference | Board GND | Corresponding header GND | Common ground between board and compatible fixture |
+
+These mappings are based on UM2861's connector pinout and must still be checked against the physical board revision and any connected shields. Do not connect an unknown peripheral or assume that a connector pin is electrically free merely because the MCU alternate function exists. SPI mode 0 and 1 MHz are the initial fixture protocol choices, not claims that all SPI peripherals require those settings. The fixture protocol must explicitly define the test target and response semantics.
+
+**Clock baseline:** use the internal MSI oscillator selected at **16 MHz as SYSCLK**, with no PLL, and AHB/APB prescalers at 1 for the initial baseline. Select peripheral clock sources explicitly in RCC; use the documented bus clock for I2C1/SPI1 unless the selected reference manual or driver configuration requires another supported source. Set Flash latency and voltage-scaling configuration according to the exact STM32U575 datasheet/reference manual before switching clocks. Record the measured/verified clock configuration in firmware output. This is a proposed conservative starting configuration, not a verified physical configuration.
+
+**Timer and deadlines:** use one documented hardware timer as a monotonic timestamp source, configured for a 1 MHz counter tick if the selected timer clock and prescaler permit it. Define the initial software timeout for controlled transfer tests as **10 ms**, then preregister any additional timeout values before data collection. Record wraparound handling and prove timeout conversion against the actual timer clock configuration.
+
+**Build and memory:** the hardware phase must pin one exact Arm GNU Toolchain release (or one exact Arm-compatible Clang/LLVM release), CMSIS Core version, STM32U5 CMSIS device package, STM32CubeU5 HAL/LL release if used, linker script revision, startup/system source, optimization/debug flags, and board/MCU revision in a checked-in manifest. Do not claim reproducibility from compiler family names alone. Use the official STM32U5 CMSIS startup/system files matched to the chosen package; no hand-copied startup file with an unrecorded provenance. The reference runtime remains an unchanged source unit behind the adapter.
+
+**Instrumentation baseline:** capture I2C at 100 kHz and SPI at 1 MHz with a logic analyzer configured for at least 10 MS/s (20 MS/s preferred for timing margin) and thresholds compatible with the 3.3 V logic domain. Use an oscilloscope for voltage/edge integrity and controlled disturbance timing. Probe loading, sample rates, thresholds, and channel-to-firmware trace alignment must be recorded. These are minimum planning values; instrument adequacy must be reassessed for faster edges or any higher bus rate.
+
+### 12.2 CF01 source-table inconsistency — preserved, not silently repaired
+
+A review cross-check found a pre-existing discrepancy in the frozen K.10 records:
+- In `research/phase2_k10_p4_advantage_novelty_results.md`, the CF01 row's P2 result field states `SUCCESS, att=3`, while the row's explanatory text says P2 succeeds in one attempt.
+- The CF01 row in `research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md` records P2 as `SUCCESS (att=1)`.
+
+The existing raw CSV paths are cited by the reports but were not retrievable through the inspected branch contents during this review. No experiment was rerun and no frozen K.10 result was edited. Therefore, the **CF01 P2 attempt count remains unresolved** and must not be used as a comparative claim until K.12's final audit reconciles it against the original raw records if those records are available. This discrepancy does not alter the K.11 CF16 comparison, whose one-attempt P2 versus three-attempt P4 finding is retained from the K.10 report.
+
+### 12.3 Formal closure and handoff
+
+K.11 is **APPROVED AND CLOSED**. K.12 is authorized to begin software-only professor-facing demonstration productization and final software audit. K.12 does not inherit permission for MCU flashing, physical fault injection, or physical measurement. The `exp` branch remains canonical and unchanged; `main` remains unsynchronized. The original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` remains a preservation obligation for the original local checkout.
