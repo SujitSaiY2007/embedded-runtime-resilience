@@ -7,7 +7,7 @@
 ## Counting rule
 
 - **Primary verified register:** A source has a stable source page/identifier and enough bibliographic or patent metadata to identify it unambiguously. “Verified” here means identity/metadata verified against the linked publisher, proceedings, institutional, official project, or patent-record page. It does **not** mean the full text or every claim has been independently audited.
-- **Additional / unresolved:** The historical project records name a topic or candidate, but this pass did not recover enough reliable primary-source metadata to promote it to the primary count. These items are still counted in the overall inventory, but never represented as verified references.
+- **Additional / additional-source:** The historical project records name a topic or candidate, but this pass did not recover enough reliable primary-source metadata to promote it to the primary count. These items are still counted in the overall inventory, but never represented as verified references.
 - **Not counted twice:** Related patent publication/grant numbers in the same family are grouped under one family/source record where appropriate. A research area is not a paper. A repository/project homepage is not interchangeable with a peer-reviewed paper.
 - The inventory is reconstructed from the repository's preserved notes plus source-level checks recorded below. It is not a claim that every item was read in full or cited in the manuscript.
 
