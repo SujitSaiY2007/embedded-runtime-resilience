@@ -538,3 +538,17 @@ K.10.3 is formally approved and closed. The report analyzes three primary combin
 K.10.4 — Final Technical Distinction & Research Conclusion — is authorized as the next active checkpoint. It must synthesize K.10 evidence and K.10.1–K.10.3 findings, preserve measured trade-offs and limitations, and not rerun experiments or modify the runtime. main remains untouched.
 
 **Reason:** explicitly separates measured host-model behavior from the still-unresolved technical distinction, and records the strongest combination attacks before final research synthesis.
+
+## D-126 — K.10.4 final research synthesis completed; handoff to ChatGPT review
+**Status:** Accepted (Approval-Gated: Pending ChatGPT Review) — 2026-10-13
+
+The K.10.4 final technical distinction and research conclusion has been prepared (`research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`).
+1. **Evidence Boundary:** Synthesizes the 400-execution host/reference dataset across 16 case families. Confirms bounded P4 advantages in CF04/CF07 (fail-closed ambiguous association) and CF05 (ladder termination bounds).
+2. **Attribution Locks:** Explicitly preserves that exact-event quarantine is shared across P0–P4 in `ref_runtime.c` and is not a P4-exclusive advantage; preserves the CF16 baseline win (P2 succeeds in 1 attempt vs P4 in 3 attempts); preserves 6/16 parity outcomes (CF02, CF09, CF11–CF13, CF15) and capacity confounds (`QMAX=16`, `EPMAX=1`).
+3. **Prior-Art Status:** Confirms single-reference anticipation is refuted across all inspected primary candidates (PA-01 through PA-10). Documents persistent, unresolved high technical-combination risk under C1 (Phoenix + IBM PA-08 + QP/C).
+4. **Claim Boundaries:** Strictly prohibits claims of universal superiority, legal novelty, non-obviousness, patentability, or target-MCU hardware performance.
+5. **Hardware Boundary:** Physical MCU validation remains strictly deferred until authorized target hardware (NUCLEO-U575ZI-Q) and instrumentation are available.
+6. **Approval Gate:** K.10.4 is complete at execution/documentation level, pending formal ChatGPT review and closure. `main` remains unsynchronized. Next checkpoint upon approval is K.11.
+
+**Reason:** completes the post-K.10 adversarial research synthesis with strict evidence discipline, provides an auditable trade-off register, and establishes an evidence-bounded handoff into the final software synthesis phase.
+
