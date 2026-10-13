@@ -644,3 +644,6 @@ The K.12 report, chat record and updated demo guide will document exact commit/t
 **Verification limitation:** This ChatGPT session can retrieve/edit GitHub source but has no runnable local checkout/compiler/browser runtime. CMake build, CTest, server/API smoke tests and manual responsive/accessibility review are not executed here. K.12 must remain INCOMPLETE/BLOCKED unless these checks can be run and evidenced. The frozen K.10 campaign must not be rerun.
 
 **CF01:** Original raw K.10 CSV records are absent from the non-truncated remote branch tree. Keep the discrepancy unresolved and exclude CF01 P2 attempt count from comparison until original raw records are supplied. `exp` and `main` are frozen and must not be moved.
+
+
+> **Final integration status (2026-10-13): K.12 APPROVED AND CLOSED. Pull request #9 merged to `main` at `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`; `main` was verified at that SHA, `exp` remains unchanged at `ab766b47ce7bae2791028cea22b7915f8debc41c`, and the feature branch is preserved at `0b7a3d2c7f0be1a14395598fb027d39c53506550`. User-reported local CTest/UI contract tests and browser demo passed; not independently reproduced by CI. Hardware implementation is future work. CF01 remains unresolved and excluded from comparative claims. See `research/main_branch_readiness_audit.md`.
