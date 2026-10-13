@@ -1,4 +1,6 @@
-# Decision Log
+# Decision Log — Current Decisions and Historical Record
+
+> **Current disposition (2026-10-13):** K.10–K.12 software/research scope is closed. `main` is the reader-facing integrated project; `exp` remains the preserved research baseline. The curated public structure is in `README.md` and `docs/`. Hardware implementation is future work. CF01's disputed P2 attempt count is omitted from comparisons while frozen historical records remain intact. Older entries below record decisions at the time and are superseded where they conflict with this current disposition.
 
 | ID | Status | Decision | Reason |
 |---|---|---|---|
