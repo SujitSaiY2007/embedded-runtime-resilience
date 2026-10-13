@@ -60,6 +60,22 @@ static void test_S08_ambiguous_no_fabricated_ref(void) {
     assert(vs.runtime.slots[0u].fault_associated == false);
 }
 
+static void test_disconnected_virtual_link_is_rejected(void) {
+    VirtualSystem disconnected, connected;
+    virtual_system_init(&disconnected, &scenario_S01, VAR_P4_INTEGRATED, 1099u);
+    assert(virtual_system_set_peripheral_connected(&disconnected, PERIPH_I2C0, false));
+    assert(virtual_system_step(&disconnected) == OUTCOME_INVALID_DEPENDENCY);
+    assert(disconnected.adapter_error);
+    assert(disconnected.runtime.trace_count == 0u);
+    assert(disconnected.runtime.slots[0u].state == ST_FREE);
+    assert(!virtual_system_complete(&disconnected));
+    assert(!virtual_system_set_peripheral_connected(&disconnected, PERIPH_I2C0, true));
+    virtual_system_init(&connected, &scenario_S01, VAR_P4_INTEGRATED, 1099u);
+    assert(virtual_system_step(&connected) == OUTCOME_SUCCESS);
+    assert(connected.runtime.trace_count > 0u);
+    assert(virtual_system_digest(&disconnected) != virtual_system_digest(&connected));
+}
+
 static void test_S14_replay_digest(void) {
     VirtualSystem a, b;
     virtual_system_init(&a, &scenario_S14, VAR_P4_INTEGRATED, 1014u);
@@ -119,6 +135,7 @@ int main(int argc, char **argv) {
     test_S05_retry_success_and_correlation();
     test_S06_bounded_progression();
     test_S08_ambiguous_no_fabricated_ref();
+    test_disconnected_virtual_link_is_rejected();
     test_S14_replay_digest();
 
     if (argc > 1 && strcmp(argv[1], "--dump") == 0) {
