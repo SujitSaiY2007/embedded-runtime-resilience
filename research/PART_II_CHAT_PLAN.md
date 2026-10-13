@@ -270,3 +270,16 @@ At the end of every checkpoint, the current chat MUST leave:
 The next ChatGPT chat begins by reading the repository state and that exact prompt.
 
 **Antigravity execution never becomes the chat sequence. It is an execution tool inside the ChatGPT-defined checkpoint.**
+
+
+---
+
+## K.11 checkpoint record — 2026-10-13
+
+K.11 deliverables are drafted on the isolated K.10.4 working branch:
+- `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`
+- `research/chat_records/chat_k11_record.md`
+
+Startup integrity checks confirmed the expected `exp` and `main` HEADs and all five protected blob SHAs. The K.11 report carries forward the 400-run matrix without rerunning it; bounded P4 advantages in CF04/CF07 and CF05; shared quarantine; CF16's P2 one-attempt baseline advantage over P4's three attempts; `QMAX=16` / `EPMAX=1` capacity caveats; and unresolved C1 combination risk.
+
+**Checkpoint state: pending ChatGPT approval.** The K.11 report defines hardware procedures only. No physical MCU execution, flashing, or measurement occurred. Do not merge to `exp` or synchronize `main`. K.12 productization may begin only after K.11 is explicitly approved and closed.
