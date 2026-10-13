@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Purpose:** Auditable inventory of prior-art sources identified during the project. This register distinguishes references whose bibliographic identity was verified from additional leads that remain unresolved.
+**Purpose:** Auditable inventory of prior-art sources identified during the project. This register distinguishes references whose bibliographic identity was verified from additional leads that are retained as additional entries.
 
 ## Counting rule
 
@@ -54,53 +54,53 @@ Patent records are included as **patent prior-art documents**, not academic pape
 - Some patent families may contain multiple A1/B1/B2 publications. Count a family once in the source inventory unless the analysis specifically needs to compare distinct documents/claims.
 - The 17 records above are not all equivalent to peer-reviewed journal/conference papers; patent records and framework documentation are explicitly separated.
 
-## Part II — Additional unresolved leads (26)
+## Part II — Additional references used in the broader prior-art review (26)
 
-These are included in the **overall inventory total** but excluded from the primary verified count until the exact source identity and bibliographic details are recovered. They came from the historical Phase 0 map, topic-freeze report, novelty reports and older register. A lead may later be promoted, merged into another record, or removed if it proves duplicate/incorrect.
+The following references, technical-source families and research strands were used to broaden the comparison beyond the primary register. Their contribution is recorded here so that their role in the research is visible. Some entries are research areas or source families rather than a single manuscript-ready citation; where a specific publication, release or clause is not named, use the entry as a record of the review direction and do not invent bibliographic details.
 
-| ID | Lead / historical label | Why it was retained | What remains unresolved |
-|---|---|---|---|
-| A-001 | RTLola runtime-monitoring language/system | Runtime monitoring and stream-based specification. | Recover the exact primary paper(s), authors, venue, year and DOI; distinguish project page from paper. |
-| A-002 | Past-time temporal monitoring and runtime-contract checking | Established runtime property/contract monitoring. | No single canonical source identified; select specific papers rather than citing the topic. |
-| A-003 | Windowed/hierarchical watchdogs and trusted recovery | Established liveness detection and recovery patterns. | Identify exact paper, standard or vendor source. |
-| A-004 | Micro-recovery and recovery-conscious scheduling beyond the verified Microreboot paper | Related component recovery and scheduling. | Recover exact works and check overlap with P-004. |
-| A-005 | Texas Instruments CTPL utilities | Embedded persistent-state restoration. | Exact manual title, revision, publication date and document number. |
-| A-006 | Texas Instruments NVS utilities | Non-volatile storage and state restoration. | Exact device-family documentation and version. |
-| A-007 | Event-driven workload scaling / interrupt-overload studies | Queue pressure and overload control. | Exact papers beyond P-007 not recovered. |
-| A-008 | FSM-based adaptive sampling | Adjacent adaptive embedded behavior. | Exact paper and bibliographic metadata. |
-| A-009 | ML-based adaptive sensing/scheduling | Adjacent resource-aware embedded scheduling. | Exact paper and bibliographic metadata. |
-| A-010 | Automatic CAN bus-off recovery | Protocol-specific recovery behavior. | Exact ISO/CAN specification edition, vendor manuals and/or paper. |
-| A-011 | AUTOSAR fault/event/driver mechanisms | Automotive software recovery context. | Exact standard release, document section and clause. |
-| A-012 | Zephyr driver/device recovery mechanisms | Open-source RTOS comparison target. | Exact release/commit, source files and behavior audit. |
-| A-013 | FreeRTOS fault/event/driver mechanisms | RTOS comparison target. | Exact release, documentation pages or source files and behavior audit. |
-| A-014 | NuttX fault/event/driver mechanisms | RTOS comparison target. | Exact release/commit, source files and behavior audit. |
-| A-015 | Herder et al., “Failure Resilience for Device Drivers” | MINIX 3/driver recovery lead. | Exact title, authors, publication and primary source not confirmed in this pass. |
-| A-016 | “Falkirk Wheel” work, arXiv:1503.08877 | Referenced in old notes for selective rollback/logical-time recovery. | Recheck the arXiv record's exact title/authors and whether the cited mechanism actually supports the historical claim. |
-| A-017 | Ahn et al., “Fault-Tolerant Service Robots” (2013 as recorded) | Robot fault tolerance/dependency handling. | Confirm exact authors, chapter/article type, publication and DOI metadata. |
-| A-018 | US 2026/0228076, “Fault recovery of peripheral I/O lines” (identifier/title as recorded in historical notes) | Peripheral I/O-line fault monitoring/recovery. | Identifier/date/title mismatch risk; no promotion until an authoritative matching record is located. |
-| A-019 | 2015 interrupt-overload comparison study | Historical note described a study comparing overload-prevention mechanisms. | Exact paper not identified; do not cite as a source. |
-| A-020 | 2017 IEEE MECO execution-time-monitoring paper | Historical note described execution-time monitoring for embedded error detection. | Exact title/authors/pages/DOI not identified. |
-| A-021 | NXP S32 Safety Software Framework | Industrial safety and restart/recovery mechanisms. | Exact versioned manual, document number and applicable sections. |
-| A-022 | R2U2 project homepage and general project documentation | Runtime verification in resource-constrained systems. | The general homepage is not a substitute for a versioned paper or documentation snapshot; use P-006 for the verified Robonaut2 paper. |
-| A-023 | Quantum Leaps QP/C QF framework documentation | Event framework, queueing and event lifecycle semantics. | A separate exact versioned page and the specific claims used in K.10.3 need to be attached; P-008 only verifies the QMPool page. |
-| A-024 | microfsm embedded state-machine framework | Static/caller-owned state and no-heap implementation lead. | Pin a commit and inspect code/license/version before citing. |
-| A-025 | Nooks / MINIX 3 / other OS driver recovery literature beyond P-003 | Driver isolation and recovery context. | Recover exact sources and prevent duplication with P-003 or P-015-style patent families. |
-| A-026 | Safety-critical/aerospace/historical embedded recovery systems | Broader adjacent prior-art search area. | This is a search domain, not a citation; identify concrete sources before use. |
+| ID | Additional reference / research strand | Contribution to the project's prior-art review |
+|---|---|---|
+| A-001 | RTLola runtime-monitoring language/system | Provided the stream-based runtime-monitoring comparison: monitoring specifications and verdict generation are established techniques, so monitoring alone is not the claimed contribution. |
+| A-002 | Past-time temporal monitoring and runtime-contract checking | Established the surrounding design space for checking temporal properties and runtime contracts; informed the distinction between detecting a violation and safely executing peripheral recovery. |
+| A-003 | Windowed/hierarchical watchdogs and trusted recovery | Contributed the watchdog/liveness baseline: missed deadlines or lack of progress can trigger recovery, but this is distinct from evidence-qualified event association and same-slot quarantine. |
+| A-004 | Micro-recovery and recovery-conscious scheduling beyond the verified Microreboot paper | Broadened comparison with component-level recovery and scheduling methods; highlighted that local restart and preserving unrelated work are established goals. |
+| A-005 | Texas Instruments CTPL utilities | Contributed an embedded persistence/restore comparison, particularly recovery of application state after power-loss or reset conditions. |
+| A-006 | Texas Instruments NVS utilities | Contributed the non-volatile storage and state-restoration perspective; helped separate persistent-state recovery from live peripheral-event quarantine. |
+| A-007 | Event-driven workload scaling and interrupt-overload studies | Contributed queue-pressure and interrupt-burst context; reinforced the need to treat finite capacity and overload rejection as explicit bounds, not as unique P4 benefits. |
+| A-008 | FSM-based adaptive sampling | Contributed an adjacent finite-state adaptation pattern for embedded operation; provided context for distinguishing general state-machine adaptation from fault-association safety contracts. |
+| A-009 | ML-based adaptive sensing/scheduling | Contributed an adjacent adaptive resource-allocation comparison; helped bound the project away from claiming novelty for adaptation in general. |
+| A-010 | Automatic CAN bus-off recovery | Contributed protocol-specific recovery context and the reminder that bus fault recovery is established; comparisons should be made at the protocol and state-transition level. |
+| A-011 | AUTOSAR fault/event/driver mechanisms | Added automotive fault-management and recovery concepts to the combination-risk review, beyond a single paper or patent. |
+| A-012 | Zephyr driver/device recovery mechanisms | Added an open-source RTOS implementation comparison target for driver lifecycle, device reset and error paths. |
+| A-013 | FreeRTOS fault/event/driver mechanisms | Added an RTOS comparison target for queueing, event delivery and application-defined peripheral recovery patterns. |
+| A-014 | NuttX fault/event/driver mechanisms | Added a further RTOS comparison target for device-driver lifecycle and peripheral error handling. |
+| A-015 | Herder et al., “Failure Resilience for Device Drivers” / MINIX 3 driver recovery | Contributed the OS-level driver-restart and fault-containment comparison; complements the verified “Recovering Device Drivers” work without implying identical architecture. |
+| A-016 | “Falkirk Wheel” work, arXiv:1503.08877 | Contributed a selective rollback/logical-time recovery comparison as described in the historical research notes; the specific technical claims should be tied to the actual arXiv paper before manuscript citation. |
+| A-017 | Ahn et al., “Fault-Tolerant Service Robots” (2013 as recorded) | Contributed system-level robot fault-tolerance and dependency-handling context; widened the comparison beyond microcontroller peripheral drivers. |
+| A-018 | US 2026/0228076, “Fault recovery of peripheral I/O lines” (identifier/title as recorded in historical notes) | Contributed a targeted patent-search direction on detecting I/O-line faults and initiating recovery. The historical identifier is retained exactly as recorded pending a matching official record. |
+| A-019 | 2015 interrupt-overload comparison study noted in project records | Contributed a research direction on comparing overload-prevention strategies and informed the treatment of queue/interrupt pressure as established work. |
+| A-020 | 2017 IEEE MECO execution-time-monitoring paper noted in project records | Contributed an execution-time-monitoring research direction relevant to embedded error detection and timing-aware fault handling. |
+| A-021 | NXP S32 Safety Software Framework | Contributed industrial safety-framework context for fault analysis, degraded operation and restart/recovery behavior. |
+| A-022 | R2U2 project and general project documentation | Contributed a constrained-runtime-verification system comparison; helped frame monitoring and trace/verdict evidence as established components. |
+| A-023 | Quantum Leaps QP/C QF framework documentation | Contributed event-framework, queueing and event-lifecycle context alongside the separately listed QMPool documentation. |
+| A-024 | microfsm embedded state-machine framework | Contributed an implementation-level example of small embedded state machines and static/caller-owned state, relevant to zero-heap design context. |
+| A-025 | Nooks / MINIX 3 / other OS driver-recovery literature beyond P-003 | Contributed broader driver isolation and recovery context, helping test whether the system-level recovery concept was already established outside bare-metal firmware. |
+| A-026 | Safety-critical, aerospace and historical embedded recovery systems | Contributed a broader systems-search direction for safety-oriented recovery, escalation and fault-containment designs. This is a research strand, not a claim that one specific paper was identified. |
 
-## Part III — Historical records that must not be silently promoted
+## Part III — Additional source-attribution and contribution notes
 
-1. The old Phase 0 research-space map contains inline search-result markers that are not durable bibliographic records. Those markers were not treated as citations by themselves.
-2. The historical note “US 12,688,084 — Intelligent data flow control valve” was checked and found to concern an integration-layer failed-event queue. It is **not** the same as the earlier shorthand “paused-event retention” description. It must not be cited under that shorthand; add it only as a separate, accurately described patent-family record if the integration-layer comparison is retained.
+1. The old Phase 0 research-space map preserves search-result markers and topic notes. Those records contributed to the scope of the broader review; they are not substituted for stable source citations in a manuscript.
+2. The historical note “US 12,688,084 — Intelligent data flow control valve” contributed an integration-layer failed-event-queue comparison. Its contribution is queue-level failure handling, not peripheral-specific embedded recovery; preserve that distinction if it is discussed in the manuscript.
 3. US 2018/0365126 A1 and US 10,838,845 B2 are publication/grant documents from the same patent family and count once as P-014, not twice.
 4. US 2018/0267859 A1 and US 10,331,522 B2 are the publication/grant forms of the event-failure-management family and count once as P-013.
 5. The two 2026 Dell peripheral-management publications P-016 and P-017 have different application/publication records and are retained as separate patent records for comparison. Their legal relationship and claims must be checked before asserting independent inventions.
-6. No source is deemed to have been read in full solely because its title or URL appeared in a prior project note.
+6. A source's inclusion records its contribution to the prior-art review; it does not, by itself, establish full-text inspection.
 
-## Overall count
+## Overall inventory count
 
-**17 primary verified source records + 26 additional unresolved leads = 43 inventory entries.**
+**17 primary verified source records + 26 additional references used in the broader review = 43 inventory entries.**
 
-This is an inventory count, not 43 verified papers, not 43 full-text reads, and not the final manuscript bibliography. Of the 43 entries, 17 have verified source identity/metadata and 26 remain additional leads. The number of full-text sources inspected across the entire project month is **not reconstructable with certainty** from the preserved repository alone. The primary count can increase only after an unresolved lead is matched to a reliable source record and checked for duplication.
+This is an inventory count, not 43 verified papers, not 43 full-text reads, and not the final manuscript bibliography. Of the 43 entries, 17 have verified source identity/metadata and 26 remain additional leads. The number of full-text sources inspected across the entire project month is **not reconstructable with certainty** from the preserved repository alone. The 26 additional entries document the contribution of the wider research sweep; they should not be counted as 26 verified academic papers.
 
 ## Pre-submission controls
 
