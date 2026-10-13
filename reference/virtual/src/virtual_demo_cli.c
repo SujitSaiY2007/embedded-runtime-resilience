@@ -123,6 +123,8 @@ static void print_json_state(FILE *f, const VirtualSystem *vs, const char *scena
     fprintf(f, "  \"step_index\": %u,\n", vs->step_index);
     fprintf(f, "  \"step_count\": %u,\n", vs->scenario->step_count);
     fprintf(f, "  \"is_complete\": %s,\n", virtual_system_complete(vs) ? "true" : "false");
+    fprintf(f, "  \"adapter_error\": %s,\n", vs->adapter_error ? "true" : "false");
+    fprintf(f, "  \"adapter_error_message\": \"%s\",\n", vs->adapter_error ? "A scenario references a disconnected or invalid virtual resource" : "");
     fprintf(f, "  \"outcome_code\": %u,\n", (unsigned)vs->last_outcome);
     fprintf(f, "  \"outcome_str\": \"%s\",\n", outcome_to_str(vs->last_outcome));
     fprintf(f, "  \"digest\": \"0x%08X\",\n", virtual_system_digest(vs));
@@ -213,7 +215,7 @@ static void print_json_state(FILE *f, const VirtualSystem *vs, const char *scena
         fprintf(f, "    {\n");
         fprintf(f, "      \"id\": %u,\n", p);
         fprintf(f, "      \"name\": \"%s\",\n", periph_to_str((PeripheralId)p));
-        fprintf(f, "      \"status\": \"%s\",\n", periph_status_to_str(pstat));
+        fprintf(f, "      \"status\": \"%s\",\n", vs->peripheral_connected[p - 1u] ? periph_status_to_str(pstat) : "DISCONNECTED");
         fprintf(f, "      \"fault_class\": \"%s\",\n", fault_class_to_str(pfc));
         fprintf(f, "      \"op_seq\": %u\n", vs->peripheral_sequence[p - 1u]);
         fprintf(f, "    }%s\n", p < VIRTUAL_MAX_PERIPHERALS ? "," : "");
@@ -305,7 +307,7 @@ static int export_all_scenarios(const char *filepath) {
     return 0;
 }
 
-static int run_single(const char *id, PolicyVariant var, uint32_t run_id, int target_step) {
+static int run_single(const char *id, PolicyVariant var, uint32_t run_id, int target_step, const bool disconnected[VIRTUAL_MAX_PERIPHERALS]) {
     const ScenarioRegistryEntry *entry = virtual_scenario_find(id);
     if (!entry) {
         fprintf(stderr, "Scenario %s not found\n", id);
@@ -318,6 +320,9 @@ static int run_single(const char *id, PolicyVariant var, uint32_t run_id, int ta
 
     VirtualSystem vs;
     virtual_system_init(&vs, entry->scenario, var, run_id);
+    for (uint8_t p = 0u; p < VIRTUAL_MAX_PERIPHERALS; ++p) {
+        if (disconnected[p]) (void)virtual_system_set_peripheral_connected(&vs, (PeripheralId)(p + 1u), false);
+    }
 
     if (target_step < 0) {
         virtual_system_run(&vs);
@@ -328,6 +333,7 @@ static int run_single(const char *id, PolicyVariant var, uint32_t run_id, int ta
         }
         for (int i = 0; i < steps_to_do; ++i) {
             virtual_system_step(&vs);
+            if (vs.adapter_error) break;
         }
     }
 
@@ -401,6 +407,7 @@ int main(int argc, char **argv) {
     PolicyVariant variant = VAR_P4_INTEGRATED;
     uint32_t run_id = 0u;
     int step = -1;
+    bool disconnected[VIRTUAL_MAX_PERIPHERALS] = {false, false, false};
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--scenario") == 0 && i + 1 < argc) {
@@ -413,6 +420,12 @@ int main(int argc, char **argv) {
             step = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--run") == 0) {
             step = -1;
+        } else if (strcmp(argv[i], "--disconnect") == 0 && i + 1 < argc) {
+            const char *name = argv[++i];
+            if (strcmp(name, "I2C0") == 0) disconnected[0] = true;
+            else if (strcmp(name, "SPI0") == 0) disconnected[1] = true;
+            else if (strcmp(name, "UART0") == 0) disconnected[2] = true;
+            else { fprintf(stderr, "Unsupported virtual peripheral: %s\\n", name); return 2; }
         } else if (strcmp(argv[i], "--export-all") == 0) {
             const char *out_file = (i + 1 < argc && argv[i + 1][0] != '-') ? argv[++i] : NULL;
             return export_all_scenarios(out_file);
@@ -440,5 +453,5 @@ int main(int argc, char **argv) {
         }
     }
 
-    return run_single(scenario_id, variant, run_id, step);
+    return run_single(scenario_id, variant, run_id, step, disconnected);
 }
