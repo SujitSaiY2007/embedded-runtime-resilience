@@ -1,46 +1,44 @@
-# Minimal Reference Implementation
+# C Reference Runtime and Virtual Embedded System
 
-This directory contains the smallest executable host/reference prototype for the frozen Gates A-E contracts.
+This directory contains the authoritative software runtime, its tests and experiment harnesses, and the bounded virtual-system adapter used by the professor-facing demo.
 
-## Current status
+## Components
 
-**Host/reference foundation complete.** Gates A-E, K.1, K.2, and K.3 are complete; the active software phase adds a professor-facing demonstrator without changing this reference.
+- `src/ref_runtime.c`, `include/ref_runtime.h`: protected C11 reference runtime and public contract.
+- `tests/`: reference-runtime tests and canonical workload notes.
+- `experiments/`: deterministic host/K.10 experiment sources and input definitions.
+- `virtual/`: modeled peripheral state, registered scenarios, CLI/JSON adapter, and virtual-system tests.
+- `docs/minimal_reference_implementation.md`: compact implementation reference.
 
 ## Build and test
 
-```text
-cmake -S . -B build
-cmake --build build
-ctest --test-dir build --output-on-failure
+From repository root:
+
+```powershell
+cmake -S reference -B reference/build
+cmake --build reference/build --config Debug
+ctest --test-dir reference/build -C Debug --output-on-failure
 ```
 
-The test suite covers W01-W14 plus bounded-recovery and static-accounting checks.
+Use the platform-appropriate CMake configuration/executable path. For the complete browser demo, see [the demonstrator guide](../docs/DEMONSTRATOR_GUIDE.md).
 
-## K.3 final status
+## Authority and integrity
 
-**K.3 COMPLETE — host/reference final-synthesis checkpoint.** Gates A-E remain frozen. K.1/K.2 host verification and corpus validation are complete.
+The C reference runtime is authoritative for policy state transitions, action selection/application, outcomes and runtime trace records. The virtual system models environment/peripheral availability and scenario steps. The Python bridge validates inputs and launches the C CLI. The browser displays the returned records.
 
-### Mandatory qualifications
+The following files are protected from presentation-layer edits:
+- `src/ref_runtime.c`
+- `include/ref_runtime.h`
 
-- **P0-P3 are not clean quarantine ablations.** The current runtime applies exact-event quarantine across all variants; therefore `ablation_contract_valid=0` for P0-P3 and `=1` for P4 under the current implementation boundary.
-- **W09/W10 are capacity-confounded.** Their results are explicit capacity-boundary observations, not unconstrained policy comparisons.
-- **MCU/physical evidence is absent.** Software fault injection is deterministic host stimulus, not physical fault validation.
+Gates A–E and frozen K.10 empirical outputs are normative. Do not modify the runtime or regenerate the K.10 matrix as a way to resolve a documentation discrepancy.
 
+## Evidence boundary
 
+Host tests and deterministic virtual faults establish behavior only within the software/reference model. They do not establish STM32U575 timing, RAM/Flash use on target, power/energy, physical fault response, or MCU-level containment. The proposed NUCLEO-U575ZI-Q target is future work.
 
-Passing host tests establish reference-model/software-injection behavior only. They do not establish STM32U575 timing, RAM/Flash, physical fault behavior, energy, statistical significance, generalization, novelty, or patentability.
+## Related documentation
 
-## Trace output
-
-The runtime keeps a fixed trace pool and provides `trace_write_csv()` for deterministic structured output. The schema includes run/trace/episode identity, EventRef generation, action index, outcome, and correctness.
-
-## Zero-heap audit
-
-There are no allocator calls in `include/`, `src/`, or `tests/`. The reference runtime uses fixed arrays and bounded records. Host-library behavior is not presented as MCU heap evidence.
-
-
-## Software demonstrator relationship
-
-`demo/index.html` is the presentation layer for the software proof of concept. This C reference remains the authoritative executable software model; the UI must not be treated as a replacement specification.
-
-The current software-phase methodology lock is recorded in `research/phase1_software_demonstrator_methodology_lock.md`.
+- [Project overview](../docs/PROJECT_OVERVIEW.md)
+- [Architecture map](../docs/ARCHITECTURE_AND_REPOSITORY_MAP.md)
+- [Demo guide](../docs/DEMONSTRATOR_GUIDE.md)
+- [Frozen K.10 results](../research/phase2_k10_p4_advantage_novelty_results.md)
