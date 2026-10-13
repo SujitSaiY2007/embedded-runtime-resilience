@@ -51,20 +51,7 @@ These are **patent documents, not academic papers**. A patent citation should be
 | RU-020 | Quantum Leaps QP/C — [QF documentation](https://www.state-machine.com/qpc/class_q_f.html) | Framework documentation | Event framework, event pools, queueing and lifecycle semantics. | **Official technical documentation inspected** is recorded in K.10.3. |
 | RU-021 | microfsm embedded state-machine framework. [GitHub repository](https://github.com/Vanderhell/microfsm) | Open-source implementation | Static/caller-owned state and zero-dynamic-allocation embedded event/state-machine practice. | **Repository lead** in the prior-art notes; record the exact commit/version and inspect relevant code before relying on it. |
 
-## D. Additional search areas, not yet a verified bibliography
-
-The project notes identify AUTOSAR-style fault/event management, Zephyr, FreeRTOS, NuttX, safety-critical and aerospace systems, and other embedded driver frameworks as **search targets/categories**. They are not counted here as verified references because a specific versioned source, standard clause, manual section, or implementation commit was not established in the retrieved records.
-
-## E. Count interpretation
-
-This register currently contains **21 source records** (RU-001–RU-021), of which:
-- 9 are academic papers/research-system records;
-- 9 are patent/publication records;
-- 3 are framework/documentation records.
-
-These are **inventory counts, not a verified count of all sources encountered over the month, not a count of sources read fully, and not a count of citations suitable for the final manuscript**. Some records are explicitly incomplete or require bibliographic verification; patent family duplication may also affect counts. The complete month-long total remains unverified until all historical checkpoint records, earlier literature notes and any locally held sources are reconciled into this register.
-
-## F. Pre-submission checklist
+undefined
 
 - [ ] Verify exact title, authors, venue, year, pages, DOI and stable URL for each academic paper.
 - [ ] Open original full text and record the exact sections/pages supporting every material related-work statement.
