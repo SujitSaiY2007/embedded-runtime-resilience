@@ -51,7 +51,55 @@ These are **patent documents, not academic papers**. A patent citation should be
 | RU-020 | Quantum Leaps QP/C — [QF documentation](https://www.state-machine.com/qpc/class_q_f.html) | Framework documentation | Event framework, event pools, queueing and lifecycle semantics. | **Official technical documentation inspected** is recorded in K.10.3. |
 | RU-021 | microfsm embedded state-machine framework. [GitHub repository](https://github.com/Vanderhell/microfsm) | Open-source implementation | Static/caller-owned state and zero-dynamic-allocation embedded event/state-machine practice. | **Repository lead** in the prior-art notes; record the exact commit/version and inspect relevant code before relying on it. |
 
-undefined
+
+## D. Additional literature and implementation leads from the earlier research-space map
+
+These leads are present in `research/phase0_research_space_map.md` and the K.10.4 synthesis. The original Phase 0 document contains inline search-result markers rather than self-contained bibliographic entries, so the following are **unresolved leads, not verified citations**.
+
+| Lead ID | Name / topic in project notes | Why it matters | Status |
+|---|---|---|---|
+| RL-001 | RTLola | Runtime monitoring/stream-based specification; helps establish that generic runtime monitoring is not a novel contribution. | Recover exact paper, authors, venue and DOI from the original source. |
+| RL-002 | Past-time temporal monitoring and contract/runtime-checker work | Established temporal property monitoring and contract checking. | Topic family; exact sources not identified in the current register. |
+| RL-003 | Windowed/hierarchical watchdogs and trusted recovery | Established liveness detection and recovery. | Exact papers, patents or vendor documentation need to be recovered. |
+| RL-004 | Micro-recovery/micro-reboot and recovery-conscious scheduling | Adjacent local-recovery and scheduling mechanisms. | Exact papers and metadata need verification. |
+| RL-005 | Texas Instruments CTPL/NVS and NVM crash-consistency work | Embedded persistent-state restoration and crash consistency. | Identify exact manuals/versions and academic papers. |
+| RL-006 | Event-driven workload scaling and interrupt-overload prevention | Prior art for overload, queue pressure and interrupt bursts. | Exact source records need recovery. |
+| RL-007 | FSM-based adaptive sampling and ML-based adaptive sensing/scheduling | Adjacent adaptive embedded scheduling research. | Exact papers and metadata need verification. |
+| RL-008 | Protocol-specific bus recovery and automatic CAN bus-off recovery | Directly relevant to peripheral/bus recovery; generic recovery is established. | Identify the exact standard, version, vendor manuals and papers. |
+| RL-009 | R2U2 / RTLola / runtime monitoring | Runtime verification and monitoring in constrained systems. | R2U2 project site is listed as RU-009; exact papers and RTLola sources still need verification. |
+| RL-010 | AUTOSAR, Zephyr, FreeRTOS and NuttX fault/event/driver mechanisms | Explicitly identified as additional combination-search targets in K.10.4. | Search target only; no versioned source/standard clause/commit has been audited here. |
+| RL-011 | Swift et al. / Nooks and Herder et al. / MINIX 3 driver recovery | OS-level driver containment and recovery. | Related records RU-003/RU-004; exact bibliographic metadata must be confirmed. |
+| RL-012 | Safety-critical, aerospace and historical embedded recovery systems | Potential adjacent work not exhaustively audited in K.10.1–K.10.4. | Search domain only. |
+
+## E. Additional concrete prior-art leads from the topic-freeze report
+
+These source names and identifiers are explicitly present in `research/deep_prior_art_attack_topic_freeze.md`. They are added for traceability, but **their inclusion here does not mean their official source records have been independently verified**.
+
+| Lead ID | Source as recorded | Why it matters | Status |
+|---|---|---|---|
+| RL-013 | US 9,218,247 B2 — “Multimaster serial single-ended system fault recovery” | I²C-style fault recovery using clocking/stop signaling, register verification, power cycling or reset. | Verify official text, claims, dates and family. |
+| RL-014 | US 2025/0068503 A1 — “I2C status monitoring and fault recovery/isolation” | I²C signal monitoring, fault identification and device isolation. | Verify official publication and claims. |
+| RL-015 | US 2026/0030091 A1 — “Data processing system peripheral device management and recovery” | Independent management controller selectively restarts a failed peripheral while preserving unrelated work; important against broad selective-recovery claims. | Verify publication, claims, priority dates and status. |
+| RL-016 | US 2026/0030180 A1 — “Management and recovery of data processing system peripheral devices” | Management-controller-based peripheral recovery with reduced disruption to unrelated operations. | Verify official record and claims. |
+| RL-017 | US 2026/0228076 — “Fault recovery of peripheral I/O lines” (identifier as written in project report) | Monitoring peripheral I/O lines and initiating recovery after a fault condition. | Identifier format/date must be checked against the official patent database. |
+| RL-018 | Regehr and Duongsaa, “Preventing Interrupt Overload,” LCTES 2005 | Established mechanisms for limiting interrupt overload and preserving progress. | Verify exact author initials, proceedings, pages and DOI/URL. |
+| RL-019 | 2015 study comparing interrupt-overload prevention mechanisms for event-driven embedded systems | Adjacent overload-prevention mechanisms. | Unidentified paper; do not cite until exact record is found. |
+| RL-020 | 2017 IEEE MECO paper on execution-time monitoring for embedded error detection | Execution-time monitoring as an error-detection mechanism. | Unidentified paper; recover exact title/authors/pages/DOI. |
+| RL-021 | NXP S32 Safety Software Framework | Industrial local recovery, degraded operation, fault analysis and restart mechanisms. | Verify exact framework version and official documentation. |
+| RL-022 | Texas Instruments CTPL and NVS utilities | Embedded persistent-state restoration/crash consistency. | Verify exact manuals, versions and document identifiers. |
+
+## F. Count interpretation
+
+This register contains **21 individually described source records** (RU-001–RU-021), plus **22 additional literature/prior-art leads** (RL-001–RL-022) recovered from earlier research-space and topic-freeze reports. Of the 21 individually described records:
+- 9 are academic paper/research-system records;
+- 9 are patent/publication records;
+- 3 are framework/documentation records.
+
+The 22 additional leads are **not 22 verified papers**. Some describe whole research areas, and the original Phase 0 inline search-result markers do not expose full bibliographic details in the current repository copy. Resolve them before counting them as distinct references.
+
+All figures are **inventory counts, not a verified count of all sources encountered over the month, not a count of sources read fully, and not a count of citations suitable for the final manuscript**. Some records are incomplete or require bibliographic verification; patent family duplication may affect counts. The complete month-long total remains unverified until all historical checkpoint records, earlier literature notes and any locally held sources are reconciled.
+
+## G. Pre-submission checklist
 
 - [ ] Verify exact title, authors, venue, year, pages, DOI and stable URL for each academic paper.
 - [ ] Open original full text and record the exact sections/pages supporting every material related-work statement.
