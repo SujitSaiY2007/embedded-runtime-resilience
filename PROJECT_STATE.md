@@ -1,3 +1,5 @@
+> **Latest closure update (2026-10-13): K.12 APPROVED AND CLOSED by ChatGPT based on user-reported successful local CTest/UI-contract checks and working browser UI. Physical MCU work is future work. CF01 attempt-count discrepancy remains documented and excluded from comparative claims. Main synchronization is the final repository integration step and must be verified by resulting remote refs.**
+
 # Project State
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
