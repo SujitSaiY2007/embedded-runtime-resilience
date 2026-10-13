@@ -567,3 +567,9 @@ Checkpoint K.11 — Final Software Synthesis + Hardware-Validation Handoff — i
 **Reason:** records formal closure of the P4 advantage/novelty investigation (K.10 through K.10.4) and authorizes the transition to the software closure and hardware handoff phase.
 
 
+
+
+| D-116 | Accepted for K.11 review | Keep the K.10 evidence interpretation bounded to CF04/CF07 and CF05 advantages, explicit counterexamples, shared quarantine, and fixed-capacity limitations. | Prevents unsupported universal-superiority claims and preserves the empirical record. |
+| D-117 | Accepted for K.11 review | Describe PA-01–PA-10 single-reference review as a bounded reviewed-set result; retain C1 multi-reference combination risk as unresolved. | Avoids overstating prior-art conclusions or implying legal novelty. |
+| D-118 | Accepted for K.11 review | Treat STM32U575ZI / NUCLEO-U575ZI-Q procedures as a future validation specification only. | K.11 does not authorize flashing, physical fault injection, or measurements. |
+| D-119 | Accepted for K.11 review | Keep `exp` and `main` unchanged during K.11; K.12 remains gated until explicit K.11 approval. | Preserves canonical history and prevents premature integration. |
