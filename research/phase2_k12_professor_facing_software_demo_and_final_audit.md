@@ -209,3 +209,15 @@ The digest expectations were updated to the outputs observed from the current ex
 ### Repository integration disposition
 
 The complete guide and main-readiness audit are committed to the feature branch. The user has now authorized completing the project and preparing `main`. However, a final remote merge must still be executed and the resulting refs verified; this addendum itself does not claim that `main` has already changed. The exact merge decision and resulting SHAs must be appended after synchronization.
+
+
+## Final main integration record — 2026-10-13
+
+The approved K.12 deliverables were integrated into `main` through pull request [#9](https://github.com/SujitSaiY2007/embedded-runtime-resilience/pull/9).
+
+- Merge commit: `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`
+- Verified `main`: `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`
+- Verified unchanged `exp`: `ab766b47ce7bae2791028cea22b7915f8debc41c`
+- Preserved feature branch: `0b7a3d2c7f0be1a14395598fb027d39c53506550`
+
+K.12 is closed for the software demonstration based on the user's successful local test/UI report. The remote integration is verified; local execution is not independently reproducible from the remote connector and no CI run was found for the merge. Physical implementation, flashing, fault injection, and measurements are explicitly future work. CF01 remains unresolved and is not used as comparative evidence.
