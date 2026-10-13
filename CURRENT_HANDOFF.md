@@ -2,13 +2,13 @@
 
 ## Session status — authoritative current state (2026-10-13)
 
-**K.10, K.10.1, K.10.2, K.10.3, AND K.10.4 APPROVED AND CLOSED BY CHATGPT (2026-10-13). K.11 — Final Software Synthesis + Hardware-Validation Handoff — is now the active authorized next checkpoint.** The K.10.4 final technical distinction report and chat record have been accepted without revision. K.11 is strictly limited to software research synthesis, publication results structure, and target-MCU hardware-validation specification. No physical hardware execution or MCU flashing is authorized. The original local-only commit (`9c6596b2c32bf79bb652f3881e6d41695d43bb38`) remains preserved. `exp` is canonical; `main` remains unsynchronized until post-K.12 closure.
+**K.10, K.10.1, K.10.2, K.10.3, K.10.4, AND K.11 APPROVED AND CLOSED BY CHATGPT (2026-10-13). K.12 — Professor-Facing Software Demonstration Productization & Final Software Audit — is now the active authorized checkpoint.** K.11's synthesis report and chat record are approved. K.11 defines the STM32U575ZI / NUCLEO-U575ZI-Q hardware-validation plan only; no physical hardware execution or MCU flashing is authorized. The original local-only commit (`9c6596b2c32bf79bb652f3881e6d41695d43bb38`) must remain preserved in the original local checkout. `exp` is canonical and remains unchanged; `main` remains unsynchronized until the authorized post-K.12 final audit.
 
 - Canonical branch: `exp`. Current working branch: `feature/k10-4-final-technical-conclusion-2026-10-13`.
 - `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` have been compared with K.10's canonical baseline; their SHA-256 digests and Git blob SHAs match exactly (100% byte-identical).
 - Gate-defining artifacts `research/phase2_k9_methodology_lock.md`, `research/phase2_k9_2_p4_advantage_novelty_design.md`, and `research/phase1_reference_implementation_design.md` remain 100% byte-identical.
 - Keep Gates A–E, `policy_decide()`, `runtime_apply_policy()`, both protected runtime files, and K.10 results frozen. Do not sync `main` until ChatGPT reviews and explicitly approves the completed checkpoints.
-- **Active checkpoint:** K.11 authorized. Exact next-chat instructions are in `NEXT_CHAT_PROMPT.md`.
+- **Active checkpoint:** K.12 authorized following formal K.11 closure. Exact instructions are in `NEXT_CHAT_PROMPT.md`.
 - Historical handoff sections below are retained as provenance. Any old “active handoff” block is superseded by this opening section and `research/PART_II_CHAT_PLAN.md`.
 
 
@@ -683,3 +683,10 @@ K.11 synthesis report: `research/phase2_k11_final_software_synthesis_and_hardwar
 The report preserves all empirical boundaries: 400 matched host/reference executions; bounded P4 advantages in CF04/CF07 and CF05; shared quarantine across P0–P4; P2's CF16 one-attempt result versus P4's three attempts; `QMAX=16` and `EPMAX=1` capacity limitations; PA-01–PA-10 single-reference conclusion scoped to reviewed references; and unresolved C1 multi-reference combination risk. No universal superiority, legal novelty, or hardware-validation claim is made.
 
 **Current status:** K.11 deliverables drafted and committed on the isolated working branch; formal K.11 closure awaits ChatGPT review. No hardware execution or MCU flashing occurred. No merge to `exp` and no synchronization of `main` is authorized. K.12 must not begin until K.11 is explicitly approved and closed.
+
+
+## K.11 formal closure — 2026-10-13
+
+K.11 has been substantively reviewed and formally approved by ChatGPT. The reviewed report is `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`; the closure record is `research/chat_records/chat_k11_record.md`. The report now includes a concrete future hardware baseline (I2C1 PB8/PB9, SPI1 PA5/PA6/PA7, PD14 chip select, MSI 16 MHz initial clock, timer/timeout plan) grounded in ST UM2861, plus an explicit unresolved CF01 attempt-count inconsistency. K.12 must reconcile CF01 against original raw records if available and must not use the unresolved count as evidence.
+
+**K.12 is authorized for software-only professor-facing demonstration productization and final audit.** No physical MCU flashing, fault injection, or measurement is authorized. The five protected blobs remain frozen. `exp` remains at `ab766b47ce7bae2791028cea22b7915f8debc41c`; `main` remains at `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`. Do not merge to `exp` or sync `main` in K.11. Preserve the original local-only commit locally.
