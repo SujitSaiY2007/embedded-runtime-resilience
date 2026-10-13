@@ -38,7 +38,7 @@ The five protected Git blob SHAs were verified against the working branch at K.1
 | `research/phase2_k9_methodology_lock.md` | `bd75f2c2c21c3964ec15b338eea99b386eff7aec` | Match |
 | `research/phase2_k9_2_p4_advantage_novelty_design.md` | `98d88ea2a0fc3a88d9d38f5b48aa274498d5e00d` | Match |
 
-Startup refs observed: `exp = ab766b47ce7bae2791028cea22b7915f8debc41c`; `main = 0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`; working branch HEAD at verification was `26b037584bb0a0acce3a293bed3f5a516ffab6c2`, which is descended from the K.10.4 closure commit. No K.11 merge to `exp) or sync to `main` is authorized. The local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` cannot be verified by the remote view and must be preserved in the original local checkout.
+Startup refs observed: `exp = ab766b47ce7bae2791028cea22b7915f8debc41c`; `main = 0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`; working branch HEAD at verification was `26b037584bb0a0acce3a293bed3f5a516ffab6c2`, which is descended from the K.10.4 closure commit. No K.11 merge to `exp` or sync to `main` is authorized. The local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` cannot be verified by the remote view and must be preserved in the original local checkout.
 
 ## 3. Architecture and contribution statement
 
