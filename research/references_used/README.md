@@ -1,31 +1,30 @@
 # References Used — Embedded Runtime Resilience
 
-This folder consolidates the reference inventory recovered from the project's research reports and historical checkpoints, with source-level metadata checks performed against stable online records.
+This folder records the sources and research strands used during the project's prior-art investigation, including their contributions to the research comparison.
 
 ## Files
 
-- [Reference register](REFERENCE_REGISTER.md) — primary verified source records and separately listed unresolved leads.
-- [Counting and verification notes](COUNTING_AND_VERIFICATION.md) — count definitions, deduplication decisions and limits.
+- [Reference register](REFERENCE_REGISTER.md) — primary source records and additional references used, with each additional entry's contribution.
+- [Counting and contribution notes](COUNTING_AND_VERIFICATION.md) — inventory totals, counting rules, deduplication and evidence boundaries.
 
 ## Current inventory
 
 - **17 primary verified source records**
-- **26 additional unresolved leads**
+- **26 additional references used in the broader review**
 - **43 total inventory entries**
 
-The primary verified records include academic/research-system papers, official framework documentation and patent source records. They are not all academic papers. “Verified” means source identity and core metadata were matched to a stable record; it does not mean every item was read in full or belongs in the final manuscript bibliography.
-
-Unresolved items are deliberately **excluded from the primary count** but **included in the overall inventory total**. This follows the project's counting rule: never promote an unidentified historical search result, broad topic or mismatched patent citation into the verified bibliography.
+The primary records include academic/research-system papers, official framework documentation and patent source records. They are not all academic papers. The additional entries include named source candidates, technical-source families and broader research strands; their contributions are recorded in the register and they are included in the total inventory.
 
 ## Research-integrity rule
 
-Keep three counts distinct:
-1. Sources identified with verified metadata.
-2. Sources whose full text, patent claims or relevant technical sections were actually inspected.
-3. Sources cited in the final manuscript.
+Keep the following counts distinct:
+1. Sources with verified identity and core metadata.
+2. Additional sources/research strands contributing to the broader review.
+3. Sources whose full text or patent claims were actually inspected.
+4. Sources cited in the final manuscript.
 
-The current repository supports the first count (17 primary records plus 26 unresolved leads). It does not support a definitive month-long total for full-text reads or final manuscript citations. Do not state that all 43 items were read, or that the register is an exhaustive global prior-art search.
+The current inventory supports the first two counts (17 + 26 = 43). It does not establish a definitive month-long count of full-text reads or final manuscript citations. Do not describe all 43 as academic papers or claim every entry was read in full.
 
 ## Maintenance
 
-When a lead is resolved, verify the primary source, capture its exact metadata and stable URL/DOI/identifier, check for duplicates and patent-family relationships, record what was actually inspected, and then update both the primary and additional counts. The presence of a source here does not establish that it anticipates the project design or that the design is novel, non-obvious or patentable.
+When a source is selected for manuscript citation, record its exact metadata and stable URL/DOI/identifier, verify its contribution to the claim being made, check for duplicates and patent-family relationships, and record what was actually inspected. The presence of a source here does not establish that it anticipates the project design or that the design is novel, non-obvious or patentable.
