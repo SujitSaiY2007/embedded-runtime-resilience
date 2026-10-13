@@ -2,7 +2,8 @@
 ## Final Software Synthesis & Hardware-Validation Handoff Protocol
 
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Canonical branch:** `exp`  
+**Canonical reference branch:** `exp`  
+**Active working branch:** `feature/k10-4-final-technical-conclusion-2026-10-13` (K.10.4 closure commit: `09c17a413c7fb0b48c3c5da4642e24a402edd970`)  
 **Active checkpoint:** K.11  
 **Checkpoint authority:** ChatGPT  
 **Repository execution agent:** Antigravity only when explicitly invoked by ChatGPT  
@@ -16,7 +17,7 @@
 
 Before initiating K.11 work:
 
-1. Confirm starting branch is `exp` based on the approved canonical HEAD.
+1. Confirm the working branch is `feature/k10-4-final-technical-conclusion-2026-10-13` at or descended from K.10.4 closure commit `09c17a413c7fb0b48c3c5da4642e24a402edd970`, so the approved K.10.4 report and closure records remain present. Treat `exp` at `ab766b47ce7bae2791028cea22b7915f8debc41c` as the canonical reference branch and verify it remains unchanged. Do not merge the feature branch into `exp` as part of K.11.
 2. Confirm `main` HEAD is `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f` and remains 100% untouched.
 3. Preserve the original checkout's local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38`; never reset, overwrite, merge away, or force-push that local history.
 4. Verify the five protected Git blob SHAs:
