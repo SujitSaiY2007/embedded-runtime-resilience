@@ -16,7 +16,7 @@
 
 K.12 has productized the existing HTML/JavaScript + Python standard-library bridge + bounded C virtual system + frozen C reference runtime into a more explicit professor-facing software demonstrator. The live path is wired to the same C CLI and reference runtime; the UI does not implement a second recovery algorithm. Virtual link availability is represented in the C adapter and included in the deterministic digest. A scenario event whose fixed virtual peripheral has been disconnected is rejected before event admission mutates reference-runtime state.
 
-**K.12 is not approved and closed.** This session could inspect and write remote GitHub source but had no runnable local checkout/compiler/browser to execute CMake, CTest, the HTTP bridge, or a live browser flow. The remote-source edits and source-level contract checks are not substitutes for observed runtime output. Accordingly, those executions are marked NOT RUN / BLOCKED, and the required final audit gate is incomplete.
+**K.12 is APPROVED AND CLOSED for the software-demonstrator scope (2026-10-13).** The user subsequently ran the build/test workflow locally, reported that the test suite passed, supplied live C CLI output for S05 and six scenario digests, and confirmed that the browser UI worked. These are user-run observations, not independently reproduced by remote CI. The historical table below records what was unknown at the time of the original remote-only audit; read it together with the final verification update and do not treat its earlier BLOCKED labels as the final status.
 
 ## 2. Remote repository and integrity startup audit
 
@@ -181,12 +181,12 @@ Because the GitHub connector does not execute CMake, native binaries or a browse
 
 ## 9. Closure decision and exact remaining blockers
 
-**K.12 verdict: INCOMPLETE / BLOCKED.** Remote-source implementation is committed, and protected blob/ref boundaries were preserved in the remote audit. This is not a test-passed or demo-validated release because no native build, CTest, live HTTP request, or browser execution has been observed here.
+**K.12 final verdict: APPROVED AND CLOSED for the software-only scope.** The user reported successful local CTest/UI contract tests and a working browser demonstration. The remote audit did not independently reproduce the user's Windows environment; validation provenance remains user-run rather than CI-verified.
 
 To finish without requesting an entire ZIP, the minimum missing evidence is:
 
 1. A runnable clone/environment with a C11 compiler, CMake, Python 3, and a browser to execute the exact matrix above, inspect the complete diff, and verify the updated digest assertions.
-2. The original K.10 raw run and trace CSVs if the CF01 P2 count is to be reconciled. If those records cannot be recovered, leave CF01 unresolved permanently in the published claims.
+2. The original K.10 raw run and trace CSVs would be required to certify the historical CF01 P2 attempt count. For the finalized presentation, omit that disputed count and use only the uncontested qualitative outcomes. This is not a project-closure blocker.
 3. Access to the original local checkout only to verify local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` and any uncommitted files; remote GitHub data cannot establish that local state.
 
 Do not merge this feature branch to `exp`, move `main`, rerun K.10, modify protected runtime files, flash firmware, perform physical fault injection, or claim hardware validation as part of this blocked checkpoint.
@@ -202,7 +202,7 @@ The digest expectations were updated to the outputs observed from the current ex
 
 - The software demonstration is complete for the user-reported environment: browser UI → Python bridge → C virtual-system adapter/CLI → existing C reference runtime → traces/outcome/digest → UI.
 - Physical MCU implementation, flashing, fault injection, and hardware measurements are **future work**. The NUCLEO-U575ZI-Q / STM32U575ZI information remains a proposed validation plan, not a completed implementation.
-- CF01's historical P2 attempt-count discrepancy remains unresolved because the original K.10 run/trace CSVs were unavailable in the inspected remote repository. The disputed count is excluded from comparative claims; the frozen matrix was not rerun.
+- CF01's numerical attempt-count provenance remains unresolved because the original K.10 run/trace CSVs were unavailable. This is closed as a presentation issue: the disputed count is omitted from comparisons; the qualitative outcomes remain usable; the frozen matrix was not rerun.
 - Protected runtime and Gate artifacts remain byte-identical to `exp` as checked during this audit.
 - No API keys or paid cloud services are required for the software demo.
 
@@ -220,8 +220,18 @@ The approved K.12 deliverables were integrated into `main` through pull request 
 - Verified unchanged `exp`: `ab766b47ce7bae2791028cea22b7915f8debc41c`
 - Preserved feature branch: `0b7a3d2c7f0be1a14395598fb027d39c53506550`
 
-K.12 is closed for the software demonstration based on the user's successful local test/UI report. The remote integration is verified; local execution is not independently reproducible from the remote connector and no CI run was found for the merge. Physical implementation, flashing, fault injection, and measurements are explicitly future work. CF01 remains unresolved and is not used as comparative evidence.
+K.12 is closed for the software demonstration based on the user's successful local test/UI report. The remote integration is verified; local execution is not independently reproducible from the remote connector and no CI run was found for the merge. Physical implementation, flashing, fault injection, and measurements are explicitly future work. CF01's disputed count is omitted from comparisons; it is not a project blocker.
 
+
+
+
+## Final current-status summary
+
+- **Software demo:** user-reported working end-to-end through the C runtime.
+- **Automated tests:** user reported all tests passed after aligning contract-test digest expectations with the current executable outputs.
+- **Evidence provenance:** local Windows run by user; not independently reproduced by remote CI.
+- **CF01:** closeout interpretation finalized. Use the qualitative outcomes; omit the disputed P2 attempt count from comparisons. Preserve frozen K.10 source reports unchanged.
+- **Hardware:** future work; no physical implementation or measurements claimed.
 
 ## CF01 editorial reconciliation and project-closeout interpretation — 2026-10-13
 
