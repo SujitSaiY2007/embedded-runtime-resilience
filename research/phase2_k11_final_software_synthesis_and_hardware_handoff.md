@@ -1,5 +1,7 @@
 # K.11 — Final Software Synthesis and Hardware-Validation Handoff
 
+> **Current reader note:** K.11 is closed. The proposed hardware-validation plan is future work, not a report of completed board execution. Current project status and run instructions are in [the project overview](../../docs/PROJECT_OVERVIEW.md) and [demonstrator guide](../../docs/DEMONSTRATOR_GUIDE.md). Historical checkpoint-time branch statements below are retained as provenance.
+
 **Status:** APPROVED AND CLOSED BY CHATGPT (2026-10-13)  
 **Date:** 2026-10-13  
 **Working branch:** `feature/k10-4-final-technical-conclusion-2026-10-13`  
