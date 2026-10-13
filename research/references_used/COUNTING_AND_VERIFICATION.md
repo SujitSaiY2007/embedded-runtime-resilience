@@ -6,13 +6,13 @@
 
 ## Current verified inventory status
 
-The initial reconstructed register contains **21 source records**:
+The reconstructed register now contains **21 individually registered source records plus 12 additional landscape leads**:
 
 - **9 academic paper / research-system records** (RU-001–RU-009);
 - **9 patent or patent-publication records** (RU-010–RU-018);
 - **3 framework/documentation records** (RU-019–RU-021).
 
-This is a count of rows in the new register only. It is **not** a claim that 21 sources were fully read, that all 21 are appropriate final-paper citations, or that only 21 sources were encountered during the project month.
+The 21 source records are individually described (9 academic paper/research-system records, 9 patent/publication records, 3 framework/documentation records). The 12 landscape leads are named research areas or source families recovered from the Phase 0 research-space map and K.10.4 synthesis; they are not 12 verified papers. This is **not** a claim that 21 sources were fully read, that all 21 are appropriate final-paper citations, or that only 21 sources were encountered during the project month.
 
 ## Why the full-month count is not yet known
 
@@ -43,6 +43,7 @@ The register was reconstructed from the canonical repository's:
 - `research/phase2_k10_2_single_reference_anticipation_review.md`;
 - `research/phase2_k10_3_multi_reference_combination_review.md`;
 - `research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`;
+- `research/phase0_research_space_map.md` (earlier literature landscape and additional unresolved search-result citation markers);
 - `research/chat_records/chat_k10_1_record.md`, `chat_k10_2_record.md`, and `chat_k10_3_record.md`.
 
 The existence of these records supports that a prior-art investigation was documented. It does not prove exhaustive literature coverage.
