@@ -1,3 +1,5 @@
+> **Latest closure update (2026-10-13): K.12 APPROVED AND CLOSED by ChatGPT based on user-reported successful local tests and working browser UI. Hardware implementation is future work. Preserve the unresolved CF01 caveat; do not alter frozen K.10/K.8 evidence. Main synchronization is pending execution and ref verification.**
+
 # Current Handoff
 
 ## Session status — authoritative current state (2026-10-13)
