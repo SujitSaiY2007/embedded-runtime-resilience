@@ -629,3 +629,16 @@ The K.11 report explicitly limits findings to the 400 deterministic host/referen
 ChatGPT completed substantive review and approved K.11. See `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md` and `research/chat_records/chat_k11_record.md`. The hardware section now defines a concrete future board/pin/clock/timeout baseline and clearly marks it as unexecuted. The unresolved K.10 CF01 P2 attempt-count discrepancy is documented; K.12 must reconcile it against original raw records if available and must not use the conflicting count as evidence.
 
 K.12 is authorized for software-only demo productization and final audit. No hardware execution or flashing is authorized. `exp` and `main` must remain unchanged until a later explicit integration authorization. Preserve the original local-only commit in the original checkout.
+
+
+---
+
+## K.12 implementation and audit status — 2026-10-13
+
+K.12 implementation is in progress on `feature/k10-4-final-technical-conclusion-2026-10-13`. The professor UI now includes the virtual I2C0/SPI0/UART0 connection workbench, frozen K.10 evidence summary, CF01 unresolved warning, and a future STM32U575ZI / NUCLEO-U575ZI-Q mapping explicitly marked pending physical validation. The C adapter exposes connection availability, includes it in the reproducibility digest, and rejects an event admission referencing a disconnected resource before reference-runtime state mutation. The CLI/bridge carry the configuration and expose adapter errors; CLI/UI contract tests were extended.
+
+The K.12 report, chat record and updated demo guide will document exact commit/tree evidence. Remote-only integrity checks cannot demonstrate that the original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` persists in the user's local checkout.
+
+**Verification limitation:** This ChatGPT session can retrieve/edit GitHub source but has no runnable local checkout/compiler/browser runtime. CMake build, CTest, server/API smoke tests and manual responsive/accessibility review are not executed here. K.12 must remain INCOMPLETE/BLOCKED unless these checks can be run and evidenced. The frozen K.10 campaign must not be rerun.
+
+**CF01:** Original raw K.10 CSV records are absent from the non-truncated remote branch tree. Keep the discrepancy unresolved and exclude CF01 P2 attempt count from comparison until original raw records are supplied. `exp` and `main` are frozen and must not be moved.
