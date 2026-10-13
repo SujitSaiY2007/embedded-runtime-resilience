@@ -1023,10 +1023,14 @@
           state = payload;
           if (requestId !== lastRenderRequest) return;
           if (state.adapter_error) {
-            bridgeMessage.textContent = state.adapter_error_message || 'Virtual adapter rejected the selected configuration.';
+            stopPlay();
+            const links = [...disconnectedPeripherals].join(', ') || 'required virtual resource';
+            bridgeMessage.textContent = `EXECUTION BLOCKED — ${links} is disconnected. The C virtual adapter rejected admission before runtime mutation; no event was admitted for this request.`;
             bridgeMessage.className = 'k12-warning';
+            bridgeMessage.setAttribute('aria-live', 'assertive');
           } else {
             updateVirtualLinkUI();
+            bridgeMessage.removeAttribute('aria-live');
           }
         } catch (e) {
           if (requestId !== lastRenderRequest) return;
