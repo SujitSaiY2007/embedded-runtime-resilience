@@ -9,7 +9,7 @@
 **Checkpoint authority:** ChatGPT  
 **Repository execution agent:** Antigravity only when explicitly invoked by ChatGPT
 
-> **Gate:** This prompt is a prepared continuation brief, not permission to begin K.12 before ChatGPT explicitly approves and closes K.11. Do not sync `main`. No physical hardware execution or MCU flashing is authorized by this prompt.
+> **Gate status (2026-10-13): K.11 has been substantively reviewed and formally APPROVED AND CLOSED BY CHATGPT. K.12 is AUTHORIZED TO BEGIN within the software-only scope below. Do not sync `main`. No physical hardware execution or MCU flashing is authorized by this prompt.
 
 ## 1. Startup verification
 
@@ -63,4 +63,4 @@ K.12 may be recommended for closure only when:
 - the final audit reports exact branch/commit SHAs and verifies `exp`, `main`, and protected blob integrity;
 - no unsupported hardware or legal claims remain.
 
-**Start condition:** ChatGPT has explicitly approved and closed K.11. If that approval is absent, stop after startup verification and report the gate as closed.
+**Start condition:** K.11 was explicitly approved and closed by ChatGPT on 2026-10-13. Proceed with K.12 after startup verification. The CF01 P2 attempt-count discrepancy documented in the K.11 report is an explicit audit item: reconcile against original raw records if available; do not rerun the K.10 matrix or silently edit frozen K.10 results.
