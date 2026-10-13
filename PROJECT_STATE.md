@@ -2,10 +2,10 @@
 
 **Project:** Embedded Systems — Missed Opportunities in Simpler Areas  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Status (authoritative current state, 2026-10-13):** K.10, K.10.1, K.10.2, K.10.3, AND K.10.4 APPROVED AND CLOSED BY CHATGPT (2026-10-13). K.11 — Final Software Synthesis + Hardware-Validation Handoff — is the active authorized next checkpoint. K.11 is strictly software synthesis and hardware specification; no physical MCU execution is authorized. `exp` is canonical (active working branch: `feature/k10-4-final-technical-conclusion-2026-10-13`); `main` remains unchanged and unsynchronized until final software closure.  
+**Status (authoritative current state, 2026-10-13):** K.10, K.10.1, K.10.2, K.10.3, K.10.4, AND K.11 APPROVED AND CLOSED BY CHATGPT. K.12 — Professor-Facing Software Demonstration Productization & Final Software Audit — is the active authorized checkpoint. K.12 is software-only; physical MCU flashing, fault injection, and measurement remain unauthorized. `exp` is canonical (working branch: `feature/k10-4-final-technical-conclusion-2026-10-13`); `main` remains unchanged and unsynchronized.  
 **Project mode:** Solo software-dominant embedded-systems research project.
 
-> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. K.10.1–K.10.4 are approved and closed; K.11 is authorized. Gates A–E, the protected C runtime, and K.10 empirical evidence remain frozen.
+> **Current-status precedence:** This opening status and `research/PART_II_CHAT_PLAN.md` govern the present state. Older dated sections below are historical checkpoint records and are preserved for provenance; they must not be read as the current active objective. K.10 is complete and must not be rerun. K.10.1–K.10.4 and K.11 are approved and closed; K.12 is authorized. Gates A–E, the protected C runtime, and K.10 empirical evidence remain frozen.
 
 
 
@@ -622,3 +622,10 @@ Startup verification observed working HEAD `26b037584bb0a0acce3a293bed3f5a516ffa
 The K.11 report explicitly limits findings to the 400 deterministic host/reference executions. P4's measured advantages are bounded to CF04/CF07 and CF05; quarantine is shared across P0–P4; P2 wins the attempt-count comparison in CF16 (one attempt versus P4's three); `QMAX=16` and `EPMAX=1` are stated capacity confounds; and C1 multi-reference combination risk remains unresolved. No hardware validation has been performed.
 
 **K.11 status: deliverables drafted; formal checkpoint approval pending.** No physical hardware execution, MCU flashing, runtime redesign, experiment rerun, merge to `exp`, or synchronization of `main` is authorized. K.12 remains gated pending explicit K.11 closure.
+
+
+## K.11 formal closure — 2026-10-13
+
+ChatGPT completed substantive review and approved K.11. See `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md` and `research/chat_records/chat_k11_record.md`. The hardware section now defines a concrete future board/pin/clock/timeout baseline and clearly marks it as unexecuted. The unresolved K.10 CF01 P2 attempt-count discrepancy is documented; K.12 must reconcile it against original raw records if available and must not use the conflicting count as evidence.
+
+K.12 is authorized for software-only demo productization and final audit. No hardware execution or flashing is authorized. `exp` and `main` must remain unchanged until a later explicit integration authorization. Preserve the original local-only commit in the original checkout.
