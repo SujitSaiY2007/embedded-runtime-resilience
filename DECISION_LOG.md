@@ -586,3 +586,8 @@ Checkpoint K.11 — Final Software Synthesis + Hardware-Validation Handoff — i
 K.12 may expose connect/disconnect controls only for the finite modeled virtual peripheral IDs I2C0, SPI0 and UART0. The virtual-system adapter stores link availability, includes it in the run digest, and rejects admission when a fixed scenario event refers to a disconnected resource. This is a virtual resource-availability test, not arbitrary pin remapping, not physical wiring and not a change to Gates A–E or recovery policy logic. 
 
 **Verification boundary:** Source and Git blob integrity can be checked remotely; compiler/CTest/browser behavior cannot be claimed without observed execution output. The absent original `k10_runs.csv` and `k10_traces.csv` prevent resolving the frozen CF01 P2 count discrepancy. No K.10 matrix rerun or edits to frozen results are permitted. No `exp` merge or `main` synchronization is authorized as part of K.12.
+
+
+| D-K12-01 | Accepted | Close K.12 after user-reported local CTest/UI-contract success and working browser UI; retain provenance as user-run, not independently CI-verified. | User confirmed the live software demonstration works; remote-only inspection cannot reproduce their local Windows environment. |
+| D-K12-02 | Accepted | Treat physical MCU implementation and measurements as future work. | The current milestone is a software-only research demonstration; the board plan is preparatory only. |
+| D-K12-03 | Accepted | Keep the CF01 P2 attempt-count discrepancy unresolved and exclude it from comparative claims until original run/trace records are available. | The original primary records were not present in the inspected remote branch; do not rerun the frozen matrix to replace them. |
