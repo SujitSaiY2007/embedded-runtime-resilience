@@ -1,6 +1,8 @@
 # K.10.4 — Final Technical Distinction & Research Conclusion
 
-**Status:** COMPLETE (Pending ChatGPT Review and Approval)  
+> **Historical checkpoint note:** This report was authored during K.10.4. Current repository integration and software-demo status are tracked in [the project overview](../../docs/PROJECT_OVERVIEW.md) and [K.12 audit](phase2_k12_professor_facing_software_demo_and_final_audit.md). The software scope is now closed; physical MCU validation remains future work. Historical statements below are retained where they describe the checkpoint-time state.
+
+**Final status:** APPROVED AND CLOSED BY CHATGPT (2026-10-13)  
 **Date:** 2026-10-13  
 **Branch:** `exp` (via isolated working branch `feature/k10-4-final-technical-conclusion-2026-10-13`)  
 **Scope:** Research synthesis and technical distinction analysis only. Not a legal opinion on patentability, novelty, or non-obviousness.  
