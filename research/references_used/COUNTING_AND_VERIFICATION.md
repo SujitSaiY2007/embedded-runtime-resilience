@@ -1,50 +1,50 @@
 # Counting and Verification Notes
 
-**As of:** 2026-10-13  
+**Updated:** 2026-10-13  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
-**Register:** [REFERENCE_REGISTER.md](REFERENCE_REGISTER.md)
+**Canonical register:** [REFERENCE_REGISTER.md](REFERENCE_REGISTER.md)
 
-## Current verified inventory status
+## Final inventory from this recovery pass
 
-The reconstructed register now contains **21 individually registered source records plus 12 additional landscape leads**:
+| Classification | Count | Meaning |
+|---|---:|---|
+| Primary verified source records | **17** | Source identity and core bibliographic/patent metadata matched to a stable publisher, institutional, proceedings, official documentation or patent-record page. |
+| Additional unresolved leads | **26** | Historical candidate sources/topics that remain insufficiently identified or need exact source/version/claim verification. |
+| Total inventory entries | **43** | Primary records plus additional leads, with patent families and known publication/grant duplicates grouped to avoid double counting. |
 
-- **9 academic paper / research-system records** (RU-001–RU-009);
-- **9 patent or patent-publication records** (RU-010–RU-018);
-- **3 framework/documentation records** (RU-019–RU-021).
+The 17 primary records comprise 7 academic/research-system papers, 1 official framework-documentation source, and 9 patent source records/families. The additional 26 are not verified papers. Some are concrete candidates; others are search topics that still need a specific paper, standard clause, source-code revision or manual.
 
-The 21 source records are individually described (9 academic paper/research-system records, 9 patent/publication records, 3 framework/documentation records). The 22 additional leads include named research areas and concrete patent/paper/vendor-source leads recovered from the Phase 0 research-space map, topic-freeze report and K.10.4 synthesis; they are not 22 verified papers. This is **not** a claim that 21 sources were fully read, that all 21 are appropriate final-paper citations, or that only 21 sources were encountered during the project month.
+## What “verified” means here
 
-## Why the full-month count is not yet known
+“Primary verified” means the source can be identified unambiguously and its core metadata was checked against the linked source record. It does **not** mean that every source was read cover-to-cover in this pass, that every claim was reviewed, that every source is appropriate for the final paper, or that the whole month’s reading history has been recovered.
 
-1. The research evolved across K.1–K.12 and multiple checkpoint reports; references are not all stored in one canonical bibliography.
-2. Some items were only search leads, abstracts, metadata, patent abstracts, or references inherited from earlier notes.
-3. Some patent identifiers may be related family members, so document count and unique invention/family count differ.
-4. Some academic records need exact title/author/venue/DOI confirmation.
-5. The recovered repository records do not establish a complete inventory of every source that may have been read locally or discussed in earlier chats.
+Keep three separate counts in any later report:
+1. **Identified source records** — sources with reliable identity and metadata.
+2. **Full-text/claims inspected** — sources for which the actual paper, patent claims or technical sections were read and relevant passages recorded.
+3. **Cited in the manuscript** — only sources actually cited and tied to a specific claim in the final manuscript.
 
-## Rules for future reporting
+These are different numbers and must never be merged into a single “papers read” count.
 
-Report separate totals for:
-1. unique academic papers with verified metadata;
-2. academic papers whose full text was inspected;
-3. patents/publications inspected at claim level;
-4. other technical documentation/standards;
-5. candidate leads not yet verified;
-6. references actually cited in the submitted manuscript.
+## Corrections and deduplication applied
 
-Do not present the current row count as any of those totals unless a reconciliation establishes it. Do not cite a source merely because it appears in the register.
+- US 2018/0365126 A1 and US 10,838,845 B2 are the same IBM patent family and count once.
+- US 2018/0267859 A1 and US 10,331,522 B2 are the publication/grant forms of one event-failure-management family and count once.
+- US 12,688,084 is “Intelligent data flow control valve” and concerns an integration-layer failed-event queue. It was not promoted under the older shorthand that described it as a peripheral/embedded recovery source.
+- The old identifier/title for “Fault recovery of peripheral I/O lines” (US 2026/0228076 as written in the historical notes) remains unresolved and is not in the primary count.
+- The two 2026 Dell peripheral-management publications have separate application/publication records and are retained separately for technical comparison; their legal family/claim relationship is not adjudicated here.
 
-## Audit trail used for this reconstruction
+## What remains unresolved
 
-The register was reconstructed from the canonical repository's:
-- `research/novelty_investigation.md`;
-- `research/phase2_k10_p4_advantage_novelty_results.md`;
-- `research/phase2_k10_1_adversarial_distinction_review.md`;
-- `research/phase2_k10_2_single_reference_anticipation_review.md`;
-- `research/phase2_k10_3_multi_reference_combination_review.md`;
-- `research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`;
-- `research/phase0_research_space_map.md` (earlier literature landscape and unresolved search-result citation markers);
-- `research/deep_prior_art_attack_topic_freeze.md` (additional patent, interrupt-overload, execution-time-monitoring and vendor-framework leads);
-- `research/chat_records/chat_k10_1_record.md`, `chat_k10_2_record.md`, and `chat_k10_3_record.md`.
+The full-month total of sources encountered, the exact number read in full, and the number cited in any manuscript cannot be reconstructed with certainty from the currently preserved repository. Historical Phase 0 search-result markers are not stable bibliographic records. The 26 additional leads are retained in the overall inventory, but are not promoted into the primary count until identified and checked.
 
-The existence of these records supports that a prior-art investigation was documented. It does not prove exhaustive literature coverage.
+This is a completed, evidence-bounded inventory pass, not a claim of an exhaustive global prior-art search. It does not establish novelty, inventive step, patentability or freedom to operate.
+
+## Future update rule
+
+When a lead is resolved:
+1. Open and verify the primary source record.
+2. Capture exact title, authors/inventors, venue or patent publication/grant, date, DOI/URL and version.
+3. Check for duplicates and patent-family relationships.
+4. Move it from the additional list into the primary verified list only after those checks.
+5. Record whether full text/claims were actually inspected and the exact section/page supporting the research comparison.
+6. Update both the primary, additional and total counts in this file and the register.
