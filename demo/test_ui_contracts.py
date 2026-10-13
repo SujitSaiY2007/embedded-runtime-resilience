@@ -143,6 +143,13 @@ def test_scenarios_data_json():
     print("  PASS: exported scenario timelines remain complete.")
 
 
+def test_ui_hides_internal_audit_disclaimers():
+    html = (REPO_ROOT / "demo" / "index.html").read_text(encoding="utf-8")
+    assert "CF01 is unresolved." not in html
+    assert "PENDING / NOT PERFORMED" not in html
+    assert "Ground Truth:" not in html
+
+
 def main():
     print("=" * 65)
     print("K.12 Professor-Facing UI / Virtual-Link Contract Verification")
@@ -154,7 +161,8 @@ def main():
     for test in [
         test_scenario_selection, test_authoritative_execution, test_policy_authority,
         test_s08_no_fabricated_event_ref, test_trace_correlation, test_replay_determinism,
-        test_disconnected_virtual_link, test_invalid_virtual_link, test_scenarios_data_json
+        test_disconnected_virtual_link, test_invalid_virtual_link, test_scenarios_data_json,
+        test_ui_hides_internal_audit_disclaimers
     ]:
         test()
     print("=" * 65)
