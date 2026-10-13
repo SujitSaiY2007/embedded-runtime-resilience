@@ -578,3 +578,11 @@ Checkpoint K.11 — Final Software Synthesis + Hardware-Validation Handoff — i
 | D-120 | Accepted — K.11 formally approved and closed by ChatGPT (2026-10-13) | Approve the final software synthesis and hardware-validation specification as a future handoff, and authorize K.12 software-only demonstration productization and final audit. | The synthesis preserves the bounded host-model evidence, trade-offs, prior-art uncertainty, and physical-validation boundary. |
 | D-121 | Accepted — follow-up required in K.12 | Preserve and explicitly reconcile the CF01 P2 attempt-count discrepancy between the frozen K.10 results table/narrative and K.10.4 summary using original raw records if available; do not rerun K.10 or silently edit its results. | Maintains evidence integrity and prevents a conflicting attempt-count claim from entering the demonstration or publication narrative. |
 | D-122 | Accepted — frozen boundary | Keep `exp` and `main` unchanged during K.12 unless a later explicit ChatGPT decision authorizes integration; preserve the local-only commit in the original checkout. | Protects research provenance and prevents premature synchronization. |
+
+
+## D-123 — K.12 virtual connection interface and final-audit evidence boundary
+**Status:** Accepted for K.12 implementation — 2026-10-13
+
+K.12 may expose connect/disconnect controls only for the finite modeled virtual peripheral IDs I2C0, SPI0 and UART0. The virtual-system adapter stores link availability, includes it in the run digest, and rejects admission when a fixed scenario event refers to a disconnected resource. This is a virtual resource-availability test, not arbitrary pin remapping, not physical wiring and not a change to Gates A–E or recovery policy logic. 
+
+**Verification boundary:** Source and Git blob integrity can be checked remotely; compiler/CTest/browser behavior cannot be claimed without observed execution output. The absent original `k10_runs.csv` and `k10_traces.csv` prevent resolving the frozen CF01 P2 count discrepancy. No K.10 matrix rerun or edits to frozen results are permitted. No `exp` merge or `main` synchronization is authorized as part of K.12.
