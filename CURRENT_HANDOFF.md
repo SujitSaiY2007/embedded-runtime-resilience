@@ -717,3 +717,10 @@ K.12 added a professor-facing virtual hardware workbench and frozen-evidence pan
 
 **Local-only history:** Remote inspection cannot establish whether original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38` remains in the original local checkout. Do not claim local preservation was verified based on this remote audit.
 
+
+
+## Final project status — 2026-10-13
+
+**K.10 through K.12 software/research milestones are closed.** The professor-facing software demonstrator and project guide are integrated into `main` through PR #9, merge commit `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`. Remote refs verified: `main` at the merge commit; `exp` unchanged at `ab766b47ce7bae2791028cea22b7915f8debc41c`; feature branch preserved at `0b7a3d2c7f0be1a14395598fb027d39c53506550`.
+
+The user reports successful local CTest/UI contract tests and a working browser demo. This provenance is user-run, not independently CI-verified. CF01 remains unresolved without original run/trace CSVs and must be excluded from comparative claims. Physical MCU implementation, flashing, fault injection and measurements are future work. Use `PROJECT_COMPLETE_GUIDE.md` as the end-to-end orientation document and `research/main_branch_readiness_audit.md` for the integration record.
