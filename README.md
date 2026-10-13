@@ -1,187 +1,100 @@
 # Embedded Runtime Resilience
+### Research case study · Deterministic embedded recovery · Live software demonstrator
 
-> **Research project — Gates A-E frozen; host validation complete; software demonstrator + methodology lock active**
+[![Research status](https://img.shields.io/badge/research-software%20phase%20complete-247a55)](#project-status)
+[![Runtime](https://img.shields.io/badge/runtime-C11-blue)](reference/)
+[![UI](https://img.shields.io/badge/demo-HTML%20%2B%20Python-orange)](demo/)
+[![Hardware](https://img.shields.io/badge/hardware-future%20work-lightgrey)](docs/PROJECT_OVERVIEW.md)
 
-A solo software-dominant embedded-systems research project investigating a **Lightweight Zero-Heap Context-Aware Peripheral Recovery Policy with Event Quarantine for Resource-Constrained MPU-Enabled Event-Driven MCU Firmware**.
+**Embedded Runtime Resilience** investigates a bounded, zero-heap, context-aware peripheral-recovery policy for event-driven MCU firmware, with event quarantine and recovery-history-aware decisions. The repository combines a protected C reference runtime, deterministic host experiments, a virtual embedded-system adapter, a browser UI, and an auditable research record.
 
-## Current status
+> **Project state (13 October 2026):** The software research and professor-facing demonstrator are complete for the current scope. The live UI is intended to exercise the same C reference runtime used by the project. Physical MCU implementation, fault injection, and hardware measurements are future work—not completed results.
 
-**K.10 is COMPLETE.** The decisive software-model P0-P4 investigation has been executed and recorded. The project now enters the **post-K.10 adversarial technical-distinction review** before K.11.
+## Start here
 
-K.10 established a **demonstrated bounded advantage** for P4 in specific controlled fault conditions, while also identifying explicit no-difference cases and trade-offs. The prior-art investigation found no single investigated reference disclosing the complete proposed combination, but individual mechanisms and sub-combinations are established and multi-reference recombination remains an unresolved technical/legal risk.
+| If you want to… | Go to |
+|---|---|
+| Understand the project, contribution, evidence, limits, and roadmap | [Project overview](docs/PROJECT_OVERVIEW.md) |
+| Run the live software demonstrator | [Demo setup and operating guide](docs/DEMONSTRATOR_GUIDE.md) |
+| Understand the source tree and runtime data flow | [Architecture and repository map](docs/ARCHITECTURE_AND_REPOSITORY_MAP.md) |
+| Read the final evidence-bounded conclusion | [K.10.4 research conclusion](research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md) |
+| Review the matched experiments | [K.10 results](research/phase2_k10_p4_advantage_novelty_results.md) |
+| Review final software synthesis and hardware handoff | [K.11 synthesis](research/phase2_k11_final_software_synthesis_and_hardware_handoff.md) |
+| Review the final software demo audit | [K.12 audit](research/phase2_k12_professor_facing_software_demo_and_final_audit.md) |
+| Understand historical decisions and checkpoints | [Research archive index](research/README.md) · [Decision log](DECISION_LOG.md) |
 
-### Current active sequence
+## Project status
 
-**K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12 -> final exp audit -> main synchronization**
-
-- **K.10.1:** adversarial prior-art + feature/limitation distinction review
-- **K.10.2:** deep single-reference anticipation review
-- **K.10.3:** multi-reference combination / technical obviousness analysis
-- **K.10.4:** final technical distinction + evidence-bounded research conclusion
-- **K.11:** final software synthesis + target-MCU validation handoff
-- **K.12:** final software productization + clean professor-facing UI demonstration
-
-**ChatGPT owns this sequence. Antigravity is an execution agent inside a ChatGPT-defined checkpoint and does not define the chat-wise roadmap.**
-
-Hardware validation has not started.
+- **Research conclusion:** finalized within the tested host/reference-model scope.
+- **K.12 software demonstrator:** user-reported local build/tests and browser run succeeded; remote repository integration is complete. These local executions were not independently reproduced by CI.
+- **Main branch:** contains the approved software/research deliverables and current project-navigation documents.
+- **`exp` branch:** retained unchanged as the canonical frozen research baseline.
+- **Physical hardware:** not implemented or measured; documented as future work.
+- **CF01:** the reported qualitative outcomes are retained; its conflicting P2 attempt count is omitted from comparative claims. Frozen historical records are preserved.
 
 ## Research question
 
-Can a compact, deterministic, software-only recovery policy for event-driven MCU firmware use peripheral fault context and short recovery history to select a bounded recovery action while quarantining the fault-associated event, preserving unrelated valid queued events, and maintaining acceptable CPU/RAM/Flash overhead on an MPU-enabled resource-constrained MCU?
+Can a compact deterministic recovery policy use peripheral-fault context and short recovery history to select a bounded action, isolate the fault-associated event, preserve unrelated valid queued work, and terminate within explicit resource limits?
 
-## Project progression
+## What this repository demonstrates
 
-The project has two broad phases:
+The interactive software path is:
 
-1. **Phase 0 — Research and topic selection:** research-space exploration, prior-art investigation, falsification of broad candidate ideas, and topic freeze.
-2. **Phase 1 — Main engineering/research work:** system design, formalization, experimental protocol, reference implementation, physical testbed, experiments, analysis, and final synthesis.
+```text
+Browser UI
+  → Python HTTP bridge
+  → C virtual-system adapter and scenario runner
+  → existing C reference runtime
+  → runtime outcome, digest and trace records
+  → UI state and correlated trace display
+```
 
-Phase 1 currently progresses through the Gate A–E design/experimental checkpoints before implementation and validation.
+The UI is a control/presentation layer, not a second recovery implementation. The C reference runtime remains authoritative for recovery decisions.
 
-## Current architecture direction
+## Evidence-bounded findings
 
-- **Target MCU/board:** STM32U575ZI / NUCLEO-U575ZI-Q
-- **Primary interface:** I2C
-- **Secondary interface:** SPI
-- **Initial diagnostic/control path:** UART/USART
-- **Recovery model:** zero-heap, statically bounded, deterministic
-- **Core mechanism:** context/history-aware recovery with dependency-aware event quarantine
-- **Logical actions:** `RETRY`, `REINIT_OR_RESET`, `DEGRADE`, `ESCALATE`
-- **Recovery budget:** maximum 4 recovery actions per fault episode
+The frozen K.10 campaign covers **16 case families × 5 policy variants × 5 repetitions = 400 executions** in a deterministic host/reference model. The reports describe bounded P4 advantages in selected case families, important no-difference cases, and trade-offs—including a lower-attempt P2 result in CF16. Exact-event quarantine is shared across P0–P4 and is not a P4-exclusive capability. Resource caps such as QMAX=16 and EPMAX=1 constrain interpretation.
 
-The platform direction and design contracts remain subject to later implementation and physical validation where applicable.
+These results do **not** establish universal superiority, physical MCU performance, statistical generalization, legal novelty, non-obviousness, or patentability.
 
-## Research discipline
+## Quick start
 
-The project does **not** claim that zero-heap allocation, MPU isolation, peripheral recovery, event queues, event quarantine, context-aware recovery, or formal invariants are individually novel.
+Prerequisites: C11 compiler, CMake 3.16+, Python 3, and a modern browser. No API keys or paid cloud service are required.
 
-The research hypothesis concerns the **specific integrated mechanism and its measured technical trade-offs**.
+From the repository root:
 
-Host-side modeling and exhaustive checks provide evidence about the defined model; they are not substitutes for firmware execution or physical hardware validation.
+```powershell
+cmake -S reference -B reference/build
+cmake --build reference/build --config Debug
+ctest --test-dir reference/build -C Debug --output-on-failure
+python demo/test_ui_contracts.py
+python demo/server.py 8000
+```
 
-No physical measurements, benchmark results, patentability conclusions, or unsupported novelty claims should be inferred from the current repository state.
+Open [http://localhost:8000/](http://localhost:8000/) while the server is running. See the [full demo guide](docs/DEMONSTRATOR_GUIDE.md) for platform notes and the acceptance checklist.
 
-## Continuity
+## Repository map
 
-This repository is the project's canonical source of truth across development sessions.
+```text
+.
+├── README.md                         # public-facing project entry point
+├── docs/                             # curated project and demo documentation
+├── demo/                             # browser UI, Python bridge, UI contract tests
+├── reference/                        # authoritative C runtime and virtual system
+└── research/                         # frozen methods, results, conclusions and history
+    └── chat_records/                 # checkpoint provenance; retained as history
+```
 
-Before substantive continuation, read:
+The historical root continuity files remain for auditability and ongoing maintenance. The curated docs linked above are the preferred entry points for readers and evaluators.
 
-1. `PROJECT_MANUAL.md`
-2. `PROJECT_STATE.md`
-3. `CURRENT_HANDOFF.md`
-4. `DECISION_LOG.md`
-5. the relevant `research/` artifacts
+## Reproducibility and integrity
 
-`NEXT_CHAT_PROMPT.md` contains the current next-chat startup prompt. Historical design artifacts are retained rather than deleted merely to shorten the repository.
+- The C reference runtime is the software authority for decisions and trace records.
+- The K.10 evidence is frozen; do not regenerate the matrix to repair a documentation inconsistency.
+- Historical reports remain intact for provenance; final presentation avoids unsupported CF01 attempt-count comparisons.
+- Hardware planning is explicitly labeled as proposed, not performed.
+- The `main` branch contains the finalized presentation layer; `exp` remains unchanged.
 
-## Research rule
+## Citation and academic use
 
-**Novelty is a hypothesis until demonstrated against prior art.**
-
-The repository documents research decisions and evidence progressively; completion of a design gate does not by itself establish experimental superiority, novelty, or patentability.
-
-## 2026-10-01 — Chat K.1 checkpoint
-
-Chat K.1 completed the smallest reproducible host-experiment checkpoint.
-
-- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
-- Commit: `949bd4c`
-- The branch was pushed and the working tree was clean after commit.
-- Windows/MSVC build produced `reference_tests.exe` and `host_experiment.exe`.
-- CTest: **2/2 passed**.
-- `py experiments/run_host_experiment.py --check`: **PASS** for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
-- Matched corpus size: **14 workloads × 5 variants = 70 runs**.
-- W09/W10 are explicitly capacity-confounded.
-- P0-P3 are explicitly marked `ablation_contract_valid=0`; P4 is marked valid under the current implementation boundary.
-- The P0-P3 quarantine-ablation gap remains documented and unchanged.
-
-The generated `out/` and `out.replay/` directories were inspected during verification and then cleaned before the checkpoint commit; the declarative input corpus and harness remain committed so the run is reproducible.
-
-### Chat K.2 starting boundary
-
-Do not rebuild or redesign the harness unless corpus inspection exposes a concrete defect. Start by regenerating/inspecting the corpus, validating trace/outcome semantics against Gate E, and recording any remaining evidence limitations.
-
-## 2026-10-01 — Chat K.2 corpus-validation checkpoint
-
-Chat K.2 completed the corpus-level validation of the regenerated host evidence.
-
-- Branch: `experiment/host-p0-p4-corpus-2026-10-01`
-- Regenerated corpus: **70 runs = W01-W14 × P0-P4**.
-- `corpus_manifest.csv` reports PASS for deterministic replay, matched-input equivalence, raw-input preservation, capacity-confound flagging, and ablation-contract flagging.
-- Manifest evidence boundary reports host evidence only: `host_evidence_only=1`, `mcu_evidence=0`, `physical_fault_evidence=0`.
-- Representative trace/run slices were inspected across recovery-heavy and later workloads; no concrete corpus-generation, serialization, or runtime defect was found.
-- W09/W10 remain explicitly capacity-confounded.
-- P0-P3 remain `ablation_contract_valid=0`; P4 remains valid under the current implementation boundary.
-- The existing exact-event-quarantine implementation gap remains documented and unchanged.
-
-The generated `out/` and `out.replay/` directories remain transient verification artifacts. The committed source of reproducibility is the declarative corpus, harness, and checkpoint documentation.
-
-**K.2 is complete. K.3 is the next checkpoint.**
-
-
-## 2026-10-01 — Integrated software-phase objective
-
-The current target is a complete software-only proof of concept for professor review. The UI demonstrates the end-to-end mechanism while the ISO C11 reference and host corpus remain the authoritative software evidence. See `research/phase1_software_demonstrator_methodology_lock.md`.
-
-The software conclusion is intentionally bounded: the project has a specified, implemented, reproducible host mechanism suitable for hardware validation, but MCU performance, physical recovery, statistical evidence, and final novelty/patentability remain unverified.
-
----
-
-# Project Structure — Two-Part Research Program
-
-## Part I — K-Series Host/Reference Foundation — COMPLETE
-K.1 -> K.2 -> K.3 is Part I. K.3 is a completed Part-I checkpoint, not the end of the overall project.
-
-Part I established Gates A-E, the ISO C11 reference mechanism, deterministic host experiment infrastructure, K.1 execution verification, K.2 corpus validation, and K.3 evidence-bounded synthesis.
-
-## Part II — Software Demonstrator, Novelty Investigation, and Methodology Lock — ACTIVE
-Part II begins at K.4. Its purpose is to investigate the remaining novelty space, construct a software-only virtual embedded system, connect that environment to the same authoritative C reference runtime, build the professor-facing UI, perform matched software comparison, re-verify the software chain, and produce the hardware-validation handoff.
-
-Professor review is the intended use of Part II, not a separate stage.
-
-### Authoritative architecture
-UI -> Virtual Embedded System -> SAME C Reference Runtime -> Recovery Decision -> Trace -> UI
-
-The UI is presentation/control only. The virtual system models the environment. The C reference runtime remains the authoritative recovery-policy implementation. A second competing recovery algorithm must not be created in the UI or simulator.
-
-### Branch-control policy
-- exp is the active research/reference branch.
-- Focused child branches may be created from exp.
-- Completed checkpoints return to exp.
-- main is the integrated stable mirror and is synchronized from exp through explicit PR/merge.
-- No active Part-II development is performed directly on main.
-- Every main update identifies the source exp commit and checkpoint.
-
-### Chat scope contract
-Every Part-II chat has a predefined scope in research/PART_II_CHAT_PLAN.md. A chat must read continuity files, perform only its assigned checkpoint, record completed and incomplete work, update continuity, and stop at its boundary.
-
-
-
-
----
-
-## Active roadmap update — 2026-10-01
-
-K.9 is historically closed. A new controlled checkpoint, **K.9.2 — P4 Advantage & Novelty Investigation Design Lock**, now precedes K.10.
-
-This is intentional: the existing K.8/K.9 evidence does not establish universal P4 superiority or novelty. K.9.2 defines the complete metric, scenario-combination, attribution, falsification and prior-art search space before decisive investigation.
-
-**K.9.2:** design/measurement/search lock only.  
-**K.10:** execute the P4 advantage and novelty investigation.  
-**Later checkpoint:** final synthesis and hardware-validation handoff only after K.10 evidence exists.
-
-Antigravity is the repository execution agent; ChatGPT controls/audits checkpoint scope. Historical K.1-K.9 records are preserved.
-
-
----
-
-## 2026-10-02 — Canonical post-K.10 roadmap
-
-The active Part-II sequence is now defined exclusively by `research/PART_II_CHAT_PLAN.md`. Earlier roadmap wording that conflicts with that file is historical/superseded; historical records remain for provenance.
-
-K.10 is complete. The next work is adversarial technical review, not another P4 redesign or another generic experiment cycle.
-
-**Canonical sequence:** K.10.1 -> K.10.2 -> K.10.3 -> K.10.4 -> K.11 -> K.12.
-
-Every stage is controlled by a ChatGPT chat. Antigravity may execute work only inside the currently authorized stage. Each stage must close with continuity updates and the exact next ChatGPT prompt.
+This repository is a research case study and software demonstration. Cite the repository commit or release used in any report. Before external publication, re-check references, experimental artifacts, and institutional authorship requirements. The repository does not claim a legal patentability determination.
