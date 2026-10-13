@@ -9,7 +9,7 @@ This folder consolidates the references and source leads documented during the p
 
 ## Important scope rule
 
-This is a **reconstruction from the canonical repository's available research reports and checkpoint records**, not proof that every item was read in full or cited in a manuscript. The register distinguishes primary-source inspection from metadata/abstract-only review, candidate leads, and references whose exact bibliographic details still require verification. Do not cite an item in a manuscript solely because it appears here.
+This is a **reconstruction from the canonical repository's available research reports and checkpoint records**, not proof that every item was read in full or cited in a manuscript. The register now includes 21 individually described source records plus 22 additional literature/prior-art leads recovered from earlier project reports. It distinguishes primary-source inspection from metadata/abstract-only review, unresolved search leads, and references whose exact bibliographic details still require verification. Do not cite an item in a manuscript solely because it appears here.
 
 The repository's K.10.1–K.10.4 documents are technical prior-art analyses, not legal opinions. Their bounded findings must remain bounded. A reference's presence here does not establish that it anticipates the complete P4 design, nor that P4 is novel or patentable.
 
