@@ -290,3 +290,12 @@ Startup integrity checks confirmed the expected `exp` and `main` HEADs and all f
 K.11 is formally approved and closed by ChatGPT. The synthesis report and chat record document the evidence boundaries, the future STM32U575ZI / NUCLEO-U575ZI-Q protocol, and an unresolved CF01 P2 attempt-count discrepancy in the frozen K.10 documents. K.12 must reconcile CF01 from original raw records if available without rerunning the K.10 matrix or editing frozen K.10 results.
 
 **K.12 is now the active authorized checkpoint** for software-only professor-facing demonstration productization and final audit. No MCU flashing, physical fault injection, physical measurements, merge to `exp`, or synchronization of `main` is authorized absent a later explicit approval.
+
+
+---
+
+## K.12 execution update — 2026-10-13
+
+K.12 remote implementation is underway: workbench and evidence UI, C virtual link-availability plumbing, bounded Python CLI bridge, cross-platform CLI contract script, and demo guide are updated on the authorized feature branch. The research-evidence UI preserves CF01 as unresolved and labels future STM32U575ZI / NUCLEO-U575ZI-Q validation as pending.
+
+**Still required before closure:** inspect complete final diff and protected-file SHAs; execute CMake build, CTest and live HTTP/UI checks in a runnable environment; resolve CF01 only if original raw records become available; finish K.12 report/record and continuity consistency. If these execution checks cannot be run, verdict must remain INCOMPLETE/BLOCKED. Do not rerun K.10, change the protected runtime, merge to `exp`, move `main`, or claim the original local-only commit verified remotely.
