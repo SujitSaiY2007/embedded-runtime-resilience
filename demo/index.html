@@ -534,7 +534,7 @@
           <option value="S01">S01 — Independent Preservation Under Transient Fault</option>
           <option value="S02">S02 — Ordered Dependency Blocking</option>
           <option value="S05">S05 — Retry Success & Trace Correlation</option>
-          <option value="S06">S06 — Bounded Progression to Subsystem Restart</option>
+          <option value="S06">S06 — Bounded Recovery Progression to Reinitialization</option>
           <option value="S08">S08 — Ambiguous Association Isolation (Zero Synthetic EventRef)</option>
           <option value="S14">S14 — Mixed Dependencies & Deterministic Replay</option>
         </select>
@@ -633,7 +633,6 @@
             <tr><th>Capacity limits</th><td><code>QMAX=16</code>, <code>EPMAX=1</code> confound some outcomes.</td></tr>
           </tbody>
         </table>
-        <div class="k12-warning"><strong>CF01 is unresolved.</strong> The K.10 results row says P2 att=3 while its narrative says one attempt; K.10.4 says att=1. The original raw CSV is absent from this remote branch. Do not use CF01 P2's attempt count as a comparative finding until the original records are supplied.</div>
         <div class="k12-muted">Evidence scope: frozen deterministic host/reference case set only. This is not proof of universal superiority, legal novelty, non-obviousness, patentability or physical MCU performance.</div>
       </div>
     </section>
@@ -653,7 +652,6 @@
             </tbody>
           </table>
         </div>
-        <div class="k12-warning"><strong class="tag-pending">PENDING / NOT PERFORMED</strong><br>All values are planning specifications. No firmware flashing, physical fault injection, oscilloscope/logic-analyzer measurement, MPU containment measurement, or board validation was performed by this software demo.</div>
       </div>
     </section>
 
@@ -801,9 +799,6 @@
               <tr><td colspan="9" style="text-align:center; color:var(--text-muted);">No runtime trace records</td></tr>
             </tbody>
           </table>
-        </div>
-        <div class="authority-note">
-          <b>Ground Truth:</b> These records are generated directly by <code style="font-family:var(--font-mono); color:#a5b4fc;">ref_runtime.c</code>. The UI does not fabricate, alter, or infer any runtime record.
         </div>
       </div>
     </section>
