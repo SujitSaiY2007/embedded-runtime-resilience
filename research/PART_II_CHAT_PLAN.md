@@ -301,3 +301,10 @@ K.11 is formally approved and closed by ChatGPT. The synthesis report and chat r
 K.12 remote implementation is underway: workbench and evidence UI, C virtual link-availability plumbing, bounded Python CLI bridge, cross-platform CLI contract script, and demo guide are updated on the authorized feature branch. The research-evidence UI preserves CF01 as unresolved and labels future STM32U575ZI / NUCLEO-U575ZI-Q validation as pending.
 
 **Still required before closure:** inspect complete final diff and protected-file SHAs; execute CMake build, CTest and live HTTP/UI checks in a runnable environment; resolve CF01 only if original raw records become available; finish K.12 report/record and continuity consistency. If these execution checks cannot be run, verdict must remain INCOMPLETE/BLOCKED. Do not rerun K.10, change the protected runtime, merge to `exp`, move `main`, or claim the original local-only commit verified remotely.
+
+
+## Final software project closure — 2026-10-13
+
+**K.10, K.10.1–K.10.4, K.11 and K.12 are closed for the current software/research scope.** PR #9 integrated the research synthesis, professor-facing virtual software demonstrator and closure documents into `main` at `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`. `exp` remains unchanged at `ab766b47ce7bae2791028cea22b7915f8debc41c`; the feature branch is preserved at `0b7a3d2c7f0be1a14395598fb027d39c53506550`.
+
+The user reports successful local tests and a working UI; the remote audit did not independently run the local toolchain or browser. CF01 remains unresolved and excluded from comparative claims. **Hardware implementation is future work**, not a blocker to the completed software demonstration. No new K checkpoint is authorized by this closure note; hardware work should begin only if separately requested and planned.
