@@ -1,3 +1,5 @@
+> **Latest checkpoint status (2026-10-13): K.12 APPROVED AND CLOSED by ChatGPT based on user-reported successful local tests and working UI. The next action is controlled final integration to `main` and ref verification. Physical hardware implementation is future work; do not rerun frozen K.10 or modify protected runtime/Gate artifacts.**
+
 # Part II — Canonical Multi-Chat Execution Plan
 
 **Status:** ACTIVE — canonical post-K.10 roadmap  
