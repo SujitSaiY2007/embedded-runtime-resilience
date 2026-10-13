@@ -609,3 +609,16 @@ K.10.1 attacks the remaining technical distinction. K.10.2 tests single-referenc
 ## Governance
 
 ChatGPT owns the chat-wise sequence. Antigravity may execute only inside the active ChatGPT-defined checkpoint. Historical branch plans and old prompts are provenance, not active instructions. The canonical active plan is `research/PART_II_CHAT_PLAN.md`; the exact current continuation prompt is `NEXT_CHAT_PROMPT.md`.
+
+
+---
+
+## K.11 status update — 2026-10-13
+
+K.11's synthesis and target-MCU validation specification have been drafted on the isolated working branch. See `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md` and `research/chat_records/chat_k11_record.md`.
+
+Startup verification observed working HEAD `26b037584bb0a0acce3a293bed3f5a516ffab6c2`, canonical `exp` at `ab766b47ce7bae2791028cea22b7915f8debc41c`, and `main` at `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`. All five protected Git blobs matched their expected SHAs. The local-only commit remains a local preservation obligation, not remotely verified.
+
+The K.11 report explicitly limits findings to the 400 deterministic host/reference executions. P4's measured advantages are bounded to CF04/CF07 and CF05; quarantine is shared across P0–P4; P2 wins the attempt-count comparison in CF16 (one attempt versus P4's three); `QMAX=16` and `EPMAX=1` are stated capacity confounds; and C1 multi-reference combination risk remains unresolved. No hardware validation has been performed.
+
+**K.11 status: deliverables drafted; formal checkpoint approval pending.** No physical hardware execution, MCU flashing, runtime redesign, experiment rerun, merge to `exp`, or synchronization of `main` is authorized. K.12 remains gated pending explicit K.11 closure.
