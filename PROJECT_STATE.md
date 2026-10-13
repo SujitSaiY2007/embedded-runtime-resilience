@@ -647,3 +647,6 @@ The K.12 report, chat record and updated demo guide will document exact commit/t
 
 
 > **Final integration status (2026-10-13): K.12 APPROVED AND CLOSED. Pull request #9 merged to `main` at `ea0fd0d9fbda90afb4c5db77c30c085548d6eb46`; `main` was verified at that SHA, `exp` remains unchanged at `ab766b47ce7bae2791028cea22b7915f8debc41c`, and the feature branch is preserved at `0b7a3d2c7f0be1a14395598fb027d39c53506550`. User-reported local CTest/UI contract tests and browser demo passed; not independently reproduced by CI. Hardware implementation is future work. CF01 remains unresolved and excluded from comparative claims. See `research/main_branch_readiness_audit.md`.
+
+
+**CF01 final editorial disposition (2026-10-13):** The historical table-versus-narrative P2 attempt-count discrepancy is closed as a project-presentation issue. The verified shared outcome is P2 SUCCESS (and P4 SUCCESS; P0 TERMINAL_ESCALATE). The disputed numerical count is omitted from CF01 comparative claims because the original raw run/trace records were not available. The frozen K.10 reports are preserved; the K.12 audit records the rationale. This is not a blocker to the completed software project. Hardware validation remains future work.
