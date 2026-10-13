@@ -1,75 +1,66 @@
-# ACTIVE NEXT-CHAT PROMPT — K.11
-## Final Software Synthesis & Hardware-Validation Handoff Protocol
+# ACTIVE NEXT-CHAT PROMPT — K.12
+
+## Professor-Facing Software Demonstration Productization & Final Software Audit
 
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
 **Canonical reference branch:** `exp`  
-**Active working branch:** `feature/k10-4-final-technical-conclusion-2026-10-13` (K.10.4 closure commit: `09c17a413c7fb0b48c3c5da4642e24a402edd970`)  
-**Active checkpoint:** K.11  
+**K.10.4 closure commit:** `09c17a413c7fb0b48c3c5da4642e24a402edd970`  
+**K.11 deliverables:** `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`, `research/chat_records/chat_k11_record.md`  
 **Checkpoint authority:** ChatGPT  
-**Repository execution agent:** Antigravity only when explicitly invoked by ChatGPT  
+**Repository execution agent:** Antigravity only when explicitly invoked by ChatGPT
 
-> **Checkpoint Status:**  
-> K.10, K.10.1, K.10.2, K.10.3, and K.10.4 are formally approved and closed. Checkpoint K.11 is formally **AUTHORIZED TO BEGIN**. K.11 is strictly limited to software research synthesis, publication results structure, and target-MCU hardware-validation specification. No physical hardware execution or MCU flashing is authorized. Do not sync `main`.
+> **Gate:** This prompt is a prepared continuation brief, not permission to begin K.12 before ChatGPT explicitly approves and closes K.11. Do not sync `main`. No physical hardware execution or MCU flashing is authorized by this prompt.
 
----
+## 1. Startup verification
 
-## 1. Startup and Integrity Verification
-
-Before initiating K.11 work:
-
-1. Confirm the working branch is `feature/k10-4-final-technical-conclusion-2026-10-13` at or descended from K.10.4 closure commit `09c17a413c7fb0b48c3c5da4642e24a402edd970`, so the approved K.10.4 report and closure records remain present. Treat `exp` at `ab766b47ce7bae2791028cea22b7915f8debc41c` as the canonical reference branch and verify it remains unchanged. Do not merge the feature branch into `exp` as part of K.11.
-2. Confirm `main` HEAD is `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f` and remains 100% untouched.
-3. Preserve the original checkout's local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38`; never reset, overwrite, merge away, or force-push that local history.
-4. Verify the five protected Git blob SHAs:
+1. Verify the current working branch and that it contains the approved K.10.4 closure and K.11 deliverables.
+2. Verify `exp` remains at `ab766b47ce7bae2791028cea22b7915f8debc41c` unless ChatGPT explicitly authorizes a different baseline.
+3. Verify `main` remains at `0bff0b32e24dccb1b94c20b6e305cb918a49ec6f`.
+4. Preserve the original local-only commit `9c6596b2c32bf79bb652f3881e6d41695d43bb38`; do not reset, overwrite, merge away, or force-push it.
+5. Verify the five protected Git blob SHAs remain:
    - `reference/src/ref_runtime.c`: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`
    - `reference/include/ref_runtime.h`: `fbb7bb07bdb712fbadcde3d83bca19f82b5c8198`
    - `research/phase1_reference_implementation_design.md`: `b7fb120692756740bc969aa3412acaa89320c188`
    - `research/phase2_k9_methodology_lock.md`: `bd75f2c2c21c3964ec15b338eea99b386eff7aec`
    - `research/phase2_k9_2_p4_advantage_novelty_design.md`: `98d88ea2a0fc3a88d9d38f5b48aa274498d5e00d`
-5. Inspect mandatory continuity documents:
-   - `PROJECT_MANUAL.md`
-   - `PROJECT_STATE.md`
-   - `CURRENT_HANDOFF.md`
-   - `DECISION_LOG.md`
-   - `research/PART_II_CHAT_PLAN.md`
-   - `research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md`
-   - `research/chat_records/chat_k10_4_record.md`
+6. Read `PROJECT_MANUAL.md`, `PROJECT_STATE.md`, `CURRENT_HANDOFF.md`, `DECISION_LOG.md`, `research/PART_II_CHAT_PLAN.md`, the K.10.4 report/record, and both K.11 deliverables.
 
----
+## 2. K.12 objective
 
-## 2. K.11 Objective and Scope
+Create a minimal, reliable, professor-facing software demonstration of the completed reference/virtual system. K.12 is productization and final software audit, not a new research campaign.
 
-Checkpoint K.11 synthesizes the completed K.10.x research campaign into the definitive software research closure package and establishes the target-MCU hardware-validation specification.
+### Required work
 
-### Required Work:
-1. **Software Research Synthesis:**
-   - Package final architecture, mechanism, empirical evidence, and prior-art distinction into a coherent, publication-oriented results structure.
-   - Enforce all empirical boundaries: 400 matched executions, bounded advantages in CF04/CF07 and CF05, shared quarantine preservation across P0–P4, baseline CF16 win (P2 1 attempt vs P4 3 attempts), capacity confounds (`QMAX=16`, `EPMAX=1`), and no universal superiority claims.
-   - Enforce prior-art boundaries: single-reference anticipation refuted across PA-01–PA-10; C1 multi-reference combination risk unresolved; integrated contract framed as an evidence-bounded research hypothesis.
-2. **Target-MCU Validation Specification:**
-   - Define exact physical hardware requirements for the STM32U575ZI / NUCLEO-U575ZI-Q target platform.
-   - Specify bare-metal toolchain (ARM GCC / Clang), CMSIS startup, clock tree, and peripheral driver integration requirements.
-   - Specify MPU region configuration for execution isolation and fault containment.
-   - Specify physical fault injection protocols (I2C/SPI bus disturbance, clock stretching timeouts, NACK stimulus) and physical instrumentation (logic analyzer, oscilloscope).
-   - Formulate unambiguous hardware validation success criteria and falsification conditions.
-3. **Professor-Facing Software Closure:**
-   - Prepare the academic narrative and clear software-level closure summary for professor review prior to K.12 demonstration productization.
+1. Define the smallest clear demonstration flow from UI through virtual embedded system into the same existing C reference runtime, recovery decision, trace, and UI presentation.
+2. Make the demo reproducible from a clean clone with explicit dependencies, commands, expected outputs, and troubleshooting.
+3. Ensure displayed claims distinguish deterministic host/reference results from any physical hardware evidence (none is authorized here).
+4. Provide a concise professor-facing walkthrough and explain CF04, CF05, CF07, shared quarantine, CF16 trade-off, and capacity caveats accurately.
+5. Audit source, tests, build/run instructions, evidence, and documentation consistency.
+6. Update the K.12 report, chat record, and continuity artifacts with exact commits and outcomes.
 
----
+## 3. Frozen boundaries
 
-## 3. Frozen Boundaries and Restrictions
+- Do not modify Gates A–E, `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, `policy_decide()`, or `runtime_apply_policy()`.
+- Do not rerun the 400-execution K.10 matrix.
+- Do not claim universal P4 superiority, legal novelty, non-obviousness, inventive step, or patentability.
+- Do not perform physical MCU flashing, fault injection, or measurement.
+- Do not merge the feature branch into `exp` or synchronize `main` without explicit ChatGPT authorization after final audit.
+- Preserve all historical branches and the local-only commit.
 
-The following restrictions remain in full effect:
-- **NO HARDWARE EXECUTION:** K.11 defines hardware specifications and protocols only. No physical MCU flashing, hardware testing, or physical measurements are authorized.
-- **NO RUNTIME REDESIGN:** Do not alter Gates A–E, `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, `policy_decide()`, or `runtime_apply_policy()`.
-- **NO EXPERIMENT RERUNS:** Do not rerun the 400-execution K.10 matrix.
-- **NO LEGAL OPINIONS:** Do not claim legal novelty, non-obviousness, inventive step, or patentability.
-- **NO `main` SYNCHRONIZATION:** `main` remains unsynchronized until K.12 demonstration and final software audit are complete.
+## 4. Required deliverables
 
----
+1. `research/phase2_k12_professor_facing_software_demo_and_final_audit.md`
+2. `research/chat_records/chat_k12_record.md`
+3. Updated `CURRENT_HANDOFF.md`, `PROJECT_STATE.md`, `DECISION_LOG.md`, `research/PART_II_CHAT_PLAN.md`, and next-step guidance only if ChatGPT authorizes a further checkpoint.
 
-## 4. Required Deliverables for K.11
+## 5. Completion criteria
 
-1. Main report: `research/phase2_k11_final_software_synthesis_and_hardware_handoff.md`
-2. Chat record: `research/chat_records/chat_k11_record.md`
-3. Updated continuity artifacts (`CURRENT_HANDOFF.md`, `PROJECT_STATE.md`, `DECISION_LOG.md`, `research/PART_II_CHAT_PLAN.md`, `NEXT_CHAT_PROMPT.md` for K.12).
+K.12 may be recommended for closure only when:
+- a clean-clone demonstration path is documented and actually verified within authorized software-only scope;
+- the UI-to-runtime-to-trace flow is traceable to the existing C reference runtime;
+- tests and outputs are reproducible and no protected runtime file changed;
+- all limitations and counterexamples are visible in the professor narrative;
+- the final audit reports exact branch/commit SHAs and verifies `exp`, `main`, and protected blob integrity;
+- no unsupported hardware or legal claims remain.
+
+**Start condition:** ChatGPT has explicitly approved and closed K.11. If that approval is absent, stop after startup verification and report the gate as closed.
