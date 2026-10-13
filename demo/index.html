@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zero-Heap Context-Aware Recovery — Professor-Facing Demonstrator (K.7)</title>
+  <title>Embedded Runtime Resilience — Integrated Virtual-System Demo (K.12)</title>
   <meta name="description" content="Professor-facing proof-of-concept demonstrator for zero-heap context-aware peripheral recovery with event quarantine, connected to the canonical C reference runtime.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -436,6 +436,29 @@
       flex-wrap: wrap;
       gap: 10px;
     }
+
+    /* K.12 professor-facing workbench and evidence panels */
+    .k12-grid { display:grid; grid-template-columns: 1.3fr 1fr; gap:16px; }
+    .k12-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; min-width:0; }
+    .k12-card h2 { font-size:14px; text-transform:uppercase; letter-spacing:.02em; color:#cbd5e1; }
+    .k12-muted { font-size:12px; line-height:1.5; color:var(--text-muted); }
+    .virtual-board { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; align-items:stretch; }
+    .virtual-mcu { grid-column:2; grid-row:1 / span 3; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid rgba(99,102,241,.6); background:rgba(99,102,241,.12); border-radius:12px; padding:14px 8px; text-align:center; }
+    .virtual-port { border:1px solid var(--card-border); background:rgba(30,41,59,.45); border-radius:10px; padding:10px; display:flex; flex-direction:column; gap:7px; }
+    .virtual-port strong { font-size:12px; }
+    .virtual-port label { font-size:11px; color:var(--text-muted); }
+    .virtual-port button { width:100%; font-size:11px; }
+    .virtual-port[data-connected="true"] { border-color:rgba(16,185,129,.6); }
+    .virtual-port[data-connected="false"] { border-color:rgba(239,68,68,.6); }
+    .k12-warning { border-left:3px solid var(--warning); padding:10px 12px; background:rgba(245,158,11,.08); border-radius:6px; font-size:12px; line-height:1.45; color:#fde68a; }
+    .evidence-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .evidence-table th,.evidence-table td { padding:8px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(51,65,85,.6); }
+    .evidence-table th { color:#a5b4fc; width:27%; }
+    .tag-pending { color:#fde68a; font-weight:700; }
+    .demo-error { color:#fecaca; font-size:12px; }
+    @media(max-width:900px) { .k12-grid { grid-template-columns:1fr; } }
+    @media(max-width:600px) { .virtual-board { grid-template-columns:1fr; } .virtual-mcu { grid-column:auto; grid-row:auto; } }
+
   </style>
 </head>
 <body>
@@ -447,13 +470,13 @@
         Zero-Heap Context-Aware Peripheral Recovery Demonstrator
       </h1>
       <div class="subtitle" id="scenario-desc-header">
-        Canonical Reference Runtime Front-End (K.7) — Authoritative ISO C11 Policy & Virtual System
+        K.12 · Integrated virtual-system demonstrator · host/reference software only
       </div>
     </div>
     <div class="header-badges">
       <span class="badge badge-primary" id="mode-badge">STANDALONE OFFLINE</span>
       <span class="badge badge-success">C RUNTIME AUTHORITATIVE</span>
-      <span class="badge badge-cyan">ZERO-HEAP VERIFIED</span>
+      <span class="badge badge-cyan">ZERO-HEAP REFERENCE MODEL</span>
     </div>
   </header>
 
@@ -559,6 +582,78 @@
           </div>
           <input type="range" id="step-slider" min="0" max="7" value="0" aria-label="Step Progress Slider">
         </div>
+      </div>
+    </section>
+
+
+    <!-- K.12 virtual workbench: modeled links are passed to the C virtual system. -->
+    <section class="k12-grid" aria-label="K.12 virtual hardware workbench and research evidence">
+      <div class="k12-card">
+        <h2>Virtual hardware workbench</h2>
+        <p class="k12-muted">This is an executable software model, not physical wiring. The existing scenario definitions map events to fixed virtual resources (I2C0, SPI0, UART0); connect/disconnect changes are passed to the C CLI. A disconnected link is rejected by the virtual adapter before event admission mutates runtime state.</p>
+        <div class="virtual-board">
+          <div class="virtual-port" id="port-i2c" data-connected="true">
+            <strong>I2C0 · Primary</strong>
+            <label>Modeled bus / event resource</label>
+            <button type="button" data-peripheral="I2C0" class="link-toggle">Disconnect link</button>
+            <small class="k12-muted" id="link-status-I2C0">Connected in virtual model</small>
+          </div>
+          <div class="virtual-mcu">
+            <strong>Virtual MCU</strong>
+            <span class="k12-muted">C11 runtime</span>
+            <span class="k12-muted">Fixed event / trace pools</span>
+          </div>
+          <div class="virtual-port" id="port-spi" data-connected="true">
+            <strong>SPI0 · Secondary</strong>
+            <label>Modeled bus / event resource</label>
+            <button type="button" data-peripheral="SPI0" class="link-toggle">Disconnect link</button>
+            <small class="k12-muted" id="link-status-SPI0">Connected in virtual model</small>
+          </div>
+          <div class="virtual-port" id="port-uart" data-connected="true">
+            <strong>UART0 · Diagnostic</strong>
+            <label>Modeled console/control resource</label>
+            <button type="button" data-peripheral="UART0" class="link-toggle">Disconnect link</button>
+            <small class="k12-muted" id="link-status-UART0">Connected in virtual model</small>
+          </div>
+        </div>
+        <div class="k12-muted">The fixed scenario registry is not an arbitrary pin-level wiring editor. Connection controls modify the supported virtual-resource availability; they do not assign physical pins or alter the frozen recovery algorithm.</div>
+        <div id="k12-bridge-message" class="k12-warning" role="status">Checking live C backend…</div>
+      </div>
+
+      <div class="k12-card">
+        <h2>Frozen research evidence</h2>
+        <p class="k12-muted">Research values below are transcribed from the frozen K.10 result and K.10.4 conclusion reports; they are not recalculated from this interactive run.</p>
+        <table class="evidence-table">
+          <tbody>
+            <tr><th>CF04 + CF07</th><td>P4 showed bounded benefit from fail-closed ambiguous-association handling and clean episode closure, preserving capacity for a later episode.</td></tr>
+            <tr><th>CF05</th><td>P4 reached terminal recovery handling under cascading recovery faults; P2/P3 did not terminate within the tested bound.</td></tr>
+            <tr><th>Shared behavior</th><td>Exact-event quarantine is present across P0–P4; it is not a P4-exclusive advantage.</td></tr>
+            <tr><th>CF16 trade-off</th><td>P2 succeeds in one attempt; P4 requires three attempts in the frozen report.</td></tr>
+            <tr><th>No measured advantage</th><td>CF02, CF09, CF11, CF12, CF13 and CF15.</td></tr>
+            <tr><th>Capacity limits</th><td><code>QMAX=16</code>, <code>EPMAX=1</code> confound some outcomes.</td></tr>
+          </tbody>
+        </table>
+        <div class="k12-warning"><strong>CF01 is unresolved.</strong> The K.10 results row says P2 att=3 while its narrative says one attempt; K.10.4 says att=1. The original raw CSV is absent from this remote branch. Do not use CF01 P2's attempt count as a comparative finding until the original records are supplied.</div>
+        <div class="k12-muted">Evidence scope: frozen deterministic host/reference case set only. This is not proof of universal superiority, legal novelty, non-obviousness, patentability or physical MCU performance.</div>
+      </div>
+    </section>
+
+    <section class="k12-card" aria-label="Future target hardware mapping">
+      <h2>Future target mapping · hardware validation pending</h2>
+      <div class="k12-grid">
+        <div>
+          <strong>Proposed NUCLEO-U575ZI-Q / STM32U575ZIT6Q</strong>
+          <table class="evidence-table">
+            <tbody>
+              <tr><th>I2C1</th><td>PB8/PB9 · planned 100 kHz baseline</td></tr>
+              <tr><th>SPI1</th><td>PA5/PA6/PA7 · planned 1 MHz, mode 0, 8-bit MSB-first</td></tr>
+              <tr><th>Chip select</th><td>PD14 · planned GPIO CS</td></tr>
+              <tr><th>Clock/timeouts</th><td>MSI 16 MHz SYSCLK without PLL; 1 MHz timer tick where feasible; 10 ms initial transfer timeout</td></tr>
+              <tr><th>UART/USART</th><td>Diagnostic/control intended; exact pins and alternate functions must be checked against actual board revision.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="k12-warning"><strong class="tag-pending">PENDING / NOT PERFORMED</strong><br>All values are planning specifications. No firmware flashing, physical fault injection, oscilloscope/logic-analyzer measurement, MPU containment measurement, or board validation was performed by this software demo.</div>
       </div>
     </section>
 
@@ -717,16 +812,16 @@
 
   <footer>
     <div>
-      <b>Embedded Runtime Resilience</b> — Research Checkpoint K.7 (Professor Demonstrator)
+      <b>Embedded Runtime Resilience</b> — K.12 · Integrated Virtual-System Demonstrator
     </div>
     <div style="font-family:var(--font-mono); font-size:11px;">
-      Architecture: UI → Virtual System (K.6) → C Reference Runtime (ref_runtime.c)
+      Architecture: UI → Python bridge → C virtual system → frozen C reference runtime
     </div>
   </footer>
 
   <script>
     /* =========================================================================
-     * K.7 Professor-Facing Demonstrator Logic
+     * K.12 Professor-Facing Demonstrator Logic
      * Preserves strict runtime authority: all data originates from C binary.
      * ========================================================================= */
 
@@ -737,6 +832,8 @@
     let currentVariant = 4;
     let playInterval = null;
     let isLiveBackend = false;
+    const disconnectedPeripherals = new Set();
+    let lastRenderRequest = 0;
 
     // DOM Elements
     const scenarioSelect = document.getElementById('scenario-select');
@@ -748,6 +845,8 @@
     const stepSlider = document.getElementById('step-slider');
     const sliderCurrLabel = document.getElementById('slider-curr-label');
     const modeBadge = document.getElementById('mode-badge');
+    const bridgeMessage = document.getElementById('k12-bridge-message');
+    const linkButtons = [...document.querySelectorAll('.link-toggle')];
 
     const btnReset = document.getElementById('btn-reset');
     const btnPrev = document.getElementById('btn-prev');
@@ -790,13 +889,28 @@
           const status = await res.json();
           if (status.c_binary_found) {
             isLiveBackend = true;
-            modeBadge.textContent = 'LIVE C BINARY';
+            modeBadge.textContent = 'LIVE C REFERENCE PATH';
             modeBadge.className = 'badge badge-success';
+            bridgeMessage.textContent = 'Live C backend detected. Virtual link configuration will affect the C virtual adapter and runtime admission.';
+          } else {
+            isLiveBackend = false;
+            modeBadge.textContent = 'OFFLINE EVIDENCE VIEW';
+            modeBadge.className = 'badge badge-warning';
+            bridgeMessage.textContent = 'C executable is unavailable. Scenario timeline is read-only; link controls are disabled because they cannot affect offline exports.';
           }
         }
       } catch (e) {
         isLiveBackend = false;
+        modeBadge.textContent = 'OFFLINE EVIDENCE VIEW';
+        modeBadge.className = 'badge badge-warning';
+        bridgeMessage.textContent = 'Live C backend is not reachable. Link controls are read-only; only exported scenario evidence is available.';
       }
+
+      linkButtons.forEach(button => {
+        button.disabled = !isLiveBackend;
+        button.addEventListener('click', () => toggleVirtualLink(button.dataset.peripheral));
+      });
+      updateVirtualLinkUI();
 
       // 2. Load pre-exported scenarios_data.json as default/fallback data
       try {
@@ -811,7 +925,7 @@
       // 3. Attach listeners
       scenarioSelect.addEventListener('change', onScenarioChange);
       variantSelect.addEventListener('change', onVariantChange);
-      btnReset.addEventListener('click', () => setStep(0));
+      btnReset.addEventListener('click', () => { stopPlay(); setStep(0); });
       btnPrev.addEventListener('click', () => setStep(currentStep - 1));
       btnNext.addEventListener('click', () => setStep(currentStep + 1));
       btnRun.addEventListener('click', () => setStep(maxSteps));
@@ -859,6 +973,7 @@
     }
 
     async function setStep(step) {
+      stopPlay();
       if (step < 0) step = 0;
       if (step > maxSteps) step = maxSteps;
       currentStep = step;
@@ -873,32 +988,69 @@
       await renderStep(step);
     }
 
+    function toggleVirtualLink(name) {
+      if (!isLiveBackend) return;
+      if (disconnectedPeripherals.has(name)) disconnectedPeripherals.delete(name);
+      else disconnectedPeripherals.add(name);
+      updateVirtualLinkUI();
+      renderStep(currentStep);
+    }
+
+    function updateVirtualLinkUI() {
+      linkButtons.forEach(button => {
+        const name = button.dataset.peripheral;
+        const connected = !disconnectedPeripherals.has(name);
+        const card = document.getElementById(name === 'I2C0' ? 'port-i2c' : name === 'SPI0' ? 'port-spi' : 'port-uart');
+        const status = document.getElementById(`link-status-${name}`);
+        button.textContent = connected ? 'Disconnect link' : 'Connect link';
+        button.disabled = !isLiveBackend;
+        card.dataset.connected = String(connected);
+        status.textContent = connected ? 'Connected in virtual model' : 'Disconnected — dependent admissions rejected';
+      });
+      if (isLiveBackend && bridgeMessage) {
+        const list = [...disconnectedPeripherals];
+        bridgeMessage.textContent = list.length ? `Live configuration: disconnected ${list.join(', ')}. The next C execution will report a bounded adapter error if the selected scenario needs one of these resources.` : 'Live C backend detected. All modeled virtual links are connected.';
+        bridgeMessage.className = list.length ? 'k12-warning' : 'k12-muted';
+      }
+    }
+
     async function renderStep(step) {
+      const requestId = ++lastRenderRequest;
       let state = null;
 
-      // Prefer live backend if available and custom variant is selected
       if (isLiveBackend) {
         try {
-          const res = await fetch(`/api/step?scenario=${currentScenarioId}&step=${step}&variant=${currentVariant}`);
-          if (res.ok) {
-            state = await res.json();
+          const params = new URLSearchParams({scenario:currentScenarioId,step:String(step),variant:String(currentVariant)});
+          [...disconnectedPeripherals].forEach(name => params.append('disconnect', name));
+          const res = await fetch(`/api/step?${params.toString()}`, {cache:'no-store'});
+          const payload = await res.json();
+          if (!res.ok) throw new Error(payload.error || `HTTP ${res.status}`);
+          state = payload;
+          if (requestId !== lastRenderRequest) return;
+          if (state.adapter_error) {
+            bridgeMessage.textContent = state.adapter_error_message || 'Virtual adapter rejected the selected configuration.';
+            bridgeMessage.className = 'k12-warning';
+          } else {
+            updateVirtualLinkUI();
           }
         } catch (e) {
-          console.warn('Backend fetch failed, falling back to static data:', e);
+          if (requestId !== lastRenderRequest) return;
+          bridgeMessage.textContent = `Live C execution failed: ${e.message}. No offline trace is substituted for this request.`;
+          bridgeMessage.className = 'demo-error';
+          return;
         }
-      }
-
-      // Fallback to offline timeline data
-      if (!state && scenariosData && scenariosData.scenarios[currentScenarioId]) {
+      } else if (scenariosData && scenariosData.scenarios && scenariosData.scenarios[currentScenarioId]) {
         const timeline = scenariosData.scenarios[currentScenarioId].timeline;
-        if (timeline && timeline[step]) {
-          state = timeline[step];
-        }
+        state = timeline && timeline[step] ? timeline[step] : null;
       }
 
-      if (!state) return;
+      if (!state) {
+        bridgeMessage.textContent = 'No state is available for this step. Check scenario exports or rebuild the C CLI.';
+        bridgeMessage.className = 'demo-error';
+        return;
+      }
 
-      // Update UI with authoritative state
+      // Update UI from the live C response or clearly-labeled static exported data.
       updatePipeline(state);
       updateDashboard(state);
       updateSlotsTable(state);
