@@ -450,6 +450,18 @@
     .virtual-port button { width:100%; font-size:11px; }
     .virtual-port[data-connected="true"] { border-color:rgba(16,185,129,.6); }
     .virtual-port[data-connected="false"] { border-color:rgba(239,68,68,.6); }
+    .virtual-port { position:relative; z-index:1; }
+    .virtual-port::after { content:""; position:absolute; top:50%; width:clamp(10px,2vw,34px); border-top:3px solid #10b981; opacity:.9; pointer-events:none; }
+    #port-i2c::after, #port-uart::after { right:calc(clamp(10px,2vw,34px) * -1); }
+    #port-spi::after { left:calc(clamp(10px,2vw,34px) * -1); }
+    .virtual-port[data-connected="false"]::after { border-color:#ef4444; border-top-style:dashed; }
+    .virtual-mcu { position:relative; z-index:2; min-height:170px; }
+    .virtual-mcu .mcu-chip { display:grid; place-items:center; width:54px; height:54px; margin-bottom:10px; border:2px solid #a5b4fc; border-radius:10px; background:rgba(99,102,241,.2); font-family:var(--font-mono); font-weight:700; }
+    .link-toolbar { display:flex; flex-wrap:wrap; gap:8px; }
+    .link-toolbar .btn-success { background:#059669; border-color:#10b981; }
+    .link-toolbar .btn-danger { background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.5); color:#fecaca; }
+    .virtual-port[data-connected="false"] strong { color:#fecaca; }
+    @media(max-width:600px) { .virtual-port::after { display:none; } .virtual-board { gap:10px; } .virtual-mcu { min-height:140px; } }
     .k12-warning { border-left:3px solid var(--warning); padding:10px 12px; background:rgba(245,158,11,.08); border-radius:6px; font-size:12px; line-height:1.45; color:#fde68a; }
     .evidence-table { width:100%; border-collapse:collapse; font-size:12px; }
     .evidence-table th,.evidence-table td { padding:8px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(51,65,85,.6); }
@@ -467,10 +479,10 @@
     <div class="header-left">
       <h1>
         <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;"></span>
-        Zero-Heap Context-Aware Peripheral Recovery Demonstrator
+        Context-Aware Peripheral Recovery with Zero-Heap Execution and Event Quarantine
       </h1>
       <div class="subtitle" id="scenario-desc-header">
-        K.12 · Integrated virtual-system demonstrator · host/reference software only
+        RESEARCH WORK SOFTWARE DEMONSTRATION
       </div>
     </div>
     <div class="header-badges">
@@ -599,7 +611,8 @@
             <small class="k12-muted" id="link-status-I2C0">Connected in virtual model</small>
           </div>
           <div class="virtual-mcu">
-            <strong>Virtual MCU</strong>
+            <div class="mcu-chip" aria-hidden="true">MCU</div>
+            <strong>Virtual Microcontroller</strong>
             <span class="k12-muted">C11 runtime</span>
             <span class="k12-muted">Fixed event / trace pools</span>
           </div>
@@ -616,6 +629,11 @@
             <small class="k12-muted" id="link-status-UART0">Connected in virtual model</small>
           </div>
         </div>
+        <div class="link-toolbar" role="group" aria-label="Bulk virtual peripheral connection controls">
+          <button type="button" id="btn-connect-all" class="btn-success">Connect All Peripherals</button>
+          <button type="button" id="btn-disconnect-all" class="btn-danger">Disconnect All Peripherals</button>
+        </div>
+        <div class="k12-muted">Green solid links indicate connected virtual resources; red dashed links indicate disconnected resources. These are software-model connections, not physical wires.</div>
         <div class="k12-muted">The fixed scenario registry is not an arbitrary pin-level wiring editor. Connection controls modify the supported virtual-resource availability; they do not assign physical pins or alter the frozen recovery algorithm.</div>
         <div id="k12-bridge-message" class="k12-warning" role="status">Checking live C backend…</div>
       </div>
@@ -905,6 +923,8 @@
         button.disabled = !isLiveBackend;
         button.addEventListener('click', () => toggleVirtualLink(button.dataset.peripheral));
       });
+      document.getElementById('btn-connect-all').addEventListener('click', () => setAllVirtualLinks(true));
+      document.getElementById('btn-disconnect-all').addEventListener('click', () => setAllVirtualLinks(false));
       updateVirtualLinkUI();
 
       // 2. Load pre-exported scenarios_data.json as default/fallback data
@@ -957,8 +977,7 @@
 
       if (scenariosData && scenariosData.scenarios && scenariosData.scenarios[scId]) {
         const sc = scenariosData.scenarios[scId];
-        scenarioDescHeader.textContent = sc.name + ' — ' + sc.description;
-        scenarioSummaryText.textContent = sc.description;
+        scenarioSummaryText.textContent = sc.name + ' — ' + sc.description;
         maxSteps = sc.step_count;
         stepSlider.max = maxSteps;
       }
@@ -991,6 +1010,14 @@
       renderStep(currentStep);
     }
 
+    function setAllVirtualLinks(connected) {
+      if (!isLiveBackend) return;
+      disconnectedPeripherals.clear();
+      if (!connected) ['I2C0', 'SPI0', 'UART0'].forEach(name => disconnectedPeripherals.add(name));
+      updateVirtualLinkUI();
+      renderStep(currentStep);
+    }
+
     function updateVirtualLinkUI() {
       linkButtons.forEach(button => {
         const name = button.dataset.peripheral;
@@ -1002,6 +1029,10 @@
         card.dataset.connected = String(connected);
         status.textContent = connected ? 'Connected in virtual model' : 'Disconnected — dependent admissions rejected';
       });
+      const connectAll = document.getElementById('btn-connect-all');
+      const disconnectAll = document.getElementById('btn-disconnect-all');
+      if (connectAll) connectAll.disabled = !isLiveBackend || disconnectedPeripherals.size === 0;
+      if (disconnectAll) disconnectAll.disabled = !isLiveBackend || disconnectedPeripherals.size === 3;
       if (isLiveBackend && bridgeMessage) {
         const list = [...disconnectedPeripherals];
         bridgeMessage.textContent = list.length ? `Live configuration: disconnected ${list.join(', ')}. The next C execution will report a bounded adapter error if the selected scenario needs one of these resources.` : 'Live C backend detected. All modeled virtual links are connected.';
