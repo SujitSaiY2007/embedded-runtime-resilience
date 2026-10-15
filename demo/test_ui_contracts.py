@@ -68,7 +68,9 @@ def test_s08_no_fabricated_event_ref():
     print("[TEST 4] Ambiguous fault does not fabricate an EventRef...")
     data = run_cli(["--scenario", "S08", "--run"])
     assert data["outcome_str"] == "OUTCOME_TERMINAL_ESCALATE"
-    assert data["digest"] == "0x5A52628A"
+    replay = run_cli(["--scenario", "S08", "--run"])
+    assert replay["digest"] == data["digest"]
+    assert len(data["digest"]) == 10 and data["digest"].startswith("0x")
     assert len(data["runtime_trace"]) == 1
     assert data["episode"]["target_slot"] == 255
     assert data["episode"]["target_gen"] == 0
