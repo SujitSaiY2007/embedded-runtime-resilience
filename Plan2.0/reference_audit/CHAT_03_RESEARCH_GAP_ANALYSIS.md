@@ -63,10 +63,10 @@ The evidence currently supports an **engineering hypothesis and host-model evalu
 ### G-EVAL-01 — Independent reproducibility and raw artifact linkage
 
 - **Category:** Evaluation gap / evidence gap
-- **Observed:** `reference/experiments/k10_experiment.c` defines the 16-family × 5-variant × 5-repeat harness; evaluator asserts 400 rows; K.10 report describes saved findings. This Chat 03 did not rerun the campaign or inspect raw output CSVs.
-- **Current-project response:** Frozen result reports and experiment sources are retained.
-- **Remaining uncertainty:** This audit has not independently confirmed raw output availability, file hashes, row-level values, or recomputed summaries from the current `main` tree.
-- **Do next:** Without rerunning the 400 executions, inspect existing saved raw CSVs and traces if present, verify row counts/hashes and recompute derived summary metrics from the saved data only. Record exact commands and results in a separate authorized audit.
+- **Observed:** `reference/experiments/k10_experiment.c` defines the 16-family × 5-variant × 5-repeat harness; evaluator asserts 400 rows; K.10 report describes saved findings. This Chat 03 did not rerun the campaign. Fetches of the expected raw-output paths `reference/experiments/out/k10_runs.csv` and `reference/experiments/out/k10_traces.csv` returned 404 on live `main`.
+- **Current-project response:** Frozen result reports and experiment sources are retained, but the raw files were not found at those canonical paths in the inspected `main` snapshot.
+- **Remaining uncertainty:** The raw artifacts may be absent from `main` or stored under another path; this audit did not establish their presence elsewhere, hashes, row-level values, or independently recompute summaries.
+- **Do next:** Without rerunning the 400 executions, locate any already-saved raw CSVs in repository history or an authorized archive, then verify row counts/hashes and recompute derived metrics from saved data only. Record exact commands and results in a separate authorized audit. If raw data cannot be recovered, qualify result reproducibility accordingly.
 - **Do not do now:** Do not rerun or regenerate the campaign; this chat's instruction explicitly forbids it.
 
 ### G-EVAL-02 — Baseline fidelity and ablation attribution
