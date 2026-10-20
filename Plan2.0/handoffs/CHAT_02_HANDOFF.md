@@ -27,7 +27,7 @@
 - Publisher/project evidence was inspected for the papers/frameworks listed in the report. Direct ACM metadata for P-002/P-007 and official USPTO verification for patent rows remain explicit gaps.
 - Local Git CLI/network access failed at DNS resolution; no local git status/diff/tests are claimed.
 - No runtime tests, hardware tests, frozen experiments or 400-run campaign were run.
-- Content commit: `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b`. Final handoff audit-trail commit/current `main` head: `533754a9098ec9c9be8f4e191f8320686568f9bd`.
+- Content commit: `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b`. Final handoff audit-trail commit/current `main` head: `d608f4f989e425f320abbccc81a85e6017685d74`.
 - GitHub reported the content commit changed exactly the register, Chat 02 report and this handoff; the follow-up fix changed only this handoff. No protected path appeared in either changed-path list.
 
 ## Protected assets
