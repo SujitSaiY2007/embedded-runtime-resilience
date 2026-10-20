@@ -4,7 +4,7 @@
 **Branch:** `main` only  
 **Audit date:** 2026-10-20  
 **Starting `main` SHA:** `4686aa178716fed5045b5aad3d72815c3a068005`  
-**Outcome:** Metadata audit prepared with explicit uncertainty; some primary publisher and USPTO checks remain open.
+**Outcome:** Metadata audit committed to `main` at `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b`; some primary publisher and USPTO checks remain open.
 
 ## Verification counts
 
