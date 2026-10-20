@@ -4,7 +4,7 @@
 **Branch:** `main` only  
 **Audit date:** 2026-10-20  
 **Starting `main` SHA:** `4686aa178716fed5045b5aad3d72815c3a068005`  
-**Outcome:** Metadata audit committed to `main` at `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b`; some primary publisher and USPTO checks remain open.
+**Outcome:** Metadata audit committed to `main` at `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b` (content commit; see final handoff-only fix at `9a03e22d0736ed5c7b3caf9af0b906811c1ae70c`); some primary publisher and USPTO checks remain open.
 
 ## Verification counts
 
@@ -27,7 +27,8 @@
 - Publisher/project evidence was inspected for the papers/frameworks listed in the report. Direct ACM metadata for P-002/P-007 and official USPTO verification for patent rows remain explicit gaps.
 - Local Git CLI/network access failed at DNS resolution; no local git status/diff/tests are claimed.
 - No runtime tests, hardware tests, frozen experiments or 400-run campaign were run.
-- The commit SHA and final changed-path list will be recorded only after the GitHub commit succeeds and the live ref is rechecked.
+- Content commit: `6dbf8d293f80b1d072fba0107b9e64a93bc24c4b`. Final handoff-only fix commit/current `main` head: `9a03e22d0736ed5c7b3caf9af0b906811c1ae70c`.
+- GitHub reported the content commit changed exactly the register, Chat 02 report and this handoff; the follow-up fix changed only this handoff. No protected path appeared in either changed-path list.
 
 ## Protected assets
 
