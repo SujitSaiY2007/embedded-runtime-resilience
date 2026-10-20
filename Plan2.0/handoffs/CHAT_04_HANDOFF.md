@@ -3,7 +3,7 @@
 **Date:** 2026-10-20  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
 **Branch policy:** `main` only  
-**Current scope status:** Chat-04 audit and handoff are complete. The separate manuscript-editing step remains pending because the user supplied a PDF, not an editable DOCX/LaTeX source.
+**Current scope status:** Chat-04 audit, editable manuscript reconstruction, reference-purpose mapping, and handoff are complete. The reconstructed DOCX is delivered in the conversation; the binary is not committed to GitHub. The user supplied a PDF, so the manuscript was rebuilt as a new editable draft rather than editing an original DOCX/LaTeX source.
 
 ## 1. Main answer to the professor's journal-reference requirement
 
@@ -24,9 +24,14 @@ Plan2.0's prior target remains approximately **90% peer-reviewed journal article
 2. `Plan2.0/reference_audit/RELATED_WORK_GAP_MATRIX.md` — topic-by-topic gaps in peripheral recovery, driver recovery, runtime verification, fault tolerance, association/diagnosis, bounded memory, evaluation and hardware evidence.
 3. `Plan2.0/reference_audit/CHAT_04_JOURNAL_REFERENCE_CANDIDATES.md` — eight journal candidates/entries including existing P-005; author metadata for the IEEE Access survey was subsequently verified.
 4. `Plan2.0/reference_audit/MANUSCRIPT_DRAFT_JOURNAL_SHARE_AUDIT.md` — classification of the uploaded 24-reference manuscript bibliography, ratios under both counting interpretations, replacement guidance, candidate list, and remaining requirements.
-5. `Plan2.0/handoffs/CHAT_04_HANDOFF.md` — this handoff.
+5. `Plan2.0/reference_audit/RECONSTRUCTED_MANUSCRIPT_REFERENCE_PLAN.md` — reference-by-reference purpose and citation placement, ratio calculation, and verification boundaries.
+6. `Plan2.0/handoffs/CHAT_04_HANDOFF.md` — this handoff.
 
-## 3. Manuscript reference classification
+## 3. Reconstructed manuscript and reference decision
+
+Created `Reconstructed_Manuscript_Journal_First.docx` as a new editable manuscript based on the supplied 12-page PDF. It preserves the study's stated model, methods, case matrix, outcomes, threats to validity, and evidence limitations; it does not claim to rerun experiments. It adds an explicit reference-purpose/citation-placement appendix so each source has a stated role. The reconstructed bibliography contains 20 references: 15 journal articles and five conference papers, for a strict journal share of **15/20 = 75%**. The original IEEE *Computer* magazine article was replaced with the ACM *Computing Surveys* journal survey by Natella, Cotroneo, and Madeira on software fault injection (DOI 10.1145/2841425). Five direct conference sources are retained because they are primary technical comparators. The ratio meets the user's stated minimum, not the earlier aspirational ~90% target.
+
+## 4. Manuscript reference classification
 
 **Journal articles (12 under broad classification):** [5], [6], [7], [10]–[15], [18]–[20]. Reference [12], “Fault Injection Techniques and Tools,” is published in IEEE *Computer* and is treated as a journal/magazine item in broad classification, but faculty rules may exclude magazines from a journal-article quota.
 
@@ -36,7 +41,7 @@ Plan2.0's prior target remains approximately **90% peer-reviewed journal article
 
 See `MANUSCRIPT_DRAFT_JOURNAL_SHARE_AUDIT.md` for full titles, source-type rationale and claim-preservation guidance.
 
-## 4. Journal candidate shortlist
+## 5. Journal candidate shortlist
 
 - **Already cited:** Reinbacher, Függer & Brauer (2014), *Formal Methods in System Design*, reference [7]/register P-005. Do not duplicate.
 - **Runtime verification:** Heffernan, MacNamee & Fogarty (2014), *IET Software*, DOI 10.1049/iet-sen.2013.0236.
@@ -49,7 +54,7 @@ See `MANUSCRIPT_DRAFT_JOURNAL_SHARE_AUDIT.md` for full titles, source-type ratio
 
 These remain candidates until full text is inspected and each citation is mapped to a precise manuscript claim. Adjacent scheduling/energy work must not be presented as direct evidence of peripheral-event quarantine.
 
-## 5. Completed validation
+## 6. Completed validation
 
 - Read current live `main` metadata and relevant Plan2.0/reference audit files, the Chat 02 handoff and the Chat 03 handoff.
 - Parsed the 43-row, 17-column reference register for the initial inventory audit.
@@ -59,13 +64,13 @@ These remain candidates until full text is inspected and each citation is mapped
 - Committed the audit reports and handoff to `main`; no branch was created.
 - No code, tests, Gates A–E, frozen K.10 artifacts, raw experimental outputs, or protected implementation files were modified.
 
-## 6. Remaining boundary and next action
+## 7. Remaining boundary and next action
 
-The **Chat-04 audit/reporting deliverable is complete**, but the manuscript does **not** yet meet the professor's 75% requirement. The uploaded PDF is sufficient to audit the reference list but is not a safe editable manuscript source for citation replacement and renumbering.
+The **Chat-04 audit and reconstruction deliverables are complete**. The reconstructed DOCX has a 75% strict journal-article share (15/20), but submission readiness is not established: full-text claim-to-source verification, professor confirmation of venue counting rules, author details, final citation cross-check, and reconciliation of results against frozen artifacts remain required.
 
-To complete the separate manuscript integration task, obtain the current editable DOCX or LaTeX source (or explicit authorization to reconstruct an editable draft from the PDF). Then:
+Before submission, the user should review the reconstructed editable DOCX and then:
 
-1. Confirm the professor's rule for IEEE *Computer* [12].
+1. Confirm the professor accepts the strict classification of the 20-reference bibliography and the 75% minimum.
 2. Inspect full text of proposed journal candidates and map them to claims.
 3. Replace/add only sources that support the paper; retain essential primary conference work where justified.
 4. Update in-text citations and bibliography together, check unused/duplicate references, and renumber consistently.
