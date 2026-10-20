@@ -48,7 +48,7 @@ The strict ratio meets the stated 75% minimum, provided the professor accepts th
 - A citation is included to support a stated background/comparison point, not to imply that the cited source implements the complete integrated P4 policy.
 - Four conference sources [1]–[4] are retained as primary comparators; [13] is another conference source used for interrupt-overload context. Accordingly, the strict denominator is 20 and the strict journal numerator is 15 (15/20 = 75%). **Correction to the table above:** because [13] is also a conference paper, the non-journal total is five conference papers plus the magazine item [14]; the strict count remains 15/20.
 - No book, patent, or software documentation is included in the 20-item bibliography. Patents and documentation can remain in the broader prior-art/source register when relevant, but are not necessary to support the current manuscript's central experimental claims.
-- The new citations [16]–[20] were added to the in-text related-work discussion and mapped in Appendix A of the editable draft.
+- The new citations [14], [16]–[20] are included in the in-text related-work discussion and mapped in Appendix A of the editable draft.
 - The manuscript results were transcribed from the supplied PDF. This reconstruction did not rerun experiments or independently verify the frozen outcome table.
 - The additional journal sources were selected using bibliographic/publisher metadata and topical fit. Full-text, page-level claim verification is still required before journal submission. Do not imply that every candidate has already passed detailed full-text review.
 
