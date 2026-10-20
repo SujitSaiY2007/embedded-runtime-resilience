@@ -1,0 +1,65 @@
+# Chat 03 — Claim-to-Evidence Audit
+
+**Audit date:** 2026-10-20  
+**Repository:** [SujitSaiY2007/embedded-runtime-resilience](https://github.com/SujitSaiY2007/embedded-runtime-resilience)  
+**Starting `main` SHA:** `e71e8243a66200836d6c9069600d64e1838df7a7`  
+**Scope:** Audit findings and recommendations only. This report does not edit manuscript prose, bibliography, protected runtime, tests, Gates A–E, prior-art records, or frozen experiment sources/results.
+
+## 1. Summary
+
+The strongest supported claims concern the existence and semantics of the **host/reference model** and the design of a bounded experiment. Claims about the *reported outcomes* of K.10 are supported by saved reports and experiment code, but this chat did not rerun or independently reproduce the campaign. Claims about physical MCU behavior, comprehensive literature absence, legal novelty, obviousness, or patentability are not established and must remain qualified or withheld.
+
+Evidence statuses:
+- **Supported:** the cited repository artifact directly supports the narrow wording.
+- **Partially supported:** some evidence exists, but scope, provenance, independence, or an important condition is missing.
+- **Unsupported:** the inspected evidence does not substantiate the claim.
+- **Contradicted:** the claim conflicts with inspected evidence.
+- **Not assessable:** the source/claim cannot be evaluated reliably from the available evidence.
+
+## 2. Claim-to-evidence matrix
+
+| ID | Claim in current project records (faithful paraphrase) | Location | Evidence inspected | Status | Confidence / required action |
+|---|---|---|---|---|---|
+| C-01 | The reference runtime is a bounded, zero-heap C11 host model with fixed event storage. | `reference/include/ref_runtime.h`; `reference/src/ref_runtime.c`; `reference/CMakeLists.txt`; `research/phase1_reference_implementation_design.md` | Static constants `QMAX=16`, `XMAX=4`, `DMAX=4`, `ACTIVE_MAX=20`; C11/CMake build; no heap API appears in the inspected runtime opening/design | **Supported** for the host reference implementation | High for the inspected artifacts. Do not expand to “verified zero-heap MCU firmware” without target build/link-map evidence. |
+| C-02 | Event identity uses a slot plus generation and stale references are rejected. | `reference/include/ref_runtime.h`; `reference/src/ref_runtime.c`; Gate A; `reference/tests/test_reference.c` | `EventRef` structure, `event_ref_valid`, generation advancement and stale-reference outcomes | **Supported** as implemented reference-model behavior | High. Test coverage is present; this audit did not run the tests. Generation wrap/stale-reference corner cases should be explicitly tied to exact tests before a universal invariant claim. |
+| C-03 | Dependency-aware eligibility distinguishes independent, ordered and coupled work; peripheral equality alone does not imply dependency. | Gate A; `reference/include/ref_runtime.h`; `reference/tests/test_reference.c` | Explicit dependency enum/entries and tests W01–W03 including ordered blocking/coupled containment | **Supported** as design and host-test intent | High for presence of design/tests. Do not claim formal proof or physical-system correctness. |
+| C-04 | Fault association is bounded by evidence precision and ambiguity is handled fail-closed. | Gate B/C; runtime/header; K.10 report; K.10.1–K.10.4 | Association-level enum and frozen K.10 report's CF04/CF07 interpretation | **Partially supported** | High that the contract/code/results are documented; medium that the whole claim is independently reproduced. Exact policy branch, assertions and test names should be cited in the final paper. K.10 outcomes are saved reports, not rerun here. |
+| C-05 | Recovery uses a finite action ladder and bounded episode/history state. | Gate C/D; `reference/include/ref_runtime.h`; `reference/src/ref_runtime.c`; K.10 results | Finite action/outcome enums, bounded constants and episode-related state | **Supported** as a finite reference model | High for bounded representation; implementation-level termination should be claimed only within tested/modelled transitions, not universally for all firmware. |
+| C-06 | The model preserves valid independent queued work during an affected event's quarantine. | Gate A/C; `reference/tests/test_reference.c` W01; K.10 report CF02/CF03 | W01 explicitly selects and executes unrelated work; K.10 reports shared target isolation and background work completion in CF02 | **Partially supported** | High for specified host scenarios; not a general real-world service-preservation guarantee. The saved report says exact-event quarantine is shared across P0–P4. |
+| C-07 | P4 is universally superior to P0–P3. | K.10 result report; K.10.4 | K.10.4 records six families with no measured advantage and CF16 where P2 uses fewer attempts (1 vs P4's 3) | **Contradicted** | High. Withhold universal superiority. State localized wins and explicit trade-offs only. |
+| C-08 | P4 has an attributable advantage in CF04 and CF07. | `research/phase2_k10_p4_advantage_novelty_results.md`; K.10.4 | Saved matrix describes P4 fail-closed termination in ambiguous association and subsequent fault handling; other variants' failure modes are recorded | **Partially supported** | Medium-high for what the saved corpus/report says; this chat did not reproduce raw output or recompute metrics. Keep the host/reference-model qualifier and cite raw CSV/trace rows in any publication-ready result table. |
+| C-09 | The frozen campaign contains 400 matched executions (16 families × 5 variants × 5 repetitions). | K.10 result report; `reference/experiments/k10_experiment.c`; `reference/experiments/evaluate_k10_advantage.py` | Constants define 16 families/5 repetitions; evaluator asserts 400 rows; report states 400 | **Supported** as experiment design and saved report; **not rerun here** | High for harness design. Do not state this chat verified current raw CSV hashes or re-executed the campaign. |
+| C-10 | K.10 demonstrates physical MCU timing, memory, energy or hardware recovery. | K.10 report; Gate E; Plan 2.0 current state; hardware plan | Gate E explicitly disclaims MCU results, energy and hardware success; Plan 2.0 says physical validation is pending | **Contradicted** | High. Withhold these claims until hardware tests and raw measurements exist. |
+| C-11 | The software demonstrator/UI is the same runtime algorithm, not a second independently implemented recovery policy. | `research/phase2_k12_professor_facing_software_demo_and_final_audit.md` | K.12 report says the live path uses the C CLI/reference runtime and the UI does not implement a second recovery algorithm | **Partially supported** | The repository record states this, but K.12 explicitly says closure was based on user-reported tests/UI and not independently reproduced by remote CI. Cite the audit and keep provenance visible. |
+| C-12 | Hardware target and board integration are already validated. | `Plan2.0/HARDWARE_DEMONSTRATION.md`; `Plan2.0/CURRENT_STATE.md`; Gate D/E | Hardware plan requires resolving NUCLEO-U575ZI-Q vs NUCLEO-L476RG; build/flash, wiring and physical trials are pending | **Contradicted** | High. Board selection and physical evidence are open. Do not claim hardware demonstration completion. |
+| C-13 | The current 43-entry inventory establishes a comprehensive literature review or absence of prior art. | Chat 01/02 audits; reference register; K.10.2/K.10.3 | 9 identity-verified, 17 partial, 17 unresolved; 26 entries include strands/families, not necessarily exact works; K.10.2/3 bound conclusions to inspected candidates | **Contradicted** | High. Say “within the inspected candidate set” and describe review scope. Do not infer universal novelty from the inventory. |
+| C-14 | No single inspected candidate discloses the full L1–L12 combination. | `research/phase2_k10_2_single_reference_anticipation_review.md` | K.10.2 states this bounded conclusion and explicitly disclaims universal absence/legal novelty | **Partially supported** | Medium. This is a historical research conclusion, not independently repeated in this chat. Full-text and patent-claim completeness vary by source; retain the “inspected candidate set” qualifier. |
+| C-15 | A multi-reference combination presents a credible technical challenge. | `research/phase2_k10_3_multi_reference_combination_review.md`; K.10.4 | K.10.3 explicitly analyzes Phoenix + failed-event queue + QP/C and distinguishes adjacent teachings from the complete integrated contract | **Supported** as a documented technical risk assessment | High that the report identifies the challenge; it is not a legal obviousness opinion and does not resolve legal standards. |
+| C-16 | The integrated combination is legally novel, non-obvious or patentable. | K.10.2, K.10.3, K.10.4; `research/novelty_investigation.md` | Each relevant report disclaims a legal conclusion and leaves the hypothesis vulnerable/unresolved | **Unsupported** | High. Withhold. Requires qualified legal review and substantially complete prior-art/source analysis; no wording in this audit can certify legal status. |
+| C-17 | P0–P4 reproduce named published systems. | Gate E; K.10 report; source-to-design records | P0–P4 are defined as internal fixed-retry/context/history/integrated variants; no faithful-reproduction protocol or source mapping was found | **Unsupported** | High. Call them internal matched baselines/ablations, not replications of Phoenix/Karma/QP/C/etc. |
+| C-18 | Every one of the 43 entries is an exact verified publication and was read in full. | Chat 01/02 audits; `REFERENCE_REGISTER.csv`; `COUNTING_AND_VERIFICATION.md` | 17 P-series plus 26 A-series; 17 unresolved and 17 partial per Chat 02; several A entries are broad leads/strands | **Contradicted** | High. Distinguish reviewed rows, identified source records, and full-text/claims inspection. |
+| C-19 | Gate A–E are accepted design/protocol contracts. | Gate A–E documents | Each records acceptance at semantic/design/protocol level and explicitly defers implementation/physical validation | **Supported** as documented gate status | High. “Gate accepted” must not be rewritten as “firmware formally verified” or “hardware validated.” |
+| C-20 | Current software tests passed in this Chat 03 session. | No new test execution in this session | Repository test source and CMake configuration were inspected, but no build or test command was run | **Unsupported / not run** | High. Do not report a Chat 03 test pass. |
+
+## 3. High-priority wording and evidence recommendations
+
+1. **Qualify P4 advantage:** report only the scenario families and metrics with saved evidence. Include the counterexamples and trade-offs. Keep “host/reference-model” adjacent to results.
+2. **Do not call exact-event quarantine P4-exclusive:** K.10.4 states it is shared across P0–P4.
+3. **Do not call P0–P4 replications:** they are internal matched policy baselines/ablations unless a separate implementation-equivalence audit proves otherwise.
+4. **Separate test existence from test execution:** `test_reference.c` proves tests are authored; it does not prove they passed in this Chat 03 session.
+5. **Separate design acceptance from verification:** Gates A–E define contracts and proof/check plans; they do not certify MCU firmware or physical behavior.
+6. **Constrain prior-art language:** K.10.2's result applies only to its inspected candidate set; K.10.3 identifies a credible combination challenge. Neither report establishes legal novelty, non-obviousness or patentability.
+7. **No hardware claim before evidence:** the hardware plan calls for board identification, safe controlled fault injection, raw serial traces, repeatability and a fresh successful transaction after recovery. No such evidence was established in this audit.
+8. **Do not convert unresolved A-series strands into citations:** exact title/author/venue/identifier and relevant passage must be confirmed first.
+
+## 4. Open evidence requests for Chat 04
+
+- Pin every manuscript claim to a source passage/page/claim and exact project artifact.
+- Confirm the final manuscript does not cite broad A-series strands as if they were identified publications.
+- Verify the exact K.10 raw output and trace files are present in the current `main` tree before citing row-level values. This chat inspected the harness and saved report, not the raw result CSVs.
+- Preserve source identity and full-text inspection as separate fields.
+- Leave hardware claims absent until board-specific firmware/build/trace evidence is added by the hardware work packages.
+
+## 5. Audit boundary
+
+This is a documentation-level audit of repository artifacts accessible on live `main`. It did not execute builds/tests, inspect every source full text, rerun K.10, validate the raw 400-run CSV, perform hardware work, or offer a legal opinion. Findings should not be represented as any of those activities.
