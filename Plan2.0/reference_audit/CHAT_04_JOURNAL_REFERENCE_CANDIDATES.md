@@ -28,11 +28,11 @@ Donal Heffernan, Ciaran MacNamee, and Padraig Fogarty, “Runtime verification m
 
 ### J-C03 — Survey of fault-tolerance techniques for embedded systems
 
-“A Survey of Fault-Tolerance Techniques for Embedded Systems From the Perspective of Power, Energy, and Thermal Issues,” *IEEE Access*, vol. 10, pp. 12229–12251 (2022). DOI: [10.1109/ACCESS.2022.3144217](https://doi.org/10.1109/ACCESS.2022.3144217).
+Sepideh Safari, Mohsen Ansari, Heba Khdr, Pourya Gohari-Nazari, Sina Yari-Karin, Amir Yeganeh-Khaksar, Shaahin Hessabi, Alireza Ejlali, and Jörg Henkel, “A Survey of Fault-Tolerance Techniques for Embedded Systems From the Perspective of Power, Energy, and Thermal Issues,” *IEEE Access*, vol. 10, pp. 12229–12251 (2022). DOI: [10.1109/ACCESS.2022.3144217](https://doi.org/10.1109/ACCESS.2022.3144217).
 
 - **Use:** Broader taxonomy of fault-tolerance in real-time embedded systems, especially timing, energy, thermal constraints and scheduling.
 - **Fit:** High for introduction and background framing; moderate for event-level peripheral recovery.
-- **Limitation:** Survey focus is system-level fault-tolerance and mapping/scheduling, not specifically peripheral-event association or quarantine. Retrieve the full IEEE author list before producing a final formatted citation.
+- **Limitation:** Survey focus is system-level fault-tolerance and mapping/scheduling, not specifically peripheral-event association or quarantine. The author list has now been checked against IEEE/metadata search results.
 - **Publisher evidence:** [IEEE Xplore record](https://ieeexplore.ieee.org/document/9684471/).
 
 ### J-C04 — Software-based transient fault tolerance in embedded systems
