@@ -50,6 +50,7 @@ These counts describe audit classifications, not papers read or full-text inspec
 
 - Retrieved current `main` commit history and confirmed the starting head `e71e8243a66200836d6c9069600d64e1838df7a7`.
 - Fetched and inspected the required Plan 2.0 documents, Chat 01/02 audit artifacts and handoffs, reference register, research reference/counting notes, C runtime/header, CMake config, runtime tests, Gate A–E contracts, implementation design, K.10 harness/evaluator, K.10 results, K.10.1–K.10.4 records, K.12 audit and hardware plan.
+- Attempted read-only fetches of `reference/experiments/out/k10_runs.csv` and `reference/experiments/out/k10_traces.csv`; both expected paths returned 404 on live `main`. No claim is made that no copies exist elsewhere.
 - Parsed the CSV register's 43 data rows and reviewed each stable ID P-001–P-017/A-001–A-026 in the source-to-design report.
 - Confirmed protected file blob SHAs are unchanged at the final pre-handoff check:
   - `reference/src/ref_runtime.c`: `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`
