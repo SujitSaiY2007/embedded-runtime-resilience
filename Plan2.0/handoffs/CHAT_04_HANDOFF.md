@@ -3,54 +3,73 @@
 **Date:** 2026-10-20  
 **Repository:** `SujitSaiY2007/embedded-runtime-resilience`  
 **Branch policy:** `main` only  
-**Starting head observed for this work:** `3c4310615b36f9e44295fcf25a639622dc219a31`  
-**Status:** Journal-quality assessment and candidate shortlist committed. Final manuscript bibliography not edited because no tracked manuscript/bibliography file was identified in the live repository tree.
+**Current scope status:** Chat-04 audit and handoff are complete. The separate manuscript-editing step remains pending because the user supplied a PDF, not an editable DOCX/LaTeX source.
 
-## 1. Main answer to professor's requirement
+## 1. Main answer to the professor's journal-reference requirement
 
-The current preliminary inventory is **not yet at the requested journal-share level**. The 43-row register explicitly classifies only one entry as a journal article (P-005). It includes conference papers, patent records, documentation, a preprint/project family and unresolved source leads. These 43 entries are a prior-art inventory, not the final bibliography; therefore the final manuscript's journal ratio remains unknown until the actual cited reference list is located.
+The user-provided `Manuscript Draft.pdf` contains 24 numbered references on pages 11–12. The bibliography audit found:
 
-Plan 2.0's existing protocol sets an approximate **90% peer-reviewed journal-article target where the literature supports it**. The user's current stated minimum is **75% or above**. Chat 04 recommends treating 75% as the minimum and aiming nearer 90% if relevance and primary-source evidence permit. Do not add weak sources or misclassify conference papers to meet a cosmetic ratio.
+- **12/24 (50.0%)** journal articles if IEEE *Computer* reference [12] is accepted in the professor's journal/magazine category.
+- **11/24 (45.8%)** under a stricter rule that excludes [12] from the journal-article quota.
+- At least **18/24 journal articles** are required to reach 75% with a fixed 24-reference denominator.
+- The final policy must follow the professor's definition of “journal article”; either classification is below the 75% threshold.
 
-## 2. Files created
+The earlier 43-row Plan2.0 reference register is a prior-art inventory, not the manuscript bibliography. Its publication-type counts must not be substituted for the manuscript's journal-share calculation.
 
-1. `Plan2.0/reference_audit/REFERENCE_QUALITY_SUMMARY.md` — current inventory type/status counts, denominator rules, journal-share formula, integrity constraints and decision.
-2. `Plan2.0/reference_audit/RELATED_WORK_GAP_MATRIX.md` — theme-by-theme gap matrix for peripheral recovery, driver recovery, runtime verification, fault tolerance, fault association, event quarantine, bounded memory, evaluation and hardware evidence.
-3. `Plan2.0/reference_audit/CHAT_04_JOURNAL_REFERENCE_CANDIDATES.md` — eight journal candidates/entries (including existing P-005, which must not be duplicated) with publisher links, relevance and limitations.
-4. `Plan2.0/handoffs/CHAT_04_HANDOFF.md` — this handoff.
+Plan2.0's prior target remains approximately **90% peer-reviewed journal articles where the literature supports it**. Treat 75% as the current minimum, without weakening relevance or misclassifying sources to meet a cosmetic percentage.
 
-## 3. Journal candidate shortlist
+## 2. Files created or updated
 
-- **Already registered:** Reinbacher, Függer & Brauer (2014), *Formal Methods in System Design*, P-005.
+1. `Plan2.0/reference_audit/REFERENCE_QUALITY_SUMMARY.md` — inventory classification, denominator rules and journal-share formula.
+2. `Plan2.0/reference_audit/RELATED_WORK_GAP_MATRIX.md` — topic-by-topic gaps in peripheral recovery, driver recovery, runtime verification, fault tolerance, association/diagnosis, bounded memory, evaluation and hardware evidence.
+3. `Plan2.0/reference_audit/CHAT_04_JOURNAL_REFERENCE_CANDIDATES.md` — eight journal candidates/entries including existing P-005; author metadata for the IEEE Access survey was subsequently verified.
+4. `Plan2.0/reference_audit/MANUSCRIPT_DRAFT_JOURNAL_SHARE_AUDIT.md` — classification of the uploaded 24-reference manuscript bibliography, ratios under both counting interpretations, replacement guidance, candidate list, and remaining requirements.
+5. `Plan2.0/handoffs/CHAT_04_HANDOFF.md` — this handoff.
+
+## 3. Manuscript reference classification
+
+**Journal articles (12 under broad classification):** [5], [6], [7], [10]–[15], [18]–[20]. Reference [12], “Fault Injection Techniques and Tools,” is published in IEEE *Computer* and is treated as a journal/magazine item in broad classification, but faculty rules may exclude magazines from a journal-article quota.
+
+**Conference/proceedings papers (7):** [1]–[4], [8], [9], [16].
+
+**Other source types (5):** [17] textbook; [21] software/framework documentation; [22]–[24] patent publications.
+
+See `MANUSCRIPT_DRAFT_JOURNAL_SHARE_AUDIT.md` for full titles, source-type rationale and claim-preservation guidance.
+
+## 4. Journal candidate shortlist
+
+- **Already cited:** Reinbacher, Függer & Brauer (2014), *Formal Methods in System Design*, reference [7]/register P-005. Do not duplicate.
 - **Runtime verification:** Heffernan, MacNamee & Fogarty (2014), *IET Software*, DOI 10.1049/iet-sen.2013.0236.
-- **Survey:** *A Survey of Fault-Tolerance Techniques for Embedded Systems From the Perspective of Power, Energy, and Thermal Issues*, *IEEE Access* 10 (2022), pp. 12229–12251, DOI 10.1109/ACCESS.2022.3144217. Full author list still needs to be extracted before final formatted citation.
-- **Software transient-fault tolerance:** Asghari, Binesh Marvasti & Rahmani (2018), *Future Generation Computer Systems* 87, pp. 58–65, DOI 10.1016/j.future.2018.04.049.
-- **Real-time fault-tolerance trade-offs:** Santos, Santos & Orozco (2009), *Journal of Systems Architecture* 55(2), pp. 90–101, DOI 10.1016/j.sysarc.2008.09.001.
-- **Fault-tolerant real-time scheduling:** Moulik & Sharma (2024), *Future Generation Computer Systems* 161, pp. 214–225, DOI 10.1016/j.future.2024.07.008.
-- **Self-adaptive networked embedded systems:** Streichert, Koch, Haubelt & Teich (2006), *EURASIP Journal on Embedded Systems*, article 042168, DOI 10.1155/ES/2006/42168.
-- **Timing/reliability/energy trade-offs:** Alishzadeh, Jassbi & Reshadi (2023), *Microprocessors and Microsystems* 102, article 104929, DOI 10.1016/j.micpro.2023.104929.
+- **Embedded fault-tolerance survey:** Safari et al. (2022), *IEEE Access*, DOI 10.1109/ACCESS.2022.3144217. The nine-author list is verified in the candidate report.
+- **Software transient-fault tolerance:** Asghari, Binesh Marvasti & Rahmani (2018), *Future Generation Computer Systems*, DOI 10.1016/j.future.2018.04.049.
+- **Real-time fault-tolerance trade-offs:** Santos, Santos & Orozco (2009), *Journal of Systems Architecture*, DOI 10.1016/j.sysarc.2008.09.001.
+- **Fault-tolerant real-time scheduling:** Moulik & Sharma (2024), *Future Generation Computer Systems*, DOI 10.1016/j.future.2024.07.008.
+- **Self-adaptive networked embedded systems:** Streichert et al. (2006), *EURASIP Journal on Embedded Systems*, DOI 10.1155/ES/2006/42168.
+- **Timing/reliability/energy trade-offs:** Alishzadeh, Jassbi & Reshadi (2023), *Microprocessors and Microsystems*, DOI 10.1016/j.micpro.2023.104929.
 
-The candidate report explicitly marks the sources as candidates rather than automatically accepted manuscript citations. Full text/page-level claim mapping remains necessary, and the candidates do not disclose the project's complete integrated mechanism merely because their topics overlap.
+These remain candidates until full text is inspected and each citation is mapped to a precise manuscript claim. Adjacent scheduling/energy work must not be presented as direct evidence of peripheral-event quarantine.
 
-## 4. Validation and limitations
+## 5. Completed validation
 
-- Read current live `main` metadata and fetched `Plan2.0/REFERENCE_OVERHAUL.md`, `Plan2.0/README.md`, `research/references_used/README.md`, `research/references_used/REFERENCE_REGISTER.md`, `research/references_used/COUNTING_AND_VERIFICATION.md`, `Plan2.0/reference_audit/REFERENCE_REGISTER.csv`, Chat 02 handoff/report and Chat 03 handoff.
-- Parsed the 43-row CSV with its 17-column schema and counted publication-type/status labels.
-- Checked publisher/official landing pages for journal candidates including Springer, Wiley/IET, IEEE and Elsevier pages. Exact author list for the IEEE Access survey remains an open bibliographic task in the candidate report.
-- Inspected the live recursive Git tree (217 tracked paths); no path matching common manuscript/bibliography names or extensions was found. This means no tracked manuscript was located in that tree, not that no manuscript exists outside the repository.
-- No manuscript bibliography or reference list was edited; no code, tests, Gates A–E, frozen K.10 artifacts or existing source register was changed.
-- No runtime tests, experiment runs, raw CSV recomputation or hardware tests were performed.
+- Read current live `main` metadata and relevant Plan2.0/reference audit files, the Chat 02 handoff and the Chat 03 handoff.
+- Parsed the 43-row, 17-column reference register for the initial inventory audit.
+- Inspected the manuscript PDF's reference list on pages 11–12 and counted its 24 numbered references.
+- Checked publisher/metadata search results for the journal candidate set and verified the complete author list for Safari et al. (2022).
+- Kept the manuscript bibliography denominator separate from the repository's 43-entry prior-art inventory.
+- Committed the audit reports and handoff to `main`; no branch was created.
+- No code, tests, Gates A–E, frozen K.10 artifacts, raw experimental outputs, or protected implementation files were modified.
 
-## 5. Next required work
+## 6. Remaining boundary and next action
 
-1. **Locate the actual manuscript and its bibliography.** If it is outside the repository, obtain the exact current file/version from the user rather than inventing a manuscript path.
-2. Extract the unique cited references from that manuscript and classify each by publication type; then calculate the actual journal share.
-3. Verify candidate metadata and full-text relevance. Retrieve the full IEEE Access survey author list; inspect the full text and exact sections/pages for every selected candidate.
-4. Add only selected, verified journal articles to the manuscript and bibliography. Retain indispensable reputable conference papers as conference papers.
-5. Update the canonical source register and claim/source traceability together, using stable IDs and exact DOI/official links. Preserve existing 43-row historical counts as historical counts rather than silently rewriting them.
-6. Recalculate the final journal ratio from the final unique citations and report numerator, denominator, excluded source types and duplicate handling.
-7. Keep prior-art conclusions bounded; a journal-heavy bibliography does not establish novelty, non-obviousness or patentability.
+The **Chat-04 audit/reporting deliverable is complete**, but the manuscript does **not** yet meet the professor's 75% requirement. The uploaded PDF is sufficient to audit the reference list but is not a safe editable manuscript source for citation replacement and renumbering.
 
-## 6. Integrity boundary
+To complete the separate manuscript integration task, obtain the current editable DOCX or LaTeX source (or explicit authorization to reconstruct an editable draft from the PDF). Then:
 
-This handoff closes the **initial journal-quality assessment and candidate discovery** portion only. It does not claim the final bibliography meets 75% or 90%, because the manuscript's actual cited reference list was not found in the repository and candidate selection/full-text mapping is incomplete.
+1. Confirm the professor's rule for IEEE *Computer* [12].
+2. Inspect full text of proposed journal candidates and map them to claims.
+3. Replace/add only sources that support the paper; retain essential primary conference work where justified.
+4. Update in-text citations and bibliography together, check unused/duplicate references, and renumber consistently.
+5. Recalculate the final journal ratio from the unique final cited references and document the numerator/denominator.
+6. Keep the paper's claims and evidence boundary intact: the current manuscript describes host/reference software evaluation, not physical MCU validation.
+
+No claim is made that the final manuscript bibliography already complies, that all candidate articles have passed page-level claim verification, or that journal percentage establishes novelty, non-obviousness or patentability.
