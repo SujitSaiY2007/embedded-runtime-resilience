@@ -5,8 +5,8 @@
 **Branch:** `main` only  
 **Starting live `main` SHA:** `e71e8243a66200836d6c9069600d64e1838df7a7`  
 **Handoff creation commit SHA:** `a74d34f207baa0753fc214d029201561f6967ae0`  
-**Last pre-synchronization `main` SHA:** `abfabaeae0b568e4b63b3b064b838c7b56786eee`  
-**Final handoff synchronization commit:** recorded as the subsequent `main` commit in live GitHub history; the commit SHA is reported in the Chat 03 closure response  
+**Last pre-synchronization `main` SHA:** `e1b3a3774ee230119615857af0e2761f2d0dac3a`  
+**Final handoff synchronization commit:** the commit created by this final handoff-only update; exact SHA is reported in the Chat 03 closure response  
 **Date:** 2026-10-20
 
 ## 1. Outcome
