@@ -104,7 +104,7 @@ A citation, thematic similarity, or shared vocabulary alone is not evidence of d
 
 - **Mapped (comparison/context): 25** — 17 P-series entries plus A-005, A-006, A-012, A-013, A-015, A-016, A-022, A-023, with A-001's identity limitation kept visible; these are provisional topical mappings, not 26 demonstrated influence claims.
 - **Partially mapped: 0 as a separate exclusive count** — partial metadata is reported in the status column; the evidence is not strong enough to promote a mapping where the table says unresolved.
-- **Unresolved: 17** — A-002, A-003, A-004, A-007–A-011, A-014, A-017–A-021, A-024–A-026. A-001 and A-022 also have unresolved identity components, so status and relationship counts are not mutually exclusive.
+- **Relationship unresolved: 18** — A-001 plus A-002, A-003, A-004, A-007–A-011, A-014, A-017–A-021, A-024–A-026. A-022 has a provisional topical mapping but its exact paper/release remains unresolved.
 - **Direct adoption: 0; adaptation: 0** — no auditable source-to-code derivation was established in this pass.
 - **No demonstrated influence: explicitly noted for A-005/A-006; not asserted for every unresolved source.**
 
