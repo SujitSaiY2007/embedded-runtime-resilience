@@ -49,9 +49,9 @@ Do not alter without a separately approved research change:
 
 Do not rerun the K.10 matrix to resolve editorial inconsistencies. Do not imply hardware validation was performed.
 
-## 6. Future work
+## 6. Plan 2.0 hardware continuation (current as of 2026-10-22)
 
-The next possible technical stage is separately authorized physical validation using the proposed NUCLEO-U575ZI-Q / STM32U575ZI target. It requires board-revision/pin verification, a reviewed test plan, safe fault injection, instrumentation and recorded MCU-specific timing/resource results. No hardware task is active under the current closure.
+The historical software/research closure remains valid, but the separate Plan 2.0 physical-demonstration work package is now active. Chat 05.2 is paused at ST-LINK/GDB initialization on the user-reported NUCLEO-L476RG (revision MB1136 C). Board-only USB detection, ST-LINK firmware upgrade, and a generated CubeIDE empty-project build are user-verified. SWD connection, flash, MCU execution, sensor wiring, sensor reads, fault injection, recovery and MCU-specific measurements remain unverified. The earlier NUCLEO-U575ZI-Q proposal remains a target-requirements discrepancy to assess, not a resolved equivalence. Continue from Plan2.0/CURRENT_STATE.md and Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md. Do not claim hardware validation or imply no hardware task is active.
 
 ## 7. Reader navigation
 
