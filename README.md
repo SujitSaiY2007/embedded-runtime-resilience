@@ -7,7 +7,7 @@
 [![Plan](https://img.shields.io/badge/plan-2.0-315a9b)](Plan2.0/README.md)
 [![Software](https://img.shields.io/badge/software-reference%20demo%20available-247a55)](#current-status)
 [![Hardware](https://img.shields.io/badge/hardware-validation%20pending-c88719)](Plan2.0/HARDWARE_DEMONSTRATION.md)
-[![Branch policy](https://img.shields.io/badge/work- main%20only-6f42c1)](Plan2.0/CHAT_PROTOCOL.md)
+[![Branch policy](https://img.shields.io/badge/work-main%20only-6f42c1)](Plan2.0/CHAT_PROTOCOL.md)
 
 ## Current status — 22 October 2026
 
