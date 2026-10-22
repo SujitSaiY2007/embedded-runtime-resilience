@@ -85,12 +85,12 @@ Continue in **Chat 05.3**, using [the continuation prompt](prompts/CHAT_05_3_STL
 - The recorded log reports ST-LINK initialization failure together with GDB/SWV listener bind errors on 61234/61235. Prior `netstat` checks produced no matching entries, so occupied ports are not established as the cause.
 - The root cause remains unresolved among local configuration/tool startup, probe/driver communication, target-access, and listener startup possibilities; none is proven from saved screenshots alone.
 - Current reset-behaviour setting and the actual existence/version of CubeIDE-bundled CLI utilities remain unknown because these are local-host facts not exposed by the GitHub connector.
-- Safe next check: inspect the exact existing Debug Configuration (record reset behaviour and enabled SWV setting), then use Windows File Explorer to verify whether the bundled `ST-LINK_gdbserver.exe` and `STM32_Programmer_CLI.exe` exist at the paths already recorded, without launching a flash/write operation. Report filenames/paths and the new console output only. Do not redo the prior empty port checks. Do not flash.
+- Safe next check is specified in `Plan2.0/handoffs/CHAT_05_3_HANDOFF.md`: inspect the existing Debug Configuration (reset behaviour and SWV setting), then use File Explorer to verify whether the already-referenced `ST-LINK_gdbserver.exe` and `STM32_Programmer_CLI.exe` are present. No write-capable command is to be run at this stage.
 
 ### Evidence boundary
 The generated CubeIDE Empty Project build result remains compilation/link evidence only. Target connection, firmware flash, application execution, sensor access, fault injection, recovery and MCU-specific measurements remain unverified. NUCLEO-L476RG is not assumed equivalent to the historical NUCLEO-U575ZI-Q proposal. Frozen 400-execution research evidence and protected runtime files remain untouched.
 
 ### Chat 05.3 repository provenance
 - Branch: `main` only.
-- Documentation changes for this closeout are recorded in the commit that updates this file; see the terminal commit SHA in the Chat 05.3 closeout/handoff.
+- Continuity documentation and navigation were updated in this closeout sequence; the final live HEAD is recorded in the Chat 05.3 response.
 - Repository-side checks: live files were fetched and blob SHAs compared before edits. No firmware/toolchain build or hardware test was run by the repository connector.
