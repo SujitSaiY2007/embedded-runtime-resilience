@@ -9,7 +9,7 @@ Each numbered chat is a bounded work package. Read the current state, previous h
 | 02 | Metadata and venue verification | DOI/title/authors/year/venue/type checks; journal/conference/source classification | No fabricated or silently guessed metadata |
 | 03 | Literature gap and influence mapping | Source-to-design traceability, related-work matrix, research-gap map | Each project claim linked to evidence or flagged unsupported |
 | 04 | Bibliography/manuscript revision | IEEE-style reference list and revised related work | Citations resolve and claims are source-supported |
-| 05 | Hardware architecture gate | Board decision, wiring/pin plan, toolchain, driver plan, safety and acceptance tests | Hardware choice and adapter boundary approved before code |
+| 05 | Hardware compatibility audit | Board/component inventory, target discrepancy, zero-budget feasibility, risk register | Compatibility blockers documented; no unsafe wiring approved |\n| 05.2 | Zero-budget hardware bring-up | Identify only existing parts; verify board/cable/sensor; staged safe connection, build/flash and baseline tests where feasible | Every electrical gate passes before wiring/power; raw evidence and truthful handoff recorded |
 | 06 | Minimal firmware scaffold | Reproducible build and serial trace, no recovery claims yet | Firmware builds/flashes and baseline trace captured |
 | 07 | Baseline peripheral integration | Sensor/peripheral reads with raw logs | Stable baseline demonstrated and documented |
 | 08 | Controlled fault and recovery | Safe fault injection, detection, recovery, post-recovery success | Recovery verified by a fresh successful operation |
