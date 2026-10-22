@@ -25,7 +25,10 @@ Plan 2.0 begins the next phase after the software/reference-model demonstrator: 
 4. [Hardware demonstration plan](HARDWARE_DEMONSTRATION.md)
 5. [Multi-chat continuity protocol](CHAT_PROTOCOL.md)
 6. [Chat 00 — initialization and next-chat handoff](CHAT_00_INITIALIZATION.md)
-7. [Archive index](../archive/README.md)
+7. [Chat 05 hardware compatibility audit](hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md)
+8. [Chat 05.2 — detailed hardware bring-up prompt](prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md)
+9. [Chat 05.2 handoff](handoffs/CHAT_05_2_HANDOFF.md)
+10. [Archive index](../archive/README.md)
 
 ## Definition of done
 
