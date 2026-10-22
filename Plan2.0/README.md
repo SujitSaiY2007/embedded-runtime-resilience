@@ -27,8 +27,9 @@ Plan 2.0 begins the next phase after the software/reference-model demonstrator: 
 6. [Chat 00 — initialization and next-chat handoff](CHAT_00_INITIALIZATION.md)
 7. [Chat 05 hardware compatibility audit](hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md)
 8. [Chat 05.2 — detailed hardware bring-up prompt](prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md)
-9. [Chat 05.2 handoff](handoffs/CHAT_05_2_HANDOFF.md)
-10. [Archive index](../archive/README.md)
+9. [Chat 05.2 handoff — paused at ST-LINK initialization](handoffs/CHAT_05_2_HANDOFF.md)
+10. [Chat 05.3 — ST-LINK debugger continuation prompt](prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md)
+11. [Archive index](../archive/README.md)
 
 ## Definition of done
 
