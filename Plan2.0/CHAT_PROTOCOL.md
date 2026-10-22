@@ -1,5 +1,9 @@
 # Multi-Chat Execution Protocol
 
+## Live continuation note — 2026-10-22
+
+Chat 05.2 is paused at ST-LINK/GDB initialization. Before asking the user to repeat any step, read Plan2.0/CURRENT_STATE.md and Plan2.0/handoffs/CHAT_05_2_HANDOFF.md; board-only USB detection, ST-LINK firmware upgrade, clean generated-project build, exact server command/error and empty netstat checks are already recorded. The next chat is Chat 05.3 and must continue from this exact point. The user does not have standalone STM32CubeProgrammer; do not request an installation or any purchase.
+
 ## Startup
 
 At the start of each chat:
