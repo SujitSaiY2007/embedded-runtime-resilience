@@ -31,3 +31,8 @@ Board/MCU/revision, pin map and wiring photo; sensor/module identity; compiler/I
 ## Acceptance criteria
 
 Baseline operation is stable; the injected failure is observed at the real driver interface or clearly labeled software-injected boundary; the recovery action is evidenced by trace; a fresh post-recovery transaction succeeds within a predeclared bound; the result is repeatable; raw evidence is retained; no MCU recovery claim is made from virtual-only results.
+
+
+## Live bring-up status — 22 October 2026
+
+The current NUCLEO-L476RG board powers on and is detected over USB, and the ST-LINK firmware update completed to V2J48M35. The generated CubeIDE Empty Project builds with 0 errors and 0 warnings. Debug launch currently fails with ST-LINK initialization error and GDB/SWV bind messages on TCP ports 61234/61235; the same ports had no matching entries in the user's netstat checks. Standalone STM32CubeProgrammer is not available to the user. Firmware flashing, MCU execution, sensor wiring, sensor reads and recovery remain unverified. Continue from [Chat 05.3 prompt](prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md), without repeating completed checks or buying/installing anything.
