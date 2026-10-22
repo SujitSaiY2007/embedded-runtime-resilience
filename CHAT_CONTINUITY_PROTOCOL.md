@@ -1,26 +1,40 @@
-# Chat Continuity Protocol — Finalized Project
+# Chat Continuity Protocol — Embedded Runtime Resilience
 
-## Current status
+## Current active state (2026-10-22)
 
-As of 2026-10-13, the software/research scope of Embedded Runtime Resilience is finalized. K.10's frozen investigation, K.10.1–K.10.4 adversarial review, K.11 synthesis and K.12 software demonstrator are closed. Physical MCU implementation is future work.
+The software/research baseline K.10–K.12 remains finalized and protected. Plan 2.0 hardware bring-up is now active. Chat 05.2 is paused at an ST-LINK/GDB initialization failure; the next continuation is Chat 05.3.
+
+Canonical live hardware state: Plan2.0/CURRENT_STATE.md  
+Previous chat handoff: Plan2.0/handoffs/CHAT_05_2_HANDOFF.md  
+Next execution prompt: Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md
 
 ## Canonical startup reading
-1. `README.md`
-2. `docs/PROJECT_OVERVIEW.md`
-3. `docs/ARCHITECTURE_AND_REPOSITORY_MAP.md`
-4. `docs/DEMONSTRATOR_GUIDE.md`
-5. `research/README.md`
-6. K.10 results, K.10.4 conclusion, K.11 synthesis and K.12 audit as relevant.
-7. Root continuity files and `research/chat_records/` for historical provenance.
 
-## Integrity rules
-- Do not modify protected runtime/Gate artifacts without a separately approved scope.
-- Do not rerun the frozen K.10 matrix to repair a documentation inconsistency.
-- Preserve dated checkpoint records.
-- Do not represent host/virtual results as physical MCU evidence.
-- Mark user-run tests as user-reported unless a reproducible CI/run artifact is available.
-- CF01: present P0 terminal escalation, P2 success and P4 success; omit the disputed P2 attempt count from comparisons.
-- `exp` is the preserved research baseline; documentation-only work on `main` must not mutate it.
+1. README.md
+2. Plan2.0/README.md
+3. Plan2.0/CURRENT_STATE.md
+4. Plan2.0/CHAT_PROTOCOL.md
+5. Plan2.0/EXECUTION_ROADMAP.md
+6. Latest Chat 05.2 handoff and Chat 05.3 continuation prompt.
+7. Original Chat 05.2 prompt and hardware compatibility audit for inventory/safety gates.
+8. Read the protected research/software records only as relevant; do not rerun the frozen 400-run matrix.
 
-## Closeout format
-Record the exact scope, files changed, validation actually performed, validation provenance, commit and branch refs, unresolved scientific limits, and future work. Keep the public README concise; place chronology in the checkpoint archive.
+## Current hardware truth
+
+User evidence shows the NUCLEO-L476RG board powers on and is detected over USB; ST-LINK firmware update to V2J48M35 succeeded; the generated CubeIDE empty project builds with 0 errors and 0 warnings. The GDB server does not start and reports ST-LINK initialization failure plus port bind errors on 61234/61235. The same two ports returned no matching netstat entries. The user does not have standalone STM32CubeProgrammer. Firmware flashing, MCU execution, sensor reads, fault injection and recovery are not verified.
+
+## Integrity and safety rules
+
+- Work on main only; no new branches, switching branches, merges or force-pushes.
+- Before writing, inspect live main HEAD and re-fetch/reconcile files.
+- Preserve reference/src/ref_runtime.c, reference/include/ref_runtime.h, Gate A–E contracts, frozen K.10 evidence, experiment sources/configuration, prior-art analysis, manuscript and historical records.
+- Never represent host/virtual results as physical MCU evidence.
+- Do not claim universal P4 superiority, legal patentability, or unverified hardware results.
+- Do not rerun already completed hardware checks without a new evidence-based reason.
+- No new purchases, borrowing, installations or dependencies; budget is ₹0.
+- Do not wire the BME280-labelled module until exact identity, pinout, supply/logic levels, pull-ups and board routing are verified and an exact wiring table is reviewed.
+- Distinguish user-reported observations from independently reproduced checks and CI evidence.
+
+## Required closeout
+
+Record Chat ID/date, exact branch and commit SHA, files changed, commands/checks actually performed and their provenance, evidence status, blocker/risks, and one exact next prompt. Never say a check passed if it was not run. The hardware task may remain BLOCKED if available tools/hardware do not permit safe verification.
