@@ -29,7 +29,7 @@ The next phase is active planning, not completed validation:
 | Reference audit requirements | [Plan2.0/REFERENCE_OVERHAUL.md](Plan2.0/REFERENCE_OVERHAUL.md) |
 | Physical demonstration plan | [Plan2.0/HARDWARE_DEMONSTRATION.md](Plan2.0/HARDWARE_DEMONSTRATION.md) |
 | Rules for each chat and handoff | [Plan2.0/CHAT_PROTOCOL.md](Plan2.0/CHAT_PROTOCOL.md) |
-| Next task: preliminary-reference inventory | [Chat 01 handoff](Plan2.0/handoffs/CHAT_01_HANDOFF.md) |
+| Hardware compatibility audit | [Chat 05 audit](Plan2.0/hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md) |\n| Next hardware task: zero-budget safe bring-up | [Chat 05.2 detailed prompt](Plan2.0/prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md) |\n| Chat 05.2 status and handoff | [Chat 05.2 handoff](Plan2.0/handoffs/CHAT_05_2_HANDOFF.md) |
 | Historical documentation snapshot | [Archive index](archive/README.md) |
 
 ## Existing software demonstrator
