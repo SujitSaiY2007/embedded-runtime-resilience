@@ -593,3 +593,14 @@ K.12 may expose connect/disconnect controls only for the finite modeled virtual 
 | D-K12-01 | Accepted | Close K.12 after user-reported local CTest/UI-contract success and working browser UI; retain provenance as user-run, not independently CI-verified. | User confirmed the live software demonstration works; remote-only inspection cannot reproduce their local Windows environment. |
 | D-K12-02 | Accepted | Treat physical MCU implementation and measurements as future work. | The current milestone is a software-only research demonstration; the board plan is preparatory only. |
 | D-K12-03 | Accepted | Keep the CF01 P2 attempt-count discrepancy unresolved and exclude it from comparative claims until original run/trace records are available. | The original primary records were not present in the inspected remote branch; do not rerun the frozen matrix to replace them. |
+
+
+## Plan 2.0 continuation decisions — 2026-10-22
+
+| ID | Status | Decision | Reason |
+|---|---|---|---|
+| P2-HW-007 | Accepted | Treat Chat 05.2 as paused at ST-LINK/GDB initialization; continue in Chat 05.3 from the saved prompt/handoff. | Avoid repeating completed steps and preserve accurate cross-chat state. |
+| P2-HW-008 | Accepted | Treat board-only USB detection, ST-LINK firmware upgrade to V2J48M35, and generated empty-project build (0 errors, 0 warnings) as user-evidenced checks only. | These do not establish SWD target connection, firmware download, or execution. |
+| P2-HW-009 | Accepted | Do not assume TCP ports 61234/61235 are occupied; prior netstat checks returned no matches while CubeIDE reported GDB/SWV bind failures and ST-LINK initialization error. | Current evidence does not establish port occupation as root cause. |
+| P2-HW-010 | Accepted | Do not require standalone STM32CubeProgrammer; user says it is unavailable. Inspect already-installed CubeIDE-bundled tools only, with no new installs or purchases. | Zero-budget/no-new-software constraint and available-tool reality. |
+| P2-HW-011 | Accepted | Keep sensor disconnected and do not claim flash/execution until debugger/target connection and raw evidence are established. | Electrical compatibility and MCU communication remain unverified. |
