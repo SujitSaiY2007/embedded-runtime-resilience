@@ -9,14 +9,14 @@
 [![Hardware](https://img.shields.io/badge/hardware-validation%20pending-c88719)](Plan2.0/HARDWARE_DEMONSTRATION.md)
 [![Branch policy](https://img.shields.io/badge/work- main%20only-6f42c1)](Plan2.0/CHAT_PROTOCOL.md)
 
-## Current status — 17 October 2026
+## Current status — 22 October 2026
 
 The C reference runtime, deterministic host experiments, virtual embedded system, Python bridge, and browser demonstrator are existing project assets. The frozen host/reference campaign contains **16 case families × 5 policy variants × 5 repetitions = 400 executions**.
 
 The next phase is active planning, not completed validation:
 - **Reference overhaul:** the preliminary bibliography (approximately 43 entries) still requires entry-by-entry metadata, venue, relevance, and influence verification.
 - **Research traceability:** every claimed relationship between publications, baselines, design choices, and the proposed contribution must be explicitly evidenced.
-- **Physical hardware:** firmware integration, controlled fault injection, recovery verification, and MCU-specific measurements are pending. Do not describe the virtual demonstrator as hardware validation.
+- **Physical hardware:** Chat 05.2 is paused at ST-LINK/GDB initialization. Board-only USB detection, ST-LINK firmware update, and a generated CubeIDE empty-project build are user-verified; MCU connection, flashing, execution, sensor reads, recovery and MCU-specific measurements remain unverified. See [current hardware state](Plan2.0/CURRENT_STATE.md).
 - **Branch policy:** all Plan 2.0 work is performed **only on `main`**. Do not create or write to another branch.
 
 ## Start here
@@ -29,7 +29,10 @@ The next phase is active planning, not completed validation:
 | Reference audit requirements | [Plan2.0/REFERENCE_OVERHAUL.md](Plan2.0/REFERENCE_OVERHAUL.md) |
 | Physical demonstration plan | [Plan2.0/HARDWARE_DEMONSTRATION.md](Plan2.0/HARDWARE_DEMONSTRATION.md) |
 | Rules for each chat and handoff | [Plan2.0/CHAT_PROTOCOL.md](Plan2.0/CHAT_PROTOCOL.md) |
-| Hardware compatibility audit | [Chat 05 audit](Plan2.0/hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md) |\n| Next hardware task: zero-budget safe bring-up | [Chat 05.2 detailed prompt](Plan2.0/prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md) |\n| Chat 05.2 status and handoff | [Chat 05.2 handoff](Plan2.0/handoffs/CHAT_05_2_HANDOFF.md) |
+| Hardware compatibility audit | [Chat 05 audit](Plan2.0/hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md) |
+| Chat 05.2 original zero-budget bring-up prompt | [Chat 05.2 prompt](Plan2.0/prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md) |
+| Current status and handoff | [Chat 05.2 handoff](Plan2.0/handoffs/CHAT_05_2_HANDOFF.md) |
+| Next continuation — ST-LINK diagnostics | [Chat 05.3 prompt](Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md) |
 | Historical documentation snapshot | [Archive index](archive/README.md) |
 
 ## Existing software demonstrator
