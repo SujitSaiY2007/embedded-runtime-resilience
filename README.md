@@ -32,6 +32,7 @@ The next phase is active planning, not completed validation:
 | Hardware compatibility audit | [Chat 05 audit](Plan2.0/hardware/CHAT_05_HARDWARE_COMPATIBILITY_AUDIT.md) |
 | Chat 05.2 original zero-budget bring-up prompt | [Chat 05.2 prompt](Plan2.0/prompts/CHAT_05_2_ZERO_BUDGET_HARDWARE_BRINGUP_PROMPT.md) |
 | Current status and handoff | [Chat 05.2 handoff](Plan2.0/handoffs/CHAT_05_2_HANDOFF.md) |
+| Latest hardware continuation handoff | [Chat 05.3 handoff](Plan2.0/handoffs/CHAT_05_3_HANDOFF.md) |
 | Next continuation — ST-LINK diagnostics | [Chat 05.3 prompt](Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md) |
 | Historical documentation snapshot | [Archive index](archive/README.md) |
 
