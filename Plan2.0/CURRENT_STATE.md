@@ -68,3 +68,29 @@ The Chat 05.2 prompt remains authoritative for the already-owned inventory: expe
 ## Next action
 
 Continue in **Chat 05.3**, using [the continuation prompt](prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md) and [the Chat 05.2 handoff](handoffs/CHAT_05_2_HANDOFF.md). Do not repeat completed USB detection, firmware upgrade, clean build or empty netstat checks unless new evidence justifies it. Diagnose the ST-LINK initialization failure using already-installed tools only. Do not claim flashing or execution until raw success evidence exists.
+
+
+## Chat 05.3 continuation outcome — 2026-10-22
+
+**Outcome: BLOCKED / ROOT CAUSE NOT YET ESTABLISHED.** Continuity documents and saved user evidence were reconciled against live `main`. The repository connector cannot inspect the Windows host's local CubeIDE UI, filesystem, process table, installed executables, or local log files; no claim is made that bundled tools have been physically verified on that host during this chat.
+
+### Checks performed in this chat
+- Read the mandatory Chat 05.3 state, handoff, prompt, protocol and roadmap from live `main`.
+- Read the prompt-required top-level README, Plan 2.0 README, Chat 05 hardware compatibility audit, and Chat 05.2 bring-up prompt from live `main`.
+- Inspected live `main` before repository writes. Initial head: `af38761a153129d36c58aca84fba2a7e78e2f7cd`.
+- No Windows command was run by this chat. The previous no-match results for ports 61234/61235, firmware update, and empty-project build remain **user-reported/screenshot evidence from Chat 05.2**, not new tests.
+- No board interaction, debugger launch, target-identification operation, firmware download, sensor wiring, source edit, or research experiment was performed in this chat.
+
+### Diagnosis bounded by available evidence
+- The recorded log reports ST-LINK initialization failure together with GDB/SWV listener bind errors on 61234/61235. Prior `netstat` checks produced no matching entries, so occupied ports are not established as the cause.
+- The root cause remains unresolved among local configuration/tool startup, probe/driver communication, target-access, and listener startup possibilities; none is proven from saved screenshots alone.
+- Current reset-behaviour setting and the actual existence/version of CubeIDE-bundled CLI utilities remain unknown because these are local-host facts not exposed by the GitHub connector.
+- Safe next check: inspect the exact existing Debug Configuration (record reset behaviour and enabled SWV setting), then use Windows File Explorer to verify whether the bundled `ST-LINK_gdbserver.exe` and `STM32_Programmer_CLI.exe` exist at the paths already recorded, without launching a flash/write operation. Report filenames/paths and the new console output only. Do not redo the prior empty port checks. Do not flash.
+
+### Evidence boundary
+The generated CubeIDE Empty Project build result remains compilation/link evidence only. Target connection, firmware flash, application execution, sensor access, fault injection, recovery and MCU-specific measurements remain unverified. NUCLEO-L476RG is not assumed equivalent to the historical NUCLEO-U575ZI-Q proposal. Frozen 400-execution research evidence and protected runtime files remain untouched.
+
+### Chat 05.3 repository provenance
+- Branch: `main` only.
+- Documentation changes for this closeout are recorded in the commit that updates this file; see the terminal commit SHA in the Chat 05.3 closeout/handoff.
+- Repository-side checks: live files were fetched and blob SHAs compared before edits. No firmware/toolchain build or hardware test was run by the repository connector.
