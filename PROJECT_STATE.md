@@ -1,9 +1,11 @@
 # Project State — Canonical Current Snapshot
 
-**Last reconciled:** 2026-10-13  
+**Last reconciled:** 2026-10-22  
 **Project:** Embedded Runtime Resilience  
 **Repository:** SujitSaiY2007/embedded-runtime-resilience  
-**Current state:** **Software/research scope finalized; K.12 closed; hardware validation is future work.**
+**Current state:** **Software/research scope finalized; Plan 2.0 hardware bring-up active, paused at ST-LINK/GDB initialization.**
+
+> Current hardware status is maintained in [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md). The historical software/research findings below remain valid; the old “hardware is future work” wording is superseded by active Plan 2.0 bring-up. As of 2026-10-22, board-only USB detection, ST-LINK firmware upgrade, and a generated empty-project build are user-verified. Debugger initialization fails; firmware flash/execution and sensor operation are not verified.
 
 ## 1. Finalized deliverable
 
