@@ -84,3 +84,8 @@ Use the full inventory and uncertainty ledger in the existing Chat 05.2 prompt; 
 - No unsupported claim that firmware has been flashed or executed.
 - Repository state and next handoff updated on main.
 - A single clear next action given to the user, based on the actual result.
+
+
+## Chat 05.3 closeout clarification — 2026-10-22
+
+The GitHub repository connector can read/write repository files but cannot inspect the user's Windows filesystem, current CubeIDE Debug Configuration, process table, or console directly. Therefore, presence of bundled executables, reset behaviour, SWV checkbox state, and a live ST-LINK CLI operation remain **not verified by Chat 05.3**. Do not represent this repository-only continuation as a completed local hardware diagnostic. The exact next action is given in `Plan2.0/handoffs/CHAT_05_3_HANDOFF.md`: record current reset/SWV settings and check whether the already-referenced bundled GDB server and programmer CLI executable files exist, without launching a write operation. Continue the root-cause investigation only after those user-observed facts are supplied.
