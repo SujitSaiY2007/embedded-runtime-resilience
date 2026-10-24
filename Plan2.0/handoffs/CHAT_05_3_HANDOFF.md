@@ -79,3 +79,38 @@ The user is returning after a break and wants to continue this same Chat 05.3 ta
 Continue this same Chat 05.3 task; do not restart setup. Do not repeat the CLI target-identification test, executable/path checks, old port checks, firmware update, clean build, manual server test on port 50000, or generic localhost instructions. Investigate the difference between the manual server reaching its wait state and CubeIDE's failed autostart/remote connection, focusing on server lifecycle and whether two server instances or mismatched modes are involved. Choose one new diagnostic only when its possible outcomes distinguish hypotheses. Explain the test before asking the user to perform it.
 
 No installation, purchase, erase, option-byte change, firmware flash, sensor wiring, source/runtime edits, or modifications to frozen evidence. Work on main only. If the IDE session succeeds, verify target identity first and do not flash without a separate safety gate. Clearly label user-supplied observations versus checks performed through the repository connector.
+
+
+## Final resumed-session update — 2026-10-24: GPIO experiment succeeded
+
+This update supersedes the earlier statement that the IDE debug session remained blocked. It preserves that historical diagnosis; the original root cause of the earlier GDB launch failure was not established.
+
+### New user-provided evidence
+- The local STM32CubeIDE project built with **0 errors, 0 warnings** after the backup C file was excluded from the Debug build.
+- The CubeIDE console displayed **“Download verified successfully.”**
+- A live debug session reached the final infinite loop in `main.c`.
+- Expressions view showed:
+  - `test_event_count = 1`
+  - `test_fault_count = 1`
+  - `test_recovery_count = 1`
+  - `test_state = 4` (`ERR_STATE_RECOVERED`)
+  - `test_recovered = 1`
+  - `test_fault_injected = 1`
+  - `test_gpio_mode = 1` (PA5 output mode)
+  - `test_gpio_output = 1` (PA5 output data latch high)
+- User reported LD1 status LED activity and LD2 eventually illuminated green.
+
+### Interpretation and limits
+The test injects a software-controlled GPIO configuration fault by changing PA5 from output mode to input mode, then restores output mode, writes PA5 high, and verifies the GPIO mode and output latch. The observed values match the expected successful path. The three-attempt loop exists, but this single successful run does not establish all retry/failure paths or worst-case timing.
+
+This is not a physical peripheral-damage experiment. GPIO register readback is not an independent voltage or optical measurement. No sensor is wired/read; no repeated-run study, MCU timing/stack/energy measurement, or P0–P4 MCU comparison was performed. The code remains in the local generated CubeIDE workspace and is not yet asserted to be canonical repository firmware. The earlier NUCLEO-L476RG versus proposed NUCLEO-U575ZI-Q target discrepancy remains unresolved.
+
+Full evidence record: [`Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md`](../results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md).
+
+### Chat 05.3 outcome
+**Narrow milestone achieved:** ST-LINK/CubeIDE can now download and debug the local experiment, and the software-injected PA5 configuration-fault path passed the expected register/state checks. **Chat 05.3's earlier debugger blocker is no longer the current operational state**, though its original cause remains unknown.
+
+### Exact next task — Chat 06
+Preserve the external backup and working local firmware. Inspect the local project/source provenance and canonical repository structure, then make the minimal firmware experiment reproducible and traceable without copying generated startup/linker files or altering the protected C reference runtime. Record the exact build/download/debug procedure and user-evidence provenance. After the minimal baseline is version-controlled, Chat 07 handles peripheral compatibility/baseline reads; Chat 08 handles broader controlled fault/recovery with fresh post-recovery operation verification.
+
+Do not wire the BME280-labelled module until identity and electrical compatibility are verified. Work only on `main`; do not create/switch branches, install tools, purchase equipment, flash further experiments without an explicit step, or alter frozen research evidence.
