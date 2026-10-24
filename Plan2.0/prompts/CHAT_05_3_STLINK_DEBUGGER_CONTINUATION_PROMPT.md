@@ -89,3 +89,29 @@ Use the full inventory and uncertainty ledger in the existing Chat 05.2 prompt; 
 ## Chat 05.3 closeout clarification — 2026-10-22
 
 The GitHub repository connector can read/write repository files but cannot inspect the user's Windows filesystem, current CubeIDE Debug Configuration, process table, or console directly. Therefore, presence of bundled executables, reset behaviour, SWV checkbox state, and a live ST-LINK CLI operation remain **not verified by Chat 05.3**. Do not represent this repository-only continuation as a completed local hardware diagnostic. The exact next action is given in `Plan2.0/handoffs/CHAT_05_3_HANDOFF.md`: record current reset/SWV settings and check whether the already-referenced bundled GDB server and programmer CLI executable files exist, without launching a write operation. Continue the root-cause investigation only after those user-observed facts are supplied.
+
+
+## Resume addendum — 2026-10-24 (takes precedence over older next-action text)
+
+The user is continuing the existing Chat 05.3 work in a new conversation, not starting a new setup. Read CURRENT_STATE.md and CHAT_05_3_HANDOFF.md, especially their resumed-investigation sections. The evidence has advanced beyond the older “check if bundled tools exist” step.
+
+### New evidence already supplied by the user
+- Device Manager lists ST LINK DEBUG without a yellow warning.
+- Bundled STM32_Programmer_CLI.exe reports version 2.23.0; bundled ST-LINK_gdbserver.exe reports version 7.14.0.
+- A read-only CLI connection using SWD, HOTPLUG and 4000 kHz successfully identified NUCLEO-L476RG, device ID 0x415, revision Rev 4, Cortex-M4, target voltage 3.27 V and ST-LINK firmware V2J48M35.
+- Original GDB/SWV listener bind failures were reported on 61234/61235 despite previous netstat checks showing no matching entries. Do not assume those ports were occupied.
+- Manual GDB server invocation with the explicit CubeProgrammer tools path and port 50000 reached “Waiting for debugger connection...”. A full debug session was not established.
+- The user supplied the CubeIDE-generated command on port 50000; it uses the same GDB server executable and CubeProgrammer tools directory as the manual invocation and includes -m 0 -g --frequency 140. Do not ask for the command again.
+- CubeIDE still failed to start/connect. A localhost/remote attempt displayed “No ST-LINK detected!”. The current state of any manual server process is unknown.
+- SWV was unchecked and the failure persisted. Root cause remains unconfirmed.
+
+### Required next-chat behaviour
+1. Acknowledge the user's return and summarize the known facts briefly; do not repeat completed checks.
+2. Do not rerun target identification, recheck executable paths, repeat the clean build or ST-LINK firmware update, recheck ports 61234/61235, repeat the manual server on 50000, or ask for the generated command again unless a specific new hypothesis justifies it.
+3. Focus on the unresolved boundary: CLI target identification succeeds; manual GDB server reaches waiting state on 50000; CubeIDE fails. Investigate server lifecycle, autostart-versus-remote mode, duplicate server ownership of the probe, and the exact output generated during one carefully selected new test. Ask for one new diagnostic at a time and explain what each outcome would prove.
+4. Do not assume “No ST-LINK detected” means the hardware is faulty; the CLI already identified the target in a separate run. Conversely, do not assume the target debug session works just because the server waits.
+5. Do not install, download, purchase, erase, change option bytes, flash, wire the sensor, or edit runtime/source files during diagnosis. Keep external wiring disconnected. Work only on main and protect the frozen 400-execution evidence and Gate A–E/runtime files.
+6. If debug connection succeeds, verify target identity before any other action. Flashing the generated Empty Project requires a separate explicit safety gate and must not be described as repository runtime.
+7. Repository tools cannot inspect the user's local Windows UI, processes, or logs. Clearly distinguish user-provided evidence from repository-side checks.
+
+Immediate objective: isolate the cause of CubeIDE's failed debug launch without repeating already completed work. A precise blocker with evidence is preferable to risky or speculative changes.
