@@ -35,3 +35,16 @@ These are user-supplied screenshot observations, not checks performed by GitHub 
 Source is preserved here, but a clean, independently repeated build from a repository checkout has **not** been performed. To reproduce the reported result, use the existing local STM32CubeIDE 2.2.0 project that was used for the successful run; do not import this folder over the working project or copy generated project files blindly. Before a future rebuild or download, verify the selected project, target, and build configuration. Inspect the eight debugger variables listed above after execution.
 
 The source record alone does not establish a reproducible, clean-room build. That requires a later reviewed project/scaffold decision and an actual build test.
+
+
+## Local CubeIDE configuration review — 2026-10-24
+
+The user supplied screenshots from the existing local STM32CubeIDE 2.2.0 project properties. Confirmed from those screenshots:
+- Active configuration: `Debug`.
+- Workspace toolchain: GNU Tools for STM32 `14.3.rel1`.
+- Compiler language standard: GNU11 (`-std=gnu11`).
+- Linker script field: `${workspace_loc:/${ProjName}/STM32L476RGTX_FLASH.ld}`, resolving to the project-root Flash linker script.
+- Linker options visible: map-file generation enabled; unused-section removal enabled; system calls set to Minimal implementation (`--specs=nosys.specs`).
+- Project tree shows source/startup folders, generated Debug build artifacts, an ELF/list/map, a debug launch configuration, and both `STM32L476RGTX_FLASH.ld` and `STM32L476RGTX_RAM.ld` files.
+
+The screenshots do not establish the full compiler CPU/FPU flags, whether the RAM linker script is ever selected, or a clean rebuild from a repository checkout. The user explicitly requested that configuration inspection stop here and that work proceed; do not request further settings screenshots unless a concrete reproducibility blocker later requires one. No settings were intentionally changed during inspection. These are user-provided screenshot observations, not repository-side verification.
