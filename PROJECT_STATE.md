@@ -1,11 +1,11 @@
 # Project State — Canonical Current Snapshot
 
-**Last reconciled:** 2026-10-22  
+**Last reconciled:** 2026-10-24  
 **Project:** Embedded Runtime Resilience  
 **Repository:** SujitSaiY2007/embedded-runtime-resilience  
-**Current state:** **Software/research scope finalized; Plan 2.0 hardware bring-up active, paused at ST-LINK/GDB initialization.**
+**Current state:** **Software/research scope finalized; Plan 2.0 hardware demonstration active. First local GPIO fault-injection/recovery run verified under CubeIDE debugger; sensor integration and broader physical validation remain open.**
 
-> Current hardware status is maintained in [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md). The historical software/research findings below remain valid; the old “hardware is future work” wording is superseded by active Plan 2.0 bring-up. As of 2026-10-22, board-only USB detection, ST-LINK firmware upgrade, and a generated empty-project build are user-verified. Debugger initialization fails; firmware flash/execution and sensor operation are not verified.
+> Current hardware status is maintained in [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md). The historical software/research findings below remain valid; the old “hardware is future work” wording is superseded by active Plan 2.0 bring-up. As of 2026-10-24, later user screenshots supersede the earlier debugger-blocked status: a local CubeIDE build succeeded, firmware download was verified, the debugger reached the test's final loop, and expected GPIO recovery values were observed. See Plan2.0/CURRENT_STATE.md and the GPIO experiment report. Sensor operation, physical peripheral failure recovery, and MCU measurements remain unverified.
 
 ## 1. Finalized deliverable
 
@@ -51,7 +51,7 @@ Do not rerun the K.10 matrix to resolve editorial inconsistencies. Do not imply 
 
 ## 6. Plan 2.0 hardware continuation (current as of 2026-10-22)
 
-The historical software/research closure remains valid, but the separate Plan 2.0 physical-demonstration work package is now active. Chat 05.2 is paused at ST-LINK/GDB initialization on the user-reported NUCLEO-L476RG (revision MB1136 C). Board-only USB detection, ST-LINK firmware upgrade, and a generated CubeIDE empty-project build are user-verified. SWD connection, flash, MCU execution, sensor wiring, sensor reads, fault injection, recovery and MCU-specific measurements remain unverified. The earlier NUCLEO-U575ZI-Q proposal remains a target-requirements discrepancy to assess, not a resolved equivalence. Continue from Plan2.0/CURRENT_STATE.md and Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md. Do not claim hardware validation or imply no hardware task is active.
+The historical software/research closure remains valid, but the separate Plan 2.0 physical-demonstration work package is now active. Chat 05.3 has progressed beyond the earlier ST-LINK/GDB blocker: user screenshots show successful download verification and debugger execution of a local GPIO experiment on the NUCLEO-L476RG. A software-injected PA5 mode fault was followed by register-checked restoration, with all eight expected debugger values observed. This is a narrow hardware-execution milestone, not physical peripheral-failure recovery. Sensor wiring/reads, repeatability, MCU timing/stack/energy measurements, and the L476/U575 target discrepancy remain open. Continue from Plan2.0/CURRENT_STATE.md and the GPIO experiment report; the next planned package is Chat 06 reproducible minimal-firmware scaffold, followed by Chat 07 baseline peripheral integration and Chat 08 broader controlled fault/recovery.
 
 ## 7. Reader navigation
 
