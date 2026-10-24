@@ -2,8 +2,8 @@
 
 **Snapshot date:** 2026-10-24  
 **Execution branch:** main only  
-**Active work package:** Chat 05.3 resumed ST-LINK/GDB diagnosis; target identification verified, IDE debug session still blocked  
-**Status:** CLI target identification and manual GDB-server waiting state verified by user; IDE debug session, firmware flash/execution, sensor wiring and physical recovery remain unverified.
+**Active work package:** Chat 05.3 debugger recovery succeeded; first software-injected GPIO recovery experiment completed. Transition next to Chat 06 reproducible minimal-firmware scaffold.  
+**Status:** User-provided CubeIDE screenshots show clean build, successful firmware download verification, live debugger execution, and expected GPIO recovery values. Sensor integration, physical fault recovery and MCU performance measurements remain unverified.
 
 ## Completed before Plan 2.0
 
@@ -20,7 +20,7 @@
 - User confirmed the board powers on and the laptop detects a USB device when connected board-only.
 - ST-LINK firmware upgrade via STLinkUpgrade 3.17.11 completed successfully. The tool showed type STM32 Debug+Mass storage+VCP and firmware version V2J48M35.
 - STM32CubeIDE 2.2.0 is installed. A generated Empty Project named Embedded-Runtime-Resilience exists in the user's CubeIDE workspace under STM32CubeIDE/workspace_2.2.0/Embedded-Runtime-Resilience. It is a local generated project and must not be assumed to be the canonical GitHub source tree.
-- The user showed Src/main.c containing an infinite loop. The latest build console screenshot reports **0 errors, 0 warnings**. This confirms compilation/linking of the generated empty project only, not custom runtime integration or hardware execution.
+- The local generated CubeIDE workspace project now contains a register-level GPIO recovery experiment. User screenshots show a **0 errors / 0 warnings** build, “Download verified successfully,” a live debug session reaching the final loop, and all eight expected debugger values. This is evidence for that local experiment, not yet proof that its sources are integrated into the canonical repository.
 - The user does not have the standalone STM32CubeProgrammer application available. Do not ask them to install it or purchase anything. If useful, inspect existing CubeIDE-bundled tools first.
 
 ## Chat 05.2 debugger attempt — exact observations
@@ -47,10 +47,10 @@
 | Generated CubeIDE project build | 0 errors, 0 warnings | User screenshot |
 | TCP port entries from the two netstat checks | No matches returned | User screenshot |
 | ST-LINK GDB server starts and connects over SWD | **Blocked / failed** | User screenshot and console |
-| Firmware flashed to MCU | **Not verified** | No successful download evidence |
-| MCU application execution | **Not verified** | No live debug or runtime evidence |
+| Custom local experiment downloaded to MCU | **User-evidence verified** | CubeIDE console screenshot: “Download verified successfully” |
+| Custom local experiment executed under debugger | **User-evidence verified** | Debugger paused in final loop; Expressions view showed expected values |
 | Sensor identity/electrical compatibility/wiring | **Unverified / do not wire** | See Chat 05.2 prompt |
-| Sensor read, fault injection, recovery, MCU measurements | **Not performed / not verified** | No raw evidence |
+| Software-injected PA5 configuration fault and register-checked recovery | **Narrow test passed** | User screenshots; see [GPIO experiment report](results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md) |\n| Sensor reads, physical peripheral-failure recovery, MCU timing/stack/energy measurements | **Not performed / not verified** | No evidence supplied |
 
 ## Existing component inventory and zero-budget rule
 
@@ -111,3 +111,4 @@ New user evidence:
 - SWV was unchecked and retry still failed. The exact root cause is unresolved.
 
 Next chat must continue this same Chat 05.3 task. Do not repeat the CLI target identification, executable-path checks, old port checks, build, firmware update, manual server test on 50000, or generic localhost instructions. Investigate the lifecycle/configuration difference between a manually waiting GDB server and CubeIDE autostart/remote modes. Ask for one new diagnostic only if its result distinguishes hypotheses. Do not leave two servers competing for the same ST-LINK. No installs, purchases, erase, option-byte change, flash, sensor wiring, source/runtime edits, or changes to protected research evidence. Work on main only. The GitHub connector cannot inspect local Windows processes or UI; clearly distinguish user-provided evidence from repository-side verification.
+\n\n## Chat 05.3 GPIO experiment update — 2026-10-24\n\nThe earlier debugger-blocked status above is superseded by the new user-provided evidence in [the experiment report](results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md). The local CubeIDE build completed with 0 errors/0 warnings; the console showed successful download verification; the debugger reached the final loop; and the eight Expressions values matched the expected successful path (event=1, fault=1, recovery=1, state=4/RECOVERED, recovered=1, injection=1, GPIO mode=output, output latch=high). The experiment injects a software configuration fault by changing PA5 from output to input, then restores output mode and sets PA5 high. This does not establish physical peripheral failure recovery, independent pin-voltage/optical measurement, sensor operation, repeated-trial reliability, or MCU resource measurements. The code remains in the local generated CubeIDE workspace; do not imply it is already canonical repository firmware.\n\n### Next action\n\nTransition from Chat 05.3 diagnosis to Chat 06 minimal-firmware scaffold/provenance. Preserve the local backup and working firmware. First reconcile source provenance and make the minimal test reproducible without copying generated startup/linker files or modifying the protected C reference runtime. Then plan Chat 07 baseline peripheral integration; do not wire the BME280-labelled module until identity and electrical compatibility are verified. Chat 08 remains the broader controlled-fault/recovery work package; this first GPIO test is only a narrow initial milestone.\n
