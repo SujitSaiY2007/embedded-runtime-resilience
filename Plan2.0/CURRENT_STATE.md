@@ -67,7 +67,7 @@ The Chat 05.2 prompt remains authoritative for the already-owned inventory: expe
 
 ## Next action
 
-Continue in **Chat 05.3**, using [the continuation prompt](prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md) and [the Chat 05.2 handoff](handoffs/CHAT_05_2_HANDOFF.md). Do not repeat completed USB detection, firmware upgrade, clean build or empty netstat checks unless new evidence justifies it. Diagnose the ST-LINK initialization failure using already-installed tools only. Do not claim flashing or execution until raw success evidence exists.
+The original Chat 05.3 debugger blocker is superseded by the 2026-10-24 GPIO experiment evidence recorded below and in [the experiment report](results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md). Continue with **Chat 06 — minimal-firmware scaffold and source provenance** using [the current next-chat prompt](../NEXT_CHAT_PROMPT.md). Do not repeat earlier target-identification, firmware-update, port checks or manual GDB-server tests. Do not wire the sensor or modify protected research assets.
 
 
 ## Chat 05.3 continuation outcome — 2026-10-22
