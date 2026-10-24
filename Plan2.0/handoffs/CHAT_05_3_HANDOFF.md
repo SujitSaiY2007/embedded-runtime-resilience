@@ -59,3 +59,23 @@ Proceed only after the local tool-presence/configuration facts are returned. If 
 - Repository review: GitHub connector reads during Chat 05.3.
 - Local Windows inspection, debugger launch, target identification, firmware flash/run, and sensor test: **not performed in Chat 05.3**.
 - Documentation changes are recorded in the Chat 05.3 closeout commit(s); see `Plan2.0/CURRENT_STATE.md` and the final response for exact verified HEAD.
+
+
+## Resumed work update — 2026-10-24
+
+The user is returning after a break and wants to continue this same Chat 05.3 task calmly in a new conversation. Newer evidence below supersedes the earlier instruction to first check whether the executables exist; do not repeat those checks.
+
+### Verified from user-provided screenshots/output
+- Device Manager lists ST LINK DEBUG with no yellow warning; user reports the device works fine.
+- Bundled STM32_Programmer_CLI.exe exists and reports version 2.23.0. Bundled ST-LINK_gdbserver.exe reports version 7.14.0.
+- CLI command using SWD HOTPLUG at 4000 kHz successfully identified NUCLEO-L476RG, device ID 0x415, revision Rev 4, Cortex-M4, target voltage 3.27 V, and ST-LINK firmware V2J48M35.
+- Original CubeIDE launch reported bind failures on ports 61234 and 61235, while earlier netstat checks returned no matches. Do not treat this as proof of occupied ports.
+- Manual GDB server launch with explicit CubeProgrammer tools path on port 50000 reached “Waiting for debugger connection...”. This does not prove a complete IDE debug session.
+- User supplied the CubeIDE command on port 50000, using the same server executable and CubeProgrammer tools path as the manual launch, with arguments -m 0 -g --frequency 140. Do not ask them to resend it.
+- CubeIDE still failed. A localhost/remote attempt failed and displayed “No ST-LINK detected!”. Current state of the manual server process and port 50000 listener is unknown.
+- SWV was unchecked and the IDE failure persisted. Root cause is still unresolved.
+
+### Exact next-chat objective
+Continue this same Chat 05.3 task; do not restart setup. Do not repeat the CLI target-identification test, executable/path checks, old port checks, firmware update, clean build, manual server test on port 50000, or generic localhost instructions. Investigate the difference between the manual server reaching its wait state and CubeIDE's failed autostart/remote connection, focusing on server lifecycle and whether two server instances or mismatched modes are involved. Choose one new diagnostic only when its possible outcomes distinguish hypotheses. Explain the test before asking the user to perform it.
+
+No installation, purchase, erase, option-byte change, firmware flash, sensor wiring, source/runtime edits, or modifications to frozen evidence. Work on main only. If the IDE session succeeds, verify target identity first and do not flash without a separate safety gate. Clearly label user-supplied observations versus checks performed through the repository connector.
