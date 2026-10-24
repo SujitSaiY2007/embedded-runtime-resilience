@@ -48,3 +48,7 @@ The user supplied screenshots from the existing local STM32CubeIDE 2.2.0 project
 - Project tree shows source/startup folders, generated Debug build artifacts, an ELF/list/map, a debug launch configuration, and both `STM32L476RGTX_FLASH.ld` and `STM32L476RGTX_RAM.ld` files.
 
 The screenshots do not establish the full compiler CPU/FPU flags, whether the RAM linker script is ever selected, or a clean rebuild from a repository checkout. The user explicitly requested that configuration inspection stop here and that work proceed; do not request further settings screenshots unless a concrete reproducibility blocker later requires one. No settings were intentionally changed during inspection. These are user-provided screenshot observations, not repository-side verification.
+
+## Follow-up build confirmation — 2026-10-24
+
+After the configuration inspection, the user closed the Properties dialog with Cancel and ran **Project → Build Project** in the existing local `Embedded-Runtime-Resilience` CubeIDE project. The user reported that it “works fine.” This is a user-reported successful build of the existing local project; exact final error/warning counts were not provided in this follow-up, and no repository checkout build was run. No firmware download, debug launch, or board interaction was requested for this step. This confirms local build continuity, not clean-room reproducibility from the preserved GitHub source directory.
