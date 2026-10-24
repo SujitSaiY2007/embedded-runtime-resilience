@@ -1,9 +1,9 @@
 # Plan 2.0 — Current State
 
-**Snapshot date:** 2026-10-22  
+**Snapshot date:** 2026-10-24  
 **Execution branch:** main only  
-**Active work package:** Chat 05.2 hardware bring-up, paused at ST-LINK/GDB initialization  
-**Status:** Board-only USB detection and IDE build verified by user; MCU debug connection, firmware flash/execution, sensor wiring and physical recovery remain unverified.
+**Active work package:** Chat 05.3 resumed ST-LINK/GDB diagnosis; target identification verified, IDE debug session still blocked  
+**Status:** CLI target identification and manual GDB-server waiting state verified by user; IDE debug session, firmware flash/execution, sensor wiring and physical recovery remain unverified.
 
 ## Completed before Plan 2.0
 
@@ -94,3 +94,20 @@ The generated CubeIDE Empty Project build result remains compilation/link eviden
 - Branch: `main` only.
 - Continuity documentation and navigation were updated in this closeout sequence; the final live HEAD is recorded in the Chat 05.3 response.
 - Repository-side checks: live files were fetched and blob SHAs compared before edits. No firmware/toolchain build or hardware test was run by the repository connector.
+
+
+## Chat 05.3 resumed investigation — 2026-10-24
+
+Status: target identification verified; CubeIDE debug session remains blocked; root cause not yet established. Do not restart setup or repeat earlier checks.
+
+New user evidence:
+- Device Manager lists ST LINK DEBUG without a yellow warning; user says it works fine.
+- Bundled STM32_Programmer_CLI.exe is present; CLI version/help reports 2.23.0. Bundled ST-LINK_gdbserver.exe reports version 7.14.0.
+- Read-only SWD connection using mode=HOTPLUG and freq=4000 identified NUCLEO-L476RG, device ID 0x415, Rev 4, Cortex-M4, target voltage 3.27 V, ST-LINK firmware V2J48M35.
+- CubeIDE's original ports 61234/61235 failed to bind; earlier netstat checks had no matching entries. Do not assume an occupied port.
+- Manual GDB server launch with explicit CubeProgrammer tools path and port 50000 reached 'Waiting for debugger connection...'. This proves the server reached a wait/listen state, not a complete debug session.
+- CubeIDE generated command on port 50000 was supplied by the user and includes the same GDB server and CubeProgrammer tools paths as the manual command, plus -m 0 -g --frequency 140. Do not ask for that command again.
+- CubeIDE still failed. A localhost/remote attempt also failed and showed 'No ST-LINK detected!'. Current server process/listener state is unknown.
+- SWV was unchecked and retry still failed. The exact root cause is unresolved.
+
+Next chat must continue this same Chat 05.3 task. Do not repeat the CLI target identification, executable-path checks, old port checks, build, firmware update, manual server test on 50000, or generic localhost instructions. Investigate the lifecycle/configuration difference between a manually waiting GDB server and CubeIDE autostart/remote modes. Ask for one new diagnostic only if its result distinguishes hypotheses. Do not leave two servers competing for the same ST-LINK. No installs, purchases, erase, option-byte change, flash, sensor wiring, source/runtime edits, or changes to protected research evidence. Work on main only. The GitHub connector cannot inspect local Windows processes or UI; clearly distinguish user-provided evidence from repository-side verification.
