@@ -100,3 +100,8 @@ Open http://localhost:8000/ while the server is running. See [Demo guide](docs/D
 ## Citation and academic use
 
 Use verified primary publication records for the literature overhaul. The repository itself is not a substitute for citing the original research. Before external publication, re-check all metadata, the source-to-design traceability, experimental artifacts, and institutional authorship requirements.
+
+
+## Chat 06 source-preservation checkpoint — 24 October 2026
+
+The three source files supplied after the successful local GPIO experiment are now preserved as plain C under [Plan 2.0 firmware source](Plan2.0/firmware/ld2_gpio_recovery/README.md): `main.c`, `err_runtime.c`, and `err_runtime.h`. This is a source record, not a complete CubeIDE project or an independently reproduced build. The user's external backup remains separate. The next task is to inspect the local project configuration and establish a safe reproducibility procedure. No generated startup/linker files, IDE metadata, binaries, sensor code, or protected reference-runtime files were added or changed.
