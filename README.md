@@ -16,7 +16,7 @@ The C reference runtime, deterministic host experiments, virtual embedded system
 The next phase is active planning, not completed validation:
 - **Reference overhaul:** the preliminary bibliography (approximately 43 entries) still requires entry-by-entry metadata, venue, relevance, and influence verification.
 - **Research traceability:** every claimed relationship between publications, baselines, design choices, and the proposed contribution must be explicitly evidenced.
-- **Physical hardware:** Chat 05.2 is paused at ST-LINK/GDB initialization. Board-only USB detection, ST-LINK firmware update, and a generated CubeIDE empty-project build are user-verified; MCU connection, flashing, execution, sensor reads, recovery and MCU-specific measurements remain unverified. See [current hardware state](Plan2.0/CURRENT_STATE.md).
+- **Physical hardware:** Chat 05.3 now has user-supplied evidence of a successful local CubeIDE firmware download/debug session and a narrow software-injected GPIO recovery experiment on LD2/PA5 (all eight expected debugger values observed). This is not physical peripheral-damage recovery. Sensor reads, repeatability, MCU performance measurements and target-equivalence questions remain open. See [current hardware state](Plan2.0/CURRENT_STATE.md) and the [GPIO experiment report](Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md).
 - **Branch policy:** all Plan 2.0 work is performed **only on `main`**. Do not create or write to another branch.
 
 ## Start here
@@ -36,7 +36,7 @@ The next phase is active planning, not completed validation:
 | Next continuation — ST-LINK diagnostics | [Chat 05.3 prompt](Plan2.0/prompts/CHAT_05_3_STLINK_DEBUGGER_CONTINUATION_PROMPT.md) |
 | Historical documentation snapshot | [Archive index](archive/README.md) |
 
-## Existing software demonstrator
+## Latest physical-demo milestone (24 October 2026)\n\nThe user-provided CubeIDE screenshots show a clean local build (0 errors, 0 warnings), successful download verification, and debugger execution through a software-injected PA5 configuration fault and register-checked recovery. The local test observed event=1, fault=1, recovery=1, state=RECOVERED, GPIO mode=output, and output latch=high. See the [experiment record](Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md). The local generated workspace project has not yet been reconciled as canonical version-controlled firmware; no sensor was wired/read and no MCU timing/stack/energy measurements were made.\n\n## Existing software demonstrator
 
 The current software flow is:
 
