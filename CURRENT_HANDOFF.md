@@ -1,9 +1,9 @@
 # Current Handoff — Plan 2.0 Hardware Bring-Up
 
-**Last reconciled:** 2026-10-22  
+**Last reconciled:** 2026-10-24  
 **Repository:** SujitSaiY2007/embedded-runtime-resilience  
 **Branch:** main only  
-**Status:** Chat 05.2 paused at ST-LINK/GDB initialization; continue in Chat 05.3.
+**Status:** Chat 05.3 has achieved a successful local firmware download/debug run and narrow GPIO recovery check; next work is Chat 06 reproducible minimal-firmware scaffold.
 
 ## Research/software baseline retained
 
@@ -31,3 +31,4 @@ Read Plan2.0/CURRENT_STATE.md, Plan2.0/handoffs/CHAT_05_2_HANDOFF.md, and contin
 ## Source of truth
 
 The detailed inventory and safety gates remain in the Chat 05.2 original prompt. The latest state/next action is Plan2.0/CURRENT_STATE.md and the Chat 05.3 prompt. All future Plan 2.0 work stays on main; inspect live HEAD before writing.
+\n\n## New evidence — 2026-10-24: GPIO experiment\n\nUser-provided CubeIDE screenshots show: build completed with 0 errors/0 warnings; firmware download console said “Download verified successfully”; debugger execution reached the final infinite loop; Expressions view showed event=1, fault=1, recovery=1, state=4 (RECOVERED), recovered=1, fault_injected=1, gpio_mode=1 (output), gpio_output=1 (output latch high). The experiment deliberately changed PA5 from output mode to input mode, then restored output mode and set PA5 high. Full method/limits: [GPIO experiment report](Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md).\n\n**Evidence limits:** This verifies one software-injected GPIO configuration case in the local generated CubeIDE project. It does not prove physical peripheral damage recovery, measured pin voltage/LED optics, sensor reads, repeated-run reliability, MCU timing/stack/energy, or integration of this local code into the canonical repository. The sensor remains unwired. The STM32L476RG target is not assumed equivalent to the earlier STM32U575ZI proposal.\n\n## Exact next action\n\nChat 06: preserve the local working source and backup, reconcile source provenance with the canonical repository, and make the minimal firmware test reproducible without copying generated startup/linker files or changing the protected reference runtime. After the baseline is stable, Chat 07 covers sensor/peripheral compatibility and baseline reads; Chat 08 covers broader controlled fault/recovery, with fresh-operation verification.\n
