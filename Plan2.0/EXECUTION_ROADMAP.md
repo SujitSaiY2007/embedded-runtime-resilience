@@ -30,3 +30,7 @@ Each numbered chat is a bounded work package. Read the current state, previous h
 
 
 **Chat 06 progress update (2026-10-24):** source files and provenance are preserved in `Plan2.0/firmware/ld2_gpio_recovery/`. User screenshots confirm the local CubeIDE Debug configuration, GNU Tools for STM32 14.3.rel1, GNU11, `STM32L476RGTX_FLASH.ld`, map-file generation, unused-section removal, and `--specs=nosys.specs`. The generated project tree includes startup/build artifacts, ELF/list/map outputs, debug launch configuration, and Flash/RAM linker scripts. No more configuration screenshots should be requested absent a concrete blocker. Chat 06 must now consolidate a safe reproduction procedure and evidence boundaries; do not copy generated artifacts or disturb the local project/backup.
+
+## Chat 06 milestone update — 2026-10-24
+
+The user confirmed that `Project → Build Project` works in the existing local CubeIDE project after the settings review. Source preservation, configuration recording, and local rebuild continuity are complete for this stage. A clean build from a repository checkout is still **not demonstrated**; do not label the GitHub source folder a standalone CubeIDE project. The user asked to stop further configuration inspection. Chat 07 may begin with sensor identity/electrical-compatibility research only; keep the module unwired until its identity, pinout, supply/logic levels, and pull-ups are verified.
