@@ -33,3 +33,14 @@ Make the minimal firmware experiment reproducible and traceable. First inspect t
 
 ## Acceptance gate
 A version-controlled, reproducible minimal-firmware record with exact source provenance, build/download/debug instructions, explicit user-evidence provenance, and no unsupported physical-recovery claims. Then hand off to Chat 07 for safe peripheral compatibility/baseline planning. Chat 08 remains the broader controlled-fault/recovery package; this GPIO experiment is only an initial milestone.
+
+
+## Chat 06 continuation update — source files preserved (2026-10-24)
+
+The source-provenance first step is complete. The user supplied the current `main.c`, `err_runtime.c`, and `err_runtime.h`; the user confirmed the external backup of the earlier `main.c` exists separately. A normalized plain-C transcription plus provenance/limitations is preserved at [Plan2.0/firmware/ld2_gpio_recovery/README.md](Plan2.0/firmware/ld2_gpio_recovery/README.md).
+
+### Exact next action
+Ask the user to show the local CubeIDE project tree and relevant project configuration files/settings needed to understand how the source is built (do not request a full project upload unless a specific missing file requires it). Inspect source/build inclusion and backup exclusion, target selection, linker/startup dependencies, and build configuration. Do not modify the working project, overwrite the external backup, flash again, or copy generated project files into the repository yet. Then propose the smallest reproducible scaffold and explicit acceptance checks.
+
+### Current evidence boundary
+The source-preservation commits were made on `main`. The repository connector did not compile the C files, inspect the user's local project, run CubeIDE, download firmware, or operate the board. The earlier 0-error/0-warning build, “Download verified successfully,” and eight debugger values remain user-supplied screenshot evidence from 2026-10-24. No sensor integration, repeated-trial validation, or MCU resource measurements have been performed.
