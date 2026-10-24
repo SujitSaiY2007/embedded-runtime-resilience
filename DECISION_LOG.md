@@ -604,3 +604,13 @@ K.12 may expose connect/disconnect controls only for the finite modeled virtual 
 | P2-HW-009 | Accepted | Do not assume TCP ports 61234/61235 are occupied; prior netstat checks returned no matches while CubeIDE reported GDB/SWV bind failures and ST-LINK initialization error. | Current evidence does not establish port occupation as root cause. |
 | P2-HW-010 | Accepted | Do not require standalone STM32CubeProgrammer; user says it is unavailable. Inspect already-installed CubeIDE-bundled tools only, with no new installs or purchases. | Zero-budget/no-new-software constraint and available-tool reality. |
 | P2-HW-011 | Accepted | Keep sensor disconnected and do not claim flash/execution until debugger/target connection and raw evidence are established. | Electrical compatibility and MCU communication remain unverified. |
+
+
+## Plan 2.0 hardware continuation decisions — 2026-10-24
+
+| ID | Status | Decision | Reason |
+|---|---|---|---|
+| P2-HW-012 | Accepted | Record the local NUCLEO-L476RG PA5 software-injected configuration-fault experiment as a narrow successful debugger milestone, based on user-provided CubeIDE build/download/Expressions screenshots. | The build, download verification and eight expected runtime/GPIO values are visible in user evidence; they establish this test path only. |
+| P2-HW-013 | Accepted | Keep the GPIO experiment distinct from physical peripheral-failure recovery and from the frozen P0–P4 host/reference campaign. | The injected fault is a software change to PA5 mode, and verification checks register mode/output latch; it is not a physical damage test or MCU performance study. |
+| P2-HW-014 | Accepted | Treat the local generated CubeIDE project as separate from canonical repository firmware until source provenance and reproducible integration are reviewed. | Prevents accidental copying of generated startup/linker artifacts and keeps the protected C reference runtime authoritative. |
+| P2-HW-015 | Accepted | Transition next to Chat 06 minimal-firmware scaffold/provenance; retain Chat 07 for peripheral baseline and Chat 08 for broader controlled fault/recovery. | The first GPIO path is a useful initial milestone but does not satisfy the wider sensor, repeatability, post-recovery operation, or MCU measurement gates. |
