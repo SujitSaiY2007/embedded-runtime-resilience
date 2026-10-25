@@ -148,3 +148,14 @@ Detailed result and evidence boundary: [Chat 07 BME280 chip-ID detection report]
 ### Next action — Chat 07.1
 
 Review the exact current local sensor-test source and preserve its provenance separately from the successful LD2 GPIO recovery experiment. Then design the smallest safe, reversible software-controlled I²C fault/recovery test whose acceptance criterion is a **fresh successful chip-ID transaction after recovery**. Do not use electrical shorts or unsafe pin forcing. Preserve the external `main.c` backup and protected research assets. See [Chat 07.1 prompt](prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md).
+
+
+## Chat 07.1 update — controlled BME280 NACK and I²C reinitialization (2026-10-25)
+
+The user supplied CubeIDE evidence for a successful run of the controlled NACK/reinitialization test. The screenshot showed `baseline_ok=1`, `fault_attempted=1`, `fault_nack_observed=1`, `fault_result=-1`, `recovery_attempted=1`, `recovery_error=0`, `post_recovery_read_ok=1`, `post_recovery_chip_id=96 (0x60)`, `post_recovery_result=0`, `sensor_address=118 (0x76)`, `sensor_chip_id=96 (0x60)`, `sensor_found=1`, `sensor_error=0`, and `test_state=3 (RECOVERY_PASSED)`. User-provided build screenshot showed 0 errors and 0 warnings.
+
+This demonstrates a fresh successful BME280 chip-ID read after a controlled address-NACK attempt and I²C1 peripheral reinitialization. It does not establish recovery from a physically stuck bus or show the protected reference runtime making the recovery decision. Semihosting output was not visible; debugger Expressions provided the evidence. GitHub tools did not run CubeIDE, compile, flash, or operate the board.
+
+Full report: [Chat 07.1 controlled-NACK result](results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md).
+
+**Next package: Chat 08 — runtime-to-hardware integration.** Inspect the runtime and contracts; define the smallest safe hardware adapter and fault model; then integrate incrementally. The acceptance gate is a runtime-controlled recovery decision/action followed by a fresh successful sensor transaction. Do not repeat the baseline or completed NACK test, do not overwrite the separate LD2 experiment, and do not flash without explicit user approval. See [Chat 08 prompt](prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md).
