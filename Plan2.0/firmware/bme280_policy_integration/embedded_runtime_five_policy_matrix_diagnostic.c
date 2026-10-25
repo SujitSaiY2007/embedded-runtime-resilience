@@ -234,29 +234,53 @@ static int gpio_bus_clear(void) {
 static int iinit(void) {
     uint32_t n;
     progress_stage=10U;
-    RCC->AHB2ENR|=RCC_AHB2ENR_GPIOBEN;
+
+    /* Enable GPIOB clock and confirm the write has taken effect. */
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
     (void)RCC->AHB2ENR;
-    RCC->CR|=RCC_CR_HSION;
+
+    /* Ensure HSI16 is running before selecting it for I2C1. */
+    RCC->CR |= RCC_CR_HSION;
     n=I2C_TIMEOUT;
-    while(!(RCC->CR&RCC_CR_HSIRDY))if(n--==0)return E_TIMEOUT;
-    RCC->CCIPR&=~RCC_CCIPR_I2C1SEL;
-    RCC->CCIPR|=(2U<<RCC_CCIPR_I2C1SEL_Pos);
-    GPIOB->MODER&=~((3U<<16)|(3U<<18));
-    GPIOB->MODER|=(2U<<16)|(2U<<18);
-    GPIOB->OTYPER|=(1U<<8)|(1U<<9);
-    GPIOB->OSPEEDR&=~((3U<<16)|(3U<<18));
-    GPIOB->OSPEEDR|=(3U<<16)|(3U<<18);
-    GPIOB->PUPDR&=~((3U<<16)|(3U<<18));
-    GPIOB->AFR[1]&=~0xFFU;
-    GPIOB->AFR[1]|=0x44U;
-    RCC->APB1ENR1|=RCC_APB1ENR1_I2C1EN;
+    while((RCC->CR & RCC_CR_HSIRDY)==0U) {
+        if(n==0U) return E_TIMEOUT;
+        --n;
+    }
+
+    /* Release PB8/PB9 before assigning them to I2C1. */
+    GPIOB->BSRR=(1U<<8)|(1U<<9);
+
+    /* Select HSI16 as the I2C1 kernel clock. */
+    RCC->CCIPR &= ~RCC_CCIPR_I2C1SEL;
+    RCC->CCIPR |= (2U<<RCC_CCIPR_I2C1SEL_Pos);
+
+    /* PB8=SCL, PB9=SDA, alternate function 4, open-drain. */
+    GPIOB->MODER &= ~((3U<<16)|(3U<<18));
+    GPIOB->OTYPER |= (1U<<8)|(1U<<9);
+    GPIOB->OSPEEDR &= ~((3U<<16)|(3U<<18));
+    GPIOB->OSPEEDR |= (3U<<16)|(3U<<18);
+    GPIOB->PUPDR &= ~((3U<<16)|(3U<<18));
+    GPIOB->AFR[1] &= ~0xFFU;
+    GPIOB->AFR[1] |= 0x44U;
+    GPIOB->MODER |= (2U<<16)|(2U<<18);
+
+    /* Enable and reset I2C1. */
+    RCC->APB1ENR1 |= RCC_APB1ENR1_I2C1EN;
     (void)RCC->APB1ENR1;
-    RCC->APB1RSTR1|=RCC_APB1RSTR1_I2C1RST;
-    RCC->APB1RSTR1&=~RCC_APB1RSTR1_I2C1RST;
-    I2C1->CR1=0;
+    RCC->APB1RSTR1 |= RCC_APB1RSTR1_I2C1RST;
+    RCC->APB1RSTR1 &= ~RCC_APB1RSTR1_I2C1RST;
+
+    /* Configure timing while I2C1 is disabled. */
+    I2C1->CR1=0U;
+    I2C1->CR2=0U;
     I2C1->TIMINGR=I2C_TIMING_VALUE;
     clr();
+
+    if((RCC->APB1ENR1 & RCC_APB1ENR1_I2C1EN)==0U) return E_READY;
+    if(I2C1->TIMINGR!=I2C_TIMING_VALUE) return E_READY;
+
     I2C1->CR1=I2C_CR1_PE;
+    if((I2C1->CR1 & I2C_CR1_PE)==0U) return E_READY;
     return E_OK;
 }
 static void abort_i2c_transfer(void) {
