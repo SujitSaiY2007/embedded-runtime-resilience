@@ -60,3 +60,14 @@ One controlled transaction-level NACK → I²C1 peripheral reinitialization → 
 The user selected five total trials. The historical Chat 08 run is designated Trial 1; the two screenshots are complementary evidence from that same run. Trials 2–5 remain pending. The source is a one-shot test that halts at `__BKPT(0)` and then loops, so a repeated trial requires starting the same unchanged programmed image from reset. A new flash is not inherently necessary when the same image is already programmed, but its binary identity has not been independently verified by this audit.
 
 For each trial capture the baseline, controlled NACK, recovery action/result, fresh post-recovery chip ID, runtime release result and terminal state/report code. Required pass criteria and the full ledger are in [Chat 10 final hardware validation](../../results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md). Do not infer auxiliary fields from source. Do not flash without source/build review, a clean build and explicit user approval. This documentation update did not run CubeIDE or hardware.
+
+
+## Five-policy diagnostic run — 2026-10-25
+
+A separate diagnostic candidate is preserved at [`embedded_runtime_five_policy_matrix_diagnostic.c`](embedded_runtime_five_policy_matrix_diagnostic.c). User-provided CubeIDE screenshots show a terminal state with `progress_stage=900`, `finished=1`, `overall_code=1`. The observed baseline error slots were zero; `nack_result[0..4]=-1` matched the source-defined `E_NACK`. Physical statuses P0–P4 were 7,1,7,7,1, corresponding to `R_TERMINAL`, `R_PASS`, `R_TERMINAL`, `R_TERMINAL`, `R_PASS`. For P1 and P4, the screenshots show `post_read_ok=1`, `post_chip_id=96 (0x60)`, and `release_result=1`.
+
+This is one controlled wrong-address NACK → I²C1 peripheral recovery/reinitialization → fresh BME280 ID read → runtime release run. It does not prove physically stuck SDA/SCL recovery, repeated-run reliability, MCU timing/stack/Flash/RAM/energy, or universal P4 superiority. The 80 embedded runtime decisions (5 policies × 16 provisional contexts) are not 80 physical fault injections and are not proven identical to the frozen host case families.
+
+**Matrix evidence caveat:** one screenshot shows `matrix_status[79]=1`, while the user later stated all matrix statuses were 1 except the last. No complete readable export of all 80 entries is present in this report, so the discrepancy remains unresolved. Do not assert a full-array audit from the aggregate `overall_code=1` alone.
+
+See [Chat 11 diagnostic report](../../results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md). This GitHub update did not compile, flash, or execute the candidate.
