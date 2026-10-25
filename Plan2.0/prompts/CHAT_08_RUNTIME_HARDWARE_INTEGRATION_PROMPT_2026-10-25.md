@@ -89,3 +89,12 @@ Update the result report, current state, handoff, roadmap, protocol, and README 
 - Fresh BME280 transaction succeeds after recovery.
 - Result and limitations are recorded in GitHub with a verified commit SHA.
 - A next-chat handoff names only remaining work; no rediscovery or repetition.
+
+
+## Chat 08 continuation update — 2026-10-25
+
+The user has now supplied the working BME280 `main.c`. Do **not** ask them to upload it again and do not restart the source audit. A separate integration candidate is committed at [`Plan2.0/firmware/bme280_policy_integration/main.c`](../firmware/bme280_policy_integration/main.c), with local build and debugger acceptance instructions in the adjacent README and a status report under `results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md`.
+
+**Immediate next action:** ask the user to preserve the current CubeIDE source/backup, place the candidate `main.c` into the existing project's application source location, add the unchanged `reference/include/ref_runtime.h` and `reference/src/ref_runtime.c` to the CubeIDE include/source locations, then perform a clean build. Do not flash yet. If the build fails, request the first relevant compiler/linker errors and fix the candidate without editing protected runtime files. If it builds cleanly, summarize the exact image about to be programmed and obtain explicit approval before flashing. Then verify debugger-visible values against the README acceptance list.
+
+Expected P4 context: `policy_decision_action=2` (`ACT_REINIT_OR_RESET`), `policy_decision_reason=23`, real `hardware_action_result=0`, fresh `post_recovery_chip_id=0x60`, and `policy_release_result=1`. These are expected values, not observed results yet. Do not repeat the baseline or old controlled-NACK test unless a concrete technical reason arises. Preserve the separate LD2 experiment and frozen host/reference evidence.
