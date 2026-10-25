@@ -1,63 +1,22 @@
-# Next Chat Prompt — Chat 06 Minimal-Firmware Scaffold and Provenance
+# Next Chat Prompt — Chat 07.1: BME280 Baseline and Recovery
 
-Continue the same Plan 2.0 hardware work from the successful Chat 05.3 debugger milestone. Do not restart board setup or repeat completed diagnostics.
+The prior Chat 06 prompt below is retained in Git history but superseded for current work. Continue from the latest sensor result and use the dedicated prompt as the source of truth:
 
-## Read first
-- `Plan2.0/CURRENT_STATE.md`
-- `Plan2.0/CHAT_PROTOCOL.md`
-- `Plan2.0/EXECUTION_ROADMAP.md`
-- `CURRENT_HANDOFF.md`
-- `Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md`
-- `Plan2.0/handoffs/CHAT_05_3_HANDOFF.md`
+**[Open the full Chat 07.1 prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md)**
 
-## Verified user evidence as of 2026-10-24
-- Target: ST NUCLEO-L476RG / STM32L476RG (prior target discrepancy with NUCLEO-U575ZI-Q remains unresolved).
-- Local STM32CubeIDE 2.2.0 project `Embedded-Runtime-Resilience` built with 0 errors and 0 warnings.
-- CubeIDE console reported “Download verified successfully.”
-- Live debugger execution reached the final loop after the GPIO experiment.
-- Expressions values: `test_event_count=1`, `test_fault_count=1`, `test_recovery_count=1`, `test_state=4`, `test_recovered=1`, `test_fault_injected=1`, `test_gpio_mode=1`, `test_gpio_output=1`.
-- The experiment injects a software configuration fault by switching PA5 (LD2) from output to input; recovery restores output mode, sets PA5 high, and checks the GPIO mode/output latch.
-- This is a narrow software-injected GPIO configuration test, not physical peripheral-failure recovery. No sensor is wired/read; no MCU performance measurements or repeated-run study exist.
+## Latest state (2026-10-25)
 
-## Chat 06 objective
-Make the minimal firmware experiment reproducible and traceable. First inspect the local project/source provenance and current canonical repository structure. Preserve the external backup of the verified pre-experiment `main.c`. Determine a safe, reviewable way to keep the experiment source in version control without copying generated startup/linker files or replacing the protected C reference runtime. Document exact build, download and debugger steps and the evidence limits.
+User-provided CubeIDE screenshot showed:
+- `sensor_found=1`
+- `sensor_address=118` decimal = `0x76`
+- `sensor_chip_id=96` decimal = `0x60`
+- `sensor_type=1`
+- `sensor_error=0`
 
-## Hard constraints
-- Work only on `main`; inspect live HEAD and fetch current file blob SHAs before writes.
-- Do not create/switch branches or force-push.
-- Do not alter `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, Gate A–E contracts, frozen K.10 evidence, prior-art analyses, or historical records.
-- Do not claim the local generated CubeIDE project is already canonical repository firmware.
-- Do not wire the BME280-labelled module until its exact marking, pinout, supply/logic levels, and pull-ups are verified and a wiring plan is reviewed.
-- No purchases or installs. Keep sensor and external wiring disconnected until the compatibility gate passes.
-- Do not repeat CLI target-identification, firmware update, old port checks, or the earlier manual GDB-server test unless a new hypothesis requires it.
+The user-pasted ST-LINK log showed “Download verified successfully,” device ID `0x415`, target voltage 3.26 V. The successful register-`0xD0` read at address `0x76` returned `0x60`, matching BME280. This is a user-evidence-backed physical chip-ID read, not full environmental sensing or sensor fault-recovery proof.
 
-## Acceptance gate
-A version-controlled, reproducible minimal-firmware record with exact source provenance, build/download/debug instructions, explicit user-evidence provenance, and no unsupported physical-recovery claims. Then hand off to Chat 07 for safe peripheral compatibility/baseline planning. Chat 08 remains the broader controlled-fault/recovery package; this GPIO experiment is only an initial milestone.
+## Immediate next task
 
+Review the exact current local sensor source and preserve its provenance separately from `Plan2.0/firmware/ld2_gpio_recovery/`. Design a safe, controlled software-only I²C fault/recovery test with the acceptance criterion of a fresh successful chip-ID read after recovery. Preserve the external `main.c` backup and protected reference/research evidence. Work on `main` only; do not repeat the successful chip-ID test without a specific reason, do not use electrical shorts or unsafe pin forcing, and do not flash without explaining the step and getting user approval.
 
-## Chat 06 continuation update — source files preserved (2026-10-24)
-
-The source-provenance first step is complete. The user supplied the current `main.c`, `err_runtime.c`, and `err_runtime.h`; the user confirmed the external backup of the earlier `main.c` exists separately. A normalized plain-C transcription plus provenance/limitations is preserved at [Plan2.0/firmware/ld2_gpio_recovery/README.md](Plan2.0/firmware/ld2_gpio_recovery/README.md).
-
-### Exact next action
-Ask the user to show the local CubeIDE project tree and relevant project configuration files/settings needed to understand how the source is built (do not request a full project upload unless a specific missing file requires it). Inspect source/build inclusion and backup exclusion, target selection, linker/startup dependencies, and build configuration. Do not modify the working project, overwrite the external backup, flash again, or copy generated project files into the repository yet. Then propose the smallest reproducible scaffold and explicit acceptance checks.
-
-### Current evidence boundary
-The source-preservation commits were made on `main`. The repository connector did not compile the C files, inspect the user's local project, run CubeIDE, download firmware, or operate the board. The earlier 0-error/0-warning build, “Download verified successfully,” and eight debugger values remain user-supplied screenshot evidence from 2026-10-24. No sensor integration, repeated-trial validation, or MCU resource measurements have been performed.
-
-
-## Chat 06 continuation — configuration summary and next work
-
-User-provided CubeIDE property screenshots confirm: active Debug configuration; GNU Tools for STM32 14.3.rel1; GNU11; linker script `${workspace_loc:/${ProjName}/STM32L476RGTX_FLASH.ld}`; map-file generation and unused-section removal enabled; and Minimal system-call implementation (`--specs=nosys.specs`). The project tree shows startup/build artifacts, ELF/list/map outputs, a debug launch configuration, and Flash/RAM linker scripts. Full CPU/FPU flags and a clean repository-checkout build remain unverified.
-
-The user explicitly asked to stop inspecting settings and proceed. Do not request further screenshots unless a concrete reproducibility blocker appears. Next, consolidate the minimum safe reproduction steps using the existing local CubeIDE project: preserve the separate backup; confirm the correct project and Debug configuration; build the existing project; if a later flash is genuinely needed, obtain user confirmation first; inspect the eight existing debugger expressions only if reproducing the test. Do not overwrite the working project, copy generated artifacts blindly, flash just for documentation, or wire the sensor. Treat all prior build/download/debug results as user screenshot evidence, not a new repository-side test.
-
-## Chat 06 closeout — 2026-10-24
-
-Source-preservation and local project inspection are complete for this stage. The user confirmed that `Project → Build Project` works in the existing local CubeIDE project after closing Properties with Cancel. Relevant settings recorded in the firmware README: Debug configuration, GNU Tools for STM32 14.3.rel1, GNU11, `STM32L476RGTX_FLASH.ld`, map-file generation, unused-section removal, and `--specs=nosys.specs`. Exact follow-up build counts were not provided. No download/debug action was taken during the follow-up.
-
-Important limitation: this does not prove a clean build from a repository checkout. Do not request further settings screenshots unless a concrete blocker appears. Preserve the external `main.c` backup and existing local project; do not import the GitHub source folder over it or copy generated files blindly.
-
-## Next work package: Chat 07 — sensor identity and compatibility gate
-
-Start with evidence gathering only. Identify the exact markings and pin labels on the already-owned BME280-labelled module, then verify the actual module/vendor documentation, board pin mapping, supply voltage, I/O logic levels, and required pull-ups. Keep the module and all external wiring disconnected until the compatibility review and a complete wiring table are approved. No purchases or installs. Do not jump straight to wiring or sensor reads. If the module cannot be positively identified from current evidence, report the blocker and ask for one targeted photo of its front/back markings and connector labels.
+Read `Plan2.0/CURRENT_STATE.md`, `CURRENT_HANDOFF.md`, `Plan2.0/CHAT_PROTOCOL.md`, `Plan2.0/EXECUTION_ROADMAP.md`, and the evidence report `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md` before continuing.
