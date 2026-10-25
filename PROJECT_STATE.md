@@ -63,3 +63,10 @@ Start with `README.md`, then `docs/PROJECT_OVERVIEW.md`, `docs/ARCHITECTURE_AND_
 The user has now demonstrated a successful BME280 chip-ID read on the physical NUCLEO-L476RG. The user-provided debugger screenshot showed `sensor_found=1`, `sensor_address=0x76`, `sensor_chip_id=0x60`, `sensor_type=1`, and `sensor_error=0`; the user-pasted ST-LINK log reported “Download verified successfully.” This supersedes older statements that sensor reads had not yet been performed. See `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
 
 This supports baseline I²C chip identification only. Full environmental measurements, repeated trials, controlled sensor fault/recovery with a fresh successful post-recovery transaction, and MCU timing/stack/energy measurements remain unverified. The prior LD2/PA5 GPIO configuration recovery remains a separate, preserved milestone. Continue from `Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`; do not repeat completed setup or overwrite the user's external backup.
+
+
+## Hardware status update — Chat 07.1, 2026-10-25
+
+The user supplied debugger values showing `baseline_ok=1`, `fault_nack_observed=1`, `fault_result=-1`, `recovery_attempted=1`, `recovery_error=0`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`, `post_recovery_result=0`, and `test_state=3 (RECOVERY_PASSED)`. User screenshot showed a clean local build (0 errors, 0 warnings). Full report: `Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md`.
+
+This is a narrow controlled address-NACK/reinitialization result with a fresh successful sensor transaction. It is not stuck-bus recovery and does not prove the protected reference runtime controlled the recovery policy. The next package is Chat 08 runtime-to-hardware integration, specified in `Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md`. No protected source or frozen evidence should be modified.
