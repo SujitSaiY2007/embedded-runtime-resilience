@@ -202,3 +202,15 @@ After hardware validation is closed or remaining blockers are explicitly documen
 
 Prompt: [CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md](prompts/CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md).
 
+
+## Chat 10 update — 2026-10-25: repeated-trial protocol defined
+
+The user selected a target of **five total controlled recovery trials**. Read-only inspection of the current integration source confirms a one-shot test sequence: healthy BME280 chip-ID read, controlled address NACK at `0x77`, P4 decision, I2C1 peripheral reinitialization, fresh chip-ID read at `0x76`, runtime event release, then terminal `__BKPT(0)` and loop.
+
+The existing Chat 08 run is recorded as **Trial 1 (historical evidence)**; the two screenshots are one run. Its main-path pass variables are user-evidence verified, but exact build artifact identity and some auxiliary runtime fields are not captured. Trials 2–5 have **not been performed**. No compiler, CubeIDE, reset, MCU, or flash operation was performed by the GitHub-side audit. No flashing is authorized unless the user explicitly approves it after source/build review and a clean build.
+
+Predeclared pass criteria require baseline success, observed controlled NACK, P4-selected I2C1 reinitialization, successful action result, fresh post-recovery BME280 ID `0x60`, successful runtime release, and terminal report `test_state=3`, `test_finished=1`, `test_report_code=8`. Failures must be preserved; missing/contradictory evidence is inconclusive. Do not count a diagnostic rerun as the same trial.
+
+Report and procedure: [Chat 10 final hardware validation](results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md). Chat 11 prompt: [real-time UI integration](prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md).
+
+**Current status: Chat 10 in progress.** Repeatability closure, available build-artifact inspection, and final hardware-to-UI readiness review remain pending. Physical stuck-bus recovery, P0–P4 hardware comparison, MCU timing/stack/energy measurements and universal P4 superiority remain unproven.
