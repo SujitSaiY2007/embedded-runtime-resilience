@@ -66,3 +66,12 @@ Chat 10 is in progress. The user selected five total controlled recovery trials.
 Read the [Chat 10 validation report](Plan2.0/results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md) for the exact procedure and acceptance criteria. The GitHub-side audit did not operate CubeIDE, reset the MCU, build, flash, or run trials. Trials 2–5 remain unperformed. Keep each failure; missing or contradictory evidence is inconclusive. No stuck-bus, P0–P4 hardware comparison, or MCU timing/stack/energy claim is established.
 
 After the trial ledger is reconciled (or the user explicitly elects to proceed with the repeatability gap documented), continue to [Chat 11 real-time UI integration prompt](Plan2.0/prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md). Chat 11 must verify the actual transport and transmitted bytes before implementing live telemetry. Preserve the simulation path and label simulation separately from hardware.
+
+## 2026-10-25 — unified five-policy matrix candidate
+
+The user requested a broader single-run comparison rather than more repetitions of the P4-only program. Added:
+- `Plan2.0/firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix.c`
+- `Plan2.0/results/FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md`
+
+Candidate scope: five-policy physical controlled-NACK comparison plus 80 provisional runtime decision cases (5 policies × 16 contexts) through the protected reference runtime. This source is **not compiled or hardware-validated**. The 16 contexts have not yet been reconciled with the exact frozen host case-family definitions. The physical part tests only a controlled I²C address NACK, not a stuck bus. Preserve the existing `main.c`, protected runtime, and frozen evidence. Next: inspect/reconcile scenario mapping, build in CubeIDE with only one active `main()`, review warnings/resource use, then ask approval before any firmware download.
+
