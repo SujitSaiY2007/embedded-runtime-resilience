@@ -178,3 +178,16 @@ The protected `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h
 - Observed terminal variables: `baseline_ok=1`, `fault_attempted=1`, `fault_nack_observed=1`, `recovery_attempted=1`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60` (96), `sensor_error=0`, `test_state=3`, `test_finished=1`, `test_report_code=8`.
 - Full record: [Chat 08 hardware integration result](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
 - Chat 09: reconcile the runtime decision/action/release/trace fields with the physical action; check source/report consistency and finish documentation. Do not repeat successful baseline/NACK steps without a concrete evidence gap.
+
+
+## Chat 09 hardware evidence reconciliation — 2026-10-25
+
+**Status: Chat 08 physical hardware milestone complete at the bounded controlled-NACK scope.** User-provided screenshots (saved by the user) show a clean CubeIDE build (0 errors/0 warnings), successful download verification, `baseline_ok=1`, `fault_attempted=1`, `fault_nack_observed=1`, `recovery_attempted=1`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`, `sensor_error=0`, `test_state=3`, `test_finished=1`, and `test_report_code=8`. The debugger halted at the intentional terminal breakpoint.
+
+The live firmware source and current protected reference runtime were audited read-only. Source logic indicates the success code is assigned only after a fresh chip-ID read succeeds and `runtime_verify_and_release()` returns `OUTCOME_SUCCESS`. `print_test_report()` sets `test_finished`, executes `__BKPT(0)`, then enters a terminal `while(1)` loop; this makes the breakpoint intentional and holds final values stable after resume.
+
+Auxiliary fields (`policy_variant`, event admission/fault-start results, decision action/reason, action-attempt flag, hardware action result, release result, event slot/generation, runtime byte count and trace count) were not included in the available screenshot summary. The source-derived expected path is P4 variant 4, successful admission/fault start (1), `ACT_REINIT_OR_RESET` (2), reason 23, hardware action result 0 and successful release (1), but these are **not confirmed as debugger observations**. Exact slot/generation/trace/byte counts are **not captured** and are not inferred.
+
+**Recommendation:** do not repeat the baseline/NACK sequence or flash again for this milestone. An optional debugger-only inspection of the already-saved terminal session may document the omitted auxiliary fields without rerunning the experiment. No additional hardware run is necessary to close Chat 08's acceptance gate. Full stuck-bus recovery, repeated-run reliability, environmental measurement, MCU performance/memory measurements, and universal P4 superiority remain unverified. Full audit: [Chat 09 evidence reconciliation](results/CHAT_09_HARDWARE_EVIDENCE_RECONCILIATION_2026-10-25.md).
+
+**Audit provenance:** live `main` was read before edits; the GitHub connector did not execute the Windows toolchain, access the local screenshots, operate the board, or compile/flash firmware. Protected reference files, Gate A–E, frozen 400-run evidence, prior-art reviews and manuscript remain unchanged.
