@@ -387,14 +387,17 @@ int main(void)
         if (decision.action == ACT_REINIT_OR_RESET) {
             recovery_attempted = 1U;
             hardware_action_result = (uint32_t)i2c_recover();
-        } else if (decision.action == ACT_RETRY) {
-            /* The fresh sensor read below is the retry operation. */
-            hardware_action_result = (uint32_t)ERR_NONE;
         } else {
+            /*
+             * This integration test supports only the P4-selected I2C
+             * reinitialization action. Never mark an unexecuted action as
+             * successful. The fresh sensor read below is verification, not
+             * a substitute for executing ACT_RETRY.
+             */
             hardware_action_result = (uint32_t)ERR_NOT_READY;
             test_state = RECOVERY_FAILED;
             recovery_error = ERR_NOT_READY;
-            print_test_report("POLICY SELECTED NON-EXECUTABLE ACTION");
+            print_test_report("POLICY SELECTED UNSUPPORTED ACTION");
             while (1) { __NOP(); }
         }
         recovery_error = (int32_t)hardware_action_result;
