@@ -1,14 +1,14 @@
 # Project Overview
 ## Embedded Runtime Resilience — Research Case Study
 
-**State:** Software/research scope finalized · Hardware validation future work  
+**State:** Frozen software/reference scope finalized · Bounded controlled-NACK hardware demonstration user-evidenced · Manuscript drafting next  
 **Last reviewed:** 2026-10-13
 
 ## 1. Executive summary
 
 This project studies a lightweight, deterministic, zero-heap recovery policy for event-driven embedded firmware. Its design combines fault/event context, bounded recovery history, recovery-action selection, and fault-associated event quarantine. The project evaluates five policy variants (P0–P4) using a fixed C reference runtime and a deterministic host/reference experiment campaign, then exposes the same runtime through a virtual-system adapter and browser-based demonstrator.
 
-The completed deliverable is a **research case study plus executable software demonstration**. It is not a physical-board validation report.
+The deliverable now combines the frozen host/reference research case study and software demonstrator with a bounded, user-observed physical NUCLEO-L476RG/BME280 controlled-NACK recovery demonstration. Hardware evidence is narrow and must not be conflated with the host experiment campaign.
 
 ## 2. Research question and hypothesis
 
@@ -64,3 +64,8 @@ The proposed STM32U575ZI / NUCLEO-U575ZI-Q plan can guide a separately scoped ha
 - [K.10.4 conclusion](../research/phase2_k10_4_final_technical_distinction_and_research_conclusion.md)
 - [K.11 synthesis](../research/phase2_k11_final_software_synthesis_and_hardware_handoff.md)
 - [K.12 audit](../research/phase2_k12_professor_facing_software_demo_and_final_audit.md)
+
+
+## 9. Manuscript drafting entry point
+
+Use [Claude journal manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). The draft must keep the 400 deterministic host/reference executions separate from the one user-observed hardware run, verify each citation, preserve frozen artifacts, and make the matrix discrepancy and other limitations explicit.
