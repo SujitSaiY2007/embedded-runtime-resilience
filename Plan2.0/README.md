@@ -65,3 +65,13 @@ Next action: build the candidate in the existing CubeIDE project using the prote
 ## Latest hardware milestone — Chat 08 (2026-10-25)
 
 The user-provided CubeIDE screenshots show the P4-integrated BME280 test completed with `test_finished=1`, `test_report_code=8`, `test_state=3`, successful controlled NACK observation and a fresh post-recovery chip-ID read of `0x60`. This demonstrates one transaction-level NACK recovery run, not physically stuck-bus recovery or statistical superiority. See the [Chat 08 result record](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md). The next work package is Chat 09 evidence reconciliation and handoff.
+
+
+## Chat 10 — current status (2026-10-25)
+
+Chat 10 has audited the current P4/BME280 firmware source and defined the five-total-trial procedure. The existing Chat 08 run is Trial 1; its two screenshots document the same run. Trials 2–5 remain pending. No new build, flash, reset, or physical trial was performed by the GitHub-side audit. Do not flash unless the user explicitly approves after source/build review and a clean build.
+
+- [Chat 10 final hardware validation and trial ledger](results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md)
+- [Chat 11 real-time UI integration prompt](prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md)
+
+Repeatability, MCU timing/resource measurements, physical stuck-bus recovery and P0–P4 hardware comparison remain unverified. Chat 11 must verify the real firmware-to-host transport and transmitted bytes before showing live hardware telemetry; simulated data must remain clearly labeled.
