@@ -44,3 +44,10 @@ Never write “passed” when a check was not run. Never state hardware was test
 ## Chat 06 source-preservation note — 2026-10-24
 
 The user supplied `main.c`, `err_runtime.c`, and `err_runtime.h` from the local GPIO experiment and confirmed the separate external backup exists. A normalized plain-C transcription and provenance README now live at `Plan2.0/firmware/ld2_gpio_recovery/`. This source record is not the generated CubeIDE project; no startup/linker files or IDE metadata were copied. Continue by inspecting the local project configuration, preserving the working copy and backup, and documenting reproducibility. Do not claim an independent build or hardware test was run by GitHub tools.
+
+
+## Live continuation note — 2026-10-25 BME280 chip-ID read
+
+The latest sensor test has succeeded according to user-provided evidence: `sensor_found=1`, address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`; the user's ST-LINK log says “Download verified successfully.” This supersedes earlier notes that sensor reads had not been demonstrated. Details and evidence limits are in `results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
+
+Next prompt: `prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`. Review the actual local sensor source, preserve its provenance separately from the LD2 GPIO experiment, and design a safe software-controlled I²C recovery test requiring a fresh successful chip-ID read after recovery. No unsafe electrical faulting, no overwriting the external backup, no changes to protected research assets, and main only. Clearly distinguish user-supplied evidence from repository-side checks.
