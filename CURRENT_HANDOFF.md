@@ -49,3 +49,12 @@ Only documentation was edited. `Plan2.0/firmware/bme280_policy_integration/main.
 Chat 10 is not a hardware rerun. A justified project-level follow-on is reproducibility/evidence packaging and a separately designed MCU measurement plan, with target-specific configuration, units and raw outputs. Preserve `main`-only policy and all protected research artifacts.
 
 Full audit: [Chat 09 evidence reconciliation](Plan2.0/results/CHAT_09_HARDWARE_EVIDENCE_RECONCILIATION_2026-10-25.md).
+
+## Chat 10 handoff — hardware validation and UI readiness (planned)
+
+**Chat 09 remains closed. Chat 10 has not yet been executed.** The Chat 08 screenshots have now been supplied twice in this conversation; they are complementary screenshots of the same successful run, not independent trials. They support one controlled transaction-level NACK → P4-selected I²C1 reinitialization → fresh BME280 chip-ID read (`0x60`) → successful runtime release, with terminal report code 8.
+
+Next task: execute [Chat 10 prompt](Plan2.0/prompts/CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md). Begin by reading current state and auditing evidence, then propose a bounded experiment matrix. Do not reflash as the first action. Any flashing or hardware-affecting change requires a clean build and explicit user approval.
+
+Chat 10 should complete all justified, safe, feasible hardware validation, document untested/blocked claims honestly, and prepare a Chat 11 handoff for real-time UI integration. It must not implement the UI or imply all software results were reproduced on hardware. Keep `main` only; preserve protected reference files, frozen 400-execution evidence, Gates A–E, manuscript, historical reports and firmware backups.
+
