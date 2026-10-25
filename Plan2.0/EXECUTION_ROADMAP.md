@@ -14,7 +14,7 @@ Each numbered chat is a bounded work package. Read the current state, previous h
 | 05.3 | ST-LINK debugger continuation — **debugger now working for local test** | Reconcile earlier GDB blocker with the new successful CubeIDE download/debug evidence; document the narrow GPIO experiment | Download verification and debugger execution evidenced; broader recovery claims remain bounded |
 | 06 | Minimal firmware scaffold and provenance — **in progress** | Source files and provenance notes are preserved under `Plan2.0/firmware/ld2_gpio_recovery/`; inspect the local CubeIDE project configuration and establish a reproducible procedure without generated startup/linker churn | Source provenance explicit; reproducibility procedure documented and checked without overwriting the working project; build/download evidence kept distinct |
 | 07 | Baseline peripheral integration | Sensor/peripheral reads with raw logs | Stable baseline demonstrated and documented |
-| 08 | Controlled fault and recovery | Broader safe fault injection, detection, recovery, and a fresh post-recovery operation | Recovery verified by a fresh successful operation across documented cases; the Chat 05.3 PA5 test is only an initial narrow configuration-fault milestone |
+| 08 | Controlled fault and recovery — **integration candidate prepared; target validation pending** | Connect `policy_decide()` to the real BME280 I2C reinitialization adapter, then require fresh chip-ID verification before runtime release | Clean CubeIDE build, expected P4 decision/action variables, fresh chip ID `0x60`, successful runtime release, and documented evidence; no physical stuck-bus claim |
 | 09 | Measurement and repeatability | MCU timing/resource observations, raw traces, repetitions and limitations | Results reproducible and clearly separated from host results |
 | 10 | Manuscript and demo integration | Hardware methods/results, figures, demo guide, limitations | All claims trace to artifacts |
 | 11 | Final audit and release | Repository audit, clean README/state/handoff, evidence manifest | No unverified claims or unresolved critical gaps hidden |
@@ -47,3 +47,10 @@ The user has demonstrated a successful BME280 chip-ID read on the NUCLEO-L476RG:
 The user-supplied debugger screenshot confirms the controlled address-NACK/I²C1 reinitialization experiment reached `RECOVERY_PASSED` and a fresh BME280 ID read returned `0x60`. See `results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md`. This closes the Chat 07.1 experimental acceptance gate for that specific test, not the broader runtime integration goal.
 
 **Chat 08 is now the next package:** integrate the actual runtime decision/action path with the physical BME280 operation. Audit interfaces and protected boundaries first; define a safe fault model; require a fresh successful post-recovery transaction; preserve source provenance and distinguish user evidence from tool-run checks. Prompt: `prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md`.
+
+
+## Chat 08 execution update — 2026-10-25
+
+A separate BME280 firmware candidate and README are now committed under `Plan2.0/firmware/bme280_policy_integration/`. It routes the controlled NACK through the P4 runtime decision and executes the selected I2C reinitialization action before a fresh sensor read gates event release. See [Chat 08 candidate report](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
+
+**Current exit status:** source candidate and evidence plan prepared; not yet built or flashed. The next action is a local CubeIDE build using the exact runtime header/source. Only after a clean build and explicit user approval may the candidate be flashed and tested. Keep prior LD2 and Chat 07.1 evidence separate.
