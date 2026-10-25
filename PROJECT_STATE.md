@@ -1,11 +1,15 @@
 # Project State — Canonical Current Snapshot
 
-**Last reconciled:** 2026-10-24  
+**Last reconciled:** 2026-10-25  
 **Project:** Embedded Runtime Resilience  
 **Repository:** SujitSaiY2007/embedded-runtime-resilience  
-**Current state:** **Software/research scope finalized; Plan 2.0 hardware demonstration active. First local GPIO fault-injection/recovery run verified under CubeIDE debugger; sensor integration and broader physical validation remain open.**
+**Current state:** **Frozen software/reference evidence preserved; bounded five-policy diagnostic hardware run completed from user-observed CubeIDE evidence; manuscript drafting is the next priority.**
 
-> Current hardware status is maintained in [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md). The historical software/research findings below remain valid; the old “hardware is future work” wording is superseded by active Plan 2.0 bring-up. As of 2026-10-24, later user screenshots supersede the earlier debugger-blocked status: a local CubeIDE build succeeded, firmware download was verified, the debugger reached the test's final loop, and expected GPIO recovery values were observed. See Plan2.0/CURRENT_STATE.md and the GPIO experiment report. Sensor operation, physical peripheral failure recovery, and MCU measurements remain unverified.
+The latest diagnostic run reached `progress_stage=900`, `finished=1`, and `overall_code=1`. User screenshots show baseline error slots zero, `nack_result[0..4]=-1` (source-defined `E_NACK`), physical statuses P0–P4 = 7,1,7,7,1 (`R_TERMINAL`, `R_PASS`, `R_TERMINAL`, `R_TERMINAL`, `R_PASS`), and successful post-recovery BME280 ID reads (`0x60`) plus release results for P1 and P4. See [Chat 11 diagnostic hardware report](Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+This is one user-observed controlled address-NACK → I²C1 peripheral recovery/reinitialization → fresh BME280 ID read run. It does not prove physical stuck SDA/SCL recovery, repeatability, MCU resource/performance measurements, 80 physical fault injections, or universal P4 superiority. The 80 firmware matrix contexts are provisional and not established as identical to the frozen host CF01–CF16 cases. The user reported a matrix-status exception for the last entry, while a screenshot showed `matrix_status[79]=1`; treat the full-array state as unresolved unless a complete readable export is provided.
+
+The frozen host/reference campaign remains **16 case families × 5 variants × 5 repetitions = 400 executions**. Do not rerun or overwrite it. Next priority is manuscript drafting and claim/reference audit using [the Claude manuscript prompt](research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md).
 
 ## 1. Finalized deliverable
 
@@ -83,3 +87,11 @@ Follow [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md) and [the Chat 10 pro
 Chat 10 has completed read-only source inspection and defined a five-total-trial protocol for the controlled NACK → P4-selected I2C1 reinitialization → fresh BME280 ID read → runtime release path. Trial 1 is the historical Chat 08 run, evidenced by the saved screenshots; Trials 2–5 are not yet performed. This GitHub-side audit did not compile, flash, reset, or operate hardware. No new flashing is approved.
 
 See [Chat 10 validation report](Plan2.0/results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md) and [Chat 11 UI integration prompt](Plan2.0/prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md). Repeatability remains unverified until actual per-trial evidence is collected and reconciled. Existing research conclusions and frozen evidence remain unchanged.
+
+
+## Manuscript phase status — 2026-10-25
+
+- Hardware milestone recorded: [Chat 11 five-policy diagnostic report](Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+- Claude-ready drafting instructions: [research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md).
+- New report and prompt were committed to `main`; no CubeIDE build, flash, or hardware operation was performed by this GitHub-side documentation update.
+- Preserve the exact user-run source/screenshots and the protected runtime/frozen host evidence. Do not infer that all matrix slots are recorded from the aggregate code alone.
