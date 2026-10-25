@@ -1,9 +1,8 @@
 #include "stm32l476xx.h"
 #include "ref_runtime.h"
 #include <stdint.h>
-#include <stdio.h>
-/* Provided by the semihosting support library when rdimon is linked. */
-extern void initialise_monitor_handles(void);
+#include <string.h>
+/* Test results are exposed through debugger-visible variables; no semihosting required. */
 /*
  * BME280 controlled I2C transaction and reinitialization test.
  *
@@ -49,6 +48,14 @@ typedef enum
     ERR_BAD_ID = -4,
     ERR_NOT_READY = -5
 } test_error_t;
+/* Debugger-visible report:
+ * test_finished = 1 means a terminal result is ready.
+ * test_report_code: 1=baseline failed, 2=policy admission failed,
+ * 3=NACK not confirmed, 4=fault episode failed, 5=unsupported action,
+ * 6=hardware action failed, 7=verification/release failed, 8=success.
+ */
+volatile uint32_t test_finished = 0U;
+volatile uint32_t test_report_code = 0U;
 /* Debugger-visible evidence */
 volatile uint32_t test_state = TEST_NOT_STARTED;
 volatile uint32_t baseline_ok = 0U;
@@ -86,39 +93,18 @@ volatile uint32_t diagnostic_phase = 0U;
 volatile uint32_t diagnostic_isr = 0U;
 static void print_test_report(const char *heading)
 {
-    printf("\r\n");
-    printf("========================================\r\n");
-    printf(" BME280 I2C RECOVERY TEST REPORT\r\n");
-    printf("========================================\r\n");
-    printf("Result                  : %s\r\n", heading);
-    printf("test_state              = %lu\r\n", (unsigned long)test_state);
-    printf("baseline_ok             = %lu\r\n", (unsigned long)baseline_ok);
-    printf("baseline_result         = %d\r\n", baseline_result);
-    printf("fault_attempted         = %lu\r\n", (unsigned long)fault_attempted);
-    printf("fault_nack_observed     = %lu\r\n", (unsigned long)fault_nack_observed);
-    printf("fault_result            = %d\r\n", fault_result);
-    printf("recovery_attempted      = %lu\r\n", (unsigned long)recovery_attempted);
-    printf("recovery_error          = %d\r\n", recovery_error);
-    printf("post_recovery_read_ok   = %lu\r\n", (unsigned long)post_recovery_read_ok);
-    printf("policy_variant          = %lu\r\n", (unsigned long)policy_variant);
-    printf("policy_event_admit      = %lu\r\n", (unsigned long)policy_event_admit_result);
-    printf("policy_fault_start      = %lu\r\n", (unsigned long)policy_fault_start_result);
-    printf("policy_decision_action  = %lu\r\n", (unsigned long)policy_decision_action);
-    printf("policy_decision_reason  = %lu\r\n", (unsigned long)policy_decision_reason);
-    printf("hardware_action_result  = %lu\r\n", (unsigned long)hardware_action_result);
-    printf("policy_release_result   = %lu\r\n", (unsigned long)policy_release_result);
-    printf("policy_runtime_bytes    = %lu\r\n", (unsigned long)policy_runtime_bytes);
-    printf("policy_runtime_trace    = %lu\r\n", (unsigned long)policy_runtime_trace_count);
-    printf("post_recovery_chip_id   = 0x%02X\r\n", (unsigned int)post_recovery_chip_id);
-    printf("post_recovery_result    = %d\r\n", post_recovery_result);
-    printf("sensor_address          = 0x%02X\r\n", (unsigned int)sensor_address);
-    printf("sensor_chip_id          = 0x%02X\r\n", (unsigned int)sensor_chip_id);
-    printf("sensor_error            = %d\r\n", sensor_error);
-    printf("diagnostic_phase        = %lu\r\n", (unsigned long)diagnostic_phase);
-    printf("diagnostic_isr          = 0x%08lX\r\n", (unsigned long)diagnostic_isr);
-    printf("========================================\r\n");
-    printf("End of report\r\n\r\n");
-    fflush(stdout);
+    if (strcmp(heading, "BASELINE FAILED") == 0) test_report_code = 1U;
+    else if (strcmp(heading, "POLICY EVENT ADMISSION FAILED") == 0) test_report_code = 2U;
+    else if (strcmp(heading, "NACK NOT CONFIRMED") == 0) test_report_code = 3U;
+    else if (strcmp(heading, "POLICY FAULT EPISODE FAILED") == 0) test_report_code = 4U;
+    else if (strcmp(heading, "POLICY SELECTED UNSUPPORTED ACTION") == 0) test_report_code = 5U;
+    else if (strcmp(heading, "HARDWARE RECOVERY ACTION FAILED") == 0) test_report_code = 6U;
+    else if (strcmp(heading, "SENSOR READ PASSED BUT RUNTIME RELEASE FAILED") == 0) test_report_code = 7U;
+    else if (strcmp(heading, "POST-RECOVERY SENSOR VERIFICATION FAILED") == 0) test_report_code = 7U;
+    else if (strcmp(heading, "P4 POLICY-DRIVEN HARDWARE RECOVERY PASSED") == 0) test_report_code = 8U;
+    test_finished = 1U;
+    __BKPT(0);
+    while (1) { __NOP(); }
 }
 static void i2c_clear_flags(void)
 {
@@ -293,13 +279,9 @@ int main(void)
 {
     uint8_t id = 0U;
     int result;
-    /*
-     * Requires linker semihosting support (--specs=rdimon.specs)
-     * and a debugger that handles semihosting calls.
-     */
-    initialise_monitor_handles();
-    printf("\r\nStarting BME280 I2C recovery test...\r\n");
-    fflush(stdout);
+    /* No semihosting: debugger-visible variables are the test report. */
+    test_finished = 0U;
+    test_report_code = 0U;
     test_state = TEST_NOT_STARTED;
     baseline_ok = 0U;
     fault_attempted = 0U;
@@ -341,7 +323,6 @@ int main(void)
         sensor_error = (result != ERR_NONE) ? result : ERR_BAD_ID;
         test_state = BASELINE_FAILED;
         print_test_report("BASELINE FAILED");
-        while (1) { __NOP(); }
     }
     baseline_ok = 1U;
     sensor_address = BME280_ADDRESS;
@@ -355,7 +336,6 @@ int main(void)
         test_state = NACK_NOT_CONFIRMED;
         sensor_error = result;
         print_test_report("POLICY EVENT ADMISSION FAILED");
-        while (1) { __NOP(); }
     }
     /* Phase 2: controlled address-NACK attempt. */
     fault_attempted = 1U;
@@ -367,7 +347,6 @@ int main(void)
         test_state = NACK_NOT_CONFIRMED;
         recovery_error = fault_result;
         print_test_report("NACK NOT CONFIRMED");
-        while (1) { __NOP(); }
     }
     fault_nack_observed = 1U;
     test_state = NACK_CONFIRMED;
@@ -377,7 +356,6 @@ int main(void)
         test_state = RECOVERY_FAILED;
         recovery_error = result;
         print_test_report("POLICY FAULT EPISODE FAILED");
-        while (1) { __NOP(); }
     }
     {
         PolicyDecision decision = policy_decide(&policy_runtime, &policy_runtime.episode);
@@ -398,13 +376,11 @@ int main(void)
             test_state = RECOVERY_FAILED;
             recovery_error = ERR_NOT_READY;
             print_test_report("POLICY SELECTED UNSUPPORTED ACTION");
-            while (1) { __NOP(); }
         }
         recovery_error = (int32_t)hardware_action_result;
         if (recovery_error != ERR_NONE) {
             test_state = RECOVERY_FAILED;
             print_test_report("HARDWARE RECOVERY ACTION FAILED");
-            while (1) { __NOP(); }
         }
         /* A fresh physical read gates release of the quarantined runtime event. */
         id = 0U;
