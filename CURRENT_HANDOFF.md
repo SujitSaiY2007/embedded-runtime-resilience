@@ -74,3 +74,16 @@ Evidence report: `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md
 ## Exact next chat
 
 Continue with [Chat 07.1 prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md). Review the exact current sensor source, preserve it separately from the successful LD2 source and external backup, then design a safe software-controlled I²C fault/recovery test requiring a fresh successful chip-ID transaction after recovery. Main only; preserve protected research assets; no electrical shorting or unsafe pin forcing.
+
+
+## Chat 07.1 closeout — 2026-10-25
+
+**Outcome:** User-supplied CubeIDE evidence confirms the controlled BME280 address-NACK/reinitialization test reached `test_state=3 (RECOVERY_PASSED)`. Observed: `baseline_ok=1`, `fault_attempted=1`, `fault_nack_observed=1`, `fault_result=-1`, `recovery_attempted=1`, `recovery_error=0`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`, `post_recovery_result=0`, `sensor_address=0x76`, `sensor_found=1`, `sensor_error=0`. User reports build 0 errors/0 warnings. Semihosting text did not appear; final values were read from Expressions. No GitHub tool built/flashed firmware or operated the board.
+
+**Interpretation boundary:** This is recovery after a controlled address-NACK attempt and I²C1 reinitialization, followed by a fresh successful chip-ID read. It is not proof of physically stuck-bus recovery, universal fault recovery, full environmental sensing, or integration of the protected reference runtime's policy path.
+
+Evidence: [Chat 07.1 controlled-NACK result](Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md).
+
+## Exact next chat — Chat 08
+
+Continue with [Chat 08 runtime-to-hardware integration prompt](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md). First inspect live main and the runtime's actual interfaces. Plan the smallest safe integration so the actual runtime decision/action path controls a physical BME280 operation; do not repeat the completed chip-ID or address-NACK tests. Preserve protected files and the separate LD2 source. Define a safe fault model before coding. Build first; explain and obtain explicit approval before flashing.
