@@ -1,37 +1,65 @@
-# Next Chat Prompt — Chat 08: P4 Policy-to-BME280 Hardware Integration
+# Next Chat Prompt — Chat 09: Evidence Reconciliation and Hardware Integration Audit
 
-The current working BME280 `main.c` has been supplied and a separate integration candidate is already committed. Do not ask the user to upload the source again and do not repeat completed baseline/NACK experiments.
+Continue the existing project: https://github.com/SujitSaiY2007/embedded-runtime-resilience
 
-**Authoritative prompt:** [Chat 08 runtime-to-hardware integration](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
+**Repository branch policy: `main` only.** Do not create or switch branches.
 
-## Current source and status
+## Starting status
 
-- Candidate: [`Plan2.0/firmware/bme280_policy_integration/main.c`](Plan2.0/firmware/bme280_policy_integration/main.c)
-- Build and acceptance steps: [candidate README](Plan2.0/firmware/bme280_policy_integration/README.md)
-- Candidate report: [Chat 08 result record](Plan2.0/results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md)
-- Previous peripheral test: [Chat 07.1 controlled-NACK result](Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md)
-- Board: ST NUCLEO-L476RG, STM32L476RG; BME280 address `0x76`, expected chip ID `0x60`; PB8/PB9 are I2C1 SCL/SDA.
+Chat 08 is complete at the main milestone level. The user-provided CubeIDE screenshots show a successful build (0 errors, 0 warnings), successful flash/download verification, and terminal test result:
 
-## Immediate task
+- `baseline_ok=1`
+- `fault_attempted=1`
+- `fault_nack_observed=1`
+- `recovery_attempted=1`
+- `post_recovery_read_ok=1`
+- `post_recovery_chip_id=96 (0x60)`
+- `sensor_error=0`
+- `test_state=3`
+- `test_finished=1`
+- `test_report_code=8`
 
-1. Preserve the current local CubeIDE source and external backup.
-2. Place the candidate `main.c` in the existing CubeIDE project's application source location.
-3. Add the unchanged `reference/include/ref_runtime.h` and `reference/src/ref_runtime.c` to the local CubeIDE project.
-4. Perform a clean build. If it fails, request the first relevant compiler/linker errors and fix the candidate without editing protected reference runtime files.
-5. Do **not** flash until the build is clean. Then state exactly what will be programmed and obtain explicit user approval.
-6. After approval, flash/run and collect debugger evidence.
+The debugger halted at the terminal report breakpoint. The user saved the screenshots. This is evidence of one successful controlled transaction-level NACK → recovery attempt → fresh sensor read on the physical NUCLEO-L476RG with BME280. It is **not** proof of physical stuck-bus recovery, repeated-run reliability, MCU performance, or universal P4 superiority.
 
-## Acceptance values (expected, not yet observed)
+## Read first
 
-- `baseline_ok=1`, `fault_nack_observed=1`
-- `policy_variant=4` (`VAR_P4_INTEGRATED`)
-- `policy_event_admit_result=1`, `policy_fault_start_result=1`
-- `policy_decision_action=2` (`ACT_REINIT_OR_RESET`), `policy_decision_reason=23`
-- `hardware_action_result=0`
-- `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`
-- `policy_release_result=1`, `test_state=3`
-- Record build warnings/errors, `policy_runtime_bytes`, and `policy_runtime_trace_count`.
+1. `README.md`
+2. `PROJECT_STATE.md`
+3. `CURRENT_HANDOFF.md`
+4. `Plan2.0/CURRENT_STATE.md`
+5. `Plan2.0/README.md`
+6. `Plan2.0/EXECUTION_ROADMAP.md`
+7. `Plan2.0/results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md`
+8. `Plan2.0/firmware/bme280_policy_integration/README.md`
+9. `Plan2.0/firmware/bme280_policy_integration/main.c`
+10. `reference/include/ref_runtime.h` and `reference/src/ref_runtime.c` for reading only.
 
-## Protected boundaries
+Fetch current `main` HEAD and live contents before any repository edits. Do not assume previous descriptions match current files.
 
-Work on `main` only. Do not modify `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, Gate A–E contracts, frozen 400-execution evidence, prior-art reviews, manuscript, or the separate LD2 experiment. The previous Chat 07.1 screenshot is not evidence for this new policy-driven candidate. Do not claim physical stuck-bus recovery or MCU performance measurements.
+## Goals
+
+1. Audit the firmware source and current report for consistency with the user-observed result.
+2. Reconcile available runtime fields: policy variant, event admission result, fault-start result, decision action/reason, hardware action result, release result, event slot/generation and runtime trace count.
+3. Use the actual screenshots/current code as evidence. If a field was not captured, mark it **not captured**; do not fabricate or infer its exact value.
+4. Check that terminal report code 8 is assigned only after the full success path and that the terminal breakpoint behavior is intentional.
+5. Update only relevant Chat 09 evidence/handoff documentation on `main`, with precise claims and clear limitations.
+6. Determine whether the project can close the hardware demonstration phase or whether one specific, minimal validation gap remains. Avoid redundant baseline/NACK runs.
+7. Prepare a concise next-step decision at the end.
+
+## Non-negotiable constraints
+
+- Do not modify `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, Gate A–E contracts, frozen 400-execution evidence, prior-art reviews, manuscript, or historic evidence.
+- Preserve existing firmware backups and the user's saved screenshots.
+- Do not change hardware wiring or request new components unless evidence requires it.
+- Do not flash the board again unless a code change is necessary, builds cleanly, and the user explicitly approves.
+- Do not claim physical stuck-bus recovery, statistical superiority, or MCU performance/memory results from the current run.
+- No branch creation, deletion, switching, or changes outside `main`.
+
+## Required deliverables
+
+- An audit/result note for Chat 09.
+- Updated `Plan2.0/CURRENT_STATE.md`, `Plan2.0/EXECUTION_ROADMAP.md`, and `CURRENT_HANDOFF.md` if the audit changes the state.
+- A clear recommendation for whether a further hardware run is necessary.
+- A Chat 10 prompt only if another bounded work package is justified; otherwise state that the current hardware milestone is complete and specify remaining project-level work.
+
+Begin with repository/source audit and evidence reconciliation. Do not ask the user to repeat completed setup or upload source again.
