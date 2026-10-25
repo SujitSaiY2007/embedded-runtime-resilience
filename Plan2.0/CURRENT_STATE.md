@@ -191,3 +191,14 @@ Auxiliary fields (`policy_variant`, event admission/fault-start results, decisio
 **Recommendation:** do not repeat the baseline/NACK sequence or flash again for this milestone. An optional debugger-only inspection of the already-saved terminal session may document the omitted auxiliary fields without rerunning the experiment. No additional hardware run is necessary to close Chat 08's acceptance gate. Full stuck-bus recovery, repeated-run reliability, environmental measurement, MCU performance/memory measurements, and universal P4 superiority remain unverified. Full audit: [Chat 09 evidence reconciliation](results/CHAT_09_HARDWARE_EVIDENCE_RECONCILIATION_2026-10-25.md).
 
 **Audit provenance:** live `main` was read before edits; the GitHub connector did not execute the Windows toolchain, access the local screenshots, operate the board, or compile/flash firmware. Protected reference files, Gate A–E, frozen 400-run evidence, prior-art reviews and manuscript remain unchanged.
+
+## Chat 10 planned scope — 2026-10-25
+
+Chat 09 closed the bounded Chat 08 hardware demonstration. Chat 10 is now specified as **final hardware validation, evidence reconciliation and UI-integration readiness**; it has not yet been executed. The starting evidence is the two user-provided screenshots of the same Chat 08 run: controlled address NACK observed, recovery attempted, fresh BME280 ID read succeeded (`0x60`), and terminal report code 8. Do not count these screenshots as separate trials.
+
+Chat 10 must first inspect the current repository and propose an experiment matrix with predeclared criteria. It may perform only justified, safe, feasible and approved experiments. Repeated runs, failure-path tests, P0–P4 target comparisons, and MCU resource/latency measurements are not presumed complete. Distinguish target observations, software/reference results, and source-derived expectations. Physical stuck-bus recovery and unsupported measurements remain unverified unless separately tested.
+
+After hardware validation is closed or remaining blockers are explicitly documented, Chat 10 must prepare Chat 11 requirements for real-time UI integration, including a verified firmware-to-host communication path, real versus simulated data boundaries, message fields and an end-to-end acceptance test. No UI changes in Chat 10.
+
+Prompt: [CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md](prompts/CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md).
+
