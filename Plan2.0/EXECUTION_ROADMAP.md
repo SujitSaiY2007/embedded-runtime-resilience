@@ -81,3 +81,8 @@ Chat 10 begins with an evidence audit and a proposed matrix; no initial reflash.
 ## Chat 10 execution update — 2026-10-25
 
 The five-total-trial protocol has been defined in `results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md`. Trial 1 is the existing Chat 08 run (one run, two complementary screenshots); Trials 2–5 remain pending. The firmware is one-shot and halts at its terminal breakpoint, so repeated trials require restarting the unchanged image from reset. No flash/build/hardware operation was performed by the GitHub-side audit, and flashing remains prohibited without explicit user approval after review and a clean build. Do not report the repeatability gate as passed until the four additional trial records are reconciled.
+
+## 2026-10-25 hardware matrix scope update
+
+A separate candidate `Plan2.0/firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix.c` and review plan `Plan2.0/results/FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md` were added on `main`. This candidate targets P0–P4 for one physical controlled NACK scenario and a provisional 5×16 runtime-decision matrix. It is **not yet built or validated**. Before flashing, reconcile the 16 candidate contexts with the frozen host case corpus, inspect resource use and compiler diagnostics, and obtain explicit approval for download. Do not call the in-firmware matrix 80 physical tests or claim equivalence with the frozen 400-execution campaign.
+
