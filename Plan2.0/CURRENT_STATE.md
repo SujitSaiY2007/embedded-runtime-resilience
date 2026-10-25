@@ -221,3 +221,18 @@ A new candidate was added on `main`: [`embedded_runtime_five_policy_matrix.c`](f
 
 **Not yet compiled, run, or validated. Do not flash yet.** The 16 in-firmware contexts are provisional and must be reconciled against the exact frozen host campaign definitions before claiming case-family equivalence. Physical execution covers only the controlled I²C address NACK; the matrix rows are runtime decision tests, not physical fault injections. Existing `main.c`, protected reference runtime files, and frozen 400-execution evidence remain unchanged.
 
+
+
+## Chat 11 — five-policy diagnostic hardware run and manuscript transition (2026-10-25)
+
+**Status:** The user-provided CubeIDE debugger evidence shows the diagnostic harness reached its terminal completion function (`progress_stage=900`, `finished=1`, `overall_code=1`). The latest values are reconciled in [Chat 11 hardware report](results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+Observed values include baseline error slots 0; all five `nack_result` values -1 (source-defined `E_NACK`); physical statuses P0–P4 = 7,1,7,7,1; and for P1/P4, `post_read_ok=1`, chip ID 96 (`0x60`), and `release_result=1`. The source maps 7 to `R_TERMINAL` and 1 to `R_PASS`. This is one controlled wrong-address NACK followed by the selected I²C1 peripheral recovery/reinitialization path and a fresh BME280 read; it is not stuck-bus recovery or a repeatability/performance study.
+
+### Matrix qualification
+
+The embedded matrix has 5 policies × 16 provisional contexts = 80 runtime decisions. These are not 80 physical fault injections and the 16 contexts are not verified as identical to the frozen CF01–CF16 host corpus. A screenshot showed `matrix_status[79]=1`, while the user later described all matrix entries as 1 except the last. Since the complete array was not captured in a readable export, this conflict remains unresolved. Do not assert that all 80 slots are independently verified solely from `overall_code=1`.
+
+### Next work package
+
+The hardware milestone is closed at its bounded evidence scope; the next priority is the journal manuscript and literature audit. Use [Claude manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). Preserve the frozen 400-execution host campaign, protected runtime, Gate A–E contracts and all historic evidence. No hardware or build operation was performed by this GitHub-side update.
