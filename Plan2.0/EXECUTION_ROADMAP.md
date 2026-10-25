@@ -70,3 +70,10 @@ The source-derived expected auxiliary policy values are documented separately fr
 No further hardware run or flash is recommended solely to close Chat 08. An optional debugger-only inspection of the already-saved terminal session may fill auxiliary evidence fields, but is not an acceptance blocker. Further work should be a separately scoped reproducibility/evidence-packaging and MCU measurement plan; no MCU performance/memory or stuck-bus claims are currently supported.
 
 Full report: `results/CHAT_09_HARDWARE_EVIDENCE_RECONCILIATION_2026-10-25.md`. Firmware notes reconciled: `firmware/bme280_policy_integration/README.md`. Protected source, Gate A–E contracts, frozen 400-execution evidence, prior-art reviews and manuscript were not changed.
+
+## Chat 10 planning update — 2026-10-25
+
+Chat 09's bounded hardware demonstration and evidence reconciliation are accepted. The next package is **Chat 10 — Final Hardware Validation, Evidence Closure & UI Integration Readiness**. The Chat 10 prompt is at `prompts/CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md`.
+
+Chat 10 begins with an evidence audit and a proposed matrix; no initial reflash. It evaluates justified, safe target validation and resource measurements, but must not represent unperformed tests as completed. Any flashing/hardware-affecting change requires explicit user approval after source review and a clean build. Once hardware findings and limitations are documented, prepare Chat 11 for real-time integration with the existing UI. UI implementation is explicitly out of scope for Chat 10.
+
