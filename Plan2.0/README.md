@@ -75,3 +75,12 @@ Chat 10 has audited the current P4/BME280 firmware source and defined the five-t
 - [Chat 11 real-time UI integration prompt](prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md)
 
 Repeatability, MCU timing/resource measurements, physical stuck-bus recovery and P0–P4 hardware comparison remain unverified. Chat 11 must verify the real firmware-to-host transport and transmitted bytes before showing live hardware telemetry; simulated data must remain clearly labeled.
+
+
+## Current status — 2026-10-25: bounded hardware run complete; manuscript next
+
+The latest user-provided five-policy diagnostic run reached `progress_stage=900`, `finished=1`, `overall_code=1`. Baseline error slots were zero, all five controlled wrong-address reads returned `E_NACK=-1`, and P1/P4 achieved post-recovery BME280 ID `0x60` plus successful release results. P0/P2/P3 reached `R_TERMINAL`. The detailed evidence and limitations are in [Chat 11 diagnostic hardware report](results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+The matrix is 5 policies × 16 provisional runtime contexts; it is not 80 physical fault injections and is not established as identical to the frozen 400-execution host corpus. The complete `matrix_status[0..79]` array has not been independently captured as a readable export; a user statement about the last entry conflicts with a screenshot showing `matrix_status[79]=1`.
+
+**Next:** use [Claude's journal manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md) to audit the full repository, verify the bibliography and claims, and draft the paper. Preserve all frozen host evidence and protected runtime files.
