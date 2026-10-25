@@ -84,6 +84,13 @@ Continue with [Chat 07.1 prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_R
 
 Evidence: [Chat 07.1 controlled-NACK result](Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md).
 
-## Exact next chat — Chat 08
+## Exact next action — Chat 08 candidate build
 
-Continue with [Chat 08 runtime-to-hardware integration prompt](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md). First inspect live main and the runtime's actual interfaces. Plan the smallest safe integration so the actual runtime decision/action path controls a physical BME280 operation; do not repeat the completed chip-ID or address-NACK tests. Preserve protected files and the separate LD2 source. Define a safe fault model before coding. Build first; explain and obtain explicit approval before flashing.
+The working BME280 `main.c` has now been supplied and the separate policy-integration candidate is committed. Do not ask for the source again or repeat the baseline/NACK experiment.
+
+- Candidate source: [`Plan2.0/firmware/bme280_policy_integration/main.c`](Plan2.0/firmware/bme280_policy_integration/main.c)
+- Build/debugger checklist: [integration README](Plan2.0/firmware/bme280_policy_integration/README.md)
+- Evidence-boundary report: [Chat 08 candidate report](Plan2.0/results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md)
+- Full continuation prompt: [Chat 08 runtime-to-hardware integration prompt](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
+
+Preserve the current CubeIDE source and external backup. Copy the candidate into the existing project's application source, add the unchanged `reference/include/ref_runtime.h` and `reference/src/ref_runtime.c` to the local project, then run a clean build. No flash yet. If build is clean, summarize exactly what will be programmed and obtain explicit approval before flashing. Acceptance requires P4 selecting `ACT_REINIT_OR_RESET`, the actual I2C reinitialization succeeding, a fresh BME280 ID read of `0x60`, and successful runtime event release. The new candidate is not yet build- or hardware-verified.
