@@ -1,22 +1,37 @@
-# Next Chat Prompt — Chat 07.1: BME280 Baseline and Recovery
+# Next Chat Prompt — Chat 08: P4 Policy-to-BME280 Hardware Integration
 
-The prior Chat 06 prompt below is retained in Git history but superseded for current work. Continue from the latest sensor result and use the dedicated prompt as the source of truth:
+The current working BME280 `main.c` has been supplied and a separate integration candidate is already committed. Do not ask the user to upload the source again and do not repeat completed baseline/NACK experiments.
 
-**[Open the full Chat 07.1 prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md)**
+**Authoritative prompt:** [Chat 08 runtime-to-hardware integration](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
 
-## Latest state (2026-10-25)
+## Current source and status
 
-User-provided CubeIDE screenshot showed:
-- `sensor_found=1`
-- `sensor_address=118` decimal = `0x76`
-- `sensor_chip_id=96` decimal = `0x60`
-- `sensor_type=1`
-- `sensor_error=0`
+- Candidate: [`Plan2.0/firmware/bme280_policy_integration/main.c`](Plan2.0/firmware/bme280_policy_integration/main.c)
+- Build and acceptance steps: [candidate README](Plan2.0/firmware/bme280_policy_integration/README.md)
+- Candidate report: [Chat 08 result record](Plan2.0/results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md)
+- Previous peripheral test: [Chat 07.1 controlled-NACK result](Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md)
+- Board: ST NUCLEO-L476RG, STM32L476RG; BME280 address `0x76`, expected chip ID `0x60`; PB8/PB9 are I2C1 SCL/SDA.
 
-The user-pasted ST-LINK log showed “Download verified successfully,” device ID `0x415`, target voltage 3.26 V. The successful register-`0xD0` read at address `0x76` returned `0x60`, matching BME280. This is a user-evidence-backed physical chip-ID read, not full environmental sensing or sensor fault-recovery proof.
+## Immediate task
 
-## Immediate next task
+1. Preserve the current local CubeIDE source and external backup.
+2. Place the candidate `main.c` in the existing CubeIDE project's application source location.
+3. Add the unchanged `reference/include/ref_runtime.h` and `reference/src/ref_runtime.c` to the local CubeIDE project.
+4. Perform a clean build. If it fails, request the first relevant compiler/linker errors and fix the candidate without editing protected reference runtime files.
+5. Do **not** flash until the build is clean. Then state exactly what will be programmed and obtain explicit user approval.
+6. After approval, flash/run and collect debugger evidence.
 
-Review the exact current local sensor source and preserve its provenance separately from `Plan2.0/firmware/ld2_gpio_recovery/`. Design a safe, controlled software-only I²C fault/recovery test with the acceptance criterion of a fresh successful chip-ID read after recovery. Preserve the external `main.c` backup and protected reference/research evidence. Work on `main` only; do not repeat the successful chip-ID test without a specific reason, do not use electrical shorts or unsafe pin forcing, and do not flash without explaining the step and getting user approval.
+## Acceptance values (expected, not yet observed)
 
-Read `Plan2.0/CURRENT_STATE.md`, `CURRENT_HANDOFF.md`, `Plan2.0/CHAT_PROTOCOL.md`, `Plan2.0/EXECUTION_ROADMAP.md`, and the evidence report `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md` before continuing.
+- `baseline_ok=1`, `fault_nack_observed=1`
+- `policy_variant=4` (`VAR_P4_INTEGRATED`)
+- `policy_event_admit_result=1`, `policy_fault_start_result=1`
+- `policy_decision_action=2` (`ACT_REINIT_OR_RESET`), `policy_decision_reason=23`
+- `hardware_action_result=0`
+- `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`
+- `policy_release_result=1`, `test_state=3`
+- Record build warnings/errors, `policy_runtime_bytes`, and `policy_runtime_trace_count`.
+
+## Protected boundaries
+
+Work on `main` only. Do not modify `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, Gate A–E contracts, frozen 400-execution evidence, prior-art reviews, manuscript, or the separate LD2 experiment. The previous Chat 07.1 screenshot is not evidence for this new policy-driven candidate. Do not claim physical stuck-bus recovery or MCU performance measurements.
