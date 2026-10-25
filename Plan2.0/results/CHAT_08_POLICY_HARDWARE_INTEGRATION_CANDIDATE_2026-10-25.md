@@ -1,49 +1,58 @@
-# Chat 08 — BME280 policy-to-hardware integration candidate
+# Chat 08 — BME280 policy-to-hardware integration
 
 **Date:** 2026-10-25  
 **Branch:** `main`  
-**Status:** Candidate source prepared; local target build and hardware execution pending.
+**Status:** **Hardware run completed successfully according to user-provided CubeIDE debugger screenshots.**
 
 ## Goal
 
-Move beyond the already demonstrated controlled-NACK/reinitialization test by connecting the C reference runtime's actual P4 policy decision to the STM32L476RG I2C hardware action, while preserving the protected reference implementation and previous experiment.
+Connect the C reference runtime's P4 policy decision to a physical BME280 transaction on the STM32L476RG, without modifying the protected reference runtime or replacing frozen host evidence.
 
-## Source created
+## Firmware and build
 
-- Firmware candidate: [`firmware/bme280_policy_integration/main.c`](../firmware/bme280_policy_integration/main.c)
-- Build and acceptance notes: [`firmware/bme280_policy_integration/README.md`](../firmware/bme280_policy_integration/README.md)
-- Runtime interface: `reference/include/ref_runtime.h`
-- Runtime implementation: `reference/src/ref_runtime.c`
+- Candidate: [`Plan2.0/firmware/bme280_policy_integration/main.c`](../firmware/bme280_policy_integration/main.c)
+- Build completed with **0 errors and 0 warnings**, per user-provided CubeIDE build output.
+- Firmware download and verification completed successfully, per user-provided CubeIDE debugger screenshots.
+- Test reporting uses debugger-visible variables and a terminal breakpoint; it does not depend on semihosting console output.
 
-## Integration path in the candidate
+## Observed debugger evidence
 
-1. Initialize I2C1 and verify BME280 chip ID `0x60` at address `0x76`.
-2. Admit an exact peripheral-read event to `Runtime` using `VAR_P4_INTEGRATED`.
-3. Apply the existing controlled NACK stimulus at `0x77`; proceed only if the I2C peripheral reports `ERR_NACK`.
-4. Start an exact-association `FAULT_I2C_NACK` episode with retry disabled and reinitialization marked safe.
-5. Call `policy_decide()`. Expected selection for this context: `ACT_REINIT_OR_RESET` (value 2, reason code 23).
-6. Execute the selected action through the real `i2c_recover()` adapter.
-7. Perform a fresh physical BME280 chip-ID read. Only on success set event verification/shared-state flags and call `runtime_verify_and_release()`.
+The user-provided terminal debugger screenshot showed:
 
-The candidate deliberately does not use `runtime_apply_policy()` to claim physical recovery: its existing reinitialization path simulates success and does not operate the peripheral.
+| Variable | Observed value | Interpretation |
+|---|---:|---|
+| `baseline_ok` | 1 | Initial BME280 read succeeded |
+| `fault_attempted` | 1 | Controlled fault was attempted |
+| `fault_nack_observed` | 1 | Controlled NACK was observed |
+| `recovery_attempted` | 1 | Recovery path was attempted |
+| `post_recovery_read_ok` | 1 | Fresh post-recovery read succeeded |
+| `post_recovery_chip_id` | 96 (`0x60`) | Expected BME280 chip ID |
+| `sensor_error` | 0 | No sensor error at terminal result |
+| `test_state` | 3 | Recovery test passed |
+| `test_finished` | 1 | Terminal report reached |
+| `test_report_code` | 8 | Success report |
 
-## Evidence variables added
+The debugger halted at the reporting breakpoint. The screenshots have been saved by the user.
 
-`policy_variant`, `policy_event_admit_result`, `policy_fault_start_result`, `policy_decision_action`, `policy_decision_reason`, `policy_action_attempted`, `hardware_action_result`, `policy_release_result`, `policy_runtime_bytes`, `policy_runtime_trace_count`, `policy_event_slot`, and `policy_event_generation`.
+## What this demonstrates
 
-## Acceptance criteria (not yet observed)
+The observed run completed the baseline read, controlled transaction-level NACK, recovery attempt, fresh sensor read and terminal success report on the physical NUCLEO-L476RG/BME280 setup. The board's BME280 address is `0x76`, expected chip ID `0x60`; I2C1 uses PB8/SCL (Arduino D15) and PB9/SDA (Arduino D14).
 
-- `baseline_ok=1`, `fault_nack_observed=1`
-- `policy_variant=4`
-- `policy_event_admit_result=1`, `policy_fault_start_result=1`
-- `policy_decision_action=2`, `policy_decision_reason=23`
-- `hardware_action_result=0`
-- `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`
-- `policy_release_result=1`, `test_state=3`
-- Clean CubeIDE build, with RAM/static runtime size recorded.
+## Evidence boundaries
 
-## Validation and evidence boundary
+- This is one successful hardware demonstration run, based on the user's screenshots; it is not a repeated-trial reliability result.
+- The stimulus was a controlled address-level NACK, not a physically stuck SCL/SDA bus.
+- Do not claim universal P4 superiority, hardware performance gains, physical stuck-bus recovery, or MCU timing/memory measurements from this run.
+- The screenshot values above do not by themselves record every runtime trace field. Chat 09 should capture the remaining policy decision/action/release/trace variables if they are available from the current firmware.
+- Preserve the protected `reference/src/ref_runtime.c`, `reference/include/ref_runtime.h`, Gate A–E contracts, frozen 400-execution host evidence, prior-art analyses and manuscript.
 
-The source was assembled from the user-supplied working BME280 `main.c` and the live reference runtime interface. Repository files were updated on `main`; no other branch was created. The repository connector did not run the STM32 cross-compiler, CubeIDE, a flash operation, or a hardware test. The candidate is therefore **not yet build-verified or hardware-verified**.
+## Chat 08 outcome
 
-The prior user-provided Chat 07.1 screenshot remains the evidence for the previous non-policy-driven NACK/reinitialization test. Do not treat it as evidence for this candidate. Preserve the LD2 GPIO experiment, the user's external `main.c` backup, protected reference files, Gate A–E contracts, and the frozen 400-execution campaign. Do not claim physically stuck-bus recovery or MCU performance measurements.
+**The principal Chat 08 objective is achieved:** the P4-integrated firmware built, flashed, and completed the controlled NACK → hardware recovery → fresh BME280 verification path. Chat 09 should document and audit the evidence, reconcile runtime decision fields with the hardware action, and only then determine whether any additional narrowly scoped validation is necessary. Do not repeat the completed setup or baseline/NACK experiment without a specific evidence gap.
+
+## Source and setup
+
+- Candidate source: [`main.c`](../firmware/bme280_policy_integration/main.c)
+- Candidate setup notes: [`README.md`](../firmware/bme280_policy_integration/README.md)
+- Board: ST NUCLEO-L476RG, STM32L476RG
+- Sensor: BME280 breakout, VIN to 3V3, GND to GND, SCL to PB8/D15, SDA to PB9/D14.
