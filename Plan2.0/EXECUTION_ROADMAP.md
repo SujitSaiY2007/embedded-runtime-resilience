@@ -86,3 +86,12 @@ The five-total-trial protocol has been defined in `results/CHAT_10_FINAL_HARDWAR
 
 A separate candidate `Plan2.0/firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix.c` and review plan `Plan2.0/results/FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md` were added on `main`. This candidate targets P0–P4 for one physical controlled NACK scenario and a provisional 5×16 runtime-decision matrix. It is **not yet built or validated**. Before flashing, reconcile the 16 candidate contexts with the frozen host case corpus, inspect resource use and compiler diagnostics, and obtain explicit approval for download. Do not call the in-firmware matrix 80 physical tests or claim equivalence with the frozen 400-execution campaign.
 
+
+
+## Chat 11 closeout — diagnostic hardware evidence and manuscript next (2026-10-25)
+
+The user-provided CubeIDE run reached `progress_stage=900`, `finished=1`, `overall_code=1`. Baseline error slots were 0; the controlled wrong-address read returned `E_NACK=-1`; P1 and P4 passed their harness physical checks and returned post-recovery BME280 ID `0x60` with release result 1. P0/P2/P3 ended in `R_TERMINAL`. See [Chat 11 report](results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+This closes the current bounded hardware demonstration only. It does not establish physical stuck-bus recovery, repeatability, MCU resource measurements, 80 physical experiments or universal P4 superiority. The complete 80-element matrix-status array has not been independently captured; a discrepancy exists between the user's statement about the final entry and a screenshot showing `matrix_status[79]=1`.
+
+**Next work package: manuscript drafting.** Audit the full repository and references, create a claim-to-evidence ledger, draft a journal manuscript and verify every citation. Start from [Claude journal manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). Do not rerun or modify the frozen 400-execution host campaign or protected reference runtime.
