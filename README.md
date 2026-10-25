@@ -2,22 +2,20 @@
 
 **Research project:** bounded, zero-heap, context-aware peripheral recovery for event-driven embedded systems.
 
-**Current phase:** Plan 2.0 — reference-quality overhaul and physical hardware demonstration planning.
+**Current phase:** Plan 2.0 — bounded hardware demonstration recorded; manuscript drafting and evidence audit are next.
 
 [![Plan](https://img.shields.io/badge/plan-2.0-315a9b)](Plan2.0/README.md)
 [![Software](https://img.shields.io/badge/software-reference%20demo%20available-247a55)](#current-status)
-[![Hardware](https://img.shields.io/badge/hardware-validation%20pending-c88719)](Plan2.0/HARDWARE_DEMONSTRATION.md)
+[![Hardware](https://img.shields.io/badge/hardware-controlled%20recovery%20observed-247a55)](Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md)
 [![Branch policy](https://img.shields.io/badge/work-main%20only-6f42c1)](Plan2.0/CHAT_PROTOCOL.md)
 
-## Current status — 22 October 2026
+## Current status — 25 October 2026
 
-The C reference runtime, deterministic host experiments, virtual embedded system, Python bridge, and browser demonstrator are existing project assets. The frozen host/reference campaign contains **16 case families × 5 policy variants × 5 repetitions = 400 executions**.
+The repository contains the protected C reference runtime, frozen deterministic host/reference campaign (**16 case families × 5 policy variants × 5 repetitions = 400 executions**), virtual embedded system, Python bridge, browser demonstrator, and a user-observed STM32L476RG/BME280 controlled-NACK recovery run.
 
-The next phase is active planning, not completed validation:
-- **Reference overhaul:** the preliminary bibliography (approximately 43 entries) still requires entry-by-entry metadata, venue, relevance, and influence verification.
-- **Research traceability:** every claimed relationship between publications, baselines, design choices, and the proposed contribution must be explicitly evidenced.
-- **Physical hardware:** Chat 05.3 now has user-supplied evidence of a successful local CubeIDE firmware download/debug session and a narrow software-injected GPIO recovery experiment on LD2/PA5 (all eight expected debugger values observed). This is not physical peripheral-damage recovery. Sensor reads, repeatability, MCU performance measurements and target-equivalence questions remain open. See [current hardware state](Plan2.0/CURRENT_STATE.md) and the [GPIO experiment report](Plan2.0/results/CHAT_05_3_GPIO_RECOVERY_EXPERIMENT_2026-10-24.md).
-- **Branch policy:** all Plan 2.0 work is performed **only on `main`**. Do not create or write to another branch.
+The latest five-policy diagnostic run reached `progress_stage=900`, `finished=1`, and `overall_code=1`. All five baseline error slots were zero and the controlled wrong-address read returned the source-defined `E_NACK=-1`. P1 and P4 reached `R_PASS`; their post-recovery reads succeeded and returned BME280 ID `0x60`. P0, P2 and P3 reached `R_TERMINAL`. This is one bounded transaction-level hardware run, not physically stuck-bus recovery, repeatability evidence, MCU performance measurement, or universal P4 superiority. The full 80-element matrix array has not been independently captured in a complete readable export; one user statement about the last entry conflicts with a screenshot showing `matrix_status[79]=1`. See the [detailed hardware evidence report](Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+**Current priority: manuscript drafting.** Use the [Claude journal-manuscript prompt](research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md) to audit the repository, verify references, build a claim-to-evidence ledger, and prepare a scientifically defensible journal draft. The frozen 400-run corpus and protected runtime must remain unchanged.
 
 ## Start here
 
