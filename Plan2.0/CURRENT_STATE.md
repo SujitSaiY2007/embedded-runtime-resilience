@@ -214,3 +214,10 @@ Predeclared pass criteria require baseline success, observed controlled NACK, P4
 Report and procedure: [Chat 10 final hardware validation](results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md). Chat 11 prompt: [real-time UI integration](prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md).
 
 **Current status: Chat 10 in progress.** Repeatability closure, available build-artifact inspection, and final hardware-to-UI readiness review remain pending. Physical stuck-bus recovery, P0–P4 hardware comparison, MCU timing/stack/energy measurements and universal P4 superiority remain unproven.
+
+## Unified five-policy matrix candidate — 2026-10-25
+
+A new candidate was added on `main`: [`embedded_runtime_five_policy_matrix.c`](firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix.c), with review plan [`FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md`](results/FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md). It attempts a sequential physical controlled-NACK comparison for P0–P4 plus an 80-row (5 policies × 16 provisional runtime contexts) decision matrix using the protected reference runtime API.
+
+**Not yet compiled, run, or validated. Do not flash yet.** The 16 in-firmware contexts are provisional and must be reconciled against the exact frozen host campaign definitions before claiming case-family equivalence. Physical execution covers only the controlled I²C address NACK; the matrix rows are runtime decision tests, not physical fault injections. Existing `main.c`, protected reference runtime files, and frozen 400-execution evidence remain unchanged.
+
