@@ -51,3 +51,10 @@ The user supplied `main.c`, `err_runtime.c`, and `err_runtime.h` from the local 
 The latest sensor test has succeeded according to user-provided evidence: `sensor_found=1`, address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`; the user's ST-LINK log says “Download verified successfully.” This supersedes earlier notes that sensor reads had not been demonstrated. Details and evidence limits are in `results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
 
 Next prompt: `prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`. Review the actual local sensor source, preserve its provenance separately from the LD2 GPIO experiment, and design a safe software-controlled I²C recovery test requiring a fresh successful chip-ID read after recovery. No unsafe electrical faulting, no overwriting the external backup, no changes to protected research assets, and main only. Clearly distinguish user-supplied evidence from repository-side checks.
+
+
+## Live continuation note — Chat 07.1 controlled-NACK result (2026-10-25)
+
+User-provided CubeIDE build/debugger screenshots show a clean build (0 errors, 0 warnings) and `test_state=3 (RECOVERY_PASSED)`; the controlled address-NACK returned `-1`, I²C reinitialization returned `0`, and a fresh BME280 chip-ID read returned `0x60`. Full evidence and limits: `results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md`. Semihosting output did not appear; debugger Expressions values were used. This is not stuck-bus recovery and does not yet prove the protected reference runtime's policy is controlling hardware.
+
+Next is Chat 08: `prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md`. Read live state and exact runtime interfaces first; do not repeat completed baseline/NACK tests. Work on main only; preserve protected reference and frozen research evidence; define the safe fault model before code; build before flashing and obtain explicit user approval before any new flash.
