@@ -50,3 +50,14 @@ User-supplied CubeIDE evidence confirms a controlled address-NACK attempt, I²C1
 - [Chat 08 runtime-to-hardware integration prompt](prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
 
 Chat 08 begins by inspecting runtime interfaces and defining the safe integration/fault model. Do not repeat completed tests or alter protected assets.
+
+
+## Latest milestone — Chat 08 source candidate (2026-10-25)
+
+A separate candidate now connects the P4 reference runtime decision to the real I2C1 reinitialization adapter and requires a fresh BME280 chip-ID read before event release. **This source is prepared but not yet build- or hardware-verified.**
+
+- [Chat 08 integration candidate source](firmware/bme280_policy_integration/main.c)
+- [Build and debugger acceptance checklist](firmware/bme280_policy_integration/README.md)
+- [Chat 08 evidence-boundary report](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md)
+
+Next action: build the candidate in the existing CubeIDE project using the protected reference header/source. Do not flash until the build is clean and the user explicitly approves. Previous LD2 and Chat 07.1 evidence remain separate; frozen host/reference evidence is untouched.
