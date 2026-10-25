@@ -77,3 +77,7 @@ Chat 09's bounded hardware demonstration and evidence reconciliation are accepte
 
 Chat 10 begins with an evidence audit and a proposed matrix; no initial reflash. It evaluates justified, safe target validation and resource measurements, but must not represent unperformed tests as completed. Any flashing/hardware-affecting change requires explicit user approval after source review and a clean build. Once hardware findings and limitations are documented, prepare Chat 11 for real-time integration with the existing UI. UI implementation is explicitly out of scope for Chat 10.
 
+
+## Chat 10 execution update — 2026-10-25
+
+The five-total-trial protocol has been defined in `results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md`. Trial 1 is the existing Chat 08 run (one run, two complementary screenshots); Trials 2–5 remain pending. The firmware is one-shot and halts at its terminal breakpoint, so repeated trials require restarting the unchanged image from reset. No flash/build/hardware operation was performed by the GitHub-side audit, and flashing remains prohibited without explicit user approval after review and a clean build. Do not report the repeatability gate as passed until the four additional trial records are reconciled.
