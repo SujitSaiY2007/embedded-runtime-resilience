@@ -53,3 +53,24 @@ The user has explicitly requested that further settings inspection stop and work
 User-provided CubeIDE screenshots confirmed the active Debug configuration, GNU Tools for STM32 14.3.rel1, GNU11, Flash linker script `STM32L476RGTX_FLASH.ld`, map-file generation, unused-section removal, and Minimal system-call implementation (`--specs=nosys.specs`). The user then closed Properties with Cancel and confirmed that `Project → Build Project` works in the existing local project. This is user-reported local rebuild confirmation; exact error/warning counts were not provided in the follow-up. No firmware download or board interaction was performed in this step.
 
 Chat 06 source/configuration preservation is complete for the current local project. A clean build from a repository checkout is still unverified. Do not ask for further settings screenshots without a concrete blocker. Next: Chat 07 should first establish the exact BME280-labelled module identity and electrical compatibility from visible markings and reliable documentation; keep it disconnected and unwired until the pinout, supply, logic levels, and pull-ups are verified and a wiring plan is reviewed. Preserve the local backup and all frozen research assets.
+
+## Chat 07 update — 2026-10-25: BME280 chip-ID read succeeded
+
+The earlier handoff's statement that sensor reads were not verified is superseded by the evidence below.
+
+User-provided CubeIDE Expressions screenshot:
+- `sensor_found=1`
+- `sensor_address=118` decimal (`0x76`)
+- `sensor_chip_id=96` decimal (`0x60`)
+- `sensor_type=1` (BME280 classification in the test)
+- `sensor_error=0`
+
+User-pasted ST-LINK log confirms target device ID `0x415`, target voltage 3.26 V and “Download verified successfully.” The code's I²C register `0xD0` read therefore succeeded at address `0x76`, returning chip ID `0x60`, matching BME280. User reports the code built after HSI16 was enabled and the timing line set to `I2C1->TIMINGR = 0x30420F13U`.
+
+**Evidence provenance:** user screenshot and user-pasted log; no local CubeIDE/board action was performed by the GitHub connector. This verifies chip-ID communication only, not environmental measurement or recovery after a fault. Full sensor readings, repeatability, controlled fault/recovery, a fresh post-recovery read, and MCU resource measurements remain open. Stale `test_*` expressions displayed “Error: Multiple errors…”; clear stale entries before future inspection.
+
+Evidence report: `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
+
+## Exact next chat
+
+Continue with [Chat 07.1 prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md). Review the exact current sensor source, preserve it separately from the successful LD2 source and external backup, then design a safe software-controlled I²C fault/recovery test requiring a fresh successful chip-ID transaction after recovery. Main only; preserve protected research assets; no electrical shorting or unsafe pin forcing.
