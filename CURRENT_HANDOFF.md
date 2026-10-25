@@ -75,3 +75,36 @@ The user requested a broader single-run comparison rather than more repetitions 
 
 Candidate scope: five-policy physical controlled-NACK comparison plus 80 provisional runtime decision cases (5 policies × 16 contexts) through the protected reference runtime. This source is **not compiled or hardware-validated**. The 16 contexts have not yet been reconciled with the exact frozen host case-family definitions. The physical part tests only a controlled I²C address NACK, not a stuck bus. Preserve the existing `main.c`, protected runtime, and frozen evidence. Next: inspect/reconcile scenario mapping, build in CubeIDE with only one active `main()`, review warnings/resource use, then ask approval before any firmware download.
 
+
+
+## Current handoff — Chat 11 diagnostic run complete; manuscript next (2026-10-25)
+
+**Current priority:** draft and audit the research journal manuscript from the full repository. Continue on `main` only.
+
+### Latest user-observed five-policy diagnostic run
+
+- Board: ST NUCLEO-L476RG (MB1136 C), STM32L476RG; BME280 expected ID `0x60`.
+- Terminal: `progress_stage=900`, `finished=1`, `overall_code=1`.
+- Baseline: screenshot shows `baseline_error[0..4]=0`; baseline checks shown successful.
+- Controlled wrong-address NACK: `nack_result[0..4]=-1`, matching source-defined `E_NACK=-1`.
+- P0–P4 physical statuses: 7,1,7,7,1 (`R_TERMINAL`, `R_PASS`, `R_TERMINAL`, `R_TERMINAL`, `R_PASS`).
+- P1/P4: `post_read_ok=1`, `post_chip_id=96 (0x60)`, `release_result=1`.
+- Matrix spot checks include `matrix_reason[79]=19`, `matrix_action[79]=4`, and a screenshot showing `matrix_status[79]=1`. The user also stated that all matrix statuses were 1 except the last; this conflicts with that visible screenshot. Do not claim full-array verification without a complete readable capture.
+- Detailed record: [Chat 11 hardware report](Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md).
+
+### Evidence boundary
+
+This is one controlled transaction-level NACK → I²C1 peripheral reinitialization/recovery → fresh BME280 ID read → runtime release run, user-observed through CubeIDE screenshots. It is not physical stuck-bus recovery, repeated-run reliability, MCU timing/stack/memory/energy measurement, 80 physical injections, or proof of universal P4 superiority. The 80 firmware contexts are provisional and not proven identical to the frozen host case families.
+
+The frozen host/reference campaign (16 × 5 × 5 = 400 executions), protected runtime, Gate A–E contracts, and historic records remain unchanged. Do not rerun or overwrite them.
+
+### Manuscript task
+
+Give Claude the repository link and the complete [Claude journal-manuscript prompt](research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). Claude should audit the complete repository, verify every reference from authoritative sources, create a claim-to-evidence ledger, draft a complete journal manuscript, preserve the approved title/abstract if frozen, and mark all unresolved issues. Do not fabricate data, sources, affiliations, or measurements.
+
+### Files added/updated in this closeout
+
+- Added `Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md`.
+- Added `research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md`.
+- Updated root and Plan 2.0 status documents, firmware README, roadmap, decision log, continuity protocol and project overview.
+- GitHub-side work only: no local build, CubeIDE, flash or hardware operation was performed in this documentation pass.
