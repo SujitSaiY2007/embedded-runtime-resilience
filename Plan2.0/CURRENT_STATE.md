@@ -2,8 +2,8 @@
 
 **Snapshot date:** 2026-10-25  
 **Execution branch:** main only  
-**Active work package:** Chat 08 — P4 policy-to-BME280 hardware integration candidate prepared; local CubeIDE build and hardware validation are the immediate next steps.  
-**Status:** User-provided evidence supports the earlier LD2 GPIO experiment and Chat 07.1 BME280 controlled-NACK/reinitialization test. A separate Chat 08 candidate now connects `policy_decide()` to the I2C recovery adapter; this new candidate has not yet been built or run on the MCU. Physical stuck-bus recovery and MCU performance measurements remain unverified.
+**Active work package:** Chat 09 — evidence reconciliation and final hardware integration audit following successful Chat 08 P4 policy-to-BME280 run.  
+**Status:** Chat 08 firmware built with 0 errors/0 warnings, flashed and verified, and completed the controlled NACK → recovery → fresh BME280 read path with terminal success (`test_finished=1`, `test_report_code=8`, `test_state=3`) in user-provided debugger screenshots. This is one transaction-level NACK demonstration, not stuck-bus recovery or a statistical superiority result.  
 
 ## Completed before Plan 2.0
 
@@ -170,3 +170,11 @@ The protected `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h
 **Validation boundary:** source preparation and GitHub documentation updates are complete. No STM32 cross-compiler/CubeIDE build, firmware flash, or hardware run was performed by the repository connector. The Chat 07.1 screenshot is evidence only for the previous non-policy-driven test. Chat 08 acceptance remains pending a clean local build and an explicitly approved flash/run. Do not claim physical stuck-bus recovery or MCU performance measurements.
 
 **Immediate next action:** copy the candidate and the exact protected runtime source/header into the existing CubeIDE project using the README instructions; build first, resolve compile/link errors without editing the protected repository runtime, and report the build result before any flash operation.
+
+## Chat 08 hardware result (2026-10-25)
+
+- User-provided CubeIDE build: 0 errors, 0 warnings.
+- Firmware download and verification: successful.
+- Observed terminal variables: `baseline_ok=1`, `fault_attempted=1`, `fault_nack_observed=1`, `recovery_attempted=1`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60` (96), `sensor_error=0`, `test_state=3`, `test_finished=1`, `test_report_code=8`.
+- Full record: [Chat 08 hardware integration result](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
+- Chat 09: reconcile the runtime decision/action/release/trace fields with the physical action; check source/report consistency and finish documentation. Do not repeat successful baseline/NACK steps without a concrete evidence gap.
