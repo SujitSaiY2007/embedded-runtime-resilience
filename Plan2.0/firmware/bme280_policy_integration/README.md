@@ -53,3 +53,10 @@ If desired, inspect the saved terminal debugger session/variable view only. Do n
 ## Scope limitation
 
 One controlled transaction-level NACK → I²C1 peripheral reinitialization → fresh chip-ID read → runtime release is user-evidenced. No physically stuck SDA/SCL bus, repeated-run reliability, full environmental measurement, MCU timing/stack/energy measurement, or universal P4 superiority is demonstrated. The GitHub-side audit did not run CubeIDE or hardware, and the frozen 400-execution host/reference campaign remains separate and unchanged.
+
+
+## Chat 10 repeatability protocol — 2026-10-25
+
+The user selected five total trials. The historical Chat 08 run is designated Trial 1; the two screenshots are complementary evidence from that same run. Trials 2–5 remain pending. The source is a one-shot test that halts at `__BKPT(0)` and then loops, so a repeated trial requires starting the same unchanged programmed image from reset. A new flash is not inherently necessary when the same image is already programmed, but its binary identity has not been independently verified by this audit.
+
+For each trial capture the baseline, controlled NACK, recovery action/result, fresh post-recovery chip ID, runtime release result and terminal state/report code. Required pass criteria and the full ledger are in [Chat 10 final hardware validation](../../results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md). Do not infer auxiliary fields from source. Do not flash without source/build review, a clean build and explicit user approval. This documentation update did not run CubeIDE or hardware.
