@@ -34,3 +34,9 @@ Each numbered chat is a bounded work package. Read the current state, previous h
 ## Chat 06 milestone update — 2026-10-24
 
 The user confirmed that `Project → Build Project` works in the existing local CubeIDE project after the settings review. Source preservation, configuration recording, and local rebuild continuity are complete for this stage. A clean build from a repository checkout is still **not demonstrated**; do not label the GitHub source folder a standalone CubeIDE project. The user asked to stop further configuration inspection. Chat 07 may begin with sensor identity/electrical-compatibility research only; keep the module unwired until its identity, pinout, supply/logic levels, and pull-ups are verified.
+
+## Chat 07 update — 2026-10-25
+
+The user has demonstrated a successful BME280 chip-ID read on the NUCLEO-L476RG: `sensor_found=1`, address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`; ST-LINK log reported “Download verified successfully.” This is user-provided screenshot/log evidence and a baseline peripheral-read milestone. See `results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
+
+**Next:** Chat 07.1 reviews and preserves the exact local sensor-test source, then prepares a controlled software-only I²C fault/recovery test. Recovery acceptance requires a fresh successful chip-ID read after recovery. Do not overwrite the LD2 GPIO experiment, external backup, or protected reference/research assets. No electrical shorts or unsafe pin forcing. Use `prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`.
