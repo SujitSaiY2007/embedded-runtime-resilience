@@ -54,3 +54,8 @@ The user-supplied debugger screenshot confirms the controlled address-NACK/I²C1
 A separate BME280 firmware candidate and README are now committed under `Plan2.0/firmware/bme280_policy_integration/`. It routes the controlled NACK through the P4 runtime decision and executes the selected I2C reinitialization action before a fresh sensor read gates event release. See [Chat 08 candidate report](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
 
 **Current exit status:** source candidate and evidence plan prepared; not yet built or flashed. The next action is a local CubeIDE build using the exact runtime header/source. Only after a clean build and explicit user approval may the candidate be flashed and tested. Keep prior LD2 and Chat 07.1 evidence separate.
+
+## Chat 08–09 execution status
+
+- **Chat 08 — P4 policy-to-BME280 hardware integration:** completed successfully according to user-provided build and debugger evidence. See [Chat 08 result](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
+- **Chat 09 — evidence reconciliation and final handoff:** capture/reconcile the policy decision, selected action, hardware-action result, runtime release and trace fields; verify the current candidate and docs agree; document any remaining evidence gap. No redundant baseline/NACK run unless justified by a specific gap. Protected reference runtime and frozen host evidence remain unchanged.
