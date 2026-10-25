@@ -40,3 +40,13 @@ Plan 2.0 begins the next phase after the software/reference-model demonstrator: 
 - MCU-specific measurements and raw artifacts, clearly separated from host-model results.
 - Updated top-level README, project state, decision log, and next-chat handoff.
 - Every chat closes with an evidence-backed handoff so the next chat can continue without rediscovery.
+
+
+## Latest milestone — Chat 07.1 (2026-10-25)
+
+User-supplied CubeIDE evidence confirms a controlled address-NACK attempt, I²C1 reinitialization, and a fresh successful BME280 chip-ID read (`0x60`), ending at `test_state=3 (RECOVERY_PASSED)`. This is narrowly scoped peripheral-reinitialization evidence; it is not physically stuck-bus recovery or proof that the full reference runtime controlled the policy decision.
+
+- [Chat 07.1 result report](results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md)
+- [Chat 08 runtime-to-hardware integration prompt](prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
+
+Chat 08 begins by inspecting runtime interfaces and defining the safe integration/fault model. Do not repeat completed tests or alter protected assets.
