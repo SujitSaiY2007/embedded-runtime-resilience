@@ -1,9 +1,9 @@
 # Plan 2.0 — Current State
 
-**Snapshot date:** 2026-10-24  
+**Snapshot date:** 2026-10-25  
 **Execution branch:** main only  
-**Active work package:** Chat 05.3 debugger recovery succeeded; first software-injected GPIO recovery experiment completed. Transition next to Chat 06 reproducible minimal-firmware scaffold.  
-**Status:** User-provided CubeIDE screenshots show clean build, successful firmware download verification, live debugger execution, and expected GPIO recovery values. Sensor integration, physical fault recovery and MCU performance measurements remain unverified.
+**Active work package:** Chat 08 — P4 policy-to-BME280 hardware integration candidate prepared; local CubeIDE build and hardware validation are the immediate next steps.  
+**Status:** User-provided evidence supports the earlier LD2 GPIO experiment and Chat 07.1 BME280 controlled-NACK/reinitialization test. A separate Chat 08 candidate now connects `policy_decide()` to the I2C recovery adapter; this new candidate has not yet been built or run on the MCU. Physical stuck-bus recovery and MCU performance measurements remain unverified.
 
 ## Completed before Plan 2.0
 
@@ -159,3 +159,14 @@ This demonstrates a fresh successful BME280 chip-ID read after a controlled addr
 Full report: [Chat 07.1 controlled-NACK result](results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md).
 
 **Next package: Chat 08 — runtime-to-hardware integration.** Inspect the runtime and contracts; define the smallest safe hardware adapter and fault model; then integrate incrementally. The acceptance gate is a runtime-controlled recovery decision/action followed by a fresh successful sensor transaction. Do not repeat the baseline or completed NACK test, do not overwrite the separate LD2 experiment, and do not flash without explicit user approval. See [Chat 08 prompt](prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md).
+
+
+## Chat 08 source-preparation update — 2026-10-25
+
+The user's current working BME280 `main.c` was supplied and used as the base for a separate policy-integration candidate at [`firmware/bme280_policy_integration/main.c`](firmware/bme280_policy_integration/main.c). Its [README](firmware/bme280_policy_integration/README.md) records required files, expected debugger values, and the local validation sequence. The candidate admits an exact I2C read event into `VAR_P4_INTEGRATED`, confirms the controlled NACK, starts a `FAULT_I2C_NACK` episode, calls `policy_decide()`, executes the selected `ACT_REINIT_OR_RESET` through the real `i2c_recover()` function, and only releases the quarantined event after a fresh chip-ID read succeeds.
+
+The protected `reference/src/ref_runtime.c` and `reference/include/ref_runtime.h` were not modified. The LD2 experiment and external `main.c` backup remain separate; the frozen 400-execution campaign and Gate A–E contracts were not rerun or changed. A result record is available at [Chat 08 integration candidate report](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
+
+**Validation boundary:** source preparation and GitHub documentation updates are complete. No STM32 cross-compiler/CubeIDE build, firmware flash, or hardware run was performed by the repository connector. The Chat 07.1 screenshot is evidence only for the previous non-policy-driven test. Chat 08 acceptance remains pending a clean local build and an explicitly approved flash/run. Do not claim physical stuck-bus recovery or MCU performance measurements.
+
+**Immediate next action:** copy the candidate and the exact protected runtime source/header into the existing CubeIDE project using the README instructions; build first, resolve compile/link errors without editing the protected repository runtime, and report the build result before any flash operation.
