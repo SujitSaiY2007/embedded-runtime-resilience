@@ -56,3 +56,10 @@ The historical software/research closure remains valid, but the separate Plan 2.
 ## 7. Reader navigation
 
 Start with `README.md`, then `docs/PROJECT_OVERVIEW.md`, `docs/ARCHITECTURE_AND_REPOSITORY_MAP.md`, `docs/DEMONSTRATOR_GUIDE.md`, and the final K.10.4/K.11/K.12 reports. The root continuity files and `research/chat_records/` preserve detailed history.
+
+
+## Hardware status update — 2026-10-25
+
+The user has now demonstrated a successful BME280 chip-ID read on the physical NUCLEO-L476RG. The user-provided debugger screenshot showed `sensor_found=1`, `sensor_address=0x76`, `sensor_chip_id=0x60`, `sensor_type=1`, and `sensor_error=0`; the user-pasted ST-LINK log reported “Download verified successfully.” This supersedes older statements that sensor reads had not yet been performed. See `Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
+
+This supports baseline I²C chip identification only. Full environmental measurements, repeated trials, controlled sensor fault/recovery with a fresh successful post-recovery transaction, and MCU timing/stack/energy measurements remain unverified. The prior LD2/PA5 GPIO configuration recovery remains a separate, preserved milestone. Continue from `Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`; do not repeat completed setup or overwrite the user's external backup.
