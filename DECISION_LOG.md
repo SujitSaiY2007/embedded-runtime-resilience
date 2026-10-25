@@ -614,3 +614,14 @@ K.12 may expose connect/disconnect controls only for the finite modeled virtual 
 | P2-HW-013 | Accepted | Keep the GPIO experiment distinct from physical peripheral-failure recovery and from the frozen P0–P4 host/reference campaign. | The injected fault is a software change to PA5 mode, and verification checks register mode/output latch; it is not a physical damage test or MCU performance study. |
 | P2-HW-014 | Accepted | Treat the local generated CubeIDE project as separate from canonical repository firmware until source provenance and reproducible integration are reviewed. | Prevents accidental copying of generated startup/linker artifacts and keeps the protected C reference runtime authoritative. |
 | P2-HW-015 | Accepted | Transition next to Chat 06 minimal-firmware scaffold/provenance; retain Chat 07 for peripheral baseline and Chat 08 for broader controlled fault/recovery. | The first GPIO path is a useful initial milestone but does not satisfy the wider sensor, repeatability, post-recovery operation, or MCU measurement gates. |
+
+
+## P2-HW / Manuscript transition — 2026-10-25
+
+| ID | Status | Decision | Reason |
+|---|---|---|---|
+| P2-HW-016 | Accepted | Record the five-policy diagnostic hardware run as a bounded user-observed controlled-NACK/recovery demonstration. | CubeIDE screenshots show harness completion, expected NACK code, baseline checks, and fresh BME280 ID `0x60` with successful release for P1/P4. |
+| P2-HW-017 | Accepted | Report P0/P2/P3 terminal outcomes separately from P1/P4 physical pass outcomes. | The captured physical statuses are 7,1,7,7,1; terminal outcomes must not be presented as successful sensor recovery. |
+| P2-HW-018 | Accepted | Keep the full 80-entry matrix verification status qualified until a complete readable export resolves the final-entry discrepancy. | A screenshot shows `matrix_status[79]=1`, while a later user statement says all statuses were 1 except the last. Do not hide the discrepancy or infer full-array verification from `overall_code=1`. |
+| P2-HW-019 | Accepted | Preserve the frozen 400-execution host/reference campaign and protected C runtime unchanged. | Hardware evidence is complementary and not a substitute for or exact replication of the host campaign. |
+| P2-HW-020 | Accepted | Transition the next primary work package to journal manuscript drafting, source-to-claim mapping, and authoritative reference verification. | Hardware milestone is complete at its demonstrated scope; publication quality now depends on rigorous evidence and bibliography audit. |
