@@ -1,7 +1,10 @@
-/* Candidate harness; review before build/flash.
- * See Plan2.0/results/FIVE_POLICY_HARDWARE_MATRIX_PLAN_2026-10-25.md.
- * This is not yet compiled/validated and does not claim exact equivalence to
- * the frozen host case corpus. It uses the protected ref_runtime API.
+/* Five-policy hardware/runtime matrix harness.
+ * Uses the protected ref_runtime API. The 16 scenario rows remain provisional
+ * and are NOT claimed to be identical to the frozen host corpus.
+ * Hardware validation covers a controlled address NACK (0x77), then verifies
+ * the real BME280 at 0x76 after any selected peripheral reinitialization.
+ * Overall status: 1 = run complete with valid physical outcomes and all 80
+ * decisions recorded; 2 = physical/hardware/runtime error; 3 = matrix incomplete.
  */
 #include "stm32l476xx.h"
 #include "ref_runtime.h"
@@ -58,4 +61,20 @@ static int readreg(uint8_t a,uint8_t reg,uint8_t*v){int x;if(!v||!(I2C1->CR1&I2C
 static int prepare(PolicyVariant v,uint32_t run,const Scenario*s){EventSlot sp={0};OutcomeCode o;runtime_init(&rt,v);runtime_set_trace_metadata(&rt,run,s->id,1);sp.type=EVT_PERIPHERAL_READ;sp.producer_id=1;sp.service_id=1;sp.consumer_id=1;sp.peripheral=PERIPH_I2C0;sp.criticality=(Criticality)s->criticality;sp.transaction_id=(uint16_t)run;sp.dependency_count=0;sp.degradable=s->degrade;o=runtime_admit(&rt,&sp,&er);if(o!=OUTCOME_SUCCESS)return o;o=runtime_start_fault(&rt,(FaultClass)s->fault,(AssociationLevel)s->assoc,er,sp.transaction_id,(Criticality)s->criticality,s->retry,s->reinit,s->degrade);if(o!=OUTCOME_SUCCESS)return o;rt.episode.attempt_count=s->attempt;rt.episode.dependencies_safe=s->deps;rt.episode.shared_state_valid=s->shared;return OUTCOME_SUCCESS;}
 static void matrixcase(uint32_t p,uint32_t s){uint32_t k=p*SC+s;const Scenario*c=&cases[s];PolicyDecision d;diag_policy=p;diag_scenario=s;matrix_policy[k]=p;matrix_scenario[k]=c->id;matrix_fault[k]=c->fault;matrix_assoc[k]=c->assoc;matrix_status[k]=M_NOT_RUN;matrix_runtime_start[k]=prepare(variant(p),900000+k,c);if(matrix_runtime_start[k]!=OUTCOME_SUCCESS){matrix_status[k]=M_INVALID;return;}d=policy_decide(&rt,&rt.episode);matrix_action[k]=d.action;matrix_reason[k]=d.reason_code;matrix_terminal[k]=d.terminal;matrix_retry_authorized[k]=d.retry_authorized;matrix_status[k]=M_RECORDED;}
 static void physical(uint32_t p){uint8_t id=0;int x;PolicyDecision d;const Scenario*c=&cases[0];diag_policy=p;physical_status[p]=0;x=iinit();if(!x)x=readreg(BME280_ADDRESS,BME280_REG_ID,&id);baseline_error[p]=x;if(x||id!=BME280_EXPECTED_ID){physical_status[p]=R_BASELINE_FAIL;diag_gpio_idr=GPIOB->IDR;return;}baseline_ok[p]=1;id=0;x=readreg(NACK_TEST_ADDRESS,BME280_REG_ID,&id);nack_result[p]=x;if(x!=E_NACK){physical_status[p]=R_NACK_FAIL;return;}nack_observed[p]=1;if(prepare(variant(p),8001+p,c)!=OUTCOME_SUCCESS){physical_status[p]=R_RUNTIME_FAIL;return;}d=policy_decide(&rt,&rt.episode);first_action[p]=d.action;first_reason[p]=d.reason_code;terminal_action[p]=d.action;terminal_reason[p]=d.reason_code;while(d.action==ACT_RETRY&&retry_count[p]<RETRY_BOUND){id=0;x=readreg(NACK_TEST_ADDRESS,BME280_REG_ID,&id);if(x!=E_NACK){physical_status[p]=R_ACTION_FAIL;goto done;}retry_count[p]++;if(rt.episode.attempt_count<UINT8_MAX)rt.episode.attempt_count++;if(rt.episode.observation_count<UINT8_MAX)rt.episode.observation_count++;d=policy_decide(&rt,&rt.episode);terminal_action[p]=d.action;terminal_reason[p]=d.reason_code;}if(d.action==ACT_RETRY){physical_status[p]=R_RETRY_LIMIT;runtime_result[p]=OUTCOME_FAILURE;goto done;}if(d.action==ACT_REINIT_OR_RESET){reinit_attempted[p]=1;reinit_result[p]=iinit();if(reinit_result[p]){physical_status[p]=R_ACTION_FAIL;goto done;}id=0;x=readreg(BME280_ADDRESS,BME280_REG_ID,&id);post_chip_id[p]=id;if(x||id!=BME280_EXPECTED_ID){physical_status[p]=R_VERIFY_FAIL;goto done;}post_read_ok[p]=1;rt.slots[er.slot_id].verification_ok=true;rt.slots[er.slot_id].shared_state_valid=true;release_result[p]=runtime_verify_and_release(&rt,true);if(release_result[p]!=OUTCOME_SUCCESS){physical_status[p]=R_VERIFY_FAIL;goto done;}physical_status[p]=R_PASS;runtime_result[p]=OUTCOME_SUCCESS;}else{runtime_result[p]=runtime_apply_policy(&rt,0);physical_status[p]=R_TERMINAL;}done:diag_gpio_idr=GPIOB->IDR;}
-int main(void){finished=0;overall_code=0;for(uint32_t p=0;p<PC;p++)physical(p);for(uint32_t p=0;p<PC;p++)for(uint32_t s=0;s<SC;s++)matrixcase(p,s);overall_code=1;for(uint32_t p=0;p<PC;p++)if(!physical_status[p])overall_code=2;for(uint32_t k=0;k<PC*SC;k++)if(matrix_status[k]!=M_RECORDED)overall_code=3;stop();return 0;}
+int main(void){
+    finished=0U; overall_code=0U;
+    for(uint32_t p=0U;p<PC;p++) physical(p);
+    for(uint32_t p=0U;p<PC;p++) for(uint32_t s=0U;s<SC;s++) matrixcase(p,s);
+
+    /* A terminal policy decision is a valid outcome, not a harness crash. */
+    overall_code=1U;
+    for(uint32_t p=0U;p<PC;p++) {
+        if(physical_status[p]!=R_PASS && physical_status[p]!=R_TERMINAL)
+            overall_code=2U;
+    }
+    for(uint32_t k=0U;k<PC*SC;k++) {
+        if(matrix_status[k]!=M_RECORDED) { overall_code=3U; break; }
+    }
+    stop();
+    return 0;
+}
