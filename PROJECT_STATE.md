@@ -70,3 +70,10 @@ This supports baseline I²C chip identification only. Full environmental measure
 The user supplied debugger values showing `baseline_ok=1`, `fault_nack_observed=1`, `fault_result=-1`, `recovery_attempted=1`, `recovery_error=0`, `post_recovery_read_ok=1`, `post_recovery_chip_id=0x60`, `post_recovery_result=0`, and `test_state=3 (RECOVERY_PASSED)`. User screenshot showed a clean local build (0 errors, 0 warnings). Full report: `Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md`.
 
 This is a narrow controlled address-NACK/reinitialization result with a fresh successful sensor transaction. It is not stuck-bus recovery and does not prove the protected reference runtime controlled the recovery policy. The next package is Chat 08 runtime-to-hardware integration, specified in `Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md`. No protected source or frozen evidence should be modified.
+
+## Plan 2.0 status update — Chat 10 planned (2026-10-25)
+
+Chat 09 has closed the bounded Chat 08 P4 policy-to-BME280 hardware demonstration based on user-supplied CubeIDE evidence. Chat 10 is planned—not yet executed—as the final hardware-validation and evidence-closure phase. The same-run screenshots show controlled transaction-level NACK handling, attempted I²C1 reinitialization, a fresh BME280 chip-ID read of `0x60`, and terminal report code 8. They do not establish stuck-bus recovery, repeatability, MCU performance/memory measurements, or universal P4 superiority.
+
+Follow [Plan2.0/CURRENT_STATE.md](Plan2.0/CURRENT_STATE.md) and [the Chat 10 prompt](Plan2.0/prompts/CHAT_10_FINAL_HARDWARE_VALIDATION_PROMPT_2026-10-25.md). Preserve all protected research artifacts and use `main` only. Chat 10 should prepare an evidence-backed Chat 11 handoff for real-time UI integration; it must not implement the UI or claim unperformed tests.
+
