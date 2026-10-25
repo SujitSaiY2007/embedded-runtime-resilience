@@ -112,3 +112,15 @@ The three source files supplied after the successful local GPIO experiment are n
 The user-provided STM32CubeIDE Expressions screenshot shows a successful BME280 chip-ID read on the NUCLEO-L476RG: `sensor_found=1`, I²C address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`. The user-pasted ST-LINK log reports “Download verified successfully.” This verifies a baseline I²C register read, not full temperature/pressure/humidity sensing or fault recovery. See the [Chat 07 evidence report](Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md).
 
 **Next:** [Chat 07.1 — BME280 baseline and recovery prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md). Preserve the successful LD2 experiment and all protected research evidence; next acceptance criterion is a fresh successful sensor transaction after a controlled, safe recovery test.
+
+
+## Hardware milestone — Chat 07.1 (25 October 2026)
+
+User-provided STM32CubeIDE evidence confirms the controlled BME280 address-NACK/reinitialization test reached `test_state=3 (RECOVERY_PASSED)`: baseline read succeeded, the test observed `fault_result=-1`, I²C reinitialization reported `recovery_error=0`, and a fresh post-recovery read returned chip ID `0x60`. The user reported a successful build with 0 errors and 0 warnings.
+
+This is evidence for a controlled address-NACK followed by I²C peripheral reinitialization and a fresh successful sensor read. It does not demonstrate recovery from physically stuck SDA/SCL, all error classes, or a decision made by the protected reference runtime. Semihosting output was not visible; debugger Expressions values were used. The repository tools did not independently build or run the hardware.
+
+- [Chat 07.1 detailed result](Plan2.0/results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md)
+- [Chat 08 next-chat prompt](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
+
+**Next:** Chat 08 integrates the actual runtime decision/action path with the physical sensor in a staged, safe, user-approved workflow.
