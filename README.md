@@ -105,3 +105,10 @@ Use verified primary publication records for the literature overhaul. The reposi
 ## Chat 06 source-preservation checkpoint — 24 October 2026
 
 The three source files supplied after the successful local GPIO experiment are now preserved as plain C under [Plan 2.0 firmware source](Plan2.0/firmware/ld2_gpio_recovery/README.md): `main.c`, `err_runtime.c`, and `err_runtime.h`. This is a source record, not a complete CubeIDE project or an independently reproduced build. The user's external backup remains separate. The next task is to inspect the local project configuration and establish a safe reproducibility procedure. No generated startup/linker files, IDE metadata, binaries, sensor code, or protected reference-runtime files were added or changed.
+
+
+## Latest hardware milestone — 25 October 2026
+
+The user-provided STM32CubeIDE Expressions screenshot shows a successful BME280 chip-ID read on the NUCLEO-L476RG: `sensor_found=1`, I²C address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`. The user-pasted ST-LINK log reports “Download verified successfully.” This verifies a baseline I²C register read, not full temperature/pressure/humidity sensing or fault recovery. See the [Chat 07 evidence report](Plan2.0/results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md).
+
+**Next:** [Chat 07.1 — BME280 baseline and recovery prompt](Plan2.0/prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md). Preserve the successful LD2 experiment and all protected research evidence; next acceptance criterion is a fresh successful sensor transaction after a controlled, safe recovery test.
