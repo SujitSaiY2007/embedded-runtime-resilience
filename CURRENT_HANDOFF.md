@@ -58,3 +58,11 @@ Next task: execute [Chat 10 prompt](Plan2.0/prompts/CHAT_10_FINAL_HARDWARE_VALID
 
 Chat 10 should complete all justified, safe, feasible hardware validation, document untested/blocked claims honestly, and prepare a Chat 11 handoff for real-time UI integration. It must not implement the UI or imply all software results were reproduced on hardware. Keep `main` only; preserve protected reference files, frozen 400-execution evidence, Gates A–E, manuscript, historical reports and firmware backups.
 
+
+## Chat 10 live handoff — five-trial validation pending (2026-10-25)
+
+Chat 10 is in progress. The user selected five total controlled recovery trials. The existing Chat 08 run is Trial 1 (historical user evidence); its two screenshots are not independent trials. Four further trials must be performed from reset using the unchanged programmed firmware, with a terminal evidence capture per trial. The current firmware source is one-shot and stops at `__BKPT(0)` then an infinite loop. Do not flash; any proposed flashing requires source/build review, a clean build, and explicit user approval.
+
+Read the [Chat 10 validation report](Plan2.0/results/CHAT_10_FINAL_HARDWARE_VALIDATION_2026-10-25.md) for the exact procedure and acceptance criteria. The GitHub-side audit did not operate CubeIDE, reset the MCU, build, flash, or run trials. Trials 2–5 remain unperformed. Keep each failure; missing or contradictory evidence is inconclusive. No stuck-bus, P0–P4 hardware comparison, or MCU timing/stack/energy claim is established.
+
+After the trial ledger is reconciled (or the user explicitly elects to proceed with the repeatability gap documented), continue to [Chat 11 real-time UI integration prompt](Plan2.0/prompts/CHAT_11_REALTIME_UI_INTEGRATION_PROMPT_2026-10-25.md). Chat 11 must verify the actual transport and transmitted bytes before implementing live telemetry. Preserve the simulation path and label simulation separately from hardware.
