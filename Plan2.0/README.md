@@ -61,3 +61,7 @@ A separate candidate now connects the P4 reference runtime decision to the real 
 - [Chat 08 evidence-boundary report](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md)
 
 Next action: build the candidate in the existing CubeIDE project using the protected reference header/source. Do not flash until the build is clean and the user explicitly approves. Previous LD2 and Chat 07.1 evidence remain separate; frozen host/reference evidence is untouched.
+
+## Latest hardware milestone — Chat 08 (2026-10-25)
+
+The user-provided CubeIDE screenshots show the P4-integrated BME280 test completed with `test_finished=1`, `test_report_code=8`, `test_state=3`, successful controlled NACK observation and a fresh post-recovery chip-ID read of `0x60`. This demonstrates one transaction-level NACK recovery run, not physically stuck-bus recovery or statistical superiority. See the [Chat 08 result record](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md). The next work package is Chat 09 evidence reconciliation and handoff.
