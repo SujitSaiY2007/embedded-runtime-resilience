@@ -59,3 +59,14 @@ A separate BME280 firmware candidate and README are now committed under `Plan2.0
 
 - **Chat 08 — P4 policy-to-BME280 hardware integration:** completed successfully according to user-provided build and debugger evidence. See [Chat 08 result](results/CHAT_08_POLICY_HARDWARE_INTEGRATION_CANDIDATE_2026-10-25.md).
 - **Chat 09 — evidence reconciliation and final handoff:** capture/reconcile the policy decision, selected action, hardware-action result, runtime release and trace fields; verify the current candidate and docs agree; document any remaining evidence gap. No redundant baseline/NACK run unless justified by a specific gap. Protected reference runtime and frozen host evidence remain unchanged.
+
+
+## Chat 09 closeout — 2026-10-25
+
+**Outcome: ACCEPTED for the bounded hardware-demonstration milestone.** The user-provided Chat 08 CubeIDE evidence supports one successful controlled address-NACK → P4-selected I²C1 reinitialization → fresh BME280 chip-ID read (`0x60`) → runtime event release → terminal report code 8. Chat 09 audited the current firmware, current protected reference runtime (read-only), report and handoff.
+
+The source-derived expected auxiliary policy values are documented separately from the observed screenshot fields; event slot/generation, trace count and runtime byte count remain not captured. Report code 8 is assigned only after the fresh sensor read and successful runtime release. The terminal `__BKPT(0)` followed by an infinite loop is intentional debugger-visible behavior.
+
+No further hardware run or flash is recommended solely to close Chat 08. An optional debugger-only inspection of the already-saved terminal session may fill auxiliary evidence fields, but is not an acceptance blocker. Further work should be a separately scoped reproducibility/evidence-packaging and MCU measurement plan; no MCU performance/memory or stuck-bus claims are currently supported.
+
+Full report: `results/CHAT_09_HARDWARE_EVIDENCE_RECONCILIATION_2026-10-25.md`. Firmware notes reconciled: `firmware/bme280_policy_integration/README.md`. Protected source, Gate A–E contracts, frozen 400-execution evidence, prior-art reviews and manuscript were not changed.
