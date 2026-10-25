@@ -1,6 +1,6 @@
 # Decision Log — Current Decisions and Historical Record
 
-> **Current disposition (2026-10-13):** K.10–K.12 software/research scope is closed. `main` is the reader-facing integrated project; `exp` remains the preserved research baseline. The curated public structure is in `README.md` and `docs/`. Hardware implementation is future work. CF01's disputed P2 attempt count is omitted from comparisons while frozen historical records remain intact. Older entries below record decisions at the time and are superseded where they conflict with this current disposition.
+> **Current disposition (2026-10-25):** The frozen K.10–K.12 software/reference scope remains closed and protected; `main` is the reader-facing integrated project and `exp` remains the preserved research baseline. A bounded, user-observed five-policy diagnostic hardware run has been recorded; manuscript drafting and source/reference audit are now next. Hardware claims remain limited to the controlled NACK/recovery run documented in `Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md`. CF01's disputed P2 attempt count remains omitted from comparisons; frozen historical records remain intact. Older entries below are historical and superseded where they conflict with this disposition.
 
 | ID | Status | Decision | Reason |
 |---|---|---|---|
