@@ -40,3 +40,10 @@ The user confirmed that `Project → Build Project` works in the existing local 
 The user has demonstrated a successful BME280 chip-ID read on the NUCLEO-L476RG: `sensor_found=1`, address `0x76`, chip ID `0x60`, `sensor_type=1`, `sensor_error=0`; ST-LINK log reported “Download verified successfully.” This is user-provided screenshot/log evidence and a baseline peripheral-read milestone. See `results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md`.
 
 **Next:** Chat 07.1 reviews and preserves the exact local sensor-test source, then prepares a controlled software-only I²C fault/recovery test. Recovery acceptance requires a fresh successful chip-ID read after recovery. Do not overwrite the LD2 GPIO experiment, external backup, or protected reference/research assets. No electrical shorts or unsafe pin forcing. Use `prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md`.
+
+
+## Chat 07.1 closeout — 2026-10-25
+
+The user-supplied debugger screenshot confirms the controlled address-NACK/I²C1 reinitialization experiment reached `RECOVERY_PASSED` and a fresh BME280 ID read returned `0x60`. See `results/CHAT_07_1_BME280_CONTROLLED_NACK_RECOVERY_2026-10-25.md`. This closes the Chat 07.1 experimental acceptance gate for that specific test, not the broader runtime integration goal.
+
+**Chat 08 is now the next package:** integrate the actual runtime decision/action path with the physical BME280 operation. Audit interfaces and protected boundaries first; define a safe fault model; require a fresh successful post-recovery transaction; preserve source provenance and distinguish user evidence from tool-run checks. Prompt: `prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md`.
