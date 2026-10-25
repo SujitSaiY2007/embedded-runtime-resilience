@@ -2,8 +2,8 @@
 
 **Snapshot date:** 2026-10-25  
 **Execution branch:** main only  
-**Active work package:** Chat 09 — evidence reconciliation and final hardware integration audit following successful Chat 08 P4 policy-to-BME280 run.  
-**Status:** Chat 08 firmware built with 0 errors/0 warnings, flashed and verified, and completed the controlled NACK → recovery → fresh BME280 read path with terminal success (`test_finished=1`, `test_report_code=8`, `test_state=3`) in user-provided debugger screenshots. This is one transaction-level NACK demonstration, not stuck-bus recovery or a statistical superiority result.  
+**Active work package:** Journal manuscript drafting and evidence/reference audit after the bounded Chat 11 five-policy diagnostic hardware run.  
+**Status:** User-provided CubeIDE screenshots show the diagnostic harness reached `progress_stage=900`, `finished=1`, and `overall_code=1`; P1/P4 post-recovery BME280 reads returned `0x60` and release result 1. See the Chat 11 hardware report for exact outcomes and unresolved matrix caveat. This is one controlled transaction-level NACK demonstration, not stuck-bus recovery, repeatability, MCU resource measurement, or universal superiority.  
 
 ## Completed before Plan 2.0
 
