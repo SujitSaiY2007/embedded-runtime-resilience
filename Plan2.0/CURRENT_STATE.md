@@ -133,3 +133,18 @@ The user asked to stop further configuration-screen inspection and proceed. No m
 After configuration inspection, the user closed project Properties with Cancel and ran `Project → Build Project` on the existing local `Embedded-Runtime-Resilience` CubeIDE project. User reported that it “works fine.” Exact final error/warning counts were not supplied in this follow-up. No download/debug/board interaction was requested. This is evidence that the existing local project still builds; it is not a clean build from a repository checkout and does not independently verify that the GitHub-preserved source directory alone is buildable.
 
 Chat 06 can now close its local inspection phase: source files and provenance are preserved, relevant CubeIDE settings are recorded, and the existing local project rebuild was user-confirmed. Remaining limitation: a clean, reproducible build from a reviewed repository scaffold has not been demonstrated. Do not ask for more configuration screenshots unless a concrete blocker appears. Next work is Chat 07 planning only: verify the exact sensor/module identity and electrical compatibility from markings/documentation before any wiring; no sensor wiring is currently approved.
+
+## Chat 07 sensor baseline milestone — 2026-10-25
+
+User-provided STM32CubeIDE Expressions screenshot and ST-LINK log now establish a successful sensor chip-ID read:
+- Firmware download log: **“Download verified successfully”**; target device ID `0x415`, voltage 3.26 V.
+- Expressions: `sensor_found=1`, `sensor_address=118 (0x76)`, `sensor_chip_id=96 (0x60)`, `sensor_type=1`, `sensor_error=0`.
+- The read of register `0xD0` at I²C address `0x76` returned `0x60`, matching the BME280 chip ID. User reports the build worked after adding HSI16 enable/wait and setting `I2C1->TIMINGR = 0x30420F13U`.
+
+This is a meaningful physical peripheral baseline-read result and supersedes earlier statements that no sensor read had been performed. Evidence is user-supplied; the GitHub connector did not operate CubeIDE or the board. Full temperature/pressure/humidity reads, calibration compensation, repeatability, sensor fault recovery, a fresh post-recovery transaction, and MCU performance measurements remain unverified. Stale `test_*` Expressions entries showed “Error: Multiple errors…” in this sensor-test session; these are separate from the valid `sensor_*` results and should be cleared/recreated for future debugging.
+
+Detailed result and evidence boundary: [Chat 07 BME280 chip-ID detection report](results/CHAT_07_BME280_CHIP_ID_DETECTION_2026-10-25.md).
+
+### Next action — Chat 07.1
+
+Review the exact current local sensor-test source and preserve its provenance separately from the successful LD2 GPIO recovery experiment. Then design the smallest safe, reversible software-controlled I²C fault/recovery test whose acceptance criterion is a **fresh successful chip-ID transaction after recovery**. Do not use electrical shorts or unsafe pin forcing. Preserve the external `main.c` backup and protected research assets. See [Chat 07.1 prompt](prompts/CHAT_07_1_BME280_BASELINE_AND_RECOVERY_PROMPT_2026-10-25.md).
