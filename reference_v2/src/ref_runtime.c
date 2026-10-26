@@ -110,8 +110,8 @@ PolicyDecision policy_decide(const Runtime*rt,const FaultContext*ctx){
     case VAR_P4_INTEGRATED:
         if(ctx->association!=ASSOC_EXACT){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=17u;}else if(ambiguity&&!ctx->degrade_safe){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=18u;}else if(!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=19u;}else if(ctx->attempt_count>=3u){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=20u;}else if(ctx->attempt_count>=2u){d.action=ctx->reinit_safe?ACT_REINIT_OR_RESET:(ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE);d.terminal=d.action>=ACT_DEGRADE;d.reason_code=21u;}else if(ctx->retry_safe){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=22u;}else if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=23u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=24u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=25u;}break;
     case VAR_P5_RESET_ONLY:
-        d.target_scope=ASSOC_UNKNOWN;
-        if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=26u;}
+        /* Reset-only baseline requires an exact target; otherwise fail closed. */
+        if(ctx->association==ASSOC_EXACT&&ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=26u;}
         else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=28u;}
         break;
     case VAR_P6_EXP_BACKOFF_RETRY:
