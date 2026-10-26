@@ -138,7 +138,7 @@ OutcomeCode runtime_verify_and_release(Runtime*rt,bool verification_ok){
     EventSlot*e=&rt->slots[target.slot_id];
     if(!verification_ok||!e->verification_ok||!e->shared_state_valid||!dependency_allows(rt,e))return OUTCOME_FAILURE;
     /* Keep the episode quarantined and retry release after queue capacity returns. */
-    if(rt->queue_count>=QMAX)return OUTCOME_QUEUE_FULL;
+    if(rt->queue_count>=QMAX){e->state=ST_QUARANTINED;e->fault_associated=true;return OUTCOME_QUEUE_FULL;}
     e->state=ST_QUEUED;e->fault_associated=false;if(rt->quarantine_count>0u)--rt->quarantine_count;queue_append(rt,e->slot_id);trace_event(rt,e,ACT_NONE,OUTCOME_SUCCESS);rt->episode.episode_state=EP_TERMINAL;rt->episode.active=false;rt->episode_in_use=false;rt->active_fault_episode_id=0u;return OUTCOME_SUCCESS;
 }
 
