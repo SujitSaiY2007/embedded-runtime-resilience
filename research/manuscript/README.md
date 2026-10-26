@@ -1,6 +1,6 @@
 # Manuscript Workspace
 
-**Status (2026-10-26):** first full draft (v0.1) with evidence ledger, reference audit, figure plan and open issues. Not yet reviewed by the authors. Not submission-ready: see "Before submission".
+**Status (2026-10-26):** first full draft (v0.1) exists with evidence ledger, reference audit, figure plan and open issues. The user has now confirmed the local `reference_v2` CTest run passed 1/1 test (screenshot; not independently reproduced in this environment), supplied the five-policy hardware source `hardware_exp.c` (SHA-256 `8d65294a7dbf8aca22cab9f2c56732bdb015bf7c3fab87cee6b555f7ae6a1ee8`), and confirmed the original K.10 CSVs cannot be found. The manuscript can be drafted/revised now, but it is **not submission-ready**: corrected 560-run campaign, reference verification, hardware source-to-binary identity, and missing author/venue metadata remain open.
 **Repository:** [embedded-runtime-resilience](https://github.com/SujitSaiY2007/embedded-runtime-resilience)
 **Task specification:** [CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md)
 
