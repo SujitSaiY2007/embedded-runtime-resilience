@@ -1,3 +1,15 @@
+## Current milestone update — 26 October 2026 (supersedes earlier planning notes below)
+
+**Manuscript milestone:** The author-supplied editable Word manuscript and PDF are finalized for this research milestone. The root README and manuscript release index are now the canonical reader entry points. The binary DOCX/PDF still need to be uploaded into `research/manuscript/final/` through GitHub's web interface; they are not currently committed.
+
+**Current repository organization:** Active code remains in `reference/` and `demo/`; current research and hardware evidence remains in `research/` and `Plan2.0/`; superseded manuscript draft, pre-release README and manuscript-drafting prompt are archived under `archive/`.
+
+**Evidence boundaries remain unchanged:** the frozen host campaign is 400 executions; the physical NUCLEO-L476RG/BME280 comparison is one policy run; five control trials are separate; the browser UI is not live-integrated with the physical MCU; exact flashed-binary identity is unverified; no universal P4 superiority or MCU timing/energy/stack claim is made.
+
+**Do not automatically start the previously planned Chat 12 hardware bridge.** That was a prior plan, not part of this manuscript-release cleanup. Any further hardware/UI implementation requires the user's next explicit direction.
+
+---
+
 # Plan 2.0 — Current State
 
 **Snapshot date:** 2026-10-25  
