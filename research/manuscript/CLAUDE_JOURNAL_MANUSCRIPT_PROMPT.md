@@ -288,3 +288,8 @@ Before declaring the draft complete:
 ## Final instruction
 
 Deliver the strongest clear, achievement-centered, comparison-rich, reproducible manuscript the evidence supports. Make the work look as significant as it truly is through careful explanation, relevant verified comparisons, high-quality visuals, and transparent provenance—not through exaggeration. No more code development or experiments: only manuscript, literature, evidence organization, reproducibility documentation, figures/tables and Word preparation.
+
+
+## Addendum — traced chat screenshots (2026-10-26)
+
+Read `research/manuscript/CHAT_SCREENSHOT_EVIDENCE_INDEX.md` before finalizing the evidence inventory. Five relevant screenshot attachments were found in the ChatGPT conversation: `image(20261026-091651).png`, `image(20261026-092203).png`, `image(20261026-092522).png`, `image(20261026-093013).png`, and `image(20261026-093158).png`. The index describes their visible content and appropriate evidentiary boundaries. **Important: the index is committed, but the binary screenshots themselves are not yet in the GitHub repository.** Do not claim they have been preserved in GitHub. Check the repository for actual image files; if they are still absent, mark them as source attachments available in the ChatGPT conversation and report the binary upload as outstanding. Do not invent repository paths or create synthetic substitutes. Continue the manuscript without blocking on these screenshots; use the committed report and evidence ledger for factual claims, and use screenshots only as illustrative corroboration once the originals are actually committed.
