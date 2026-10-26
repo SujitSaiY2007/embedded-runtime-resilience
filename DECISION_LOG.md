@@ -1,3 +1,7 @@
+> **Current release notice — 26 October 2026:** The manuscript milestone is finalized. For the canonical current project overview, see [README.md](README.md); for the author-supplied Word/PDF artifact status, see [the manuscript release index](research/manuscript/README.md). These files below retain their historical planning/decision context; do not interpret older “next task” statements as current authorization. The final DOCX/PDF binaries still need to be uploaded into `research/manuscript/final/` through GitHub's web interface.
+
+---
+
 # Decision Log — Current Decisions and Historical Record
 
 > **Current disposition (2026-10-25):** The frozen K.10–K.12 software/reference scope remains closed and protected; `main` is the reader-facing integrated project and `exp` remains the preserved research baseline. A bounded, user-observed five-policy diagnostic hardware run has been recorded; manuscript drafting and source/reference audit are now next. Hardware claims remain limited to the controlled NACK/recovery run documented in `Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md`. CF01's disputed P2 attempt count remains omitted from comparisons; frozen historical records remain intact. Older entries below are historical and superseded where they conflict with this disposition.
