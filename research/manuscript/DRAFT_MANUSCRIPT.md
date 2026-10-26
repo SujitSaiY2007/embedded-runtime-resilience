@@ -44,7 +44,7 @@ We make no claim that P4 is novel as a whole, state of the art, or superior in g
 
 ### 2.1 Peripheral, driver and component recovery
 
-Phoenix is the closest published system to our setting. It targets resource-constrained embedded systems, logs peripheral accesses, tracks program and external peripheral state, and rolls back to the failed access, using as little as 6 KB of memory in the authors' report [1]. Recovery therefore depends on checkpointing and replay. KARMA addresses a different fault source: intermittent power makes peripheral operations inconsistent, and the system provides a general abstraction for synchronous and asynchronous operations in that setting [2]. Shadow drivers monitor a device driver and take over its role during recovery so that applications and the kernel continue to run [3]. Microreboots restart fine-grained components to give cheap recovery [4]. The last two target commodity operating systems and server software, not event-driven firmware without an operating system.
+Phoenix is the closest published system to our setting. It targets resource-constrained embedded systems, logs peripheral accesses, tracks program and external peripheral state, and rolls back to the failed access, using as little as 6 KB of memory in the authors' report [1]. Recovery therefore depends on checkpointing and replay. KARMA addresses a different fault source: intermittent power makes peripheral operations inconsistent, and the system provides a general abstraction for synchronous and asynchronous operations in that setting [2]. Shadow drivers monitor a device driver and take over its role during recovery so that applications and the kernel continue to run [3]. Microreboots restart fine-grained components to give cheap recovery [4]. Peripheral-state restoration middleware such as RESTOP records external peripheral operations so configuration can be restored after an interruption [11], while experimental I²C-bus analysis catalogs bus failure modes and mitigation options [12]. These are related but distinct problems: RESTOP targets power-interruption state retention, and the I²C study focuses on bus-level fault mitigation rather than the event-to-fault association policy evaluated here. The driver and component-recovery works [3,4] target commodity operating systems and server software, not event-driven firmware without an operating system.
 
 We treat these four works as *conceptual comparators*, not as sources of our baselines. Our P0–P3 were designed by us as ablations of P4 (Section 4.1). The repository records no verified claim that any of them reproduces a published algorithm, and we do not make one. <!--L01-->
 
@@ -52,7 +52,7 @@ We treat these four works as *conceptual comparators*, not as sources of our bas
 
 We use the fault, error and failure terminology and the classification of the means of dependability, including fault tolerance, from the dependability taxonomy [5]. Runtime verification offers a complementary view: it observes a running system against formal properties. Reinbacher et al. present resource-bounded runtime monitoring for embedded real-time systems [6]. Kempa et al. embed online runtime verification for fault disambiguation on a robotic platform [7]. Heffernan et al. monitor selected safety properties of an automotive embedded system, guided by ISO 26262 [9]. These works detect and classify; our runtime decides and acts. We borrow the idea that a fault verdict can be uncertain, which motivates the association levels in Section 3.
 
-Surveys of fault tolerance for embedded systems organize techniques by power, energy and thermal constraints [8], and OS-level task redundancy has been evaluated for transient faults [10]. These sources frame the problem but do not describe event-level peripheral recovery, and we cite them for context only.
+Surveys organize embedded fault-tolerance methods across software and hardware mitigation [13], as well as power, energy and thermal constraints [8]. A broader review covers data-error detection and recovery techniques in embedded systems [15]. Software fault-tolerance research also discusses recovery through changes to the execution environment, including retry, reboot and failover [14], while real-time embedded work has examined fault tolerance alongside energy and scheduling constraints [16]. OS-level task redundancy has separately been evaluated for transient faults [10]. These sources frame the problem but do not describe the same event-level peripheral-recovery policy, and we cite them for context rather than as implementations of our baselines.
 
 ### 2.3 Research gap and scope of the claim
 
@@ -285,7 +285,7 @@ A zero-heap recovery runtime with five policy variants was evaluated in a determ
 
 ## References
 
-Verification status: [1]–[3], [5] were checked against publisher or institutional pages in this session; [4], [6]–[10] carry metadata recorded in the repository's reference audit and must be re-checked before submission (see REFERENCE_AUDIT.md).
+Verification status: [1]–[3], [5], and [11]–[16] were checked against publisher, journal, or institutional records during the reference update; [4], [6]–[10] carry metadata recorded in the repository's reference audit and must be re-checked before submission (see REFERENCE_AUDIT.md). All entries still require claim-to-full-text/page checks before submission.
 
 [1] R. Smith and S. Rixner, "Surviving peripheral failures in embedded systems," in *Proc. 2015 USENIX Annual Technical Conference (USENIX ATC 15)*, USENIX Association, 2015. https://www.usenix.org/conference/atc15/technical-session/presentation/smith
 
@@ -306,6 +306,19 @@ Verification status: [1]–[3], [5] were checked against publisher or institutio
 [9] D. Heffernan, C. MacNamee, and P. Fogarty, "Runtime verification monitoring for automotive embedded systems using the ISO 26262 functional safety standard as a guide for the definition of the monitored properties," *IET Softw.*, vol. 8, no. 5, pp. 193–203, 2014, doi: 10.1049/iet-sen.2013.0236.
 
 [10] S. A. Asghari, M. Binesh Marvasti, and A. M. Rahmani, "Enhancing transient fault tolerance in embedded systems through an OS task level redundancy approach," *Future Gener. Comput. Syst.*, vol. 87, pp. 58–65, 2018, doi: 10.1016/j.future.2018.04.049.
+
+
+[11] A. Rodriguez Arreola, D. Balsamo, G. V. Merrett, and A. S. Weddell, "RESTOP: Retaining external peripheral state in intermittently-powered sensor systems," *Sensors*, vol. 18, no. 1, Art. no. 172, 2018, doi: 10.3390/s18010172.
+
+[12] A. Albalooshi, A. H. M. Jallad, and P. R. Marpu, "Fault analysis and mitigation techniques of the I2C bus for nanosatellite missions," *IEEE Access*, vol. 11, pp. 34709–34717, 2023, doi: 10.1109/ACCESS.2023.3262410.
+
+[13] M. A. Solouki, S. Angizi, and M. Violante, "Dependability in embedded systems: A survey of fault tolerance methods and software-based mitigation techniques," *IEEE Access*, vol. 12, pp. 180939–180967, 2024, doi: 10.1109/ACCESS.2024.3509633.
+
+[14] K. S. Trivedi, M. Grottke, and J. A. Lopez, "Rethinking software fault tolerance," *IEEE Transactions on Reliability*, vol. 73, no. 1, pp. 67–72, 2024, doi: 10.1109/TR.2023.3330787.
+
+[15] V. B. Thati, J. Vankeirsbilck, J. Boydens, and D. Pissoort, "Data error detection and recovery in embedded systems: A literature review," *Advances in Science, Technology and Engineering Systems Journal*, vol. 2, no. 3, pp. 623–633, 2017, doi: 10.25046/aj020380.
+
+[16] R. M. Santos, J. Santos, and J. D. Orozco, "Power saving and fault-tolerance in real-time critical embedded systems," *Journal of Systems Architecture*, vol. 55, no. 2, pp. 90–101, 2009, doi: 10.1016/j.sysarc.2008.09.001.
 
 ## Appendix A. Artifact inventory and integrity
 
