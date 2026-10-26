@@ -11,7 +11,7 @@ This directory is an additive candidate. The protected canonical runtime under `
 
 ## P5/P6 comparator rules (candidate design)
 
-- **P5 — reset-only:** if `reinit_safe`, immediately choose `ACT_REINIT_OR_RESET` with broad (`ASSOC_UNKNOWN`) target scope; otherwise terminal escalation. No retry action is permitted.
+- **P5 — reset-only:** immediately choose `ACT_REINIT_OR_RESET` only when the fault is tied to an exact target and `reinit_safe` is true; otherwise terminal escalation. No retry action is permitted. This avoids granting targetless peripheral-reset semantics the runtime does not implement.
 - **P6 — bounded exponential-backoff retry:** authorize retry while `retry_safe` and `attempt_count < 3`; otherwise terminal escalation. `policy_backoff_delay(index)` returns abstract delay units 1, 2, 4, 8, ... capped at 256 units. The C runtime does not sleep or measure elapsed time; a host harness must record/simulate the delay explicitly. Do not describe this as a physical timing measurement.
 
 These are newly authored in-house comparators, not implementations copied from a published system. Their fairness must be checked against the same fault inputs and resource constraints before comparing results.
