@@ -25,7 +25,7 @@ Decision needed: whether to open a separately approved research change for O-01 
 | O-09 | Documentation conflict | Report §6 lists six identical families; the table shows seven (CF14 omitted). | Draft uses seven |
 | O-10 | Evidence gap | `matrix_status`: user statement ("all 1 except the last") conflicts with a screenshot showing index 79 = 1. By source, `overall_code = 1` requires all 80 recorded. | Export the 80-element array from the debugger if the board session is still available; otherwise keep the statement as is |
 | O-11 | Evidence gap | Screenshots have been supplied in this conversation, but original image files are not yet committed to the repository. | Preserve the screenshots as user-observed supporting evidence; commit original PNGs to a dedicated evidence folder if available. Do not repeat the completed run just to recreate screenshots. |
-| O-12 | Evidence gap | No control read (no reinit after NACK). Without it, the P1/P4 pass does not show that reinit was needed. | Add control to next hardware run |
+| O-12 | Resolved for scoped experiment | Five control trials recorded NACK at 0x77 and then successfully read BME280 ID 0x60 without calling full `iinit()` between probe and read. | Documented in `research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`; interpretation is limited to this address-NACK scenario and does not isolate all transaction cleanup |
 | O-21 | Unverified assumption | User supplied `hardware_exp.c` as the source used for the hardware results; SHA-256 `8d65294a7dbf8aca22cab9f2c56732bdb015bf7c3fab87cee6b555f7ae6a1ee8`. Three firmware variants are also committed. The exact flashed binary is not hash-linked to this source. | Cite the supplied source as identified by the user, retain its source hash, and state that binary identity is unverified. If the original `.elf`/`.bin` is available, hash it; no rebuild/reflash is needed solely for provenance. |
 | O-22 | Metadata | Not captured: STM32CubeIDE, ARM GCC, HAL/CMSIS, ST-LINK firmware versions; MSVC version. | Record from the authors' machine |
 | O-13 | Documentation conflict | Frozen K.10 text names STM32U575 as target; hardware is STM32L476RG. | State the change of target in the paper (done in 7.1 by naming the board only) |
@@ -44,7 +44,7 @@ Decision needed: whether to open a separately approved research change for O-01 
 
 | ID | Type | Issue | Action |
 |---|---|---|---|
-| O-25 | Validation gate | User screenshot shows `ctest --test-dir reference_v2/build -C Debug --output-on-failure`: 1/1 test passed. This is user-run local evidence, not an independently reproduced build here; the corrected 560-run campaign has not been run. | Keep v2 additive and separate from protected `reference/`; confirm the exact source state, run campaign in a fresh directory, inspect deterministic replay and matrix completeness before using v2 results in the paper. Do not flash v2 firmware. |
+| O-25 | Candidate v2 validation | User-run CTest passed 1/1; two fresh 560-run campaigns passed completeness, repetition stability, deterministic replay, and zero harness failures, with matching run and trace SHA-256 hashes. | User-observed Windows/MSVC campaign evidence; record hashes in the phase-1 closure record when available. Keep candidate v2 separate from protected `reference/`; do not treat it as physical-hardware evidence. |
 
 ## D. Venue and metadata
 
@@ -53,3 +53,8 @@ Decision needed: whether to open a separately approved research change for O-01 
 | O-18 | Metadata | Affiliations, emails, CRediT roles, funding, conflicts, ethics, AI-use disclosure, data DOI: placeholders. Author order and spelling could not be checked (no author record in the repository). | Authors |
 | O-19 | Decision | No frozen title or abstract found. Proposed title and 180-word abstract need approval. | Authors |
 | O-20 | Metadata | Venue formatting rests on a 2018 author-pack copy of *Journal of Systems Architecture* and third-party mirrors. Check abstract limit, keyword limit, highlights, reference style, template, and scope fit on elsevier.com. | Before submission |
+
+
+## E. Phase 2 hardware closure (2026-10-26)
+
+Hardware phase is closed for the planned scope; no further runs are planned. See [`research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`](../closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md). The controlled NACK control succeeded 5/5; P1 and P4 passed the single policy comparison run; P0, P2 and P3 produced terminal/non-pass outcomes. Exact flashed binary identity, complete matrix export, exact enum-name mapping for runtime result 4, repeated independent policy runs, stuck-bus behavior, and target runtime resource measurements remain limitations/future work. These limitations do not block closing this phase, but must remain explicit in the manuscript.
