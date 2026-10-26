@@ -62,3 +62,24 @@ Before submission, authors must confirm author order/spelling, affiliations, cor
 ## Bottom line
 
 Drafting can continue immediately using the current evidence and clear limitations. Submission readiness requires Gates A–E above. The only items that cannot be completed by repository edits alone are user-machine execution, new physical measurements, missing original artifacts, and factual author approvals. No professor involvement is needed until the final review/approval stage, as requested.
+
+
+## Execution order approved — software closure before hardware-only phase
+
+The project execution order is now explicitly:
+
+### Phase 1: Software and proof closure
+1. Validate the exact current additive `reference_v2` candidate and all edge-case tests.
+2. Run the corrected P0–P6 campaign in a fresh output directory: 16 scenario families × 7 policies × 5 repetitions = 560 executions.
+3. Require full matrix completeness, successful harness status, deterministic replay, output-integrity checks, and inspection of the generated run/trace artifacts before accepting the campaign.
+4. Investigate counterexamples and report trade-offs; do not pre-commit to P4 superiority.
+5. Freeze accepted source, build/test instructions, output hashes, raw generated results, derived summaries, and a claim-to-evidence reconciliation in an additive, versioned evidence package. Keep the original 400-run report and protected `reference/` unchanged.
+6. Mark the software/code-and-proof phase closed only when all gates pass or each remaining exception has an explicit, justified disposition. Do not claim execution complete based on source creation or screenshots alone.
+
+### Phase 2: Hardware-only validation
+After Phase 1 closes, shift the active work to the STM32L476RG/BME280 setup. Do not make unrelated policy/code changes. Run a documented control without reinitialization, collect repeated controlled-NACK trials, capture complete per-policy values and source/binary provenance, and measure target resource costs where feasible. Treat stuck-bus testing as a separate optional test requiring a safe protocol; address NACK alone is not stuck-bus evidence. Make only narrowly scoped code changes if a hardware result exposes a reproducible defect, then re-run the affected software gates and re-freeze the candidate.
+
+### Phase 3: Claim and manuscript closure
+Reconcile the frozen software results and completed hardware evidence, finish the primary-source reference audit and venue checks, and then ask authors to confirm authorship and submission metadata. Professor involvement remains deferred until the final review stage.
+
+This sequence is a plan, not a claim that Phase 1 or Phase 2 has already been completed. The current 560-run campaign and new physical trials remain pending.
