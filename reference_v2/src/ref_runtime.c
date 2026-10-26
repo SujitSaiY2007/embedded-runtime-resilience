@@ -22,15 +22,15 @@ bool event_ref_valid(const Runtime *rt, EventRef ref) {
     return e->state!=ST_FREE && !state_terminal(e->state) && e->generation==ref.generation;
 }
 
-static uint8_t next_generation(Runtime *rt, uint8_t slot) {
-    if (rt->generation_next[slot]==UINT8_MAX) return 0u;
+static uint16_t next_generation(Runtime *rt, uint8_t slot) {
+    if (rt->generation_next[slot]==UINT16_MAX) return 0u;
     ++rt->generation_next[slot];
     if (rt->generation_next[slot]==0u) return 0u;
     return rt->generation_next[slot];
 }
 
 static void trace_event(Runtime *rt, const EventSlot *e, RecoveryAction action, OutcomeCode outcome) {
-    if (rt->trace_count>=TRACE_EVENT_CAP) return;
+    if (rt->trace_count>=TRACE_EVENT_CAP) { if(rt->trace_dropped_count<UINT32_MAX)++rt->trace_dropped_count; return; }
     TraceRecord *t=&rt->trace[rt->trace_count++];
     t->run_id=rt->run_id;
     t->trace_seq=++rt->trace_seq;
@@ -64,7 +64,7 @@ static void queue_append(Runtime *rt,uint8_t slot){assert(rt->queue_count<QMAX);
 OutcomeCode runtime_admit(Runtime *rt,const EventSlot *spec,EventRef *out_ref){
     if(rt->queue_count>=QMAX)return OUTCOME_QUEUE_FULL;
     int idx=find_free_slot(rt);if(idx<0)return OUTCOME_QUEUE_FULL;
-    uint8_t g=next_generation(rt,(uint8_t)idx);if(g==0u)return OUTCOME_STALE_REF;
+    uint16_t g=next_generation(rt,(uint8_t)idx);if(g==0u)return OUTCOME_STALE_REF;
     EventSlot *e=&rt->slots[idx];*e=*spec;e->slot_id=(uint8_t)idx;e->generation=g;e->state=ST_QUEUED;e->fault_associated=false;e->verification_ok=false;e->shared_state_valid=true;
     rt->queue[rt->queue_count++]=(uint8_t)idx;if(out_ref)*out_ref=ref_of(e);trace_event(rt,e,ACT_NONE,OUTCOME_NONE);return OUTCOME_SUCCESS;
 }
