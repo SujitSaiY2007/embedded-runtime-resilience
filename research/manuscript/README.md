@@ -4,10 +4,15 @@
 **Repository:** [embedded-runtime-resilience](https://github.com/SujitSaiY2007/embedded-runtime-resilience)
 **Master drafting instructions:** [CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). This was overhauled on 2026-10-26 to require author–year citations, a fully editable Word `.docx`, a contribution-claim audit, verified related-work comparisons, publication figures/tables, and separate software/hardware reproduction instructions. Scope is manuscript drafting only; no further coding or hardware runs.
 
+## Chat screenshot evidence
+
+The screenshot attachments were traced in the current ChatGPT conversation. See [`CHAT_SCREENSHOT_EVIDENCE_INDEX.md`](CHAT_SCREENSHOT_EVIDENCE_INDEX.md) for the five relevant October 26 debugger/build images and their evidence boundaries. The index is a traceability record only: **the original binary screenshots are not yet committed to GitHub**, so do not treat them as repository assets until their image files and links are verified. The Claude master prompt now explicitly records this status.
+
 ## Files
 
 | File | Purpose |
 |---|---|
+| `CHAT_SCREENSHOT_EVIDENCE_INDEX.md` | Traces relevant screenshots available in the ChatGPT conversation and records binary-upload status |
 | `DRAFT_MANUSCRIPT.md` | Full draft. Title and abstract are proposals (none was frozen). `<!--Lnn-->` tags link paragraphs to the ledger |
 | `EVIDENCE_LEDGER.md` | Claim-to-evidence map with evidence classes and the list of claims deliberately not made |
 | `REFERENCE_AUDIT.md` | Verification tier for each citation, links, journal-share arithmetic, candidates and leads |
