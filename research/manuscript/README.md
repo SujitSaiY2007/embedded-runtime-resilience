@@ -1,6 +1,6 @@
 # Manuscript Workspace
 
-**Status (2026-10-26):** first full draft (v0.1) exists with evidence ledger, reference audit, figure plan and open issues. The user has now confirmed the local `reference_v2` CTest run passed 1/1 test (screenshot; not independently reproduced in this environment), supplied the five-policy hardware source `hardware_exp.c` (SHA-256 `8d65294a7dbf8aca22cab9f2c56732bdb015bf7c3fab87cee6b555f7ae6a1ee8`), and confirmed the original K.10 CSVs cannot be found. The manuscript can be drafted/revised now, but it is **not submission-ready**: corrected 560-run campaign, reference verification, hardware source-to-binary identity, and missing author/venue metadata remain open.
+**Status (2026-10-26):** first full draft (v0.1) exists with evidence ledger, reference audit, figure plan and open issues. Phase 1 candidate-v2 validation has user-observed local CTest pass and two 560-run campaigns with complete matrices, stable repetitions, deterministic replay, zero harness failures, and matching run/trace hashes. Phase 2 hardware validation is closed for the planned scope; five controlled address-NACK trials successfully read BME280 ID 0x60 without full `iinit()` between the NACK probe and read. In the single policy comparison run, P1 and P4 passed while P0, P2 and P3 returned terminal/non-pass outcomes. See `research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`. The manuscript remains **not submission-ready**: systematic prior-art review, citation verification, exact flashed binary identity, complete 80-entry matrix export, runtime target resource measurements, and author/venue metadata remain open. No further hardware runs are planned at this stage.
 **Repository:** [embedded-runtime-resilience](https://github.com/SujitSaiY2007/embedded-runtime-resilience)
 **Task specification:** [CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md)
 
@@ -31,13 +31,13 @@ All scripts read protected files and never write to them.
 
 1. Frozen host/reference campaign: 16 families × 5 policies × 5 repetitions = 400 executions (Section 6). Only the report's data columns are used.
 2. Source-level properties and host computations made for this draft (Sections 4.1, 4.4, 7.3).
-3. One user-observed STM32L476RG/BME280 run with a controlled wrong-address NACK (Section 7).
+3. One user-observed STM32L476RG/BME280 policy comparison run plus five no-full-reinitialization controlled-NACK trials (Section 7; closure record under `research/closure/`).
 4. Software demonstrator, described from repository documentation (Section 8).
 
 ## Venue recommendation (provisional)
 
 **First choice to evaluate: *Journal of Systems Architecture* (Elsevier).** Its published scope covers embedded software design, real-time systems and operating systems, and it says case studies must contribute more than a design for one piece of software. That scope text was read from a third-party mirror, not from elsevier.com.
-**Candor on readiness:** the evidence is a host campaign with in-house baselines and one hardware run. A reviewer at this venue is likely to ask for MCU measurements, repeated runs with a control, a stuck-bus test and independent baselines. Adding these first would raise the chance of acceptance; no outcome can be guaranteed.
+**Candor on readiness:** the evidence is a host campaign with in-house ablations and a bounded hardware demonstration. Hardware phase is closed by project decision; no stuck-bus test, repeated independent policy trials, MCU runtime resource profile, or independent published baselines are claimed. The manuscript must state these limitations and no acceptance outcome is guaranteed.
 **Alternatives, scope not checked:** *Microprocessors and Microsystems*, *Journal of Systems and Software*, *ACM Transactions on Embedded Computing Systems* (higher bar), *IEEE Embedded Systems Letters* (short format, needs a reduced paper).
 **Format applied provisionally:** abstract ≤ 200 words (draft: 180), ≤ 5 keywords, numbered sections, highlights, declarations block with CRediT placeholders, numeric references. These come from a 2018 author-pack copy and must be re-checked (O-20).
 
