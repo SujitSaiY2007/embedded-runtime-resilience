@@ -101,6 +101,24 @@ static void test_p5_reset_only_and_p6_backoff_baselines(void) {
     assert(p6.terminal);
 }
 
+
+static void test_p6_records_backoff_schedule(void) {
+    Runtime rt;
+    runtime_init(&rt, VAR_P6_EXP_BACKOFF_RETRY);
+    EventRef ref = admit_event(&rt);
+    assert(runtime_start_fault(&rt, FAULT_I2C_NACK, ASSOC_EXACT, ref,
+                               INVALID_TX, NORMAL, true, true, false) == OUTCOME_SUCCESS);
+    assert(runtime_apply_policy(&rt, NULL) == OUTCOME_SUCCESS);
+    bool saw_retry = false;
+    for (uint16_t i = 0; i < rt.trace_count; ++i) {
+        if (rt.trace[i].action == ACT_RETRY) {
+            saw_retry = true;
+            assert(rt.trace[i].backoff_delay_units == 1u);
+        }
+    }
+    assert(saw_retry);
+}
+
 static void test_invalid_target_does_not_leak_episode(void) {
     Runtime rt;
     runtime_init(&rt, VAR_P0_FIXED_RETRY);
@@ -121,6 +139,7 @@ int main(void) {
     test_generation_survives_more_than_255_reuses();
     test_trace_overflow_is_observable_and_bounded();
     test_p5_reset_only_and_p6_backoff_baselines();
+    test_p6_records_backoff_schedule();
     test_invalid_target_does_not_leak_episode();
     puts("reference_v2 edge-case tests: PASS");
     return 0;
