@@ -29,12 +29,12 @@ Solouki, M. A., Angizi, S., and Violante, M. (2024). “Dependability in Embedde
 - **Use in paper:** Position the work in the wider dependability landscape and organize the related-work section.
 
 ### R4. Fault tolerance under timing, power, energy, and thermal constraints
-“ A Survey of Fault-Tolerance Techniques for Embedded Systems From the Perspective of Power, Energy, and Thermal Issues.” (2022). *IEEE Access*, 10, 12229–12251. https://doi.org/10.1109/ACCESS.2022.3144217
+Safari, S., Ansari, M., Khdr, H., Gohari Nazari, P., Yari-Karin, S., Yeganeh-Khaksar, A., Hessabi, S., Ejlali, A., and Henkel, J. (2022). “A Survey of Fault-Tolerance Techniques for Embedded Systems From the Perspective of Power, Energy, and Thermal Issues.” *IEEE Access*, 10, 12229–12251. https://doi.org/10.1109/ACCESS.2022.3144217
 
 - **Verified metadata source:** IEEE DOI/publisher record.
 - **Relevance:** Summarizes fault-tolerance techniques and their resource/timing trade-offs in embedded and real-time systems.
 - **Use in paper:** Support discussion of bounded-resource trade-offs and identify performance metrics that this project has not yet measured.
-- **Bibliographic action:** Before final manuscript inclusion, retrieve the publisher's author metadata and complete the author field; do not submit this abbreviated entry as final IEEE style.
+- **Bibliographic action:** Metadata is now completed from the publisher-linked bibliographic record; confirm against the final publisher PDF before submission formatting.
 
 ### R5. Software fault tolerance and environmental recovery
 Trivedi, K. S., Grottke, M., and Lopez, J. A. (2024). “Rethinking Software Fault Tolerance.” *IEEE Transactions on Reliability*, 73(1), 67–72. https://doi.org/10.1109/TR.2023.3330787
@@ -44,12 +44,12 @@ Trivedi, K. S., Grottke, M., and Lopez, J. A. (2024). “Rethinking Software Fau
 - **Use in paper:** Conceptual framing for recovery actions and why action selection/context matters.
 
 ### R6. Transient-fault tolerance in embedded software
-“Enhancing transient fault tolerance in embedded systems through an OS task level redundancy approach.” (2018). *Future Generation Computer Systems*, 87, 58–65. https://doi.org/10.1016/j.future.2018.04.049
+Asghari, S. A., Binesh Marvasti, M., and Rahmani, A. M. (2018). “Enhancing transient fault tolerance in embedded systems through an OS task level redundancy approach.” *Future Generation Computer Systems*, 87, 58–65. https://doi.org/10.1016/j.future.2018.04.049
 
 - **Verified metadata source:** ScienceDirect result with title, journal, volume, pages, and DOI.
 - **Relevance:** Software-based fault tolerance evaluated with software fault injection and a system prototype.
 - **Use in paper:** Compare experimental methodology and task-level recovery scope with a peripheral/event-level policy.
-- **Bibliographic action:** Verify full author metadata from the publisher before final IEEE formatting.
+- **Verified metadata source:** ScienceDirect and the TU Wien repository record identify the authors as Seyyed Amir Asghari, Mohammadreza Binesh Marvasti, and Amir M. Rahmani.
 
 ### R7. Data error detection and recovery in embedded systems
 Thati, V. B., Vankeirsbilck, J., Boydens, J., and Pissoort, D. (2017). “Data Error Detection and Recovery in Embedded Systems: A Literature Review.” *Advances in Science, Technology and Engineering Systems Journal*, 2(3), 623–633. https://doi.org/10.25046/aj020380
