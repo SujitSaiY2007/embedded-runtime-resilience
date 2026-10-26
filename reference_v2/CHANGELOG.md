@@ -11,3 +11,5 @@
 
 - Widened the candidate generation token to 16 bits and added an observable, saturating dropped-trace counter while retaining the 256-record fixed buffer.
 - Added regression test source for generation reuse and trace overflow observability.
+
+- Added P5 reset-only and P6 bounded exponential-backoff retry decision rules as separate in-house comparators in v2 only. Delay values are abstract host units; no physical timing is claimed.
