@@ -31,12 +31,14 @@ Date: 2026-10-26. Draft: `DRAFT_MANUSCRIPT.md` v0.1. Each `<!--Lnn-->` tag in th
 | L16 | CF04, CF07 separate P4 from all baselines; CF05, CF06 only from P2/P3 (6) | HOST + SRC | Report table; `runtime_apply_policy` returns `OUTCOME_STALE_REF` without closing the episode when the target is invalid | Mechanism explanation is by reading the source, not by a traced run (raw traces unavailable) |
 | L17 | Seven families identical across P0–P4 (6) | DERIV | `make_figures.py` output: CF02, CF09, CF11, CF12, CF13, CF14, CF15 | Report §6 says six, omitting CF14 (O-09) |
 | L18 | CF16: P2 1 attempt, P4 3 attempts; not timing (6) | HOST | Report table and 2026-10-02 correction | — |
-| L19 | Hardware setup and flow (7.1) | SRC + HW | `Plan2.0/firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix_diagnostic.c` (`physical()`, `main()`); `CHAT_11_...md` | Which of the three firmware files was flashed is not recorded (O-21). Tool versions not captured |
+| L19 | Hardware setup and flow (7.1) | SRC + HW | User-supplied `hardware_exp.c` (SHA-256 `8d65294a7dbf8aca22cab9f2c56732bdb015bf7c3fab87cee6b555f7ae6a1ee8`), `physical()`/`main()`; `CHAT_11_...md` | User identifies this source as the program used. The exact flashed binary is not hash-linked to this source; tool versions are not fully captured. |
 | L20 | Table 3 observed values; matrix discrepancy (7.2) | HW | `Plan2.0/results/CHAT_11_FIVE_POLICY_DIAGNOSTIC_HARDWARE_RUN_2026-10-25.md` | Screenshots not in repository; no complete matrix export. `overall_code=1` ⇒ all `matrix_status == M_RECORDED` is a reading of `main()`, not an observation |
 | L21 | Observed pass/terminal pattern equals host-computed decisions for context 0 (7.3) | DERIV + HW | `derived/source_derived_decisions.csv` rows (policy 0–4, scenario 0): P0 retry(1) then escalate, P1 reinit(4), P2 escalate(11), P3 escalate(16), P4 reinit(23) | P0 retry count of 2 is source-derived, not captured |
 | L22 | Three captured matrix entries match host computation (7.3) | DERIV + HW | Index 0 and 1 (P0, contexts 0, 1): action 1, reason 1; index 79 (P4, context 15): action 4, reason 19 | 3 of 80 entries only |
 | L23 | Not shown: stuck bus, 80 injections, repeatability, MCU metrics, need for reinit, superiority (7.4) | NOT | `CHAT_11_...md` "Claims not supported"; `PROJECT_STATE.md` §5 | No control read without reinit exists |
-| L24 | Demonstrator architecture; tests user-reported (8) | REPO | `README.md` "Existing software demonstrator"; `docs/DEMONSTRATOR_GUIDE.md` | Not executed here |
+| L24 | Demonstrator architecture; tests user-reported (8) | REPO | `README.md` "Existing software demonstrator"; `docs/DEMONSTRATOR_GUIDE.md` | Not executed as part of this manuscript audit |
+
+| L25 | v2 edge-case test target passed locally | REPO / user-observed test | User screenshot of `ctest --test-dir reference_v2/build -C Debug --output-on-failure`: 1/1 test passed, 100%, 0.26 s | This is a separate additive candidate test, not evidence from the frozen P0–P4 campaign; not independently reproduced in this environment. The corrected 560-run campaign has not run. |
 
 ## Claims the draft deliberately does not make
 
