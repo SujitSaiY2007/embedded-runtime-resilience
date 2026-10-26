@@ -53,3 +53,20 @@ Date: 2026-10-26; updated after bibliography consolidation. Method: reference me
 2. Conference papers are not counted as journals. IEEE *Computer* is excluded from the strict journal count.
 3. A citation supports only the sentence it sits on. [6]–[10] are context and do not imply any overlap with P4.
 4. The register's 43 rows are not a bibliography: 17 are broad topic leads and 9 are patent records.
+
+
+## Final metadata verification pass — 2026-10-26
+
+The final pass checked the bibliographic metadata of all 16 entries against publisher, proceedings, journal, DOI, or institutional records. Key primary/authoritative records include USENIX for Phoenix and Microreboot; the publisher-linked KARMA paper/record; the DOI-bearing record for Swift et al.; Springer for Reinbacher et al. and the Robonaut2 runtime-verification paper; Wiley for Heffernan et al.; ScienceDirect for Asghari et al. and Santos et al.; IEEE records for the IEEE Access articles; and journal/publisher records for the remaining entries. This resolves the previously missing DOI for [3]: **10.1145/1189256.1189257**.
+
+### Final status by reference
+
+- **Metadata checked:** [1]–[16] — author/title/venue/year and available volume, issue, pages, and DOI checked against publisher or institutional records. For [2], the proceedings PDF/academic record was used for the DOI and conference metadata; its page range should be checked against the final publisher citation export before submission.
+- **Relevance/scope checked at abstract or accessible-text level:** all 16, to the extent indicated in the table above. These papers are used as context or conceptual comparators, not claimed as implementations of P0–P4.
+- **Full-text/page-level claim verification:** **not complete for every source.** Before submission, each substantive claim in Sections 2.1–2.3 must be mapped to the relevant page/section in the original paper. This remaining step is deliberately not described as complete.
+- **Reference composition:** 12 journal articles / 16 total = **75.0%**; four conference papers [1], [2], [4], [7] are retained because they are essential conceptual comparators. Do not remove them merely to improve the journal percentage.
+- **Scope of verification:** bibliographic metadata and relevance are not proof of novelty, completeness of the literature search, or legal patentability.
+
+### Final disposition
+
+The bibliography meets the requested 75% journal share and the missing DOI in [3] is resolved. Treat this as a metadata-verified working bibliography, not a fully submission-cleared citation set. The final novelty/contribution determination is recorded separately in `research/closure/FINAL_NOVELTY_AND_CONTRIBUTION_AUDIT_2026-10-26.md`.
