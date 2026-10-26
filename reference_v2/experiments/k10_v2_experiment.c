@@ -43,7 +43,7 @@ static void log_run(FILE *f_runs, const K10RunResult *r) {
 static void log_traces(FILE *f_trace, const Runtime *rt, int run_id, int family_id, int variant_id) {
     for (uint16_t i = 0u; i < rt->trace_count; ++i) {
         const TraceRecord *t = &rt->trace[i];
-        fprintf(f_trace, "%d,%d,%d,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u\n",
+        fprintf(f_trace, "%d,%d,%d,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u\n",
             run_id, family_id, variant_id,
             t->run_id, t->trace_seq, t->fault_episode_id,
             (unsigned)t->event_ref.slot_id, (unsigned)t->event_ref.generation,
