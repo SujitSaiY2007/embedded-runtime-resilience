@@ -85,7 +85,7 @@ static void test_p5_reset_only_and_p6_backoff_baselines(void) {
     PolicyDecision p5 = policy_decide(&rt, &ctx);
     assert(p5.action == ACT_REINIT_OR_RESET);
     assert(!p5.retry_authorized);
-    assert(p5.target_scope == ASSOC_UNKNOWN);
+    assert(p5.target_scope == ASSOC_EXACT);
 
     runtime_init(&rt, VAR_P6_EXP_BACKOFF_RETRY);
     PolicyDecision p6 = policy_decide(&rt, &ctx);
