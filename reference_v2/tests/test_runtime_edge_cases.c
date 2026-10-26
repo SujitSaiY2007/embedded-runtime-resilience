@@ -134,6 +134,58 @@ static void test_invalid_target_does_not_leak_episode(void) {
     assert(rt.active_fault_episode_id == 0u);
 }
 
+
+static void assert_failed_recovery_budget_closes_episode(
+    PolicyVariant variant, FaultClass fault_class, Criticality criticality,
+    bool degrade_safe) {
+    Runtime rt;
+    runtime_init(&rt, variant);
+    EventRef ref = admit_event(&rt);
+
+    assert(runtime_start_fault(&rt, fault_class, ASSOC_EXACT, ref,
+                               INVALID_TX, criticality, true, true,
+                               degrade_safe) == OUTCOME_SUCCESS);
+
+    OutcomeCode out = OUTCOME_NONE;
+    for (uint8_t action = 1u; action <= MAX_RECOVERY_ACTIONS; ++action) {
+        FaultInjection fi;
+        memset(&fi, 0, sizeof(fi));
+        fi.enabled = true;
+        fi.fault_class = fault_class;
+        fi.target_ref = ref;
+        fi.trigger_action_index = action;
+        out = runtime_apply_policy(&rt, &fi);
+        if (action < MAX_RECOVERY_ACTIONS) {
+            assert(out == OUTCOME_FAILURE);
+            assert(rt.episode_in_use);
+        }
+    }
+
+    assert(rt.episode.attempt_count == MAX_RECOVERY_ACTIONS);
+    assert(!rt.episode_in_use);
+    assert(!rt.episode.active);
+    assert(rt.episode.episode_state == EP_TERMINAL);
+    assert(rt.active_fault_episode_id == 0u);
+    assert(out == (degrade_safe ? OUTCOME_TERMINAL_DEGRADE
+                                : OUTCOME_TERMINAL_ESCALATE));
+}
+
+static void test_failed_recovery_budget_closes_cf05_cf06_episodes(void) {
+    const PolicyVariant variants[] = {
+        VAR_P2_CONTEXT_ONLY,
+        VAR_P3_CONTEXT_HISTORY,
+        VAR_P5_RESET_ONLY
+    };
+    for (size_t i = 0u; i < sizeof(variants) / sizeof(variants[0]); ++i) {
+        /* CF05: critical timeout; degradation is not authorized. */
+        assert_failed_recovery_budget_closes_episode(
+            variants[i], FAULT_I2C_TIMEOUT, CRITICAL, false);
+        /* CF06: deferable persistent fault; degradation is authorized. */
+        assert_failed_recovery_budget_closes_episode(
+            variants[i], FAULT_I2C_PERSISTENT, DEFERABLE, true);
+    }
+}
+
 int main(void) {
     test_release_when_queue_full_is_recoverable();
     test_generation_survives_more_than_255_reuses();
@@ -141,6 +193,7 @@ int main(void) {
     test_p5_reset_only_and_p6_backoff_baselines();
     test_p6_records_backoff_schedule();
     test_invalid_target_does_not_leak_episode();
+    test_failed_recovery_budget_closes_cf05_cf06_episodes();
     puts("reference_v2 edge-case tests: PASS");
     return 0;
 }
