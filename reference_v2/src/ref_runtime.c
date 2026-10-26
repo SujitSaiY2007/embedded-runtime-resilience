@@ -137,7 +137,27 @@ static void close_episode(Runtime*rt,EventState terminal_state){
 
 OutcomeCode runtime_apply_policy(Runtime*rt,const FaultInjection*fault){
     if(!rt->episode_in_use)return OUTCOME_NONE;PolicyDecision d=policy_decide(rt,&rt->episode);EventRef target=rt->episode.target_ref;if(d.action==ACT_NONE)return OUTCOME_NONE;
-    if(d.action==ACT_RETRY||d.action==ACT_REINIT_OR_RESET){if(!event_ref_valid(rt,target)){close_episode(rt,ST_ESCALATED);return OUTCOME_STALE_REF;}EventSlot*e=&rt->slots[target.slot_id];e->state=d.action==ACT_RETRY?ST_RETRY_PENDING:ST_QUARANTINED;uint8_t action_index=(uint8_t)(rt->episode.attempt_count+1u);uint16_t trace_before=rt->trace_count;trace_event(rt,e,d.action,OUTCOME_NONE);if(rt->variant==VAR_P6_EXP_BACKOFF_RETRY&&d.action==ACT_RETRY&&rt->trace_count>trace_before)rt->trace[rt->trace_count-1u].backoff_delay_units=policy_backoff_delay(rt->episode.attempt_count);bool failed=fault_injection_triggers(fault,target,action_index);++rt->episode.attempt_count;if(failed){e->state=ST_QUARANTINED;e->verification_ok=false;++rt->episode.observation_count;trace_event(rt,e,d.action,OUTCOME_FAILURE);return OUTCOME_FAILURE;}e->verification_ok=true;e->shared_state_valid=true;return runtime_verify_and_release(rt,true);}
+    if(d.action==ACT_RETRY||d.action==ACT_REINIT_OR_RESET){if(!event_ref_valid(rt,target)){close_episode(rt,ST_ESCALATED);return OUTCOME_STALE_REF;}EventSlot*e=&rt->slots[target.slot_id];e->state=d.action==ACT_RETRY?ST_RETRY_PENDING:ST_QUARANTINED;uint8_t action_index=(uint8_t)(rt->episode.attempt_count+1u);uint16_t trace_before=rt->trace_count;trace_event(rt,e,d.action,OUTCOME_NONE);if(rt->variant==VAR_P6_EXP_BACKOFF_RETRY&&d.action==ACT_RETRY&&rt->trace_count>trace_before)rt->trace[rt->trace_count-1u].backoff_delay_units=policy_backoff_delay(rt->episode.attempt_count);bool failed=fault_injection_triggers(fault,target,action_index);++rt->episode.attempt_count;if(failed){
+            e->state=ST_QUARANTINED;
+            e->verification_ok=false;
+            ++rt->episode.observation_count;
+            trace_event(rt,e,d.action,OUTCOME_FAILURE);
+
+            /*
+             * A failed action consumes one recovery attempt. Once the
+             * configured budget is exhausted, close the episode explicitly
+             * rather than returning FAILURE with an active episode.
+             */
+            if(rt->episode.attempt_count >= MAX_RECOVERY_ACTIONS){
+                if(rt->episode.degrade_safe){
+                    close_episode(rt,ST_DISCARDED);
+                    return OUTCOME_TERMINAL_DEGRADE;
+                }
+                close_episode(rt,ST_ESCALATED);
+                return OUTCOME_TERMINAL_ESCALATE;
+            }
+            return OUTCOME_FAILURE;
+        }e->verification_ok=true;e->shared_state_valid=true;return runtime_verify_and_release(rt,true);}
     if(d.action==ACT_DEGRADE){close_episode(rt,ST_DISCARDED);return OUTCOME_TERMINAL_DEGRADE;}close_episode(rt,ST_ESCALATED);return OUTCOME_TERMINAL_ESCALATE;
 }
 
