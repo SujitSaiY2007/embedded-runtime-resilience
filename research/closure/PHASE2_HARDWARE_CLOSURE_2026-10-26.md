@@ -6,7 +6,7 @@ Status: **Hardware validation phase closed with bounded findings and documented 
 
 ## 1. Scope and evidence provenance
 
-This closure is based on the user's STM32CubeIDE build/debugger screenshots and reported debugger values in the project conversation. The source file `hardware_exp.c` was not found at the repository root on `main` during the closure review, so the exact enum mapping for every numeric runtime result could not be independently checked against a committed source file. The exact flashed ELF/binary hash is not available; source-to-binary identity remains unverified.
+This closure is based on the user's STM32CubeIDE build/debugger screenshots and reported debugger values in the project conversation. The committed diagnostic source is `Plan2.0/firmware/bme280_policy_integration/embedded_runtime_five_policy_matrix_diagnostic.c`, and the protected runtime enum is in `reference/include/ref_runtime.h`. These map physical status 7 to `R_TERMINAL`, physical status 1 to `R_PASS`, and `runtime_result=4` to `OUTCOME_TERMINAL_ESCALATE`. The exact modified control-trial source used in CubeIDE is not separately committed or hash-linked to the flashed ELF/binary, so source-to-binary identity remains unverified. The exact flashed ELF/binary hash is not available; source-to-binary identity remains unverified.
 
 The build screenshot reports a successful build with 0 errors and 0 warnings. Linker size output reported text=12,948 bytes, data=112 bytes, BSS=12,704 bytes, total=25,764 bytes. These are build/linker figures, not runtime stack usage, recovery latency, energy, or a complete MCU resource profile.
 
@@ -38,7 +38,7 @@ Reported debugger values:
 | P3 | 3 | 7 | 4 | 0 | 0 | Terminal/non-pass; no successful post-read recorded |
 | P4 | 4 | 1 | 1 | 1 | 96 (0x60) | Harness pass; successful release and post-read |
 
-All five `baseline_ok` entries were reported as 1. The policy NACK-observation and reinitialization arrays were not fully shown in the final combined screenshot. Numeric `runtime_result=4` is recorded as observed; its exact enum name is not asserted here because the hardware source containing its enum mapping was not found on repository `main` during this review.
+All five `baseline_ok` entries were reported as 1. The policy NACK-observation and reinitialization arrays were not fully shown in the final combined screenshot. The committed `OutcomeCode` enum maps numeric `runtime_result=4` to `OUTCOME_TERMINAL_ESCALATE`; the policy harness separately records `physical_status=7` as `R_TERMINAL`. The three terminal results are consistent with terminal policy decisions, not evidence of a processor crash.
 
 The policy outcome is therefore mixed: P1 and P4 passed this harness run, while P0, P2, and P3 produced terminal/non-pass results. This is one policy-specific run, not five independent physical repetitions per policy.
 
