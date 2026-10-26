@@ -1,6 +1,6 @@
 # Reference Audit
 
-Date: 2026-10-26. Method: each reference was searched by exact title and authors; metadata was compared with publisher, proceedings, DOI or institutional pages that the search returned. Page-level claim checks against full text were **not** done. Nothing was added from memory without a flag.
+Date: 2026-10-26; updated after bibliography consolidation. Method: reference metadata was checked against publisher, journal, DOI, PubMed/PMC, or institutional pages. Some source abstracts/full-text passages were inspected for relevance. Page-level claim checks against the complete text of all references were **not** completed. Do not treat this audit as a substitute for final author verification.
 
 **Verification tiers**
 - **A** checked against an authoritative or institutional page in this session.
@@ -21,8 +21,14 @@ Date: 2026-10-26. Method: each reference was searched by exact title and authors
 | [8] | Safari et al. A Survey of Fault-Tolerance Techniques for Embedded Systems… IEEE Access 10, 12229–12251, 2022. doi:10.1109/ACCESS.2022.3144217 | Journal | B | Repository candidate list: IEEE Xplore record checked, author list checked | 2.2: survey context | Context |
 | [9] | Heffernan, MacNamee, Fogarty. Runtime verification monitoring for automotive embedded systems… IET Software 8(5), 193–203, 2014. doi:10.1049/iet-sen.2013.0236 | Journal | B | Repository candidate list: publisher page checked | 2.2: monitoring of safety properties | Context |
 | [10] | Asghari, Binesh Marvasti, Rahmani. Enhancing transient fault tolerance… OS task level redundancy. Future Gener. Comput. Syst. 87, 58–65, 2018. doi:10.1016/j.future.2018.04.049 | Journal | B | Repository candidate list: publisher page checked | 2.2: OS-level software recovery | Adjacent; cited sparingly |
+| [11] | Rodriguez Arreola et al. RESTOP: Retaining external peripheral state in intermittently-powered sensor systems. Sensors 18(1), 172, 2018. doi:10.3390/s18010172 | Journal | A | PubMed/PMC and publisher-linked record; full-text page inspected for scope | 2.1: peripheral state restoration | Direct adjacent prior art; explicitly distinguishes power-interruption restoration from this project's fault/event policy |
+| [12] | Albalooshi, Jallad, Marpu. Fault analysis and mitigation techniques of the I2C bus for nanosatellite missions. IEEE Access 11, 34709–34717, 2023. doi:10.1109/ACCESS.2023.3262410 | Journal | A | IEEE Xplore record checked | 2.1: I2C failure modes and mitigation context | Direct protocol-level context; does not equate address NACK with stuck-bus fault |
+| [13] | Solouki, Angizi, Violante. Dependability in embedded systems: A survey of fault tolerance methods and software-based mitigation techniques. IEEE Access 12, 180939–180967, 2024. doi:10.1109/ACCESS.2024.3509633 | Journal | A | IEEE/institutional record checked | 2.2: embedded dependability taxonomy | Broad context |
+| [14] | Trivedi, Grottke, Lopez. Rethinking software fault tolerance. IEEE Transactions on Reliability 73(1), 67–72, 2024. doi:10.1109/TR.2023.3330787 | Journal | A | University/publisher-linked bibliographic record checked | 2.2: retry/reboot/environmental recovery framing | Conceptual context; different system domain |
+| [15] | Thati, Vankeirsbilck, Boydens, Pissoort. Data error detection and recovery in embedded systems: A literature review. Advances in Science, Technology and Engineering Systems Journal 2(3), 623–633, 2017. doi:10.25046/aj020380 | Journal | A | Journal landing page checked | 2.2: embedded error detection/recovery review | Broad context |
+| [16] | Santos, Santos, Orozco. Power saving and fault-tolerance in real-time critical embedded systems. Journal of Systems Architecture 55(2), 90–101, 2009. doi:10.1016/j.sysarc.2008.09.001 | Journal | A | ScienceDirect record checked | 2.2: real-time recovery/resource trade-offs | Adjacent; context only |
 
-**Journal share of the cited list:** journals [3], [5], [6], [8], [9], [10] = 6 of 10 = 60%. Conference papers: [1], [2], [4], [7]. This is below the supervisor's 75% target (OPEN_ISSUES O-17). With four non-journal items fixed, 75% needs 12 journal articles in total (6 more). No filler was added to reach the ratio.
+**Final-draft reference count (current DRAFT_MANUSCRIPT.md):** 16 unique numbered references. **Strict journal count: 12/16 = 75.0%.** Conference/proceedings papers: 4 ([1], [2], [4], [7]). No magazine article, book, software documentation, or patent is included in this 16-reference list. The four conference papers are retained because they are core prior-art comparators; they should not be removed merely to improve the ratio. This is a finalized working-draft bibliography composition, not submission-ready finality: all 16 still require final claim-to-full-text/page checks, and [3] still needs its DOI confirmed.
 
 ## Candidates and leads (not cited)
 
@@ -34,7 +40,7 @@ Date: 2026-10-26. Method: each reference was searched by exact title and authors
 | Vaidyanathan, Trivedi, software rejuvenation | same | C | Restart-decision discussion |
 | Arlat et al., fault injection for dependability evaluation (IEEE Trans. Computers) | same | C | Fault-injection methodology; supports a journal-count increase with real relevance |
 | Hsueh et al., fault injection techniques (IEEE Computer) | same | C | Magazine, not counted as journal |
-| Solouki et al., dependability in embedded systems survey | same | C | Venue and type not checked |
+| Solouki et al., dependability in embedded systems survey | same | Now cited as [13] | Removed from candidate list; check claim-to-full-text mapping before submission |
 | Wu et al., software transient-fault tolerance for embedded systems | same | C | Check relevance |
 | Regehr, Duongsaa, Preventing interrupt overload, SIGPLAN Notices 40(7), 50–58 | Register P-007 | C, partially verified | Only if interrupt overload is discussed |
 | Streichert et al.; Santos et al.; Moulik, Sharma (FRESH); Alishzadeh et al. | CHAT_04 and reconstructed plan | C | Weak relevance (scheduling, networked or reconfigurable systems). Recommend dropping unless the paper discusses scheduling and energy trade-offs |
