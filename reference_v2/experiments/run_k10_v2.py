@@ -20,7 +20,13 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True, help="New, non-existing output directory")
     args = ap.parse_args()
     exe = args.exe if args.exe.is_absolute() else (Path.cwd() / args.exe).resolve()
-    if not exe.exists() and exe.with_suffix(".exe").exists(): exe = exe.with_suffix(".exe")
+    if not exe.exists():
+        candidates = [exe.with_suffix(".exe"),
+                      exe.parent / "Debug" / f"{exe.name}.exe",
+                      exe.parent / "Release" / f"{exe.name}.exe",
+                      exe.parent / "Debug" / exe.name,
+                      exe.parent / "Release" / exe.name]
+        exe = next((candidate for candidate in candidates if candidate.exists()), exe)
     if not exe.exists(): raise FileNotFoundError(f"Experiment binary not found: {exe}")
     out = args.out.resolve()
     replay = out.with_name(out.name + ".replay")
