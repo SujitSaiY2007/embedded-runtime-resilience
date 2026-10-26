@@ -18,3 +18,13 @@ The initial Plan 2.0 setup copies existing documentation blobs into `archive/leg
 - Existing frozen experimental evidence and source documents remain untouched in their original paths.
 - Until an explicit, link-safe migration is approved, originals remain the source of truth; archive copies are preservation snapshots.
 - Do not edit archive copies to update current status. Add new work under `Plan2.0/`.
+
+
+## Manuscript release cleanup — 26 October 2026
+
+The following files were preserved as historical artifacts during the manuscript release cleanup:
+
+- `project/README_PRE_MANUSCRIPT_RELEASE_2026-10-26.md` — prior root landing page, superseded by the concise current `/README.md`.
+- `manuscript/DRAFT_MANUSCRIPT_PRE_FINAL_2026-10-26.md` — earlier Markdown draft, superseded by the author-supplied DOCX/PDF release files.
+
+Active source code and current evidence records were not moved or deleted. This avoids breaking experiment scripts and provenance links.
