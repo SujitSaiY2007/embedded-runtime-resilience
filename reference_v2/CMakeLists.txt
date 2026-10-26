@@ -16,3 +16,7 @@ target_link_libraries(reference_v2_edge_tests PRIVATE ref_runtime_v2)
 target_compile_options(reference_v2_edge_tests PRIVATE ${REF_WARNING_FLAGS})
 enable_testing()
 add_test(NAME reference_v2_edge_tests COMMAND reference_v2_edge_tests)
+
+add_executable(k10_v2_experiment experiments/k10_v2_experiment.c)
+target_link_libraries(k10_v2_experiment PRIVATE ref_runtime_v2)
+target_compile_options(k10_v2_experiment PRIVATE ${REF_WARNING_FLAGS})
