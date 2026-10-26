@@ -16,6 +16,21 @@ This directory is an additive candidate. The protected canonical runtime under `
 
 These are newly authored in-house comparators, not implementations copied from a published system. Their fairness must be checked against the same fault inputs and resource constraints before comparing results.
 
+## Seven-policy host campaign
+
+The additive `experiments/k10_v2_experiment.c` extends the 16-family scenario definitions to P0–P6. The runner refuses to overwrite existing evidence, runs twice, checks 16 × 7 × 5 = 560 rows, validates repetition stability, and compares SHA-256 hashes. P5/P6 are in-house comparators. P6 logs scheduled exponential-backoff delay in logical units; no wall-clock delay or MCU timing is measured. Results are host/reference-model evidence only.
+
+Build and run from repository root:
+
+```text
+cmake -S reference_v2 -B reference_v2/build
+cmake --build reference_v2/build
+ctest --test-dir reference_v2/build --output-on-failure
+python3 reference_v2/experiments/run_k10_v2.py --out research/evidence/host/v2_rerun_YYYY-MM-DD
+```
+
+Use a fresh date-stamped path. Keep both the output directory and its `.replay` sibling. Never point this runner at `reference/experiments/out`.
+
 ## Verification status
 
 - Candidate source copied from canonical `reference/src/ref_runtime.c` at blob SHA `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`.
