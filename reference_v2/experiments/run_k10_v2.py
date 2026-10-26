@@ -33,7 +33,7 @@ def main() -> int:
     deterministic = sha256(runs) == sha256(replay / runs.name) and sha256(traces) == sha256(replay / traces.name)
     rows = read_rows(runs)
     keys = {(int(r["family_id"]), int(r["variant_id"]), int(r["repetition"])) for r in rows}
-    complete = len(rows) == 560 and len(keys) == 560 and {int(r["family_id"]) for r in rows} == set(range(1,17)) and {int(r["variant_id"]) for r in rows} == set(range(7)) and {int(r["repetition"]) for r in rows} == set(range(1,6))
+    complete = len(rows) == 560 and len(keys) == 560 and {int(r["family_id"]) for r in rows} == set(range(1,17)) and {int(r["variant_id"]) for r in rows} == set(range(7)) and {int(r["repetition"]) for r in rows} == set(range(1,6)) and all(r["harness_ok"] == "1" for r in rows)
     summaries = {}
     stable = True
     fields = ["family_name","terminal_outcome","episode_active","recovery_attempts","preserved_work","blocked_work","trace_records","reason_code","final_action","harness_ok"]
