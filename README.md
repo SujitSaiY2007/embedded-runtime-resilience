@@ -122,3 +122,13 @@ This is evidence for a controlled address-NACK followed by I²C peripheral reini
 - [Chat 08 next-chat prompt](Plan2.0/prompts/CHAT_08_RUNTIME_HARDWARE_INTEGRATION_PROMPT_2026-10-25.md)
 
 **Next:** Chat 08 integrates the actual runtime decision/action path with the physical sensor in a staged, safe, user-approved workflow.
+
+
+## Phase 4–5 conclusion — 26 October 2026
+
+The prior-art/novelty assessment and software-to-hardware demonstration audit are documented without changing the frozen runtime or experiment corpus:
+
+- [Phase 4 — Prior-Art and Novelty Conclusion](research/closure/PHASE4_PRIOR_ART_NOVELTY_CONCLUSION_2026-10-26.md): selected, attributable P4 advantages are supported by the frozen host campaign; universal superiority, definitive novelty, and patentability are not established.
+- [Phase 5 — Software-to-Hardware Demonstration and UI Integration Conclusion](research/closure/PHASE5_SOFTWARE_HARDWARE_UI_CONCLUSION_2026-10-26.md): the browser demonstrator is live against the virtual C runtime, and a separate physical BME280 NACK/recovery run is documented. A live browser-to-physical-MCU command/trace channel is not demonstrated, so the two paths must be presented separately.
+
+**Current defensible project conclusion:** reproducible comparative software evidence plus bounded physical proof-of-concept evidence; full real-time UI-to-MCU integration and formal novelty/patentability remain unestablished. Frozen K.10 results, runtime code, and hardware evidence were not rewritten or regenerated.
