@@ -8,3 +8,6 @@
 - Added focused regression test source for both defect paths.
 - Canonical `reference/` and frozen host evidence were not modified.
 - Tests have not yet been compiled or run; see `README.md`.
+
+- Widened the candidate generation token to 16 bits and added an observable, saturating dropped-trace counter while retaining the 256-record fixed buffer.
+- Added regression test source for generation reuse and trace overflow observability.
