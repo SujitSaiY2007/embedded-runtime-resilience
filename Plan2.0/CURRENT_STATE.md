@@ -2,7 +2,7 @@
 
 **Snapshot date:** 2026-10-25  
 **Execution branch:** main only  
-**Active work package:** Journal manuscript drafting and evidence/reference audit after the bounded Chat 11 five-policy diagnostic hardware run.  
+**Active work package:** Chat 12 — user-authorized live UI-to-hardware bridge and matched software comparison, with physical scope restricted to the existing NUCLEO-L476RG/BME280 controlled-NACK/P4 test.  
 **Status:** User-provided CubeIDE screenshots show the diagnostic harness reached `progress_stage=900`, `finished=1`, and `overall_code=1`; P1/P4 post-recovery BME280 reads returned `0x60` and release result 1. See the Chat 11 hardware report for exact outcomes and unresolved matrix caveat. This is one controlled transaction-level NACK demonstration, not stuck-bus recovery, repeatability, MCU resource measurement, or universal superiority.  
 
 ## Completed before Plan 2.0
@@ -249,3 +249,16 @@ Phase 4: the frozen host/reference campaign supports bounded P4 advantages in se
 Phase 5: the software browser UI executes against the virtual C runtime, while the physical BME280 controlled-NACK/recovery run is separately evidenced through CubeIDE. No live browser-to-physical-MCU command/trace channel is established in the repository evidence. Present these as two linked but separate evidence paths; do not claim a complete real-time UI-to-hardware system.
 
 No frozen result, protected runtime, or historical hardware record was changed. No new hardware run, campaign rerun, or independent build was performed during this closeout. Next priority remains manuscript/evidence/reference audit, with claims bounded to existing records.
+
+## Chat 12 queued — Live UI-to-hardware bridge (2026-10-26)
+
+The user has authorized a focused next-chat implementation using the **existing** browser UI and Python bridge. The goal is a real local serial command/response path to pre-flashed firmware and a comparison panel that places the physical result beside the corresponding C reference-runtime result.
+
+- Prompt: [Chat 12 implementation prompt](prompts/CHAT_12_LIVE_UI_TO_HARDWARE_BRIDGE_PROMPT_2026-10-26.md)
+- Roadmap: [Execution Roadmap — Chat 12](EXECUTION_ROADMAP.md)
+- Eligible physical cases: (1) baseline BME280 chip-ID read at 0x76 expecting 0x60; (2) controlled absent-address 0x77 NACK, actual P4 decision/action, I2C1 reinitialization, fresh chip-ID verification and runtime release. The existing no-full-reinitialization control may be shown only if source/evidence supports it and it is explicitly labeled as a control rather than a P4 result.
+- Architecture: existing browser UI → loopback-only Python bridge → USB Virtual COM/serial → pre-flashed NUCLEO-L476RG firmware → BME280; response returns to UI with request/run ID and provenance. Software mode remains the existing C virtual-system path.
+- Comparison rule: attempt a matched logical software-side case using the protected C runtime unchanged. If exact equivalence cannot be established, label the comparison partial/unmatched and list comparable fields; never fabricate equivalence.
+- Safety: the UI sends an allowlisted structured command, not arbitrary C source. No browser-side arbitrary flashing. CubeIDE firmware flashing requires an explicit user approval in Chat 12. No unsafe electrical faulting, stuck-bus claim, new physical scenarios, or rerun of the frozen 400-execution corpus.
+- Dependencies/transport: inspect the existing host's VCP/COM visibility and serial-library availability first; no purchases or silent installs. Keep the hardware server bound to 127.0.0.1 and use explicit state-changing requests, allowlists, timeouts, and stale-response protection.
+- Acceptance requires a real request initiated from the existing UI, a matching response from the connected board, a fresh BME280 ID read, truthful software/hardware comparison, host tests, and evidence/provenance documentation. A commit alone is not an end-to-end pass.
