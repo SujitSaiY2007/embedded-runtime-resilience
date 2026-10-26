@@ -10,7 +10,7 @@
 
 ## Abstract
 
-Peripheral faults in event-driven microcontroller firmware are usually handled by fixed retry loops, or by recovery machinery that assumes checkpointing, logging or operating-system support. We study a lightweight alternative: a zero-heap, statically bounded recovery policy (P4) that chooses an action from the evidence available about a fault, a short attempt history and safety flags, and quarantines only the associated event. Five policy variants (P0–P4) are implemented in one C reference runtime and compared in a deterministic host campaign of 16 case families × 5 policies × 5 repetitions (400 executions). P4 closes the recovery episode in all 16 reported families; each baseline leaves it active in at least two. The baselines are our own constructions and share P4's quarantine mechanism, and one family shows a cheaper baseline (1 versus 3 attempts). A single controlled I²C address-NACK run on an STM32 NUCLEO-L476RG with a BME280 sensor shows the policy-selected reinitialization path followed by a successful fresh chip-ID read (0x60) for P1 and P4. We make no claim of stuck-bus recovery, repeatability, MCU timing or memory results, or general superiority of P4.
+Peripheral faults in event-driven microcontroller firmware are usually handled by fixed retry loops, or by recovery machinery that assumes checkpointing, logging or operating-system support. We study a lightweight alternative: a zero-heap, statically bounded recovery policy (P4) that chooses an action from the evidence available about a fault, a short attempt history and safety flags, and quarantines only the associated event. Five policy variants (P0–P4) are implemented in one C reference runtime and compared in a deterministic host campaign of 16 case families × 5 policies × 5 repetitions (400 executions). P4 closes the recovery episode in all 16 reported families; each baseline leaves it active in at least two. The baselines are our own constructions and share P4's quarantine mechanism, and one family shows a cheaper baseline (1 versus 3 attempts). A controlled I²C address-NACK demonstration on an STM32 NUCLEO-L476RG with a BME280 produced successful policy-selected reinitialization and fresh chip-ID readback (0x60) for P1 and P4, while P0, P2 and P3 ended in terminal escalation. Five additional no-full-initialization control trials observed the absent-address NACK and then successfully read chip ID 0x60. These observations are limited to the tested address-NACK setup; no stuck-bus recovery, independent repeated policy runs, measured runtime stack or latency, or general superiority of P4 is claimed.
 
 **Keywords:** peripheral fault recovery; embedded runtime; event quarantine; bounded resources; fault injection
 
@@ -35,7 +35,7 @@ This paper asks a narrower question. *How far can a small, statically sized runt
 1. A recovery runtime with a fixed-size event pool, bounded quarantine and a single recovery episode, written in C without dynamic allocation (Sections 3–4).
 2. Five policy variants (P0–P4) that differ only in the decision function, so that comparisons isolate policy logic (Section 4.1).
 3. A frozen, deterministic host/reference campaign of 400 executions with per-family outcomes, including cases where P4 does not help and where a baseline is cheaper (Sections 5–6).
-4. A separate, bounded hardware observation: one controlled I²C address-NACK followed by peripheral reinitialization and a fresh sensor read on an STM32L476RG (Section 7).
+4. A separate, bounded hardware demonstration: one P0–P4 policy comparison run and five no-full-initialization control trials for a controlled I²C address NACK on an STM32L476RG (Section 7).
 5. An explicit audit of what the evidence does not show, including source-level findings that qualify the boundedness claim (Sections 4.4 and 10).
 
 We make no claim that P4 is novel as a whole, state of the art, or superior in general. Section 2.3 explains the narrow comparison on which the contribution rests.
@@ -208,15 +208,16 @@ Values were read from debugger Expressions screenshots supplied by the user (Tab
 | Baseline error | 0 | 0 | 0 | 0 | 0 |
 | Wrong-address read result (`E_NACK` = −1) | −1 | −1 | −1 | −1 | −1 |
 | Physical status (7 = terminal, 1 = pass) | 7 | 1 | 7 | 7 | 1 |
-| Post-recovery read OK | not captured | 1 | not captured | not captured | 1 |
-| Post-recovery chip ID | not captured | 0x60 | not captured | not captured | 0x60 |
-| Release result (1 = success) | not captured | 1 | not captured | not captured | 1 |
+| Runtime outcome code | 4 (terminal escalation) | 1 (success) | 4 (terminal escalation) | 4 (terminal escalation) | 1 (success) |
+| Post-recovery read OK | 0 | 1 | 0 | 0 | 1 |
+| Post-recovery chip ID | 0 | 0x60 | 0 | 0 | 0x60 |
+| Release result (1 = success) | 0 | 1 | 0 | 0 | 1 |
 
-The harness finished (`finished` = 1, `progress_stage` = 900) with its aggregate `overall_code` = 1. Three entries of the 80-decision matrix were captured: index 0 and 1 (action 1, reason 1) and index 79 (action 4, reason 19). A user statement that all matrix statuses were 1 except the last conflicts with a screenshot showing `matrix_status[79]` = 1, and no complete export of the array exists. By the source, `overall_code` = 1 is assigned only when every matrix status equals "recorded", so the aggregate is consistent with a complete matrix; this is an inference from code, not an observation of the array. <!--L20-->
+The debugger reached the final breakpoint (`finished` = 1, `progress_stage` = 900). Sampled matrix statuses at indices 0, 15, 16, 31, 32, 47, 48, 63, 64 and 79 were all 1. Index 79 showed action 4, reason 19, terminal 1, retry authorization 0 and runtime start 1. The full 80-entry array was not exported, so the evidence is a sampled matrix check rather than a complete independently readable export. <!--L20-->
 
 ### 7.3 Interpretation
 
-For P1 and P4, the observed sequence is: controlled NACK, I²C1 reinitialization, fresh chip-ID read of 0x60, successful release. P0, P2 and P3 ended in terminal outcomes and must not be read as successful sensor recovery.
+For P1 and P4, the observed sequence is: controlled NACK, I²C1 reinitialization, fresh chip-ID read of 0x60, successful release. P0, P2 and P3 ended with `OUTCOME_TERMINAL_ESCALATE` (numeric 4) and did not produce a successful post-fault read. This is a terminal policy outcome, not evidence of a processor crash.
 
 Table 4 shows why the pass/terminal pattern arises. For the fixed hardware context, `policy_decide`, evaluated on the host, returns reinitialization for P1 and P4 and a terminal decision for P0 (after two retries), P2 and P3. The observed statuses 7, 1, 7, 7, 1 match. The physical outcomes therefore follow from the policy rules and the context flags we set (retry not safe, reinitialization safe). They do not show that the policies chose well for the physical fault. <!--L21-->
 
@@ -239,7 +240,7 @@ Figure 4 shows the host-computed first decision of each policy over the 16 provi
 
 ### 7.4 What this run does not show
 
-The run does not show recovery from a physically stuck SDA or SCL line; the injected fault is an address NACK. It is not 80 physical fault injections, and the 16 firmware contexts are not established as identical to CF01–CF16. It is one run, so no repeatability or variance is available. No timing, stack, Flash, RAM or energy was measured. It does not show that reinitialization was needed: the sensor at 0x76 was never faulted, so a read without reinitialization would probably also have succeeded. This run did not include that control. Finally, the run does not show that P4 is superior. <!--L23-->
+The run does not show recovery from a physically stuck SDA or SCL line; the injected fault is an address NACK. It is not 80 physical fault injections, and the 16 firmware contexts are not established as identical to CF01–CF16. Five control trials showed successful sensor readback after the same absent-address NACK without a full `iinit()` call between the probe and subsequent read; this supports only a narrow conclusion for this fault scenario, because local transaction-abort/flag handling still occurs. The P0–P4 comparison was one policy run, not five independent policy repetitions, so no policy-level repeatability or variance is available. No runtime timing, stack, energy, or complete MCU resource profile was measured. The results do not establish general P4 superiority. <!--L23-->
 
 ## 8. Software demonstrator
 
@@ -261,17 +262,17 @@ A browser interface sends requests to a Python HTTP bridge (`demo/server.py`), w
 
 *External.* One MCU, one sensor, one bus and one fault type (address NACK) were used. A static runtime of 16 queue entries and 20 slots was exercised; larger systems and other peripherals are untested.
 
-*Hardware evidence.* The hardware values come from debugger screenshots described in project reports. The screenshots are not in the repository, no complete matrix export exists, and no control read without reinitialization was taken.
+*Hardware evidence.* The hardware values come from user-provided debugger screenshots; screenshots are not yet committed to the repository. No complete matrix export exists. Five no-full-initialization control trials are now recorded, but the modified control source is not separately committed or hash-linked to the flashed binary. The policy comparison is one run.
 
 *Implementation limits.* The runtime has the two limits in Section 4.4 (full-queue release and 255-admission lifetime) and an episode-leak path for invalid targets. The trace buffer silently stops recording after 256 records. The bounds in Section 4.4 are source-level and unmeasured.
 
 ## 11. Future work
 
-(1) Add a control (read without reinitialization) and repeat the hardware run with per-run logs. (2) Inject a physically stuck SDA or SCL line with a documented, safe method. (3) Measure Flash, RAM, stack and decision time on the MCU with raw outputs. (4) Reconcile the 16 firmware contexts with CF01–CF16, or define the matrix as a separate experiment. (5) Add independently designed baselines from the literature. (6) Fix and test the queue and generation limits through a separately approved research change. (7) Complete the systematic prior-art review.
+(1) Preserve the five-trial no-full-initialization control evidence and link the exact flashed binary to source if its original build artifact becomes available. (2) If future work permits, inject a physically stuck SDA or SCL line using a documented, safe method. (3) Measure Flash, RAM, stack and decision time on the MCU with raw outputs. (4) Reconcile the 16 firmware contexts with CF01–CF16, or define the matrix as a separate experiment. (5) Add independently designed baselines from the literature. (6) Fix and test the queue and generation limits through a separately approved research change. (7) Complete the systematic prior-art review.
 
 ## 12. Conclusion
 
-A zero-heap recovery runtime with five policy variants was evaluated in a deterministic host campaign of 400 executions and in one controlled hardware run. The integrated policy P4 closed every recovery episode in the 16 reported families, and it avoided two failure paths in the reference runtime that the simpler variants reach. It was not better in seven families and was costlier than P2 in one. On an STM32L476RG with a BME280, the policy-selected reinitialization path was followed by a successful chip-ID read for P1 and P4 in one run. Stuck-bus recovery, repeatability, MCU resource measurements and general superiority remain unestablished.
+A zero-heap recovery runtime with five policy variants was evaluated in a deterministic host campaign of 400 executions and in one controlled hardware run. The integrated policy P4 closed every recovery episode in the 16 reported families, and it avoided two failure paths in the reference runtime that the simpler variants reach. It was not better in seven families and was costlier than P2 in one. On an STM32L476RG with a BME280, the policy-selected reinitialization path was followed by a successful chip-ID read for P1 and P4 in one policy comparison run; P0, P2 and P3 escalated terminally. Five no-full-initialization control trials also read back the expected chip ID after a controlled address NACK. Stuck-bus recovery, independent repeated policy trials, runtime MCU resource measurements and general superiority remain unestablished.
 
 ## Declarations (placeholders)
 
