@@ -93,8 +93,6 @@ OutcomeCode runtime_execute_selected(Runtime *rt,EventRef selected,const FaultIn
     e->verification_ok=true;e->state=ST_COMPLETED;queue_remove(rt,e->slot_id);trace_event(rt,e,ACT_NONE,OUTCOME_SUCCESS);return OUTCOME_SUCCESS;
 }
 
-static bool precision_leq(AssociationLevel a,AssociationLevel evidence){return (uint8_t)a>=(uint8_t)evidence;}
-
 PolicyDecision policy_decide(const Runtime*rt,const FaultContext*ctx){
     PolicyDecision d={ACT_NONE,ctx->association,false,false,false,false,ctx->attempt_count,0u};if(!ctx->active||ctx->episode_state==EP_TERMINAL)return d;
     bool ambiguity=ctx->association==ASSOC_UNKNOWN;
@@ -108,7 +106,7 @@ PolicyDecision policy_decide(const Runtime*rt,const FaultContext*ctx){
     case VAR_P3_CONTEXT_HISTORY:
         if(ambiguity||!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=12u;}else if(ctx->attempt_count>=2u&&ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=13u;}else if(ctx->retry_safe&&ctx->attempt_count<2u){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=14u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=15u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=16u;}break;
     case VAR_P4_INTEGRATED:
-        if(ctx->association!=ASSOC_EXACT){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=17u;}else if(ambiguity&&!ctx->degrade_safe){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=18u;}else if(!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=19u;}else if(ctx->attempt_count>=3u){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=20u;}else if(ctx->attempt_count>=2u){d.action=ctx->reinit_safe?ACT_REINIT_OR_RESET:(ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE);d.terminal=d.action>=ACT_DEGRADE;d.reason_code=21u;}else if(ctx->retry_safe){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=22u;}else if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=23u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=24u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=25u;}break;
+        if(ctx->association!=ASSOC_EXACT){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=17u;}else if(!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=19u;}else if(ctx->attempt_count>=3u){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=20u;}else if(ctx->attempt_count>=2u){d.action=ctx->reinit_safe?ACT_REINIT_OR_RESET:(ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE);d.terminal=d.action>=ACT_DEGRADE;d.reason_code=21u;}else if(ctx->retry_safe){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=22u;}else if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=23u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=24u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=25u;}break;
     case VAR_P5_RESET_ONLY:
         /* Reset-only baseline requires an exact target; otherwise fail closed. */
         if(ctx->association==ASSOC_EXACT&&ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=26u;}
@@ -119,7 +117,7 @@ PolicyDecision policy_decide(const Runtime*rt,const FaultContext*ctx){
         else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=29u;}
         break;
     default:d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=255u;break;}
-    if(!precision_leq(d.target_scope,ctx->association))d.target_scope=ctx->association;return d;
+    return d;
 }
 
 /* Abstract host-test delay units; this does not busy-wait or measure wall-clock time. */
