@@ -43,6 +43,31 @@ static void test_release_when_queue_full_is_recoverable(void) {
     assert(rt.quarantine_count == 0u);
 }
 
+static void test_generation_survives_more_than_255_reuses(void) {
+    Runtime rt;
+    runtime_init(&rt, VAR_P4_INTEGRATED);
+    EventRef ref = event_ref_invalid();
+    for (unsigned i = 0; i < 300u; ++i) {
+        ref = admit_event(&rt);
+        rt.slots[ref.slot_id].state = ST_COMPLETED;
+        rt.queue_count = 0u;
+    }
+    assert(ref.slot_id == 0u);
+    assert(ref.generation == 300u);
+}
+
+static void test_trace_overflow_is_observable_and_bounded(void) {
+    Runtime rt;
+    runtime_init(&rt, VAR_P4_INTEGRATED);
+    for (unsigned i = 0; i < 300u; ++i) {
+        EventRef ref = admit_event(&rt);
+        rt.slots[ref.slot_id].state = ST_COMPLETED;
+        rt.queue_count = 0u;
+    }
+    assert(rt.trace_count == TRACE_EVENT_CAP);
+    assert(rt.trace_dropped_count == 44u);
+}
+
 static void test_invalid_target_does_not_leak_episode(void) {
     Runtime rt;
     runtime_init(&rt, VAR_P0_FIXED_RETRY);
@@ -60,6 +85,8 @@ static void test_invalid_target_does_not_leak_episode(void) {
 
 int main(void) {
     test_release_when_queue_full_is_recoverable();
+    test_generation_survives_more_than_255_reuses();
+    test_trace_overflow_is_observable_and_bounded();
     test_invalid_target_does_not_leak_episode();
     puts("reference_v2 edge-case tests: PASS");
     return 0;
