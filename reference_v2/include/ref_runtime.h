@@ -28,7 +28,7 @@ typedef enum { VAR_P0_FIXED_RETRY=0, VAR_P1_FIXED_RETRY_RECOVERY, VAR_P2_CONTEXT
 typedef enum { EP_IDLE=0, EP_ACTIVE, EP_TERMINAL } EpisodeState;
 typedef enum { OUTCOME_NONE=0, OUTCOME_SUCCESS, OUTCOME_FAILURE, OUTCOME_TERMINAL_DEGRADE, OUTCOME_TERMINAL_ESCALATE, OUTCOME_QUEUE_FULL, OUTCOME_QUARANTINE_FULL, OUTCOME_EPISODE_FULL, OUTCOME_STALE_REF, OUTCOME_INVALID_DEPENDENCY } OutcomeCode;
 
-typedef struct { uint8_t slot_id; uint8_t generation; } EventRef;
+typedef struct { uint8_t slot_id; uint16_t generation; } EventRef;
 typedef struct { EventRef referenced; DependencyKind kind; uint8_t acceptable_state; } DependencyEntry;
 typedef struct { uint16_t transaction_id; uint8_t member_count; EventRef members[MAX_TRANSACTION_MEMBERS]; bool member_retry_safe; bool valid; } TransactionRecord;
 typedef struct { uint8_t slot_id; uint8_t generation; EventType type; uint8_t producer_id; uint8_t service_id; uint8_t consumer_id; PeripheralId peripheral; Criticality criticality; uint16_t transaction_id; DependencyEntry dependencies[DMAX]; uint8_t dependency_count; EventState state; bool fault_associated; bool degradable; bool verification_ok; bool shared_state_valid; } EventSlot;
@@ -36,7 +36,7 @@ typedef struct { FaultClass fault_class; AssociationLevel association; uint8_t a
 typedef struct { RecoveryAction action; AssociationLevel target_scope; bool quarantine_required; bool retry_authorized; bool release_candidate; bool terminal; uint8_t attempt_index; uint8_t reason_code; } PolicyDecision;
 typedef struct { FaultClass fault_class; EventRef target_ref; uint16_t transaction_id; uint8_t trigger_action_index; uint8_t remaining_failures; bool enabled; } FaultInjection;
 typedef struct { uint32_t run_id; uint32_t trace_seq; uint32_t fault_episode_id; EventRef event_ref; uint16_t transaction_id; uint8_t observation_seq; uint8_t action_index; uint8_t state; uint8_t action; uint8_t outcome; uint8_t correctness; } TraceRecord;
-typedef struct { EventSlot slots[ACTIVE_MAX]; uint8_t queue[QMAX]; uint8_t queue_count; uint8_t quarantine_count; uint8_t generation_next[ACTIVE_MAX]; TransactionRecord transactions[QMAX]; uint8_t transaction_count; FaultContext episode; bool episode_in_use; PolicyVariant variant; uint32_t run_id; uint32_t fault_episode_id_next; uint32_t active_fault_episode_id; uint8_t workload_id; uint8_t fault_schedule_id; uint32_t trace_seq; TraceRecord trace[TRACE_EVENT_CAP]; uint16_t trace_count; } Runtime;
+typedef struct { EventSlot slots[ACTIVE_MAX]; uint8_t queue[QMAX]; uint8_t queue_count; uint8_t quarantine_count; uint16_t generation_next[ACTIVE_MAX]; TransactionRecord transactions[QMAX]; uint8_t transaction_count; FaultContext episode; bool episode_in_use; PolicyVariant variant; uint32_t run_id; uint32_t fault_episode_id_next; uint32_t active_fault_episode_id; uint8_t workload_id; uint8_t fault_schedule_id; uint32_t trace_seq; TraceRecord trace[TRACE_EVENT_CAP]; uint16_t trace_count; uint32_t trace_dropped_count; } Runtime;
 
 void runtime_init(Runtime *rt, PolicyVariant variant);
 EventRef event_ref_invalid(void);
