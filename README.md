@@ -129,6 +129,7 @@ This is evidence for a controlled address-NACK followed by I²C peripheral reini
 The prior-art/novelty assessment and software-to-hardware demonstration audit are documented without changing the frozen runtime or experiment corpus:
 
 - [Phase 4 — Prior-Art and Novelty Conclusion](research/closure/PHASE4_PRIOR_ART_NOVELTY_CONCLUSION_2026-10-26.md): selected, attributable P4 advantages are supported by the frozen host campaign; universal superiority, definitive novelty, and patentability are not established.
+- [Final Novelty and Meaningful Contribution Audit](research/closure/FINAL_NOVELTY_AND_CONTRIBUTION_AUDIT_2026-10-26.md): final evidence-bounded assessment of contributions, prior-art overlap, claim limits, and the current novelty status.
 - [Phase 5 — Software-to-Hardware Demonstration and UI Integration Conclusion](research/closure/PHASE5_SOFTWARE_HARDWARE_UI_CONCLUSION_2026-10-26.md): the browser demonstrator is live against the virtual C runtime, and a separate physical BME280 NACK/recovery run is documented. A live browser-to-physical-MCU command/trace channel is not demonstrated, so the two paths must be presented separately.
 
 **Current defensible project conclusion:** reproducible comparative software evidence plus bounded physical proof-of-concept evidence; full real-time UI-to-MCU integration and formal novelty/patentability remain unestablished. Frozen K.10 results, runtime code, and hardware evidence were not rewritten or regenerated.
