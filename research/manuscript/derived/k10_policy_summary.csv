@@ -1,0 +1,6 @@
+policy,success,terminal_escalate,terminal_degrade,stale_ref,no_terminal,episode_full,episode_left_active
+P0,8,6,0,1,0,1,2
+P1,11,1,2,1,0,1,2
+P2,11,0,1,1,2,1,4
+P3,11,0,1,1,2,1,4
+P4,12,2,2,0,0,0,0
