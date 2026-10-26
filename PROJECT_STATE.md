@@ -1,3 +1,11 @@
+**Manuscript release update — 2026-10-26**
+
+The author-provided editable Word manuscript and PDF are the current release artifacts. The manuscript is finalized for the current research milestone, with publication claims bounded by the frozen evidence. The GitHub cleanup makes the root README reader-facing, archives the pre-manuscript landing page and superseded Markdown draft, and adds a manuscript release index. The DOCX/PDF binaries are not yet stored in the repository because this GitHub integration did not expose a binary-upload operation; see `research/manuscript/README.md`. Do not claim they are downloadable from GitHub until uploaded.
+
+**Canonical reader entry:** `README.md`. **Active code:** `reference/` and `demo/`. **Active research/evidence:** `research/` and `Plan2.0/`. **Superseded material:** `archive/`. The `exp` branch remains protected and unchanged.
+
+---
+
 # Project State — Canonical Current Snapshot
 
 **Last reconciled:** 2026-10-25  
