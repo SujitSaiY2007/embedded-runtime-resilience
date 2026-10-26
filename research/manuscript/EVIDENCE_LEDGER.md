@@ -52,3 +52,15 @@ Date: 2026-10-26. Draft: `DRAFT_MANUSCRIPT.md` v0.1. Each `<!--Lnn-->` tag in th
 | P4 superiority, novelty as a whole, patentability | K.10 reports bounded advantage; legal review outstanding |
 | CF01 P2 attempt count | Disputed in frozen record; omitted per repository rule |
 | Complete independent verification of all 80 matrix entries | No readable full-array export |
+
+
+## Phase 2 hardware closure addendum (2026-10-26)
+
+Full bounded record: [`research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`](../closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md).
+
+| New ID | Claim | Class | Evidence | Caveat |
+|---|---|---|---|---|
+| H01 | Five no-full-`iinit()` control trials observed NACK at 0x77 and then read BME280 ID 0x60 | HW | User debugger screenshot values: `control_nack_result[0..4] = -1`, `control_nack_observed[0..4] = 1`, `control_post_read_ok[0..4] = 1`, `control_post_chip_id[0..4] = 96` | Scoped to this address-NACK setup; existing transaction helper may perform local cleanup. |
+| H02 | One physical policy comparison: P1/P4 passed; P0/P2/P3 terminal/non-pass | HW | User debugger values: `physical_status = [7,1,7,7,1]`, `runtime_result = [4,1,4,4,1]`, `release_result = [0,1,0,0,1]`, `post_chip_id = [0,96,0,0,96]`; all baseline checks shown as 1 | Numeric result 4 enum-name mapping was not checked against a committed hardware source file; not repeated independent runs. |
+| H03 | Sampled matrix entries, including entry 79, were recorded | HW | Screenshot: indices 0, 15, 16, 31, 32, 47, 48, 63, 64, 79 each showed status 1; entry 79 action 4, reason 19, terminal 1, retry authorization 0, runtime start 1 | No complete readable export of all 80 entries; matrix entries are policy decisions, not physical fault injections. |
+| H04 | Hardware phase closed by project decision | REPO | `PHASE2_HARDWARE_CLOSURE_2026-10-26.md` | Closure is bounded; it does not mean all policies passed or all physical fault modes were tested. |
