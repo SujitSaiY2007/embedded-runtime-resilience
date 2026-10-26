@@ -24,7 +24,7 @@ typedef enum { ST_FREE=0, ST_QUEUED, ST_ELIGIBLE, ST_EXECUTING, ST_FAILED, ST_QU
 typedef enum { ASSOC_EXACT=0, ASSOC_SERVICE_ONLY, ASSOC_PERIPHERAL_ONLY, ASSOC_UNKNOWN } AssociationLevel;
 typedef enum { FAULT_NONE=0, FAULT_I2C_NACK, FAULT_I2C_TIMEOUT, FAULT_I2C_BERR, FAULT_I2C_ARLO, FAULT_I2C_PERSISTENT, FAULT_SPI_TIMEOUT, FAULT_SPI_VERIFY, FAULT_SPI_PERSISTENT, FAULT_SW_SERVICE, FAULT_AMBIGUOUS } FaultClass;
 typedef enum { ACT_NONE=0, ACT_RETRY, ACT_REINIT_OR_RESET, ACT_DEGRADE, ACT_ESCALATE } RecoveryAction;
-typedef enum { VAR_P0_FIXED_RETRY=0, VAR_P1_FIXED_RETRY_RECOVERY, VAR_P2_CONTEXT_ONLY, VAR_P3_CONTEXT_HISTORY, VAR_P4_INTEGRATED } PolicyVariant;
+typedef enum { VAR_P0_FIXED_RETRY=0, VAR_P1_FIXED_RETRY_RECOVERY, VAR_P2_CONTEXT_ONLY, VAR_P3_CONTEXT_HISTORY, VAR_P4_INTEGRATED, VAR_P5_RESET_ONLY, VAR_P6_EXP_BACKOFF_RETRY } PolicyVariant;
 typedef enum { EP_IDLE=0, EP_ACTIVE, EP_TERMINAL } EpisodeState;
 typedef enum { OUTCOME_NONE=0, OUTCOME_SUCCESS, OUTCOME_FAILURE, OUTCOME_TERMINAL_DEGRADE, OUTCOME_TERMINAL_ESCALATE, OUTCOME_QUEUE_FULL, OUTCOME_QUARANTINE_FULL, OUTCOME_EPISODE_FULL, OUTCOME_STALE_REF, OUTCOME_INVALID_DEPENDENCY } OutcomeCode;
 
@@ -47,6 +47,7 @@ OutcomeCode runtime_add_dependency(Runtime *rt, EventRef target, EventRef predec
 bool scheduler_select(Runtime *rt, EventRef *selected);
 OutcomeCode runtime_execute_selected(Runtime *rt, EventRef selected, const FaultInjection *fault, bool *faulted);
 PolicyDecision policy_decide(const Runtime *rt, const FaultContext *ctx);
+uint16_t policy_backoff_delay(uint8_t attempt_index);
 OutcomeCode runtime_start_fault(Runtime *rt, FaultClass fault, AssociationLevel assoc, EventRef target, uint16_t tx_id, Criticality criticality, bool retry_safe, bool reinit_safe, bool degrade_safe);
 OutcomeCode runtime_apply_policy(Runtime *rt, const FaultInjection *fault);
 OutcomeCode runtime_verify_and_release(Runtime *rt, bool verification_ok);
