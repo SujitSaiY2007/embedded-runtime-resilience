@@ -109,9 +109,21 @@ PolicyDecision policy_decide(const Runtime*rt,const FaultContext*ctx){
         if(ambiguity||!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=12u;}else if(ctx->attempt_count>=2u&&ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=13u;}else if(ctx->retry_safe&&ctx->attempt_count<2u){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=14u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=15u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=16u;}break;
     case VAR_P4_INTEGRATED:
         if(ctx->association!=ASSOC_EXACT){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=17u;}else if(ambiguity&&!ctx->degrade_safe){d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=18u;}else if(!ctx->dependencies_safe||!ctx->shared_state_valid){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=19u;}else if(ctx->attempt_count>=3u){d.action=ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE;d.terminal=true;d.reason_code=20u;}else if(ctx->attempt_count>=2u){d.action=ctx->reinit_safe?ACT_REINIT_OR_RESET:(ctx->degrade_safe?ACT_DEGRADE:ACT_ESCALATE);d.terminal=d.action>=ACT_DEGRADE;d.reason_code=21u;}else if(ctx->retry_safe){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=22u;}else if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=23u;}else if(ctx->degrade_safe){d.action=ACT_DEGRADE;d.terminal=true;d.reason_code=24u;}else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=25u;}break;
+    case VAR_P5_RESET_ONLY:
+        d.target_scope=ASSOC_UNKNOWN;
+        if(ctx->reinit_safe){d.action=ACT_REINIT_OR_RESET;d.reason_code=26u;}
+        else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=28u;}
+        break;
+    case VAR_P6_EXP_BACKOFF_RETRY:
+        if(ctx->retry_safe&&ctx->attempt_count<3u){d.action=ACT_RETRY;d.retry_authorized=true;d.reason_code=27u;}
+        else{d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=29u;}
+        break;
     default:d.action=ACT_ESCALATE;d.terminal=true;d.reason_code=255u;break;}
     if(!precision_leq(d.target_scope,ctx->association))d.target_scope=ctx->association;return d;
 }
+
+/* Abstract host-test delay units; this does not busy-wait or measure wall-clock time. */
+uint16_t policy_backoff_delay(uint8_t attempt_index){if(attempt_index>=8u)return 256u;return (uint16_t)(1u<<attempt_index);}
 
 OutcomeCode runtime_start_fault(Runtime*rt,FaultClass fault,AssociationLevel assoc,EventRef target,uint16_t tx_id,Criticality criticality,bool retry_safe,bool reinit_safe,bool degrade_safe){
     if(rt->episode_in_use)return OUTCOME_EPISODE_FULL;if(assoc==ASSOC_EXACT&&!event_ref_valid(rt,target))return OUTCOME_STALE_REF;rt->episode_in_use=true;rt->episode.active=true;
