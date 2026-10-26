@@ -28,3 +28,5 @@ The following files were preserved as historical artifacts during the manuscript
 - `manuscript/DRAFT_MANUSCRIPT_PRE_FINAL_2026-10-26.md` — earlier Markdown draft, superseded by the author-supplied DOCX/PDF release files.
 
 Active source code and current evidence records were not moved or deleted. This avoids breaking experiment scripts and provenance links.
+
+- `manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT_PRE_FINAL.md` — completed prompt used for the previous drafting round; superseded by the finalized manuscript.
