@@ -1,3 +1,7 @@
+> **Manuscript release status (26 October 2026):** The manuscript is finalized for the current research milestone. Start from the repository root [README](../README.md) and [manuscript release index](../research/manuscript/README.md). The binary DOCX/PDF still need to be uploaded into `research/manuscript/final/`; they are not yet committed. The earlier Chat 12 live UI-to-hardware plan below is historical/future work and must not be treated as the current task without renewed user authorization.
+
+---
+
 # Plan 2.0 — Reference Overhaul + Hardware Demonstration
 
 **Status:** Active planning and execution framework  
