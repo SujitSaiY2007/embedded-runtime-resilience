@@ -9,6 +9,13 @@ This directory is an additive candidate. The protected canonical runtime under `
 3. **Trace-cap observability:** the 256-record cap remains fixed to preserve bounded storage, but `trace_dropped_count` now increments (saturating at `UINT32_MAX`) whenever a record is omitted. This does not recover omitted records; it makes truncation observable.
 4. **Invalid-target episode leak:** when retry/reinitialization or release encounters an invalid target reference, the candidate closes the episode as terminal escalation before returning `OUTCOME_STALE_REF`. This avoids leaving `episode_in_use` set indefinitely.
 
+## P5/P6 comparator rules (candidate design)
+
+- **P5 — reset-only:** if `reinit_safe`, immediately choose `ACT_REINIT_OR_RESET` with broad (`ASSOC_UNKNOWN`) target scope; otherwise terminal escalation. No retry action is permitted.
+- **P6 — bounded exponential-backoff retry:** authorize retry while `retry_safe` and `attempt_count < 3`; otherwise terminal escalation. `policy_backoff_delay(index)` returns abstract delay units 1, 2, 4, 8, ... capped at 256 units. The C runtime does not sleep or measure elapsed time; a host harness must record/simulate the delay explicitly. Do not describe this as a physical timing measurement.
+
+These are newly authored in-house comparators, not implementations copied from a published system. Their fairness must be checked against the same fault inputs and resource constraints before comparing results.
+
 ## Verification status
 
 - Candidate source copied from canonical `reference/src/ref_runtime.c` at blob SHA `bd865e6c75fdb60e592a2fb3050ef1e066ef9a81`.
