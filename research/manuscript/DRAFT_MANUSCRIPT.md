@@ -285,13 +285,13 @@ A zero-heap recovery runtime with five policy variants was evaluated in a determ
 
 ## References
 
-Verification status: [1]–[3], [5], and [11]–[16] were checked against publisher, journal, or institutional records during the reference update; [4], [6]–[10] carry metadata recorded in the repository's reference audit and must be re-checked before submission (see REFERENCE_AUDIT.md). All entries still require claim-to-full-text/page checks before submission.
+Verification status: bibliographic metadata for [1]–[16] has been checked against publisher or institutional records during the final reference audit (see REFERENCE_AUDIT.md). DOI for [3] is now confirmed and included. The full-text, page-level claim-to-source audit is not complete for every citation; do not treat metadata verification as final submission clearance.
 
 [1] R. Smith and S. Rixner, "Surviving peripheral failures in embedded systems," in *Proc. 2015 USENIX Annual Technical Conference (USENIX ATC 15)*, USENIX Association, 2015. https://www.usenix.org/conference/atc15/technical-session/presentation/smith
 
 [2] A. Branco, L. Mottola, M. H. Alizai, and J. H. Siddiqui, "Intermittent asynchronous peripheral operations," in *Proc. 17th ACM Conf. Embedded Networked Sensor Systems (SenSys '19)*, 2019, pp. 55–67, doi: 10.1145/3356250.3360033.
 
-[3] M. M. Swift, M. Annamalai, B. N. Bershad, and H. M. Levy, "Recovering device drivers," *ACM Trans. Comput. Syst.*, vol. 24, no. 4, pp. 333–360, Nov. 2006. [DOI: to be added from the ACM record]
+[3] M. M. Swift, M. Annamalai, B. N. Bershad, and H. M. Levy, "Recovering device drivers," *ACM Trans. Comput. Syst.*, vol. 24, no. 4, pp. 333–360, Nov. 2006, doi: 10.1145/1189256.1189257.
 
 [4] G. Candea, S. Kawamoto, Y. Fujiki, G. Friedman, and A. Fox, "Microreboot—A technique for cheap recovery," in *Proc. 6th Symp. Operating Systems Design and Implementation (OSDI '04)*, USENIX Association, 2004, pp. 31–44.
 
