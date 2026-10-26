@@ -5,7 +5,9 @@ This directory is an additive candidate. The protected canonical runtime under `
 ## Fixes in this candidate
 
 1. **Full-queue release:** `runtime_verify_and_release()` checks `queue_count >= QMAX` before changing the quarantined event or appending to the queue. It returns `OUTCOME_QUEUE_FULL` and leaves the episode/quarantine intact, allowing the caller to retry release after queue capacity becomes available.
-2. **Invalid-target episode leak:** when retry/reinitialization or release encounters an invalid target reference, the candidate closes the episode as terminal escalation before returning `OUTCOME_STALE_REF`. This avoids leaving `episode_in_use` set indefinitely.
+2. **Generation exhaustion at 255 reuses:** `EventRef.generation` and the per-slot generation counter are widened to 16 bits in this isolated candidate. A regression test reuses a slot 300 times. This moves the stale-reference exhaustion point; it does not make wraparound mathematically impossible, so lifetime bounds still need documenting.
+3. **Trace-cap observability:** the 256-record cap remains fixed to preserve bounded storage, but `trace_dropped_count` now increments (saturating at `UINT32_MAX`) whenever a record is omitted. This does not recover omitted records; it makes truncation observable.
+4. **Invalid-target episode leak:** when retry/reinitialization or release encounters an invalid target reference, the candidate closes the episode as terminal escalation before returning `OUTCOME_STALE_REF`. This avoids leaving `episode_in_use` set indefinitely.
 
 ## Verification status
 
@@ -23,4 +25,6 @@ Compile `src/ref_runtime.c` and `tests/test_runtime_edge_cases.c` with the proje
 
 - Full queue: first release attempt returns `OUTCOME_QUEUE_FULL` without assertion or state corruption; after one queue item is consumed, release succeeds.
 - Invalid target: policy application returns `OUTCOME_STALE_REF` and clears `episode_in_use`, `episode.active`, and `active_fault_episode_id`.
+- Generation: 300 reuse cycles of one slot succeed with monotonically changing 16-bit generations.
+- Trace cap: the buffer remains at 256 records and counts every dropped record.
 - Existing canonical tests and all frozen evidence remain unchanged.
