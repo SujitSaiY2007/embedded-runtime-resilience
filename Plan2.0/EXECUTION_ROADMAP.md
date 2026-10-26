@@ -95,3 +95,14 @@ The user-provided CubeIDE run reached `progress_stage=900`, `finished=1`, `overa
 This closes the current bounded hardware demonstration only. It does not establish physical stuck-bus recovery, repeatability, MCU resource measurements, 80 physical experiments or universal P4 superiority. The complete 80-element matrix-status array has not been independently captured; a discrepancy exists between the user's statement about the final entry and a screenshot showing `matrix_status[79]=1`.
 
 **Next work package: manuscript drafting.** Audit the full repository and references, create a claim-to-evidence ledger, draft a journal manuscript and verify every citation. Start from [Claude journal manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). Do not rerun or modify the frozen 400-execution host campaign or protected reference runtime.
+
+
+## User-authorized follow-up — Chat 12 (2026-10-26)
+
+| Chat | Work package | Required output | Exit condition |
+|---|---|---|---|
+| 12 | Live UI-to-hardware bridge and matched software comparison | Extend existing `demo/index.html` and `demo/server.py`; implement a loopback-only serial bridge and allowlisted command protocol; add minimal serial-command support to the pre-flashed NUCLEO-L476RG firmware; show physical BME280 controlled-NACK/P4 result alongside the corresponding C reference-runtime result; update docs and tests | Existing software mode remains intact; real UI request/response is verified against the connected board; fresh BME280 ID 0x60 and runtime verification/release are confirmed; software-vs-hardware comparability is accurately labeled; all gates and evidence provenance recorded. No arbitrary source upload/flash from UI. |
+
+**Chat 12 prompt:** [Live UI-to-hardware bridge prompt](prompts/CHAT_12_LIVE_UI_TO_HARDWARE_BRIDGE_PROMPT_2026-10-26.md).
+
+**Scope boundary:** only the current NUCLEO-L476RG + BME280 controlled wrong-address NACK/P4 reinitialization/verification case is eligible for physical UI execution, plus a baseline chip-ID read. Do not add unsafe electrical faults, claim stuck-bus recovery, claim all 80 scenarios run physically, or alter the frozen 400-run host corpus. The browser sends a fixed structured command to already-flashed firmware through the local Python serial bridge; it does not upload arbitrary C source. Firmware flashing remains an explicit, separately approved CubeIDE action.
