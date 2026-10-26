@@ -2,7 +2,7 @@
 
 **Status (2026-10-26):** first full draft (v0.1) exists with evidence ledger, reference audit, figure plan and open issues. Phase 1 candidate-v2 validation has user-observed local CTest pass and two 560-run campaigns with complete matrices, stable repetitions, deterministic replay, zero harness failures, and matching run/trace hashes. Phase 2 hardware validation is closed for the planned scope; five controlled address-NACK trials successfully read BME280 ID 0x60 without full `iinit()` between the NACK probe and read. In the single policy comparison run, P1 and P4 passed while P0, P2 and P3 returned terminal/non-pass outcomes. See `research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`. The manuscript remains **not submission-ready**: systematic prior-art review, citation verification, exact flashed binary identity, complete 80-entry matrix export, runtime target resource measurements, and author/venue metadata remain open. No further hardware runs are planned at this stage.
 **Repository:** [embedded-runtime-resilience](https://github.com/SujitSaiY2007/embedded-runtime-resilience)
-**Task specification:** [CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md)
+**Master drafting instructions:** [CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md](CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). This was overhauled on 2026-10-26 to require author–year citations, a fully editable Word `.docx`, a contribution-claim audit, verified related-work comparisons, publication figures/tables, and separate software/hardware reproduction instructions. Scope is manuscript drafting only; no further coding or hardware runs.
 
 ## Files
 
@@ -61,3 +61,8 @@ Environment: Ubuntu 24.04.4 LTS x86-64, gcc 13.3.0, Python 3.12.3, matplotlib 3.
 7. Review the Kleeberger line of work and complete a systematic prior-art search before keeping the gap statement (O-14).
 8. Re-check references [4], [6]–[10], add the DOI for [3], and add verified journal papers to approach the 75% target without padding (O-16, O-17).
 9. Check the current guide for authors and template of the chosen venue, redraw Figures 1 and 3 as vectors, and remove all HTML comments (O-20).
+
+
+## Final manuscript drafting scope (updated 2026-10-26)
+
+The Claude master prompt requires a full contribution audit, broad and verified prior-art review, author–year citations, a related-work comparison matrix, publication-quality figures/diagrams/tables, an editable `.docx` deliverable, and separate software and hardware reproducibility sections. It explicitly prohibits new code development, campaigns, hardware runs, or changes to the protected runtime/frozen evidence. It also instructs Claude to locate and preserve existing original screenshots/photos where accessible, without inventing missing assets. Repository search did not find screenshot/photo assets by the initial targeted filename/content searches; Claude must inspect the full tree before concluding they are absent. The user may optionally provide a setup photo later, but drafting must not wait for it.
