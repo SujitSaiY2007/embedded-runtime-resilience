@@ -19,14 +19,14 @@ Decision needed: whether to open a separately approved research change for O-01 
 
 | ID | Type | Issue | Action |
 |---|---|---|---|
-| O-06 | Evidence gap | Raw K.10 outputs (`k10_runs.csv`, `k10_traces.csv`) are in none of the 15 remote branches. All host numbers come from the report table. | Locate the author's copy and commit it, or approve a regeneration into a new directory (not an overwrite). Not rerun here |
+| O-06 | Evidence gap | Raw K.10 outputs (`k10_runs.csv`, `k10_traces.csv`) are in none of the 15 remote branches; user searched locally and cannot find them. All original host numbers therefore come from the frozen report table. | Treat original CSVs as unavailable unless recovered later. If new data are required, run the corrected campaign into a fresh v2 output directory after source/test review; never recreate files under the original names. |
 | O-07 | Documentation conflict | CF01 P2 attempts: table 3, narrative 1. | Frozen rule applied: count omitted |
 | O-08 | Documentation conflict | CF08 P0: table shows success (1 attempt); narrative says P0 escalates both. Which outcome is correct for P0, and is "success" meaningful there? | Authors to check generator output |
 | O-09 | Documentation conflict | Report §6 lists six identical families; the table shows seven (CF14 omitted). | Draft uses seven |
 | O-10 | Evidence gap | `matrix_status`: user statement ("all 1 except the last") conflicts with a screenshot showing index 79 = 1. By source, `overall_code = 1` requires all 80 recorded. | Export the 80-element array from the debugger if the board session is still available; otherwise keep the statement as is |
-| O-11 | Evidence gap | Hardware screenshots are not in the repository. | Commit the originals to a new evidence folder |
+| O-11 | Evidence gap | Screenshots have been supplied in this conversation, but original image files are not yet committed to the repository. | Preserve the screenshots as user-observed supporting evidence; commit original PNGs to a dedicated evidence folder if available. Do not repeat the completed run just to recreate screenshots. |
 | O-12 | Evidence gap | No control read (no reinit after NACK). Without it, the P1/P4 pass does not show that reinit was needed. | Add control to next hardware run |
-| O-21 | Unverified assumption | Three firmware variants are committed (`...matrix.c`, `...matrix_diagnostic.c`, `...matrix_formatted.c`). The flashed one is not recorded. The draft cites the diagnostic file because `CHAT_11` names it as the preserved candidate. | Authors to confirm; add a hash or commit id |
+| O-21 | Unverified assumption | User supplied `hardware_exp.c` as the source used for the hardware results; SHA-256 `8d65294a7dbf8aca22cab9f2c56732bdb015bf7c3fab87cee6b555f7ae6a1ee8`. Three firmware variants are also committed. The exact flashed binary is not hash-linked to this source. | Cite the supplied source as identified by the user, retain its source hash, and state that binary identity is unverified. If the original `.elf`/`.bin` is available, hash it; no rebuild/reflash is needed solely for provenance. |
 | O-22 | Metadata | Not captured: STM32CubeIDE, ARM GCC, HAL/CMSIS, ST-LINK firmware versions; MSVC version. | Record from the authors' machine |
 | O-13 | Documentation conflict | Frozen K.10 text names STM32U575 as target; hardware is STM32L476RG. | State the change of target in the paper (done in 7.1 by naming the board only) |
 | O-23 | Design limitation | Baselines P0–P3 are in-house ablations. | Add independently designed baselines (future work) |
@@ -39,6 +39,12 @@ Decision needed: whether to open a separately approved research change for O-01 
 | O-15 | Evidence gap | Patent records P-009 to P-017 are "partially verified" aggregator data. They are not cited. | Legal and technical review if the gap section discusses patents |
 | O-16 | Metadata | References [4], [6]–[10] rely on repository audit metadata; [3] has no DOI; [4] authors/pages unchecked this session. | Re-check against publisher pages |
 | O-17 | Requirement conflict | Supervisor target is at least 75% journal articles; draft has 6 of 10 (60%). Arithmetic: with 4 non-journal items fixed, 75% needs j/(j+4) ≥ 0.75, so j ≥ 12 journal articles, i.e. 6 more. Fixing the non-journal items is justified (they are the primary comparators), so the gap must be closed with relevant, verified journal papers, not filler. | See REFERENCE_AUDIT.md candidates |
+
+## D. Candidate v2 and manuscript gate
+
+| ID | Type | Issue | Action |
+|---|---|---|---|
+| O-25 | Validation gate | User screenshot shows `ctest --test-dir reference_v2/build -C Debug --output-on-failure`: 1/1 test passed. This is user-run local evidence, not an independently reproduced build here; the corrected 560-run campaign has not been run. | Keep v2 additive and separate from protected `reference/`; confirm the exact source state, run campaign in a fresh directory, inspect deterministic replay and matrix completeness before using v2 results in the paper. Do not flash v2 firmware. |
 
 ## D. Venue and metadata
 
