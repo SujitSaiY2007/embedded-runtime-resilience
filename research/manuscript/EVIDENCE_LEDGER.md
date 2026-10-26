@@ -1,6 +1,6 @@
 # Evidence Ledger
 
-Date: 2026-10-26. Draft: `DRAFT_MANUSCRIPT.md` v0.1. Each `<!--Lnn-->` tag in the draft maps to a row below.
+Date: 2026-10-26. Historical draft archived at `archive/manuscript/DRAFT_MANUSCRIPT_PRE_FINAL_2026-10-26.md`; final author-supplied manuscript artifacts are indexed in `research/manuscript/README.md`. Each `<!--Lnn-->` tag in the draft maps to a row below.
 
 **Evidence classes**
 - **HOST** frozen host/reference result (report of record: `research/phase2_k10_p4_advantage_novelty_results.md`).
