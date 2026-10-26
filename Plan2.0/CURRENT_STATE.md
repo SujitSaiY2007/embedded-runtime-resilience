@@ -236,3 +236,16 @@ The embedded matrix has 5 policies × 16 provisional contexts = 80 runtime decis
 ### Next work package
 
 The hardware milestone is closed at its bounded evidence scope; the next priority is the journal manuscript and literature audit. Use [Claude manuscript prompt](../research/manuscript/CLAUDE_JOURNAL_MANUSCRIPT_PROMPT.md). Preserve the frozen 400-execution host campaign, protected runtime, Gate A–E contracts and all historic evidence. No hardware or build operation was performed by this GitHub-side update.
+
+
+## Phase 4–5 conclusion recorded — 2026-10-26
+
+The current evidence-based conclusions are now documented in:
+- `research/closure/PHASE4_PRIOR_ART_NOVELTY_CONCLUSION_2026-10-26.md`
+- `research/closure/PHASE5_SOFTWARE_HARDWARE_UI_CONCLUSION_2026-10-26.md`
+
+Phase 4: the frozen host/reference campaign supports bounded P4 advantages in selected ambiguity/termination scenarios, with explicit trade-offs and shared mechanisms. The integrated design remains potentially distinguishable, but technical novelty and patentability are not proven; prior-art recombination remains a risk.
+
+Phase 5: the software browser UI executes against the virtual C runtime, while the physical BME280 controlled-NACK/recovery run is separately evidenced through CubeIDE. No live browser-to-physical-MCU command/trace channel is established in the repository evidence. Present these as two linked but separate evidence paths; do not claim a complete real-time UI-to-hardware system.
+
+No frozen result, protected runtime, or historical hardware record was changed. No new hardware run, campaign rerun, or independent build was performed during this closeout. Next priority remains manuscript/evidence/reference audit, with claims bounded to existing records.
