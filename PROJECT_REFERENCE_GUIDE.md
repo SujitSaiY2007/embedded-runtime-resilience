@@ -1,3 +1,7 @@
+> **Current release notice — 26 October 2026:** The manuscript milestone is finalized. For the canonical current project overview, see [README.md](README.md); for the author-supplied Word/PDF artifact status, see [the manuscript release index](research/manuscript/README.md). These files below retain their historical planning/decision context; do not interpret older “next task” statements as current authorization. The final DOCX/PDF binaries still need to be uploaded into `research/manuscript/final/` through GitHub's web interface.
+
+---
+
 # Project Reference Guide — Reader Edition
 
 > This file is a compatibility entry point. The maintained, presentation-ready guides now live under `docs/`.
