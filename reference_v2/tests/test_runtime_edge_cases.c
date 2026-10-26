@@ -27,12 +27,10 @@ static void test_release_when_queue_full_is_recoverable(void) {
     /* Fill the freed queue slot while the original event remains quarantined. */
     (void)admit_event(&rt);
     assert(rt.queue_count == QMAX);
-    rt.slots[refs[0].slot_id].verification_ok = true;
-    rt.slots[refs[0].slot_id].shared_state_valid = true;
-
-    assert(runtime_verify_and_release(&rt, true) == OUTCOME_QUEUE_FULL);
+    assert(runtime_apply_policy(&rt, NULL) == OUTCOME_QUEUE_FULL);
     assert(rt.episode_in_use);
     assert(rt.slots[refs[0].slot_id].state == ST_QUARANTINED);
+    assert(rt.slots[refs[0].slot_id].fault_associated);
     assert(rt.quarantine_count == 1u);
 
     EventRef selected = event_ref_invalid();
