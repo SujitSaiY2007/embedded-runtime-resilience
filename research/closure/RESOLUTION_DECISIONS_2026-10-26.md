@@ -12,8 +12,8 @@ Proceed with an additive candidate under reference_v2/. This is the technical wo
 
 | Item | Current finding | Decision / action |
 |---|---|---|
-| Original K.10 CSVs | reference/experiments/out/k10_runs.csv and k10_traces.csv are absent at those repository paths. The manuscript audit reports them absent from all remote branches. | Search the author's PC for original outputs. Never overwrite/regenerate in the original out/. A new corrected 560-run P0–P6 campaign has a separate runner and fresh output path. |
-| Hardware screenshots, Chats 05–11 | Evidence reports exist, but original PNG screenshots are not committed. | User must provide original PNGs or commit them from the local evidence folder. These cannot be reconstructed from written summaries. |
+| Original K.10 CSVs | reference/experiments/out/k10_runs.csv and k10_traces.csv are absent at those repository paths. User has searched locally and cannot find them. The manuscript audit reports them absent from all remote branches. | Treat original CSVs as unavailable unless recovered later. Never recreate them under the original names or overwrite original out/. Run the corrected 560-run P0–P6 campaign only into a separate fresh v2 output path after build/test and source review. |
+| Hardware screenshots, Chats 05–11 | User has supplied nine screenshot/image attachments in this conversation (Oct 25–26). They show successful candidate host edge tests and a hardware debug session with baseline read success, controlled NACK observation, recovery attempt, successful post-recovery read, sensor address 0x76, chip ID 0x60, and final report fields. The supplied images are conversation copies, not yet committed originals. | Preserve these as supporting visual evidence; do not treat them as raw machine-readable logs or claim repeatability. Later, add images to a dedicated evidence directory if needed and available. No need to repeat the already captured run merely to recreate screenshots. |
 | 80-element matrix export | A status discrepancy remains in the hardware report. | Request a full debugger export only if the original terminal session is still available; otherwise preserve the discrepancy and make no full-array claim. |
 | Exact flashed firmware | Three firmware candidates exist; the precise flashed file is not hash-linked to the saved run. | User should identify the actual file and provide its SHA-256 or exact local source file. |
 | Tool versions | Some versions are recorded; complete build environment/MSVC metadata is not. | Capture only missing version fields locally; do not repeat completed CubeIDE configuration checks. |
@@ -42,7 +42,7 @@ Proceed with an additive candidate under reference_v2/. This is the technical wo
 - reference_v2/README.md
 - reference_v2/CHANGELOG.md
 
-The candidate has **not yet been compiled or executed in this chat**. A local git clone was unavailable in the current environment, so these source changes must not be described as passing. Build/test output is the next required gate.
+The candidate edge-test suite has now been built and run locally by the user: the supplied terminal screenshot shows `ctest --test-dir reference_v2/build -C Debug --output-on-failure` reporting 1/1 test passed (100%, 0.26 seconds). This confirms the configured local test target passed; it does not validate the full 560-run campaign or hardware behavior of the v2 candidate. The current chat environment still cannot independently reproduce the local build.
 
 ## User help needed now — only these items
 
@@ -53,8 +53,8 @@ The candidate has **not yet been compiled or executed in this chat**. A local gi
    ctest --test-dir reference_v2/build --output-on-failure
    ```
    Send complete terminal output, including any compiler/test failure. Do not flash this candidate to the board.
-2. **Original evidence search:** search the local PC for k10_runs.csv and k10_traces.csv. If found, send them unchanged. If not found, say “not found”; use separate v2 outputs only after the candidate passes tests.
-3. **Hardware originals:** when convenient, provide original PNGs from the existing evidence folder (not messaging-app copies) and the exact firmware file flashed, if available. No new hardware run is needed just to supply files.
+2. **Original evidence search:** user cannot find k10_runs.csv or k10_traces.csv. Continue treating them as unavailable unless they turn up later. Do not spend more time searching unless convenient; use separate v2 outputs only after campaign prerequisites pass.
+3. **Hardware originals / firmware identity:** screenshots have now been supplied in this conversation and are recorded as supporting evidence. If convenient, provide original PNGs from the evidence folder and the exact firmware file flashed (or its SHA-256), if available. No new hardware run is needed just to supply files.
 4. **Professor decisions are deferred:** no need to contact the professor now. The eventual human-confirmation items are factual authorship/affiliation/declaration details and final manuscript approval.
 
 ## Next sequence
