@@ -182,3 +182,12 @@ Two interpretation safeguards are now explicit:
 2. H4 is corrected to: **whole-combination anticipation was not confirmed**. Individual mechanisms and sub-combinations are established in prior art, while multi-reference recombination remains a technical/legal risk. The final classification therefore remains potentially distinguishable, not proven novel or patentable.
 
 K.10 is closed. The next stage is **K.10.1 — Adversarial Prior-Art & Feature-Distinction Review**, whose purpose is to attack the remaining technical distinction without redesigning P4.
+
+
+---
+
+## Addendum — 27 October 2026: separate corrected-branch rerun
+
+Do not interpret the matrix above as containing the newly regenerated local CSVs. A separate K.10 campaign was run from the user's cloned `audit/runtime-correction-2026-10-27` branch and generated 400 rows (16 families × five variants × five repetitions). The user's validation reports five matching repetitions for each of 80 family/variant groups and `harness_ok=1` for all 400 rows.
+
+The new run's verified CF04–CF07 outcomes and file hashes are recorded in [Final Runtime Correction and K.10 Evidence Audit](closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md). The generated raw CSVs and traces remain local and are not part of this commit. This addendum preserves the historical report rather than silently replacing it with regenerated results. The K.10 report generator uses authored family interpretation strings; primary audit should inspect raw rows and traces.
