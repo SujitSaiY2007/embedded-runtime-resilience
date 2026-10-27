@@ -2,7 +2,7 @@
 
 **Research:** Bounded, zero-heap, context-aware peripheral recovery with event quarantine for event-driven embedded systems.
 
-**Project status:** Manuscript package prepared; source code and evidence archive preserved. The frozen host campaign and hardware records are not being rewritten.
+**Project status:** Corrected K.10 evidence is committed to `main`. The revised manuscript files have been generated; their DOCX/PDF binaries still need to be committed by the author.
 
 ## Manuscript
 
@@ -18,7 +18,17 @@
 - [Hardware closure report](research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md)
 - [Final runtime correction and K.10 audit (27 Oct 2026)](research/closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md)
 
-The editable Word manuscript and its PDF are the author-supplied release artifacts. They must be committed under `research/manuscript/final/` before this repository can serve as their permanent download location. The binary files were not included in the text-only GitHub updates made for this cleanup.
+## Corrected K.10 evidence (on main)
+
+The raw artifacts are now committed and available:
+
+- [K.10 results report](research/audit_runs/20261027_112620/k10_results.md)
+- [K.10 run-level CSV](research/audit_runs/20261027_112620/k10_runs.csv)
+- [K.10 execution traces CSV](research/audit_runs/20261027_112620/k10_traces.csv)
+
+These are the existing corrected-branch campaign artifacts merged in [PR #11](https://github.com/SujitSaiY2007/embedded-runtime-resilience/pull/11), merge commit `41a24fa55326c89cb0a772f34d187b6226a255ed`. The reported campaign covers 16 case families × five in-house variants × five repetitions = 400 executions. The author's validation reports 400 harness-valid rows and five matching repetitions in each of 80 family/variant groups for checked fields; independent replay is still pending.
+
+The final editable Word manuscript and PDF must be committed under `research/manuscript/final/` before this repository can serve as their permanent download location. They were generated in the working conversation but are not yet in GitHub.
 
 ## Run the software
 
@@ -49,12 +59,13 @@ Then open http://localhost:8000/. See the [demonstrator guide](docs/DEMONSTRATOR
 
 ## Evidence boundaries
 
-- Host evaluation: 16 case families × 5 in-house policy variants × 5 repetitions = 400 frozen executions.
-- Physical demonstration: one five-policy comparison on an STM32 NUCLEO-L476RG with a BME280 and a controlled address NACK.
+- Historical frozen host campaign: 16 case families × five in-house policy variants × five repetitions = 400 executions.
+- Corrected-branch K.10 rerun: a separate 400-execution campaign; its raw CSVs and report are now public in the paths above.
+- Physical demonstration: STM32 NUCLEO-L476RG with BME280 and controlled I²C address NACK/readback.
 - Five additional control trials are a separate narrow NACK/readback procedure, not five repeated policy comparisons.
 - The browser demonstrator exercises the virtual C runtime; live browser-to-physical-MCU integration is not established by the manuscript evidence.
-- P0–P3 are in-house ablations, not published-algorithm implementations. Exact-event quarantine is shared by all five variants.
-- The historical frozen report includes known runtime defects; a separate correction branch has regression fixes and a fresh, locally generated K.10 run. See the 27 Oct audit for the exact scope and provenance. The paper does not claim general P4 superiority.
+- P0–P3 are in-house ablations, not published-algorithm implementations. Exact-event quarantine is shared across all five variants.
+- The paper does not claim general P4 superiority. The author's reported CTest result was 8/8; it was not independently rerun in the manuscript-generation environment.
 - The exact flashed firmware binary is not hash-linked to source. No MCU latency, energy, stack or complete resource profile is claimed.
 
 ## Preservation rules
