@@ -1,24 +1,30 @@
 # Manuscript release index
 
-**Status:** The author-supplied Word manuscript and PDF are the current manuscript release for this research milestone. The root README is the reader-facing entry point.
+**Status:** The revised manuscript files have been generated in the working conversation. The corrected K.10 evidence is now committed to the public `main` branch; the Word/PDF binaries still need to be uploaded by the author.
 
 ## Approved title
 
 Bounded, Zero-Heap, Context-Aware Peripheral Recovery with Event Quarantine for Event-Driven Embedded Systems: A Host Evaluation and a Controlled I²C Hardware Demonstration
 
-## Manuscript files
+## Final manuscript files
 
-The final editable Word file and PDF were supplied in the ChatGPT conversation as:
+Use the final files provided in the ChatGPT conversation:
 
-- `Embedded_Runtime_Resilience_Manuscript (1).docx`
-- `Embedded_Runtime_Resilience_Manuscript (1).pdf`
+- `Embedded_Runtime_Resilience_Manuscript_FINAL_2026-10-27.docx`
+- `Embedded_Runtime_Resilience_Manuscript_FINAL_2026-10-27.pdf`
 
-**GitHub binary status:** These two binary files are not yet committed here. The connected GitHub operation available in this session supports text-file updates but does not expose a binary-asset upload operation for the supplied DOCX/PDF. Upload both through GitHub's web interface into this folder and use these canonical names:
+Upload both to this folder (or use the canonical repository names `Embedded_Runtime_Resilience_Manuscript.docx` and `Embedded_Runtime_Resilience_Manuscript.pdf`) using GitHub's web interface or the local Git clone. The final manuscript updates the data-availability statement to point to the now-committed K.10 evidence. Do not claim the binaries are hosted in this repository until the upload is verified.
 
-- `Embedded_Runtime_Resilience_Manuscript.docx`
-- `Embedded_Runtime_Resilience_Manuscript.pdf`
+## K.10 evidence — committed on main
 
-Until then, do not present the binary manuscript as downloadable from this repository.
+The corrected-branch campaign artifacts are now available directly in the repository:
+
+- [K.10 run-level results CSV](../audit_runs/20261027_112620/k10_runs.csv)
+- [K.10 execution trace CSV](../audit_runs/20261027_112620/k10_traces.csv)
+- [K.10 results report](../audit_runs/20261027_112620/k10_results.md)
+- [Final runtime correction and K.10 audit](../closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md)
+
+These are the existing campaign artifacts, not regenerated replacements. The reported campaign contains 400 executions (16 case families × five in-house variants × five repetitions), with 400 rows marked harness-valid and five matching repetitions in each of 80 family/variant groups for the fields checked by the author's validation script. These checks are not an independent reproduction or statistical generalization.
 
 ## Supporting research records
 
@@ -29,19 +35,9 @@ Until then, do not present the binary manuscript as downloadable from this repos
 - [Technical and evidence issue register](OPEN_ISSUES.md)
 - [Final novelty and contribution audit](../../research/closure/FINAL_NOVELTY_AND_CONTRIBUTION_AUDIT_2026-10-26.md)
 - [Hardware closure report](../../research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md)
-- [Final runtime correction and K.10 audit](../../research/closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md)
-- [Archived pre-final Markdown draft](../../archive/manuscript/DRAFT_MANUSCRIPT_PRE_FINAL_2026-10-26.md)
 
 ## Integrity statement
 
-The manuscript separates the frozen 400-execution host campaign from the physical NUCLEO-L476RG/BME280 demonstration and the software-only UI demonstrator. It does not claim universal P4 superiority, stuck-bus recovery, MCU performance measurements, or a verified identity of the exact flashed binary. The original raw K.10 per-repetition CSV files and some original screenshots remain unavailable in the repository; no replacements have been fabricated.
+The manuscript separates the frozen 400-execution host campaign from the corrected-branch 400-execution K.10 rerun, the physical NUCLEO-L476RG/BME280 demonstration, and the software-only UI demonstrator. It does not claim universal P4 superiority, stuck-bus recovery, MCU performance measurements, or a verified identity of the exact flashed binary. The host campaign and hardware demonstration are separate evidence paths.
 
-
-## 27 October evidence update
-
-A fresh local K.10 rerun completed 400 matched executions (16 case families × five in-house variants × five repetitions); all 80 family/variant groups had five matching repetitions for the fields checked, and the harness marked all 400 rows valid. The new audit records the scenario-specific CF04–CF07 outcomes and the runtime correction branch's user-run 8/8 CTest result. The raw CSVs, traces, and generated report remain local artifacts pending upload; their SHA-256 hashes are recorded in the audit. The editable DOCX/PDF binary has not been regenerated by this text-only repository update.
-
-
-## Updated manuscript artifact status — 27 October 2026
-
-The revised DOCX and regenerated PDF have been produced in the working conversation and are available from that response's file links. Their binary files have not yet been committed to this repository. The revision log lists the modified sections, the reported corrected-branch results, source hashes, and the current raw-artifact boundary. The new raw K.10 CSV/trace files also remain to be uploaded; the recorded checksums alone are not a substitute for the files.
+The raw K.10 run CSV, trace CSV, and report were merged into `main` in PR #11 (merge commit `41a24fa55326c89cb0a772f34d187b6226a255ed`). The author-reported Windows CTest result was 8/8; it was not independently rerun in the manuscript-generation environment. The DOCX/PDF binaries are not yet committed here.
