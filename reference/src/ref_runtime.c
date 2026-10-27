@@ -54,7 +54,10 @@ void runtime_init(Runtime *rt, PolicyVariant variant) {
 }
 
 static int find_free_slot(const Runtime *rt) {
-    for(uint8_t i=0u;i<ACTIVE_MAX;++i) if(rt->slots[i].state==ST_FREE || state_terminal(rt->slots[i].state)) return (int)i;
+    for (uint8_t i = 0u; i < ACTIVE_MAX; ++i) {
+        if ((rt->slots[i].state == ST_FREE || state_terminal(rt->slots[i].state)) &&
+            rt->generation_next[i] != UINT8_MAX) return (int)i;
+    }
     return -1;
 }
 static int queue_pos(const Runtime *rt,uint8_t slot){for(uint8_t i=0u;i<rt->queue_count;++i)if(rt->queue[i]==slot)return (int)i;return -1;}
@@ -63,8 +66,8 @@ static void queue_append(Runtime *rt,uint8_t slot){assert(rt->queue_count<QMAX);
 
 OutcomeCode runtime_admit(Runtime *rt,const EventSlot *spec,EventRef *out_ref){
     if(rt->queue_count>=QMAX)return OUTCOME_QUEUE_FULL;
-    int idx=find_free_slot(rt);if(idx<0)return OUTCOME_QUEUE_FULL;
-    uint8_t g=next_generation(rt,(uint8_t)idx);if(g==0u)return OUTCOME_STALE_REF;
+    int idx=find_free_slot(rt);if(idx<0)return OUTCOME_SLOT_FULL;
+    uint8_t g=next_generation(rt,(uint8_t)idx);if(g==0u)return OUTCOME_SLOT_FULL;
     EventSlot *e=&rt->slots[idx];*e=*spec;e->slot_id=(uint8_t)idx;e->generation=g;e->state=ST_QUEUED;e->fault_associated=false;e->verification_ok=false;e->shared_state_valid=true;
     rt->queue[rt->queue_count++]=(uint8_t)idx;if(out_ref)*out_ref=ref_of(e);trace_event(rt,e,ACT_NONE,OUTCOME_NONE);return OUTCOME_SUCCESS;
 }
