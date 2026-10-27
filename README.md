@@ -16,6 +16,7 @@
 - [Open technical and evidence issues](research/manuscript/OPEN_ISSUES.md)
 - [Final novelty and contribution audit](research/closure/FINAL_NOVELTY_AND_CONTRIBUTION_AUDIT_2026-10-26.md)
 - [Hardware closure report](research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md)
+- [Final runtime correction and K.10 audit (27 Oct 2026)](research/closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md)
 
 The editable Word manuscript and its PDF are the author-supplied release artifacts. They must be committed under `research/manuscript/final/` before this repository can serve as their permanent download location. The binary files were not included in the text-only GitHub updates made for this cleanup.
 
@@ -53,7 +54,7 @@ Then open http://localhost:8000/. See the [demonstrator guide](docs/DEMONSTRATOR
 - Five additional control trials are a separate narrow NACK/readback procedure, not five repeated policy comparisons.
 - The browser demonstrator exercises the virtual C runtime; live browser-to-physical-MCU integration is not established by the manuscript evidence.
 - P0–P3 are in-house ablations, not published-algorithm implementations. Exact-event quarantine is shared by all five variants.
-- Some frozen differences are affected by a known runtime defect; the paper does not claim general P4 superiority.
+- The historical frozen report includes known runtime defects; a separate correction branch has regression fixes and a fresh, locally generated K.10 run. See the 27 Oct audit for the exact scope and provenance. The paper does not claim general P4 superiority.
 - The exact flashed firmware binary is not hash-linked to source. No MCU latency, energy, stack or complete resource profile is claimed.
 
 ## Preservation rules
