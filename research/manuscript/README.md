@@ -23,6 +23,7 @@ Until then, do not present the binary manuscript as downloadable from this repos
 ## Supporting research records
 
 - [Evidence ledger](EVIDENCE_LEDGER.md)
+- [Manuscript-ready results update (27 Oct 2026)](RESULTS_UPDATE_2026-10-27.md)
 - [Reference audit](REFERENCE_AUDIT.md)
 - [Technical and evidence issue register](OPEN_ISSUES.md)
 - [Final novelty and contribution audit](../../research/closure/FINAL_NOVELTY_AND_CONTRIBUTION_AUDIT_2026-10-26.md)
