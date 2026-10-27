@@ -58,3 +58,14 @@ Decision needed: whether to open a separately approved research change for O-01 
 ## E. Phase 2 hardware closure (2026-10-26)
 
 Hardware phase is closed for the planned scope; no further runs are planned. See [`research/closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md`](../closure/PHASE2_HARDWARE_CLOSURE_2026-10-26.md). The controlled NACK control succeeded 5/5; P1 and P4 passed the single policy comparison run; P0, P2 and P3 produced terminal/non-pass outcomes. Exact flashed binary identity, complete matrix export, exact enum-name mapping for runtime result 4, repeated independent policy runs, stuck-bus behavior, and target runtime resource measurements remain limitations/future work. These limitations do not block closing this phase, but must remain explicit in the manuscript.
+
+
+## E. 27 October runtime correction and fresh K.10 audit
+
+| ID | Type | Status | Evidence / action |
+|---|---|---|---|
+| O-01 | Runtime defect: full-queue release | Corrected on `audit/runtime-correction-2026-10-27`; user-run CTest 8/8 passed | `reference/src/ref_runtime.c`; regression test verifies queue-full release returns without destructive mutation. Retest in the repository's normal build before any future runtime edits. |
+| O-02 | Generation exhaustion outcome | Corrected on `audit/runtime-correction-2026-10-27`; user-run CTest 8/8 passed | Exhausted slots are skipped; no reusable slots return `OUTCOME_SLOT_FULL` rather than `OUTCOME_STALE_REF`. |
+| O-03 | Stale-target episode leak | Corrected on `audit/runtime-correction-2026-10-27`; user-run CTest 8/8 passed | Invalid recovery targets close the episode and clear associated quarantine accounting. The K.10 scenario results remain a separate policy-matrix evaluation and should not be conflated with the C regression tests. |
+| O-26 | Fresh K.10 raw outputs not in repository | Evidence gap remains | User-run fresh campaign generated 400 rows, 80 family/variant groups with five matching repetitions, and `harness_ok=1` for all rows. Local hashes and CF04–CF07 results are recorded in `research/closure/FINAL_RUNTIME_AND_K10_AUDIT_2026-10-27.md`; upload raw CSV/trace/report artifacts to enable independent replay. |
+| O-27 | Manuscript binary not regenerated | Evidence/artifact gap remains | Text release index and audit updated. Regenerate and review the DOCX/PDF before describing the binary manuscript as revised. |

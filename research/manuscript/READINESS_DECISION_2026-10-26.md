@@ -83,3 +83,14 @@ After Phase 1 closes, shift the active work to the STM32L476RG/BME280 setup. Do 
 Reconcile the frozen software results and completed hardware evidence, finish the primary-source reference audit and venue checks, and then ask authors to confirm authorship and submission metadata. Professor involvement remains deferred until the final review stage.
 
 This sequence is a plan, not a claim that Phase 1 or Phase 2 has already been completed. The current 560-run campaign and new physical trials remain pending.
+
+
+## Addendum — 27 October 2026 runtime correction and fresh K.10 rerun
+
+The correction branch `audit/runtime-correction-2026-10-27` adds fixes for exhausted generation slots, queue-full recovery release, and stale-target episode cleanup. The user ran the repository's reference CTest suite on the cloned branch and reported **8/8 tests passing**.
+
+A fresh local K.10 run was generated at `research/audit_runs/20261027_112620/`: 400 rows across 16 case families × five policy variants × five repetitions; the user's validation found 80/80 family/variant groups with five matching repetitions and `harness_ok=1` on all 400 rows. CF04 distinguishes P4's closed `TERMINAL_ESCALATE` from P0–P3's `STALE_REF` with active episodes. CF05 and CF06 show P2/P3 remaining active after four attempts while P4 terminates at three; CF06's terminal degradation is shared by P1 and P4. CF07 shows P0–P3 blocked by `EPISODE_FULL` while P4 completes the subsequent fault.
+
+This new campaign is a separate, regenerated evidence set, not the missing original raw campaign. The raw CSV, trace CSV and generated report remain local and must be committed/uploaded before a third party can independently inspect the run-level data. The report generator contains authored interpretation strings, so the CSV and traces—not report wording alone—are the primary evidence. This addendum does not certify a new hardware run or measured MCU resource performance.
+
+**Submission status remains conditional.** The text documentation is updated, but the Word/PDF manuscript binary has not been regenerated in this operation. Before submission, update the manuscript's results/limitations sections from the audited evidence, regenerate both DOCX and PDF, and review the final rendered figures, tables, references and pagination.
